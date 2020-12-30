@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventProgramActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- top -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp">
+
+                <!-- title -->
+                <TextView
+                    android:id="@+id/top_bar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_gothic_bold"
+                    android:padding="20dp"
+                    android:textAlignment="center"
+                    android:textSize="25dp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!-- back button -->
+                    <ImageView
+                        android:id="@+id/top_bar_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <!-- user count -->
+                        <TextView
+                            android:id="@+id/top_bar_welcome_user"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_welcome_user_default"
+                            android:textColor="@color/colorBackgroundPrimary" />
+                    </LinearLayout>
+
+                    <!-- bar menu -->
+                    <ImageView
+                        android:id="@+id/top_bar_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_list_24" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView><!-- End of top-->
+
+            <!-- content -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="10dp"
+                    app:strokeColor="@color/colorBackgroundGray"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- content 1. passive checker -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <RadioGroup
+                                    android:id="@+id/event_program_section_1_program_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+
+                                        android:id="@+id/event_program_section_1_program_type_each_random"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:checked="true"
+                                        android:text="@string/event_program_section_1_program_type_random"></RadioButton>
+
+                                    <RadioButton
+                                        android:id="@+id/event_program_section_1_program_type_all_random"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/event_program_section_1_program_type_all_random"></RadioButton>
+
+                                    <RadioButton
+
+                                        android:id="@+id/event_program_section_1_program_type_direct"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/event_program_section_1_program_type_direct"></RadioButton>
+                                </RadioGroup>
+
+                                <ImageView
+                                    android:id="@+id/event_program_section_1_info"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:src="@drawable/ic_baseline_info_24"></ImageView>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView><!-- End of content 1 -->
+
+                        <!-- divider -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <!-- content 2. -->
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+
+                            <!-- content 2-1. section_1_random -->
+                            <LinearLayout
+                                android:id="@+id/event_program_section_1_random_wrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <!--content 2-1-1. title -->
+                                <TextView
+                                    android:id="@+id/event_program_section_1_random_title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/event_program_section_1_random_title" /><!-- End of content 2-1-1 -->
+
+                                <!-- divider -->
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <!-- content 2-1-2. a group -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_random_a_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="7dp"
+                                    android:layout_marginBottom="7dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/event_program_section_1_random_a_group" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="?android:attr/listDivider" />
+
+                                    <Spinner
+                                        android:id="@+id/event_program_section_1_random_a_group_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout><!-- End of content 2-1-2 -->
+
+                                <!-- content 2-1-3. b group -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_random_b_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="7dp"
+                                    android:layout_marginBottom="7dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/event_program_section_1_random_b_group" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="?android:attr/listDivider" />
+
+                                    <Spinner
+                                        android:id="@+id/event_program_section_1_random_b_group_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout><!-- End of content 2-1-3 -->
+
+                                <!-- content 2-1-4. c group -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_random_c_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="7dp"
+                                    android:layout_marginBottom="7dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/event_program_section_1_random_c_group" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="?android:attr/listDivider" />
+
+                                    <Spinner
+                                        android:id="@+id/event_program_section_1_random_c_group_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout><!-- End of content 2-1-4 -->
+
+                                <!-- content 2-1-5. d group -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_random_d_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="7dp"
+                                    android:layout_marginBottom="7dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/event_program_section_1_random_d_group" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="?android:attr/listDivider" />
+
+                                    <Spinner
+                                        android:id="@+id/event_program_section_1_random_d_group_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout><!-- End of content 2-1-5 -->
+
+                                <!-- content 2-1-6. e group -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_random_e_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="7dp"
+                                    android:layout_marginBottom="7dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/event_program_section_1_random_e_group" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="?android:attr/listDivider" />
+
+                                    <Spinner
+                                        android:id="@+id/event_program_section_1_random_e_group_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout><!-- End of content 2-1-6 -->
+
+                                <!-- divider -->
+                                <View
+                                    android:id="@+id/event_program_section_1_random_divider"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <!-- content 2-1-7. program button -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_random_bt_program_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorBackgroundFirst">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/event_program_section_1_random_bt_program"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?attr/selectableItemBackground"
+                                        android:text="@string/event_program_section_1_random_bt_program"
+                                        app:elevation="10dp" />
+
+                                </LinearLayout><!-- End of content 2-1-7 -->
+                            </LinearLayout><!-- End of content 2-1 -->
+
+
+                            <!-- content 2-2. section_1_all_random -->
+                            <LinearLayout
+                                android:id="@+id/event_program_section_1_all_random_wrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <!-- content 2-2-1. title -->
+                                <TextView
+                                    android:id="@+id/event_program_section_1_all_random_title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/event_program_section_1_all_random_title" /><!-- End of content 2-2-1 -->
+
+                                <!-- divider -->
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <!-- content 2-2-2. group total count -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_all_random_group_total_count_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/event_program_section_1_all_random_group_total_count" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="?android:attr/listDivider" />
+
+                                    <Spinner
+                                        android:id="@+id/event_program_section_1_all_random_group_total_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout><!-- End of content 2-2-2 -->
+
+                                <!-- divider -->
+                                <View
+                                    android:id="@+id/event_program_section_1_all_random_divider"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <!-- content 2-2-3. program button -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_all_random_bt_program_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorBackgroundFirst">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/event_program_section_1_all_random_bt_program"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?attr/selectableItemBackground"
+                                        android:text="@string/event_program_section_1_all_random_bt_program"
+                                        app:elevation="10dp" />
+                                </LinearLayout><!-- End of content 2-2-3 -->
+                            </LinearLayout><!-- End of content 2-2 -->
+
+
+                            <!-- content 2-3. section_1_direct -->
+                            <LinearLayout
+                                android:id="@+id/event_program_section_1_direct_wrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <!-- content 2-3-1. title -->
+                                <TextView
+                                    android:id="@+id/event_program_section_1_direct_title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/event_program_section_1_direct_title" /><!-- End of content 2-3-1 -->
+
+                                <!-- divider -->
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <!-- content 2-3-2. a group -->
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/event_program_section_1_direct_a_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardElevation="5dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="80dp"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/nanum_gothic_bold"
+                                            android:padding="5dp"
+                                            android:text="@string/event_program_section_1_direct_a_group" />
+
+                                        <View
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:background="?android:attr/listDivider" />
+
+                                        <LinearLayout
+                                            android:id="@+id/event_program_section_1_direct_a_group_event_item_adder"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </com.google.android.material.card.MaterialCardView><!-- End of content 2-3-2 -->
+
+                                <!-- content 2-3-3. b group -->
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/event_program_section_1_direct_b_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardElevation="5dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="80dp"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/nanum_gothic_bold"
+                                            android:padding="5dp"
+                                            android:text="@string/event_program_section_1_direct_b_group" />
+
+                                        <View
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:background="?android:attr/listDivider" />
+
+                                        <LinearLayout
+                                            android:id="@+id/event_program_section_1_direct_b_group_event_item_adder"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical"></LinearLayout>
+                                    </LinearLayout>
+                                </com.google.android.material.card.MaterialCardView><!-- End of content 2-3-3 -->
+
+                                <!-- content 2-3-4. c group -->
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/event_program_section_1_direct_c_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardElevation="5dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="80dp"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/nanum_gothic_bold"
+                                            android:padding="5dp"
+                                            android:text="@string/event_program_section_1_direct_c_group" />
+
+                                        <View
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:background="?android:attr/listDivider" />
+
+                                        <LinearLayout
+                                            android:id="@+id/event_program_section_1_direct_c_group_event_item_adder"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+                                </com.google.android.material.card.MaterialCardView><!-- End of content 2-3-4 -->
+
+                                <!-- content 2-3-5. d group -->
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/event_program_section_1_direct_d_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardElevation="5dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="80dp"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/nanum_gothic_bold"
+                                            android:padding="5dp"
+                                            android:text="@string/event_program_section_1_direct_d_group" />
+
+                                        <View
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:background="?android:attr/listDivider" />
+
+                                        <LinearLayout
+                                            android:id="@+id/event_program_section_1_direct_d_group_event_item_adder"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical"></LinearLayout>
+                                    </LinearLayout>
+                                </com.google.android.material.card.MaterialCardView><!-- End of content 2-3-5 -->
+
+                                <!-- content 2-3-6. e group -->
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/event_program_section_1_direct_e_group_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardElevation="5dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="80dp"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/nanum_gothic_bold"
+                                            android:padding="5dp"
+                                            android:text="@string/event_program_section_1_direct_e_group" />
+
+                                        <View
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"
+                                            android:background="?android:attr/listDivider" />
+
+                                        <LinearLayout
+                                            android:id="@+id/event_program_section_1_direct_e_group_event_item_adder"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical"></LinearLayout>
+                                    </LinearLayout>
+                                </com.google.android.material.card.MaterialCardView><!-- End of content 2-3-6 -->
+
+                                <!-- divider -->
+                                <View
+                                    android:id="@+id/event_program_section_1_direct_divider"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <!-- content 2-3-. program button -->
+                                <LinearLayout
+                                    android:id="@+id/event_program_section_1_direct_bt_program_wrapper"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorBackgroundFirst">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/event_program_section_1_direct_bt_program"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?attr/selectableItemBackground"
+                                        android:text="@string/event_program_section_1_direct_bt_program"
+                                        app:elevation="10dp" />
+                                </LinearLayout><!-- End of content 2-3- -->
+                            </LinearLayout><!-- End of content 2-3 -->
+
+                        </FrameLayout><!-- End of content 2 -->
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </ScrollView><!-- End of content -->
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

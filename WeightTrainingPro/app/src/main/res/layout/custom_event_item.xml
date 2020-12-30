@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        app:strokeColor="@color/colorBackgroundGray"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- top -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardMaxElevation="10dp">
+
+                <LinearLayout
+                    android:id="@+id/cu_event_item_event_name_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBackgroundGray"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <!-- count -->
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/cu_event_item_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/nanum_gothic_bold"
+                        android:padding="5dp"
+                        android:text="@string/cu_event_item_count"
+                        android:textColor="@color/colorTextSecond"
+                        android:textSize="20dp" />
+
+                    <!-- title -->
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/cu_event_item_event_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/nanum_gothic_bold"
+                        android:padding="5dp"
+                        android:text="@string/cu_event_item_event_name"
+                        android:textColor="@color/colorTextSecond"
+                        android:textSize="20dp" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/cu_event_item_im_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_baseline_expand_more_24" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView><!-- End of top -->
+
+            <!-- content -->
+            <LinearLayout
+                android:id="@+id/cu_event_item_content_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <!-- content 1. equipment type -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="7dp">
+
+                    <!-- title -->
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:text="@string/cu_event_item_equipment_type" />
+
+                    <!-- divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <!-- content -->
+                    <TextView
+                        android:id="@+id/cu_event_item_equipment_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:paddingLeft="10dp"
+                        android:text="@string/cu_event_item_equipment_type_default" />
+                </LinearLayout><!-- End of content 1 -->
+
+                <!-- content 2. group type -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="7dp">
+
+                    <!-- title -->
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:text="@string/cu_event_item_group_type" />
+
+                    <!-- divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <!-- content -->
+                    <TextView
+                        android:id="@+id/cu_event_item_group_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:paddingLeft="10dp"
+                        android:text="@string/cu_event_item_group_type_default" />
+                </LinearLayout><!-- End of content 2 -->
+
+                <!-- content 3.proper weight -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="7dp">
+
+                    <!-- title -->
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:text="@string/cu_event_item_proper_weight" />
+
+                    <!-- divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <!-- content -->
+                    <TextView
+                        android:id="@+id/cu_event_item_proper_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:paddingLeft="10dp"
+                        android:text="@string/cu_event_item_proper_weight_default" />
+                </LinearLayout><!-- End of content 3 -->
+
+                <!-- content 4.proper weight -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="7dp">
+
+                    <!-- title -->
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:text="@string/cu_event_item_proper_weight" />
+
+                    <!-- divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <!-- content -->
+                    <TextView
+                        android:id="@+id/cu_event_item_max_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_gothic"
+                        android:paddingLeft="10dp"
+                        android:text="@string/cu_event_item_max_weight_default" />
+                </LinearLayout><!-- End of content 4 -->
+
+                <!-- content 5. modify, delete button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <!-- modify button -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundGray">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/cu_event_item_modify"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:padding="10dp"
+                            android:text="@string/cu_event_item_modify"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorTextSecond" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- modify button -->
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundGray">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/cu_event_item_delete"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:padding="10dp"
+                            android:text="@string/cu_event_item_delete"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorTextSecond" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout><!-- End of content -->
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+
+</LinearLayout>

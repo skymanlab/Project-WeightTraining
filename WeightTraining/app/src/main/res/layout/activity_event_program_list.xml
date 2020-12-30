@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventProgramListActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- top bar -->
+            <include
+                android:id="@+id/top_bar"
+                layout="@layout/top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <!-- content 1. section_1 -->
+                <!--                <com.google.android.material.card.MaterialCardView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginBottom="10dp"-->
+                <!--                    app:cardElevation="5dp">-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <!-- content 1-1. set number -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/event_program_list_section_1_set_number_wrapper"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        app:cardElevation="5dp"
+                        app:strokeColor="@color/colorBackgroundGray"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/event_program_list_section_1_set_number"
+                                android:textAlignment="center" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:background="?android:attr/listDivider" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/event_program_list_section_1_set_number_up"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="end"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:src="@drawable/ic_baseline_expand_less_24" />
+
+                                    <TextView
+                                        android:id="@+id/event_program_list_section_1_set_number"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:text="@string/event_program_list_section_1_set_number_default_1"
+                                        android:textAlignment="center" />
+
+                                    <ImageView
+                                        android:id="@+id/event_program_list_section_1_set_number_down"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:src="@drawable/ic_baseline_expand_more_24" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/event_program_list_section_1_set_number_default_2" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView><!-- End of content 1-1 -->
+
+                    <!-- content 1-2. rest time -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/event_program_list_section_1_rest_time_wrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="5dp"
+                        app:strokeColor="@color/colorBackgroundGray"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <!-- title -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/event_program_list_section_1_rest_time"
+                                android:textAlignment="center" /><!-- End of title -->
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:background="?android:attr/listDivider" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <!-- minute -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/event_program_list_section_1_rest_time_minute_up"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:src="@drawable/ic_baseline_expand_less_24" />
+
+                                    <TextView
+                                        android:id="@+id/event_program_list_section_1_rest_time_minute"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:text="@string/event_program_list_section_1_rest_time_minute_default_1"
+                                        android:textAlignment="center" />
+
+                                    <ImageView
+                                        android:id="@+id/event_program_list_section_1_rest_time_minute_down"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:src="@drawable/ic_baseline_expand_more_24" />
+                                </LinearLayout><!-- End of minute -->
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="20dp"
+                                    android:gravity="center"
+                                    android:text="@string/event_program_list_section_1_rest_time_minute_default_2" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:paddingLeft="4dp"
+                                    android:paddingRight="4dp"
+                                    android:text=":" />
+
+                                <!-- second -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/event_program_list_section_1_rest_time_second_up"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:src="@drawable/ic_baseline_expand_less_24" />
+
+                                    <TextView
+                                        android:id="@+id/event_program_list_section_1_rest_time_second"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:text="@string/event_program_list_section_1_rest_time_second_default_1"
+                                        android:textAlignment="center" />
+
+                                    <ImageView
+                                        android:id="@+id/event_program_list_section_1_rest_time_second_down"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:src="@drawable/ic_baseline_expand_more_24" />
+                                </LinearLayout><!-- End of second -->
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/event_program_list_section_1_rest_time_second_default_2" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView><!-- End of content 1-2 -->
+                </LinearLayout>
+                <!--                </com.google.android.material.card.MaterialCardView>&lt;!&ndash; End of content 1 &ndash;&gt;-->
+
+                <!-- content 2. section_2 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:cardElevation="10dp"
+                    app:strokeColor="@color/colorBackgroundGray"
+                    app:strokeWidth="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <!-- content 2-1. top  -->
+                        <LinearLayout
+                            android:id="@+id/event_program_list_section_2_title_wrapper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorBackgroundSecond"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/nanum_gothic_bold"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_list_section_2_title"
+                                android:textColor="@color/colorTextPrimary" />
+
+                            <!-- more data button -->
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/event_program_list_section_2_bt_more_data"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:elevation="10dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="8dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="8dp"
+                                android:text="@string/event_program_list_section_2_bt_more_data"
+                                android:textColor="@color/colorTextPrimary"
+                                android:textSize="10dp" />
+                        </LinearLayout><!-- End of content 2-1 -->
+
+                        <!-- content 2-2. event list -->
+                        <ListView
+                            android:id="@+id/event_program_list_section_2_lv_event_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:choiceMode="multipleChoice" /><!-- End of content 2-2 -->
+
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <!-- content 2-3. add, delete button -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:orientation="horizontal">
+
+                            <!-- add -->
+                            <LinearLayout
+                                android:id="@+id/event_program_list_section_2_add_wrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="3dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBackgroundSecond">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/event_program_list_section_2_bt_add"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:gravity="center"
+                                    android:text="@string/event_program_list_section_2_bt_add"
+                                    android:textColor="@color/colorTextPrimary" />
+                            </LinearLayout>
+
+                            <!--                            <com.google.android.material.button.MaterialButton-->
+                            <!--                                android:id="@+id/event_program_list_section_2_bt_add"-->
+                            <!--                                android:layout_marginLeft="2dp"-->
+                            <!--                                android:layout_marginRight="2dp"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="match_parent"-->
+                            <!--                                android:text="@string/event_program_list_section_2_bt_add"-->
+                            <!--                                android:layout_weight="1"/>-->
+
+                            <!--                            <com.google.android.material.button.MaterialButton-->
+                            <!--                                android:id="@+id/event_program_list_section_2_bt_delete"-->
+                            <!--                                android:layout_marginLeft="2dp"-->
+                            <!--                                android:layout_marginRight="2dp"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="match_parent"-->
+                            <!--                                android:text="@string/event_program_list_section_2_bt_add"-->
+                            <!--                                android:layout_weight="1"/>-->
+
+                            <!-- delete -->
+                            <LinearLayout
+                                android:id="@+id/event_program_list_section_2_delete_wrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="3dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBackgroundSecond">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/event_program_list_section_2_bt_delete"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:gravity="center"
+                                    android:text="@string/event_program_list_section_2_bt_delete"
+                                    android:textColor="@color/colorTextPrimary" />
+                            </LinearLayout>
+
+                            <!-- delete -->
+                            <LinearLayout
+                                android:id="@+id/event_program_list_section_2_complete_wrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone"
+                                android:layout_marginLeft="3dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorBackgroundSecond">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/event_program_list_section_2_bt_complete"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:gravity="center"
+                                    android:text="@string/event_program_list_section_2_bt_completing"
+                                    android:textColor="@color/colorTextPrimary" />
+                            </LinearLayout>
+                        </LinearLayout><!-- End of content 2-3 -->
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView><!-- End of content 1 -->
+            </LinearLayout><!-- End of content -->
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+</androidx.constraintlayout.widget.ConstraintLayout>

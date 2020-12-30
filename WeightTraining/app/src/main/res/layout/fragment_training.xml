@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".management.project.fragment.Training.TrainingFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- top bar -->
+        <include
+            layout="@layout/include_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- content container -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--                &lt;!&ndash; 알람 &ndash;&gt;-->
+                <!--                <com.google.android.material.card.MaterialCardView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="20dp"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:layout_marginRight="20dp"-->
+                <!--                    android:layout_marginBottom="15dp"-->
+                <!--                    app:cardElevation="3dp">-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:paddingLeft="5dp"-->
+                <!--                        android:paddingTop="10dp"-->
+                <!--                        android:paddingBottom="10dp"-->
+                <!--                        android:text="" />-->
+                <!--                </com.google.android.material.card.MaterialCardView>-->
+
+                <!--                &lt;!&ndash;  &ndash;&gt;-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="20dp"-->
+                <!--                    android:layout_marginRight="20dp"-->
+                <!--                    android:gravity="end|center_vertical"-->
+                <!--                    android:orientation="horizontal">-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="" />-->
+
+                <!--                </LinearLayout>-->
+
+                <!--                <View-->
+                <!--                    android:id="@+id/divider2"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    android:layout_marginLeft="20dp"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:layout_marginRight="20dp"-->
+                <!--                    android:layout_marginBottom="5dp"-->
+                <!--                    android:background="?android:attr/listDivider" />-->
+
+                <!-- list -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:columnCount="1"
+                    android:orientation="horizontal"
+                    android:rowCount="2">
+
+                    <!-- event list -->
+                    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                        android:id="@+id/f_training_event_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="?attr/selectableItemBackground"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/training_list" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:orientation="vertical"
+                                    android:paddingTop="5dp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/nanum_gothic_bold"
+                                        android:text="@string/f_training_event_list"
+                                        android:textAlignment="textStart"
+                                        android:textSize="20sp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:fontFamily="@font/nanum_gothic"
+                                        android:text="@string/f_training_event_list_message" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end|center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/f_training_event_list_go" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/training_arrow_right" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of event list -->
+
+                    <!-- event program -->
+                    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                        android:id="@+id/f_training_event_program"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="?attr/selectableItemBackground"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/training_program" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:orientation="vertical"
+                                    android:paddingTop="5dp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/nanum_gothic_bold"
+                                        android:text="@string/f_training_event_program"
+                                        android:textAlignment="textStart"
+                                        android:textSize="20sp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:fontFamily="@font/nanum_gothic"
+                                        android:text="@string/f_training_event_program_message" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end|center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/f_training_event_program_go" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/training_arrow_right" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of event program -->
+                </GridLayout><!-- End of list -->
+
+            </LinearLayout>
+        </ScrollView><!-- End of content container -->
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MuscleAreaActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- top bar -->
+            <include
+                android:id="@+id/top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/top_bar"/>
+
+            <!-- content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- content 1. chest, shoulder -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- chest -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFirst"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_chest"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_chest"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- shoulder -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundSecond"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_shoulder"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_shoulder"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 1 -->
+
+                <!-- content 2. lat, leg -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- lat -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundThird"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_lat"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_lat"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- leg -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFourth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_leg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_leg"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 2 -->
+
+                <!-- content 3. arm -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- arm -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFifth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_arm"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_arm"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- empty -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundSixth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 5 -->
+
+            </LinearLayout><!-- End of content -->
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

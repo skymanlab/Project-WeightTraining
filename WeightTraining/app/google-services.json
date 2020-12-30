@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "124099927534",
+    "firebase_url": "https://weight-training-pro-default-rtdb.firebaseio.com",
+    "project_id": "weight-training-pro",
+    "storage_bucket": "weight-training-pro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124099927534:android:66e55d45033a5c50dc42ff",
+        "android_client_info": {
+          "package_name": "com.skymanlab.weighttraining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124099927534-tqc23sqjj8qrp1uu6b99l1v6eeo9g4fp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skymanlab.weighttraining",
+            "certificate_hash": "cadc2dc644c130214554aec5eae2b68521718004"
+          }
+        },
+        {
+          "client_id": "124099927534-r1d6v4lkmbjk0mipnhenp3rak8ujs8hc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvCO5sAAZv-SLSH_T5yJTF0l5-ZlXd4eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124099927534-r1d6v4lkmbjk0mipnhenp3rak8ujs8hc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

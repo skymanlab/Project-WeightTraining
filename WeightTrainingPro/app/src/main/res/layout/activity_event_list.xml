@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventListActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- top -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp">
+
+
+                <!-- title -->
+                <TextView
+                    android:id="@+id/top_bar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_gothic_bold"
+                    android:padding="20dp"
+                    android:textAlignment="center"
+                    android:textSize="25dp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!-- back button -->
+                    <ImageView
+                        android:id="@+id/top_bar_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <!-- user count -->
+                        <TextView
+                            android:id="@+id/top_bar_welcome_user"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_welcome_user_default"
+                            android:textColor="@color/colorBackgroundPrimary" />
+                    </LinearLayout>
+
+                    <!-- bar menu -->
+                    <ImageView
+                        android:id="@+id/top_bar_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_list_24" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView><!-- End of top-->
+
+            <!-- content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <!-- content 1. section_1 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="10dp"
+                    app:strokeColor="@color/colorBackgroundGray"
+                    app:strokeWidth="2dp">
+
+                    <!-- content 1-1. title  -->
+                    <LinearLayout
+                        android:id="@+id/event_list_section_1_title_wrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorBackgroundSecond"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:text="@string/event_list_section_1_title"
+                            android:textColor="@color/colorTextPrimary" />
+                    </LinearLayout><!-- End of content 1-1 -->
+
+                    <!-- content 1-2. event list -->
+                    <ListView
+                        android:id="@+id/event_list_section_1_lv_event_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="45dp" /><!-- End of content 1-2 -->
+
+                </com.google.android.material.card.MaterialCardView><!-- End of content 1 -->
+            </LinearLayout><!-- End of content -->
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

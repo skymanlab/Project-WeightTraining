@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".management.project.fragment.More.MoreFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- top bar -->
+        <include
+            layout="@layout/include_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- content container -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/f_more_content_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- top user info -->
+                <include
+                    android:id="@+id/f_more_user_info"
+                    layout="@layout/include_top_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <!-- logout -->
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/f_more_user_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:text="@string/f_more_user_logout" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <!-- withdraw -->
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/f_more_user_withdraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:text="@string/f_more_user_withdraw" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="?android:attr/listDivider" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:columnCount="3">
+
+                    <!-- fitness center -->
+                    <LinearLayout
+                        android:id="@+id/f_more_fitness_center"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_columnWeight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:src="@drawable/more_fitness_center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:text="@string/f_more_fitness_center" />
+
+                    </LinearLayout>
+
+                    <!-- target -->
+                    <LinearLayout
+                        android:id="@+id/f_more_target"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_columnWeight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:src="@drawable/more_target" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:text="@string/f_more_target" />
+
+                    </LinearLayout>
+
+                    <!-- setting -->
+                    <LinearLayout
+                        android:id="@+id/f_more_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_columnWeight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="center"
+                            android:src="@drawable/more_setting" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:text="@string/f_more_setting" />
+
+                    </LinearLayout>
+                </GridLayout>
+
+            </LinearLayout>
+        </ScrollView><!-- End of content container -->
+
+    </LinearLayout>
+
+</FrameLayout>

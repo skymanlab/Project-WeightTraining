@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".management.project.fragment.Training.program.Step2D1Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- title -->
+        <include
+            layout="@layout/include_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- step counter -->
+        <include
+            layout="@layout/include_program_step_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- step content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/f_program_step2_1_message"
+                android:textAlignment="center" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:columnCount="2"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_program_step2_1_chest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_1"
+                    android:textOff="@string/f_program_step2_1_chest"
+                    android:textOn="@string/f_program_step2_1_chest" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_program_step2_1_shoulder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_2"
+                    android:textOff="@string/f_program_step2_1_shoulder"
+                    android:textOn="@string/f_program_step2_1_shoulder" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_program_step2_1_lat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_3"
+                    android:textOff="@string/f_program_step2_1_lat"
+                    android:textOn="@string/f_program_step2_1_lat" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_program_step2_1_upper_body"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_4"
+                    android:textOff="@string/f_program_step2_1_upper_body"
+                    android:textOn="@string/f_program_step2_1_upper_body" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_program_step2_1_arm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_5"
+                    android:textOff="@string/f_program_step2_1_arm"
+                    android:textOn="@string/f_program_step2_1_arm" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_program_step2_1_etc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_6"
+                    android:textOff="@string/f_program_step2_1_etc"
+                    android:textOn="@string/f_program_step2_1_etc" />
+            </GridLayout>
+        </LinearLayout><!-- step content -->
+
+        <!-- step direction selector -->
+        <include
+            layout="@layout/include_program_step_direction_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" /><!-- End of step direction selector -->
+    </LinearLayout>
+
+</FrameLayout>

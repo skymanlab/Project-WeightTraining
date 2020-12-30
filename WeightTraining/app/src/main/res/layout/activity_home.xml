@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/home_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- top bar -->
+            <include
+                android:id="@+id/top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/top_bar"/>
+
+            <!-- content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- content 1. eventAdd, eventList -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- eventAdd -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFirst"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/home_event_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/home_event_add"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- eventList -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundSecond"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/home_event_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/home_event_list"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 1 -->
+
+                <!-- content 2. eventProgram -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- eventProgram -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundThird"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/home_event_program"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/home_event_program"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- empty -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFourth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 2 -->
+
+                <!-- content 3. arm -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- empty -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFifth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text=""
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- empty -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundSixth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 5 -->
+
+            </LinearLayout><!-- End of content -->
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/home_ad_mob_clicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_favorite_24"/>
+
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

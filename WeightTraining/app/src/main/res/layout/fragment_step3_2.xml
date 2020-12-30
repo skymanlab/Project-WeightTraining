@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".management.project.fragment.Training.program.Step3D2Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- title -->
+        <include
+            layout="@layout/include_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- step counter -->
+        <include
+            layout="@layout/include_program_step_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- step content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <!-- step direction selector -->
+        <include
+            layout="@layout/include_program_step_direction_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/><!-- End of step direction selector -->
+    </LinearLayout>
+
+</FrameLayout>

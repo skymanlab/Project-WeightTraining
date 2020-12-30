@@ -1,0 +1,246 @@
+<resources>
+    <string name="app_name">웨이트 트레이닝 프로</string>
+    <string name="copyright">development by ⓒskymanlab</string>
+
+    <!-- Activity : home -->
+    <string name="home_title">홈</string>
+    <string name="home_welcome_user_default">[XX]</string>
+    <string name="home_event_add">종목 추가</string>
+    <string name="home_event_list">목록 보기</string>
+    <string name="home_event_program">운동 프로그램</string>
+    <string name="home_"></string>
+    <!-- AlertDialog : back -->
+    <string name="home_alert_back_title">종료하시겠습니?</string>
+    <string name="home_alert_back_message">확인버튼을 클릭하면 앱이 종료됩니다.</string>
+    <string name="home_alert_back_bt_positive">종료</string>
+    <string name="home_alert_back_bt_negative">취소</string>
+
+    <!-- Activity : enroll -->
+    <string name="enroll_title">가입하기</string>
+    <string name="enroll_section_1_ch_temp_user">임시회원으로 등록하기</string>
+    <string name="enroll_section_1_name">이름</string>
+    <string name="enroll_section_1_email">이메일</string>
+    <string name="enroll_section_1_email_at">\@</string>
+    <string name="enroll_section_1_password">비밀번호</string>
+    <string name="enroll_section_1_bt_enroll">등록</string>
+    <!-- AlertDialog : enroll-->
+    <string name="enroll_alert_enroll_title">사용자 등록을 진행하시겠습니까?</string>
+    <string name="enroll_alert_enroll_message">사용자를 데이터베이스에 등록하겠습니다.</string>
+    <string name="enroll_alert_enroll_bt_positive">등록</string>
+    <string name="enroll_alert_enroll_bt_negative">취소</string>
+
+
+    <!-- Activity : muscle area -->
+    <string name="muscle_area_title">근육 부위 선택</string>
+    <string name="muscle_area_leg">하체운동</string>
+    <string name="muscle_area_chest">가슴운동</string>
+    <string name="muscle_area_lat">등운동</string>
+    <string name="muscle_area_shoulder">어깨운동</string>
+    <string name="muscle_area_arm">팔운동</string>
+
+    <!-- Activity : event add -->
+    <string name="event_add_title_chest">가슴운동 추가</string>
+    <string name="event_add_title_shoulder">어깨운동 추가</string>
+    <string name="event_add_title_lat">등운동 추가</string>
+    <string name="event_add_title_leg">하체운동 추가</string>
+    <string name="event_add_title_arm">팔운동 추가</string>
+    <string name="event_add_section_1_title">▶ 종목 추가</string>
+    <string name="event_add_section_1_bt_more_data">더보기</string>
+    <string name="event_add_section_1_equipment_type">운동기구 종류</string>
+    <string name="event_add_section_1_group_type">그룹 유형</string>
+    <string name="event_add_section_1_event_name">종목 이름</string>
+    <string name="event_add_section_1_proper_weight">적정 중량</string>
+    <string name="event_add_section_1_max_weight">최대 중량</string>
+    <string name="event_add_section_1_bt_add">추가하기</string>
+    <string name="event_add_section_2_title">▶ 목록</string>
+    <string name="event_add_section_2_bt_display">더보기</string>
+
+    <!-- Activity : event list-->
+    <string name="event_list_title_chest">가슴운동 목록</string>
+    <string name="event_list_title_shoulder">어깨운동 목록</string>
+    <string name="event_list_title_lat">등운동 목록</string>
+    <string name="event_list_title_leg">하체운동 목록</string>
+    <string name="event_list_title_arm">팔운동 목록</string>
+    <string name="event_list_section_1_title">▶ 목록</string>
+
+    <!-- Activity : event program -->
+    <string name="event_program_section_1_program_type_random">그룹 별 무작위</string>
+    <string name="event_program_section_1_program_type_all_random">전체 그룹 무작위</string>
+    <string name="event_program_section_1_program_type_direct">직접</string>
+    <string name="event_program_section_1_random_title">각각의 그룹에서 개수를 선택해주세요.</string>
+    <string name="event_program_section_1_random_title_empty">먼저 종목을 입력해주세요.</string>
+    <string name="event_program_section_1_random_a_group">▶ A 그룹</string>
+    <string name="event_program_section_1_random_b_group">▶ B 그룹</string>
+    <string name="event_program_section_1_random_c_group">▶ C 그룹</string>
+    <string name="event_program_section_1_random_d_group">▶ D 그룹</string>
+    <string name="event_program_section_1_random_e_group">▶ E 그룹</string>
+    <string name="event_program_section_1_random_bt_program">프로그램 만들기</string>
+    <string name="event_program_section_1_random_bt_program_empty">종목 추가하러 가기</string>
+    <string name="event_program_section_1_all_random_title"> 전체 그룹의 개수를 선택해주세요.</string>
+    <string name="event_program_section_1_all_random_title_empty">먼저 종목을 입력해주세요.</string>
+    <string name="event_program_section_1_all_random_group_total_count">▶ 선택 개수 </string>
+    <string name="event_program_section_1_all_random_bt_program">프로그램 만들기</string>
+    <string name="event_program_section_1_all_random_bt_program_empty">종목 추가하러 가기</string>
+    <string name="event_program_section_1_direct_title">각각의 종목을 직접 선택해주세요.</string>
+    <string name="event_program_section_1_direct_title_empty">먼저 종목을 입력해주세요.</string>
+    <string name="event_program_section_1_direct_a_group">▶ A 그룹</string>
+    <string name="event_program_section_1_direct_b_group">▶ B 그룹</string>
+    <string name="event_program_section_1_direct_c_group">▶ C 그룹</string>
+    <string name="event_program_section_1_direct_d_group">▶ D 그룹</string>
+    <string name="event_program_section_1_direct_e_group">▶ E 그룹</string>
+    <string name="event_program_section_1_direct_bt_program">프로그램 만들기</string>
+    <string name="event_program_section_1_direct_bt_program_empty">종목 추가하러 가기</string>
+    <!-- AlertDialog : info -->
+    <string name="event_program_section_1_alert_info_message">1. 그룹 별 무작위 : 그룹 별 선택 개수를 정한 뒤 무작위로 선택합니다.\n2. 전체 그룹 무작위 : 해당 근육 부위의 모든 종목을 무작위로 선택합니다.\n3. 직접 : 그룹 별로 나눠져 있는 종목을 직접 선택합니다.</string>
+
+    <!-- Activity : event program list -->
+    <string name="event_program_list_section_1_set_number">세트 수</string>
+    <string name="event_program_list_section_1_set_number_default_1">5</string>
+    <string name="event_program_list_section_1_set_number_default_2">회</string>
+    <string name="event_program_list_section_1_rest_time">휴식 시간</string>
+    <string name="event_program_list_section_1_rest_time_minute_default_1">01</string>
+    <string name="event_program_list_section_1_rest_time_minute_default_2">분</string>
+    <string name="event_program_list_section_1_rest_time_second_default_1">30</string>
+    <string name="event_program_list_section_1_rest_time_second_default_2">초</string>
+    <string name="event_program_list_section_2_title">▶ 운동 프로그램 확인</string>
+    <string name="event_program_list_section_2_bt_more_data">더보기</string>
+    <string name="event_program_list_section_2_bt_add">추가하기</string>
+    <string name="event_program_list_section_2_bt_delete">삭제하기</string>
+    <!-- Alert Dialog : add -->
+    <string name="event_program_list_section_2_alert_add_title">종목 추가</string>
+    <string name="event_program_list_section_2_alert_add_bt_positive">추가</string>
+    <string name="event_program_list_section_2_alert_add_bt_negative">취소</string>
+    <!-- Alert Dialog : back press -->
+    <string name="event_program_list_alert_back_press_title">이 프로그램을 종료하시겠습니까?</string>
+    <string name="event_program_list_alert_back_press_message">해당 프로그램을 종료하고 다른 프로그램을 생성합니다.</string>
+    <string name="event_program_list_alert_back_press_bt_positive">종료</string>
+    <string name="event_program_list_alert_back_press_bt_negative">취소</string>
+
+
+    <!-- Activity : event program process -->
+    <string name="event_program_process_event_name">예) 숄더 프레스</string>
+    <string name="event_program_process_proper_weight">▶ 적정 중량 : </string>
+    <string name="event_program_process_proper_weight_default">예) 45kg</string>
+    <string name="event_program_process_max_weight">▶ 최대 중량 : </string>
+    <string name="event_program_process_max_weight_default">예) 50kg</string>
+    <string name="event_program_process_rest_time_counter_title">휴식 시간</string>
+    <string name="event_program_process_rest_time_counter_change">다시 설정</string>
+    <string name="event_program_process_rest_time_counter">00 : 00</string>
+    <string name="event_program_process_bt_set_1">1 세트 시작</string>
+    <string name="event_program_process_bt_set_2">2 세트 시작</string>
+    <string name="event_program_process_bt_set_3">3 세트 시작</string>
+    <string name="event_program_process_bt_set_4">4 세트 시작</string>
+    <string name="event_program_process_bt_set_5">5 세트 시작</string>
+    <string name="event_program_process_bt_set_6">6 세트 시작</string>
+    <string name="event_program_process_bt_set_7">7 세트 시작</string>
+    <string name="event_program_process_bt_set_8">8 세트 시작</string>
+    <string name="event_program_process_bt_set_9">9 세트 시작</string>
+    <string name="event_program_process_bt_set_10">10 세트 시작</string>
+    <string name="event_program_process_bt_next_event">다음 운동하러 가기</string>
+    <!-- AlertDialog : back press -->
+    <string name="event_program_process_alert_back_press_title">해당 종목을 수행하지 않겠습니까?</string>
+    <string name="event_program_process_alert_back_press_massage">다른 종목을 선택하기 위해 전 화면으로 넘어갑니다.</string>
+    <string name="event_program_process_alert_back_press_bt_positive">전 화면으로</string>
+    <string name="event_program_process_alert_back_press_bt_negative">취소</string>
+
+    <!-- Custom : event item -->
+    <string name="cu_event_item_count">1.</string>
+    <string name="cu_event_item_event_name">종목 이름</string>
+    <string name="cu_event_item_modify">수 정</string>
+    <string name="cu_event_item_delete">삭 제</string>
+    <string name="cu_event_item_equipment_type">▶ 운동기구 종류</string>
+    <string name="cu_event_item_equipment_type_default">예) 바벨</string>
+    <string name="cu_event_item_group_type">▶ 그룹 유형</string>
+    <string name="cu_event_item_group_type_default">예) A 그룹</string>
+    <string name="cu_event_item_proper_weight">▶ 적정 중량</string>
+    <string name="cu_event_item_proper_weight_default">예) 15kg</string>
+    <string name="cu_event_item_max_weight">▶ 최대 중량</string>
+    <string name="cu_event_item_max_weight_default">예) 45kg</string>
+    <string name="cu_event_item_toast_error_input_event">모두 입력해주세요.</string>
+    <!-- AlertDialog : modify -->
+    <string name="cu_event_item_alert_save_title">해당 내용을 저장하시겠습니까?</string>
+    <string name="cu_event_item_alert_save_message">모든 내용이 데이터베이스에 저장됩니다.</string>
+    <string name="cu_event_item_alert_save_bt_positive">저장</string>
+    <string name="cu_event_item_alert_save_bt_negative">취소</string>
+
+    <!-- Custom : event program item-->
+    <string name="cu_event_program_item_bt_start">시작</string>
+    <string name="cu_event_program_item_event_name"> 예) 숄더프레스</string>
+    <string name="cu_event_program_item_proper_weight">▶ 적정 무게 : </string>
+    <string name="cu_event_program_item_proper_weight_default">예) 45kg</string>
+    <string name="cu_event_program_item_max_weight">▶ 최대 무게 : </string>
+    <string name="cu_event_program_item_max_weight_default">예) 80kg</string>
+    <string name="cu_event_program_item_"></string>
+
+    <!-- Custom Dialog : event item modification -->
+    <string name="cud_event_item_modification_title">종목 수정</string>
+    <string name="cud_event_item_modification_equipment_type">운동기구 종류</string>
+    <string name="cud_event_item_modification_group_type">그룹 유형</string>
+    <string name="cud_event_item_modification_event_name">종목 이름</string>
+    <string name="cud_event_item_modification_proper_weight">적정 중량</string>
+    <string name="cud_event_item_modification_max_weight">최대 중량</string>
+    <string name="cud_event_item_modification_bt_modify">수정</string>
+    <string name="cud_event_item_modification_bt_cancel">취소</string>
+
+    <!-- Custom Dialog : set number -->
+    <string name="cud_set_number_title">세트 수</string>
+    <string name="cud_set_number_tag">회</string>
+    <string name="cud_set_number_bt_change">변경</string>
+    <string name="cud_set_number_bt_cancel">취소</string>
+
+    <!-- Custom Dialog : rest time -->
+    <string name="cud_rest_time_title">휴식 시간</string>
+    <string name="cud_rest_time_minute_tag">분</string>
+    <string name="cud_rest_time_second_tag">초</string>
+    <string name="cud_rest_time_bt_change">변경</string>
+    <string name="cud_rest_time_bt_cancel">취소</string>
+
+    <!-- Popup Menu : event add section 2 -->
+    <string name="event_add_section_2_popup_update">갱신하기</string>
+    <string name="event_add_section_2_popup_see_more">자세히 보기</string>
+
+    <!-- Popup Menu : event program list section 1 -->
+    <string name="event_program_list_section_1_popup_event_add">종목 추가하기</string>
+
+    <!-- Popup Menu : top bar menu -->
+    <string name="top_bar_menu_popup_base_event_register">기본 데이터 등록</string>
+    <string name="top_bar_menu_popup_setting">설정</string>
+    <string name="top_bar_menu_popup_user">사용자</string>
+    <string name="top_bar_menu_popup_logout">로그아웃</string>
+
+    <!-- AlertDialog : event item lv adapter 의 delete -->
+    <string name="eila_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="eila_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="eila_alert_delete_bt_positive">삭제</string>
+    <string name="eila_alert_delete_bt_negative">취소</string>
+
+
+    <!-- Preference : title -->
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference : category title -->
+    <string name="preference_category_app">어플</string>
+    <string name="preference_category_user">사용자</string>
+
+    <!-- Preference : category item -->
+    <string name="preference_category_app_version_info">버전 정보</string>
+    <string name="preference_category_app_version_info_summary">현재 최신 버전은 ⓥ 0.1 입니다.</string>
+    <string name="preference_category_app_basic_event_data">기본 데이터 등록</string>
+    <string name="preference_category_app_basic_event_data_summary_one">아직 기본 데이터가 등록되지 않았습니다.</string>
+    <string name="preference_category_app_basic_event_data_summary_two">기본 데이터 등록이 완료되었습니다.</string>
+    <string name="preference_category_user_info">사용자 정보</string>
+    <string name="preference_category_user_keep_logged_in">로그인 유지</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
+</resources>

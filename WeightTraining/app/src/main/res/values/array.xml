@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="equipmentType">
+        <item>바벨</item>
+        <item>덤벨</item>
+        <item>머신</item>
+        <item>케이블</item>
+        <item>케틀벨</item>
+        <item>맨몸</item>
+    </string-array>
+
+    <string-array name="groupType">
+        <item>A 그룹</item>
+        <item>B 그룹</item>
+        <item>C 그룹</item>
+        <item>D 그룹</item>
+        <item>E 그룹</item>
+    </string-array>
+
+    <string-array name="emailHost">
+        <item>naver.com</item>
+        <item>google.com</item>
+        <item>gmail.com</item>
+        <item>hanmail.net</item>
+    </string-array>
+
+    <string-array name="typeCount">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="setNumber">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    
+
+</resources>

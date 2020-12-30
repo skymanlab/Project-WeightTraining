@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.skymanlab.weighttraining.management.event.listview.CheckableEventProgram
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cu_event_program_item_ch_event"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:focusable="false"
+                android:textSize="20dp" />
+            <!-- content-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <!-- content 1. event name -->
+                <TextView
+                    android:id="@+id/cu_event_program_item_event_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_gothic_bold"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/cu_event_program_item_event_name"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp">
+
+                    <!-- content 2. proper weight -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cu_event_program_item_proper_weight" />
+
+                        <TextView
+                            android:id="@+id/cu_event_program_item_proper_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:text="@string/cu_event_program_item_proper_weight_default" />
+                    </LinearLayout><!-- End of content 2 -->
+
+                    <!-- content 3. max weight -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cu_event_program_item_max_weight" />
+
+                        <TextView
+                            android:id="@+id/cu_event_program_item_max_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="2dp"
+                            android:text="@string/cu_event_program_item_max_weight_default" />
+                    </LinearLayout><!-- End of content 3 -->
+                </LinearLayout>
+            </LinearLayout><!-- End of content -->
+
+            <!-- start button -->
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cu_event_program_item_start_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/colorBackgroundGray"
+                    app:cardElevation="5dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/cu_event_program_item_bt_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="@font/nanum_gothic_bold"
+                        android:gravity="center"
+                        android:text="@string/cu_event_program_item_bt_start"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorTextPrimary" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout><!-- End of start button-->
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</com.skymanlab.weighttraining.management.event.listview.CheckableEventProgram>

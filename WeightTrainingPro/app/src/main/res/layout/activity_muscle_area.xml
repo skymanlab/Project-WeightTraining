@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MuscleAreaActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- top -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp">
+
+                <!-- title -->
+                <TextView
+                    android:id="@+id/top_bar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_gothic_bold"
+                    android:padding="20dp"
+                    android:text="@string/muscle_area_title"
+                    android:textAlignment="center"
+                    android:textSize="25dp"></TextView>
+
+                <!-- sub title -->
+                <TextView
+                    android:id="@+id/top_bar_sub_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/nanum_gothic"
+                    android:textColor="@color/colorTextSecond"
+                    android:textSize="13dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!-- back button -->
+                    <ImageView
+                        android:id="@+id/top_bar_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <!-- user count -->
+                        <TextView
+                            android:id="@+id/top_bar_welcome_user"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_welcome_user_default"
+                            android:textColor="@color/colorBackgroundPrimary" />
+                    </LinearLayout>
+
+                    <!-- bar menu -->
+                    <ImageView
+                        android:id="@+id/top_bar_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_baseline_list_24" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView><!-- End of top -->
+
+            <!-- content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- content 1. chest, shoulder -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- chest -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFirst"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_chest"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_chest"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- shoulder -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundSecond"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_shoulder"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_shoulder"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 1 -->
+
+                <!-- content 2. lat, leg -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- lat -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundThird"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_lat"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_lat"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- leg -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFourth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_leg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_leg"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 2 -->
+
+                <!-- content 3. arm -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- arm -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundFifth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/muscle_area_arm"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:text="@string/muscle_area_arm"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- empty -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorBackgroundSixth"
+                        app:cardElevation="5dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:fontFamily="@font/nanum_gothic_bold"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="30dp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout><!-- End of content 5 -->
+
+            </LinearLayout><!-- End of content -->
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

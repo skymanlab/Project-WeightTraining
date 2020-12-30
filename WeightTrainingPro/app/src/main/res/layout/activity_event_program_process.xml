@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventProgramProcessActivity">
+
+    <!-- main -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- content 1. event name-->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:id="@+id/event_program_process_event_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/event_program_process_event_name"
+                    android:textAlignment="center"
+                    android:textSize="28dp" />
+            </com.google.android.material.card.MaterialCardView><!-- End of content 1 -->
+
+            <!-- content 2. properWeight, maxWeight -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <!-- properWeight -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/event_program_process_proper_weight" />
+
+                        <TextView
+                            android:id="@+id/event_program_process_proper_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/event_program_process_proper_weight_default" />
+                    </LinearLayout>
+
+                    <!-- maxWeight -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/event_program_process_proper_weight" />
+
+                        <TextView
+                            android:id="@+id/event_program_process_max_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/event_program_process_proper_weight_default" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView><!-- End of content 2 -->
+
+            <!-- content 3. rest time -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:id="@+id/event_program_process_rest_time_counter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/event_program_process_rest_time_counter"
+                    android:textAlignment="center"
+                    android:textSize="60dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:paddingTop="5dp"
+                    android:text="@string/event_program_process_rest_time_counter_title"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/event_program_process_rest_time_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:padding="10dp"
+                    android:text="@string/event_program_process_rest_time_counter_change" />
+
+            </com.google.android.material.card.MaterialCardView><!-- End of content 3 -->
+
+            <!-- content 4. set -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardElevation="5dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/event_program_process_set_step_wrapper_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <!-- 1 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_1"
+                                android:textColor="@color/colorTextPrimary" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 2 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_2"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 3 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_3"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 4 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_4"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 5 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_5"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/event_program_process_set_step_wrapper_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="20dp"
+                            android:visibility="gone">
+
+                            <!-- 6 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_6"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 7 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_7"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 8 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_8"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 9 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_9"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_9"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/event_program_process_im_step_rest_time_processing_9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_baseline_details_24"
+                                android:visibility="gone" />
+
+                            <!-- 10 set -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/event_program_process_bt_set_step_10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:text="@string/event_program_process_bt_set_10"
+                                android:textColor="@color/colorTextPrimary"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/event_program_process_bt_next_event"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/event_program_process_bt_next_event"
+                        android:textColor="@color/colorTextPrimary"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+
+            </com.google.android.material.card.MaterialCardView><!-- End of content 4 -->
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView><!-- End of main -->
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/preference_category_app">
+
+        <Preference
+            app:key="version_info"
+            app:title="@string/preference_category_app_version_info"
+            app:summary="@string/preference_category_app_version_info_summary"/>
+
+        <Preference
+            app:key="basic_event_data"
+            app:title="@string/preference_category_app_basic_event_data"
+            app:defaultValue="true"
+            app:summary="@string/preference_category_app_basic_event_data_summary_one"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/preference_category_user">
+        <Preference
+            app:key="user_info"
+            app:title="@string/preference_category_user_info"/>
+
+        <SwitchPreferenceCompat
+            app:key="keep_logged_in"
+            app:title="@string/preference_category_user_keep_logged_in"/>
+    </PreferenceCategory>
+</PreferenceScreen>

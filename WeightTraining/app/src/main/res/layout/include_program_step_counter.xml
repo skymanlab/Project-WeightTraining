@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- step -->
+    <LinearLayout
+        android:id="@+id/program_step_counter"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/program_step_counter_number_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/step_no_selected_number_6"/>
+
+        <ImageView
+            android:id="@+id/program_step_counter_progress_bar_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/step_process_bar" />
+
+        <ImageView
+            android:id="@+id/program_step_counter_number_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/step_selected_number_1" />
+
+        <ImageView
+
+            android:id="@+id/program_step_counter_progress_bar_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/step_process_bar" />
+
+        <ImageView
+            android:id="@+id/program_step_counter_number_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/step_no_selected_number_2" />
+
+    </LinearLayout><!-- End of step -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
