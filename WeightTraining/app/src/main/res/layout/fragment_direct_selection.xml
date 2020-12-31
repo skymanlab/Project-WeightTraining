@@ -27,40 +27,41 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/direct_selection" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="@string/type_group_a" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/direct_selection" />
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/type_group_a" />
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
                         android:background="?android:attr/listDivider" />
 
                     <LinearLayout
                         android:id="@+id/f_direct_selection_a_group_item_wrapper"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f_direct_selection_group_title" />
-                    </LinearLayout>
+                        android:layout_marginLeft="5dp"
+                        android:orientation="vertical"></LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView><!-- End of a group -->
+
 
             <!-- b group -->
             <com.google.android.material.card.MaterialCardView
@@ -73,38 +74,38 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/direct_selection" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="@string/type_group_b" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/direct_selection" />
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/type_group_b" />
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
                         android:background="?android:attr/listDivider" />
 
                     <LinearLayout
                         android:id="@+id/f_direct_selection_b_group_item_wrapper"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f_direct_selection_group_title" />
-                    </LinearLayout>
+                        android:layout_marginLeft="5dp"
+                        android:orientation="vertical"></LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView><!-- End of b group -->
 
@@ -119,39 +120,38 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/direct_selection" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="@string/type_group_c" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/direct_selection" />
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/type_group_c" />
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
                         android:background="?android:attr/listDivider" />
 
                     <LinearLayout
                         android:id="@+id/f_direct_selection_c_group_item_wrapper"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f_direct_selection_group_title" />
-
-                    </LinearLayout>
+                        android:layout_marginLeft="5dp"
+                        android:orientation="vertical"></LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView><!-- End of c group -->
 
@@ -166,40 +166,38 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/direct_selection" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="@string/type_group_d" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/direct_selection" />
 
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/type_group_d" />
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
                         android:background="?android:attr/listDivider" />
 
                     <LinearLayout
                         android:id="@+id/f_direct_selection_d_group_item_wrapper"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f_direct_selection_group_title" />
-
-                    </LinearLayout>
+                        android:layout_marginLeft="5dp"
+                        android:orientation="vertical"></LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView><!-- End of d group -->
 
@@ -214,41 +212,274 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/direct_selection" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="@string/type_group_e" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/direct_selection" />
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/type_group_e" />
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
                         android:background="?android:attr/listDivider" />
 
                     <LinearLayout
                         android:id="@+id/f_direct_selection_e_group_item_wrapper"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/f_direct_selection_group_title" />
-
-                    </LinearLayout>
+                        android:layout_marginLeft="5dp"
+                        android:orientation="vertical"></LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView><!-- End of e group -->
+
+            <!--            &lt;!&ndash; a group &ndash;&gt;-->
+            <!--            <com.google.android.material.card.MaterialCardView-->
+            <!--                android:id="@+id/f_direct_selection_a_group_wrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                app:cardElevation="5dp">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:paddingLeft="10dp"-->
+            <!--                        android:paddingTop="10dp"-->
+            <!--                        android:src="@drawable/direct_selection" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="60dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="10dp"-->
+            <!--                        android:text="@string/type_group_a" />-->
+
+            <!--                    <View-->
+            <!--                        android:layout_width="1dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:background="?android:attr/listDivider" />-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:id="@+id/f_direct_selection_a_group_item_wrapper"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:orientation="vertical"-->
+            <!--                        android:padding="10dp">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="@string/f_direct_selection_group_title" />-->
+            <!--                    </LinearLayout>-->
+            <!--                </LinearLayout>-->
+            <!--            </com.google.android.material.card.MaterialCardView>&lt;!&ndash; End of a group &ndash;&gt;-->
+
+            <!--            &lt;!&ndash; b group &ndash;&gt;-->
+            <!--            <com.google.android.material.card.MaterialCardView-->
+            <!--                android:id="@+id/f_direct_selection_b_group_wrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                app:cardElevation="5dp">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:paddingLeft="10dp"-->
+            <!--                        android:paddingTop="10dp"-->
+            <!--                        android:src="@drawable/direct_selection" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="60dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="10dp"-->
+            <!--                        android:text="@string/type_group_b" />-->
+
+            <!--                    <View-->
+            <!--                        android:layout_width="1dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:background="?android:attr/listDivider" />-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:id="@+id/f_direct_selection_b_group_item_wrapper"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:orientation="vertical"-->
+            <!--                        android:padding="10dp">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="@string/f_direct_selection_group_title" />-->
+            <!--                    </LinearLayout>-->
+            <!--                </LinearLayout>-->
+            <!--            </com.google.android.material.card.MaterialCardView>&lt;!&ndash; End of b group &ndash;&gt;-->
+
+            <!--            &lt;!&ndash; c group &ndash;&gt;-->
+            <!--            <com.google.android.material.card.MaterialCardView-->
+            <!--                android:id="@+id/f_direct_selection_c_group_wrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                app:cardElevation="5dp">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:paddingLeft="10dp"-->
+            <!--                        android:paddingTop="10dp"-->
+            <!--                        android:src="@drawable/direct_selection" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="60dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="10dp"-->
+            <!--                        android:text="@string/type_group_c" />-->
+
+            <!--                    <View-->
+            <!--                        android:layout_width="1dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:background="?android:attr/listDivider" />-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:id="@+id/f_direct_selection_c_group_item_wrapper"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:orientation="vertical"-->
+            <!--                        android:padding="10dp">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="@string/f_direct_selection_group_title" />-->
+
+            <!--                    </LinearLayout>-->
+            <!--                </LinearLayout>-->
+            <!--            </com.google.android.material.card.MaterialCardView>&lt;!&ndash; End of c group &ndash;&gt;-->
+
+            <!--            &lt;!&ndash; d group &ndash;&gt;-->
+            <!--            <com.google.android.material.card.MaterialCardView-->
+            <!--                android:id="@+id/f_direct_selection_d_group_wrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                app:cardElevation="5dp">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:paddingLeft="10dp"-->
+            <!--                        android:paddingTop="10dp"-->
+            <!--                        android:src="@drawable/direct_selection" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="60dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="10dp"-->
+            <!--                        android:text="@string/type_group_d" />-->
+
+
+            <!--                    <View-->
+            <!--                        android:layout_width="1dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:background="?android:attr/listDivider" />-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:id="@+id/f_direct_selection_d_group_item_wrapper"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:orientation="vertical"-->
+            <!--                        android:padding="10dp">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="@string/f_direct_selection_group_title" />-->
+
+            <!--                    </LinearLayout>-->
+            <!--                </LinearLayout>-->
+            <!--            </com.google.android.material.card.MaterialCardView>&lt;!&ndash; End of d group &ndash;&gt;-->
+
+            <!--            &lt;!&ndash; e group &ndash;&gt;-->
+            <!--            <com.google.android.material.card.MaterialCardView-->
+            <!--                android:id="@+id/f_direct_selection_e_group_wrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                app:cardElevation="5dp">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:paddingLeft="10dp"-->
+            <!--                        android:paddingTop="10dp"-->
+            <!--                        android:src="@drawable/direct_selection" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="60dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="10dp"-->
+            <!--                        android:text="@string/type_group_e" />-->
+
+            <!--                    <View-->
+            <!--                        android:layout_width="1dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:background="?android:attr/listDivider" />-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:id="@+id/f_direct_selection_e_group_item_wrapper"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:orientation="vertical"-->
+            <!--                        android:padding="10dp">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="@string/f_direct_selection_group_title" />-->
+
+            <!--                    </LinearLayout>-->
+            <!--                </LinearLayout>-->
+            <!--            </com.google.android.material.card.MaterialCardView>&lt;!&ndash; End of e group &ndash;&gt;-->
 
         </LinearLayout>
     </ScrollView>

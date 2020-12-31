@@ -1,15 +1,21 @@
 package com.skymanlab.weighttraining;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -61,6 +67,8 @@ public class SettingsActivity extends AppCompatActivity {
                 this.basicEventData.setEnabled(false);
 
             } // [check 1]
+
+
 
             // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= user_info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
             this.user = findPreference("user_info");

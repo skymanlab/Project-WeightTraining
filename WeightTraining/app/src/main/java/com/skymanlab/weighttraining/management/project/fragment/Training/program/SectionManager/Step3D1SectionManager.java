@@ -14,12 +14,14 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class
 Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
@@ -96,6 +98,34 @@ Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionI
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+> 클릭");
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>> sectionManager 에서  확인한 fragmentArrayList 의 size 는 ? = " + fragmentArrayList.size());
 
+            // [iv/C]ArrayList<Event> : 각 fragment 들의 checkedEventArrayList 를 모두 담을 ArrayList
+            ArrayList<Event> checkedAllEventArrayList = new ArrayList<>();
+
+            // [cycle 1] : fragmentArrayList 의 내용을 확인한다.
+            for (int index=0; index < fragmentArrayList.size() ; index++ ) {
+                
+                if (fragmentArrayList.get(index).getSectionManager() !=null) {
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<< " + index + ">>> sectionManager 가 생성되었습니다.");
+
+                    // [lv/C]ArrayList<Event> : 각 fragment 에서 체크된 event 목록 가져오기
+                    ArrayList<Event> checkedEventArrayList = fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList();
+
+                    // [lv/C]ArrayList<Event> : 위의 데이터를 추가하기
+                    checkedAllEventArrayList.addAll(checkedEventArrayList);
+
+                } else {
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<< " + index + ">>> eventArrayList 아직 화면이 아직 만들어지지 않았습니다. ");
+                }
+
+            } // [cycle 1]
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------------------------------------------------------------------------------------------");
+            // [cycle 1] : checkedAllEventArrayList 확인하기
+            for (int index=0; index < checkedAllEventArrayList.size() ; index++ ) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<" + index + ">>> 선택된 eventName 은 ? " + checkedAllEventArrayList.get(index).getEventName());
+            } // [cycle 1]
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 아직 siCompletedFragmentArrayList 가 완료 되지 않았습니다. <=");

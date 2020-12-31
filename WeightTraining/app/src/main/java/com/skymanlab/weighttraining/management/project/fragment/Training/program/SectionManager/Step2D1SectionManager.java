@@ -14,6 +14,7 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D2Fragment;
 
 public class Step2D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
 
@@ -159,24 +160,36 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<" + index + ">>> 번째 값은 ? = " + this.isSelectedMuscleAreaList[index]);
         }
 
+        // [lv/C]FragmentTransaction : fragmentManager 를 통해 객체 가져오기
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
         // [check 1] : step1D0Type 이 뭐냐?
         switch (this.step1D0Type) {
             case Step1D0SectionManager.STEP_1_0_DIRECT_TYPE:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 direct 를 선택하였습니다.");
+                // direct
                 // [lv/C]Step3D1Fragment : step 3-1 fragment 객체 생성
-                Step3D1Fragment step3_1Fragment = Step3D1Fragment.newInstance(isSelectedMuscleAreaList);
+                Step3D1Fragment step3_1Fragment = Step3D1Fragment.newInstance(this.isSelectedMuscleAreaList);
 
-                // [lv/C]FragmentTransaction : fragmentManager 를 통해 객체 가져오기
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_1Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
-                // direct
                 break;
+
             case Step1D0SectionManager.STEP_1_0_RANDOM_TYPE:
+
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 random 을 선택하였습니다.");
                 // random
+                // [lv/C]Step3D2Fragment : step 3-2 fragment 객체 생성
+                Step3D2Fragment step3_2Fragment = Step3D2Fragment.newInstance(this.isSelectedMuscleAreaList);
+
+                // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
+                transaction.replace(R.id.nav_home_content_container, step3_2Fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
                 break;
         }
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".management.project.fragment.Training.program.Step3D1Fragment">
 
     <LinearLayout
@@ -40,24 +41,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/f_program_step2_2_message"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/f_program_step3_1_message"
                     android:textAlignment="center" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/f_program_step3_1_tab"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_height="match_parent">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/f_program_step3_1_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/f_program_step3_1_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:layout_marginTop="48dp"
+                        android:id="@+id/f_program_step3_1_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <androidx.core.widget.ContentLoadingProgressBar

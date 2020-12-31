@@ -394,6 +394,12 @@
     <string name="preference_category_user_info">사용자 정보</string>
     <string name="preference_category_user_keep_logged_in">로그인 유지</string>
 
+    <!-- Preference, AlertDialog : base event data save -->
+    <string name="preference_alert_base_event_data_save_title">기본 데이터를 저장하겠습니까?</string>
+    <string name="preference_alert_base_event_data_save_message">데이터베이스에 기본 종목 데이터를 저장합니다.</string>
+    <string name="preference_alert_base_event_data_save_bt_positive">저장</string>
+    <string name="preference_alert_base_event_data_save_bt_negative">취소</string>
+
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 

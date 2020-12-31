@@ -300,7 +300,6 @@ public class HomeActivity extends AppCompatActivity {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 기본 종목 데이터가 저장되었습니다. Firebase 의 database 를 검사할 필요가 없습니다.");
         } // [check 1]
 
-
     } // End of method [registerBaseEventDataSetting]
 
 }

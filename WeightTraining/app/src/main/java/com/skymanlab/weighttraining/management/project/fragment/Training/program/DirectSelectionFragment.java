@@ -14,8 +14,10 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.DirectSelectionSectionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +34,11 @@ public class DirectSelectionFragment extends Fragment {
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
-    private MuscleArea muscleArea;
-    private ArrayList<Event> eventArrayList;
+    private MuscleArea muscleArea = null;
+    private ArrayList<Event> eventArrayList = null;
+
+    // instance variable
+    private DirectSelectionSectionManager sectionManager = null;
 
     // constructor
     public DirectSelectionFragment() {
@@ -43,6 +48,11 @@ public class DirectSelectionFragment extends Fragment {
     // setter
     public void setEventArrayList(ArrayList<Event> eventArrayList) {
         this.eventArrayList = eventArrayList;
+    }
+
+    // getter
+    public DirectSelectionSectionManager getSectionManager() {
+        return sectionManager;
     }
 
     /**
@@ -68,13 +78,13 @@ public class DirectSelectionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String METHOD_NAME= "[onCreate] ";
+        final String METHOD_NAME = "[onCreate] ";
         if (getArguments() != null) {
             this.muscleArea = (MuscleArea) getArguments().get(MUSCLE_AREA);
             this.eventArrayList = (ArrayList<Event>) getArguments().get(EVENT_ARRAY_LIST);
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++ muscleArea 는 ? = "  + muscleArea.toString());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++ eventArrayList 의 size 는 ? = "  + eventArrayList.size());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++ muscleArea 는 ? = " + muscleArea.toString());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++ eventArrayList 의 size 는 ? = " + eventArrayList.size());
 
         }
     }
@@ -92,5 +102,11 @@ public class DirectSelectionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
+        // [iv/C]DirectSelectionSectionManager :
+        this.sectionManager = new DirectSelectionSectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        this.sectionManager.mappingWidget();
+        this.sectionManager.setGroupingEventData(this.eventArrayList);
+        this.sectionManager.setMuscleAreaStandardId(this.muscleArea);
+        this.sectionManager.initWidget();
     }
 }
