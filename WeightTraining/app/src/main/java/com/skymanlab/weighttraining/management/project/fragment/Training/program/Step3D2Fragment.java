@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.Step3D2SectionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,10 @@ public class Step3D2Fragment extends Fragment {
 
     // instance variable
     private boolean[] isSelectedMuscleAreaList;
+
+    // instance variable
+    private FragmentTopBarManager topBarManager;
+    private Step3D2SectionManager sectionManager;
 
     // constructor
     public Step3D2Fragment() {
@@ -73,5 +79,16 @@ public class Step3D2Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // [iv/C]FragmentTopBarManager : step 3-2 fragment top bar manager
+        this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_title));
+        this.topBarManager.mappingWidget();
+        this.topBarManager.initWidget();
+
+        // [iv/C]Step3D2SectionManager : step 3-2 fragment section manager
+        this.sectionManager = new Step3D2SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager(), this.isSelectedMuscleAreaList);
+        this.sectionManager.mappingWidget();
+        this.sectionManager.initWidget();
+        
     }
 }

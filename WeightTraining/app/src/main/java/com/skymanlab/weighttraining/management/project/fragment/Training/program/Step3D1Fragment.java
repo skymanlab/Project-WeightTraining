@@ -237,21 +237,4 @@ public class Step3D1Fragment extends Fragment {
 
     } // End of method [makeFragment]
 
-
-    /**
-     * [method] Error 가 발생하였을 때, Fragment
-     *
-     */
-     private void makeErrorFragment(boolean isSelectedMuscleArea, MuscleArea muscleArea) {
-
-         // [check 1] : 선택한 muscleArea 에 해당하는 step 3-1 의 viewPager 에 표시하는 Fragment 를 생성한다.
-         if (isSelectedMuscleArea) {
-
-             // [lv/C]DirectSelectionFragment :
-
-
-         } // [check 1]
-
-     } // End of method [makeErrorFragment]
-
 }

@@ -39,7 +39,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/direct_selection" />
+                            android:src="@drawable/menu_icon" />
 
                         <TextView
                             android:layout_width="60dp"
@@ -86,7 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/direct_selection" />
+                            android:src="@drawable/menu_icon" />
 
                         <TextView
                             android:layout_width="60dp"
@@ -132,7 +132,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/direct_selection" />
+                            android:src="@drawable/menu_icon" />
 
                         <TextView
                             android:layout_width="60dp"
@@ -178,7 +178,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/direct_selection" />
+                            android:src="@drawable/menu_icon" />
 
                         <TextView
                             android:layout_width="60dp"
@@ -224,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/direct_selection" />
+                            android:src="@drawable/menu_icon" />
 
                         <TextView
                             android:layout_width="60dp"
