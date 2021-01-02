@@ -20,9 +20,10 @@ public class Step1D0SectionManager extends FragmentSectionManager implements Fra
 
     // constant
     public static final int STEP_1_0_DIRECT_TYPE = 0;
-    public static final int STEP_1_0_RANDOM_TYPE = 1;
-    public static final int STEP_1_0_MY_PROGRAM_TYPE = 2;
-    public static final int STEP_1_0_RECOMMEND_PROGRAM_TYPE = 3;
+    public static final int STEP_1_0_EACH_RANDOM_TYPE = 1;
+    public static final int STEP_1_0_ALL_RANDOM_TYPE = 2;
+    public static final int STEP_1_0_MY_PROGRAM_TYPE = 3;
+    public static final int STEP_1_0_RECOMMEND_PROGRAM_TYPE = 4;
     // constant
     private static final String CLASS_NAME = "[PFTS] Step1D0SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
@@ -31,10 +32,9 @@ public class Step1D0SectionManager extends FragmentSectionManager implements Fra
 
     // instance variable : widget
     private MaterialButton directSelection;         // [0] type
-    private MaterialButton randomSelection;         // [1] type
-    private MaterialButton eachRandomSelection;
-    private MaterialButton allRandomSelection;
-    private MaterialButton myProgram;               // [2] type
+    private MaterialButton eachRandomSelection;     // [1] type
+    private MaterialButton allRandomSelection;      // [2] type
+    private MaterialButton myProgram;               // [3] type
     private MaterialButton recommendProgram;        // [4] type
 
     // constructor
@@ -48,8 +48,11 @@ public class Step1D0SectionManager extends FragmentSectionManager implements Fra
         // [iv/C]MaterialButton : [0] directSelection mapping
         this.directSelection = (MaterialButton) getView().findViewById(R.id.f_program_step1_direct_selection);
 
-        // [iv/C]MaterialButton : randomSelection mapping
-        this.randomSelection = (MaterialButton) getView().findViewById(R.id.f_program_step1_random_selection);
+        // [iv/C]MaterialButton : eachRandomSelection mapping
+        this.eachRandomSelection = (MaterialButton) getView().findViewById(R.id.f_program_step1_each_random_selection);
+
+        // [iv/C]MaterialButton : allRandomSelection mapping
+        this.allRandomSelection = (MaterialButton) getView().findViewById(R.id.f_program_step1_all_random_selection);
 
         // [iv/C]MaterialButton : myProgram mapping
         this.myProgram = (MaterialButton) getView().findViewById(R.id.f_program_step1_my_program);
@@ -85,15 +88,31 @@ public class Step1D0SectionManager extends FragmentSectionManager implements Fra
             }
         });
 
-        // [iv/C]MaterialButton : randomSelection click listener
-        this.randomSelection.setOnClickListener(new View.OnClickListener() {
+        // [iv/C]MaterialButton : eachRandomSelection click listener
+        this.eachRandomSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "random selection click ");
 
-                // [lv/C]Step2D1Fragment : 객체를 생성하면서 STEP_1_0_RANDOM_TYPE(random 버튼을 클릭했다는) 값을 넘겨준다.
-                Step2D1Fragment fragment = Step2D1Fragment.newInstance(STEP_1_0_RANDOM_TYPE);
+                // [lv/C]Step2D1Fragment : 객체를 생성하면서 STEP_1_0_EACH_RANDOM_TYPE(random 버튼을 클릭했다는) 값을 넘겨준다.
+                Step2D1Fragment fragment = Step2D1Fragment.newInstance(STEP_1_0_EACH_RANDOM_TYPE);
+
+                // [method] : 위에서 생성한 fragment 로 이동하는 과정 진행
+                moveStep2(fragment);
+
+            }
+        });
+
+        // [iv/C]MaterialButton : allRandomSelection click listener
+        this.allRandomSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "random selection click ");
+
+                // [lv/C]Step2D1Fragment : 객체를 생성하면서 STEP_1_0_ALL_RANDOM_TYPE(random 버튼을 클릭했다는) 값을 넘겨준다.
+                Step2D1Fragment fragment = Step2D1Fragment.newInstance(STEP_1_0_ALL_RANDOM_TYPE);
 
                 // [method] : 위에서 생성한 fragment 로 이동하는 과정 진행
                 moveStep2(fragment);

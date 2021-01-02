@@ -2,6 +2,7 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
@@ -11,28 +12,42 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.project.data.DataManager;
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class
-Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
+public class Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
 
     // constant
     private static final String CLASS_NAME = "[PFTS] Step3D1SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
+    private Fragment fragment;
+    private boolean[] isSelectedMuscleAreaList ;
+
+    // instance variable
     private ArrayList<DirectSelectionFragment> fragmentArrayList;
-    private boolean isCompletedFragmentArrayList;
+    private ArrayList<String> fragmentTitleList;
+    private boolean isCompletedFragmentCreation;
 
     // instance variable
     private StepProcessManager stepProcessManager;
@@ -43,23 +58,11 @@ Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionI
     private ContentLoadingProgressBar progressBar;
 
     // constructor
-    public Step3D1SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
+    public Step3D1SectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment,  boolean[] isSelectedMuscleAreaList) {
         super(activity, view, fragmentManager);
-        this.isCompletedFragmentArrayList = false;
-    }
-
-    // setter
-    public void setFragmentArrayList(ArrayList<DirectSelectionFragment> fragmentArrayList) {
-        this.fragmentArrayList = fragmentArrayList;
-    }
-
-    public void setCompletedFragmentArrayList(boolean completedFragmentArrayList) {
-        isCompletedFragmentArrayList = completedFragmentArrayList;
-    }
-
-    // getter
-    public ContentLoadingProgressBar getProgressBar() {
-        return progressBar;
+        this.fragment = fragment;
+        this.isSelectedMuscleAreaList = isSelectedMuscleAreaList;
+        this.isCompletedFragmentCreation = false;
     }
 
     @Override
@@ -87,6 +90,18 @@ Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionI
         this.stepProcessManager.mappingWidget();
         this.stepProcessManager.initWidget();
 
+        // [iv/C]ArrayList<DirectSelectionFragment> : DirectSelectionFragment 를 담을 객체 생성
+        this.fragmentArrayList = new ArrayList<>();
+
+        // [iv/C]ArrayList<String> : 위의 fragmentArrayList 와 1:1 매핑되는 각 fragment 의 title 을 담을 객체 생성 (tabLayout 에 표시)
+        this.fragmentTitleList = new ArrayList<>();
+
+        // [lv/C]DatabaseReference : Firebase Database 의 event 항목을 참조하기위한 객체 생성
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
+
+        // [method] :
+        loadContent(db);
+
     }
 
     @Override
@@ -94,9 +109,7 @@ Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionI
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
         // [check 1] : isCompletedFragmentArrayList 가 true 일 때만
-        if (this.isCompletedFragmentArrayList) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+> 클릭");
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>> sectionManager 에서  확인한 fragmentArrayList 의 size 는 ? = " + fragmentArrayList.size());
+        if (this.isCompletedFragmentCreation) {
 
             // [iv/C]ArrayList<Event> : 각 fragment 들의 checkedEventArrayList 를 모두 담을 ArrayList
             ArrayList<Event> checkedAllEventArrayList = new ArrayList<>();
@@ -130,17 +143,119 @@ Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionI
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 아직 siCompletedFragmentArrayList 가 완료 되지 않았습니다. <=");
         } // [check 1]
+
     }
+
+
+    /**
+     * [method] Firebase Database 에서 event/$uid/$MuscleArea 에 해당하는 내용을 muscleArea 으로 가져오기
+     */
+    private void loadContent(DatabaseReference db) {
+        final String METHOD_NAME = "[loadContent] ";
+
+        // muscleArea 에 해당하는 isSelectedMuscleArea 가 true 인 경우에만 수행되는 method 로
+        // 무조건 수행되어 Fragment 를 만들어야 한다.
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "uid = " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        // [lv/C]Query : uid 로 query 만들기
+        Query query = db.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "snapshot 내용 = " + snapshot);
+
+                // [method] : [0] CHEST 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                makeFragment(snapshot, isSelectedMuscleAreaList[0], MuscleArea.CHEST);
+
+                // [method] : [1] SHOULDER 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                makeFragment(snapshot, isSelectedMuscleAreaList[1], MuscleArea.SHOULDER);
+
+                // [method] : [2] LAT 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                makeFragment(snapshot, isSelectedMuscleAreaList[2], MuscleArea.LAT);
+
+                // [method] : [3] UPPER_BODY(or LEG) 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                makeFragment(snapshot, isSelectedMuscleAreaList[3], MuscleArea.LEG);
+
+                // [method] : [4] ARM 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                makeFragment(snapshot, isSelectedMuscleAreaList[4], MuscleArea.ARM);
+
+                // [method] : [5] ETC 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                makeFragment(snapshot, isSelectedMuscleAreaList[5], MuscleArea.ETC);
+
+                // [iv/b]isCom : fragment 생성 완료 되었음을 알림!
+                isCompletedFragmentCreation = true;
+
+                // [method] : 생성한 fragment 가 있는 fragmentArrayList 를 viewPager 와 연결하기
+                initViewPager();
+
+                // [iv/C]ContentLoadingProgressBar : GONE
+                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                // [check 1] : error 가 발생하면 -> muscleArea 에 해당하는 Fragment 를 만들지만, eventArrayList 는 null 인 fragment 객체를 생성한다.
+                if (error != null) {
+
+                    // "데이터를 가져오는데 오류가 발생하였습니다." Toast 메시지 표시
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.f_program_step3_1_firebase_database_error_message), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    /**
+     * [method]
+     */
+    private void makeFragment(DataSnapshot snapshot, boolean isSelectedMuscleArea, MuscleArea muscleArea) {
+        final String METHOD_NAME = "[makeFragment] ";
+
+        // [check 1] : step 2-1 에서 선택된 항목만 Fragment 생성하고 fragmentArrayList 에 추가한다.
+        if (isSelectedMuscleArea) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> muscleArea = " + muscleArea + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+            // [lv/C]ArrayList<Event> : 하위 항목을 담을 ArrayList 를 생성
+            ArrayList<Event> eventArrayList = new ArrayList<>();
+
+            // [cycle 1] : event/$muscleArea 의 하위 항목을 가져온다.
+            for (DataSnapshot search : snapshot.child(muscleArea.toString()).getChildren()) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>> key = " + search.getKey());
+                // [lv/C]Event : 하위 항목을 Event 객체로 만들기, key 값도 설정하기
+                Event data = search.getValue(Event.class);
+                data.setKey(search.getKey());
+
+                // [lv/C]ArrayList<Event> : 하위 항목을 추가한다.
+                eventArrayList.add(data);
+
+            } // [cycle 1]
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>> eventArrayList 의 size = " + eventArrayList.size());
+
+            // [lv/C]DirectSelectionFragment : muscleArea 와 eventArrayList 로 Fragment 객체 생성
+            DirectSelectionFragment fragment = DirectSelectionFragment.newInstance(muscleArea, eventArrayList);
+
+            // [iv/C]ArrayList<DirectSelectionFragment> : 위에서 생성한 fragment 추가한다.
+            fragmentArrayList.add(fragment);
+
+            // [iv/C]ArrayList<String> : fragment 의 title 도 저장
+            fragmentTitleList.add(DataManager.convertHanguleOfMuscleArea(muscleArea));
+
+        } // [check 1]
+
+    } // End of method [makeFragment]
 
 
     /**
      * [method] fragmentArrayList 의 fragment 로 tabLayout, viewPager 초기화 하기
      *
-     * @param fragment ViewPager2 가 포함되어 있는 layout 을 관리하는 Fragment
-     * @param fragmentArrayList viewPager 에 표시하는 Fragment 객체가 들어있는 ArrayList
-     * @param fragmentMuscleAreaList fragmentArrayList 와 1:1 매핑되어 있는 fragment 객체의 muscleArea 값이 있는 ArrayList
      */
-    public void initViewPager(Fragment fragment, ArrayList<DirectSelectionFragment> fragmentArrayList, ArrayList<String> fragmentMuscleAreaList) {
+    public void initViewPager() {
 
         // [lv/C]DirectPagerAdapter : viewPager 의 adapter 생성
         DirectPagerAdapter adapter = new DirectPagerAdapter(fragment, fragmentArrayList);
@@ -153,7 +268,7 @@ Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionI
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
-                tab.setText(fragmentMuscleAreaList.get(position));
+                tab.setText(fragmentTitleList.get(position));
 
             }
         });

@@ -23,11 +23,13 @@
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/include_all_random_selection_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanum_gothic"
                 android:paddingTop="5dp"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:text="@string/include_all_random_selection_title"
                 app:drawableStartCompat="@drawable/menu_icon" />
 

@@ -93,16 +93,15 @@
 
     <!-- Fragment : program, step3-1 -->
     <string name="f_program_step3_1_message">해당 종목을 선택해주세요.</string>
-    <string name="f_program_step3_1_"></string>
+    <string name="f_program_step3_1_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
 
     <!-- Fragment : program, step3-2 -->
     <string name="f_program_step3_2_message">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
-    <string name="f_program_step3_2_"></string>
+    <string name="f_program_step3_2_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
 
     <!-- Fragment : program, step3-3 -->
     <string name="f_program_step3_3_message">각 근육 부위의 전체에서 개수를 정해주세요.</string>
-    <string name="f_program_step3_3_all_random_selection_title">전체</string>
-    <string name="f_program_step3_3_"></string>
+    <string name="f_program_step3_3_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
 
     <!-- Fragment : program, step4-->
     <string name="f_program_step4_message"></string>

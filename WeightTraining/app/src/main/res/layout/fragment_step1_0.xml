@@ -60,7 +60,17 @@
                     app:backgroundTint="@color/colorBackgroundFirst" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_program_step1_random_selection"
+                    android:id="@+id/f_program_step1_each_random_selection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:text="@string/f_program_step1_each_random_selection"
+                    android:textColor="@color/colorTextPrimary"
+                    app:backgroundTint="@color/colorBackgroundSecond" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_program_step1_all_random_selection"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"

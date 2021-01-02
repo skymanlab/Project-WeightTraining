@@ -15,6 +15,7 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionI
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D2Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D3Fragment;
 
 public class Step2D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
 
@@ -178,15 +179,29 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
                 transaction.commit();
                 break;
 
-            case Step1D0SectionManager.STEP_1_0_RANDOM_TYPE:
+            case Step1D0SectionManager.STEP_1_0_EACH_RANDOM_TYPE:
 
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 random 을 선택하였습니다.");
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 each random 을 선택하였습니다.");
                 // random
                 // [lv/C]Step3D2Fragment : step 3-2 fragment 객체 생성
                 Step3D2Fragment step3_2Fragment = Step3D2Fragment.newInstance(this.isSelectedMuscleAreaList);
 
                 // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_2Fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                break;
+
+            case Step1D0SectionManager.STEP_1_0_ALL_RANDOM_TYPE:
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 all random 을 선택하였습니다.");
+                // random
+                // [lv/C]Step3D2Fragment : step 3-2 fragment 객체 생성
+                Step3D3Fragment step3_3Fragment = Step3D3Fragment.newInstance(this.isSelectedMuscleAreaList);
+
+                // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
+                transaction.replace(R.id.nav_home_content_container, step3_3Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
 

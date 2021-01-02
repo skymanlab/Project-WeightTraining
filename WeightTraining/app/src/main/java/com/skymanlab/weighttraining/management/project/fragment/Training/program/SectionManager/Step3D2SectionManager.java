@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -210,28 +211,28 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= chest =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]GroupingEventData : chest 목록을 가져와서 그룹화하기
-                chestGroupingEventData = loadContentByMuscleArea(snapshot, isSelectedMuscleAreaList[0], MuscleArea.CHEST);
+                chestGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[0], snapshot, MuscleArea.CHEST);
 
                 // [method] : chest spinner widget init
                 setAdapterOfChest(isSelectedMuscleAreaList[0], chestGroupingEventData);
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= shoulder =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]GroupingEventData : shoulder 목록을 가져와서
-                shoulderGroupingEventData = loadContentByMuscleArea(snapshot, isSelectedMuscleAreaList[1], MuscleArea.SHOULDER);
+                shoulderGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[1], snapshot, MuscleArea.SHOULDER);
 
                 // [method] : shoulder spinner widget init
                 setAdapterOfShoulder(isSelectedMuscleAreaList[1], shoulderGroupingEventData);
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= lat =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]GroupingEventData : lat 목록을 가져와서 그룹화하기
-                latGroupingEventData = loadContentByMuscleArea(snapshot, isSelectedMuscleAreaList[2], MuscleArea.LAT);
+                latGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[2], snapshot, MuscleArea.LAT);
 
                 // [method] : lat spinner widget init
                 setAdapterOfLat(isSelectedMuscleAreaList[2], latGroupingEventData);
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= upper_body =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]GroupingEventData : upper_body 목록을 가져와서 그룹화하기
-                upperBodyGroupingEventData = loadContentByMuscleArea(snapshot, isSelectedMuscleAreaList[3], MuscleArea.LEG);
+                upperBodyGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[3], snapshot, MuscleArea.LEG);
 
                 // [method] : upper_body spinner widget init
                 setAdapterOfUpperBody(isSelectedMuscleAreaList[3], upperBodyGroupingEventData);
@@ -239,14 +240,14 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= arm =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]GroupingEventData : arm 목록을 가져와서 그룹화하기
-                armGroupingEventData = loadContentByMuscleArea(snapshot, isSelectedMuscleAreaList[4], MuscleArea.ARM);
+                armGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[4], snapshot, MuscleArea.ARM);
 
                 // [method] : arm spinner widget init
                 setAdapterOfArm(isSelectedMuscleAreaList[4], armGroupingEventData);
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]GroupingEventData : etc 목록을 가져와서 그룹화하기
-                etcGroupingEventData = loadContentByMuscleArea(snapshot, isSelectedMuscleAreaList[5], MuscleArea.ETC);
+                etcGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[5], snapshot, MuscleArea.ETC);
 
                 // [method] : etc spinner widget init
                 setAdapterOfEtc(isSelectedMuscleAreaList[5], etcGroupingEventData);
@@ -256,18 +257,58 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+                // "데이터를 가져오는데 오류가 발생하였습니다." Toast 메시지 표시
+                Toast.makeText(getActivity(), getActivity().getString(R.string.f_program_step3_2_firebase_database_error_message), Toast.LENGTH_SHORT).show();
+
             }
         });
-
-
     }
 
     @Override
     public void setClickListenerOfNext() {
 
+        // [check 1] : chest 가 선택한 항목인가요?
+        if (this.isSelectedMuscleAreaList[0]) {
+
+        } // [check 1]
+
+        // [check 2] : shoulder 가 선택한 항목인가요?
+        if (this.isSelectedMuscleAreaList[1]) {
+
+        } // [check 2]
+
+        // [check 3] : lat 가 선택한 항목인가요?
+        if (this.isSelectedMuscleAreaList[2]) {
+
+        } // [check 3]
+
+        // [check 4] : upper_body 가 선택한 항목인가요?
+        if (this.isSelectedMuscleAreaList[3]) {
+
+        } // [check 4]
+
+        // [check 5] : arm 가 선택한 항목인가요?
+        if (this.isSelectedMuscleAreaList[4]) {
+
+        } // [check 5]
+
+        // [check 6] : etc 가 선택한 항목인가요?
+        if (this.isSelectedMuscleAreaList[5]) {
+
+        } // [check 6]
+
     }
 
-    private GroupingEventData loadContentByMuscleArea(DataSnapshot snapshot, boolean isSelectedMuscleArea, MuscleArea muscleArea) {
+
+    /**
+     * firebase database 에서 event/$uid$/ 에서 가져온 snapshot 을 통해 각 MuscleArea 의 목록을 가져와서 그룹화한 GroupingEventData 를 만들어서 반환한다.
+     *
+     * @param isSelectedMuscleArea 해당 MuscleArea 의 선택 여부
+     * @param snapshot             firebase database 에서 가져온 데이터
+     * @param muscleArea           firebase database 에서 목록 가져올 때, 어떤 부위의 목록을 가져오는 건가요?
+     * @return
+     */
+    private GroupingEventData loadContentByMuscleArea(boolean isSelectedMuscleArea, DataSnapshot snapshot, MuscleArea muscleArea) {
         final String METHOD_NAME = "[loadContentByMuscleArea] ";
 
         // [lv/C]GroupingEventData : eventArrayList 를 그룹화한다.
@@ -355,21 +396,22 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     } // End of method [loadContentByMuscleArea]
 
 
-    private ArrayAdapter<Integer> getAdapterOfGroupSpinner(ArrayList<Event> eventArrayList) {
+    /**
+     * @param size 추가할 항목의 size
+     * @return 항목이 추가된 adpater
+     */
+    private ArrayAdapter<Integer> getAdapterOfGroupSpinner(int size) {
 
         // [lv/C]ArrayAdapter<Integer> :
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getActivity(), R.layout.support_simple_spinner_dropdown_item);
 
         // [cycle 1] : a group event array list 의 size 만큼
-        for (int index = 0; index < eventArrayList.size(); index++) {
+        for (int index = 0; index <= size; index++) {
 
             // [lv/C]ArrayAdapter<Integer> : index 추가
             adapter.add(index);
 
         } // [cycle 1]
-
-        // [lv/C]ArrayAdapter<Integer> : size 추가
-        adapter.add(eventArrayList.size());
 
         return adapter;
 
@@ -450,6 +492,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
     /**
      * [method] chest 의 그룹화된 groupingEventData 를 각 그룹의 spinner 를 설정한다.
+     *
      * @param groupingEventData 그룹화된 event 데이터
      */
     private void setAdapterOfChest(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
@@ -464,7 +507,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.chestAGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : a group spinner 을 adapter 와 연겨하기
-                this.chestAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList()));
+                this.chestAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList().size()));
 
             } // [check 1]
 
@@ -475,7 +518,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.chestBGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : b group spinner 을 adapter 와 연겨하기
-                this.chestBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList()));
+                this.chestBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList().size()));
 
             } // [check 2]
 
@@ -486,7 +529,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.chestCGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : c group spinner 을 adapter 와 연겨하기
-                this.chestCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList()));
+                this.chestCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList().size()));
 
             } // [check 3]
 
@@ -497,7 +540,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.chestDGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : d group spinner 을 adapter 와 연겨하기
-                this.chestDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList()));
+                this.chestDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList().size()));
 
             } // [check 4]
 
@@ -508,7 +551,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.chestEGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : e group spinner 을 adapter 와 연겨하기
-                this.chestEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList()));
+                this.chestEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList().size()));
 
             } // [check 5]
 
@@ -591,6 +634,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
     /**
      * [method] shoulder 의 그룹화된 groupingEventData 를 각 그룹의 spinner 를 설정한다.
+     *
      * @param groupingEventData 그룹화된 event 데이터
      */
     private void setAdapterOfShoulder(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
@@ -605,7 +649,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.shoulderAGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : a group spinner 을 adapter 와 연겨하기
-                this.shoulderAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList()));
+                this.shoulderAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList().size()));
 
             } // [check 1]
 
@@ -616,7 +660,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.shoulderBGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : b group spinner 을 adapter 와 연겨하기
-                this.shoulderBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList()));
+                this.shoulderBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList().size()));
 
             } // [check 2]
 
@@ -627,7 +671,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.shoulderCGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : c group spinner 을 adapter 와 연겨하기
-                this.shoulderCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList()));
+                this.shoulderCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList().size()));
 
             } // [check 3]
 
@@ -638,7 +682,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.shoulderDGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : d group spinner 을 adapter 와 연겨하기
-                this.shoulderDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList()));
+                this.shoulderDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList().size()));
 
             } // [check 4]
 
@@ -649,7 +693,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.shoulderEGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : e group spinner 을 adapter 와 연겨하기
-                this.shoulderEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList()));
+                this.shoulderEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList().size()));
 
             } // [check 5]
 
@@ -732,6 +776,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
     /**
      * [method] lat 의 그룹화된 groupingEventData 를 각 그룹의 spinner 를 설정한다.
+     *
      * @param groupingEventData 그룹화된 event 데이터
      */
     private void setAdapterOfLat(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
@@ -746,7 +791,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.latAGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : a group spinner 을 adapter 와 연겨하기
-                this.latAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList()));
+                this.latAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList().size()));
 
             } // [check 1]
 
@@ -757,7 +802,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.latBGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : b group spinner 을 adapter 와 연겨하기
-                this.latBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList()));
+                this.latBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList().size()));
 
             } // [check 2]
 
@@ -768,7 +813,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.latCGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : c group spinner 을 adapter 와 연겨하기
-                this.latCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList()));
+                this.latCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList().size()));
 
             } // [check 3]
 
@@ -779,7 +824,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.latDGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : d group spinner 을 adapter 와 연겨하기
-                this.latDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList()));
+                this.latDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList().size()));
 
             } // [check 4]
 
@@ -790,7 +835,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.latEGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : e group spinner 을 adapter 와 연겨하기
-                this.latEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList()));
+                this.latEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList().size()));
 
             } // [check 5]
 
@@ -873,6 +918,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
     /**
      * [method] upper_body 의 그룹화된 groupingEventData 를 각 그룹의 spinner 를 설정한다.
+     *
      * @param groupingEventData 그룹화된 event 데이터
      */
     private void setAdapterOfUpperBody(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
@@ -887,7 +933,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.upperBodyAGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : a group spinner 을 adapter 와 연겨하기
-                this.upperBodyAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList()));
+                this.upperBodyAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList().size()));
 
             } // [check 1]
 
@@ -898,7 +944,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.upperBodyBGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : b group spinner 을 adapter 와 연겨하기
-                this.upperBodyBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList()));
+                this.upperBodyBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList().size()));
 
             } // [check 2]
 
@@ -909,7 +955,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.upperBodyCGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : c group spinner 을 adapter 와 연겨하기
-                this.upperBodyCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList()));
+                this.upperBodyCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList().size()));
 
             } // [check 3]
 
@@ -920,7 +966,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.upperBodyDGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : d group spinner 을 adapter 와 연겨하기
-                this.upperBodyDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList()));
+                this.upperBodyDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList().size()));
 
             } // [check 4]
 
@@ -931,7 +977,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.upperBodyEGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : e group spinner 을 adapter 와 연겨하기
-                this.upperBodyEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList()));
+                this.upperBodyEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList().size()));
 
             } // [check 5]
 
@@ -1013,6 +1059,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
     /**
      * [method] arm 의 그룹화된 groupingEventData 를 각 그룹의 spinner 를 설정한다.
+     *
      * @param groupingEventData 그룹화된 event 데이터
      */
     private void setAdapterOfArm(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
@@ -1027,7 +1074,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.armAGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : a group spinner 을 adapter 와 연겨하기
-                this.armAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList()));
+                this.armAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList().size()));
 
             } // [check 1]
 
@@ -1038,7 +1085,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.armBGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : b group spinner 을 adapter 와 연겨하기
-                this.armBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList()));
+                this.armBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList().size()));
 
             } // [check 2]
 
@@ -1049,7 +1096,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.armCGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : c group spinner 을 adapter 와 연겨하기
-                this.armCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList()));
+                this.armCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList().size()));
 
             } // [check 3]
 
@@ -1060,7 +1107,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.armDGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : d group spinner 을 adapter 와 연겨하기
-                this.armDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList()));
+                this.armDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList().size()));
 
             } // [check 4]
 
@@ -1071,7 +1118,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.armEGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : e group spinner 을 adapter 와 연겨하기
-                this.armEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList()));
+                this.armEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList().size()));
 
             } // [check 5]
 
@@ -1153,6 +1200,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
     /**
      * [method] etc 의 그룹화된 groupingEventData 를 각 그룹의 spinner 를 설정한다.
+     *
      * @param groupingEventData 그룹화된 event 데이터
      */
     private void setAdapterOfEtc(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
@@ -1167,7 +1215,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.etcAGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : a group spinner 을 adapter 와 연겨하기
-                this.etcAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList()));
+                this.etcAGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getAGroupEventArrayList().size()));
 
             } // [check 1]
 
@@ -1178,7 +1226,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.etcBGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : b group spinner 을 adapter 와 연겨하기
-                this.etcBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList()));
+                this.etcBGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getBGroupEventArrayList().size()));
 
             } // [check 2]
 
@@ -1189,7 +1237,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.etcCGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : c group spinner 을 adapter 와 연겨하기
-                this.etcCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList()));
+                this.etcCGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getCGroupEventArrayList().size()));
 
             }// [check 3]
 
@@ -1200,7 +1248,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.etcDGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : d group spinner 을 adapter 와 연겨하기
-                this.etcDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList()));
+                this.etcDGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getDGroupEventArrayList().size()));
 
             } // [check 4]
 
@@ -1211,7 +1259,7 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
                 this.etcEGroupWrapper.setVisibility(View.VISIBLE);
 
                 // [iv/C]Spinner : e group spinner 을 adapter 와 연겨하기
-                this.etcEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList()));
+                this.etcEGroupSpinner.setAdapter(getAdapterOfGroupSpinner(groupingEventData.getEGroupEventArrayList().size()));
 
             } // [check 5]
 

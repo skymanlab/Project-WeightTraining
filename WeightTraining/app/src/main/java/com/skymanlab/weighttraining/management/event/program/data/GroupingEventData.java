@@ -1,6 +1,8 @@
 package com.skymanlab.weighttraining.management.event.program.data;
 
 
+import android.util.Log;
+
 import com.skymanlab.weighttraining.management.event.data.Event;
 
 import java.util.ArrayList;
@@ -53,5 +55,19 @@ public class GroupingEventData {
 
     public void setEGroupEventArrayList(ArrayList<Event> eGroupEventArrayList) {
         this.eGroupEventArrayList = eGroupEventArrayList;
+    }
+
+
+
+    public int getAllSize() {
+        String TAG = "GroupingEventData";
+
+        Log.d(TAG, "getAllSize: a group = "  + aGroupEventArrayList.size());
+        Log.d(TAG, "getAllSize: b group = "  + bGroupEventArrayList.size());
+        Log.d(TAG, "getAllSize: c group = " + cGroupEventArrayList.size());
+        Log.d(TAG, "getAllSize: d group = " + dGroupEventArrayList.size());
+        Log.d(TAG, "getAllSize: e group = " + eGroupEventArrayList.size());
+
+        return aGroupEventArrayList.size() + bGroupEventArrayList.size() + cGroupEventArrayList.size() + dGroupEventArrayList.size() + eGroupEventArrayList.size();
     }
 }
