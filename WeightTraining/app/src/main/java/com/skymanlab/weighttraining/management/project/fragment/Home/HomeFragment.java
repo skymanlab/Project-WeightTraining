@@ -25,8 +25,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class HomeFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[FH]_HomeFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFH] HomeFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

@@ -24,8 +24,8 @@ import java.util.ArrayList;
 public class EventItemLvManager {
 
     // constructor
-    private static final String CLASS_NAME = "[EL]_EventItemLvManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[EL] EventItemLvManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private EventItemLvAdapter eventItemLvAdapter;

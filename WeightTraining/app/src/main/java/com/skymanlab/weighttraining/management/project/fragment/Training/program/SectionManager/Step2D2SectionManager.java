@@ -14,8 +14,8 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionM
 public class Step2D2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener{
 
     // constant
-    private static final String CLASS_NAME = "[PFTS] Step2D1SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTPS] Step2D2SectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private StepProcessManager stepProcessManager;

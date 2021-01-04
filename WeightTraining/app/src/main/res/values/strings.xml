@@ -103,9 +103,9 @@
     <string name="f_program_step3_3_message">각 근육 부위의 전체에서 개수를 정해주세요.</string>
     <string name="f_program_step3_3_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
 
-    <!-- Fragment : program, step4-->
-    <string name="f_program_step4_message"></string>
-    <string name="f_program_step4_"></string>
+    <!-- Fragment : program, step4-1 -->
+    <string name="f_program_step4_1_message">순서를 정해주세요.</string>
+    <string name="f_program_step4_1_"></string>
 
     <!-- Fragment : program, step5 -->
     <string name="f_program_step5_message"></string>

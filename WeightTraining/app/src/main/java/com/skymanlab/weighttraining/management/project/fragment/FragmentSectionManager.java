@@ -10,16 +10,9 @@ public class FragmentSectionManager {
     // instance variable
     private Activity activity;
     private View view;
-    //    private User user;
     private FragmentManager fragmentManager;
 
     // constructor
-//    public FragmentSectionManager(Activity activity, View view, User user) {
-//        this.activity = activity;
-//        this.view = view;
-//        this.user = user;
-//    }
-
     public FragmentSectionManager(View view, FragmentManager fragmentManager) {
         this.view = view;
         this.fragmentManager = fragmentManager;
@@ -38,7 +31,6 @@ public class FragmentSectionManager {
 
     public FragmentSectionManager(View view) {
         this.view = view;
-//        this.user = user;
     }
 
     // getter
@@ -53,11 +45,5 @@ public class FragmentSectionManager {
     public FragmentManager getFragmentManager() {
         return fragmentManager;
     }
-
-    //
-//    public User getUser() {
-//        return user;
-//    }
-
 
 }

@@ -29,8 +29,8 @@ import java.util.ArrayList;
 public class EventItemLvAdapter extends BaseAdapter {
 
     // constructor
-    private static final String CLASS_NAME = "[EL]_EventItemLvAdapter ";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[EL] EventItemLvAdapter ";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private ArrayList<Event> eventArrayList;

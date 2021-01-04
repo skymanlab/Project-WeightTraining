@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class EventProgramItemLvAdapter extends BaseAdapter {
 
     // constance
-    public static final String CLASS_NAME = "[EL]_EventSelectionItemLvAdapter";
-    public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    public static final String CLASS_NAME = "[EL] EventProgramItemLvAdapter";
+    public static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private ArrayList<Event> eventArrayList;

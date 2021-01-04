@@ -20,7 +20,7 @@ import com.skymanlab.weighttraining.management.project.activity.SectionManager;
 public class EPSectionOneManager  extends EPSectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAEP]_EPSectionOneManager";       // EventProgramActivity Section One Manager
+    private static final String CLASS_NAME = "[PAEP] EPSectionOneManager";       // EventProgramActivity Section One Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : section

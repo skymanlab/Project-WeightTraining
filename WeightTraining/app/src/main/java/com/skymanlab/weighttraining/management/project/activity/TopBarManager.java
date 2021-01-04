@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 public class TopBarManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PA]_TopBarManager";
+    private static final String CLASS_NAME = "[PA] TopBarManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

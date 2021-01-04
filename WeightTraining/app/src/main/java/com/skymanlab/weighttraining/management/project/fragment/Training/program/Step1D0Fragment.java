@@ -24,7 +24,7 @@ public class Step1D0Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] Step1D0Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

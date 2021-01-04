@@ -25,7 +25,7 @@ public class Step2D2Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] Step2D2Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String STEP_1_0_TYPE ="step1D0Type";

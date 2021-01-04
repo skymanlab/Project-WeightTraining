@@ -27,8 +27,8 @@ public class RestTimePickerDialog extends DialogFragment {
     private static final int MAX_NUMBER = 59;
     private static final int MIN_NUMBER = 0;
     // constant
-    private static final String CLASS_NAME = "[ED]_RestTimePickerDialog";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[ED] RestTimePickerDialog";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // instance variable
     private NoticeDialogListener listener;
 

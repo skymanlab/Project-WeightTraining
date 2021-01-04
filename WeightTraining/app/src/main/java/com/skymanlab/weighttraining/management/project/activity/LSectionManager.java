@@ -19,8 +19,8 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 public class LSectionManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PA]_LSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PA] LSectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private GoogleSignInClient googleSignInClient;

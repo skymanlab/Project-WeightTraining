@@ -38,7 +38,7 @@ import java.util.ArrayList;
 public class EventProgramActivity extends AppCompatActivity {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_EventProgramActivity";
+    private static final String CLASS_NAME = "[Ac] EventProgramActivity";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

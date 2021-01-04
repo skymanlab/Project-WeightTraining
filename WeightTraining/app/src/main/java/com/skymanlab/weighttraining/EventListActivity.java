@@ -20,7 +20,7 @@ public class EventListActivity extends AppCompatActivity {
 
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_EventListActivity";
+    private static final String CLASS_NAME = "[Ac] EventListActivity";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : session

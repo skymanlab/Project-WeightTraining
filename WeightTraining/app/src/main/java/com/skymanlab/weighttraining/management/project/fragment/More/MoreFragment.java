@@ -25,8 +25,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class MoreFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[FM]_MoreFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFM] MoreFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

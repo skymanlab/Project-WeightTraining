@@ -20,7 +20,7 @@ import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager
 public class SettingsActivity extends AppCompatActivity {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_HomeActivity";
+    private static final String CLASS_NAME = "[Ac] SettingsActivity";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     @Override

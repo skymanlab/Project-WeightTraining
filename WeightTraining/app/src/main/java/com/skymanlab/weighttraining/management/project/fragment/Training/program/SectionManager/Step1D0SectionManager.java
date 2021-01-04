@@ -25,8 +25,8 @@ public class Step1D0SectionManager extends FragmentSectionManager implements Fra
     public static final int STEP_1_0_MY_PROGRAM_TYPE = 3;
     public static final int STEP_1_0_RECOMMEND_PROGRAM_TYPE = 4;
     // constant
-    private static final String CLASS_NAME = "[PFTS] Step1D0SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTPS] Step1D0SectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // instance variable : step process manager
     private StepProcessManager stepProcessManager;
 

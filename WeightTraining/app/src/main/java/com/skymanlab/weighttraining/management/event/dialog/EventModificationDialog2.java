@@ -35,8 +35,8 @@ import java.util.ArrayList;
 public class EventModificationDialog2 extends DialogFragment {
 
     // constance
-    public static final String CLASS_NAME = "[ED]_EventItemModificationDialog2";
-    public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    public static final String CLASS_NAME = "[ED] EventModificationDialog2";
+    public static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Activity activity;

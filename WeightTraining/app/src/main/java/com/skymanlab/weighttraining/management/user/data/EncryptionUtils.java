@@ -9,7 +9,7 @@ import java.util.Random;
 public class EncryptionUtils {
 
     // constance
-    private static final String CLASS_NAME = "[UD]_EncryptionUtils";
+    private static final String CLASS_NAME = "[UD] EncryptionUtils";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
 

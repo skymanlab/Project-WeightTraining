@@ -26,8 +26,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[FM]_MoreSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFM] MoreSectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private MaterialTextView logout;

@@ -31,8 +31,8 @@ import java.util.ArrayList;
 public class EventProgramListActivity extends AppCompatActivity implements SetNumberPickerDialog.NoticeDialogListener, RestTimePickerDialog.NoticeDialogListener {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_EventProgramListActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[Ac] EventProgramListActivity";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : session
     private FirebaseUser firebaseUser;

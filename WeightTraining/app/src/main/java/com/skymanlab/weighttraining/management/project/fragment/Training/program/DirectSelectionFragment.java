@@ -13,6 +13,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.DirectSelectionSectionManager;
 
@@ -27,15 +28,16 @@ import java.util.HashMap;
 public class DirectSelectionFragment extends Fragment {
 
     // constant
-    private static final String MUSCLE_AREA = "muscleArea";
-    private static final String EVENT_ARRAY_LIST = "eventArrayList";
-    // constant
     private static final String CLASS_NAME = "[PFTP] DirectSelectionFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+
+    // constant
+    private static final String MUSCLE_AREA = "muscleArea";
+    private static final String GROUPING_EVENT_DATA = "groupingEventData";
 
     // instance variable
     private MuscleArea muscleArea = null;
-    private ArrayList<Event> eventArrayList = null;
+    private GroupingEventData groupingEventData = null;
 
     // instance variable
     private DirectSelectionSectionManager sectionManager = null;
@@ -46,8 +48,8 @@ public class DirectSelectionFragment extends Fragment {
     }
 
     // setter
-    public void setEventArrayList(ArrayList<Event> eventArrayList) {
-        this.eventArrayList = eventArrayList;
+    public void setGroupingEventData(GroupingEventData groupingEventData) {
+        this.groupingEventData = groupingEventData;
     }
 
     // getter
@@ -62,14 +64,17 @@ public class DirectSelectionFragment extends Fragment {
      * @return A new instance of fragment DirectSelectionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DirectSelectionFragment newInstance(MuscleArea muscleArea, ArrayList<Event> eventArrayList) {
+    public static DirectSelectionFragment newInstance(MuscleArea muscleArea, GroupingEventData groupingEventData) {
+
+        final String METHOD_NAME = "[newInstance] ";
 
         DirectSelectionFragment fragment = new DirectSelectionFragment();
 
         Bundle args = new Bundle();
         args.putSerializable(MUSCLE_AREA, muscleArea);
-        args.putSerializable(EVENT_ARRAY_LIST, eventArrayList);
+        args.putSerializable(GROUPING_EVENT_DATA, groupingEventData);
         fragment.setArguments(args);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 1. newInstance ");
 
         return fragment;
     }
@@ -81,18 +86,18 @@ public class DirectSelectionFragment extends Fragment {
         final String METHOD_NAME = "[onCreate] ";
         if (getArguments() != null) {
             this.muscleArea = (MuscleArea) getArguments().get(MUSCLE_AREA);
-            this.eventArrayList = (ArrayList<Event>) getArguments().get(EVENT_ARRAY_LIST);
-
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++ muscleArea 는 ? = " + muscleArea.toString());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++ eventArrayList 의 size 는 ? = " + eventArrayList.size());
-
+            this.groupingEventData = (GroupingEventData) getArguments().getSerializable(GROUPING_EVENT_DATA);
         }
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 2. onCreate ");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        final String METHOD_NAME= "[onCreateView] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 3. onCreateView ");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_direct_selection, container, false);
     }
@@ -102,11 +107,19 @@ public class DirectSelectionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 4. onViewCreated ");
+
         // [iv/C]DirectSelectionSectionManager :
-        this.sectionManager = new DirectSelectionSectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        this.sectionManager = new DirectSelectionSectionManager(getActivity(), view, getActivity().getSupportFragmentManager());
         this.sectionManager.mappingWidget();
-        this.sectionManager.setGroupingEventData(this.eventArrayList);
+        this.sectionManager.setGroupingEventData(this.groupingEventData);
         this.sectionManager.setMuscleAreaStandardId(this.muscleArea);
         this.sectionManager.initWidget();
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 5. onViewCreated  ---- 완료");
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 5. onViewCreated  ----  sectionManager 는 ? " + sectionManager);
+
+
     }
+
 }

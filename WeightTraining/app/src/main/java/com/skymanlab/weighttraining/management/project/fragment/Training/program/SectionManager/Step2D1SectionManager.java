@@ -3,25 +3,46 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 import android.app.Activity;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
+import com.skymanlab.weighttraining.management.project.data.DataManager;
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D2Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D3Fragment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Step2D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTS] Step2D1SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTPS] Step2D1SectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+
+    // instance variable
+    private int step1D0Type;
 
     // instance variable
     private ToggleButton chest;
@@ -33,9 +54,6 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
 
     // instance variable
     private StepProcessManager stepProcessManager;
-
-    // instance variable
-    private int step1D0Type;
 
     // instance variable
     private boolean[] isSelectedMuscleAreaList; // toggle button 에서 클릭 한 값을 알아내는
@@ -155,11 +173,106 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
     public void setClickListenerOfNext() {
 
         final String METHOD_NAME = "[setClickListenerOfNext] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>==++++ 다음 버튼 클릭 !");
 
-        for (int index = 0; index < this.isSelectedMuscleAreaList.length; index++) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<" + index + ">>> 번째 값은 ? = " + this.isSelectedMuscleAreaList[index]);
-        }
+        // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1-0 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
+        loadContent();
+
+    }
+
+    /**
+     * [method] Firebase Database 에서 event/$uid/$MuscleArea 에 해당하는 내용을 muscleArea 으로 가져오기
+     */
+    public void loadContent() {
+        final String METHOD_NAME = "[loadContent] ";
+
+        // [lv/C]DatabaseReference : Firebase Database 의 event 항목을 참조하기위한 객체 생성
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
+
+        // [lv/C]Query : uid 로 query 만들기
+        Query query = db.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "snapshot 내용 = " + snapshot);
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: chest ::::::::::::::::::::::::::::::::::::: ");
+                // [method] : [0] CHEST 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                GroupingEventData chestGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.CHEST, isSelectedMuscleAreaList[0]);
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: shoulder ::::::::::::::::::::::::::::::::::::: ");
+                // [method] : [1] SHOULDER 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                GroupingEventData shoulderGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.SHOULDER, isSelectedMuscleAreaList[1]);
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: lat ::::::::::::::::::::::::::::::::::::: ");
+                // [method] : [2] LAT 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                GroupingEventData latGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.LAT, isSelectedMuscleAreaList[2]);
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: upper body ::::::::::::::::::::::::::::::::::::: ");
+                // [method] : [3] UPPER_BODY(or LEG) 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                GroupingEventData upperBodyGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.LEG, isSelectedMuscleAreaList[3]);
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: arm ::::::::::::::::::::::::::::::::::::: ");
+                // [method] : [4] ARM 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                GroupingEventData armGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.ARM, isSelectedMuscleAreaList[4]);
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: etc ::::::::::::::::::::::::::::::::::::: ");
+                // [method] : [5] ETC 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
+                GroupingEventData etcGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.ETC, isSelectedMuscleAreaList[5]);
+
+                // [method] : chest, shoulder, lat, upperBody, arm, etc groupingEventData 를 담아서 step 1-0 에서 선택한 type 에 맞게 Fragment 이동
+                moveNextStep(chestGroupingEventData, shoulderGroupingEventData, latGroupingEventData, upperBodyGroupingEventData, armGroupingEventData, etcGroupingEventData);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                // [check 1] : error 가 발생하면 -> muscleArea 에 해당하는 Fragment 를 만들지만, eventArrayList 는 null 인 fragment 객체를 생성한다.
+                if (error != null) {
+
+                    // "데이터를 가져오는데 오류가 발생하였습니다." Toast 메시지 표시
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.f_program_step3_1_firebase_database_error_message), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    private GroupingEventData loadContentByMuscleArea(DataSnapshot snapshot, MuscleArea muscleArea, boolean isSelectedMuscleArea) {
+        final String METHOD_NAME = "[loadContentByMuscleArea] ";
+
+        // [lv/C]GroupingEventData :
+        GroupingEventData groupingEventData = null;
+
+        // [check 1] : 선택한 MuscleArea 이다.
+        if (isSelectedMuscleArea) {
+
+            // [lv/C]ArrayList<Event> : 각 목록을 담을
+            ArrayList<Event> eventArrayList = new ArrayList<>();
+
+            for (DataSnapshot search : snapshot.child(muscleArea.toString()).getChildren()) {
+
+                // [lv/C]Event : 각 목록을 가져옴
+                Event data = search.getValue(Event.class);
+                data.setKey(search.getKey());
+
+                // [lv/C]ArrayList<Event> : 위의 각 목록을 추가하기
+                eventArrayList.add(data);
+
+            }
+
+            // [lv/C]GroupingEventData : 모든 목록이 담긴 eventArrayList 를 그룹화하기
+            groupingEventData = GroupingEventUtil.classifyEventArrayListToGroupType(eventArrayList);
+
+        } // [check 1]
+
+        return groupingEventData;
+    }// End of method [loadContentByChest]
+
+
+    private void moveNextStep(GroupingEventData chest, GroupingEventData shoulder, GroupingEventData lat, GroupingEventData upperBody, GroupingEventData arm, GroupingEventData etc) {
+        final String METHOD_NAME = "[moveNextStep] ";
 
         // [lv/C]FragmentTransaction : fragmentManager 를 통해 객체 가져오기
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -167,11 +280,9 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
         // [check 1] : step1D0Type 이 뭐냐?
         switch (this.step1D0Type) {
             case Step1D0SectionManager.STEP_1_0_DIRECT_TYPE:
-
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 direct 를 선택하였습니다.");
                 // direct
                 // [lv/C]Step3D1Fragment : step 3-1 fragment 객체 생성
-                Step3D1Fragment step3_1Fragment = Step3D1Fragment.newInstance(this.isSelectedMuscleAreaList);
+                Step3D1Fragment step3_1Fragment = Step3D1Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_1Fragment);
@@ -182,11 +293,11 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
             case Step1D0SectionManager.STEP_1_0_EACH_RANDOM_TYPE:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 each random 을 선택하였습니다.");
-                // random
+                // each random
                 // [lv/C]Step3D2Fragment : step 3-2 fragment 객체 생성
-                Step3D2Fragment step3_2Fragment = Step3D2Fragment.newInstance(this.isSelectedMuscleAreaList);
+                Step3D2Fragment step3_2Fragment = Step3D2Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
-                // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
+                // [lv/C]FragmentTransaction : step 3-2 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_2Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
@@ -196,17 +307,19 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
             case Step1D0SectionManager.STEP_1_0_ALL_RANDOM_TYPE:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 all random 을 선택하였습니다.");
-                // random
-                // [lv/C]Step3D2Fragment : step 3-2 fragment 객체 생성
-                Step3D3Fragment step3_3Fragment = Step3D3Fragment.newInstance(this.isSelectedMuscleAreaList);
+                // all random
+                // [lv/C]Step3D2Fragment : step 3-3 fragment 객체 생성
+                Step3D3Fragment step3_3Fragment = Step3D3Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
-                // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
+                // [lv/C]FragmentTransaction : step 3-3 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_3Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
 
                 break;
-        }
 
-    }
+        } // [check 1]
+
+    } // End of method [moveNextStep]
+
 }

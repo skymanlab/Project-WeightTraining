@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class EPSectionOneDirectManager extends EPSectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAEP]_EPSectionOneDirectManager";       // EventProgramActivity Section One Each Random Manager
+    private static final String CLASS_NAME = "[PAEP] EPSectionOneDirectManager";       // EventProgramActivity Section One Each Random Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

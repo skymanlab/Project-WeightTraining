@@ -17,7 +17,7 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class MASectionManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PA]_MASectionManager";       // EventProgramActivity Section One Each Random Manager
+    private static final String CLASS_NAME = "[PA] MASectionManager";       // EventProgramActivity Section One Each Random Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

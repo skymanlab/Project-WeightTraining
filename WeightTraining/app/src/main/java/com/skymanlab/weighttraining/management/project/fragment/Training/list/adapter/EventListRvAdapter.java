@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.ViewHolder> {
 
     // constant
-    private static final String CLASS_NAME = "[FTA]_EventListRvAdapter";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTLA] EventListRvAdapter";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private ArrayList<Event> eventArrayList;

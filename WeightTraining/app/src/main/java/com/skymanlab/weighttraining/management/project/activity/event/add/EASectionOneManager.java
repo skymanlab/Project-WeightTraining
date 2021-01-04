@@ -34,7 +34,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 public class EASectionOneManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAEA]_EASectionOneManager";       // EventProgramActivity Section One Each Random Manager
+    private static final String CLASS_NAME = "[PAEA] EASectionOneManager";       // EventProgramActivity Section One Each Random Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

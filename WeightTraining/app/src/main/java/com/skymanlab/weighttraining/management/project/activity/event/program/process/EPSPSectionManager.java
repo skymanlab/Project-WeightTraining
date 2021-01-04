@@ -35,7 +35,7 @@ import java.util.TimerTask;
 public class EPSPSectionManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAE]_EPSPSectionManager";
+    private static final String CLASS_NAME = "[PAEPP] EPSPSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

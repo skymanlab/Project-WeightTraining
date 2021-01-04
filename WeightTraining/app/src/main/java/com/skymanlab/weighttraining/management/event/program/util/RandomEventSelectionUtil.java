@@ -14,7 +14,7 @@ import java.util.Random;
 public class RandomEventSelectionUtil {
 
     // constant
-    private static final String CLASS_NAME = "[EPu]_RandomEventSelectionUtil";
+    private static final String CLASS_NAME = "[SPU] RandomEventSelectionUtil";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
@@ -299,7 +299,6 @@ public class RandomEventSelectionUtil {
 
         // [lv/C]IndexList :
         IndexList result = null;
-
 
         // [check 1] : selectedCount 와 endRange 가 같다.
         if (selectedCount == endRange) {

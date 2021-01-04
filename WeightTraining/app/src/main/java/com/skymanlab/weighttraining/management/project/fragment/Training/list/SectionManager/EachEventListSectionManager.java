@@ -19,8 +19,8 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.list.ad
 public class EachEventListSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[FTS]_ChestListSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTLS] EachEventListSectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String DB_TARGET = "event";

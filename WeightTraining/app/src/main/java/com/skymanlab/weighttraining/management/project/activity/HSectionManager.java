@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
 public class HSectionManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PA]_HSectionManager";       // EventProgramActivity Section One Each Random Manager
+    private static final String CLASS_NAME = "[PA] HSectionManager";       // EventProgramActivity Section One Each Random Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

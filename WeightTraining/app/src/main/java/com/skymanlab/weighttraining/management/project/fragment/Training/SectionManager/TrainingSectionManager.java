@@ -10,7 +10,7 @@ import com.skymanlab.weighttraining.NavHomeActivity;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.EventListFragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.EventListFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step1D0Fragment;
 
 public class TrainingSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {

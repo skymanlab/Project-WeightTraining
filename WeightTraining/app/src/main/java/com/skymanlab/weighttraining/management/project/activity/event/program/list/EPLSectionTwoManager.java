@@ -29,8 +29,8 @@ import java.util.ArrayList;
 public class EPLSectionTwoManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAE]_EPLSectionTwoManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PAEPL] EPLSectionTwoManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private ArrayList<Event> selectedEventArrayList;

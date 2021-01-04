@@ -8,7 +8,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleAreaNextA
 public class DataFormatter {
 
     // constant
-    private static final String CLASS_NAME = "[PD]_DataFormatter";
+    private static final String CLASS_NAME = "[PD] DataFormatter";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
 

@@ -23,8 +23,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class EtcListFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[FM]_EtcListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTL] EtcListFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private EachEventListSectionManager sectionManager;
@@ -37,11 +37,10 @@ public class EtcListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment EtcListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EtcListFragment newInstance(User user) {
+    public static EtcListFragment newInstance() {
         EtcListFragment fragment = new EtcListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);

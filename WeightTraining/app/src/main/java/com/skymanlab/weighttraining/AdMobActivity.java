@@ -20,8 +20,8 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 public class AdMobActivity extends AppCompatActivity {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_AdMobActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[Ac] AdMobActivity";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
 
     // instance variable
@@ -33,23 +33,6 @@ public class AdMobActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ad_mob);
 
         final String METHOD_NAME = "[onCreate] ";
-
-//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-//            @Override
-//            public void onInitializationComplete(InitializationStatus initializationStatus) {
-//
-//            }
-//        });
-//
-//        RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
-//                .toBuilder()
-//                .build();
-//        MobileAds.setRequestConfiguration(requestConfiguration);
-//
-//        adView = (AdView) findViewById(R.id.ad_mob_ads);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        adView.loadAd(adRequest);
-
 
         // [lv/C]FirebaseApp :
         FirebaseApp.initializeApp(this);

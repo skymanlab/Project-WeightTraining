@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 public class FragmentTopUserManager extends FragmentSectionManager implements FragmentSectionInitializable{
 
     // constant
-    private static final String CLASS_NAME = "[F]_FragmentTopUserManager";
+    private static final String CLASS_NAME = "[PF] FragmentTopUserManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // instance variable
     private ImageView userPhoto;

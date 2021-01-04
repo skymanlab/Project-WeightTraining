@@ -25,8 +25,8 @@ public class InterveneFragment extends Fragment {
 
 
     // constant
-    private static final String CLASS_NAME = "[FH]_InterveneFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFI] InterveneFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

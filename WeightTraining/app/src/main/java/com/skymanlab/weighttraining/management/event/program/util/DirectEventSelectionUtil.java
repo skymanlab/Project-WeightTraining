@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DirectEventSelectionUtil {
 
     // constant
-    private static final String CLASS_NAME = "[EPu]_DirectEventSelectionUtil";
+    private static final String CLASS_NAME = "[EPU] DirectEventSelectionUtil";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

@@ -27,7 +27,9 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
+import com.skymanlab.weighttraining.management.event.program.util.RandomEventSelectionUtil;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 
@@ -36,11 +38,10 @@ import java.util.ArrayList;
 public class Step3D2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTS] Step3D2SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] Step3D2SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
-    private boolean[] isSelectedMuscleAreaList;
     private StepProcessManager stepProcessManager;
 
     // instance variable
@@ -139,9 +140,33 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     private GroupingEventData etcGroupingEventData;
 
     // constructor
-    public Step3D2SectionManager(Activity activity, View view, FragmentManager fragmentManager, boolean[] isSelectedMuscleAreaList) {
+    public Step3D2SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
         super(activity, view, fragmentManager);
-        this.isSelectedMuscleAreaList = isSelectedMuscleAreaList;
+    }
+
+    // setter
+    public void setChestGroupingEventData(GroupingEventData chestGroupingEventData) {
+        this.chestGroupingEventData = chestGroupingEventData;
+    }
+
+    public void setShoulderGroupingEventData(GroupingEventData shoulderGroupingEventData) {
+        this.shoulderGroupingEventData = shoulderGroupingEventData;
+    }
+
+    public void setLatGroupingEventData(GroupingEventData latGroupingEventData) {
+        this.latGroupingEventData = latGroupingEventData;
+    }
+
+    public void setUpperBodyGroupingEventData(GroupingEventData upperBodyGroupingEventData) {
+        this.upperBodyGroupingEventData = upperBodyGroupingEventData;
+    }
+
+    public void setArmGroupingEventData(GroupingEventData armGroupingEventData) {
+        this.armGroupingEventData = armGroupingEventData;
+    }
+
+    public void setEtcGroupingEventData(GroupingEventData etcGroupingEventData) {
+        this.etcGroupingEventData = etcGroupingEventData;
     }
 
     @Override
@@ -154,22 +179,22 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
         this.stepContentWrapper = (LinearLayout) getView().findViewById(R.id.f_program_step3_2_step_content_wrapper);
 
         // [method] : chest 용 layout inflater 와 widget mapping
-        mappingWidgetOfChest(inflater, this.isSelectedMuscleAreaList[0]);
+        mappingWidgetOfChest(inflater);
 
         // [method] : shoulder 용 layout inflater 와 widget mapping
-        mappingWidgetOfShoulder(inflater, this.isSelectedMuscleAreaList[1]);
+        mappingWidgetOfShoulder(inflater);
 
         // [method] : lat 용 layout inflater 와 widget mapping
-        mappingWidgetOfLat(inflater, this.isSelectedMuscleAreaList[2]);
+        mappingWidgetOfLat(inflater);
 
         // [method] : upper_body 용 layout inflater 와 widget mapping
-        mappingWidgetOfUpperBody(inflater, this.isSelectedMuscleAreaList[3]);
+        mappingWidgetOfUpperBody(inflater);
 
         // [method] : arm 용 layout inflater 와 widget mapping
-        mappingWidgetOfArm(inflater, this.isSelectedMuscleAreaList[4]);
+        mappingWidgetOfArm(inflater);
 
         // [method] : etc 용 layout inflater 와 widget mapping
-        mappingWidgetOfEtc(inflater, this.isSelectedMuscleAreaList[5]);
+        mappingWidgetOfEtc(inflater);
 
     }
 
@@ -185,216 +210,160 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
 
 
         // [method] : chest widget init
-        initWidgetOfChest(isSelectedMuscleAreaList[0]);
+        initWidgetOfChest();
 
         // [method] : shoulder widget init
-        initWidgetOfShoulder(isSelectedMuscleAreaList[1]);
+        initWidgetOfShoulder();
 
         // [method] : lat widget init
-        initWidgetOfLat(isSelectedMuscleAreaList[2]);
+        initWidgetOfLat();
 
         // [method] : upper_body widget init
-        initWidgetOfUpperBody(isSelectedMuscleAreaList[3]);
+        initWidgetOfUpperBody();
 
         // [method] : arm widget init
-        initWidgetOfArm(isSelectedMuscleAreaList[4]);
+        initWidgetOfArm();
 
         // [method] : etc widget init
-        initWidgetOfEtc(isSelectedMuscleAreaList[5]);
+        initWidgetOfEtc();
 
-        // [lv/C]DatabaseReference :
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
-        Query query = db.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= chest =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]GroupingEventData : chest 목록을 가져와서 그룹화하기
-                chestGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[0], snapshot, MuscleArea.CHEST);
-
-                // [method] : chest spinner widget init
-                setAdapterOfChest(isSelectedMuscleAreaList[0], chestGroupingEventData);
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= shoulder =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]GroupingEventData : shoulder 목록을 가져와서
-                shoulderGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[1], snapshot, MuscleArea.SHOULDER);
-
-                // [method] : shoulder spinner widget init
-                setAdapterOfShoulder(isSelectedMuscleAreaList[1], shoulderGroupingEventData);
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= lat =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]GroupingEventData : lat 목록을 가져와서 그룹화하기
-                latGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[2], snapshot, MuscleArea.LAT);
-
-                // [method] : lat spinner widget init
-                setAdapterOfLat(isSelectedMuscleAreaList[2], latGroupingEventData);
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= upper_body =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]GroupingEventData : upper_body 목록을 가져와서 그룹화하기
-                upperBodyGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[3], snapshot, MuscleArea.LEG);
-
-                // [method] : upper_body spinner widget init
-                setAdapterOfUpperBody(isSelectedMuscleAreaList[3], upperBodyGroupingEventData);
-
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= arm =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]GroupingEventData : arm 목록을 가져와서 그룹화하기
-                armGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[4], snapshot, MuscleArea.ARM);
-
-                // [method] : arm spinner widget init
-                setAdapterOfArm(isSelectedMuscleAreaList[4], armGroupingEventData);
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]GroupingEventData : etc 목록을 가져와서 그룹화하기
-                etcGroupingEventData = loadContentByMuscleArea(isSelectedMuscleAreaList[5], snapshot, MuscleArea.ETC);
-
-                // [method] : etc spinner widget init
-                setAdapterOfEtc(isSelectedMuscleAreaList[5], etcGroupingEventData);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-                // "데이터를 가져오는데 오류가 발생하였습니다." Toast 메시지 표시
-                Toast.makeText(getActivity(), getActivity().getString(R.string.f_program_step3_2_firebase_database_error_message), Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
     @Override
     public void setClickListenerOfNext() {
+        final String METHOD_NAME = "[setClickListenerOfNext] ";
+
+        // [lv/C]ArrayList<Event> : selectedEventArrayList
+        ArrayList<Event> selectedEventArrayList = new ArrayList<>();
 
         // [check 1] : chest 가 선택한 항목인가요?
-        if (this.isSelectedMuscleAreaList[0]) {
+        if (this.chestGroupingEventData != null) {
+
+            // [lv/C]RandomEventSelectionUtil : each random 으로 chest 를 그룹별로 선택
+            RandomEventSelectionUtil util = new RandomEventSelectionUtil(
+                    ProgramType.EACH_RANDOM,
+                    getSpinnerItem(chestAGroupSpinner),
+                    getSpinnerItem(chestBGroupSpinner),
+                    getSpinnerItem(chestCGroupSpinner),
+                    getSpinnerItem(chestDGroupSpinner),
+                    getSpinnerItem(chestEGroupSpinner));
+            util.setGroupingEventData(chestGroupingEventData);
+            util.selectRandomEvent();
+
+            // [lv/C]ArrayList<Event> : a group 의 selectedEventArrayList 를 추가한다.
+            selectedEventArrayList.addAll(util.getRandomSelectedEventArrayList());
 
         } // [check 1]
 
         // [check 2] : shoulder 가 선택한 항목인가요?
-        if (this.isSelectedMuscleAreaList[1]) {
+        if (this.shoulderGroupingEventData != null) {
+
+            // [lv/C]RandomEventSelectionUtil : each random 으로 shoulder 를 그룹별로 선택
+            RandomEventSelectionUtil util = new RandomEventSelectionUtil(
+                    ProgramType.EACH_RANDOM,
+                    getSpinnerItem(shoulderAGroupSpinner),
+                    getSpinnerItem(shoulderBGroupSpinner),
+                    getSpinnerItem(shoulderCGroupSpinner),
+                    getSpinnerItem(shoulderDGroupSpinner),
+                    getSpinnerItem(shoulderEGroupSpinner));
+            util.setGroupingEventData(shoulderGroupingEventData);
+            util.selectRandomEvent();
+
+            // [lv/C]ArrayList<Event> : a group 의 selectedEventArrayList 를 추가한다.
+            selectedEventArrayList.addAll(util.getRandomSelectedEventArrayList());
 
         } // [check 2]
 
         // [check 3] : lat 가 선택한 항목인가요?
-        if (this.isSelectedMuscleAreaList[2]) {
+        if (this.latGroupingEventData != null) {
+
+            // [lv/C]RandomEventSelectionUtil : each random 으로 lat 를 그룹별로 선택
+            RandomEventSelectionUtil util = new RandomEventSelectionUtil(
+                    ProgramType.EACH_RANDOM,
+                    getSpinnerItem(latAGroupSpinner),
+                    getSpinnerItem(latBGroupSpinner),
+                    getSpinnerItem(latCGroupSpinner),
+                    getSpinnerItem(latDGroupSpinner),
+                    getSpinnerItem(latEGroupSpinner));
+            util.setGroupingEventData(latGroupingEventData);
+            util.selectRandomEvent();
+
+            // [lv/C]ArrayList<Event> : a group 의 selectedEventArrayList 를 추가한다.
+            selectedEventArrayList.addAll(util.getRandomSelectedEventArrayList());
 
         } // [check 3]
 
         // [check 4] : upper_body 가 선택한 항목인가요?
-        if (this.isSelectedMuscleAreaList[3]) {
+        if (this.upperBodyGroupingEventData != null) {
+
+            // [lv/C]RandomEventSelectionUtil : each random 으로 upperBody 를 그룹별로 선택
+            RandomEventSelectionUtil util = new RandomEventSelectionUtil(
+                    ProgramType.EACH_RANDOM,
+                    getSpinnerItem(upperBodyAGroupSpinner),
+                    getSpinnerItem(upperBodyBGroupSpinner),
+                    getSpinnerItem(upperBodyCGroupSpinner),
+                    getSpinnerItem(upperBodyDGroupSpinner),
+                    getSpinnerItem(upperBodyEGroupSpinner));
+            util.setGroupingEventData(upperBodyGroupingEventData);
+            util.selectRandomEvent();
+
+            // [lv/C]ArrayList<Event> : a group 의 selectedEventArrayList 를 추가한다.
+            selectedEventArrayList.addAll(util.getRandomSelectedEventArrayList());
 
         } // [check 4]
 
         // [check 5] : arm 가 선택한 항목인가요?
-        if (this.isSelectedMuscleAreaList[4]) {
+        if (this.armGroupingEventData != null) {
+
+            // [lv/C]RandomEventSelectionUtil : each random 으로 arm 를 그룹별로 선택
+            RandomEventSelectionUtil util = new RandomEventSelectionUtil(
+                    ProgramType.EACH_RANDOM,
+                    getSpinnerItem(armAGroupSpinner),
+                    getSpinnerItem(armBGroupSpinner),
+                    getSpinnerItem(armCGroupSpinner),
+                    getSpinnerItem(armDGroupSpinner),
+                    getSpinnerItem(armEGroupSpinner));
+            util.setGroupingEventData(armGroupingEventData);
+            util.selectRandomEvent();
+
+            // [lv/C]ArrayList<Event> : a group 의 selectedEventArrayList 를 추가한다.
+            selectedEventArrayList.addAll(util.getRandomSelectedEventArrayList());
 
         } // [check 5]
 
         // [check 6] : etc 가 선택한 항목인가요?
-        if (this.isSelectedMuscleAreaList[5]) {
+        if (this.etcGroupingEventData != null) {
+
+            // [lv/C]RandomEventSelectionUtil : each random 으로 etc 를 그룹별로 선택
+            RandomEventSelectionUtil util = new RandomEventSelectionUtil(
+                    ProgramType.EACH_RANDOM,
+                    getSpinnerItem(etcAGroupSpinner),
+                    getSpinnerItem(etcBGroupSpinner),
+                    getSpinnerItem(etcCGroupSpinner),
+                    getSpinnerItem(etcDGroupSpinner),
+                    getSpinnerItem(etcEGroupSpinner));
+            util.setGroupingEventData(etcGroupingEventData);
+            util.selectRandomEvent();
+
+            // [lv/C]ArrayList<Event> : a group 의 selectedEventArrayList 를 추가한다.
+            selectedEventArrayList.addAll(util.getRandomSelectedEventArrayList());
 
         } // [check 6]
 
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------------------------------------------------");
+        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, selectedEventArrayList);
     }
 
 
-    /**
-     * firebase database 에서 event/$uid$/ 에서 가져온 snapshot 을 통해 각 MuscleArea 의 목록을 가져와서 그룹화한 GroupingEventData 를 만들어서 반환한다.
-     *
-     * @param isSelectedMuscleArea 해당 MuscleArea 의 선택 여부
-     * @param snapshot             firebase database 에서 가져온 데이터
-     * @param muscleArea           firebase database 에서 목록 가져올 때, 어떤 부위의 목록을 가져오는 건가요?
-     * @return
-     */
-    private GroupingEventData loadContentByMuscleArea(boolean isSelectedMuscleArea, DataSnapshot snapshot, MuscleArea muscleArea) {
-        final String METHOD_NAME = "[loadContentByMuscleArea] ";
+    private int getSpinnerItem(AppCompatSpinner groupSpinner) {
 
-        // [lv/C]GroupingEventData : eventArrayList 를 그룹화한다.
-        GroupingEventData groupingEventData = null;
-
-        // [check 1] : true(선택된 muscleArea 이다.) ->
-        if (isSelectedMuscleArea) {
-
-            // [lv/C]ArrayList<Event> : 각 muscleArea 담을
-            ArrayList<Event> eventArrayList = new ArrayList<>();
-
-            for (DataSnapshot search : snapshot.child(muscleArea.toString()).getChildren()) {
-
-                // [lv/C]Event :
-                Event data = search.getValue(Event.class);
-                data.setKey(search.getKey());
-
-                // [lv/C]ArrayList<Event> : 위의 객체 추가하기
-                eventArrayList.add(data);
-
-            }
-
-            // [lv/C]GroupingEventUtil : eventArrayList 를 그룹화하고, 그룹화한 데이터를 groupingEventData 에 저장하기
-            GroupingEventUtil util = new GroupingEventUtil(eventArrayList);
-            util.classifyEventArrayListToGroupType();
-            groupingEventData = util.getGroupingEvent();
-
-
-//            if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "A GROUP ----> O");
-//
-//            } else {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "A GROUP ----> X");
-//
-//            }
-//
-//            if (!groupingEventData.getBGroupEventArrayList().isEmpty()) {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "B GROUP ----> O");
-//
-//            } else {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "B GROUP ----> X");
-//
-//            }
-//
-//            if (!groupingEventData.getCGroupEventArrayList().isEmpty()) {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "C GROUP ----> O");
-//
-//            } else {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "C GROUP ----> X");
-//
-//            }
-//
-//            if (!groupingEventData.getDGroupEventArrayList().isEmpty()) {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "D GROUP ----> O");
-//
-//            } else {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "D GROUP ----> X");
-//
-//            }
-//
-//            if (!groupingEventData.getEGroupEventArrayList().isEmpty()) {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "E GROUP ----> O");
-//
-//            } else {
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "E GROUP ----> X");
-//
-//            }
-
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------------------------------------------------");
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "groupingEventData 를 확인하겠습니다.");
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-.-._>__>_>_>_>_>_>_>_>_>_>_>_>_ A");
-//        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, groupingEventData.getAGroupEventArrayList());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-.-._>__>_>_>_>_>_>_>_>_>_>_>_>_ B");
-//        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, groupingEventData.getBGroupEventArrayList());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-.-._>__>_>_>_>_>_>_>_>_>_>_>_>_ C");
-//        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, groupingEventData.getCGroupEventArrayList());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-.-._>__>_>_>_>_>_>_>_>_>_>_>_>_ D");
-//        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, groupingEventData.getDGroupEventArrayList());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-.-._>__>_>_>_>_>_>_>_>_>_>_>_>_ E");
-//        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, groupingEventData.getEGroupEventArrayList());
-
-        } // [check 1]
-
-        return groupingEventData;
-    } // End of method [loadContentByMuscleArea]
-
+        if (0 < groupSpinner.getSelectedItemPosition()) {
+            return groupSpinner.getSelectedItemPosition();
+        } else {
+            return 0;
+        }
+    }
 
     /**
      * @param size 추가할 항목의 size
@@ -425,10 +394,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param inflater LayoutInflater
      */
-    private void mappingWidgetOfChest(LayoutInflater inflater, boolean isSelectedMuscleArea) {
+    private void mappingWidgetOfChest(LayoutInflater inflater) {
 
         // [check 1] : 선택된 muscleArea 일때
-        if (isSelectedMuscleArea) {
+        if (this.chestGroupingEventData != null) {
 
             // [iv/C]View : chest wrapper 로 layout 생성
             this.chestWrapper = inflater.inflate(R.layout.include_each_random_selection, null);
@@ -477,13 +446,16 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     /**
      * [method] chest 와 관련 widget init
      */
-    private void initWidgetOfChest(boolean isSelectedMuscleArea) {
+    private void initWidgetOfChest() {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (this.chestGroupingEventData != null) {
 
             // [iv/C]TextView : chest title setting
             this.chestTitle.setText(getActivity().getString(R.string.type_muscle_area_chest));
+
+            // [method] : chest 그룹 별로 spinner 설정하기
+            setAdapterOfChest(this.chestGroupingEventData);
 
         } // [check 1]
 
@@ -495,10 +467,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param groupingEventData 그룹화된 event 데이터
      */
-    private void setAdapterOfChest(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
+    private void setAdapterOfChest(GroupingEventData groupingEventData) {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (groupingEventData != null) {
 
             // [check 1] : a group
             if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {
@@ -567,10 +539,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param inflater LayoutInflater
      */
-    private void mappingWidgetOfShoulder(LayoutInflater inflater, boolean isSelectedMuscleArea) {
+    private void mappingWidgetOfShoulder(LayoutInflater inflater) {
 
         // [check 1] : 선택된 muscleArea 일때
-        if (isSelectedMuscleArea) {
+        if (this.shoulderGroupingEventData != null) {
 
             // [iv/C]View : shoulder wrapper 의 layout 생성
             this.shoulderWrapper = inflater.inflate(R.layout.include_each_random_selection, null);
@@ -619,13 +591,16 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     /**
      * [method] shoulder 와 관련 widget init
      */
-    private void initWidgetOfShoulder(boolean isSelectedMuscleArea) {
+    private void initWidgetOfShoulder() {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (this.shoulderGroupingEventData != null) {
 
             // [iv/C]TextView : shoulder title setting
             this.shoulderTitle.setText(getActivity().getString(R.string.type_muscle_area_shoulder));
+
+            // [method] : shoulder 그룹 별로 spinner 설정하기
+            setAdapterOfShoulder(this.shoulderGroupingEventData);
 
         } // [check 1]
 
@@ -637,10 +612,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param groupingEventData 그룹화된 event 데이터
      */
-    private void setAdapterOfShoulder(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
+    private void setAdapterOfShoulder(GroupingEventData groupingEventData) {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (groupingEventData != null) {
 
             // [check 1] : a group
             if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {
@@ -709,10 +684,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param inflater LayoutInflater
      */
-    private void mappingWidgetOfLat(LayoutInflater inflater, boolean isSelectedMuscleArea) {
+    private void mappingWidgetOfLat(LayoutInflater inflater) {
 
         // [check 1] : 선택된 muscleArea 일때
-        if (isSelectedMuscleArea) {
+        if (this.latGroupingEventData != null) {
 
             // [iv/C]View : lat wrapper 의 layout 생성
             this.latWrapper = inflater.inflate(R.layout.include_each_random_selection, null);
@@ -761,13 +736,16 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     /**
      * [method] lat 와 관련 widget init
      */
-    private void initWidgetOfLat(boolean isSelectedMuscleArea) {
+    private void initWidgetOfLat() {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (this.latGroupingEventData != null) {
 
             // [iv/C]TextView : lat title setting
             this.latTitle.setText(getActivity().getString(R.string.type_muscle_area_lat));
+
+            // [method] : lat 그룹 별로 spinner 설정하기
+            setAdapterOfLat(this.latGroupingEventData);
 
         } // [check 1]
 
@@ -779,10 +757,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param groupingEventData 그룹화된 event 데이터
      */
-    private void setAdapterOfLat(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
+    private void setAdapterOfLat(GroupingEventData groupingEventData) {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (groupingEventData != null) {
 
             // [check 1] : a group
             if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {
@@ -851,10 +829,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param inflater LayoutInflater
      */
-    private void mappingWidgetOfUpperBody(LayoutInflater inflater, boolean isSelectedMuscleArea) {
+    private void mappingWidgetOfUpperBody(LayoutInflater inflater) {
 
         // [check 1] : 선택된 muscleArea 일때
-        if (isSelectedMuscleArea) {
+        if (this.upperBodyGroupingEventData != null) {
 
             // [iv/C]View : upperBody wrapper 의 layout 생성
             this.upperBodyWrapper = inflater.inflate(R.layout.include_each_random_selection, null);
@@ -903,13 +881,16 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     /**
      * [method] upper_body 와 관련 widget init
      */
-    private void initWidgetOfUpperBody(boolean isSelectedMuscleArea) {
+    private void initWidgetOfUpperBody() {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (this.upperBodyGroupingEventData != null) {
 
             // [iv/C]TextView : upper_body title setting
             this.upperBodyTitle.setText(getActivity().getString(R.string.type_muscle_area_upper_body));
+
+            // [method] : upperBody 그룹 별로 spinner 설정하기
+            setAdapterOfUpperBody(this.upperBodyGroupingEventData);
 
         } // [check 1]
 
@@ -921,10 +902,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param groupingEventData 그룹화된 event 데이터
      */
-    private void setAdapterOfUpperBody(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
+    private void setAdapterOfUpperBody(GroupingEventData groupingEventData) {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (groupingEventData != null) {
 
             // [check 1] : a group
             if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {
@@ -992,10 +973,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param inflater LayoutInflater
      */
-    private void mappingWidgetOfArm(LayoutInflater inflater, boolean isSelectedMuscleArea) {
+    private void mappingWidgetOfArm(LayoutInflater inflater) {
 
         // [check 1] : 선택된 muscleArea 일때
-        if (isSelectedMuscleArea) {
+        if (this.armGroupingEventData != null) {
 
             // [iv/C]View : arm wrapper 의 layout 생성
             this.armWrapper = inflater.inflate(R.layout.include_each_random_selection, null);
@@ -1044,13 +1025,16 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     /**
      * [method] arm 와 관련 widget init
      */
-    private void initWidgetOfArm(boolean isSelectedMuscleArea) {
+    private void initWidgetOfArm() {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (this.armGroupingEventData != null) {
 
             // [iv/C]TextView : arm title setting
             this.armTitle.setText(getActivity().getString(R.string.type_muscle_area_arm));
+
+            // [method] : arm 그룹 별로 spinner 설정하기
+            setAdapterOfArm(this.armGroupingEventData);
 
         } // [check 1]
 
@@ -1062,10 +1046,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param groupingEventData 그룹화된 event 데이터
      */
-    private void setAdapterOfArm(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
+    private void setAdapterOfArm(GroupingEventData groupingEventData) {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (groupingEventData != null) {
 
             // [check 1] : a group
             if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {
@@ -1134,10 +1118,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param inflater LayoutInflater
      */
-    private void mappingWidgetOfEtc(LayoutInflater inflater, boolean isSelectedMuscleArea) {
+    private void mappingWidgetOfEtc(LayoutInflater inflater) {
 
         // [check 1] : 선택된 muscleArea 일때
-        if (isSelectedMuscleArea) {
+        if (this.etcGroupingEventData != null) {
 
             // [iv/C]View : etc wrapper 의 layout 생성
             this.etcWrapper = inflater.inflate(R.layout.include_each_random_selection, null);
@@ -1185,13 +1169,16 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
     /**
      * [method] etc 와 관련 widget init
      */
-    private void initWidgetOfEtc(boolean isSelectedMuscleArea) {
+    private void initWidgetOfEtc() {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (this.etcGroupingEventData != null) {
 
             // [iv/C]TextView : etc title setting
             this.etcTitle.setText(getActivity().getString(R.string.type_muscle_area_etc));
+
+            // [method] : etc 그룹 별로 spinner 설정하기
+            setAdapterOfEtc(this.etcGroupingEventData);
 
         } // [check 1]
 
@@ -1203,10 +1190,10 @@ public class Step3D2SectionManager extends FragmentSectionManager implements Fra
      *
      * @param groupingEventData 그룹화된 event 데이터
      */
-    private void setAdapterOfEtc(boolean isSelectedMuscleArea, GroupingEventData groupingEventData) {
+    private void setAdapterOfEtc(GroupingEventData groupingEventData) {
 
         // [check 1] :
-        if (isSelectedMuscleArea) {
+        if (groupingEventData != null) {
 
             // [check 1] : a group
             if (!groupingEventData.getAGroupEventArrayList().isEmpty()) {

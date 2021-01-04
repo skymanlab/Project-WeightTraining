@@ -23,8 +23,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class LatListFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[FM]_LatListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTL] LatListFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private EachEventListSectionManager sectionManager;
@@ -37,11 +37,10 @@ public class LatListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment LatListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LatListFragment newInstance(User user) {
+    public static LatListFragment newInstance() {
         LatListFragment fragment = new LatListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);

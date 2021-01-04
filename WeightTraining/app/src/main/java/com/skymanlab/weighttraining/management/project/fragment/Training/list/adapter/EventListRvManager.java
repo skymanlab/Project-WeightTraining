@@ -26,8 +26,8 @@ import java.util.ArrayList;
 public class EventListRvManager {
 
     // constant
-    private static final String CLASS_NAME = "[FTA]_EventListRvManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTLA] EventListRvManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String DB_TARGET = "event";

@@ -5,9 +5,10 @@ import android.util.Log;
 
 import com.skymanlab.weighttraining.management.event.data.Event;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GroupingEventData {
+public class GroupingEventData implements Serializable {
 
     // instance variable
     private ArrayList<Event> aGroupEventArrayList;
@@ -56,8 +57,6 @@ public class GroupingEventData {
     public void setEGroupEventArrayList(ArrayList<Event> eGroupEventArrayList) {
         this.eGroupEventArrayList = eGroupEventArrayList;
     }
-
-
 
     public int getAllSize() {
         String TAG = "GroupingEventData";

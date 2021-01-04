@@ -26,8 +26,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class EventProgramProcessActivity extends AppCompatActivity implements RestTimePickerDialog.NoticeDialogListener {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_EventProgramSetProcessingActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[Ac] EventProgramProcessActivity";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : session
     private FirebaseUser firebaseUser;

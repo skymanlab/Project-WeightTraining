@@ -38,8 +38,8 @@ import java.util.Random;
 public class HomeActivity extends AppCompatActivity {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_HomeActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[Ac] HomeActivity";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : session
     private FirebaseUser firebaseUser = null;

@@ -39,8 +39,8 @@ import java.util.HashMap;
 public class NavHomeActivity extends AppCompatActivity {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_NavHomeFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[Ac] NavHomeActivity";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FirebaseUser firebaseUser;

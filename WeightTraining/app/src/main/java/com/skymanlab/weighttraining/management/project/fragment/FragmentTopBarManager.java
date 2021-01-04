@@ -11,7 +11,7 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class FragmentTopBarManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[F]_FragmentTopBarManager";
+    private static final String CLASS_NAME = "[PF] FragmentTopBarManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
@@ -21,20 +21,10 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
     private String titleContent;
 
     // constructor
-//    public FragmentTopBarManager(View view, String titleContent) {
-//        super(view);
-//        this.titleContent = titleContent;
-//    }
-
     public FragmentTopBarManager(Activity activity, View view, String titleContent) {
         super(activity, view);
         this.titleContent = titleContent;
     }
-
-//    public FragmentTopBarManager(Activity activity, View view, User user, String titleContent) {
-//        super(activity, view);
-//        this.titleContent = titleContent;
-//    }
 
     // setter
     public void setTitleContent(String titleContent) {

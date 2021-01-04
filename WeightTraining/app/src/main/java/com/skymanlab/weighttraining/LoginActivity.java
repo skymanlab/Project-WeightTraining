@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     // constant
     public static final int RC_SIGN_IN = 9000;
     // constant
-    private static final String CLASS_NAME = "[Ac]_LoginActivity";
+    private static final String CLASS_NAME = "[Ac] LoginActivity";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // instance variable
     private LSectionManager sectionManager;

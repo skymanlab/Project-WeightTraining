@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class EventItemFoldableLvAdapter extends BaseAdapter {
 
     // constructor
-    private static final String CLASS_NAME = "[EL]_EventItemLvAdapter ";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[EL] EventItemFoldableLvAdapter ";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private ArrayList<Event> eventArrayList;

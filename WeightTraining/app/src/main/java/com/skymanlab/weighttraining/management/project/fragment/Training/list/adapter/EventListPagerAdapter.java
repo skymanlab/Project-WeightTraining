@@ -28,12 +28,12 @@ public class EventListPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-        ChestListFragment chestList = new ChestListFragment();
-        ShoulderListFragment shoulderList = new ShoulderListFragment();
-        LatListFragment latList = new LatListFragment();
-        UpperBodyListFragment upperBodyList = new UpperBodyListFragment();
-        ArmListFragment armList = new ArmListFragment();
-        EtcListFragment etcList = new EtcListFragment();
+        ChestListFragment chestList = ChestListFragment.newInstance();
+        ShoulderListFragment shoulderList = ShoulderListFragment.newInstance();
+        LatListFragment latList = LatListFragment.newInstance();
+        UpperBodyListFragment upperBodyList = UpperBodyListFragment.newInstance();
+        ArmListFragment armList = ArmListFragment.newInstance();
+        EtcListFragment etcList = EtcListFragment.newInstance();
 
         // [check 1] : 몇 번째 화면인가요?
         switch (position) {

@@ -32,8 +32,8 @@ import java.util.TreeMap;
 public class DirectSelectionSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFTS] Step3D1SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTPS] DirectSelectionSectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final int STANDARD_ID_CHEST = 100;
@@ -71,16 +71,21 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     private GroupingEventData groupingEventData = null;
     private int muscleAreaStandardId = 0;
     private HashMap<Integer, Event> checkedEventList = new HashMap<>();
-
+    
     // constructor
     public DirectSelectionSectionManager(Activity activity, View view, FragmentManager fragmentManager) {
         super(activity, view, fragmentManager);
     }
 
+    // setter
+    public void setGroupingEventData(GroupingEventData groupingEventData) {
+        this.groupingEventData = groupingEventData;
+    }
+
 
     @Override
     public void mappingWidget() {
-
+        final String METHOD_NAME = "[mappingWidget] ";
 
         // [iv/C]MaterialCardView : mapping
         this.aGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_a_group_wrapper);
@@ -112,30 +117,32 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         // [iv/C]LinearLayout : mapping
         this.eGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_e_group_item_wrapper);
 
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>+_+_+_+_+_+_+_+_+_+_ DirectSelectionSectionManager 1. mappingWidget");
     }
 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        if (this.groupingEventData != null && (0 < this.muscleAreaStandardId)) {
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>+_+_+_+_+_+_+_+_+_+_ DirectSelectionSectionManager 2. initWidget");
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++>> muscleAreaStandardId = " + this.muscleAreaStandardId);
+        if (this.groupingEventData != null && (0 < this.muscleAreaStandardId)) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>+_+_+_+_+_+_+_+_+_+_ DirectSelectionSectionManager 2. initWidget 조건 성립");
 
             // [method] : A group 의 데이터를 표시하는 과정 진행
-            makeGroupCheckBox(this.aGroupWrapper, this.aGroupItemWrapper, this.groupingEventData.getAGroupEventArrayList(), STANDARD_ID_A_GROUP);
+            this.aGroupCheckBoxIdList = makeGroupCheckBox(this.aGroupWrapper, this.aGroupItemWrapper, this.groupingEventData.getAGroupEventArrayList(), STANDARD_ID_A_GROUP);
 
             // [method] : B group 의 데이터를 표시하는 과정 진행
-            makeGroupCheckBox(this.bGroupWrapper, this.bGroupItemWrapper, this.groupingEventData.getBGroupEventArrayList(), STANDARD_ID_B_GROUP);
+            this.bGroupCheckBoxIdList = makeGroupCheckBox(this.bGroupWrapper, this.bGroupItemWrapper, this.groupingEventData.getBGroupEventArrayList(), STANDARD_ID_B_GROUP);
 
             // [method] : C group 의 데이터를 표시하는 과정 진행
-            makeGroupCheckBox(this.cGroupWrapper, this.cGroupItemWrapper, this.groupingEventData.getCGroupEventArrayList(), STANDARD_ID_C_GROUP);
+            this.cGroupCheckBoxIdList = makeGroupCheckBox(this.cGroupWrapper, this.cGroupItemWrapper, this.groupingEventData.getCGroupEventArrayList(), STANDARD_ID_C_GROUP);
 
             // [method] : D group 의 데이터를 표시하는 과정 진행
-            makeGroupCheckBox(this.dGroupWrapper, this.dGroupItemWrapper, this.groupingEventData.getDGroupEventArrayList(), STANDARD_ID_D_GROUP);
+            this.dGroupCheckBoxIdList = makeGroupCheckBox(this.dGroupWrapper, this.dGroupItemWrapper, this.groupingEventData.getDGroupEventArrayList(), STANDARD_ID_D_GROUP);
 
             // [method] : E group 의 데이터를 표시하는 과정 진행
-            makeGroupCheckBox(this.eGroupWrapper, this.eGroupItemWrapper, this.groupingEventData.getEGroupEventArrayList(), STANDARD_ID_E_GROUP);
+            this.eGroupCheckBoxIdList = makeGroupCheckBox(this.eGroupWrapper, this.eGroupItemWrapper, this.groupingEventData.getEGroupEventArrayList(), STANDARD_ID_E_GROUP);
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++>> groupingEventData 를 먼저 설정해주세요.");
@@ -184,43 +191,6 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     } // End of method [setMuscleAreaStandardId]
 
-    /**
-     * [method] 해당 muscleArea 의 eventArrayList 를 토대로 그룹별로 나눈 GroupingEventData 객체를 만든다.
-     *
-     * @param eventArrayList muscleArea 의 목록
-     */
-    public void setGroupingEventData(ArrayList<Event> eventArrayList) {
-
-        final String METHOD_NAME = "[setGroupingEventData] ";
-
-        // [lv/C]GroupingEventUtil : eventArrayList 를 그룹 별로 나누어 저장한다.
-        GroupingEventUtil util = new GroupingEventUtil(eventArrayList);
-        util.classifyEventArrayListToGroupType();
-
-        // [iv/C]GroupingEventData : util 을 이용하여 그룹화한 값 가져오기
-        this.groupingEventData = util.getGroupingEvent();
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----- A GROUP ----- ");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.groupingEventData.getAGroupEventArrayList());
-
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----- B GROUP ----- ");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.groupingEventData.getBGroupEventArrayList());
-
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----- C GROUP ----- ");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.groupingEventData.getCGroupEventArrayList());
-
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----- D GROUP ----- ");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.groupingEventData.getDGroupEventArrayList());
-
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----- E GROUP ----- ");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.groupingEventData.getEGroupEventArrayList());
-
-    } // End of method [setGroupingEventData]
-
 
     /**
      * [method] 하나의 그룹의 eventDataArrayList 로 checkBox 를 만들고 관리하기 위한 id 를 따로 보관한다.
@@ -233,14 +203,11 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
         // [check 1] : true(groupEventArrayList 의 size 가 0) -> groupWrapper 를 GONE / false -> groupEventArrayList 의 내용을 groupItemWrapper 에 CheckBox 를 만들어 추가한다.
         if (groupEventArrayList.isEmpty()) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++>> 데이터가 비어있습니다.");
 
             // [lv/C]MaterialCardView : 이 그룹의 wrapper 를 GONE
             groupWrapper.setVisibility(View.GONE);
 
         } else {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++>> 데이터가 있습니다.");
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "1. groupStandardId = " + groupStandardId);
 
             // [cycle 1] : groupEventArrayList 의 모든 데이터를 CheckBox 로 표시하기
             for (int index = 0; index < groupEventArrayList.size(); index++) {
@@ -260,7 +227,6 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
                 eventCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<" + compoundButton.getText() + ">>> 은 ? " + b);
 
                         // [check 1] : true -> checkedEventList 에 event 키 값으로 추가 / false -> checkedEventList 에 추가 되었는지 확인
                         if (b) {

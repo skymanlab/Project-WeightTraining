@@ -26,7 +26,7 @@ public abstract class EPSectionManager extends SectionManager {
     public static final Class NOT_ZERO_TYPE_CLASS_MOVE = EventProgramListActivity.class;
     public static final Class ZERO_TYPE_CLASS_MOVE = EventAddActivity.class;
     // constant
-    private static final String CLASS_NAME = "[PAEP]_EPSectionOneEachRandomManager";       // EventProgramActivity Section One Manager
+    private static final String CLASS_NAME = "[PAEP] EPSectionManager";       // EventProgramActivity Section One Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // instance variable
     private int sectionType;

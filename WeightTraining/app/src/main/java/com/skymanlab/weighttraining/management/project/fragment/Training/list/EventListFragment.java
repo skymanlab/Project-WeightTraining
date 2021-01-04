@@ -1,4 +1,4 @@
-package com.skymanlab.weighttraining.management.project.fragment.Training;
+package com.skymanlab.weighttraining.management.project.fragment.Training.list;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,8 +23,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
 public class EventListFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[FM]_EventListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTL] EventListFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

@@ -20,7 +20,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 public class ELSectionManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAEL]_ELSectionManager";       // EventProgramActivity Section One Each Random Manager
+    private static final String CLASS_NAME = "[PAEL] ELSectionManager";       // EventProgramActivity Section One Each Random Manager
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

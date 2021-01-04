@@ -14,7 +14,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleAreaNextA
 public class DataManager {
 
     // constant
-    private static final String CLASS_NAME = "[PD]_DataManager";
+    private static final String CLASS_NAME = "[PD] DataManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
 

@@ -25,7 +25,7 @@ public class SetNumberPickerDialog extends DialogFragment {
     private static final int MAX_SET_NUMBER = 10;
     private static final int MIN_SET_NUMBER = 0;
     // constant
-    private static final String CLASS_NAME = "[ED]_SetNumberPickerDialog";
+    private static final String CLASS_NAME = "[ED] SetNumberPickerDialog";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

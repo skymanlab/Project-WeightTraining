@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.Step3D3SectionManager;
 
@@ -24,13 +25,23 @@ public class Step3D3Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] Step3D3Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
-    private static final String SELECTED_MUSCLE_AREA_LIST = "selectedMuscleAreaList";
+    private static final String CHEST_GROUPING_EVENT_DATA = "chestGroupingEventData";
+    private static final String SHOULDER_GROUPING_EVENT_DATA = "shoulderGroupingEventData";
+    private static final String LAT_GROUPING_EVENT_DATA = "latGroupingEventData";
+    private static final String UPPER_BODY_GROUPING_EVENT_DATA = "upperBodyGroupingEventData";
+    private static final String ARM_GROUPING_EVENT_DATA = "armGroupingEventData";
+    private static final String ETC_GROUPING_EVENT_DATA = "etcGroupingEventData";
 
     // instance variable
-    private boolean[] isSelectedMuscleAreaList;
+    private GroupingEventData chestGroupingEventData;
+    private GroupingEventData shoulderGroupingEventData;
+    private GroupingEventData latGroupingEventData;
+    private GroupingEventData upperBodyGroupingEventData;
+    private GroupingEventData armGroupingEventData;
+    private GroupingEventData etcGroupingEventData;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -45,16 +56,21 @@ public class Step3D3Fragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param isSelectedMuscleAreaList STEP 2-1 에서 선택한 muscle area list
      * @return A new instance of fragment Step3D3Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Step3D3Fragment newInstance(boolean[] isSelectedMuscleAreaList) {
+    public static Step3D3Fragment newInstance(GroupingEventData chest, GroupingEventData shoulder, GroupingEventData lat, GroupingEventData upperBody, GroupingEventData arm, GroupingEventData etc) {
 
         Step3D3Fragment fragment = new Step3D3Fragment();
 
+        // bundle 에 데이터를 추가하고, fragment 에 넘겨주기
         Bundle args = new Bundle();
-        args.putBooleanArray(SELECTED_MUSCLE_AREA_LIST, isSelectedMuscleAreaList);
+        args.putSerializable(CHEST_GROUPING_EVENT_DATA, chest);
+        args.putSerializable(SHOULDER_GROUPING_EVENT_DATA, shoulder);
+        args.putSerializable(LAT_GROUPING_EVENT_DATA, lat);
+        args.putSerializable(UPPER_BODY_GROUPING_EVENT_DATA, upperBody);
+        args.putSerializable(ARM_GROUPING_EVENT_DATA, arm);
+        args.putSerializable(ETC_GROUPING_EVENT_DATA, etc);
         fragment.setArguments(args);
 
         return fragment;
@@ -65,7 +81,13 @@ public class Step3D3Fragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            this.isSelectedMuscleAreaList = getArguments().getBooleanArray(SELECTED_MUSCLE_AREA_LIST);
+            // bundle 에서 넘어온 데이터 가져오기
+            this.chestGroupingEventData = (GroupingEventData) getArguments().getSerializable(CHEST_GROUPING_EVENT_DATA);
+            this.shoulderGroupingEventData = (GroupingEventData) getArguments().getSerializable(SHOULDER_GROUPING_EVENT_DATA);
+            this.latGroupingEventData = (GroupingEventData) getArguments().getSerializable(LAT_GROUPING_EVENT_DATA);
+            this.upperBodyGroupingEventData = (GroupingEventData) getArguments().getSerializable(UPPER_BODY_GROUPING_EVENT_DATA);
+            this.armGroupingEventData = (GroupingEventData) getArguments().getSerializable(ARM_GROUPING_EVENT_DATA);
+            this.etcGroupingEventData = (GroupingEventData) getArguments().getSerializable(ETC_GROUPING_EVENT_DATA);
         }
     }
 
@@ -86,7 +108,13 @@ public class Step3D3Fragment extends Fragment {
         this.topBarManager.initWidget();
 
         // [iv/C]Step3D3SectionManager :
-        this.sectionManager = new Step3D3SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager(), this.isSelectedMuscleAreaList);
+        this.sectionManager = new Step3D3SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        this.sectionManager.setChestGroupingEventData(this.chestGroupingEventData);
+        this.sectionManager.setShoulderGroupingEventData(this.shoulderGroupingEventData);
+        this.sectionManager.setLatGroupingEventData(this.latGroupingEventData);
+        this.sectionManager.setUpperBodyGroupingEventData(this.upperBodyGroupingEventData);
+        this.sectionManager.setArmGroupingEventData(this.armGroupingEventData);
+        this.sectionManager.setEtcGroupingEventData(this.etcGroupingEventData);
         this.sectionManager.mappingWidget();
         this.sectionManager.initWidget();
 

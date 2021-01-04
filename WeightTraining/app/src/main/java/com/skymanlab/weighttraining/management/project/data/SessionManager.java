@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class SessionManager {
 
     // constance
-    private static final String CLASS_NAME = "[PD]_SessionManager";
+    private static final String CLASS_NAME = "[PD] SessionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= user =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

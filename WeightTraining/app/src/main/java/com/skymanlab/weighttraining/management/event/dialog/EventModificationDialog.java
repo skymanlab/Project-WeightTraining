@@ -35,8 +35,8 @@ import java.util.ArrayList;
 public class EventModificationDialog {
 //
 //    // constance
-//    public static final String CLASS_NAME = "[ED]_EventItemModificationDialog";
-//    public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+//    public static final String CLASS_NAME = "[ED] EventModificationDialog";
+//    public static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 //
 //    // instance variable
 //    private Context context;

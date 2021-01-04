@@ -14,7 +14,7 @@ public class RightDataChecker {
 
 
     // constant
-    private static final String CLASS_NAME = "[PD]_RightDataChecker";
+    private static final String CLASS_NAME = "[PD] RightDataChecker";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
 

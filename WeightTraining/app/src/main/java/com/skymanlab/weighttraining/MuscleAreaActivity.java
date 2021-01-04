@@ -18,7 +18,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleAreaNextA
 public class MuscleAreaActivity extends AppCompatActivity {
 
     // constant
-    private static final String CLASS_NAME = "[Ac]_MuscleAreaActivity";
+    private static final String CLASS_NAME = "[Ac] MuscleAreaActivity";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : session

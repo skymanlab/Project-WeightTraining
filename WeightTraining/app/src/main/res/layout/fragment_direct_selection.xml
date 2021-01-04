@@ -21,7 +21,10 @@
                 android:id="@+id/f_direct_selection_a_group_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -68,7 +71,10 @@
                 android:id="@+id/f_direct_selection_b_group_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -114,7 +120,10 @@
                 android:id="@+id/f_direct_selection_c_group_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -160,7 +169,10 @@
                 android:id="@+id/f_direct_selection_d_group_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -206,7 +218,10 @@
                 android:id="@+id/f_direct_selection_e_group_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout

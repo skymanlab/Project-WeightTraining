@@ -21,7 +21,7 @@ import com.skymanlab.weighttraining.management.project.activity.SectionManager;
 public class EPLSectionOneManager extends SectionManager implements SectionInitialization {
 
     // constant
-    private static final String CLASS_NAME = "[PAE]_EPLSectionOneManager";
+    private static final String CLASS_NAME = "[PAEPL] EPLSectionOneManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
