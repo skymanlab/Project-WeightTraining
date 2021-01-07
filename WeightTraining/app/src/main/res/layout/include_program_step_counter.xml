@@ -6,7 +6,7 @@
 
     <!-- step -->
     <LinearLayout
-        android:id="@+id/program_step_counter"
+        android:id="@+id/include_program_step_counter"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:gravity="center"
@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/program_step_counter_number_first"
+            android:id="@+id/include_program_step_counter_number_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/step_no_selected_number_6"/>
 
         <ImageView
-            android:id="@+id/program_step_counter_progress_bar_first"
+            android:id="@+id/include_program_step_counter_progress_bar_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -30,14 +30,14 @@
             android:src="@drawable/step_process_bar" />
 
         <ImageView
-            android:id="@+id/program_step_counter_number_second"
+            android:id="@+id/include_program_step_counter_number_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/step_selected_number_1" />
 
         <ImageView
 
-            android:id="@+id/program_step_counter_progress_bar_second"
+            android:id="@+id/include_program_step_counter_progress_bar_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -45,7 +45,7 @@
             android:src="@drawable/step_process_bar" />
 
         <ImageView
-            android:id="@+id/program_step_counter_number_third"
+            android:id="@+id/include_program_step_counter_number_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/step_no_selected_number_2" />

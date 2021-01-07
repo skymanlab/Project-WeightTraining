@@ -213,7 +213,7 @@ public class EPSectionOneAllRandomManager extends EPSectionManager implements Se
         eventSelectionUtil.selectRandomEvent();
 
         // [method] : randomSelectedEventArrayList 를 포함하여 EventSelectionProgramActivity 로 이동한다.
-        moveEventSelectionProgramActivity(eventSelectionUtil.getRandomSelectedEventArrayList(), eventSelectionUtil.getNoSelectedEventArrayList());
+        moveEventSelectionProgramActivity(eventSelectionUtil.getSelectedEventArrayList(), eventSelectionUtil.getNoSelectedEventArrayList());
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++>> allRandomProgram program click listener / end <<++++++++++");
 

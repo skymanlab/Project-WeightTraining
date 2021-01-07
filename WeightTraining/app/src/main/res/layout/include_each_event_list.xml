@@ -7,7 +7,7 @@
 
     <!-- recycler view -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/f_each_event_list_recycler_view"
+        android:id="@+id/include_each_event_list_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="vertical"
@@ -18,7 +18,7 @@
 
     <!-- progress bar -->
     <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/f_each_event_list_progress_bar"
+        android:id="@+id/include_each_event_list_progress_bar"
         style="?android:progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
 
     <!-- add button -->
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/f_each_event_list_bt_add"
+        android:id="@+id/include_each_event_list_bt_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"

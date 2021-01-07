@@ -66,7 +66,7 @@ public class ChestListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // [iv/C]EachEventListSectionManager : chest fragment section manager
-        this.sectionManager = new EachEventListSectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager(), MuscleArea.CHEST);
+        this.sectionManager = new EachEventListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), MuscleArea.CHEST);
         this.sectionManager.mappingWidget();
         this.sectionManager.initWidget();
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".management.project.fragment.Training.program.MakerStep1Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- title -->
+        <include
+            layout="@layout/include_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- step counter -->
+        <include
+            layout="@layout/include_program_step_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- step content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- message -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/f_maker_step1_comment"
+                android:textAlignment="center" />
+
+            <!-- button -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:useDefaultMargins="true"
+                android:columnCount="3"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step1_direct_selection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:text="@string/f_maker_step1_direct_selection"
+                    android:textColor="@color/colorTextPrimary"
+                    app:backgroundTint="@color/colorBackgroundFirst" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step1_each_random_selection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:text="@string/f_maker_step1_each_random_selection"
+                    android:textColor="@color/colorTextPrimary"
+                    app:backgroundTint="@color/colorBackgroundSecond" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step1_all_random_selection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:text="@string/f_maker_step1_all_random_selection"
+                    android:textColor="@color/colorTextPrimary"
+                    app:backgroundTint="@color/colorBackgroundThird" />
+
+
+            </GridLayout>
+        </LinearLayout><!-- step content -->
+
+        <!-- step direction selector -->
+        <include
+            layout="@layout/include_program_step_direction_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" /><!-- End of step direction selector -->
+
+    </LinearLayout>
+
+</FrameLayout>

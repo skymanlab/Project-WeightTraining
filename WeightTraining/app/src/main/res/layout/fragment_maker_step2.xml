@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".management.project.fragment.Training.program.Step1D0Fragment">
+    tools:context=".management.project.fragment.Training.program.MakerStep2Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,17 +29,15 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- message -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/f_program_step1_message"
+                android:text="@string/f_maker_step2_comment"
                 android:textAlignment="center" />
 
-            <!-- button -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,56 +46,65 @@
                 android:columnCount="2"
                 android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_program_step1_direct_selection"
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_maker_step2_chest"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:text="@string/f_program_step1_direct_selection"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundFirst" />
+                    android:background="@drawable/toggle_selector_1"
+                    android:textOff="@string/f_maker_step2_chest"
+                    android:textOn="@string/f_maker_step2_chest" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_program_step1_each_random_selection"
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_maker_step2_shoulder"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:text="@string/f_program_step1_each_random_selection"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundSecond" />
+                    android:background="@drawable/toggle_selector_2"
+                    android:textOff="@string/f_maker_step2_shoulder"
+                    android:textOn="@string/f_maker_step2_shoulder" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_program_step1_all_random_selection"
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_maker_step2_lat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:text="@string/f_program_step1_all_random_selection"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundThird" />
+                    android:background="@drawable/toggle_selector_3"
+                    android:textOff="@string/f_maker_step2_lat"
+                    android:textOn="@string/f_maker_step2_lat" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_program_step1_my_program"
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_maker_step2_upper_body"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:text="@string/f_program_step1_my_program"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundFourth" />
+                    android:background="@drawable/toggle_selector_4"
+                    android:textOff="@string/f_maker_step2_upper_body"
+                    android:textOn="@string/f_maker_step2_upper_body" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_program_step1_recommend_program"
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_maker_step2_arm"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:text="@string/f_program_step1_recommend_program"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundFifth" />
+                    android:background="@drawable/toggle_selector_5"
+                    android:textOff="@string/f_maker_step2_arm"
+                    android:textOn="@string/f_maker_step2_arm" />
 
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/f_maker_step2_etc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/toggle_selector_6"
+                    android:textOff="@string/f_maker_step2_etc"
+                    android:textOn="@string/f_maker_step2_etc" />
             </GridLayout>
         </LinearLayout><!-- step content -->
 
@@ -107,7 +113,6 @@
             layout="@layout/include_program_step_direction_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" /><!-- End of step direction selector -->
-
     </LinearLayout>
 
 </FrameLayout>

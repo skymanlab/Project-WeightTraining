@@ -209,14 +209,14 @@ public class EventItemAddDialog extends DialogFragment {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/false :  0 보다 크거나 같은 수가 아니야! <=");
 
                 // [lv/C]Toast : 0 보다 크거나 같은 수를 입력해주세요!
-                Toast.makeText(context, "0 보다 크거나 같은 수를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.cud_event_item_add_snack_0_up_input, Toast.LENGTH_SHORT).show();
                 return false;
             } // [check 2]
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 입력되지 않은 값이 있어! <=");
             // [lv/C]Toast : 모든 값을 입력해주세요!
-            Toast.makeText(context, "모든 값을 입력해주세요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.cud_event_item_add_snack_all_input, Toast.LENGTH_SHORT).show();
             return false;
         } // [check 1]
 
@@ -260,12 +260,12 @@ public class EventItemAddDialog extends DialogFragment {
                     if (error == null) {
 
                         // "입력에 성공하였습니다." Toast 메시지 표시
-                        Toast.makeText(context, "입력에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.cud_event_item_add_snack_input_success, Toast.LENGTH_SHORT).show();
 
                     } else {
 
                         // "입력에 실패하였습니다." Toast 메시지 표시
-                        Toast.makeText(context, "입력에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.cud_event_item_add_snack_input_fail, Toast.LENGTH_SHORT).show();
                     } // [check 2]
                 }
             });
@@ -273,7 +273,7 @@ public class EventItemAddDialog extends DialogFragment {
         } else {
 
             // "모든 데이터를 입력해주세요." Toast 메시지 표시
-            Toast.makeText(context, "모든 데이터를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.cud_event_item_add_snack_all_input, Toast.LENGTH_SHORT).show();
 
         } // [check 1]
 

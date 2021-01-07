@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager.EachEventListSectionManager;
 import com.skymanlab.weighttraining.management.user.data.User;
 
@@ -66,9 +67,9 @@ public class EtcListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // [iv/C]EachEventListSectionManager : etc fragment section manager
-//        this.sectionManager = new EachEventListSectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager(), MuscleArea.SHOULDER);
-//        this.sectionManager.mappingWidget();
-//        this.sectionManager.initWidget();
+        this.sectionManager = new EachEventListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), MuscleArea.ETC);
+        this.sectionManager.mappingWidget();
+        this.sectionManager.initWidget();
 
     }
 }

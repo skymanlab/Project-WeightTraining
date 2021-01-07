@@ -60,22 +60,22 @@ public class EventListSectionManager extends FragmentSectionManager implements F
 
                 switch (position) {
                     case 0:
-                        tab.setText(getActivity().getString(R.string.f_chest_list_title));
+                        tab.setText(getActivity().getString(R.string.type_muscle_area_chest));
                         break;
                     case 1:
-                        tab.setText(getActivity().getString(R.string.f_shoulder_list_title));
+                        tab.setText(getActivity().getString(R.string.type_muscle_area_shoulder));
                         break;
                     case 2:
-                        tab.setText(getActivity().getString(R.string.f_lat_list_title));
+                        tab.setText(getActivity().getString(R.string.type_muscle_area_lat));
                         break;
                     case 3:
-                        tab.setText(getActivity().getString(R.string.f_upper_body_list_title));
+                        tab.setText(getActivity().getString(R.string.type_muscle_area_upper_body));
                         break;
                     case 4:
-                        tab.setText(getActivity().getString(R.string.f_arm_list_title));
+                        tab.setText(getActivity().getString(R.string.type_muscle_area_arm));
                         break;
                     case 5:
-                        tab.setText(getActivity().getString(R.string.f_etc_list_title));
+                        tab.setText(getActivity().getString(R.string.type_muscle_area_etc));
                         break;
                 }
             }

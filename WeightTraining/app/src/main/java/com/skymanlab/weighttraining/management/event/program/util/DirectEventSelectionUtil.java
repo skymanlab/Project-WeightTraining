@@ -24,7 +24,7 @@ public class DirectEventSelectionUtil {
     private boolean[] isCheckedEGroup;
 
     // instance variable
-    private ArrayList<Event> directSelectedEventArrayList;
+    private ArrayList<Event> selectedEventArrayList;
     private ArrayList<Event> noSelectedEventArrayList;
 
 
@@ -124,21 +124,21 @@ public class DirectEventSelectionUtil {
     }
 
 
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= directSelectionEventArrayList =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= selectionEventArrayList =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     /**
-     * [method] [getter] DirectSelectedEventArrayList
+     * [method] [getter] selectedEventArrayList
      */
-    public ArrayList<Event> getDirectSelectedEventArrayList() {
+    public ArrayList<Event> getSelectedEventArrayList() {
 
-        final String METHOD_NAME = "[getDirectSelectedEventArrayList] ";
+        final String METHOD_NAME = "[getSelectedEventArrayList] ";
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "*** DirectSelectedEventArrayList 확인 ****");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, directSelectedEventArrayList);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "*** selectedEventArrayList 확인 ****");
+        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, selectedEventArrayList);
 
-        return directSelectedEventArrayList;
+        return selectedEventArrayList;
 
-    } // End of method [getDirectSelectedEventArrayList]
+    } // End of method [getSelectedEventArrayList]
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= noSelectedEventArrayList =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -179,25 +179,25 @@ public class DirectEventSelectionUtil {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : 모든 group 별 eventArrayList 가 입력되었습니다. <=");
 
             // [iv/C]ArrayList<Event> : directSelectedEventArrayList 객체 생성
-            this.directSelectedEventArrayList = new ArrayList<>();
+            this.selectedEventArrayList = new ArrayList<>();
 
             // [iv/C]ArrayList<Event> : noSelectedEventArrayList 객체 생성
             this.noSelectedEventArrayList = new ArrayList<>();
 
             // [iv/C]ArrayList<Event> : aGroupEventArrayList 에서 체크된 것들 만 directSelectedEventArrayList 에 추가한다.
-            this.directSelectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getAGroupEventArrayList(), this.isCheckedAGroup));
+            this.selectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getAGroupEventArrayList(), this.isCheckedAGroup));
 
             // [iv/C]ArrayList<Event> : bGroupEventArrayList 에서 체크된 것들 만 directSelectedEventArrayList 에 추가한다.
-            this.directSelectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getBGroupEventArrayList(), this.isCheckedBGroup));
+            this.selectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getBGroupEventArrayList(), this.isCheckedBGroup));
 
             // [iv/C]ArrayList<Event> : cGroupEventArrayList 에서 체크된 것들 만 directSelectedEventArrayList 에 추가한다.
-            this.directSelectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getCGroupEventArrayList(), this.isCheckedCGroup));
+            this.selectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getCGroupEventArrayList(), this.isCheckedCGroup));
 
             // [iv/C]ArrayList<Event> : dGroupEventArrayList 에서 체크된 것들 만 directSelectedEventArrayList 에 추가한다.
-            this.directSelectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getDGroupEventArrayList(), this.isCheckedDGroup));
+            this.selectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getDGroupEventArrayList(), this.isCheckedDGroup));
 
             // [iv/C]ArrayList<Event> : eGroupEventArrayList 에서 체크된 것들 만 directSelectedEventArrayList 에 추가한다.
-            this.directSelectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getEGroupEventArrayList(), this.isCheckedEGroup));
+            this.selectedEventArrayList.addAll(getCheckedEventList(this.groupingEventData.getEGroupEventArrayList(), this.isCheckedEGroup));
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 일단 Group 별 eventArrayList 를 입력해주세요! <=");

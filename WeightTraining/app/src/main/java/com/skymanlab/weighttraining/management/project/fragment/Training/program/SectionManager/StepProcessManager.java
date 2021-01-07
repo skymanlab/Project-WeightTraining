@@ -65,25 +65,25 @@ public class StepProcessManager extends FragmentSectionManager implements Fragme
     public void mappingWidget() {
 
         // [iv/C]ImageView : firstNumber mapping
-        this.firstNumber = (ImageView) getView().findViewById(R.id.program_step_counter_number_first);
+        this.firstNumber = (ImageView) getView().findViewById(R.id.include_program_step_counter_number_first);
 
         // [iv/C]ImageView : secondNumber mapping
-        this.secondNumber = (ImageView) getView().findViewById(R.id.program_step_counter_number_second);
+        this.secondNumber = (ImageView) getView().findViewById(R.id.include_program_step_counter_number_second);
 
         // [iv/C]ImageView : thirdNumber mapping
-        this.thirdNumber = (ImageView) getView().findViewById(R.id.program_step_counter_number_third);
+        this.thirdNumber = (ImageView) getView().findViewById(R.id.include_program_step_counter_number_third);
 
         // [iv/C]ImageView : firstProgressBar mapping
-        this.firstProgressBar = (ImageView) getView().findViewById(R.id.program_step_counter_progress_bar_first);
+        this.firstProgressBar = (ImageView) getView().findViewById(R.id.include_program_step_counter_progress_bar_first);
 
         // [iv/C]ImageView : secondProgressBar mapping
-        this.secondProgressBar = (ImageView) getView().findViewById(R.id.program_step_counter_progress_bar_second);
+        this.secondProgressBar = (ImageView) getView().findViewById(R.id.include_program_step_counter_progress_bar_second);
 
         // [iv/C]Button : previous mapping
-        this.previous = (Button) getView().findViewById(R.id.program_step_direction_selector_previous);
+        this.previous = (Button) getView().findViewById(R.id.include_program_step_direction_selector_previous);
 
         // [iv/C]Button : next mapping
-        this.next = (Button) getView().findViewById(R.id.program_step_direction_selector_next);
+        this.next = (Button) getView().findViewById(R.id.include_program_step_direction_selector_next);
 
     }
 

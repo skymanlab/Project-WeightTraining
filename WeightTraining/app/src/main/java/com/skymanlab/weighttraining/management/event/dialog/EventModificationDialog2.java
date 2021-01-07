@@ -214,14 +214,14 @@ public class EventModificationDialog2 extends DialogFragment {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/false :  0 보다 크거나 같은 수가 아니야! <=");
 
                 // [lv/C]Toast : 0 보다 크거나 같은 수를 입력해주세요!
-                Toast.makeText(getActivity(), "0 보다 크거나 같은 수를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.cud_event_item_modification_snack_0_up_input, Toast.LENGTH_SHORT).show();
                 return false;
             } // [check 2]
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 입력되지 않은 값이 있어! <=");
             // [lv/C]Toast : 모든 값을 입력해주세요!
-            Toast.makeText(getActivity(), "모든 값을 입력해주세요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.cud_event_item_modification_snack_all_input, Toast.LENGTH_SHORT).show();
             return false;
         } // [check 1]
 
@@ -263,7 +263,7 @@ public class EventModificationDialog2 extends DialogFragment {
                     // [check 1] : error 발생 안함
                     if (error == null) {
                         // 성공
-                        Toast.makeText(activity, "수정 성공!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.cud_event_item_modification_snack_modify_success, Toast.LENGTH_SHORT).show();
                     } else {
                         // error 발생
                     } // [check 1]

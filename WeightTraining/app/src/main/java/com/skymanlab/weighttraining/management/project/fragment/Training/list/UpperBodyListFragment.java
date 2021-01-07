@@ -65,8 +65,8 @@ public class UpperBodyListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // [iv/C]EachEventListSectionManager : shoulder fragment section mananger
-        this.sectionManager = new EachEventListSectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager(), MuscleArea.LEG);
+        // [iv/C]EachEventListSectionManager : shoulder fragment section manager
+        this.sectionManager = new EachEventListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), MuscleArea.LEG);
         this.sectionManager.mappingWidget();
         this.sectionManager.initWidget();
     }

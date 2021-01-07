@@ -6,6 +6,7 @@
 
     <!-- direction button -->
     <FrameLayout
+        android:id="@+id/include_program_step_direction_selector_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -17,17 +18,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/program_step_direction_selector_previous"
+            android:id="@+id/include_program_step_direction_selector_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
-            android:text="@string/f_program_step_direction_selector_previous" />
+            android:text="@string/include_program_step_direction_selector_previous" />
 
         <Button
-            android:id="@+id/program_step_direction_selector_next"
+            android:id="@+id/include_program_step_direction_selector_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:text="@string/f_program_step_direction_selector_next" />
+            android:text="@string/include_program_step_direction_selector_next" />
     </FrameLayout><!-- End of process button -->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,20 +11,17 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 
-public class Step2D2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener{
+public class MyProgramSectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener{
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] Step2D2SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MyProgramSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
-
-    // instance variable
-    private StepProcessManager stepProcessManager;
 
     // instance variable
     private RecyclerView list;
 
     // constructor
-    public Step2D2SectionManager(View view, FragmentManager fragmentManager) {
+    public MyProgramSectionManager(View view, FragmentManager fragmentManager) {
         super(view, fragmentManager);
     }
 
@@ -32,18 +29,13 @@ public class Step2D2SectionManager extends FragmentSectionManager implements Fra
     public void mappingWidget() {
 
         // [iv/C]RecyclerView : list mapping
-        this.list = (RecyclerView)getView().findViewById(R.id.f_program_step2_2_recycler_view);
+        this.list = (RecyclerView)getView().findViewById(R.id.f_my_program_recycler_view);
 
     }
 
     @Override
     public void initWidget() {
 
-        // [iv/C]StepProcessManager : step 2-1 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
-        this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_TWO);
-        this.stepProcessManager.mappingWidget();
-        this.stepProcessManager.setNextClickListener(this);
-        this.stepProcessManager.initWidget();
     }
 
     @Override

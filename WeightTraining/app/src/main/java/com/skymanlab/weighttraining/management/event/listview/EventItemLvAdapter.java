@@ -19,7 +19,6 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog;
 import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog2;
 import com.skymanlab.weighttraining.management.project.data.DataFormatter;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
@@ -156,9 +155,9 @@ public class EventItemLvAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // [lv/C]AlertDialog.Builder : builder 객체 생성 및 초기 설절
                 AlertDialog.Builder builder = new AlertDialog.Builder(targetActivity);
-                builder.setTitle(R.string.eila_alert_delete_title)
-                        .setMessage(R.string.eila_alert_delete_message)
-                        .setPositiveButton(R.string.eila_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.event_item_lv_adapter_alert_delete_title)
+                        .setMessage(R.string.event_item_lv_adapter_alert_delete_message)
+                        .setPositiveButton(R.string.event_item_lv_adapter_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -181,19 +180,19 @@ public class EventItemLvAdapter extends BaseAdapter {
                                     notifyDataSetChanged();
 
                                     // [lv/C]Toast : 삭제가 완료되었습니다.
-                                    Toast.makeText(targetActivity, "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(targetActivity, R.string.event_item_lv_adapter_snack_db_delete_success, Toast.LENGTH_SHORT).show();
 
                                 } else {
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 데이터베이스에서 삭제하지 못 했어! <=");
 
                                     // [lv/C]Toast : 실패하였습니다.
-                                    Toast.makeText(targetActivity, "실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(targetActivity, R.string.event_item_lv_adapter_snack_db_delete_error , Toast.LENGTH_SHORT).show();
 
                                 } // [check 1]
 
                             }
                         })
-                        .setNegativeButton(R.string.eila_alert_delete_bt_negative, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.event_item_lv_adapter_alert_delete_bt_negative, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 

@@ -3,13 +3,13 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 import android.app.Activity;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,26 +23,23 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
-import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D2Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D3Fragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Step2D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
+public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] Step2D1SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep2SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private int step1D0Type;
+    private int step1SelectedType;
 
     // instance variable
     private ToggleButton chest;
@@ -59,38 +56,38 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
     private boolean[] isSelectedMuscleAreaList; // toggle button 에서 클릭 한 값을 알아내는
 
     // constructor
-    public Step2D1SectionManager(Activity activity, View view, FragmentManager fragmentManager, int step1D0Type) {
+    public MakerStep2SectionManager(Activity activity, View view, FragmentManager fragmentManager, int step1SelectedType) {
         super(activity, view, fragmentManager);
-        this.step1D0Type = step1D0Type;
+        this.step1SelectedType = step1SelectedType;
     }
 
     @Override
     public void mappingWidget() {
 
         // [iv/C]ToggleButton : [0] chest mapping
-        this.chest = (ToggleButton) getView().findViewById(R.id.f_program_step2_1_chest);
+        this.chest = (ToggleButton) getView().findViewById(R.id.f_maker_step2_chest);
 
         // [iv/C]ToggleButton : [1] shoulder mapping
-        this.shoulder = (ToggleButton) getView().findViewById(R.id.f_program_step2_1_shoulder);
+        this.shoulder = (ToggleButton) getView().findViewById(R.id.f_maker_step2_shoulder);
 
         // [iv/C]ToggleButton : [2] lat mapping
-        this.lat = (ToggleButton) getView().findViewById(R.id.f_program_step2_1_lat);
+        this.lat = (ToggleButton) getView().findViewById(R.id.f_maker_step2_lat);
 
         // [iv/C]ToggleButton : [3] upperBody mapping
-        this.upperBody = (ToggleButton) getView().findViewById(R.id.f_program_step2_1_upper_body);
+        this.upperBody = (ToggleButton) getView().findViewById(R.id.f_maker_step2_upper_body);
 
         // [iv/C]ToggleButton : [4] arm mapping
-        this.arm = (ToggleButton) getView().findViewById(R.id.f_program_step2_1_arm);
+        this.arm = (ToggleButton) getView().findViewById(R.id.f_maker_step2_arm);
 
         // [iv/C]ToggleButton : [5] etc mapping
-        this.etc = (ToggleButton) getView().findViewById(R.id.f_program_step2_1_etc);
+        this.etc = (ToggleButton) getView().findViewById(R.id.f_maker_step2_etc);
 
     }
 
     @Override
     public void initWidget() {
 
-        // [iv/C]StepProcessManager : step 2-1 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
+        // [iv/C]StepProcessManager : step 2 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
         this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_TWO);
         this.stepProcessManager.mappingWidget();
         this.stepProcessManager.setNextClickListener(this);
@@ -174,15 +171,50 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
 
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1-0 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
-        loadContent();
+        // [check 1] : 6가지의 MuscleArea 중 하나라도 선택한 것이 있을 때만 다음 단계 진행
+        if (checkSelectedMuscleArea()) {
+
+            // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
+            loadContent();
+
+        } else {
+
+            // "근육 부위를 하나라도 선택해주세요." Snack Bar 메시지 출력
+            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_next, Snackbar.LENGTH_SHORT).show();
+
+        } // [check 1]
 
     }
+
+    private boolean checkSelectedMuscleArea() {
+
+        // [lv/i]selectedCounter : 선택된 개수를 카운트한다.
+        int selectedCounter = 0;
+
+        // [cycle 1] : 각 MuscleArea 의 isSelectedMuscleAreaList 를 확인하여 모두 선택된 값이 없을 때는 false 를 리턴한다.
+        for (int index = 0; index < this.isSelectedMuscleAreaList.length; index++) {
+
+            // [check 1] : 선택된 목록이면 selectedCounter 를 +1 증가한다.
+            if (this.isSelectedMuscleAreaList[index]) {
+                selectedCounter++;
+            } // [check 1]
+
+        } // [cycle 1]
+
+        // [check 2] : selected counter 가 0 이면 false, 0 이상이면 true 를 반환한다.
+        if (selectedCounter == 0) {
+            return false;
+        } else {
+            return true;
+        } // [check 2]
+
+    }
+
 
     /**
      * [method] Firebase Database 에서 event/$uid/$MuscleArea 에 해당하는 내용을 muscleArea 으로 가져오기
      */
-    public void loadContent() {
+    private void loadContent() {
         final String METHOD_NAME = "[loadContent] ";
 
         // [lv/C]DatabaseReference : Firebase Database 의 event 항목을 참조하기위한 객체 생성
@@ -231,8 +263,8 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
                 // [check 1] : error 가 발생하면 -> muscleArea 에 해당하는 Fragment 를 만들지만, eventArrayList 는 null 인 fragment 객체를 생성한다.
                 if (error != null) {
 
-                    // "데이터를 가져오는데 오류가 발생하였습니다." Toast 메시지 표시
-                    Toast.makeText(getActivity(), getActivity().getString(R.string.f_program_step3_1_firebase_database_error_message), Toast.LENGTH_SHORT).show();
+                    // "데이터를 가져오는데 오류가 발생하였습니다." snack bar 메시지 표시
+                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_load_content_db_error, Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -278,8 +310,8 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         // [check 1] : step1D0Type 이 뭐냐?
-        switch (this.step1D0Type) {
-            case Step1D0SectionManager.STEP_1_0_DIRECT_TYPE:
+        switch (this.step1SelectedType) {
+            case MakerStep1SectionManager.STEP_1_DIRECT_TYPE:
                 // direct
                 // [lv/C]Step3D1Fragment : step 3-1 fragment 객체 생성
                 Step3D1Fragment step3_1Fragment = Step3D1Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
@@ -290,7 +322,7 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
                 transaction.commit();
                 break;
 
-            case Step1D0SectionManager.STEP_1_0_EACH_RANDOM_TYPE:
+            case MakerStep1SectionManager.STEP_1_EACH_RANDOM_TYPE:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 each random 을 선택하였습니다.");
                 // each random
@@ -304,7 +336,7 @@ public class Step2D1SectionManager extends FragmentSectionManager implements Fra
 
                 break;
 
-            case Step1D0SectionManager.STEP_1_0_ALL_RANDOM_TYPE:
+            case MakerStep1SectionManager.STEP_1_ALL_RANDOM_TYPE:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 all random 을 선택하였습니다.");
                 // all random

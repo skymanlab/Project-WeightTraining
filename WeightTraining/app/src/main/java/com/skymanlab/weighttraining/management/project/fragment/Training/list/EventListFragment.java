@@ -38,11 +38,10 @@ public class EventListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment EventListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventListFragment newInstance(User user) {
+    public static EventListFragment newInstance() {
 
         final String METHOD_NAME = "[newInstance] ";
 

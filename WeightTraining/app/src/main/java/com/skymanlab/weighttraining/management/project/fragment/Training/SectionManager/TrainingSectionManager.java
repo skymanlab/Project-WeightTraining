@@ -11,7 +11,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.list.EventListFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step1D0Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.ProgramFragment;
 
 public class TrainingSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -45,7 +45,7 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
 
                 // [lv/C]FragmentTransaction : TrainingFragment -> EventListFragment 이동
                 FragmentTransaction transaction = ((NavHomeActivity) getActivity()).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_home_content_container, new EventListFragment());
+                transaction.replace(R.id.nav_home_content_container, EventListFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -59,7 +59,7 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
 
                 // [lv/C]FragmentTransaction : TrainingFragment -> ProgramFragment 이동
                 FragmentTransaction transaction = ((NavHomeActivity) getActivity()).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_home_content_container, new Step1D0Fragment());
+                transaction.replace(R.id.nav_home_content_container, ProgramFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

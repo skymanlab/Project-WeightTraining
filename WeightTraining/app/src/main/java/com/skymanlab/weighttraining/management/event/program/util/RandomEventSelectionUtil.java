@@ -37,13 +37,15 @@ public class RandomEventSelectionUtil {
     private ProgramType programType;
 
     // instance variable :
-    private ArrayList<Event> randomSelectedEventArrayList = null;
+    private ArrayList<Event> selectedEventArrayList = null;
     private ArrayList<Event> noSelectedEventArrayList = null;
+    private EventResultSet eventResultSet = null;
 
     // constructor
     public RandomEventSelectionUtil(ProgramType programType, int aGroupSelectedCount, int bGroupSelectedCount, int cGroupSelectedCount, int dGroupSelectedCount, int eGroupSelectedCount) {
-        this.randomSelectedEventArrayList = new ArrayList<>();
+        this.selectedEventArrayList = new ArrayList<>();
         this.noSelectedEventArrayList = new ArrayList<>();
+        this.eventResultSet = new EventResultSet();
 
         this.programType = programType;
         this.aGroupSelectedCount = aGroupSelectedCount;
@@ -55,8 +57,9 @@ public class RandomEventSelectionUtil {
 
     // constructor
     public RandomEventSelectionUtil(ProgramType programType, int allGroupSelectedCount) {
-        this.randomSelectedEventArrayList = new ArrayList<>();
+        this.selectedEventArrayList = new ArrayList<>();
         this.noSelectedEventArrayList = new ArrayList<>();
+        this.eventResultSet = new EventResultSet();
 
         this.programType = programType;
         this.allGroupSelectedCount = allGroupSelectedCount;
@@ -80,7 +83,6 @@ public class RandomEventSelectionUtil {
         // [iv/C]ArrayList<Event> : integratedEventArrayList 객체 생성
         this.integratedEventArrayList = new ArrayList<>();
 
-
         // [iv/C]ArrayList<Event> : aGroupEventArrayList
         this.integratedEventArrayList.addAll(this.groupingEventData.getAGroupEventArrayList());
         this.integratedEventArrayList.addAll(this.groupingEventData.getBGroupEventArrayList());
@@ -100,27 +102,27 @@ public class RandomEventSelectionUtil {
         this.groupingEventData = groupingEventData;
     }
 
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= RandomSelectedGroupEventList =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    public ArrayList<Event> getRandomSelectedEventArrayList() {
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= selectedEventArrayList =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public ArrayList<Event> getSelectedEventArrayList() {
 
-        final String METHOD_NAME = "[getRandomSelectedEventArrayList] ";
+        final String METHOD_NAME = "[getSelectedEventArrayList] ";
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "*** randomSelectedEventArrayList 확인 ****");
-        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.randomSelectedEventArrayList);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "*** selectedEventArrayList 확인 ****");
+        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, this.selectedEventArrayList);
 
-        return randomSelectedEventArrayList;
+        return selectedEventArrayList;
 
-    } // End of method [getRandomSelectedEventArrayList]
+    } // End of method [getSelectedEventArrayList]
 
 
     /**
-     * [method] eventArrayList 에서 randomIndex 의 index 값에 해당하는 Event 객체를 randomSelectedEventArrayList 에 추가한다.
+     * [method] eventArrayList 에서 randomIndex 의 index 값에 해당하는 Event 객체를 selectedEventArrayList 에 추가한다.
      */
-    public void addRandomSelectedEventArrayList(ArrayList<Event> eventArrayList) {
+    public void addSelectedEventArrayList(ArrayList<Event> eventArrayList) {
 
-        this.randomSelectedEventArrayList.addAll(eventArrayList);
+        this.selectedEventArrayList.addAll(eventArrayList);
 
-    } // End of method [addRandomSelectedEventArrayList]
+    } // End of method [addSelectedEventArrayList]
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= noSelectedEventArrayList =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -142,6 +144,19 @@ public class RandomEventSelectionUtil {
 
     } // End of method [addNoSelectedEventArrayList]
 
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= eventResultSet =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public EventResultSet getEventResultSet() {
+        return eventResultSet;
+    }
+
+    public void addEventResultSet(ArrayList<Event> selectedEventArrayList, ArrayList<Event> noSelectedEventArrayList) {
+
+        // [iv/C]EventResultSet : selectedEventArrayList 와 noSelectedEventArrayList
+        this.eventResultSet.setSelectedEventArrayList(selectedEventArrayList);
+        this.eventResultSet.setNoSelectedEventArrayList(noSelectedEventArrayList);
+
+    } // End of method [addNoSelectedEventArrayList]
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= random selection util =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -178,6 +193,10 @@ public class RandomEventSelectionUtil {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==> e group 랜덤 선택  <++++++++");
                     divideEventArrayList(this.groupingEventData.getEGroupEventArrayList(), this.eGroupSelectedCount);
 
+                    // [iv/C]EventResultSet : eventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 입력하기
+                    this.eventResultSet.setSelectedEventArrayList(getSelectedEventArrayList());
+                    this.eventResultSet.setNoSelectedEventArrayList(getNoSelectedEventArrayList());
+
                     // 결과
 //                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 //                    getRandomSelectedEventArrayList();
@@ -192,6 +211,10 @@ public class RandomEventSelectionUtil {
 
                     // [method] : integratedEventArrayList 에서 allGroupSelectedCount(선택한 개수) 만큼 임의로 선택된 값들을 randomSelectedEventArrayList 에 추가하기
                     divideEventArrayList(this.integratedEventArrayList, this.allGroupSelectedCount);
+
+                    // [iv/C]EventResultSet : eventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 입력하기
+                    this.eventResultSet.setSelectedEventArrayList(getSelectedEventArrayList());
+                    this.eventResultSet.setNoSelectedEventArrayList(getNoSelectedEventArrayList());
 
                     // 결과
 //                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -218,15 +241,133 @@ public class RandomEventSelectionUtil {
     private void divideEventArrayList(ArrayList<Event> eventArrayList, int selectedCount) {
 
         // [lv/C]IndexList : 랜덤으로 선택된 index 리스트와 선택되지 않은 index 리스트를 구분한다.
-        IndexList indexList = generateRandomOfIndex(selectedCount, eventArrayList.size());
+        IndexList dividedIndexList = generateRandomOfIndex(selectedCount, eventArrayList.size());
 
-        // [method] : 랜덤으로 선택된 index 들만 randomSelectedEventArrayList 에 저장
-        addRandomSelectedEventArrayList(generateEventArrayList(indexList.getSelectedIndex(), eventArrayList));
+        // [method] : 랜덤으로 선택된 index 들만 selectedEventArrayList 에 저장
+        addSelectedEventArrayList(generateEventArrayList(dividedIndexList.getSelectedIndex(), eventArrayList));
 
         // [method] : 선택되지 않은 나머지 index 들만 noSelectedEventArrayList 에 저장
-        addNoSelectedEventArrayList(generateEventArrayList(indexList.getNoSelectedIndex(), eventArrayList));
+        addNoSelectedEventArrayList(generateEventArrayList(dividedIndexList.getNoSelectedIndex(), eventArrayList));
 
     } // End of method [divideEventArrayList]
+
+
+    /**
+     * [method] [random] 총 개수에서 선택된 개수 만큼
+     *
+     * @param selectedCount 총 개수 중에서 랜덤으로 구하려는 수의 개수
+     * @param endRange      랜덤으로 구하려는 수의 끝 범위(총 개수)
+     */
+    private IndexList generateRandomOfIndex(int selectedCount, int endRange) {
+
+        final String METHOD_NAME = "[generateRandomIndex] ";
+
+        // [lv/C]Random : 랜덤 함수 생성
+        Random random = new Random();
+
+        // [lv/C]IndexList :
+        IndexList result = null;
+
+        // [check 0] : selectedCount 가 0 보다 크거나 같은 값일때만 수행한다.
+        if (0 <= selectedCount) {
+
+            // [check 1] : selectedCount 와 endRange 가 같다.
+            if (selectedCount == endRange) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : selectedCount 와 endRange 가 같습니다. 기존 index 값을 차례대로 입력합니다. <=");
+
+                // [lv/i]randomIndex : 랜덤으로 선택된 값 / selectedCount 크기의 배열 생성
+                int[] randomSelectedIndexList = new int[selectedCount];
+
+                // [cycle 1] : 선택한 개수 만큼
+                for (int index = 0; index < selectedCount; index++) {
+
+                    // [lv/i]randomIndex : 0 부터 차레대로 입력
+                    randomSelectedIndexList[index] = index;
+
+                } // [cycle 1]
+
+                result = new IndexList(endRange, 0);
+                result.setSelectedIndex(randomSelectedIndexList);
+
+            } else {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : selectedCount 와 endRange 가 달라요! 랜덤으로 선택! <=");
+
+                // =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                // [lv/i]randomIndex : 랜덤으로 선택된 값 / selectedCount 크기의 배열 생성
+                int[] randomSelectedIndexList = new int[selectedCount];
+
+                // [cycle 2] : 선택한 개수 만큼
+                for (int index = 0; index < selectedCount; index++) {
+
+                    // [lv/i]randomIndex : 0 부터 endRange 범위에서 무작위로 값 생성
+                    randomSelectedIndexList[index] = random.nextInt(endRange);
+
+                    // [cycle 3] : index 만큼
+                    for (int comparedIndex = 0; comparedIndex < index; comparedIndex++) {
+
+                        // [check 2] : 새롭게 생성된 random 수가 그 전 배열의 값과 같은 것이 있을 경우
+                        if (randomSelectedIndexList[index] == randomSelectedIndexList[comparedIndex]) {
+
+                            // [lv/i]index : 같은 값이 있으므로 해당 index 번째에 다시 값을 생성하여 넣기 위해 -1 하기 / because cycle 1 에서 index++ 해주므로 원래 index 값을 만들기 위해서 index-- 해줘야 합니다.
+                            index--;
+
+                        } // [check 2]
+                    } // [cycle 3]
+                } // [cycle 2]
+
+                // [method] : randomIndex 의 무작위로 선택된 값이 정렬이 되지 않았으므로 오름차순으로 정렬한다.
+                Arrays.sort(randomSelectedIndexList);
+
+                // =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                // [lv/i]noSelectedIndex :
+                int[] noSelectedIndexList = new int[endRange - selectedCount];
+
+                int indexN = 0;
+
+                // [cycle 4] : index 의 총 개수 만큼
+                for (int index = 0; index < endRange; index++) {
+
+                    // [lv/i]checker : 같은 것이 몇 개 있는 지 검사
+                    int checker = 0;
+
+                    // [cycle 5] : 랜덤으로 선택된 index 가 있는
+                    for (int indexR = 0; indexR < selectedCount; indexR++) {
+
+                        // [check 3] : 해당 index 가 랜덤으로 선택된 index 가 다를 때만
+                        if (index != randomSelectedIndexList[indexR]) {
+
+                            // [lv/i]checker : 다른 것이 있을 때 +1 증가하기
+                            checker++;
+
+                        } // [check 3]
+
+                    } // [cycle 5]
+
+                    // [check 4] : checker 와 randomSelectedIndex.length 가 같다. 즉, randomSelectedIndex 의 index 와 모두 같지 않으므로 선택되지 않은 index 가 되는 것이다.
+                    if (checker == selectedCount) {
+
+                        // [lv/i]noSelectedIndexList : 해당 index 를 noSelectedIndexList 에 추가한다.
+                        noSelectedIndexList[indexN++] = index;
+
+                    } // [check 4]
+
+                } // [cycle 4]
+
+                // [lv/C]IndexList : randomSelectedIndexList 와 noSelectedIndexList 를
+                result = new IndexList(selectedCount, endRange - selectedCount);
+                result.setSelectedIndex(randomSelectedIndexList);
+                result.setNoSelectedIndex(noSelectedIndexList);
+
+            } // [check 1]
+
+        } else {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/true : selectedCount 가 0 보다 작은 값은 안 되요! <=");
+        } // [check 0]
+
+        return result;
+    } // End of method [generateRandomIndex]
 
 
     /**
@@ -282,117 +423,6 @@ public class RandomEventSelectionUtil {
         return randomEventArrayList;
 
     } // End of method [generateRandomEventArrayList]
-
-
-    /**
-     * [method] [random] 총 개수에서 선택된 개수 만큼
-     *
-     * @param selectedCount 총 개수 중에서 랜덤으로 구하려는 수의 개수
-     * @param endRange      랜덤으로 구하려는 수의 끝 범위(총 개수)
-     */
-    private IndexList generateRandomOfIndex(int selectedCount, int endRange) {
-
-        final String METHOD_NAME = "[generateRandomIndex] ";
-
-        // [lv/C]Random : 랜덤 함수 생성
-        Random random = new Random();
-
-        // [lv/C]IndexList :
-        IndexList result = null;
-
-        // [check 1] : selectedCount 와 endRange 가 같다.
-        if (selectedCount == endRange) {
-
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : selectedCount 와 endRange 가 같습니다. 기존 index 값을 차례대로 입력합니다. <=");
-
-            // [lv/i]randomIndex : 랜덤으로 선택된 값 / selectedCount 크기의 배열 생성
-            int[] randomSelectedIndexList = new int[selectedCount];
-
-            // [cycle 1] : 선택한 개수 만큼
-            for (int index = 0; index < selectedCount; index++) {
-
-                // [lv/i]randomIndex : 0 부터 차레대로 입력
-                randomSelectedIndexList[index] = index;
-
-            } // [cycle 1]
-
-            result = new IndexList(endRange, 0);
-            result.setSelectedIndex(randomSelectedIndexList);
-
-        } else {
-
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : selectedCount 와 endRange 가 달라요! 랜덤으로 선택! <=");
-
-            // =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-            // [lv/i]randomIndex : 랜덤으로 선택된 값 / selectedCount 크기의 배열 생성
-            int[] randomSelectedIndexList = new int[selectedCount];
-
-            // [cycle 2] : 선택한 개수 만큼
-            for (int index = 0; index < selectedCount; index++) {
-
-                // [lv/i]randomIndex : 0 부터 endRange 범위에서 무작위로 값 생성
-                randomSelectedIndexList[index] = random.nextInt(endRange);
-
-                // [cycle 3] : index 만큼
-                for (int comparedIndex = 0; comparedIndex < index; comparedIndex++) {
-
-                    // [check 2] : 새롭게 생성된 random 수가 그 전 배열의 값과 같은 것이 있을 경우
-                    if (randomSelectedIndexList[index] == randomSelectedIndexList[comparedIndex]) {
-
-                        // [lv/i]index : 같은 값이 있으므로 해당 index 번째에 다시 값을 생성하여 넣기 위해 -1 하기 / because cycle 1 에서 index++ 해주므로 원래 index 값을 만들기 위해서 index-- 해줘야 합니다.
-                        index--;
-
-                    } // [check 2]
-                } // [cycle 3]
-            } // [cycle 2]
-
-            // [method] : randomIndex 의 무작위로 선택된 값이 정렬이 되지 않았으므로 오름차순으로 정렬한다.
-            Arrays.sort(randomSelectedIndexList);
-
-            // =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-            // [lv/i]noSelectedIndex :
-            int[] noSelectedIndexList = new int[endRange - selectedCount];
-
-            int indexN = 0;
-
-            // [cycle 4] : index 의 총 개수 만큼
-            for (int index = 0; index < endRange; index++) {
-
-                // [lv/i]checker : 같은 것이 몇 개 있는 지 검사
-                int checker = 0;
-
-                // [cycle 5] : 랜덤으로 선택된 index 가 있는
-                for (int indexR = 0; indexR < selectedCount; indexR++) {
-
-                    // [check 3] : 해당 index 가 랜덤으로 선택된 index 가 다를 때만
-                    if (index != randomSelectedIndexList[indexR]) {
-
-                        // [lv/i]checker : 다른 것이 있을 때 +1 증가하기
-                        checker++;
-
-                    } // [check 3]
-
-                } // [cycle 5]
-
-                // [check 4] : checker 와 randomSelectedIndex.length 가 같다. 즉, randomSelectedIndex 의 index 와 모두 같지 않으므로 선택되지 않은 index 가 되는 것이다.
-                if (checker == selectedCount) {
-
-                    // [lv/i]noSelectedIndexList : 해당 index 를 noSelectedIndexList 에 추가한다.
-                    noSelectedIndexList[indexN++] = index;
-
-                } // [check 4]
-
-            } // [cycle 4]
-
-            // [lv/C]IndexList : randomSelectedIndexList 와 noSelectedIndexList 를
-            result = new IndexList(selectedCount, endRange - selectedCount);
-            result.setSelectedIndex(randomSelectedIndexList);
-            result.setNoSelectedIndex(noSelectedIndexList);
-
-        } // [check 1]
-
-        return result;
-    } // End of method [generateRandomIndex]
 
 
     /**

@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.dynamic.IFragmentWrapper;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +28,8 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.event.program.util.EventResultSet;
+import com.skymanlab.weighttraining.management.event.program.util.RandomEventSelectionUtil;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
@@ -47,16 +50,10 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
 
     // instance variable
     private Fragment fragment;
-    private GroupingEventData chestGroupingEventData;
-    private GroupingEventData shoulderGroupingEventData;
-    private GroupingEventData latGroupingEventData;
-    private GroupingEventData upperBodyGroupingEventData;
-    private GroupingEventData armGroupingEventData;
-    private GroupingEventData etcGroupingEventData;
 
     // instance variable
     private ArrayList<DirectSelectionFragment> fragmentArrayList;
-    private ArrayList<String> fragmentTitleList;
+    private ArrayList<MuscleArea> fragmentMuscleAreaList;
 
     // instance variable
     private StepProcessManager stepProcessManager;
@@ -76,37 +73,12 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
     }
 
     // setter
-    public void setChestGroupingEventData(GroupingEventData chestGroupingEventData) {
-        this.chestGroupingEventData = chestGroupingEventData;
-    }
-
-    public void setShoulderGroupingEventData(GroupingEventData shoulderGroupingEventData) {
-        this.shoulderGroupingEventData = shoulderGroupingEventData;
-    }
-
-    public void setLatGroupingEventData(GroupingEventData latGroupingEventData) {
-        this.latGroupingEventData = latGroupingEventData;
-    }
-
-    public void setUpperBodyGroupingEventData(GroupingEventData upperBodyGroupingEventData) {
-        this.upperBodyGroupingEventData = upperBodyGroupingEventData;
-    }
-
-    public void setArmGroupingEventData(GroupingEventData armGroupingEventData) {
-        this.armGroupingEventData = armGroupingEventData;
-    }
-
-    public void setEtcGroupingEventData(GroupingEventData etcGroupingEventData) {
-        this.etcGroupingEventData = etcGroupingEventData;
-    }
-
-
     public void setFragmentArrayList(ArrayList<DirectSelectionFragment> fragmentArrayList) {
         this.fragmentArrayList = fragmentArrayList;
     }
 
-    public void setFragmentTitleList(ArrayList<String> fragmentTitleList) {
-        this.fragmentTitleList = fragmentTitleList;
+    public void setFragmentMuscleAreaList(ArrayList<MuscleArea> fragmentMuscleAreaList) {
+        this.fragmentMuscleAreaList = fragmentMuscleAreaList;
     }
 
     @Override
@@ -143,26 +115,94 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
     public void setClickListenerOfNext() {
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        ArrayList<Event> checkedAllEventArrayList = new ArrayList<>();
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 각 MuscleArea 의 EventResultSet =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // 각 MuscleArea 에서 체크된 항목과 체크되지 않은 항목을 가져와서, EventResultSet 의 객체의 selectedEventArrayList 와 noSelectedEventArrayList 에 각각 입력한다.
+        EventResultSet chestEventResultSet = new EventResultSet();
+        EventResultSet shoulderEventResultSet = new EventResultSet();
+        EventResultSet latEventResultSet = new EventResultSet();
+        EventResultSet upperBodyEventResultSet = new EventResultSet();
+        EventResultSet armEventResultSet = new EventResultSet();
+        EventResultSet etcEventResultSet = new EventResultSet();
 
         // [cycle 1] :
-        for (int index=0; index < fragmentArrayList.size() ; index++ ) {
+        for (int index = 0; index < fragmentArrayList.size(); index++) {
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "------- < " + index  + " >- sectionManger = " +fragmentArrayList.get(index).getSectionManager());
-            checkedAllEventArrayList.addAll(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+            switch (fragmentMuscleAreaList.get(index)) {
+                case CHEST:
+
+                    // [lv/C]EventResultSet : [0] chest 의 EventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 를 입력하기
+                    chestEventResultSet.setSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+                    chestEventResultSet.setNoSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getNoCheckedEventList());
+
+                    break;
+
+                case SHOULDER:
+
+                    // [lv/C]EventResultSet : [1] shoulder 의 EventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 를 입력하기
+                    shoulderEventResultSet.setSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+                    shoulderEventResultSet.setNoSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getNoCheckedEventList());
+
+                    break;
+
+                case LAT:
+
+                    // [lv/C]EventResultSet : [2] lat 의 EventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 를 입력하기
+                    latEventResultSet.setSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+                    latEventResultSet.setNoSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getNoCheckedEventList());
+
+                    break;
+
+                case LEG:
+
+                    // [lv/C]EventResultSet : [3] upper_body 의 EventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 를 입력하기
+                    upperBodyEventResultSet.setSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+                    upperBodyEventResultSet.setNoSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getNoCheckedEventList());
+
+                    break;
+
+                case ARM:
+
+                    // [lv/C]EventResultSet : [4] arm 의 EventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 를 입력하기
+                    armEventResultSet.setSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+                    armEventResultSet.setNoSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getNoCheckedEventList());
+
+                    break;
+
+                case ETC:
+
+                    // [lv/C]EventResultSet : [5] etc 의 EventResultSet 의 selectedEventArrayList 와 noSelectedEventArrayList 를 입력하기
+                    etcEventResultSet.setSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getCheckedEventArrayList());
+                    etcEventResultSet.setNoSelectedEventArrayList(fragmentArrayList.get(index).getSectionManager().getNoCheckedEventList());
+
+                    break;
+            }
+
         } // [cycle 1]
 
-        for (int index = 0; index < checkedAllEventArrayList.size(); index++) {
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<" + index + ">>> 선택된 eventName 은 ? " + checkedAllEventArrayList.get(index).getEventName());
-        } // [cycle 1]
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= step 4-1 로 넘어가는 과정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // [check 7] : 각 MuscleArea 의 selectedEventArrayList 가 모두 0 이면 다음 단계로 넘어가지 못함
+        if (chestEventResultSet.getSelectedEventArrayList().isEmpty()
+                && shoulderEventResultSet.getSelectedEventArrayList().isEmpty()
+                && latEventResultSet.getSelectedEventArrayList().isEmpty()
+                && upperBodyEventResultSet.getSelectedEventArrayList().isEmpty()
+                && armEventResultSet.getSelectedEventArrayList().isEmpty()
+                && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
 
+            // "선택되지 않았습니다." snack bar 메시지 출력
+            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_program_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
 
-        // [check 1] : checkedAllEventArrayList 에 데이터가 있을 때만
-        if (!checkedAllEventArrayList.isEmpty()) {
+        } else {
 
-            // [lv/C]Step4D1Fragment  : step 4-1 fragment 생성 및 checkedAllEventArrayList 를 selectedEventArrayList 로 넘기기
-            Step4D1Fragment step4_1 = Step4D1Fragment.newInstance(checkedAllEventArrayList);
+            // [lv/C]Step4D1Fragment  : step 4-1 fragment 생성 및 각 MuscleArea 의 EventResultSet 객체를 넘기기
+            Step4D1Fragment step4_1 = Step4D1Fragment.newInstance(
+                    chestEventResultSet,
+                    shoulderEventResultSet,
+                    latEventResultSet,
+                    upperBodyEventResultSet,
+                    armEventResultSet,
+                    etcEventResultSet
+            );
 
             // [lv/C]FragmentTransaction :
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -170,12 +210,38 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
             transaction.addToBackStack(null);
             transaction.commit();
 
-        } else {
-
-            // "선택되지 않았습니다." Toast 메시지 출력
-            Toast.makeText(getActivity(), "선택되지 않았습니다.", Toast.LENGTH_SHORT).show();
-
         } // [check 1]
+
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------- CHEST ----------------------------------");
+        for (int index=0; index < chestEventResultSet.getNoSelectedEventArrayList().size() ; index++ ) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<" +index +">>>>> event Name = " + chestEventResultSet.getNoSelectedEventArrayList().get(index).getEventName());
+        } // [cycle ]
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------- SHOULDER ----------------------------------");
+        for (int index=0; index < shoulderEventResultSet.getNoSelectedEventArrayList().size() ; index++ ) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<" +index +">>>>> event Name = " + shoulderEventResultSet.getNoSelectedEventArrayList().get(index).getEventName());
+        } // [cycle ]
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------- LAT ----------------------------------");
+        for (int index=0; index < latEventResultSet.getNoSelectedEventArrayList().size() ; index++ ) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<" +index +">>>>> event Name = " + latEventResultSet.getNoSelectedEventArrayList().get(index).getEventName());
+        } // [cycle ]
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------- UPPER_BODY ----------------------------------");
+        for (int index=0; index < upperBodyEventResultSet.getNoSelectedEventArrayList().size() ; index++ ) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<" +index +">>>>> event Name = " + upperBodyEventResultSet.getNoSelectedEventArrayList().get(index).getEventName());
+        } // [cycle ]
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------- ARM ----------------------------------");
+        for (int index=0; index < armEventResultSet.getNoSelectedEventArrayList().size() ; index++ ) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<" +index +">>>>> event Name = " + armEventResultSet.getNoSelectedEventArrayList().get(index).getEventName());
+        } // [cycle ]
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------- ETC ----------------------------------");
+        for (int index=0; index < etcEventResultSet.getNoSelectedEventArrayList().size() ; index++ ) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<" +index +">>>>> event Name = " + etcEventResultSet.getNoSelectedEventArrayList().get(index).getEventName());
+        } // [cycle ]
 
     }
 
@@ -185,7 +251,7 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
      */
     public void initViewPager() {
 
-        final String METHOD_NAME = "[initViewPager]" ;
+        final String METHOD_NAME = "[initViewPager]";
 
         // [iv/C]DirectPagerAdapter : viewPager 의 adapter 생성
         this.adapter = new DirectPagerAdapter(fragment, fragmentArrayList);
@@ -199,7 +265,7 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
-                tab.setText(fragmentTitleList.get(position));
+                tab.setText(DataManager.convertHanguleOfMuscleArea(fragmentMuscleAreaList.get(position)));
 
             }
         });

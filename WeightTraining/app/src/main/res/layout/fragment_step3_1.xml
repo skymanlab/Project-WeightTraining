@@ -41,7 +41,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@string/f_program_step3_1_message"
+                    android:text="@string/f_program_step3_1_comment"
                     android:textAlignment="center" />
 
                 <com.google.android.material.card.MaterialCardView

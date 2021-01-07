@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -116,9 +117,9 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
 
         // [lv/C]AlertDialog : Builder 로 AlertDialog 객체 생성 / 초기설정
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.elra_alert_delete_title)
-                .setMessage(R.string.elra_alert_delete_message)
-                .setPositiveButton(R.string.elra_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.event_list_rv_adapter_alert_delete_title)
+                .setMessage(R.string.event_list_rv_adapter_alert_delete_message)
+                .setPositiveButton(R.string.event_list_rv_adapter_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -135,13 +136,13 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
                                 // [check 1] : 에러 발생 안 함
                                 if (error == null) {
 
-                                    // "삭제가 완료되었습니다." Toast 메시지 표시
-                                    Toast.makeText(activity, "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                    // "삭제가 완료되었습니다." snack bar 메시지 표시
+                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.event_list_rv_adapter_snack_db_delete_success, Snackbar.LENGTH_SHORT).show();
 
                                 } else {
 
-                                    // "삭제를 실패하였습니다." Toast 메시지 표시
-                                    Toast.makeText(activity, "삭제를 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                    // "삭제를 실패하였습니다." snack bar 메시지 표시
+                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.event_list_rv_adapter_snack_db_delete_error, Snackbar.LENGTH_SHORT).show();
 
                                 } // [check 1]
                             }
@@ -150,7 +151,7 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
 
                     }
                 })
-                .setNegativeButton(R.string.elra_alert_delete_bt_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.event_list_rv_adapter_alert_delete_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

@@ -103,12 +103,12 @@ public class Step3D3Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // [iv/C]FragmentTopBarManager :
-        this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_title));
+        this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
         this.topBarManager.mappingWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step3D3SectionManager :
-        this.sectionManager = new Step3D3SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        this.sectionManager = new Step3D3SectionManager(getActivity(), view, getActivity().getSupportFragmentManager());
         this.sectionManager.setChestGroupingEventData(this.chestGroupingEventData);
         this.sectionManager.setShoulderGroupingEventData(this.shoulderGroupingEventData);
         this.sectionManager.setLatGroupingEventData(this.latGroupingEventData);

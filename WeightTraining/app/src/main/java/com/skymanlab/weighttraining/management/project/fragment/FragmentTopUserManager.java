@@ -37,13 +37,13 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
     public void mappingWidget() {
 
         // [iv/C]ImageView : userPhoto mapping
-        this.userPhoto = (ImageView) getView().findViewById(R.id.fragment_top_user_photo);
+        this.userPhoto = (ImageView) getView().findViewById(R.id.include_top_user_photo);
 
         // [iv/C]TextView : userName mapping
-        this.userName = (TextView) getView().findViewById(R.id.fragment_top_user_name);
+        this.userName = (TextView) getView().findViewById(R.id.include_top_user_name);
 
         // [iv/C]TextView : userEmail mapping
-        this.userEmail = (TextView) getView().findViewById(R.id.fragment_top_user_email);
+        this.userEmail = (TextView) getView().findViewById(R.id.include_top_user_email);
 
     }
 

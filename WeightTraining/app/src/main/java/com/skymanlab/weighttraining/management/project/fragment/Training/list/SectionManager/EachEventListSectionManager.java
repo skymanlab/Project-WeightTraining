@@ -48,13 +48,13 @@ public class EachEventListSectionManager extends FragmentSectionManager implemen
     public void mappingWidget() {
 
         // [iv/C]RecyclerView : recyclerView mapping
-        this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_each_event_list_recycler_view);
+        this.recyclerView = (RecyclerView) getView().findViewById(R.id.include_each_event_list_recycler_view);
 
         // [iv/C]ContentLoadingProgressBar : progressBar mapping
-        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_each_event_list_progress_bar);
+        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.include_each_event_list_progress_bar);
 
         // [iv/C]ImageButton : add mapping
-        this.add = (ImageButton) getView().findViewById(R.id.f_each_event_list_bt_add);
+        this.add = (ImageButton) getView().findViewById(R.id.include_each_event_list_bt_add);
     }
 
     @Override

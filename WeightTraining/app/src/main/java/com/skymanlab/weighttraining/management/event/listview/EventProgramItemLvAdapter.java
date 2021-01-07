@@ -80,7 +80,7 @@ public class EventProgramItemLvAdapter extends BaseAdapter {
         TextView properWeight = (TextView) convertView.findViewById(R.id.cu_event_program_item_proper_weight);
         final TextView maxWeight = (TextView) convertView.findViewById(R.id.cu_event_program_item_max_weight);
         MaterialTextView start = (MaterialTextView) convertView.findViewById(R.id.cu_event_program_item_bt_start);
-        MaterialCardView startWrapper =  (MaterialCardView) convertView.findViewById(R.id.cu_event_program_item_start_wrapper);
+        MaterialCardView startWrapper = (MaterialCardView) convertView.findViewById(R.id.cu_event_program_item_start_wrapper);
 
         // [lv/C]ArrayList<Event> : event program 에서 선택된 리스트 중 해당 position 의 event 객체 가져오기
         final Event event = (Event) getItem(position);
@@ -90,7 +90,7 @@ public class EventProgramItemLvAdapter extends BaseAdapter {
         eventName.setText(event.getEventName());
         properWeight.setText(DataFormatter.setWeightFormat(event.getProperWeight()));
         maxWeight.setText(DataFormatter.setWeightFormat(event.getMaxWeight()));
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "size = "  + eventArrayList.size());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "size = " + eventArrayList.size());
 
 
 //        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<<" + position + ">>>> isCompleted = " + isCompleted.get(position));
@@ -130,8 +130,7 @@ public class EventProgramItemLvAdapter extends BaseAdapter {
                         if (0 < restTimeMillisecond) {
 
 
-
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<<<<<<"+position+">>> +++++++++++++++++++++++++++++++++++++++++++   클미ㅏㅇㄴ러ㅣㅏㅁ어나ㅣ언리ㅏ");
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<<<<<<" + position + ">>> +++++++++++++++++++++++++++++++++++++++++++   클미ㅏㅇㄴ러ㅣㅏㅁ어나ㅣ언리ㅏ");
 
                             // [lv/C]Intent : EventProgramSetProcessingActivity 로 이동
                             Intent intent = new Intent(activity, EventProgramProcessActivity.class);
@@ -147,10 +146,11 @@ public class EventProgramItemLvAdapter extends BaseAdapter {
                             activity.startActivityForResult(intent, 50000);
 
                         } else {
-                            Toast.makeText(activity, "휴식시간을 정하지 않았습니다.", Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(activity, R.string.event_program_item_lv_adapter_snack_rest_time_no_setting, Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(activity, "세트 수를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.event_program_item_lv_adapter_snack_set_number_no_setting, Toast.LENGTH_SHORT).show();
                     }
 
 

@@ -35,7 +35,7 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
     public void mappingWidget() {
 
         // [iv/C]TextView : title mapping
-        this.title = (TextView) getView().findViewById(R.id.fragment_top_bar_title);
+        this.title = (TextView) getView().findViewById(R.id.include_top_bar_title);
 
     }
 

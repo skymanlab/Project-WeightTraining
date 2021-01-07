@@ -61,7 +61,7 @@ public class Step3D1Fragment extends Fragment {
 
     // instance variable : step 3-1
     private ArrayList<DirectSelectionFragment> fragmentArrayList = new ArrayList<>();
-    private ArrayList<String> fragmentTitleList = new ArrayList<>();
+    private ArrayList<MuscleArea> fragmentMuscleAreaList = new ArrayList<>();
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -150,19 +150,17 @@ public class Step3D1Fragment extends Fragment {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "1. fragment = " + this.fragmentArrayList);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "2. fragment size = " + this.fragmentArrayList.size());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "3. fragment title = " + this.fragmentTitleList);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "3. fragment title = " + this.fragmentTitleList);
 
         // [iv/C]FragmentTopBarManager : step 3-1 fragment top bar
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_training_title));
+        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.mappingWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step3D1SectionManager : step 3-1 content section manager
         this.sectionManager = new Step3D1SectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this);
+        this.sectionManager.setFragmentArrayList(this.fragmentArrayList);
+        this.sectionManager.setFragmentMuscleAreaList(this.fragmentMuscleAreaList);
         this.sectionManager.mappingWidget();
-        this.sectionManager.setFragmentArrayList(fragmentArrayList);
-        this.sectionManager.setFragmentTitleList(fragmentTitleList);
         this.sectionManager.initWidget();
 
     }
@@ -182,8 +180,8 @@ public class Step3D1Fragment extends Fragment {
             // [iv/C]ArrayList<DirectSelectionFragment> : 위에서 생성한 fragment 를 ArrayList 에 추가한다.
             fragmentArrayList.add(muscleAreaFragment);
 
-            // [iv/C]ArrayList<String> : 위와 1:1 매핑되는 title 을 추가한다.
-            fragmentTitleList.add(DataManager.convertHanguleOfMuscleArea(muscleArea));
+            // [iv/C]ArrayList<String> : 위와 1:1 매핑되는 MuscleArea 를 추가한다.
+            fragmentMuscleAreaList.add(muscleArea);
 
         } // [check 1]
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".management.project.fragment.Training.program.Step2D2Fragment">
+    tools:context=".management.project.fragment.Training.program.MyProgramFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,13 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- step counter -->
-        <include
-            layout="@layout/include_program_step_counter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- step content -->
+        <!-- content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,23 +29,16 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/f_program_step2_2_message"
+                android:text="@string/f_my_program_comment"
                 android:textAlignment="center" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/f_program_step2_2_recycler_view"
+                android:id="@+id/f_my_program_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"/>
 
-        </LinearLayout><!-- step content -->
-
-        <!-- step direction selector -->
-        <include
-            layout="@layout/include_program_step_direction_selector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/><!-- End of step direction selector -->
+        </LinearLayout><!-- End of content -->
     </LinearLayout>
-
 </FrameLayout>

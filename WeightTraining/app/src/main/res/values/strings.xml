@@ -2,16 +2,37 @@
     <string name="app_name">위트라웨이</string>
     <string name="copyright">development by ⓒskymanlab</string>
 
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ type +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Type : Muscle area -->
+    <string name="type_muscle_area_chest">가슴</string>
+    <string name="type_muscle_area_shoulder">어깨</string>
+    <string name="type_muscle_area_lat">등</string>
+    <string name="type_muscle_area_upper_body">하체</string>
+    <string name="type_muscle_area_arm">팔</string>
+    <string name="type_muscle_area_etc">기타</string>
+
+    <!-- Type : Group -->
+    <string name="type_group_a">A 그룹</string>
+    <string name="type_group_b">B 그룹</string>
+    <string name="type_group_c">C 그룹</string>
+    <string name="type_group_d">D 그룹</string>
+    <string name="type_group_e">E 그룹</string>
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ fragment +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
     <!-- Fragment : home -->
     <string name="f_home_title">홈</string>
 
     <!-- Fragment : training -->
     <string name="f_training_title">트레이닝</string>
     <string name="f_training_event_list">목록</string>
-    <string name="f_training_event_list_message">각 부위별로 등록되어 있는 목록을 확인합니다.</string>
+    <string name="f_training_event_list_comment">각 부위별로 등록되어 있는 목록을 확인합니다.</string>
     <string name="f_training_event_list_go">목록보러 가기</string>
     <string name="f_training_event_program">프로그램</string>
-    <string name="f_training_event_program_message">자신의 운동 프로그램을 만들거나, 추천 프로그램을 가져올 수 있습니다.</string>
+    <string name="f_training_event_program_comment">자신의 운동 프로그램을 만들거나, 추천 프로그램을 가져올 수 있습니다.</string>
     <string name="f_training_event_program_go">프로그램 만들기</string>
 
     <!-- Fragment : intervene -->
@@ -36,118 +57,90 @@
     <string name="f_more_alert_withdraw_user_bt_positive">탈퇴</string>
     <string name="f_more_alert_withdraw_user_bt_negative">취소</string>
 
-
     <!-- Fragment : event list -->
     <string name="f_event_list_title">목록</string>
 
-    <!-- Fragment : chest list -->
-    <string name="f_chest_list_title">가슴</string>
-
-    <!-- Fragment : shoulder list -->
-    <string name="f_shoulder_list_title">어깨</string>
-
-    <!-- Fragment : lat list -->
-    <string name="f_lat_list_title">등</string>
-    <string name="f_lat_list_"></string>
-
-    <!-- Fragment : upper body list -->
-    <string name="f_upper_body_list_title">하체</string>
-    <string name="f_upper_body_list_"></string>
-
-    <!-- Fragment : arm list -->
-    <string name="f_arm_list_title">팔</string>
-    <string name="f_arm_list_"></string>
-
-    <!-- Fragment : etc list -->
-    <string name="f_etc_list_title">기타</string>
-    <string name="f_etc_list_"></string>
-
     <!-- Fragment : program -->
-    <string name="f_program_title">프로그램 만들기</string>
-    <string name="f_program_step_direction_selector_previous">이전</string>
-    <string name="f_program_step_direction_selector_next">다음</string>
+    <string name="f_program_title">프로그램</string>
+    <string name="f_program_menu_program_maker">프로그램 만들기</string>
+    <string name="f_program_menu_program_maker_go">프로그램 만들기</string>
+    <string name="f_program_menu_program_maker_comment">직접 선택, 그룹별 선택, 전체 그룹에서 선택으로 프로그램을 만들 수 있습니다.</string>
+    <string name="f_program_menu_my_program">나의 프로그램</string>
+    <string name="f_program_menu_my_program_comment">나의 프로그램 목록을 </string>
+    <string name="f_program_menu_my_program_go">나의 프로그램 보러가기</string>
+    <string name="f_program_menu_recommend_program">추천 프로그램</string>
+    <string name="f_program_menu_recommend_program_comment">추천 프로그램</string>
+    <string name="f_program_menu_recommend_program_go">추천 프로그램 보러가기</string>
 
-    <!-- Fragment : program, step1 -->
-    <string name="f_program_step1_message">해당 프로그램의 방식을 선택해주세요.</string>
-    <string name="f_program_step1_direct_selection">직접 선택</string>
-    <string name="f_program_step1_each_random_selection">그룹 별 랜덤 선택</string>
-    <string name="f_program_step1_all_random_selection">전체 그룹 랜덤 선택</string>
-    <string name="f_program_step1_random_selection">랜덤 선택</string>
-    <string name="f_program_step1_my_program">나의 프로그램</string>
-    <string name="f_program_step1_recommend_program">추천 프로그램</string>
-    <string name="f_program_step1_"></string>
+    <!-- Fragment : maker step1 -->
+    <string name="f_maker_step1_comment">만들기 방식을 선택해주세요.</string>
+    <string name="f_maker_step1_direct_selection">직접 선택</string>
+    <string name="f_maker_step1_each_random_selection">그룹 별 랜덤 선택</string>
+    <string name="f_maker_step1_all_random_selection">전체 그룹 랜덤 선택</string>
+    <string name="f_maker_step1_random_selection">랜덤 선택</string>
+    <string name="f_maker_step1_my_program">나의 프로그램</string>
+    <string name="f_maker_step1_recommend_program">추천 프로그램</string>
+    <string name="f_maker_step1_"></string>
 
-    <!-- Fragment : program, step2-1 -->
-    <string name="f_program_step2_1_message">근육 부의를 선택해주세요.(중복 가능)</string>
-    <string name="f_program_step2_1_chest">가슴</string>
-    <string name="f_program_step2_1_shoulder">어깨</string>
-    <string name="f_program_step2_1_lat">등</string>
-    <string name="f_program_step2_1_upper_body">하체</string>
-    <string name="f_program_step2_1_arm">팔</string>
-    <string name="f_program_step2_1_etc">기타</string>
-    <string name="f_program_step2_1_"></string>
-
-    <!-- Fragment : program, step2-2 -->
-    <string name="f_program_step2_2_message">당신을 위한 추천 프로그램입니다. 선택해주세요.</string>
-    <string name="f_program_step2_2_"></string>
+    <!-- Fragment : maker step2 -->
+    <string name="f_maker_step2_comment">근육 부의를 선택해주세요.(중복 가능)</string>
+    <string name="f_maker_step2_chest">가슴</string>
+    <string name="f_maker_step2_shoulder">어깨</string>
+    <string name="f_maker_step2_lat">등</string>
+    <string name="f_maker_step2_upper_body">하체</string>
+    <string name="f_maker_step2_arm">팔</string>
+    <string name="f_maker_step2_etc">기타</string>
+    <string name="f_maker_step2_snack_next">근육 부위를 하나라도 선택해주세요.</string>
+    <string name="f_maker_step2_snack_load_content_db_error"></string>
 
     <!-- Fragment : program, step3-1 -->
-    <string name="f_program_step3_1_message">해당 종목을 선택해주세요.</string>
-    <string name="f_program_step3_1_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
-
-    <!-- Fragment : program, step3-2 -->
-    <string name="f_program_step3_2_message">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
-    <string name="f_program_step3_2_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
-
-    <!-- Fragment : program, step3-3 -->
-    <string name="f_program_step3_3_message">각 근육 부위의 전체에서 개수를 정해주세요.</string>
-    <string name="f_program_step3_3_firebase_database_error_message">데이터를 가져오는데 오류가 발생하였습니다.</string>
-
-    <!-- Fragment : program, step4-1 -->
-    <string name="f_program_step4_1_message">순서를 정해주세요.</string>
-    <string name="f_program_step4_1_"></string>
-
-    <!-- Fragment : program, step5 -->
-    <string name="f_program_step5_message"></string>
-    <string name="f_program_step5_"></string>
-
-    <!-- Fragment : program, step6 -->
-    <string name="f_program_step6_message"></string>
-    <string name="f_program_ste_6_"></string>
+    <string name="f_program_step3_1_comment">해당 종목을 선택해주세요.</string>
+    <string name="f_program_step3_1_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
     <!-- Fragment : program, step 3-1, direct selection -->
     <string name="f_direct_selection_group_title">아래의 목록에서 해당 종목을 선택하세요.</string>
 
-    <!-- Type : Muscle area -->
-    <string name="type_muscle_area_chest">가슴</string>
-    <string name="type_muscle_area_shoulder">어깨</string>
-    <string name="type_muscle_area_lat">등</string>
-    <string name="type_muscle_area_upper_body">하체</string>
-    <string name="type_muscle_area_arm">팔</string>
-    <string name="type_muscle_area_etc">기타</string>
+    <!-- Fragment : program, step3-2 -->
+    <string name="f_program_step3_2_comment">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
+    <string name="f_program_step3_2_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
-    <!-- Type : Group -->
-    <string name="type_group_a">A 그룹</string>
-    <string name="type_group_b">B 그룹</string>
-    <string name="type_group_c">C 그룹</string>
-    <string name="type_group_d">D 그룹</string>
-    <string name="type_group_e">E 그룹</string>
+    <!-- Fragment : program, step3-3 -->
+    <string name="f_program_step3_3_comment">각 근육 부위의 전체에서 개수를 정해주세요.</string>
+    <string name="f_program_step3_3_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-    <!-- Include layout : each random selection -->
-    <string name="include_each_random_selection">어떤 부위 일까요?</string>
+    <!-- Fragment : program, step4-1 -->
+    <string name="f_program_step4_1_comment">순서를 정해주세요.</string>
+    <string name="f_program_step4_1_final_order_list_title">최종 순서</string>
+    <string name="f_program_step4_1_selected_item_list_title">선택 목록</string>
 
-    <!-- Include layout : all random selection -->
+    <!-- Fragment : program, step5 -->
+    <string name="f_program_step5_comment"></string>
+    <string name="f_program_step5_"></string>
+
+    <!-- Fragment : program, step6 -->
+    <string name="f_program_step6_comment"></string>
+    <string name="f_program_ste_6_"></string>
+
+    <!-- Fragment : my program -->
+    <string name="f_my_program_comment">내가 만든 프로그램 목록입니다.</string>
+    <string name="f_my_program_"></string>
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ include layout +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Include Layout : program step direction selector -->
+    <string name="include_program_step_direction_selector_previous">이전</string>
+    <string name="include_program_step_direction_selector_next">다음</string>
+
+    <!-- Include Layout : each random selection -->
+    <string name="include_each_random_selection_muscle_area">어떤 부위 일까요?</string>
+
+    <!-- Include Layout : all random selection -->
     <string name="include_all_random_selection_title">어떤 부위 일까요?</string>
     <string name="include_all_random_selection_menu">전체</string>
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-    <!-- Navigation -->
-    <string name="nav_bottom_bar_home">홈</string>
-    <string name="nav_bottom_bar_training">트레이닝</string>
-    <string name="nav_bottom_bar_intervene">참견</string>
-    <string name="nav_bottom_bar_more">더보기</string>
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ activity +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Activity : login -->
     <string name="login_title">로그인</string>
@@ -285,8 +278,7 @@
     <string name="event_program_process_alert_back_press_bt_negative">취소</string>
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Custom : event item -->
     <string name="cu_event_item_count">1.</string>
@@ -318,8 +310,7 @@
     <string name="cu_event_program_item_"></string>
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Custom Dialog : event item -->
     <string name="cud_event_item_title">event item title</string>
@@ -331,8 +322,13 @@
     <string name="cud_event_item_bt_modify">수정</string>
     <string name="cud_event_item_bt_cancel">취소</string>
 
-    <!-- Custom Dialog : event item add-->
+    <!-- Custom Dialog : event item add -->
     <string name="cud_event_item_add_title">종목 추가</string>
+    <string name="cud_event_item_add_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
+    <string name="cud_event_item_add_snack_all_input">모든 값을 입력해주세요!</string>
+    <string name="cud_event_item_add_snack_input_success">입력에 성공하였습니다.</string>
+    <string name="cud_event_item_add_snack_input_fail">입력에 실패하였습니다.</string>
+    <string name="cud_event_item_add_snack_"></string>
     <!-- AlertDialog : event item add 의 add -->
     <string name="cud_event_item_add_alert_add_title">해당 종목을 추가하시겠습니까?</string>
     <string name="cud_event_item_add_alert_add_message">데이터베이스에서 해당 종목을 추가합니다.</string>
@@ -348,6 +344,9 @@
     <string name="cud_event_item_modification_max_weight">최대 중량</string>
     <string name="cud_event_item_modification_bt_modify">수정</string>
     <string name="cud_event_item_modification_bt_cancel">취소</string>
+    <string name="cud_event_item_modification_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
+    <string name="cud_event_item_modification_snack_all_input">모든 값을 입력해주세요!</string>
+    <string name="cud_event_item_modification_snack_modify_success">수정 성공하였습니다.</string>
     <!-- AlertDialog :event item modification 의 modify -->
     <string name="cud_event_item_modification_alert_modify_title">해당 종목을 수정하시겠습니까></string>
     <string name="cud_event_item_modification_alert_modify_message">데이터베이스에 해당 종목의 내용을 수정합니다.</string>
@@ -368,7 +367,7 @@
     <string name="cud_rest_time_bt_cancel">취소</string>
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ pop up +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 
     <!-- Popup Menu : event add section 2 -->
@@ -385,8 +384,7 @@
     <string name="top_bar_menu_popup_logout">로그아웃</string>
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ preference +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Preference : title -->
     <string name="title_activity_settings">SettingsActivity</string>
@@ -411,20 +409,45 @@
     <string name="preference_alert_base_event_data_save_bt_negative">취소</string>
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ etc +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
+    <!-- Navigation -->
+    <string name="nav_bottom_bar_home">홈</string>
+    <string name="nav_bottom_bar_training">트레이닝</string>
+    <string name="nav_bottom_bar_intervene">참견</string>
+    <string name="nav_bottom_bar_more">더보기</string>
 
-    <!-- AlertDialog : event item lv adapter 의 delete -->
-    <string name="eila_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="eila_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="eila_alert_delete_bt_positive">삭제</string>
-    <string name="eila_alert_delete_bt_negative">취소</string>
+    <!-- RecyclerView Adapter : event list rv adapter -->
+    <string name="event_list_rv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_list_rv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
+    <!-- AlertDialog : event list rv adapter -->
+    <string name="event_list_rv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_list_rv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_list_rv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_list_rv_adapter_alert_delete_bt_negative">취소</string>
 
-    <!-- AlertDialog : event list rv adapter 의 delete -->
-    <string name="elra_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="elra_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="elra_alert_delete_bt_positive">삭제</string>
-    <string name="elra_alert_delete_bt_negative">취소</string>
+    <!-- ListView Adapter : event item lv adapter -->
+    <string name="event_item_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_item_lv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
+    <!-- AlertDialog : event item lv adapter -->
+    <string name="event_item_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_item_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_item_lv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_item_lv_adapter_alert_delete_bt_negative">취소</string>
+
+    <!-- ListView Adapter : event item foldable lv adapter -->
+    <string name="event_item_foldable_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_item_foldable_lv_adapter_snack_db_delete_error">실패하였습니다.</string>
+    <!-- AlertDialog : event item foldable lv adapter -->
+    <string name="event_item_foldable_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_bt_negative">취소</string>
+
+    <!-- ListView Adapter : event program item lv adapter -->
+    <string name="event_program_item_lv_adapter_snack_rest_time_no_setting">휴식시간을 정하지 않았습니다.</string>
+    <string name="event_program_item_lv_adapter_snack_set_number_no_setting">세트 수를 입력해주세요.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
