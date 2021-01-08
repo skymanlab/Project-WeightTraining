@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".management.project.fragment.Training.list.EventListFragment">
+    tools:context=".management.project.fragment.Training.list.ListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,19 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-<!--        &lt;!&ndash; content container &ndash;&gt;-->
-<!--        <ScrollView-->
+        <!-- each list -->
+<!--        <com.google.android.material.card.MaterialCardView-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent"-->
-<!--            android:fillViewport="true">-->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginBottom="5dp">-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,27 +32,23 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/f_event_list_tab_layout"
+                    android:id="@+id/f_list_tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabMode="scrollable"/>
 
                 <View
-                    android:id="@+id/divider3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/f_event_list_view_pager2"
+                    android:id="@+id/f_list_view_pager2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-<!--        </ScrollView>&lt;!&ndash; End of content container &ndash;&gt;-->
-
+<!--        </com.google.android.material.card.MaterialCardView>-->
     </LinearLayout>
 
 </FrameLayout>

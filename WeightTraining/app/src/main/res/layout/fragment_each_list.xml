@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".management.project.fragment.Training.list.EachListFragment">
+
+    <!-- recycler view -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/f_each_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
+
+    <!-- progress bar -->
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/f_each_list_progress_bar"
+        style="?android:progressBarStyle"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!-- add button -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/f_each_list_bt_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="?attr/selectableItemBackground"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/event_add_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</FrameLayout>

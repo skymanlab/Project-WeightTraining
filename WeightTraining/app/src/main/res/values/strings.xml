@@ -57,8 +57,10 @@
     <string name="f_more_alert_withdraw_user_bt_positive">탈퇴</string>
     <string name="f_more_alert_withdraw_user_bt_negative">취소</string>
 
-    <!-- Fragment : event list -->
-    <string name="f_event_list_title">목록</string>
+    <!-- Fragment : list -->
+    <string name="f_list_title">목록</string>
+
+    <!-- Fragment : each list -->
 
     <!-- Fragment : program -->
     <string name="f_program_title">프로그램</string>
@@ -93,33 +95,33 @@
     <string name="f_maker_step2_snack_next">근육 부위를 하나라도 선택해주세요.</string>
     <string name="f_maker_step2_snack_load_content_db_error"></string>
 
-    <!-- Fragment : program, step3-1 -->
-    <string name="f_program_step3_1_comment">해당 종목을 선택해주세요.</string>
-    <string name="f_program_step3_1_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
+    <!-- Fragment : maker step3-1 -->
+    <string name="f_maker_step3_1_comment">해당 종목을 선택해주세요.</string>
+    <string name="f_maker_step3_1_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
     <!-- Fragment : program, step 3-1, direct selection -->
     <string name="f_direct_selection_group_title">아래의 목록에서 해당 종목을 선택하세요.</string>
 
-    <!-- Fragment : program, step3-2 -->
-    <string name="f_program_step3_2_comment">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
-    <string name="f_program_step3_2_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
+    <!-- Fragment : maker step3-2 -->
+    <string name="f_maker_step3_2_comment">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
+    <string name="f_maker_step3_2_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
-    <!-- Fragment : program, step3-3 -->
-    <string name="f_program_step3_3_comment">각 근육 부위의 전체에서 개수를 정해주세요.</string>
-    <string name="f_program_step3_3_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
+    <!-- Fragment : maker step3-3 -->
+    <string name="f_maker_step3_3_comment">각 근육 부위의 전체에서 개수를 정해주세요.</string>
+    <string name="f_maker_step3_3_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
+    `
+    <!-- Fragment : maker step4-1 -->
+    <string name="f_maker_step4_comment">순서를 정해주세요.</string>
+    <string name="f_maker_step4_final_order_list_title">최종 순서</string>
+    <string name="f_maker_step4_selected_item_list_title">선택 목록</string>
 
-    <!-- Fragment : program, step4-1 -->
-    <string name="f_program_step4_1_comment">순서를 정해주세요.</string>
-    <string name="f_program_step4_1_final_order_list_title">최종 순서</string>
-    <string name="f_program_step4_1_selected_item_list_title">선택 목록</string>
-
-    <!-- Fragment : program, step5 -->
-    <string name="f_program_step5_comment"></string>
-    <string name="f_program_step5_"></string>
+    <!-- Fragment : maker step5 -->
+    <string name="f_maker_step5_comment"></string>
+    <string name="f_maker_step5_"></string>
 
     <!-- Fragment : program, step6 -->
-    <string name="f_program_step6_comment"></string>
-    <string name="f_program_ste_6_"></string>
+    <string name="f_maker_step6_comment"></string>
+    <string name="f_maker_ste_6_"></string>
 
     <!-- Fragment : my program -->
     <string name="f_my_program_comment">내가 만든 프로그램 목록입니다.</string>
@@ -418,13 +420,13 @@
     <string name="nav_bottom_bar_more">더보기</string>
 
     <!-- RecyclerView Adapter : event list rv adapter -->
-    <string name="event_list_rv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
-    <string name="event_list_rv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
+    <string name="each_list_rv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="each_list_rv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
     <!-- AlertDialog : event list rv adapter -->
-    <string name="event_list_rv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="event_list_rv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="event_list_rv_adapter_alert_delete_bt_positive">삭제</string>
-    <string name="event_list_rv_adapter_alert_delete_bt_negative">취소</string>
+    <string name="each_list_rv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="each_list_rv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="each_list_rv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="each_list_rv_adapter_alert_delete_bt_negative">취소</string>
 
     <!-- ListView Adapter : event item lv adapter -->
     <string name="event_item_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>

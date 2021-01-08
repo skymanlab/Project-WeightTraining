@@ -9,27 +9,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.util.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.Step4D1SectionManager;
-
-import java.util.ArrayList;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep4SectionManager;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Step4D1Fragment#newInstance} factory method to
+ * Use the {@link MakerStep4Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Step4D1Fragment extends Fragment {
+public class MakerStep4Fragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTP] Step4D1Fragment";
+    private static final String CLASS_NAME = "[PFTP] MakerStep4Fragment";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
@@ -50,10 +45,10 @@ public class Step4D1Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
-    private Step4D1SectionManager sectionManager;
+    private MakerStep4SectionManager sectionManager;
 
     // constructor
-    public Step4D1Fragment() {
+    public MakerStep4Fragment() {
         // Required empty public constructor
     }
 
@@ -64,14 +59,14 @@ public class Step4D1Fragment extends Fragment {
      * @return A new instance of fragment Step4D1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Step4D1Fragment newInstance(EventResultSet chest,
-                                              EventResultSet shoulder,
-                                              EventResultSet lat,
-                                              EventResultSet upperBody,
-                                              EventResultSet arm,
-                                              EventResultSet etc) {
+    public static MakerStep4Fragment newInstance(EventResultSet chest,
+                                                 EventResultSet shoulder,
+                                                 EventResultSet lat,
+                                                 EventResultSet upperBody,
+                                                 EventResultSet arm,
+                                                 EventResultSet etc) {
 
-        Step4D1Fragment fragment = new Step4D1Fragment();
+        MakerStep4Fragment fragment = new MakerStep4Fragment();
 
         Bundle args = new Bundle();
         args.putSerializable(CHEST_EVENT_RESULT_SET, chest);             // [0] chest
@@ -104,7 +99,7 @@ public class Step4D1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step4_1, container, false);
+        return inflater.inflate(R.layout.fragment_maker_step4, container, false);
     }
 
     @Override
@@ -112,13 +107,13 @@ public class Step4D1Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]FragmentTopBarManager : step 4-1 fragment top bar
+        // [iv/C]FragmentTopBarManager : step 4 fragment top bar
         this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
         this.topBarManager.mappingWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step4D1SectionManager : step 4-1 fragment section
-        this.sectionManager = new Step4D1SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        // [iv/C]Step4D1SectionManager : step 4 fragment section
+        this.sectionManager = new MakerStep4SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
         this.sectionManager.setSelectedChestEventArrayList(this.chestEventResultSet.getSelectedEventArrayList());
         this.sectionManager.setSelectedShoulderEventArrayList(this.shoulderEventResultSet.getSelectedEventArrayList());
         this.sectionManager.setSelectedLatEventArrayList(this.latEventResultSet.getSelectedEventArrayList());

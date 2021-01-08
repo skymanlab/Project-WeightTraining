@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,33 +15,20 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.event.program.util.EventResultSet;
-import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
 import com.skymanlab.weighttraining.management.event.program.util.RandomEventSelectionUtil;
-import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step4D1Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
 
-import java.util.ArrayList;
-
-public class Step3D3SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
+public class MakerStep3D3SectionManager extends FragmentSectionManager implements FragmentSectionInitializable,StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] Step3D3SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep3D3SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -96,7 +82,7 @@ public class Step3D3SectionManager extends FragmentSectionManager implements Fra
     private GroupingEventData etcGroupingEventData;
 
     // constructor
-    public Step3D3SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
+    public MakerStep3D3SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
         super(activity, view, fragmentManager);
     }
 
@@ -157,10 +143,11 @@ public class Step3D3SectionManager extends FragmentSectionManager implements Fra
     @Override
     public void initWidget() {
 
-        // [iv/C] : step 3-3
+        // [iv/C] : step 3-3 step process manager
         this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_THREE);
-        this.stepProcessManager.mappingWidget();
+        this.stepProcessManager.setPreviousClickListener(this);
         this.stepProcessManager.setNextClickListener(this);
+        this.stepProcessManager.mappingWidget();
         this.stepProcessManager.initWidget();
 
         // [method] : [0] chest widget mapping
@@ -181,6 +168,11 @@ public class Step3D3SectionManager extends FragmentSectionManager implements Fra
         // [method] : [5] etc widget mapping
         initWidgetOfEtc();
 
+    }
+
+    @Override
+    public AlertDialog setClickListenerOfPrevious() {
+        return null;
     }
 
     @Override
@@ -297,12 +289,12 @@ public class Step3D3SectionManager extends FragmentSectionManager implements Fra
                 && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
 
             // "선택되지 않았습니다." snack bar 메시지 출력
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_program_step3_3_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_3_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
 
         } else {
 
             // [lv/C]Step4D1Fragment  : step 4-1 fragment 생성 및 각 MuscleArea 의 EventResultSet 객체를 넘기기
-            Step4D1Fragment step4_1 = Step4D1Fragment.newInstance(
+            MakerStep4Fragment step4_1 = MakerStep4Fragment.newInstance(
                     chestEventResultSet,
                     shoulderEventResultSet,
                     latEventResultSet,
@@ -686,5 +678,4 @@ public class Step3D3SectionManager extends FragmentSectionManager implements Fra
         } // [check 1]
 
     } // End of method [setAdapterOfEtc]
-
 }

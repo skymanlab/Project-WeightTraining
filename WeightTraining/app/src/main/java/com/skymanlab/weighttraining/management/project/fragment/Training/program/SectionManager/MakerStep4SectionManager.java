@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -33,10 +34,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Step4D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
+public class MakerStep4SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] Step4D1SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep4SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -66,7 +67,7 @@ public class Step4D1SectionManager extends FragmentSectionManager implements Fra
     private int finalOrderNumber;
 
     // constructor
-    public Step4D1SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
+    public MakerStep4SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
         super(activity, view, fragmentManager);
     }
 
@@ -99,13 +100,13 @@ public class Step4D1SectionManager extends FragmentSectionManager implements Fra
     public void mappingWidget() {
 
         // [iv/C]HorizontalScrollView :
-        this.finalOrderListScroll = (HorizontalScrollView) getView().findViewById(R.id.f_program_step4_1_final_order_list_scroll);
+        this.finalOrderListScroll = (HorizontalScrollView) getView().findViewById(R.id.f_maker_step4_final_order_list_scroll);
 
         // [iv/C]LinearLayout : finalOrderListWrapper mapping
-        this.finalOrderListWrapper = (LinearLayout) getView().findViewById(R.id.f_program_step4_1_final_order_list_wrapper);
+        this.finalOrderListWrapper = (LinearLayout) getView().findViewById(R.id.f_maker_step4_final_order_list_wrapper);
 
         // [iv/C]GridLayout : selectedItemListWrapper mapping
-        this.selectedItemListWrapper = (GridLayout) getView().findViewById(R.id.f_program_step4_1_selected_item_list_wrapper);
+        this.selectedItemListWrapper = (GridLayout) getView().findViewById(R.id.f_maker_step4_selected_item_list_wrapper);
 
     }
 
@@ -115,8 +116,9 @@ public class Step4D1SectionManager extends FragmentSectionManager implements Fra
 
         // [iv/C]StepProcessManager : step 4-1
         this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_FOUR);
-        this.stepProcessManager.mappingWidget();
+        this.stepProcessManager.setPreviousClickListener(this);
         this.stepProcessManager.setNextClickListener(this);
+        this.stepProcessManager.mappingWidget();
         this.stepProcessManager.initWidget();
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------- chest -------------------------------------------------");
@@ -249,6 +251,11 @@ public class Step4D1SectionManager extends FragmentSectionManager implements Fra
 
         } // [check 6]
 
+    }
+
+    @Override
+    public AlertDialog setClickListenerOfPrevious() {
+        return null;
     }
 
     @Override

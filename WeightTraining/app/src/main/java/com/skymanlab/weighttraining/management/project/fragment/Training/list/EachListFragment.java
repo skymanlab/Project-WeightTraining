@@ -12,25 +12,33 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager.EachEventListSectionManager;
-import com.skymanlab.weighttraining.management.user.data.User;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager.EachListSectionManager;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EtcListFragment#newInstance} factory method to
+ * Use the {@link EachListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EtcListFragment extends Fragment {
+public class EachListFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTL] EtcListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final String CLASS_NAME = "[PFTL] EachListFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+
+    // constant
+    private static final String MUSCLE_AREA = "muscleArea";
 
     // instance variable
-    private EachEventListSectionManager sectionManager;
+    private MuscleArea muscleArea;
 
-    public EtcListFragment() {
+    // instance variable
+    private EachListSectionManager sectionManager;
+
+    // constructor
+    public EachListFragment() {
         // Required empty public constructor
     }
 
@@ -38,12 +46,13 @@ public class EtcListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment EtcListFragment.
+     * @return A new instance of fragment EachListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EtcListFragment newInstance() {
-        EtcListFragment fragment = new EtcListFragment();
+    public static EachListFragment newInstance(MuscleArea muscleArea) {
+        EachListFragment fragment = new EachListFragment();
         Bundle args = new Bundle();
+        args.putSerializable(MUSCLE_AREA, muscleArea);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,6 +61,7 @@ public class EtcListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            this.muscleArea = (MuscleArea) getArguments().getSerializable(MUSCLE_AREA);
         }
     }
 
@@ -59,17 +69,19 @@ public class EtcListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_etc_list, container, false);
+        return inflater.inflate(R.layout.fragment_each_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]EachEventListSectionManager : etc fragment section manager
-        this.sectionManager = new EachEventListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), MuscleArea.ETC);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> muscleArea " + muscleArea);
+
+        // [iv/C]EachListSectionManager : each list fragment section manager
+        this.sectionManager = new EachListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this, this.muscleArea);
         this.sectionManager.mappingWidget();
         this.sectionManager.initWidget();
-
     }
 }

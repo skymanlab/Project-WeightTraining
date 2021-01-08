@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".management.project.fragment.Training.program.Step3D3Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".management.project.fragment.Training.program.MakerStep3D1Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +24,15 @@
             android:layout_height="wrap_content" />
 
         <!-- step content -->
-        <ScrollView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fillViewport="true">
+            android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/f_program_step3_3_step_content_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -41,17 +41,32 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@string/f_program_step3_2_comment"
+                    android:text="@string/f_maker_step3_1_comment"
                     android:textAlignment="center" />
 
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/f_maker_step3_1_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:layout_marginTop="48dp"
+                        android:id="@+id/f_maker_step3_1_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-        </ScrollView><!-- End of step content -->
+
+        </FrameLayout><!-- End of step content -->
 
         <!-- step direction selector -->
         <include
             layout="@layout/include_program_step_direction_selector"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/><!-- End of step direction selector -->
+            android:layout_height="wrap_content" /><!-- End of step direction selector -->
     </LinearLayout>
-
 </FrameLayout>

@@ -1,51 +1,36 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.event.program.util.EventResultSet;
-import com.skymanlab.weighttraining.management.event.program.util.RandomEventSelectionUtil;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step4D1Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectPagerAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Step3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
+public class MakerStep3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] Step3D1SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep3D1SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -61,13 +46,12 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
     // instance variable
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
-    private ContentLoadingProgressBar progressBar;
 
     // instance variable
     private DirectPagerAdapter adapter;
 
     // constructor
-    public Step3D1SectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment) {
+    public MakerStep3D1SectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment) {
         super(activity, view, fragmentManager);
         this.fragment = fragment;
     }
@@ -85,13 +69,10 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
     public void mappingWidget() {
 
         // [iv/C]TabLayout : mapping
-        this.tabLayout = (TabLayout) getView().findViewById(R.id.f_program_step3_1_tab);
+        this.tabLayout = (TabLayout) getView().findViewById(R.id.f_maker_step3_1_tab);
 
         // [iv/C]ViewPager2 : mapping
-        this.viewPager = (ViewPager2) getView().findViewById(R.id.f_program_step3_1_pager);
-
-        // [iv/C]ContentLoadingProgressBar : mapping
-        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_program_step3_1_progress_bar);
+        this.viewPager = (ViewPager2) getView().findViewById(R.id.f_maker_step3_1_pager);
 
     }
 
@@ -102,6 +83,7 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
 
         // [iv/C]StepProcessManager : step 3-1
         this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_THREE);
+        this.stepProcessManager.setPreviousClickListener(this);
         this.stepProcessManager.setNextClickListener(this);
         this.stepProcessManager.mappingWidget();
         this.stepProcessManager.initWidget();
@@ -109,6 +91,11 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
         // [method] : 위에서 추가한 fragmentArrayList 와 fragmentTitleList 로 viewPager 를 만들기
         initViewPager();
 
+    }
+
+    @Override
+    public AlertDialog setClickListenerOfPrevious() {
+        return null;
     }
 
     @Override
@@ -190,12 +177,12 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
                 && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
 
             // "선택되지 않았습니다." snack bar 메시지 출력
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_program_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
 
         } else {
 
             // [lv/C]Step4D1Fragment  : step 4-1 fragment 생성 및 각 MuscleArea 의 EventResultSet 객체를 넘기기
-            Step4D1Fragment step4_1 = Step4D1Fragment.newInstance(
+            MakerStep4Fragment step4_1 = MakerStep4Fragment.newInstance(
                     chestEventResultSet,
                     shoulderEventResultSet,
                     latEventResultSet,
@@ -271,9 +258,5 @@ public class Step3D1SectionManager extends FragmentSectionManager implements Fra
         });
         mediator.attach();
 
-        // [iv/C]ContentLoadingProgressBar : GONE
-        this.progressBar.setVisibility(View.GONE);
-
     } // End of method [initViewPager]
-
 }

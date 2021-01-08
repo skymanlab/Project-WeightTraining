@@ -10,11 +10,16 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EventListPagerAdapter;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EachListPagerAdapter;
 
-public class EventListSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
+public class ListSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
+
+    // constant
+    private static final String CLASS_NAME = "[PFTLS] ListSectionManager";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Fragment fragment;
@@ -24,10 +29,10 @@ public class EventListSectionManager extends FragmentSectionManager implements F
     private ViewPager2 viewPager;
 
     // instance variable
-    private EventListPagerAdapter pagerAdapter;
+    private EachListPagerAdapter pagerAdapter;
 
     // constructor
-    public EventListSectionManager(Activity activity, View view, Fragment fragment) {
+    public ListSectionManager(Activity activity, View view, Fragment fragment) {
         super(activity, view);
         this.fragment = fragment;
     }
@@ -36,22 +41,22 @@ public class EventListSectionManager extends FragmentSectionManager implements F
     public void mappingWidget() {
 
         // [iv/C]TabLayout : tabLayout mapping
-        this.tabLayout = (TabLayout) getView().findViewById(R.id.f_event_list_tab_layout);
+        this.tabLayout = (TabLayout) getView().findViewById(R.id.f_list_tab_layout);
 
         // [iv/C]ViewPager2 : viewPager mapping
-        this.viewPager = (ViewPager2) getView().findViewById(R.id.f_event_list_view_pager2);
+        this.viewPager = (ViewPager2) getView().findViewById(R.id.f_list_view_pager2);
 
     }
 
     @Override
     public void initWidget() {
 
-        // [iv/C]EventListPagerAdapter : ViewPager2 의 adapter 생성
-        this.pagerAdapter = new EventListPagerAdapter(fragment);
+        // [iv/C]EachListPagerAdapter : ViewPager2 의 adapter 생성
+        this.pagerAdapter = new EachListPagerAdapter(fragment);
 
         // [iv/C]ViewPager2 : 위의 pagerAdapter 를 연결
         this.viewPager.setAdapter(this.pagerAdapter);
-        this.viewPager.setPageTransformer(new EventListPagerAdapter.ZoomOutPageTransformer());
+        this.viewPager.setPageTransformer(new EachListPagerAdapter.ZoomOutPageTransformer());
 
         // [lv/C]TabLayoutMediator : ViewPager2 의 각 페이지마다 TabLayout 의 위치에 맞게 매핑하고, 각 title 을 만들기
         TabLayoutMediator mediator = new TabLayoutMediator(this.tabLayout, this.viewPager, true, new TabLayoutMediator.TabConfigurationStrategy() {

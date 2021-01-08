@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +27,7 @@ import com.skymanlab.weighttraining.management.project.data.DataManager;
 
 import java.util.ArrayList;
 
-public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.ViewHolder> {
+public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.ViewHolder> {
 
     // constant
     private static final String CLASS_NAME = "[PFTLA] EventListRvAdapter";
@@ -40,7 +39,7 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
     private FragmentManager fragmentManager;
 
     // constructor
-    public EventListRvAdapter(ArrayList<Event> eventArrayList, Activity activity, FragmentManager fragmentManager) {
+    public EachListRvAdapter(ArrayList<Event> eventArrayList, Activity activity, FragmentManager fragmentManager) {
         this.eventArrayList = eventArrayList;
         this.activity = activity;
         this.fragmentManager = fragmentManager;
@@ -117,9 +116,9 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
 
         // [lv/C]AlertDialog : Builder 로 AlertDialog 객체 생성 / 초기설정
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.event_list_rv_adapter_alert_delete_title)
-                .setMessage(R.string.event_list_rv_adapter_alert_delete_message)
-                .setPositiveButton(R.string.event_list_rv_adapter_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.each_list_rv_adapter_alert_delete_title)
+                .setMessage(R.string.each_list_rv_adapter_alert_delete_message)
+                .setPositiveButton(R.string.each_list_rv_adapter_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -137,12 +136,12 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
                                 if (error == null) {
 
                                     // "삭제가 완료되었습니다." snack bar 메시지 표시
-                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.event_list_rv_adapter_snack_db_delete_success, Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.each_list_rv_adapter_snack_db_delete_success, Snackbar.LENGTH_SHORT).show();
 
                                 } else {
 
                                     // "삭제를 실패하였습니다." snack bar 메시지 표시
-                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.event_list_rv_adapter_snack_db_delete_error, Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.each_list_rv_adapter_snack_db_delete_error, Snackbar.LENGTH_SHORT).show();
 
                                 } // [check 1]
                             }
@@ -151,7 +150,7 @@ public class EventListRvAdapter extends RecyclerView.Adapter<EventListRvAdapter.
 
                     }
                 })
-                .setNegativeButton(R.string.event_list_rv_adapter_alert_delete_bt_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.each_list_rv_adapter_alert_delete_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

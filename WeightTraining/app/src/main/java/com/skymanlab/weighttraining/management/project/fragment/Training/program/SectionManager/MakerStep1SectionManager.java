@@ -3,6 +3,7 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 import android.app.Activity;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,7 +16,7 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionI
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep2Fragment;
 
-public class MakerStep1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
+public class MakerStep1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
 
     // constant
     public static final int STEP_1_DIRECT_TYPE = 0;
@@ -60,6 +61,8 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
 
         // [iv/C]StepProgressManager : step 1 단계 설정
         this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_ONE);
+        this.stepProcessManager.setPreviousClickListener(this);
+        this.stepProcessManager.setNextClickListener(this);
         this.stepProcessManager.mappingWidget();
         this.stepProcessManager.initWidget();
 
@@ -113,6 +116,15 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
 
     }
 
+    @Override
+    public void setClickListenerOfNext() {
+
+    }
+
+    @Override
+    public AlertDialog setClickListenerOfPrevious() {
+        return null;
+    }
 
     /**
      * [method] Step 2 로 이동
@@ -126,4 +138,5 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
         transaction.commit();
 
     } // End of method [moveStep2]
+
 }

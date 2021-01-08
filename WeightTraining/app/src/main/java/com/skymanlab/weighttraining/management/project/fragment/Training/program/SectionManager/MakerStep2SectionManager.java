@@ -6,6 +6,8 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,13 +28,13 @@ import com.skymanlab.weighttraining.management.event.program.util.GroupingEventU
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D1Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D2Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.Step3D3Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D1Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D2Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D3Fragment;
 
 import java.util.ArrayList;
 
-public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener {
+public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable,StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep2SectionManager";
@@ -48,6 +50,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     private ToggleButton upperBody;
     private ToggleButton arm;
     private ToggleButton etc;
+    private ContentLoadingProgressBar progressBar;
 
     // instance variable
     private StepProcessManager stepProcessManager;
@@ -82,6 +85,9 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
         // [iv/C]ToggleButton : [5] etc mapping
         this.etc = (ToggleButton) getView().findViewById(R.id.f_maker_step2_etc);
 
+        // [iv/C]ContentLoadingProgressBar : progressBar mapping
+        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_maker_step2_progress_bar);
+
     }
 
     @Override
@@ -89,8 +95,9 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
         // [iv/C]StepProcessManager : step 2 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
         this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_TWO);
-        this.stepProcessManager.mappingWidget();
+        this.stepProcessManager.setPreviousClickListener(this);
         this.stepProcessManager.setNextClickListener(this);
+        this.stepProcessManager.mappingWidget();
         this.stepProcessManager.initWidget();
 
         // [iv/b]isSelectedMuscleAreaList : ToggleButton 과 1:1 매핑한 값을 초기화한다.(초기값은 false 이다.)
@@ -167,12 +174,20 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     }
 
     @Override
+    public AlertDialog setClickListenerOfPrevious() {
+        return null;
+    }
+
+    @Override
     public void setClickListenerOfNext() {
 
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
         // [check 1] : 6가지의 MuscleArea 중 하나라도 선택한 것이 있을 때만 다음 단계 진행
         if (checkSelectedMuscleArea()) {
+
+            // [iv/C]ContentLoadingProgressBar : VISIABLE
+            this.progressBar.setVisibility(View.VISIBLE);
 
             // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
             loadContent();
@@ -314,7 +329,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
             case MakerStep1SectionManager.STEP_1_DIRECT_TYPE:
                 // direct
                 // [lv/C]Step3D1Fragment : step 3-1 fragment 객체 생성
-                Step3D1Fragment step3_1Fragment = Step3D1Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
+                MakerStep3D1Fragment step3_1Fragment = MakerStep3D1Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_1Fragment);
@@ -327,7 +342,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 each random 을 선택하였습니다.");
                 // each random
                 // [lv/C]Step3D2Fragment : step 3-2 fragment 객체 생성
-                Step3D2Fragment step3_2Fragment = Step3D2Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
+                MakerStep3D2Fragment step3_2Fragment = MakerStep3D2Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-2 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_2Fragment);
@@ -341,7 +356,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 all random 을 선택하였습니다.");
                 // all random
                 // [lv/C]Step3D2Fragment : step 3-3 fragment 객체 생성
-                Step3D3Fragment step3_3Fragment = Step3D3Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
+                MakerStep3D3Fragment step3_3Fragment = MakerStep3D3Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-3 fragment 화면 전환
                 transaction.replace(R.id.nav_home_content_container, step3_3Fragment);

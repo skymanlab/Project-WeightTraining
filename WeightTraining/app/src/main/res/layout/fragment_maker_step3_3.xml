@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".management.project.fragment.Training.program.Step3D2Fragment">
+    tools:context=".management.project.fragment.Training.program.MakerStep3D3Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +30,7 @@
             android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/f_program_step3_2_step_content_wrapper"
+                android:id="@+id/f_program_step3_3_step_content_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -42,7 +41,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@string/f_program_step3_2_comment"
+                    android:text="@string/f_maker_step3_2_comment"
                     android:textAlignment="center" />
 
             </LinearLayout>
@@ -52,7 +51,7 @@
         <include
             layout="@layout/include_program_step_direction_selector"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" /><!-- End of step direction selector -->
+            android:layout_height="wrap_content"/><!-- End of step direction selector -->
     </LinearLayout>
 
 </FrameLayout>

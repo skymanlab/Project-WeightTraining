@@ -7,20 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.ArmListFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.ChestListFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.EtcListFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.LatListFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.ShoulderListFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.UpperBodyListFragment;
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.EachListFragment;
 
-public class EventListPagerAdapter extends FragmentStateAdapter {
+public class EachListPagerAdapter extends FragmentStateAdapter {
 
     // constant
     public static final int FRAGMENT_COUNT = 6;
 
     // constructor
-    public EventListPagerAdapter(@NonNull Fragment fragment) {
+    public EachListPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
     }
 
@@ -28,12 +24,12 @@ public class EventListPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-        ChestListFragment chestList = ChestListFragment.newInstance();
-        ShoulderListFragment shoulderList = ShoulderListFragment.newInstance();
-        LatListFragment latList = LatListFragment.newInstance();
-        UpperBodyListFragment upperBodyList = UpperBodyListFragment.newInstance();
-        ArmListFragment armList = ArmListFragment.newInstance();
-        EtcListFragment etcList = EtcListFragment.newInstance();
+        EachListFragment chestList = EachListFragment.newInstance(MuscleArea.CHEST);
+        EachListFragment shoulderList = EachListFragment.newInstance(MuscleArea.SHOULDER);
+        EachListFragment latList = EachListFragment.newInstance(MuscleArea.LAT);
+        EachListFragment upperBodyList = EachListFragment.newInstance(MuscleArea.LEG);
+        EachListFragment armList = EachListFragment.newInstance(MuscleArea.ARM);
+        EachListFragment etcList = EachListFragment.newInstance(MuscleArea.ETC);
 
         // [check 1] : 몇 번째 화면인가요?
         switch (position) {

@@ -4,43 +4,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
-import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.Step3D1SectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep3D1SectionManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Step3D1Fragment#newInstance} factory method to
+ * Use the {@link MakerStep3D1Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Step3D1Fragment extends Fragment {
+public class MakerStep3D1Fragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTP] Step3D1Fragment";
+    private static final String CLASS_NAME = "[PFTP] MakerStep3D1Fragment";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
@@ -65,10 +52,10 @@ public class Step3D1Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
-    private Step3D1SectionManager sectionManager;
+    private MakerStep3D1SectionManager sectionManager;
 
     // constructor
-    public Step3D1Fragment() {
+    public MakerStep3D1Fragment() {
         // Required empty public constructor
     }
 
@@ -79,9 +66,9 @@ public class Step3D1Fragment extends Fragment {
      * @return A new instance of fragment Step3D1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Step3D1Fragment newInstance(GroupingEventData chest, GroupingEventData shoulder, GroupingEventData lat, GroupingEventData upperBody, GroupingEventData arm, GroupingEventData etc) {
+    public static MakerStep3D1Fragment newInstance(GroupingEventData chest, GroupingEventData shoulder, GroupingEventData lat, GroupingEventData upperBody, GroupingEventData arm, GroupingEventData etc) {
 
-        Step3D1Fragment fragment = new Step3D1Fragment();
+        MakerStep3D1Fragment fragment = new MakerStep3D1Fragment();
 
         Bundle args = new Bundle();
         args.putSerializable(CHEST_GROUPING_EVENT_DATA, chest);
@@ -139,7 +126,7 @@ public class Step3D1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_step3_1, container, false);
+        return inflater.inflate(R.layout.fragment_maker_step3_1, container, false);
     }
 
     @Override
@@ -157,7 +144,7 @@ public class Step3D1Fragment extends Fragment {
         this.topBarManager.initWidget();
 
         // [iv/C]Step3D1SectionManager : step 3-1 content section manager
-        this.sectionManager = new Step3D1SectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this);
+        this.sectionManager = new MakerStep3D1SectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this);
         this.sectionManager.setFragmentArrayList(this.fragmentArrayList);
         this.sectionManager.setFragmentMuscleAreaList(this.fragmentMuscleAreaList);
         this.sectionManager.mappingWidget();
