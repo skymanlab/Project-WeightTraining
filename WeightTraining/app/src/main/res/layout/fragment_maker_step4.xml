@@ -80,7 +80,7 @@
 
             </com.google.android.material.card.MaterialCardView><!-- End of final order list -->
 
-            <!-- selected item list-->
+            <!-- event list-->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -103,12 +103,13 @@
                         android:textAlignment="center" />
 
                     <ScrollView
+                        android:id="@+id/f_maker_step4_event_list_scroll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fillViewport="true">
 
                         <GridLayout
-                            android:id="@+id/f_maker_step4_selected_item_list_wrapper"
+                            android:id="@+id/f_maker_step4_event_list_wrapper"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:columnCount="3"
@@ -122,7 +123,7 @@
                 </LinearLayout>
 
 
-            </com.google.android.material.card.MaterialCardView><!-- End of selected item list -->
+            </com.google.android.material.card.MaterialCardView><!-- End of event list -->
         </LinearLayout>
 
         <!-- step direction selector -->

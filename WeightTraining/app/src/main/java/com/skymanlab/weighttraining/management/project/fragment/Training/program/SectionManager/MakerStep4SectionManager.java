@@ -2,15 +2,11 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,20 +47,36 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
     private ArrayList<Event> selectedArmEventArrayList;
     private ArrayList<Event> selectedEtcEventArrayList;
 
-    // instance variable
-    private HorizontalScrollView finalOrderListScroll;
-    private LinearLayout finalOrderListWrapper;
-    private GridLayout selectedItemListWrapper;
+    // instance variable : step 4 layout
+    private HorizontalScrollView finalOrderListScroll;      // [1] final order 의 목록(list)을 보여주기 위한 scroll view
+    private LinearLayout finalOrderListWrapper;             // [1] final order 의 목록(list)을 보여주는 scroll view 에서 각 항목(item)을 담을 linear layout
+    private GridLayout eventListWrapper;                    // [2] event 의 목록(list)을 보여주는 scroll view 안에 각 항목(item)을 담을 grid layout
 
-    // instance variable
-    private ArrayList<String> finalOrderList;
+    // instance variable : [1] final order
+    private HashMap<String, Step4FinalOrderItem> finalOrderItemList;
 
-    // instance variable
-    private HashMap<String, View> finalOrderViewList;
-    private HashMap<String, TextView> finalOrderNumberList;
-    private HashMap<String, View> selectedItemViewList;
-    private HashMap<String, MaterialCardView> selectedItemContentWrapperList;
-    private int finalOrderNumber;
+    // instance variable : [2] event
+    private HashMap<String, Step4EventItem> eventItemList;
+
+    // instance variable : result
+    private ArrayList<Event> finalOrderList;
+
+//    // instance variable : [1] final order
+//    private HashMap<String, View> finalOrderItemList;                               // O [1] final order 의 각 항목(item)을 모두 담은 자료구조
+//    private HashMap<String, MaterialCardView> finalOrderItemContentWrapperList;     // X [1] final order 의 각 항목(item)의 내용물이 감싸(contentWrapper)고 있는 MaterialCardView 를 모두 담은 자료구조
+//    private HashMap<String, TextView> finalOrderItemNumberList;                     // O [1] final order 의 각 항목(item)의 내용물 중 순서(number) 를 나타내는 TextView 를 모두 담은 자료구조
+//    private HashMap<String, TextView> finalOrderItemMuscleAreaNumberList;           // X [1] final order 의 각 항목(item)의 내용물 중 근육 부위 순서(muscle area number) 를 나타내는 TextView 를 모두 담은 자료구조
+//
+//    // instance variable : [2] event
+//    private HashMap<String, View> eventItemList;                                // [2] event 의 각 항목(item)을 모두 담은 자료구조
+//    private HashMap<String, MaterialCardView> eventItemContentWrapperList;      // [2] event 의 각 항목(item)의 내용물을 감싸(contentWrapper)고 있는 MaterialCardView 를 모두 담은 자료구조
+//    private HashMap<String, ImageView> eventItemMoreInfoList;                   // [2] event 의 각 항목(item)의 내용물 중 정보 더보기(moreInfo)를 나타내는 ImageView 를 모두 담은 자료구조
+//    private HashMap<String, TextView> eventItemMuscleAreaNumberList;            // [2] event 의 각 항목(item)의 내용물 중 근육 부위 순서(muscleAreaNumber) 를 나타내는 TextView 를 모두 담은 자료구조
+//    private HashMap<String, TextView> eventItemEventNameList;                   // [2] event 의 각 항목(item)의 내용물 중 종목 이름(eventName) 을 모두 담은 자료구조
+//
+//    // instance variable
+//    private int finalOrderItemNumberCounter;                // [1] final order 의 각 항목(item)의 내용물 중 순서(item) 를 카운트하는 변수
+//    private ArrayList<String> finalOrderList;               // [1] event list 에서 클릭한 순서대로 담긴 항목 : 최종 결과물이다.
 
     // constructor
     public MakerStep4SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
@@ -105,8 +117,8 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
         // [iv/C]LinearLayout : finalOrderListWrapper mapping
         this.finalOrderListWrapper = (LinearLayout) getView().findViewById(R.id.f_maker_step4_final_order_list_wrapper);
 
-        // [iv/C]GridLayout : selectedItemListWrapper mapping
-        this.selectedItemListWrapper = (GridLayout) getView().findViewById(R.id.f_maker_step4_selected_item_list_wrapper);
+        // [iv/C]GridLayout : eventListWrapper mapping
+        this.eventListWrapper = (GridLayout) getView().findViewById(R.id.f_maker_step4_event_list_wrapper);
 
     }
 
@@ -134,122 +146,32 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------- etc -------------------------------------------------");
         LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, selectedEtcEventArrayList);
 
-        // [iv/C]ArrayList<String> :
-        this.finalOrderList = new ArrayList<>();
+        // [iv/C]HashMap<String, Step4EventItem> :
+        this.eventItemList = new HashMap<String, Step4EventItem>();
 
-        // [iv/C]HashMap<String, View> :
-        this.finalOrderViewList = new HashMap<>();
-
-        // [lv/C]HashMap<String, TextView> :
-        this.finalOrderNumberList = new HashMap<>();
-
-        // [iv/C]HashMap<String, View> :
-        this.selectedItemViewList = new HashMap<>();
-
-        // [iv/C]HashMap<String, MaterialCardView> :
-        this.selectedItemContentWrapperList = new HashMap<>();
-
-        // [iv/i]finalOrderNumber :
-        this.finalOrderNumber = 1;
+        // [iv/C]HashMap<String, Step4FinalOrderItem> :
+        this.finalOrderItemList = new HashMap<String, Step4FinalOrderItem>();
 
         // [lv/C]LayoutInflater : layout inflater 가져오기
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // [check 1] : chest
-        if (!this.selectedChestEventArrayList.isEmpty()) {
+        // [0] chest
+        initItemByMuscleArea(this.selectedChestEventArrayList, inflater);
 
-            // [cycle 1] :
-            for (int index = 0; index < this.selectedChestEventArrayList.size(); index++) {
+        // [1] shoulder
+        initItemByMuscleArea(this.selectedShoulderEventArrayList, inflater);
 
-                // [method] : view 생성 후 finalOrderList 에 추가
-                createFinalOrderItemView(inflater, index, this.selectedChestEventArrayList.get(index));
+        // [2] lat
+        initItemByMuscleArea(this.selectedLatEventArrayList, inflater);
 
-                // [iv/C]GridLayout : selectedItemList 의 view 를 wrapper 에 추가한다.
-                this.selectedItemListWrapper.addView(createSelectedItemView(inflater, index, this.selectedChestEventArrayList.get(index)));
+        // [3] upper body
+        initItemByMuscleArea(this.selectedUpperBodyEventArrayList, inflater);
 
-            } // [cycle 1]
+        // [4] arm
+        initItemByMuscleArea(this.selectedArmEventArrayList, inflater);
 
-        } // [check 1]
-
-        // [check 2] : shoulder
-        if (!this.selectedShoulderEventArrayList.isEmpty()) {
-
-            // [cycle 2] :
-            for (int index = 0; index < this.selectedShoulderEventArrayList.size(); index++) {
-
-                // [method] : view 생성 후 finalOrderList 에 추가
-                createFinalOrderItemView(inflater, index, this.selectedShoulderEventArrayList.get(index));
-
-                // [iv/C]GridLayout : selectedItemList 의 view 를 wrapper 에 추가한다.
-                this.selectedItemListWrapper.addView(createSelectedItemView(inflater, index, this.selectedShoulderEventArrayList.get(index)));
-
-            } // [cycle 2]
-
-        } // [check 2]
-
-        // [check 3] : lat
-        if (!this.selectedLatEventArrayList.isEmpty()) {
-
-            // [cycle 3] :
-            for (int index = 0; index < this.selectedLatEventArrayList.size(); index++) {
-
-                // [method] : view 생성 후 finalOrderList 에 추가
-                createFinalOrderItemView(inflater, index, this.selectedLatEventArrayList.get(index));
-
-                // [iv/C]GridLayout : selectedItemList 의 view 를 wrapper 에 추가한다.
-                this.selectedItemListWrapper.addView(createSelectedItemView(inflater, index, this.selectedLatEventArrayList.get(index)));
-
-            } // [cycle 3]
-
-        } // [check 3]
-
-        // [check 4] : upper body
-        if (!this.selectedUpperBodyEventArrayList.isEmpty()) {
-
-            // [cycle 4] :
-            for (int index = 0; index < this.selectedUpperBodyEventArrayList.size(); index++) {
-
-                // [method] : view 생성 후 finalOrderList 에 추가
-                createFinalOrderItemView(inflater, index, this.selectedUpperBodyEventArrayList.get(index));
-
-                // [iv/C]GridLayout : selectedItemList 의 view 를 wrapper 에 추가한다.
-                this.selectedItemListWrapper.addView(createSelectedItemView(inflater, index, this.selectedUpperBodyEventArrayList.get(index)));
-
-            } // [cycle 4]
-
-        } // [check 4]
-
-        // [check 5] : arm
-        if (!this.selectedArmEventArrayList.isEmpty()) {
-
-            // [cycle 5] :
-            for (int index = 0; index < this.selectedArmEventArrayList.size(); index++) {
-
-                // [method] : view 생성 후 finalOrderList 에 추가
-                createFinalOrderItemView(inflater, index, this.selectedArmEventArrayList.get(index));
-
-                // [iv/C]GridLayout : selectedItemList 의 view 를 wrapper 에 추가한다.
-                this.selectedItemListWrapper.addView(createSelectedItemView(inflater, index, this.selectedArmEventArrayList.get(index)));
-
-            } // [cycle 5]
-
-        } // [check 5]
-
-        // [check 6] : etc
-        if (!this.selectedEtcEventArrayList.isEmpty()) {
-
-            // [cycle 6] :
-            for (int index = 0; index < this.selectedEtcEventArrayList.size(); index++) {
-
-                // [method] : view 생성 후 finalOrderList 에 추가
-                createFinalOrderItemView(inflater, index, this.selectedEtcEventArrayList.get(index));
-
-                // [iv/C]GridLayout : selectedItemList 의 view 를 wrapper 에 추가한다.
-                this.selectedItemListWrapper.addView(createSelectedItemView(inflater, index, this.selectedEtcEventArrayList.get(index)));
-
-            } // [cycle 6]
-
-        } // [check 6]
+        // [5] etc
+        initItemByMuscleArea(this.selectedEtcEventArrayList, inflater);
 
     }
 
@@ -262,213 +184,277 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
     public void setClickListenerOfNext() {
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> >>>>> >>>> finalOrderListWrapper 의 view 개수 = " + finalOrderListWrapper.getChildCount() );
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> >>>>> >>>> selectedItemListWrapper 의 view 개수 = " + selectedItemListWrapper.getChildCount() );
+    }
 
+    private void initItemByMuscleArea(ArrayList<Event> eventArrayList, LayoutInflater inflater) {
 
-        // [check 1] : finalOrderListWrapper 의 view 수와 selectedItemListWrapper 의 수가 같을때만 다음 단계 수행
-        if (selectedItemListWrapper.getChildCount() == finalOrderListWrapper.getChildCount()) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> 같음");
-        } else {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> 다름");
+        // [check 1] : eventArrayList 의 데이터가 있을 때만 item 을 생성하는 초기 설정을 진행한다.
+        if (!eventArrayList.isEmpty()) {
+
+            // [cycle 1] : eventArrayList 의 각 항목들을 이용하여 Step4EventItem 과 Step4FinalOrderItem 의 객체를 생성하는 초기 설정을 한다.
+            for (int index=0; index < eventArrayList.size() ; index++ ) {
+
+                // [lv/C]Step4EventItem : event 의 항목(item) 생성
+                Step4EventItem eventItem = createEventItem(inflater, eventArrayList.get(index), (index + 1));
+
+                // event 의 item 을 관리하기 위한 리스트에 추가한다.
+                addItemToEventItemList(eventArrayList.get(index).getKey(), eventItem);
+
+                // eventListWrapper(LinearLayout) 에 eventItem 의 item view 를 추가하여 화면에 표시하는 과정 진행
+                addViewToEventListWrapper(eventItem);
+
+                // [lv/C]Step4FinalOrderItem : final order 의 항목(item) 을 생성
+                Step4FinalOrderItem finalOrderItem = createFinalOrderItem(inflater, eventArrayList.get(index), (index + 1));
+
+                // final order 의 item 을 관리하기 위한 리스트에 추가한다.
+                addItemToFinalOrderItemList(eventArrayList.get(index).getKey(), finalOrderItem);
+
+            } // [cycle 1]
 
         } // [check 1]
-    }
+
+    } // End of method [initItemByMuscleArea]
 
 
-    private View createFinalOrderItemView(LayoutInflater inflater, int index, Event event) {
-        final String METHOD_NAME = "[createFinalOrderItemView] ";
+    /**
+     * eventItemList 에 Step4EventItem 객체를 key 를 eventKey 로 하여 추가한다.
+     *
+     * @param eventKey  HashMap 의 key
+     * @param eventItem HashMap 에 추가할 Step4EventItem 객체
+     */
+    private void addItemToEventItemList(String eventKey, Step4EventItem eventItem) {
 
-        // [lv/C]View : R.layout.include_final_order_item inflate
-        View view = inflater.inflate(R.layout.include_final_order_item, null);
+        // [iv/C]HashMap<String, Step4EventItem> : event 의 key 값으로 eventItem 을 추가하기
+        this.eventItemList.put(eventKey, eventItem);
 
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= mapping =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [lv/C]MaterialCardView : wrapper mapping
-        MaterialCardView content = (MaterialCardView) view.findViewById(R.id.include_final_order_item_wrapper);
-
-        // [lv/C]TextView : number mapping
-        TextView number = (TextView) view.findViewById(R.id.include_final_order_item_number);
-
-        // [lv/C]TextView : muscleAreaNumber mapping
-        TextView muscleAreaNumber = (TextView) view.findViewById(R.id.include_final_order_item_muscle_area_number);
+    } // End of method [addItemToEventItemList]
 
 
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= list 에 추가하기 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [iv/C]HashMap<String, View> :  view 를 list 에 추가하기
-        this.finalOrderViewList.put(event.getKey(), view);
+    /**
+     * finalOrderItemList 에 Step4FinalOrderItem 객체릴 key 를 eventKey 로 하여 추가한다.
+     *
+     * @param eventKey       HashMap 의 key
+     * @param finalOrderItem HashMap 에 추가할 Step4EventItem 객체
+     */
+    private void addItemToFinalOrderItemList(String eventKey, Step4FinalOrderItem finalOrderItem) {
 
-        // [iv/C]HashMap<String, TextView> : number 를 list 에 추가하기
-        this.finalOrderNumberList.put(event.getKey(), number);
+        // [iv/C]HashMap<String, Step4FinalOrderItem> : eventKey 을 key 로 하여 finalOrderItem 을 추가한다.
+        this.finalOrderItemList.put(eventKey, finalOrderItem);
 
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= init =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-        // [lv/C]MaterialCardView : content 색 변경
-        content.setCardBackgroundColor(getActivity().getColor(DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())));
-
-        // [lv/C]TextView : muscleAreaNumber text setting
-        muscleAreaNumber.setText(DataManager.convertHanguleOfMuscleArea(event.getMuscleArea()) + " " + (index + 1));
-
-        // [lv/C]View :
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> event name = " + event.getEventName());
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= final order =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]ArrayList<String> : finalOrderListWrapper 에서 삭제된 view 의 key 를 순서대로 저장
-                finalOrderList.remove(event.getKey());
-
-                // [iv/C]finalOrderListWrapper : 여기서 해당 view 삭제하기
-                finalOrderListWrapper.removeView(view);
-
-                // [cycle 1] : finalOrderListWrapper 에 추가된 view 들의 순서를 다시 정한다.
-                for (int index = 0; index < finalOrderListWrapper.getChildCount(); index++) {
-
-                    // [iv/C]HashMap<String, TextView> : finalOrderNumberList 의 내용을 순서대로 정렬한 번호로 만든다.
-                    finalOrderNumberList.get(finalOrderList.get(index)).setText((index + 1) + "");
-
-                } // [cycle 1]
+    } // End of method [addItemToFinalOrderItemList]
 
 
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= selected item =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [lv/C]View : selectedItemViewList 에서 event 의 key 로 view 가져오기
-                View selectedItemView = selectedItemViewList.get(event.getKey());
-                selectedItemView.setEnabled(true);
+    /**
+     * Step4EventItem 을 이용하여 event 의 각 항목을 나타내는 객체를 생성하여 반환한다.
+     * @param inflater layout 을 inflate 하기 위한 LayoutInflater
+     * @param event 각 항목에 나타낼 데이터가 담긴 Event 객체
+     * @param eventNumber MuscleArea 별로 event 를 구분하기 위한 수
+     * @return event 의 각 항목을 나타내는 객체
+     */
+    private Step4EventItem createEventItem(LayoutInflater inflater, Event event, int eventNumber) {
+        final String METHOD_NAME = "[createEventItem] ";
 
-                // [lv/C]MaterialCardView : selectedItemContentWrapperList 에서 event 의 key 으로 contentWrapper 가져오기
-                MaterialCardView selectedItemContent = selectedItemContentWrapperList.get(event.getKey());
-                selectedItemContent.setCardBackgroundColor(getActivity().getColor(DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())));
-
-
-            }
-        });
-        return view;
-    }
-
-    private View createSelectedItemView(LayoutInflater inflater, int index, Event event) {
-        final String METHOD_NAME = "[createSelectedItemView] ";
-
-        // [lv/C]View : R.layout.include_selected_item inflate
-        View view = inflater.inflate(R.layout.include_selected_item, null);
-
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= mapping =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [lv/C]MaterialCardView : contentWrapper mapping
-        MaterialCardView contentWrapper = (MaterialCardView) view.findViewById(R.id.include_selected_item_wrapper);
-
-        // [lv/C]ImageView : info mapping
-        ImageView info = (ImageView) view.findViewById(R.id.include_selected_item_info);
-
-        // [lv/C]TextView : muscleAreaNumber mapping
-        TextView muscleAreaNumber = (TextView) view.findViewById(R.id.include_selected_item_muscle_area_number);
-
-        // [lv/C]TextView : eventName mapping
-        TextView eventName = (TextView) view.findViewById(R.id.include_selected_item_event_name);
-
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= list 에 추가하기 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-        // [iv/C]HashMap<String, View> : view 를 list 에 추가하기
-        this.selectedItemViewList.put(event.getKey(), view);
-
-        // [iv/C]HashMap<String, MaterialCardView> : contentWrapper 를 list 에 추가하기
-        this.selectedItemContentWrapperList.put(event.getKey(), contentWrapper);
-
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= init =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [lv/C]MaterialCardView : contentWrapper 색 변경
-        contentWrapper.setCardBackgroundColor(getActivity().getColor(DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())));
-
-        // [lv/C]TextView : muscleAreaNumber text setting
-        muscleAreaNumber.setText(DataManager.convertHanguleOfMuscleArea(event.getMuscleArea()) + (index + 1));
-
-        // [lv/C]TextView : eventName text setting
-        eventName.setText(event.getEventName());
-
-        // [lv/C]TextView : info touch listener
-        info.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> >>> >>> touch down event");
-                        break;
-                }
-                return true;
-            }
-        });
-
-        // [lv/C]View : itemView click listener
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= final order =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]ArrayList<String> : finalOrderListWrapper 에 추가된 view 의 key 를 순서대로 저장
-                finalOrderList.add(event.getKey());
-
-                // [iv/C]LinearLayout : event 의 key 값으로 finalOrderList 에서 view 를 찾아서 finalOrderListWrapper 에 추가하기
-                finalOrderListWrapper.addView(finalOrderViewList.get(event.getKey()));
-
-                // [cycle 1] : finalOrderListWrapper 에 추가된 view 들의 순서를 다시 정한다.
-                for (int index = 0; index < finalOrderListWrapper.getChildCount(); index++) {
-
-                    // [iv/C]HashMap<String, TextView> : finalOrderNumberList 의 내용을 순서대로 정렬한 번호로 만든다.
-                    finalOrderNumberList.get(finalOrderList.get(index)).setText((index + 1) + "");
-
-                } // [cycle 1]
-
-                // [iv/C]HorizontalScrollView : Ui thread 를 이용하여 scrollView 를 마지막으로 이동한다.(horizontal 이므로 right 이다.)
-                finalOrderListScroll.post(new Runnable() {
+        // [lv/C]Step4EventItem : event item 의 초기 내용을 설정한다.
+        Step4EventItem eventItem = new Step4EventItem.Builder()
+                .setInflater(inflater)
+                .setContentWrapperColor(ContextCompat.getColor(getActivity(), DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())))
+                .setEvent(event)
+                .setEventNumber(eventNumber)
+                .setItemClickListener(new Step4EventItem.OnItemClickListener() {
                     @Override
-                    public void run() {
+                    public void includeFinalOrderItem(View item, MaterialCardView contentWrapper, String eventKey) {
 
-                        // [iv/C]HorizontalScrollView : 마지막으로 이동
-                        finalOrderListScroll.fullScroll(ScrollView.FOCUS_RIGHT);
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-->> 클릭한 event item 의 key 는? = " + eventKey);
+
+                        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= final order =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                        // [lv/C]LinearLayout : finalOrderItemList 에서 eventKey 로 finalOrderItem 을 찾는다. 그리고 item view 를 가져와서 finalOrderListWrapper 에 추가한다. // view 가 동익함
+                        finalOrderListWrapper.addView(finalOrderItemList.get(eventKey).getItem());
+
+                        // finalOrderListWrapper 의 모든 항목(finalOrderItem)들의 number 를 재설정한다.
+                        resetFinalOrderItemNumber(eventKey);
+
+                        // [iv/C]HorizontalScrollView : Ui thread 를 이용하여 scrollView 를 마지막으로 이동한다.(horizontal 이므로 right 이다.)
+                        finalOrderListScroll.post(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                // [iv/C]HorizontalScrollView : 마지막으로 이동
+                                finalOrderListScroll.fullScroll(ScrollView.FOCUS_RIGHT);
+
+                            }
+                        });
+
+                        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= event =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                        // [lv/C]MaterialCardView : contentWrapper 의 색을 변경
+                        contentWrapper.setCardBackgroundColor(getActivity().getColor(R.color.colorBackgroundGray));
+
+                        // [lv/C]View : view 의 click 금지
+                        item.setEnabled(false);
+                    }
+                })
+                .init();
+
+        // [lv/C]Step4EventItem : event 의 item 을 생성한다.
+        eventItem.createItem();
+
+        return eventItem;
+    } // End of method [createEventItem]
+
+
+    private Step4FinalOrderItem createFinalOrderItem(LayoutInflater inflater, Event event, int eventNumber) {
+        final String METHOD_NAME = "[Step4FinalOrderItem] ";
+
+        // [lv/C]Step4FinalOrderItem : final order item 의 초기 내용을 설정한다.
+        Step4FinalOrderItem finalOrderItem = new Step4FinalOrderItem.Builder()
+                .setInflater(inflater)
+                .setContentWrapperColor(ContextCompat.getColor(getActivity(), DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())))
+                .setEvent(event)
+                .setEventNumber(eventNumber)
+                .setItemClickListener(new Step4FinalOrderItem.OnItemClickListener() {
+                    @Override
+                    public void excludeFinalOrderItem(View item, String eventKey, int contentWrapperColor) {
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--->> fianl order item 을 클릭 하였습니다. key 는 ? " + eventKey);
+
+                        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= final order =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                        // [lv/C]LinearLayout : finalOrderListWrapper 에 내 자신의 view 를 삭제한다.
+                        finalOrderListWrapper.removeView(item);
+
+                        // finalOrderListWrapper 의 모든 항목(finalOrderItem)들의 number 를 재설정한다.
+                        resetFinalOrderItemNumber(eventKey);
+
+                        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= selected item =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                        // [iv/C]HashMap<String, Step4EventItem> : eventItemList 에서 key 가 eventKey 인 객체에서 contentWrapper 를 가져온다. 그리고 색을 다시 기존의 색으로 변경한다.
+                        eventItemList.get(eventKey).getContentWrapper().setCardBackgroundColor(contentWrapperColor);
+
+                        // [iv/C]HashMap<String, Step4EventItem>  : eventItemList 에서 key 가 eventKey 인 객체에서 item 을 가져온다. 그리고 다시 사용할 수 있도록 변경한다.
+                        eventItemList.get(eventKey).getItem().setEnabled(true);
 
                     }
-                });
+
+                })
+                .init();
+
+        // [lv/C]Step4FinalOrderItem : item 생성
+        finalOrderItem.createItem();
+
+        return finalOrderItem;
+
+    }
 
 
-                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= selected item =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [lv/C]View : contentWrapper 의 색 변경 Gray
-                contentWrapper.setCardBackgroundColor(getActivity().getColor(R.color.colorBackgroundGray));
+    /**
+     * finalOrderListWrapper 에
+     * @param eventKey
+     */
+    private void resetFinalOrderItemNumber(String eventKey) {
 
-                // [lv/C]View : view 의 click 금지
-                view.setEnabled(false);
+        // [cycle 1] : finalOrderListWrapper 에 순서대로 나열되어 있는 finalOrderItem 의 number 를 순서대로 번호를 다시 매긴다.
+        for (int index = 0; index < this.finalOrderListWrapper.getChildCount(); index++) {
 
-            }
-        });
+            // [iv/C]HashMap<String, Step4FinalOrderList> : eventKey 로 finalOrderItem 을 찾은 뒤 number 의 text 를 재설정한다.
+            finalOrderItemList.get(eventKey).getNumber().setText((index + 1) + "");
 
-        // [iv/C]GridLayout : ViewThreeObserver 의 onGlobalLayoutListener(전체 뷰가 그려질때) 통해 selectedItemListWrapper 의 width 를 구하고, params 를 view 에 적용하는 과정을 진행
-        selectedItemListWrapper.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        } // [cycle 1]
+
+    } // End of method [resetFinalOrderItemNumber]
+
+
+
+    /**
+     *
+     * @param eventItem
+     */
+    private void addViewToEventListWrapper(Step4EventItem eventItem) {
+        final String METHOD_NAME = "[addViewToEventListWrapper] ";
+
+        // [iv/C]GridLayout : ViewTreeObserver 를 이용하여 eventListWrapper 의 width 를 구하고 eventItem 의 item view 의 width 를 설정한다.
+        this.eventListWrapper.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<< " + index + ">>> 번째에서 확인한 width = " + selectedItemListWrapper.getWidth());
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<< " + index + ">>> 번째에서 확인한 column count = " + selectedItemListWrapper.getColumnCount());
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<< " + index + ">>> 번째에서 확인한 padding left = " + selectedItemListWrapper.getPaddingLeft());
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<< " + index + ">>> 번째에서 확인한 padding right = " + selectedItemListWrapper.getPaddingRight());
 
-                // [lv/C]GridLayout.LayoutParams : view 의 설정을 하는 객체생성 / parent : selectedItemListWrapper 의 width 를 가지고 각 view 의 width 를 정한다.
-                GridLayout.LayoutParams params = (GridLayout.LayoutParams) view.getLayoutParams();
-                params.width = ((selectedItemListWrapper.getWidth() - (selectedItemListWrapper.getPaddingLeft() + selectedItemListWrapper.getPaddingRight()) ) / selectedItemListWrapper.getColumnCount());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> eventListWrapper 의 width = " + eventListWrapper.getWidth());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> eventListWrapper 의 padding left = " + eventListWrapper.getPaddingLeft());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> eventListWrapper 의 padding right = " + eventListWrapper.getPaddingRight());
 
-                // Ui Thread 를 이용하여 params 를 view 에 적용한다.
+                // [lv/C]GridLayout.LayoutParams : view 의 width 의 초기 내용을 설정한다.
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.width = (eventListWrapper.getWidth() - (eventListWrapper.getPaddingLeft() + eventListWrapper.getPaddingRight())) / eventListWrapper.getColumnCount();
+
+                // Ui Thread 를 이용하여 params 를 item 에 적용한다.
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        view.setLayoutParams(params);
+
+                        // [lv/C]Step4EventItem : item view 에 prams 적용하기
+                        eventItem.applyLayoutParams(params);
+
+                        // [iv/C]GridLayout : eventListWrapper 에 eventItem 의 item view 를 추가하기
+                        eventListWrapper.addView(eventItem.getItem());
+
                     }
                 });
 
                 // [iv/C]GridLayout : ViewThreeObserver 의 onGlobalLayoutListener(this) 를 삭제하여, 무한 반복을 하지 않도록 한다.
-                selectedItemListWrapper.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                eventListWrapper.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
             }
         });
 
-        return view;
-    }
+    } // End of method [addViewToEventListWrapper]
+
+
+
+    /**
+     * eventItemList 의 각 item 을 eventListWrapper 에 모두 추가한다.
+     */
+    private void addAllViewToEventListWrapper() {
+        final String METHOD_NAME = "[addAllViewToEventListWrapper] ";
+
+        // [iv/C]GridLayout : ViewTreeObserver 를 이용하여 eventListWrapper 의 width 를 구하고 eventItem 의 item view 의 width 를 설정한다.
+        this.eventListWrapper.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> eventListWrapper 의 width = " + eventListWrapper.getWidth());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> eventListWrapper 의 padding left = " + eventListWrapper.getPaddingLeft());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> eventListWrapper 의 padding right = " + eventListWrapper.getPaddingRight());
+
+                // [lv/C]GridLayout.LayoutParams : view 의 width 의 초기 내용을 설정한다.
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.width = (eventListWrapper.getWidth() - (eventListWrapper.getPaddingLeft() + eventListWrapper.getPaddingRight())) / eventListWrapper.getColumnCount();
+
+                // Ui Thread 를 이용하여 params 를 item 에 적용한다.
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        // [lv/C]Iterator : eventItemList 에서 key set 을 가져온다. 이 key set 의 모든 항목을 읽어올 준비를 한다.
+                        Iterator iterator = eventItemList.keySet().iterator();
+
+                        // [cycle 1] : iterator 를 통해 다음 항목이 있을 때만 수행한다.
+                        while (iterator.hasNext()) {
+
+                            // [lv/C]String : iterator 을 통해 key 를 가져온다.
+                            String key = (String) iterator.next();
+
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----------- key = " + key);
+                            // [lv/C]HashMap<String, Step4EventItem> : eventItemList 에서 해당 key 의 객체를 가져온다. 그리고 이 객체의 item(view) 에 params 를 적용시킨다.
+                            eventItemList.get(key).getItem().setLayoutParams(params);
+
+                            // [iv/C]GridLayout : eventItemList 에서 해당 key 의 객체를 가져온다. 그리고 이 객체의 item(view) 을 eventListWrapper 에 추가하여 화면에 표시한다.
+                            eventListWrapper.addView(eventItemList.get(key).getItem());
+
+                        } // [cycle 1]
+
+                    }
+                });
+
+                // [iv/C]GridLayout : ViewThreeObserver 의 onGlobalLayoutListener(this) 를 삭제하여, 무한 반복을 하지 않도록 한다.
+                eventListWrapper.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+            }
+        });
+
+    } // End of method [addAllViewToEventListWrapper]
+
 }

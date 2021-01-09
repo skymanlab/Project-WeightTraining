@@ -4,10 +4,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!-- content -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/include_selected_item_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:id="@+id/include_step4_final_order_item_content_wrapper"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:layout_margin="5dp"
         android:background="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/colorBackgroundSecond"
@@ -17,29 +18,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/include_selected_item_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_more_vert_24"
-            android:layout_gravity="end"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!-- number -->
             <TextView
-                android:id="@+id/include_selected_item_muscle_area_number"
+                android:id="@+id/include_step4_final_order_item_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextPrimary" />
+                android:layout_marginLeft="10sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10sp"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="10sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -48,17 +41,16 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/colorBackgroundWhite" />
 
+            <!-- muscle area number -->
             <TextView
-                android:id="@+id/include_selected_item_event_name"
+                android:id="@+id/include_step4_final_order_item_muscle_area_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/colorTextPrimary" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-
+    </com.google.android.material.card.MaterialCardView><!-- End of content -->
 </androidx.constraintlayout.widget.ConstraintLayout>
