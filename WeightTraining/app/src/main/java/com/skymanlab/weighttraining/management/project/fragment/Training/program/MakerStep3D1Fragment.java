@@ -140,14 +140,14 @@ public class MakerStep3D1Fragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : step 3-1 fragment top bar
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step3D1SectionManager : step 3-1 content section manager
         this.sectionManager = new MakerStep3D1SectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this);
         this.sectionManager.setFragmentArrayList(this.fragmentArrayList);
         this.sectionManager.setFragmentMuscleAreaList(this.fragmentMuscleAreaList);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
     }

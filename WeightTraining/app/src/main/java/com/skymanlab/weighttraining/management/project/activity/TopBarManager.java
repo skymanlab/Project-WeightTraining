@@ -63,26 +63,24 @@ public class TopBarManager extends SectionManager implements SectionInitializati
         this.subTitleContent = subTitleContent;
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : title mapping
+        // [iv/C]TextView : title connect
         this.title = (TextView) super.getActivity().findViewById(R.id.top_bar_title);
 
-        // [iv/C]TextView : subTitle mapping
+        // [iv/C]TextView : subTitle connect
         this.subTitle = (TextView) super.getActivity().findViewById(R.id.top_bar_sub_title);
 
-        // [iv/C]ImageView : back mapping
+        // [iv/C]ImageView : back connect
         this.back = (ImageView) super.getActivity().findViewById(R.id.top_bar_back);
 
-        // [iv/C]ImageView : userPhoto mapping
+        // [iv/C]ImageView : userPhoto connect
         this.userPhoto = (ImageView) super.getActivity().findViewById(R.id.top_bar_user_photo);
 
         this.canInit = true;
 
     }
-
 
     @Override
     public void initWidget() {
@@ -151,7 +149,7 @@ public class TopBarManager extends SectionManager implements SectionInitializati
             });
 
         } else {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : widget 들이 mapping 되지 않았어요! <=");
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : widget 들이 connect 되지 않았어요! <=");
         } // [check 1]
     }
 

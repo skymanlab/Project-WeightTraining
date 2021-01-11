@@ -106,30 +106,30 @@ public class EPLSectionTwoManager extends SectionManager implements SectionIniti
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]LinearLayout : titleWrapper mapping
+        // [iv/C]LinearLayout : titleWrapper connect
         this.titleWrapper = (LinearLayout) getActivity().findViewById(R.id.event_program_list_section_2_title_wrapper);
 
-        // [iv/C]ListView : programListLv mapping
+        // [iv/C]ListView : programListLv connect
         this.programListLv = (ListView) getActivity().findViewById(R.id.event_program_list_section_2_lv_event_item);
 
-        // [iv/C]LinearLayout : addWrapper mapping
+        // [iv/C]LinearLayout : addWrapper connect
         this.addWrapper = (LinearLayout) getActivity().findViewById(R.id.event_program_list_section_2_add_wrapper);
 
-        // [iv/C]materialTextView : add mapping
+        // [iv/C]materialTextView : add connect
         this.add = (MaterialTextView) getActivity().findViewById(R.id.event_program_list_section_2_bt_add);
 
-        // [iv/C]LinearLayout : deleteWrapper mapping
+        // [iv/C]LinearLayout : deleteWrapper connect
         this.deleteWrapper = (LinearLayout) getActivity().findViewById(R.id.event_program_list_section_2_delete_wrapper);
 
-        // [iv/C]materialTextView : delete mapping
+        // [iv/C]materialTextView : delete connect
         this.delete = (MaterialTextView) getActivity().findViewById(R.id.event_program_list_section_2_bt_delete);
 
-        // [iv/C]LinearLayout : completeWrapper mapping
+        // [iv/C]LinearLayout : completeWrapper connect
         this.completeWrapper = (LinearLayout) getActivity().findViewById(R.id.event_program_list_section_2_complete_wrapper);
 
-        // [iv/C]MaterialTextView : complete mapping
+        // [iv/C]MaterialTextView : complete connect
         this.complete = (MaterialTextView) getActivity().findViewById(R.id.event_program_list_section_2_bt_complete);
 
     }

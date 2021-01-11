@@ -55,14 +55,14 @@ public class MuscleAreaActivity extends AppCompatActivity {
 
                 // [lv/C]TopBarManager : Top bar 초기 설정 / subTitle 설정
                 TopBarManager topBarManager = new TopBarManager(this, this.firebaseUser, true, true);
-                topBarManager.mappingWidget();
+                topBarManager.connectWidget();
                 topBarManager.setTitleContent(getString(R.string.muscle_area_title));
                 topBarManager.setSubTitleContent(DataFormatter.setSubtitleFormat(this.muscleAreaNextActivityType));
                 topBarManager.initWidget();
 
                 // [lv/C]MASectionManager : section 메니저
                 MASectionManager sectionManager = new MASectionManager(this, this.firebaseUser, this.muscleAreaNextActivityType);
-                sectionManager.mappingWidget();
+                sectionManager.connectWidget();
                 sectionManager.initWidget();
 
             } else {

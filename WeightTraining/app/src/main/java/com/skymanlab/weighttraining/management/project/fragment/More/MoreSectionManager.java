@@ -36,28 +36,27 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private LinearLayout target;
     private LinearLayout setting;
 
-
     // constructor
     public MoreSectionManager(Activity activity, View view) {
         super(activity, view);
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]MaterialTextView : logout mapping
+        // [iv/C]MaterialTextView : logout connect
         this.logout = (MaterialTextView) getView().findViewById(R.id.f_more_user_logout);
 
-        // [iv/C]MaterialTextView : withdraw mapping
+        // [iv/C]MaterialTextView : withdraw connect
         this.withdraw = (MaterialTextView) getView().findViewById(R.id.f_more_user_withdraw);
 
-        // [iv/C]LinearLayout : fitnessCenter mapping
+        // [iv/C]LinearLayout : fitnessCenter connect
         this.fitnessCenter = (LinearLayout) getView().findViewById(R.id.f_more_fitness_center);
 
-        // [iv/C]LinearLayout : target mapping
+        // [iv/C]LinearLayout : target connect
         this.target = (LinearLayout) getView().findViewById(R.id.f_more_target);
 
-        // [iv/C]LinearLayout : setting mapping
+        // [iv/C]LinearLayout : setting connect
         this.setting = (LinearLayout) getView().findViewById(R.id.f_more_setting);
 
     }

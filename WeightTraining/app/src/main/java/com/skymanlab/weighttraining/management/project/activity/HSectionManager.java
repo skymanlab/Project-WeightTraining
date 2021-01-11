@@ -46,21 +46,21 @@ public class HSectionManager extends SectionManager implements SectionInitializa
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : eventAdd mapping
+        // [iv/C]TextView : eventAdd connect
         this.eventAdd = (TextView) getActivity().findViewById(R.id.home_event_add);
 
-        // [iv/C]TextView : eventList mapping
+        // [iv/C]TextView : eventList connect
         this.eventList = (TextView) getActivity().findViewById(R.id.home_event_list);
 
-        // [iv/C]TextView : eventProgram mapping
+        // [iv/C]TextView : eventProgram connect
         this.eventProgram = (TextView) getActivity().findViewById(R.id.home_event_program);
 
-        // [iv/C]MaterialCardView : container mapping
+        // [iv/C]MaterialCardView : container connect
         this.container = (MaterialCardView) getActivity().findViewById(R.id.home_container);
 
-        // [iv/C]ImageView : adMobClicker mapping
+        // [iv/C]ImageView : adMobClicker connect
         this.adMopClicker = (ImageView) getActivity().findViewById(R.id.home_ad_mob_clicker);
 
     }

@@ -71,13 +71,13 @@ public class HomeActivity extends AppCompatActivity {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : 옳은 user 데이터입니다. <=");
             // [lv/C]TopBarManager : Top bar 초기 설정
             TopBarManager topBarManager = new TopBarManager(this, this.firebaseUser, true, false);
-            topBarManager.mappingWidget();
+            topBarManager.connectWidget();
             topBarManager.setTitleContent(getString(R.string.home_title));
             topBarManager.initWidget();
 
             // [iv/C]HSectionManager : section 메니저
             this.sectionManager = new HSectionManager(this, this.firebaseUser);
-            this.sectionManager.mappingWidget();
+            this.sectionManager.connectWidget();
             this.sectionManager.initWidget();
 
         } else {

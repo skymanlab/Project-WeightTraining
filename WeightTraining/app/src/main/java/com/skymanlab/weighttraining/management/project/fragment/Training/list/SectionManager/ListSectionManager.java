@@ -13,7 +13,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EachListPagerAdapter;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EachListFragmentPagerAdapter;
 
 public class ListSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -29,7 +29,7 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
     private ViewPager2 viewPager;
 
     // instance variable
-    private EachListPagerAdapter pagerAdapter;
+    private EachListFragmentPagerAdapter pagerAdapter;
 
     // constructor
     public ListSectionManager(Activity activity, View view, Fragment fragment) {
@@ -38,12 +38,12 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TabLayout : tabLayout mapping
+        // [iv/C]TabLayout : tabLayout connect
         this.tabLayout = (TabLayout) getView().findViewById(R.id.f_list_tab_layout);
 
-        // [iv/C]ViewPager2 : viewPager mapping
+        // [iv/C]ViewPager2 : viewPager connect
         this.viewPager = (ViewPager2) getView().findViewById(R.id.f_list_view_pager2);
 
     }
@@ -52,11 +52,11 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
     public void initWidget() {
 
         // [iv/C]EachListPagerAdapter : ViewPager2 의 adapter 생성
-        this.pagerAdapter = new EachListPagerAdapter(fragment);
+        this.pagerAdapter = new EachListFragmentPagerAdapter(fragment);
 
         // [iv/C]ViewPager2 : 위의 pagerAdapter 를 연결
         this.viewPager.setAdapter(this.pagerAdapter);
-        this.viewPager.setPageTransformer(new EachListPagerAdapter.ZoomOutPageTransformer());
+        this.viewPager.setPageTransformer(new EachListFragmentPagerAdapter.ZoomOutPageTransformer());
 
         // [lv/C]TabLayoutMediator : ViewPager2 의 각 페이지마다 TabLayout 의 위치에 맞게 매핑하고, 각 title 을 만들기
         TabLayoutMediator mediator = new TabLayoutMediator(this.tabLayout, this.viewPager, true, new TabLayoutMediator.TabConfigurationStrategy() {

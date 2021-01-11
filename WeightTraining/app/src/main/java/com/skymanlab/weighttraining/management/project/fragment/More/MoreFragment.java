@@ -80,17 +80,17 @@ public class MoreFragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : fragment top bar section manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_more_title));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C] : FragmentTopUserManager : fragment top user section manager
         this.topUserManager = new FragmentTopUserManager(view, true);
-        this.topUserManager.mappingWidget();
+        this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
 
         // [iv/C]MoreSectionManager : more fragment content section manager
         this.sectionManager = new MoreSectionManager(getActivity(), view);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
     }

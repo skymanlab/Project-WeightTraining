@@ -130,16 +130,19 @@
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ include layout +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-    <!-- Include Layout : program step direction selector -->
-    <string name="include_program_step_direction_selector_previous">이전</string>
-    <string name="include_program_step_direction_selector_next">다음</string>
+    <!-- Include Layout : maker step selector -->
+    <string name="include_maker_step_selector_previous">이전</string>
+    <string name="include_maker_step_selector_next">다음</string>
 
-    <!-- Include Layout : each random selection -->
-    <string name="include_each_random_selection_muscle_area">어떤 부위 일까요?</string>
+    <!-- Include Layout : maker type direct selection group item -->
+    <string name="include_maker_type_direct_selection_group_item_title">어떤 그룹일까?</string>
 
-    <!-- Include Layout : all random selection -->
-    <string name="include_all_random_selection_title">어떤 부위 일까요?</string>
-    <string name="include_all_random_selection_menu">전체</string>
+    <!-- Include Layout : maker type each group random -->
+    <string name="include_maker_type_each_group_random_muscle_area">어떤 부위 일까요?</string>
+
+    <!-- Include Layout : maker type all group random -->
+    <string name="include_maker_type_all_group_random_item_muscle_area">어떤 부위 일까요?</string>
+    <string name="include_maker_type_all_group_random_item_menu">전체</string>
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ activity +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

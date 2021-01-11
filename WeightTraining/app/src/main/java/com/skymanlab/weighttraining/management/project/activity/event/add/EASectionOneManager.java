@@ -53,35 +53,34 @@ public class EASectionOneManager extends SectionManager implements SectionInitia
         super(activity, firebaseUser, muscleArea);
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]LinearLayout : titleWrapper mapping
+        // [iv/C]LinearLayout : titleWrapper connect
         this.titleWrapper = (LinearLayout) getActivity().findViewById(R.id.event_add_section_1_title_wrapper);
 
-        // [iv/C]TextView : moreData mapping
+        // [iv/C]TextView : moreData connect
         this.moreData = (TextView) getActivity().findViewById(R.id.event_add_section_1_bt_more_data);
 
-        // [iv/C]Spinner : equipmentType mapping / 운동기기 종류
+        // [iv/C]Spinner : equipmentType connect / 운동기기 종류
         this.equipmentType = (Spinner) getActivity().findViewById(R.id.event_add_section_1_equipment_type);
 
-        // [iv/C]Spinner : groupType mapping / 그룹 유형
+        // [iv/C]Spinner : groupType connect / 그룹 유형
         this.groupType = (Spinner) getActivity().findViewById(R.id.event_add_section_1_group_type);
 
-        // [iv/C]EditText : eventName mapping / 종목 이름
+        // [iv/C]EditText : eventName connect / 종목 이름
         this.eventName = (EditText) getActivity().findViewById(R.id.event_add_section_1_event_name);
 
-        // [iv/C]EditText : properWeight mapping / 적정 중량
+        // [iv/C]EditText : properWeight connect / 적정 중량
         this.properWeight = (EditText) getActivity().findViewById(R.id.event_add_section_1_proper_weight);
 
-        // [iv/C]EditText : maxWeight mapping / 최대 중량
+        // [iv/C]EditText : maxWeight connect / 최대 중량
         this.maxWeight = (EditText) getActivity().findViewById(R.id.event_add_section_1_max_weight);
 
-        // [iv/C]LinearLayout : addWrapper mapping
+        // [iv/C]LinearLayout : addWrapper connect
         this.addWrapper = (LinearLayout) getActivity().findViewById(R.id.event_add_section_1_add_wrapper);
 
-        // [iv/C]TextView : add mapping
+        // [iv/C]TextView : add connect
         this.add = (TextView) getActivity().findViewById(R.id.event_add_section_1_add);
 
     }

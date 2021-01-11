@@ -55,18 +55,18 @@ public class EventAddActivity extends AppCompatActivity {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/true : 옳은 muscleArea 데이터입니다. <=");
                 // [lv/C]TopBarManager : Top bar 초기 설정
                 TopBarManager topBarManager = new TopBarManager(this, this.firebaseUser, true, false);
-                topBarManager.mappingWidget();
+                topBarManager.connectWidget();
                 topBarManager.setTitleContent(DataFormatter.setTopTitleFormat(MuscleAreaNextActivityType.EVENT_ADD, this.muscleArea));
                 topBarManager.initWidget();
 
                 // [lv/C]EASectionOneManager : section_1 메니저
                 EASectionOneManager sectionOneManager = new EASectionOneManager(this, this.firebaseUser, this.muscleArea);
-                sectionOneManager.mappingWidget();
+                sectionOneManager.connectWidget();
                 sectionOneManager.initWidget();
 
                 // [lv/C]EASectionTwoManager : section_2 메니저
                 EASectionTwoManager sectionTwoManager = new EASectionTwoManager(this, this.firebaseUser, this.muscleArea, getSupportFragmentManager());
-                sectionTwoManager.mappingWidget();
+                sectionTwoManager.connectWidget();
                 sectionTwoManager.initWidget();
 
             } else {

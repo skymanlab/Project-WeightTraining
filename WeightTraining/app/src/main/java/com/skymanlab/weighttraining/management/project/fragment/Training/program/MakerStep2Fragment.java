@@ -83,12 +83,12 @@ public class MakerStep2Fragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager :
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step2D1SectionManager :
         this.sectionManager = new MakerStep2SectionManager(getActivity(),view, getActivity().getSupportFragmentManager(), this.step1SelectedType);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }
 }

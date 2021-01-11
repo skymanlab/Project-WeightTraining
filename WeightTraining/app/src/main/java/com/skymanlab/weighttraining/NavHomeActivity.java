@@ -87,7 +87,7 @@ public class NavHomeActivity extends AppCompatActivity {
 
         // [iv/C]FragmentTransaction : HomeFragment 화면을 보여주고 stack 에 담기
         FragmentTransaction startFragment = getSupportFragmentManager().beginTransaction();
-        startFragment.replace(R.id.nav_home_content_container, home).commit();
+        startFragment.replace(R.id.nav_home_content_wrapper, home).commit();
 
         // [iv/C]Bo :
         navBottomBar = (BottomNavigationView) findViewById(R.id.nav_home_bottom_bar);
@@ -103,23 +103,23 @@ public class NavHomeActivity extends AppCompatActivity {
                         // [method] : FragmentManager 에 있는 stack 의 모든 내용을 지운다.
                         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         // [lv/C]FragmentTransaction : home 이동
-                        moveFragment.replace(R.id.nav_home_content_container, home).commitAllowingStateLoss();
+                        moveFragment.replace(R.id.nav_home_content_wrapper, home).commitAllowingStateLoss();
                         // [iv/C]Stack<Fragment> : stack 에 push
                         break;
                     case R.id.nav_bottom_bar_training:
                         // [lv/C]FragmentTransaction : training 이동
                         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        moveFragment.replace(R.id.nav_home_content_container, training).commitAllowingStateLoss();
+                        moveFragment.replace(R.id.nav_home_content_wrapper, training).commitAllowingStateLoss();
                         break;
                     case R.id.nav_bottom_bar_intervene:
                         // [lv/C]FragmentTransaction : intervene 이동
                         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        moveFragment.replace(R.id.nav_home_content_container, intervene).commitAllowingStateLoss();
+                        moveFragment.replace(R.id.nav_home_content_wrapper, intervene).commitAllowingStateLoss();
                         break;
                     case R.id.nav_bottom_bar_more:
                         // [lv/C]FragmentTransaction : more 이동
                         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        moveFragment.replace(R.id.nav_home_content_container, more).commitAllowingStateLoss();
+                        moveFragment.replace(R.id.nav_home_content_wrapper, more).commitAllowingStateLoss();
                         break;
                 }
                 return true;

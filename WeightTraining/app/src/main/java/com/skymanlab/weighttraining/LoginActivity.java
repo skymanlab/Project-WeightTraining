@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // [iv/C]LSectionManager : Login section manager / widget mapping & init
         this.sectionManager = new LSectionManager(this, googleSignInClient);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
     }

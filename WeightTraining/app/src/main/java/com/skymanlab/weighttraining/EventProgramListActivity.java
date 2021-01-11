@@ -85,18 +85,18 @@ public class EventProgramListActivity extends AppCompatActivity implements SetNu
 
                 // [lv/C]TopBarManager : Top bar 초기 설정
                 TopBarManager topBarManager = new TopBarManager(this, this.firebaseUser, true, false);
-                topBarManager.mappingWidget();
+                topBarManager.connectWidget();
                 topBarManager.setTitleContent(DataFormatter.setTopTitleFormat(MuscleAreaNextActivityType.EVENT_PROGRAM, this.muscleArea));
                 topBarManager.initWidget();
 
                 // [iv/C]SectionOneManager : sectionOne 과 관련된 widget 메니저
                 this.sectionOne = new EPLSectionOneManager(this, getSupportFragmentManager());
-                this.sectionOne.mappingWidget();
+                this.sectionOne.connectWidget();
                 this.sectionOne.initWidget();
 
                 // [iv/C]EPLSectionTwoManager : sectionTwo 와 관련된 widget 메니저
                 this.sectionTwo = new EPLSectionTwoManager(this, this.firebaseUser, this.muscleArea, this.selectedEventArrayList, this.noSelectedEventArrayList);
-                this.sectionTwo.mappingWidget();
+                this.sectionTwo.connectWidget();
                 this.sectionTwo.setSetNumber(this.sectionOne.getSetNumber());
                 this.sectionTwo.setRestTimeMinute(this.sectionOne.getRestTimeMinute());
                 this.sectionTwo.setRestTimeSecond(this.sectionOne.getRestTimeSecond());

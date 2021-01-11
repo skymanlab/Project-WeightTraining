@@ -1,6 +1,9 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
 import android.app.Activity;
+import android.content.Context;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,12 +18,15 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
+import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.DirectSelectionGroupItem;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -77,8 +83,13 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     private int muscleAreaStandardId = 0;
     private HashMap<Integer, Event> checkedEventList = new HashMap<>();
     private ArrayList<Event> noCheckedEventList = new ArrayList<>();
-    
-    // constructor
+
+
+    // instance variable
+    private LinearLayout groupListWrapper;
+    private HashMap<GroupType, DirectSelectionGroupItem> groupItemList;
+
+   // constructor
     public DirectSelectionSectionManager(Activity activity, View view, FragmentManager fragmentManager) {
         super(activity, view, fragmentManager);
     }
@@ -88,42 +99,42 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         this.groupingEventData = groupingEventData;
     }
 
-
     @Override
-    public void mappingWidget() {
-        final String METHOD_NAME = "[mappingWidget] ";
+    public void connectWidget() {
 
-        // [iv/C]MaterialCardView : mapping
+        // [iv/C]LinearLayout : groupListWrapper connection
+        this.groupListWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_group_list_wrapper);
+
+        // [iv/C]MaterialCardView : connect
         this.aGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_a_group_wrapper);
 
-        // [iv/C]LinearLayout : mapping
+        // [iv/C]LinearLayout : connect
         this.aGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_a_group_item_wrapper);
 
-        // [iv/C]MaterialCardView : mapping
+        // [iv/C]MaterialCardView : connect
         this.bGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_b_group_wrapper);
 
-        // [iv/C]LinearLayout : mapping
+        // [iv/C]LinearLayout : connect
         this.bGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_b_group_item_wrapper);
 
-        // [iv/C]MaterialCardView : mapping
+        // [iv/C]MaterialCardView : connect
         this.cGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_c_group_wrapper);
 
-        // [iv/C]LinearLayout : mapping
+        // [iv/C]LinearLayout : connect
         this.cGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_c_group_item_wrapper);
 
-        // [iv/C]MaterialCardView : mapping
+        // [iv/C]MaterialCardView : connect
         this.dGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_d_group_wrapper);
 
-        // [iv/C]LinearLayout : mapping
+        // [iv/C]LinearLayout : connect
         this.dGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_d_group_item_wrapper);
 
-        // [iv/C]MaterialCardView : mapping
+        // [iv/C]MaterialCardView : connect
         this.eGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_e_group_wrapper);
 
-        // [iv/C]LinearLayout : mapping
+        // [iv/C]LinearLayout : connect
         this.eGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_e_group_item_wrapper);
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>+_+_+_+_+_+_+_+_+_+_ DirectSelectionSectionManager 1. mappingWidget");
     }
 
     @Override
@@ -135,20 +146,35 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         if (this.groupingEventData != null && (0 < this.muscleAreaStandardId)) {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>+_+_+_+_+_+_+_+_+_+_ DirectSelectionSectionManager 2. initWidget 조건 성립");
 
-            // [method] : A group 의 데이터를 표시하는 과정 진행
-            this.aGroupCheckBoxList = makeGroupCheckBox(this.aGroupWrapper, this.aGroupItemWrapper, this.groupingEventData.getAGroupEventArrayList(), STANDARD_ID_A_GROUP);
+            this.groupItemList = new HashMap<GroupType, DirectSelectionGroupItem>();
 
-            // [method] : B group 의 데이터를 표시하는 과정 진행
-            this.bGroupCheckBoxList = makeGroupCheckBox(this.bGroupWrapper, this.bGroupItemWrapper, this.groupingEventData.getBGroupEventArrayList(), STANDARD_ID_B_GROUP);
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            // [method] : C group 의 데이터를 표시하는 과정 진행
-            this.cGroupCheckBoxList = makeGroupCheckBox(this.cGroupWrapper, this.cGroupItemWrapper, this.groupingEventData.getCGroupEventArrayList(), STANDARD_ID_C_GROUP);
+            // [1] a group
+            initGroupListWrapper(inflater, GroupType.A_GROUP, this.groupingEventData.getAGroupEventArrayList());
 
-            // [method] : D group 의 데이터를 표시하는 과정 진행
-            this.dGroupCheckBoxList = makeGroupCheckBox(this.dGroupWrapper, this.dGroupItemWrapper, this.groupingEventData.getDGroupEventArrayList(), STANDARD_ID_D_GROUP);
+            // [2] b group
 
-            // [method] : E group 의 데이터를 표시하는 과정 진행
-            this.eGroupCheckBoxList = makeGroupCheckBox(this.eGroupWrapper, this.eGroupItemWrapper, this.groupingEventData.getEGroupEventArrayList(), STANDARD_ID_E_GROUP);
+            // [3] c group
+            // [4] d group
+            // [5] e group
+
+
+
+//            // [method] : A group 의 데이터를 표시하는 과정 진행
+//            this.aGroupCheckBoxList = makeGroupCheckBox(this.aGroupWrapper, this.aGroupItemWrapper, this.groupingEventData.getAGroupEventArrayList(), STANDARD_ID_A_GROUP);
+//
+//            // [method] : B group 의 데이터를 표시하는 과정 진행
+//            this.bGroupCheckBoxList = makeGroupCheckBox(this.bGroupWrapper, this.bGroupItemWrapper, this.groupingEventData.getBGroupEventArrayList(), STANDARD_ID_B_GROUP);
+//
+//            // [method] : C group 의 데이터를 표시하는 과정 진행
+//            this.cGroupCheckBoxList = makeGroupCheckBox(this.cGroupWrapper, this.cGroupItemWrapper, this.groupingEventData.getCGroupEventArrayList(), STANDARD_ID_C_GROUP);
+//
+//            // [method] : D group 의 데이터를 표시하는 과정 진행
+//            this.dGroupCheckBoxList = makeGroupCheckBox(this.dGroupWrapper, this.dGroupItemWrapper, this.groupingEventData.getDGroupEventArrayList(), STANDARD_ID_D_GROUP);
+//
+//            // [method] : E group 의 데이터를 표시하는 과정 진행
+//            this.eGroupCheckBoxList = makeGroupCheckBox(this.eGroupWrapper, this.eGroupItemWrapper, this.groupingEventData.getEGroupEventArrayList(), STANDARD_ID_E_GROUP);
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++>> groupingEventData 를 먼저 설정해주세요.");
@@ -196,6 +222,50 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         } // [switch 1]
 
     } // End of method [setMuscleAreaStandardId]
+
+    private void initGroupListWrapper (LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
+        final String METHOD_NAME = "[initGroupListWrapper] ";
+        if (groupEventArrayList != null) {
+
+            if (!groupEventArrayList.isEmpty()){
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "------------==>> group item 생성 ");
+                // DirectSelectionGroupItem 으로 groupItem 을 생성하기
+                DirectSelectionGroupItem groupItem = createDirectSelectionGroupItem(inflater, groupType, groupEventArrayList);
+
+                // groupItemList 에 추가하기
+                addItemToGroupItemList(groupType, groupItem);
+
+                // groupListWrapper 에 추가하여 화면에 표시하기
+                addViewToGroupListWrapper(groupItem);
+            }
+        }
+    }
+
+
+    private DirectSelectionGroupItem createDirectSelectionGroupItem (LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
+
+        // [lv/C]DirectSelectionGroupItem :
+        DirectSelectionGroupItem groupItem = new DirectSelectionGroupItem.Builder(getActivity())
+                .setInflater(inflater)
+                .setGroupType(groupType)
+                .setGroupEventArrayList(groupEventArrayList)
+                .setStandardId(muscleAreaStandardId)
+                .init();
+
+        groupItem.createItem();
+
+        return groupItem;
+    }
+
+
+    private void addItemToGroupItemList(GroupType groupType, DirectSelectionGroupItem groupItem){
+        this.groupItemList.put(groupType, groupItem);
+    }
+
+    private void addViewToGroupListWrapper(DirectSelectionGroupItem groupItem) {
+        this.groupListWrapper.addView(groupItem.getItem());
+    }
 
 
     /**
@@ -274,6 +344,18 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     } // End of method [makeGroupCheckBox]
 
 
+
+//    public EventResultSet getEventResultSet() {
+//
+//
+//    }
+
+
+
+
+
+
+    // << ======================== DirectSelectionGroupItem
     /**
      * 체크된 종목이 저장되어 있는 checkedEventList 를 key(id) 로 오름차순 정렬한다. 그리고 정렬된 순서로 ArrayList<Event> 객체를 만들어서 반환한다.
      *
@@ -305,6 +387,8 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     } // End of method [getCheckedEventArrayList]
 
 
+
+    // << ======================== 여기서
     public ArrayList<Event> getNoCheckedEventList() {
 
         // [lv/C]ArrayList<Event> : 체크되지 않은 리스트들을 eventArrayList 에 추가한다.

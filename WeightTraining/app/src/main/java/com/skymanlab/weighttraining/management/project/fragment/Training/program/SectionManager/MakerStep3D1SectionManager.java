@@ -16,18 +16,18 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.program.util.EventResultSet;
+import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectPagerAdapter;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectSelectionFragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class MakerStep3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
+public class MakerStep3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep3D1SectionManager";
@@ -41,14 +41,14 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
     private ArrayList<MuscleArea> fragmentMuscleAreaList;
 
     // instance variable
-    private StepProcessManager stepProcessManager;
+    private MakerStepManager makerStepManager;
 
     // instance variable
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
 
     // instance variable
-    private DirectPagerAdapter adapter;
+    private DirectSelectionFragmentPagerAdapter adapter;
 
     // constructor
     public MakerStep3D1SectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment) {
@@ -66,12 +66,12 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TabLayout : mapping
+        // [iv/C]TabLayout : connect
         this.tabLayout = (TabLayout) getView().findViewById(R.id.f_maker_step3_1_tab);
 
-        // [iv/C]ViewPager2 : mapping
+        // [iv/C]ViewPager2 : connect
         this.viewPager = (ViewPager2) getView().findViewById(R.id.f_maker_step3_1_pager);
 
     }
@@ -81,12 +81,12 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
 
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]StepProcessManager : step 3-1
-        this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_THREE);
-        this.stepProcessManager.setPreviousClickListener(this);
-        this.stepProcessManager.setNextClickListener(this);
-        this.stepProcessManager.mappingWidget();
-        this.stepProcessManager.initWidget();
+        // [iv/C]MakerStepManager : step 3-1
+        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_THREE);
+        this.makerStepManager.setPreviousClickListener(this);
+        this.makerStepManager.setNextClickListener(this);
+        this.makerStepManager.connectWidget();
+        this.makerStepManager.initWidget();
 
         // [method] : 위에서 추가한 fragmentArrayList 와 fragmentTitleList 로 viewPager 를 만들기
         initViewPager();
@@ -181,8 +181,8 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
 
         } else {
 
-            // [lv/C]Step4D1Fragment  : step 4-1 fragment 생성 및 각 MuscleArea 의 EventResultSet 객체를 넘기기
-            MakerStep4Fragment step4_1 = MakerStep4Fragment.newInstance(
+            // [lv/C]Step4D1Fragment  : step 6 fragment 생성 및 각 MuscleArea 의 EventResultSet 객체를 넘기기
+            MakerStep6Fragment step6Fragment = MakerStep6Fragment.newInstance(
                     chestEventResultSet,
                     shoulderEventResultSet,
                     latEventResultSet,
@@ -193,7 +193,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
 
             // [lv/C]FragmentTransaction :
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.nav_home_content_container, step4_1);
+            transaction.replace(R.id.nav_home_content_wrapper, step6Fragment);
             transaction.addToBackStack(null);
             transaction.commit();
 
@@ -241,7 +241,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
         final String METHOD_NAME = "[initViewPager]";
 
         // [iv/C]DirectPagerAdapter : viewPager 의 adapter 생성
-        this.adapter = new DirectPagerAdapter(fragment, fragmentArrayList);
+        this.adapter = new DirectSelectionFragmentPagerAdapter(fragment, fragmentArrayList);
 
         // [iv/C]ViewPager2 : 위의 adapter 를 연결
         this.viewPager.setAdapter(adapter);

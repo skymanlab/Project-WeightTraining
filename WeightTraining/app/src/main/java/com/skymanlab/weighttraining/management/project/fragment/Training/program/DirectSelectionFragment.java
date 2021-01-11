@@ -111,7 +111,7 @@ public class DirectSelectionFragment extends Fragment {
 
         // [iv/C]DirectSelectionSectionManager :
         this.sectionManager = new DirectSelectionSectionManager(getActivity(), view, getActivity().getSupportFragmentManager());
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.setGroupingEventData(this.groupingEventData);
         this.sectionManager.setMuscleAreaStandardId(this.muscleArea);
         this.sectionManager.initWidget();

@@ -73,12 +73,12 @@ public class MyProgramFragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager :
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step2D2SectionManager :
         this.sectionManager = new MyProgramSectionManager(view, getActivity().getSupportFragmentManager());
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }
 }

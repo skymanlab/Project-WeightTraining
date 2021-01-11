@@ -98,50 +98,48 @@ public class EPLSectionOneManager extends SectionManager implements SectionIniti
         return restTimeSecond;
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]MaterialCardView : setNumberWrapper mapping
+        // [iv/C]MaterialCardView : setNumberWrapper connect
         this.setNumberWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_list_section_1_set_number_wrapper);
 
-        // [iv/C]TextView : setNumber mapping
+        // [iv/C]TextView : setNumber connect
         this.setNumber = (TextView) getActivity().findViewById(R.id.event_program_list_section_1_set_number);
 
-        // [iv/C]ImageView : setNumber mapping
+        // [iv/C]ImageView : setNumber connect
         this.setNumberUP = (ImageView) getActivity().findViewById(R.id.event_program_list_section_1_set_number_up);
 
-        // [iv/C]ImageView : setNumberDOWN mapping
+        // [iv/C]ImageView : setNumberDOWN connect
         this.setNumberDOWN = (ImageView) getActivity().findViewById(R.id.event_program_list_section_1_set_number_down);
 
 
-        // [iv/C]MaterialCardView : restTimeWrapper mapping
+        // [iv/C]MaterialCardView : restTimeWrapper connect
         this.restTimeWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_wrapper);
 
-        // [iv/C]TextView : restTimeMinute mapping
+        // [iv/C]TextView : restTimeMinute connect
         this.restTimeMinute = (TextView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_minute);
 
-        // [iv/C]ImageView : restTimeMinuteUP mapping
+        // [iv/C]ImageView : restTimeMinuteUP connect
         this.restTimeMinuteUP = (ImageView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_minute_up);
 
-        // [iv/C]ImageView : restTimeMinuteDOWN mapping
+        // [iv/C]ImageView : restTimeMinuteDOWN connect
         this.restTimeMinuteDOWN = (ImageView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_minute_down);
 
 
-        // [iv/C]TextView : restTimeSecond mapping
+        // [iv/C]TextView : restTimeSecond connect
         this.restTimeSecond = (TextView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_second);
 
-        // [iv/C]ImageView : restTimeSecondUP mapping
+        // [iv/C]ImageView : restTimeSecondUP connect
         this.restTimeSecondUP = (ImageView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_second_up);
 
-        // [iv/C]ImageView : restTimeSecondDOWN mapping
+        // [iv/C]ImageView : restTimeSecondDOWN connect
         this.restTimeSecondDOWN = (ImageView) getActivity().findViewById(R.id.event_program_list_section_1_rest_time_second_down);
 
         // [iv/b]canInit : 초기화 할 준비가 되었다.
         this.canInit = true;
 
     }
-
 
     @Override
     public void initWidget() {

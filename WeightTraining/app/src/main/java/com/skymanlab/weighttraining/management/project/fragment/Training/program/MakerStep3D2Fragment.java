@@ -104,7 +104,7 @@ public class MakerStep3D2Fragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : step 3-2 fragment top bar manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step3D2SectionManager : step 3-2 fragment section manager
@@ -115,7 +115,7 @@ public class MakerStep3D2Fragment extends Fragment {
         this.sectionManager.setUpperBodyGroupingEventData(upperBodyGroupingEventData);
         this.sectionManager.setArmGroupingEventData(armGroupingEventData);
         this.sectionManager.setEtcGroupingEventData(etcGroupingEventData);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
         
     }

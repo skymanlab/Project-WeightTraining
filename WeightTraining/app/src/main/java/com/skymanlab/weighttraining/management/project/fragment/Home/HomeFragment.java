@@ -87,12 +87,12 @@ public class HomeFragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : fragment top bar section manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_home_title));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]FragmentTopUserManager : fragment top user section manager
         this.topUserManager = new FragmentTopUserManager(view, false);
-        this.topUserManager.mappingWidget();
+        this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
     }
 }

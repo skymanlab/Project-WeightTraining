@@ -35,23 +35,22 @@ public class MASectionManager extends SectionManager implements SectionInitializ
         super(activity, firebaseUser);
         this.nextActivityType = nextActivityType;
     }
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : chest mapping
+        // [iv/C]TextView : chest connect
         this.chest = (TextView) getActivity().findViewById(R.id.muscle_area_chest);
 
-        // [iv/C]TextView : shoulder mapping
+        // [iv/C]TextView : shoulder connect
         this.shoulder = (TextView) getActivity().findViewById(R.id.muscle_area_shoulder);
 
-        // [iv/C]TextView : lat mapping
+        // [iv/C]TextView : lat connect
         this.lat = (TextView) getActivity().findViewById(R.id.muscle_area_lat);
 
-        // [iv/C]TextView : leg mapping
+        // [iv/C]TextView : leg connect
         this.leg = (TextView) getActivity().findViewById(R.id.muscle_area_leg);
 
-        // [iv/C]TextView : arm mapping
+        // [iv/C]TextView : arm connect
         this.arm = (TextView) getActivity().findViewById(R.id.muscle_area_arm);
 
     }

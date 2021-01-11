@@ -3,13 +3,13 @@ package com.skymanlab.weighttraining.management.project.activity;
 public interface SectionInitialization {
 
     /**
-     * [method] widget mapping : the section's all widget is mapping.
+     * [method] widget connect : the section's all widget is connect.
      */
-    public void mappingWidget();
+    void connectWidget();
 
     /**
      * [method] widget init : the section's all widget initialize.
      */
-    public void initWidget();
+    void initWidget();
 
 }

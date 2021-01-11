@@ -70,12 +70,12 @@ public class ListFragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : fragment top bar section manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_list_title));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]EventListSectionManager : section manager
         this.sectionManager = new ListSectionManager(getActivity(), view, this);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }
 }

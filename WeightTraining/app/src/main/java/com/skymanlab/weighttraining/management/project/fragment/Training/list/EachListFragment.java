@@ -81,7 +81,7 @@ public class EachListFragment extends Fragment {
 
         // [iv/C]EachListSectionManager : each list fragment section manager
         this.sectionManager = new EachListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this, this.muscleArea);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }
 }

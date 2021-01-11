@@ -66,12 +66,12 @@ public class ProgramFragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : program fragment top bar manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]ProgramSectionManager : program fragment section manager
         this.sectionManager = new ProgramSectionManager(getActivity(),getView(), getActivity().getSupportFragmentManager());
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }
 }

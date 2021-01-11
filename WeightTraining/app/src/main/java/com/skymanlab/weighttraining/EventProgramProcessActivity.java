@@ -81,7 +81,7 @@ public class EventProgramProcessActivity extends AppCompatActivity implements Re
 
                 // [iv/C]EPSPSectionManager : section 의 widget 을 초기설정
                 this.section = new EPSPSectionManager(this, this.firebaseUser, this.event, this.eventPosition, this.setNumber, this.restTime, getSupportFragmentManager());
-                this.section.mappingWidget();
+                this.section.connectWidget();
                 this.section.initWidget();
 
             } // [check 2]

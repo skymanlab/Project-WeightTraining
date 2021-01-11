@@ -11,7 +11,7 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 
-public class MyProgramSectionManager extends FragmentSectionManager implements FragmentSectionInitializable, StepProcessManager.OnNextClickListener{
+public class MyProgramSectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnNextClickListener{
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MyProgramSectionManager";
@@ -26,9 +26,9 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]RecyclerView : list mapping
+        // [iv/C]RecyclerView : list connect
         this.list = (RecyclerView)getView().findViewById(R.id.f_my_program_recycler_view);
 
     }

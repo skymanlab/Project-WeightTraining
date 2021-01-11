@@ -56,49 +56,50 @@ public class EPSectionOneEachRandomManager  extends EPSectionManager implements 
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : randomTitle mapping
+        // [iv/C]TextView : randomTitle connect
         this.randomTitle = (TextView) super.getActivity().findViewById(R.id.event_program_section_1_random_title);                                      // title
 
-        // [iv/C]LinearLayout : randomAGroupWrapper mapping / wrapper
+        // [iv/C]LinearLayout : randomAGroupWrapper connect / wrapper
         this.randomAGroupWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_a_group_wrapper);
 
-        // [iv/C]LinearLayout : randomBGroupWrapper mapping / wrapper
+        // [iv/C]LinearLayout : randomBGroupWrapper connect / wrapper
         this.randomBGroupWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_b_group_wrapper);
 
-        // [iv/C]LinearLayout : randomCGroupWrapper mapping / wrapper
+        // [iv/C]LinearLayout : randomCGroupWrapper connect / wrapper
         this.randomCGroupWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_c_group_wrapper);
 
-        // [iv/C]LinearLayout : randomDGroupWrapper mapping / wrapper
+        // [iv/C]LinearLayout : randomDGroupWrapper connect / wrapper
         this.randomDGroupWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_d_group_wrapper);
 
-        // [iv/C]LinearLayout : randomEGroupWrapper mapping / wrapper
+        // [iv/C]LinearLayout : randomEGroupWrapper connect / wrapper
         this.randomEGroupWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_e_group_wrapper);
 
-        // [iv/C]Spinner : randomAGroupCount mapping / count
+        // [iv/C]Spinner : randomAGroupCount connect / count
         this.randomAGroupCount = (Spinner) super.getActivity().findViewById(R.id.event_program_section_1_random_a_group_count);
 
-        // [iv/C]Spinner : randomBGroupCount mapping / count
+        // [iv/C]Spinner : randomBGroupCount connect / count
         this.randomBGroupCount = (Spinner) super.getActivity().findViewById(R.id.event_program_section_1_random_b_group_count);
 
-        // [iv/C]Spinner : randomCGroupCount mapping / count
+        // [iv/C]Spinner : randomCGroupCount connect / count
         this.randomCGroupCount = (Spinner) super.getActivity().findViewById(R.id.event_program_section_1_random_c_group_count);
 
-        // [iv/C]Spinner : randomDGroupCount mapping / count
+        // [iv/C]Spinner : randomDGroupCount connect / count
         this.randomDGroupCount = (Spinner) super.getActivity().findViewById(R.id.event_program_section_1_random_d_group_count);
 
-        // [iv/C]Spinner : randomEGroupCount mapping /count
+        // [iv/C]Spinner : randomEGroupCount connect /count
         this.randomEGroupCount = (Spinner) super.getActivity().findViewById(R.id.event_program_section_1_random_e_group_count);
 
-        // [iv/C]View : randomDivider mapping
+        // [iv/C]View : randomDivider connect
         this.randomDivider = (View) super.getActivity().findViewById(R.id.event_program_section_1_random_divider);
 
-        // [iv/C]LinearLayout : randomProgramWrapper mapping
+        // [iv/C]LinearLayout : randomProgramWrapper connect
         this.randomProgramWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_bt_program_wrapper);            // program button wrapper
 
-        // [iv/C]Button : randomProgram mapping
+        // [iv/C]Button : randomProgram connect
         this.randomProgram = (Button) super.getActivity().findViewById(R.id.event_program_section_1_random_bt_program);                                 // program button
+        
     }
 
     @Override

@@ -7,7 +7,7 @@
     tools:context=".NavHomeActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_home_content_container"
+        android:id="@+id/nav_home_content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/nav_home_bottom_bar"

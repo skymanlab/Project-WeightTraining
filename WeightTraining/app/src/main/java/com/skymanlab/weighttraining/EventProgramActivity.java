@@ -82,7 +82,7 @@ public class EventProgramActivity extends AppCompatActivity {
 
                 // [lv/C]TopBarManager : Top bar 초기 설정
                 TopBarManager topBarManager = new TopBarManager(this, this.firebaseUser, true, false);
-                topBarManager.mappingWidget();
+                topBarManager.connectWidget();
                 topBarManager.setTitleContent(DataFormatter.setTopTitleFormat(MuscleAreaNextActivityType.EVENT_PROGRAM, this.muscleArea));
                 topBarManager.initWidget();
 
@@ -172,25 +172,25 @@ public class EventProgramActivity extends AppCompatActivity {
 
                 // [lv/C]EPSectionOneManager : section_1 을 관리하는 메니저
                 EPSectionOneManager sectionOne = new EPSectionOneManager(activity);
-                sectionOne.mappingWidget();
+                sectionOne.connectWidget();
                 sectionOne.setSectionType(sectionType);
                 sectionOne.initWidget();
 
                 // [lv/C]EPSectionOneEachRandomManager : section_1_each_random 을 관리하는 메니저
                 EPSectionOneEachRandomManager eachRandom = new EPSectionOneEachRandomManager(activity, firebaseUser, muscleArea, groupingEventData);
-                eachRandom.mappingWidget();
+                eachRandom.connectWidget();
                 eachRandom.setSectionType(sectionType);
                 eachRandom.initWidget();
 
                 // [lv/C]EPSectionOneAllRandomManager : section_1_all_random 을 관리하는 메니저
                 EPSectionOneAllRandomManager allRandom = new EPSectionOneAllRandomManager(activity, firebaseUser, muscleArea, eventArrayList, groupingEventData);
-                allRandom.mappingWidget();
+                allRandom.connectWidget();
                 allRandom.setSectionType(sectionType);
                 allRandom.initWidget();
 
                 // [lv/C]EPSectionOneDirectManager : section_1_direct 을 관리하는 메니저
                 EPSectionOneDirectManager direct = new EPSectionOneDirectManager(activity, firebaseUser, muscleArea, groupingEventData);
-                direct.mappingWidget();
+                direct.connectWidget();
                 direct.setSectionType(sectionType);
                 direct.initWidget();
 

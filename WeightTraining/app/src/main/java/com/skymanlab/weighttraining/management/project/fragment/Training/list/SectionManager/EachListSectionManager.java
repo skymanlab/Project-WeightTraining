@@ -49,7 +49,6 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Event> eventArrayList;
 
-
     // constructor
     public EachListSectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment, MuscleArea muscleArea) {
         super(activity, view, fragmentManager);
@@ -58,15 +57,15 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]RecyclerView : recyclerView mapping
+        // [iv/C]RecyclerView : recyclerView connect
         this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_each_list_recycler_view);
 
-        // [iv/C]ContentLoadingProgressBar : progressBar mapping
+        // [iv/C]ContentLoadingProgressBar : progressBar connect
         this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_each_list_progress_bar);
 
-        // [iv/C]ImageButton : add mapping
+        // [iv/C]ImageButton : add connect
         this.add = (ImageButton) getView().findViewById(R.id.f_each_list_bt_add);
 
     }
@@ -75,7 +74,7 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
     public void initWidget() {
 
         // [method] : adapter 생성 후 recyclerView 에 설정하기
-        initRecyclerView();
+        initWidgetOfRecyclerView();
 
         // [method] : DB 에서 데이터를 가져오는 과정 진행
         loadContentByMuscleArea(this.muscleArea);
@@ -94,7 +93,7 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
     /**
      * recyclerView 의 layout manager 와 adapter 를 설정하는 초기작업 실행
      */
-    private void initRecyclerView() {
+    private void initWidgetOfRecyclerView() {
 
         // [iv/C]ArrayList<Event> : eventArrayList 생성
         this.eventArrayList = new ArrayList<>();
@@ -111,7 +110,7 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
         // [iv/C] : recyclerView 의 adapter setting
         this.recyclerView.setAdapter(this.adapter);
 
-    } // End of method [initRecyclerView]
+    } // End of method [initWidgetOfRecyclerView]
 
 
     /**

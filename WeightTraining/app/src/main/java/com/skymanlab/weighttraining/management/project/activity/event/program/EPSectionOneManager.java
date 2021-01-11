@@ -41,25 +41,24 @@ public class EPSectionOneManager  extends EPSectionManager implements SectionIni
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]RadioGroup : programMakerType mapping
+        // [iv/C]RadioGroup : programMakerType connect
         this.programMakerType = (RadioGroup) super.getActivity().findViewById(R.id.event_program_section_1_program_type);
 
-        // [iv/C]ImageView : info mapping
+        // [iv/C]ImageView : info connect
         this.info = (ImageView) super.getActivity().findViewById(R.id.event_program_section_1_info);
 
-        // [iv/C]LinearLayout : randomWrapper mapping
+        // [iv/C]LinearLayout : randomWrapper connect
         this.randomWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_random_wrapper);                              // section wrapper
 
-        // [iv/C]LinearLayout : allRandomWrapper mapping
+        // [iv/C]LinearLayout : allRandomWrapper connect
         this.allRandomWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_all_random_wrapper);                       // section wrapper
 
-        // [iv/C]LinearLayout : directWrapper mapping
+        // [iv/C]LinearLayout : directWrapper connect
         this.directWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_direct_wrapper);                              // section wrapper
 
     }
-
 
     @Override
     public void initWidget() {

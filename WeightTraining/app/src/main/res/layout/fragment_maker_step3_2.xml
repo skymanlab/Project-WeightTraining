@@ -19,7 +19,7 @@
 
         <!-- step counter -->
         <include
-            layout="@layout/include_program_step_counter"
+            layout="@layout/include_maker_step_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -31,7 +31,7 @@
             android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/f_maker_step3_2_step_content_wrapper"
+                android:id="@+id/f_maker_step3_2_each_group_random_list_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -50,7 +50,7 @@
 
         <!-- step direction selector -->
         <include
-            layout="@layout/include_program_step_direction_selector"
+            layout="@layout/include_maker_step_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" /><!-- End of step direction selector -->
     </LinearLayout>

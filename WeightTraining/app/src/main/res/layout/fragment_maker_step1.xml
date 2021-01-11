@@ -19,7 +19,7 @@
 
         <!-- step counter -->
         <include
-            layout="@layout/include_program_step_counter"
+            layout="@layout/include_maker_step_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -86,7 +86,7 @@
 
         <!-- step direction selector -->
         <include
-            layout="@layout/include_program_step_direction_selector"
+            layout="@layout/include_maker_step_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" /><!-- End of step direction selector -->
 

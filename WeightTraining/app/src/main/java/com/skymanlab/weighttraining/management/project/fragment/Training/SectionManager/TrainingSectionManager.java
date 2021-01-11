@@ -25,12 +25,12 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]MaterialCardView : eventList mapping
+        // [iv/C]MaterialCardView : eventList connect
         this.eventList = (MaterialCardView) getView().findViewById(R.id.f_training_event_list);
 
-        // [iv/C]MaterialCardView : eventProgram mapping
+        // [iv/C]MaterialCardView : eventProgram connect
         this.eventProgram = (MaterialCardView) getView().findViewById(R.id.f_training_event_program);
 
     }
@@ -43,9 +43,9 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
             @Override
             public void onClick(View v) {
 
-                // [lv/C]FragmentTransaction : TrainingFragment -> EventListFragment 이동
+                // [lv/C]FragmentTransaction : TrainingFragment -> ListFragment 이동
                 FragmentTransaction transaction = ((NavHomeActivity) getActivity()).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_home_content_container, ListFragment.newInstance());
+                transaction.replace(R.id.nav_home_content_wrapper, ListFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -59,7 +59,7 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
 
                 // [lv/C]FragmentTransaction : TrainingFragment -> ProgramFragment 이동
                 FragmentTransaction transaction = ((NavHomeActivity) getActivity()).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_home_content_container, ProgramFragment.newInstance());
+                transaction.replace(R.id.nav_home_content_wrapper, ProgramFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

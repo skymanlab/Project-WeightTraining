@@ -34,15 +34,15 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]ImageView : userPhoto mapping
+        // [iv/C]ImageView : userPhoto connect
         this.userPhoto = (ImageView) getView().findViewById(R.id.include_top_user_photo);
 
-        // [iv/C]TextView : userName mapping
+        // [iv/C]TextView : userName connect
         this.userName = (TextView) getView().findViewById(R.id.include_top_user_name);
 
-        // [iv/C]TextView : userEmail mapping
+        // [iv/C]TextView : userEmail connect
         this.userEmail = (TextView) getView().findViewById(R.id.include_top_user_email);
 
     }
@@ -52,8 +52,8 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
 
         final String METHOD_NAME = "[initWidget] ";
 
-        // [method] : user info 를 표시하는 과정 진행
-        displayUserInfo();
+        // [method] : user info 의 초기 내용을 설정한다.
+        initUserInfo();
     }
 
 
@@ -61,7 +61,7 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
      * [method] User 정보를 표시하기
      *
      */
-    private void displayUserInfo() {
+    private void initUserInfo() {
 
         // [lv/C]FirebaseUser : FirebaseAuth 를 통해 user 정보 가져오기
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -94,5 +94,5 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
 
         } // [check 1]
 
-    } // End of method [displayUserInfo]
+    } // End of method [initUserInfo]
 }

@@ -61,51 +61,51 @@ public class EPSectionOneDirectManager extends EPSectionManager implements Secti
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : directTitle mapping
+        // [iv/C]TextView : directTitle connect
         this.directTitle = (TextView) getActivity().findViewById(R.id.event_program_section_1_direct_title);                                      // title
 
 
-        // [iv/C]MaterialCardView : directAGroupWrapper mapping
+        // [iv/C]MaterialCardView : directAGroupWrapper connect
         this.directAGroupWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_section_1_direct_a_group_wrapper);
 
-        // [iv/C]MaterialCardView : directAGroupWrapper mapping
+        // [iv/C]MaterialCardView : directAGroupWrapper connect
         this.directBGroupWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_section_1_direct_b_group_wrapper);
 
-        // [iv/C]MaterialCardView : directAGroupWrapper mapping
+        // [iv/C]MaterialCardView : directAGroupWrapper connect
         this.directCGroupWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_section_1_direct_c_group_wrapper);
 
-        // [iv/C]MaterialCardView : directAGroupWrapper mapping
+        // [iv/C]MaterialCardView : directAGroupWrapper connect
         this.directDGroupWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_section_1_direct_d_group_wrapper);
 
-        // [iv/C]MaterialCardView : directAGroupWrapper mapping
+        // [iv/C]MaterialCardView : directAGroupWrapper connect
         this.directEGroupWrapper = (MaterialCardView) getActivity().findViewById(R.id.event_program_section_1_direct_e_group_wrapper);
 
 
-        // [iv/C]LinearLayout : directAGroupItemAdder mapping
+        // [iv/C]LinearLayout : directAGroupItemAdder connect
         this.directAGroupEventItemAdder = (LinearLayout) getActivity().findViewById(R.id.event_program_section_1_direct_a_group_event_item_adder);
 
-        // [iv/C]LinearLayout : directAGroupItemAdder mapping
+        // [iv/C]LinearLayout : directAGroupItemAdder connect
         this.directBGroupEventItemAdder = (LinearLayout) getActivity().findViewById(R.id.event_program_section_1_direct_b_group_event_item_adder);
 
-        // [iv/C]LinearLayout : directAGroupItemAdder mapping
+        // [iv/C]LinearLayout : directAGroupItemAdder connect
         this.directCGroupEventItemAdder = (LinearLayout) getActivity().findViewById(R.id.event_program_section_1_direct_c_group_event_item_adder);
 
-        // [iv/C]LinearLayout : directAGroupItemAdder mapping
+        // [iv/C]LinearLayout : directAGroupItemAdder connect
         this.directDGroupEventItemAdder = (LinearLayout) getActivity().findViewById(R.id.event_program_section_1_direct_d_group_event_item_adder);
 
-        // [iv/C]LinearLayout : directAGroupItemAdder mapping
+        // [iv/C]LinearLayout : directAGroupItemAdder connect
         this.directEGroupEventItemAdder = (LinearLayout) getActivity().findViewById(R.id.event_program_section_1_direct_e_group_event_item_adder);
 
 
-        // [iv/C]View : directDivider mapping
+        // [iv/C]View : directDivider connect
         this.directDivider = (View) getActivity().findViewById(R.id.event_program_section_1_direct_divider);
 
-        // [iv/C]LinearLayout : directProgramWrapper mapping
+        // [iv/C]LinearLayout : directProgramWrapper connect
         this.directProgramWrapper = (LinearLayout) getActivity().findViewById(R.id.event_program_section_1_direct_bt_program_wrapper);            // program button wrapper
 
-        // [iv/C]Button : directProgram mapping
+        // [iv/C]Button : directProgram connect
         this.directProgram = (Button) getActivity().findViewById(R.id.event_program_section_1_direct_bt_program);                                 // program button
 
     }

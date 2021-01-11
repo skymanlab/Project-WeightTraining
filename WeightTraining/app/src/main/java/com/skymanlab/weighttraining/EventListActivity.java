@@ -56,13 +56,13 @@ public class EventListActivity extends AppCompatActivity {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/true : 옳은 muscleArea 데이터입니다. <=");
                 // [lv/C]TopBarManager : Top bar 초기 설정
                 TopBarManager topBarManager = new TopBarManager(this, this.firebaseUser, true, false);
-                topBarManager.mappingWidget();
+                topBarManager.connectWidget();
                 topBarManager.setTitleContent(DataFormatter.setTopTitleFormat(MuscleAreaNextActivityType.EVENT_LIST, this.muscleArea));
                 topBarManager.initWidget();
 
                 // [lv/C]ELSectionManager : section 메니저
                 ELSectionManager sectionManager = new ELSectionManager(this, this.firebaseUser, this.muscleArea, getSupportFragmentManager());
-                sectionManager.mappingWidget();
+                sectionManager.connectWidget();
                 sectionManager.initWidget();
 
             } else {

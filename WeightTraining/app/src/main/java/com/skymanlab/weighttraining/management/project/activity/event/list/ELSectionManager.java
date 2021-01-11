@@ -37,17 +37,16 @@ public class ELSectionManager extends SectionManager implements SectionInitializ
         this.fragmentManager = fragmentManager;
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]LinearLayout : titleWrapper mapping
+        // [iv/C]LinearLayout : titleWrapper connect
         this.titleWrapper = (LinearLayout) getActivity().findViewById(R.id.event_list_section_1_title_wrapper);
 
-        // [iv/C]ListView : eventListLv mapping
+        // [iv/C]ListView : eventListLv connect
         this.eventListLv = (ListView) getActivity().findViewById(R.id.event_list_section_1_lv_event_item);
 
-        // [iv/C]ProgressBar : progressBar mapping
+        // [iv/C]ProgressBar : progressBar connect
         this.progressBar = (ProgressBar) getActivity().findViewById(R.id.event_list_section_1_progressbar);
 
     }

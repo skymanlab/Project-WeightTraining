@@ -95,33 +95,32 @@ public class EPSPSectionManager extends SectionManager implements SectionInitial
         this.restTime = restTime;
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : eventName mapping
+        // [iv/C]TextView : eventName connect
         this.eventName = (TextView) getActivity().findViewById(R.id.event_program_process_event_name);
 
-        // [iv/C]TextView : properWeight mapping
+        // [iv/C]TextView : properWeight connect
         this.properWeight = (TextView) getActivity().findViewById(R.id.event_program_process_proper_weight);
 
-        // [iv/C]TextView : maxWeight mapping
+        // [iv/C]TextView : maxWeight connect
         this.maxWeight = (TextView) getActivity().findViewById(R.id.event_program_process_max_weight);
 
-        // [iv/C]TextView : restTimeCounter mapping
+        // [iv/C]TextView : restTimeCounter connect
         this.restTimeCounter = (TextView) getActivity().findViewById(R.id.event_program_process_rest_time_counter);
 
-        // [iv/C]TextView : restTimeChange mapping
+        // [iv/C]TextView : restTimeChange connect
         this.restTimeChange = (TextView) getActivity().findViewById(R.id.event_program_process_rest_time_change);
 
 
-        // [iv/C]LinearLayout : setStepWrapper1 mapping
+        // [iv/C]LinearLayout : setStepWrapper1 connect
         this.setStepWrapper1 = (LinearLayout) getActivity().findViewById(R.id.event_program_process_set_step_wrapper_1);
 
-        // [iv/C]LinearLayout : setStepWrapper2 mapping
+        // [iv/C]LinearLayout : setStepWrapper2 connect
         this.setStepWrapper2 = (LinearLayout) getActivity().findViewById(R.id.event_program_process_set_step_wrapper_2);
 
-        // [iv/C]MaterialButton : setStepButtonList mapping
+        // [iv/C]MaterialButton : setStepButtonList connect
         this.setStepButtonList = new MaterialButton[MAX_SET_NUMBER];
         this.setStepButtonList[0] = (MaterialButton) getActivity().findViewById(R.id.event_program_process_bt_set_step_1);
         this.setStepButtonList[1] = (MaterialButton) getActivity().findViewById(R.id.event_program_process_bt_set_step_2);
@@ -134,7 +133,7 @@ public class EPSPSectionManager extends SectionManager implements SectionInitial
         this.setStepButtonList[8] = (MaterialButton) getActivity().findViewById(R.id.event_program_process_bt_set_step_9);
         this.setStepButtonList[9] = (MaterialButton) getActivity().findViewById(R.id.event_program_process_bt_set_step_10);
 
-        // [iv/C]ImageView : setStepImageList mapping
+        // [iv/C]ImageView : setStepImageList connect
         this.setStepImageList = new ImageView[MAX_SET_NUMBER - 1];
         this.setStepImageList[0] = (ImageView) getActivity().findViewById(R.id.event_program_process_im_step_rest_time_processing_1);
         this.setStepImageList[1] = (ImageView) getActivity().findViewById(R.id.event_program_process_im_step_rest_time_processing_2);
@@ -146,7 +145,7 @@ public class EPSPSectionManager extends SectionManager implements SectionInitial
         this.setStepImageList[7] = (ImageView) getActivity().findViewById(R.id.event_program_process_im_step_rest_time_processing_8);
         this.setStepImageList[8] = (ImageView) getActivity().findViewById(R.id.event_program_process_im_step_rest_time_processing_9);
 
-        // [iv/C]MaterialButton : nextEventGo mapping
+        // [iv/C]MaterialButton : nextEventGo connect
         this.nextEventGo = (MaterialButton) getActivity().findViewById(R.id.event_program_process_bt_next_event);
 
     }

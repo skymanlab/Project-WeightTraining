@@ -34,7 +34,7 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 
 import java.util.ArrayList;
 
-public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable,StepProcessManager.OnPreviousClickListener, StepProcessManager.OnNextClickListener {
+public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep2SectionManager";
@@ -53,7 +53,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     private ContentLoadingProgressBar progressBar;
 
     // instance variable
-    private StepProcessManager stepProcessManager;
+    private MakerStepManager makerStepManager;
 
     // instance variable
     private boolean[] isSelectedMuscleAreaList; // toggle button 에서 클릭 한 값을 알아내는
@@ -65,27 +65,27 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]ToggleButton : [0] chest mapping
+        // [iv/C]ToggleButton : [0] chest connect
         this.chest = (ToggleButton) getView().findViewById(R.id.f_maker_step2_chest);
 
-        // [iv/C]ToggleButton : [1] shoulder mapping
+        // [iv/C]ToggleButton : [1] shoulder connect
         this.shoulder = (ToggleButton) getView().findViewById(R.id.f_maker_step2_shoulder);
 
-        // [iv/C]ToggleButton : [2] lat mapping
+        // [iv/C]ToggleButton : [2] lat connect
         this.lat = (ToggleButton) getView().findViewById(R.id.f_maker_step2_lat);
 
-        // [iv/C]ToggleButton : [3] upperBody mapping
+        // [iv/C]ToggleButton : [3] upperBody connect
         this.upperBody = (ToggleButton) getView().findViewById(R.id.f_maker_step2_upper_body);
 
-        // [iv/C]ToggleButton : [4] arm mapping
+        // [iv/C]ToggleButton : [4] arm connect
         this.arm = (ToggleButton) getView().findViewById(R.id.f_maker_step2_arm);
 
-        // [iv/C]ToggleButton : [5] etc mapping
+        // [iv/C]ToggleButton : [5] etc connect
         this.etc = (ToggleButton) getView().findViewById(R.id.f_maker_step2_etc);
 
-        // [iv/C]ContentLoadingProgressBar : progressBar mapping
+        // [iv/C]ContentLoadingProgressBar : progressBar connect
         this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_maker_step2_progress_bar);
 
     }
@@ -93,12 +93,12 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     @Override
     public void initWidget() {
 
-        // [iv/C]StepProcessManager : step 2 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
-        this.stepProcessManager = new StepProcessManager(getView(), getFragmentManager(), StepProcessManager.STEP_TWO);
-        this.stepProcessManager.setPreviousClickListener(this);
-        this.stepProcessManager.setNextClickListener(this);
-        this.stepProcessManager.mappingWidget();
-        this.stepProcessManager.initWidget();
+        // [iv/C]MakerStepManager : step 2 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
+        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_TWO);
+        this.makerStepManager.setPreviousClickListener(this);
+        this.makerStepManager.setNextClickListener(this);
+        this.makerStepManager.connectWidget();
+        this.makerStepManager.initWidget();
 
         // [iv/b]isSelectedMuscleAreaList : ToggleButton 과 1:1 매핑한 값을 초기화한다.(초기값은 false 이다.)
         this.isSelectedMuscleAreaList = new boolean[6];
@@ -326,18 +326,18 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
         // [check 1] : step1D0Type 이 뭐냐?
         switch (this.step1SelectedType) {
-            case MakerStep1SectionManager.STEP_1_DIRECT_TYPE:
+            case MakerStepManager.MAKER_TYPE_DIRECT_SELECTION:
                 // direct
                 // [lv/C]Step3D1Fragment : step 3-1 fragment 객체 생성
                 MakerStep3D1Fragment step3_1Fragment = MakerStep3D1Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-1 fragment 화면 전환
-                transaction.replace(R.id.nav_home_content_container, step3_1Fragment);
+                transaction.replace(R.id.nav_home_content_wrapper, step3_1Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
 
-            case MakerStep1SectionManager.STEP_1_EACH_RANDOM_TYPE:
+            case MakerStepManager.MAKER_TYPE_EACH_GROUP_RANDOM:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 each random 을 선택하였습니다.");
                 // each random
@@ -345,13 +345,13 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 MakerStep3D2Fragment step3_2Fragment = MakerStep3D2Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-2 fragment 화면 전환
-                transaction.replace(R.id.nav_home_content_container, step3_2Fragment);
+                transaction.replace(R.id.nav_home_content_wrapper, step3_2Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
 
                 break;
 
-            case MakerStep1SectionManager.STEP_1_ALL_RANDOM_TYPE:
+            case MakerStepManager.MAKER_TYPE_ALL_GROUP_RANDOM:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> step1 에서 all random 을 선택하였습니다.");
                 // all random
@@ -359,7 +359,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 MakerStep3D3Fragment step3_3Fragment = MakerStep3D3Fragment.newInstance(chest, shoulder, lat, upperBody, arm, etc);
 
                 // [lv/C]FragmentTransaction : step 3-3 fragment 화면 전환
-                transaction.replace(R.id.nav_home_content_container, step3_3Fragment);
+                transaction.replace(R.id.nav_home_content_wrapper, step3_3Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
 

@@ -50,24 +50,24 @@ public class EPSectionOneAllRandomManager extends EPSectionManager implements Se
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]TextView : allRandomTitle mapping
+        // [iv/C]TextView : allRandomTitle connect
         this.allRandomTitle = (TextView) super.getActivity().findViewById(R.id.event_program_section_1_all_random_title);                               // title
 
-        // [iv/C]LinearLayout :  mapping
+        // [iv/C]LinearLayout :  connect
         this.allRandomGroupTotalCountWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_all_random_group_total_count_wrapper);
 
-        // [iv/C]Spinner : allRandomGroupTotalCount mapping
+        // [iv/C]Spinner : allRandomGroupTotalCount connect
         this.allRandomGroupTotalCount = (Spinner) super.getActivity().findViewById(R.id.event_program_section_1_all_random_group_total_count);
 
-        // [iv/C]View : allRandomDivider mapping
+        // [iv/C]View : allRandomDivider connect
         this.allRandomDivider = (View) super.getActivity().findViewById(R.id.event_program_section_1_all_random_divider);
 
-        // [iv/C]LinearLayout : allRandomProgramWrapper mapping
+        // [iv/C]LinearLayout : allRandomProgramWrapper connect
         this.allRandomProgramWrapper = (LinearLayout) super.getActivity().findViewById(R.id.event_program_section_1_all_random_bt_program_wrapper);     // program button wrapper
 
-        // [iv/C]Button : allRandomProgram mapping
+        // [iv/C]Button : allRandomProgram connect
         this.allRandomProgram = (Button) super.getActivity().findViewById(R.id.event_program_section_1_all_random_bt_program);                          // program button
 
     }

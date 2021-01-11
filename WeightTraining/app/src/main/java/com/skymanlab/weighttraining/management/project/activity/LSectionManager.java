@@ -35,9 +35,9 @@ public class LSectionManager extends SectionManager implements SectionInitializa
     }
 
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]Button : googleAuth mapping
+        // [iv/C]Button : googleAuth connect
         this.googleAuth = (SignInButton) getActivity().findViewById(R.id.login_google_auth);
 
     }

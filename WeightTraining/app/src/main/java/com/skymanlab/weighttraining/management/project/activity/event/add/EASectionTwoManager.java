@@ -44,20 +44,19 @@ public class EASectionTwoManager extends SectionManager implements SectionInitia
         this.fragmentManager = fragmentManager;
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]LinearLayout : titleWrapper2 mapping
+        // [iv/C]LinearLayout : titleWrapper2 connect
         this.titleWrapper2 = (LinearLayout) getActivity().findViewById(R.id.event_add_section_2_title_wrapper);
 
-        // [iv/C]TextView : display mapping
+        // [iv/C]TextView : display connect
         this.display = (TextView) getActivity().findViewById(R.id.event_add_section_2_bt_display);
 
-        // [iv/C]ListView : eventListLv mapping
+        // [iv/C]ListView : eventListLv connect
         this.eventListLv = (ListView) getActivity().findViewById(R.id.event_add_section_2_lv_event_item);
 
-        // [iv/C]ProgressBar : progressBar mapping
+        // [iv/C]ProgressBar : progressBar connect
         this.progressBar =  (ProgressBar) getActivity().findViewById(R.id.event_add_section_2_progressbar);
 
     }

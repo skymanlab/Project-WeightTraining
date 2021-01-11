@@ -30,17 +30,16 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
         super(activity, view, fragmentManager);
     }
 
-
     @Override
-    public void mappingWidget() {
+    public void connectWidget() {
 
-        // [iv/C]MaterialCardView : programMaker mapping
+        // [iv/C]MaterialCardView : programMaker connect
         this.programMaker = (MaterialCardView)getView().findViewById(R.id.f_program_menu_program_maker);
 
-        // [iv/C]MaterialCardView : myProgram mapping
+        // [iv/C]MaterialCardView : myProgram connect
         this.myProgram = (MaterialCardView)getView().findViewById(R.id.f_program_menu_my_program);
 
-        // [iv/C]MaterialCardView : recommendProgram mapping
+        // [iv/C]MaterialCardView : recommendProgram connect
         this.recommendProgram = (MaterialCardView)getView().findViewById(R.id.f_program_menu_recommend_program);
 
     }
@@ -58,7 +57,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
 
                 // [lv/C]FragmentTransaction : maker step 1 fragment 로 이동하기 FragmentTransaction 객체 생성
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_home_content_container, step1Fragment);
+                transaction.replace(R.id.nav_home_content_wrapper, step1Fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
 
@@ -76,7 +75,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
 
                 // [lv/C]FragmentTransaction : my program fragment 로 이동하기 FragmentTransaction 객체 생성
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_home_content_container, myProgramFragment);
+                transaction.replace(R.id.nav_home_content_wrapper, myProgramFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
 

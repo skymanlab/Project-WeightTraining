@@ -79,12 +79,12 @@ public class TrainingFragment extends Fragment {
 
         // [iv/C]FragmentTopBarManager : fragment top bar section manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_training_title));
-        this.topBarManager.mappingWidget();
+        this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]TrainingSectionManager : training fragment section manager
         this.sectionManager = new TrainingSectionManager(getActivity(), view);
-        this.sectionManager.mappingWidget();
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }
 }
