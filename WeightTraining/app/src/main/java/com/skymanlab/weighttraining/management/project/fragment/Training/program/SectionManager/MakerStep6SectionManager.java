@@ -32,7 +32,7 @@ import java.util.Iterator;
 public class MakerStep6SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] MakerStep4SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep6SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -91,13 +91,13 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
     public void connectWidget() {
 
         // [iv/C]HorizontalScrollView : finalOrderListScroll connect
-        this.finalOrderListScroll = (HorizontalScrollView) getView().findViewById(R.id.f_maker_step4_final_order_list_scroll);
+        this.finalOrderListScroll = (HorizontalScrollView) getView().findViewById(R.id.f_maker_step6_final_order_list_scroll);
 
         // [iv/C]LinearLayout : finalOrderListWrapper connect
-        this.finalOrderListWrapper = (LinearLayout) getView().findViewById(R.id.f_maker_step4_final_order_list_wrapper);
+        this.finalOrderListWrapper = (LinearLayout) getView().findViewById(R.id.f_maker_step6_final_order_list_wrapper);
 
         // [iv/C]GridLayout : eventListWrapper connect
-        this.eventListWrapper = (GridLayout) getView().findViewById(R.id.f_maker_step4_event_list_wrapper);
+        this.eventListWrapper = (GridLayout) getView().findViewById(R.id.f_maker_step6_event_list_wrapper);
 
     }
 

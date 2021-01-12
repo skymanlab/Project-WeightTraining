@@ -109,18 +109,18 @@
     <!-- Fragment : maker step3-3 -->
     <string name="f_maker_step3_3_comment">각 근육 부위의 전체에서 개수를 정해주세요.</string>
     <string name="f_maker_step3_3_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
-    `
-    <!-- Fragment : maker step4-1 -->
-    <string name="f_maker_step4_comment">순서를 정해주세요.</string>
-    <string name="f_maker_step4_final_order_list_title">최종 순서</string>
-    <string name="f_maker_step4_selected_item_list_title">선택 목록</string>
+
+    <!-- Fragment : maker step4 -->
+    <string name="f_maker_step4_comment">선택된 항목들을 확인합니다.</string>
 
     <!-- Fragment : maker step5 -->
-    <string name="f_maker_step5_comment"></string>
+    <string name="f_maker_step5_comment">각 항목별로 초기 설정을 해주세요.</string>
     <string name="f_maker_step5_"></string>
 
     <!-- Fragment : program, step6 -->
-    <string name="f_maker_step6_comment"></string>
+    <string name="f_maker_step6_comment">순서를 정해주세요.</string>
+    <string name="f_maker_step6_final_order_list_title">최종 순서</string>
+    <string name="f_maker_step6_selected_item_list_title">선택 목록</string>
     <string name="f_maker_ste_6_"></string>
 
     <!-- Fragment : my program -->
@@ -313,6 +313,10 @@
     <string name="cu_event_program_item_max_weight">▶ 최대 무게 : </string>
     <string name="cu_event_program_item_max_weight_default">예) 80kg</string>
     <string name="cu_event_program_item_"></string>
+
+    <!-- Custom : selected event item -->
+    <string name="cu_selected_event_item_muscle_area_number">예) 가슴 1</string>
+    <string name="cu_selected_event_item_event_name">예) 벤치 프레스</string>
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

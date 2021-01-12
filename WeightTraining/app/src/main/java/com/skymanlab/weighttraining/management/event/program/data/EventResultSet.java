@@ -40,4 +40,9 @@ public class EventResultSet implements Serializable {
     public void addNoSelectedEventArrayList(Event event) {
         this.noSelectedEventArrayList.add(event);
     }
+
+    public void initArrayList() {
+        this.selectedEventArrayList = new ArrayList<>();
+        this.noSelectedEventArrayList = new ArrayList<>();
+    }
 }

@@ -179,8 +179,8 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            // [method] : widget mapping
-            mappingWidget(itemView);
+            // [method] : widget connect
+            connectWidget(itemView);
         }
 
         // getter
@@ -217,9 +217,9 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
         }
 
         /**
-         * [method] widget mapping
+         * [method] widget connect
          */
-        private void mappingWidget(View itemView) {
+        private void connectWidget(View itemView) {
 
             count = (TextView) itemView.findViewById(R.id.cu_event_item_count);
             eventName = (TextView) itemView.findViewById(R.id.cu_event_item_event_name);

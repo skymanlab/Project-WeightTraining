@@ -14,17 +14,18 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep4SectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep6SectionManager;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MakerStep6Fragment#newInstance} factory method to
+ * Use the {@link MakerStep4Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MakerStep6Fragment extends Fragment {
+public class MakerStep4Fragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTP] MakerStep6Fragment";
+    private static final String CLASS_NAME = "[PFTP] MakerStep4Fragment";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
@@ -45,10 +46,10 @@ public class MakerStep6Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
-    private MakerStep6SectionManager sectionManager;
+    private MakerStep4SectionManager sectionManager;
 
     // constructor
-    public MakerStep6Fragment() {
+    public MakerStep4Fragment() {
         // Required empty public constructor
     }
 
@@ -56,19 +57,20 @@ public class MakerStep6Fragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment Step4D1Fragment.
+     * @return A new instance of fragment Step4Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MakerStep6Fragment newInstance(EventResultSet chest,
+    public static MakerStep4Fragment newInstance(EventResultSet chest,
                                                  EventResultSet shoulder,
                                                  EventResultSet lat,
                                                  EventResultSet upperBody,
                                                  EventResultSet arm,
                                                  EventResultSet etc) {
 
-        MakerStep6Fragment fragment = new MakerStep6Fragment();
+        MakerStep4Fragment fragment = new MakerStep4Fragment();
 
         Bundle args = new Bundle();
+
         args.putSerializable(CHEST_EVENT_RESULT_SET, chest);             // [0] chest
         args.putSerializable(SHOULDER_EVENT_RESULT_SET, shoulder);       // [1] shoulder
         args.putSerializable(LAT_EVENT_RESULT_SET, lat);                 // [2] lat
@@ -91,39 +93,35 @@ public class MakerStep6Fragment extends Fragment {
             this.upperBodyEventResultSet = (EventResultSet) getArguments().getSerializable(UPPER_BODY_EVENT_RESULT_SET); // [3] upper body
             this.armEventResultSet = (EventResultSet) getArguments().getSerializable(ARM_EVENT_RESULT_SET);              // [4] arm
             this.etcEventResultSet = (EventResultSet) getArguments().getSerializable(ETC_EVENT_RESULT_SET);              // [5] etc
-        }
 
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maker_step6, container, false);
+        return inflater.inflate(R.layout.fragment_maker_step4, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]FragmentTopBarManager : step 6 fragment top bar
+        // [iv/C]FragmentTopBarManager : step 4 fragment top bar
         this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step4D1SectionManager : step 6 fragment section
-        this.sectionManager = new MakerStep6SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
-        this.sectionManager.setSelectedChestEventArrayList(this.chestEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedShoulderEventArrayList(this.shoulderEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedLatEventArrayList(this.latEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedUpperBodyEventArrayList(this.upperBodyEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedArmEventArrayList(this.armEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedEtcEventArrayList(this.etcEventResultSet.getSelectedEventArrayList());
+        // [iv/C]Step4D1SectionManager : step 4 fragment section
+        this.sectionManager = new MakerStep4SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        this.sectionManager.setChestEventResultSet(this.chestEventResultSet);
+        this.sectionManager.setShoulderEventResultSet(this.shoulderEventResultSet);
+        this.sectionManager.setLatEventResultSet(this.latEventResultSet);
+        this.sectionManager.setUpperBodyEventResultSet(this.upperBodyEventResultSet);
+        this.sectionManager.setArmEventResultSet(this.armEventResultSet);
+        this.sectionManager.setEtcEventResultSet(this.etcEventResultSet);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
-
     }
-
-
 }

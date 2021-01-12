@@ -40,7 +40,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] DirectSelectionSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final int STANDARD_ID_CHEST = 100;
@@ -50,40 +50,9 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     private static final int STANDARD_ID_ARM = 500;
     private static final int STANDARD_ID_ETC = 600;
 
-    // constant
-    private static final int STANDARD_ID_A_GROUP = 10;
-    private static final int STANDARD_ID_B_GROUP = 20;
-    private static final int STANDARD_ID_C_GROUP = 30;
-    private static final int STANDARD_ID_D_GROUP = 40;
-    private static final int STANDARD_ID_E_GROUP = 50;
-
-    // instance variable
-    private MaterialCardView aGroupWrapper;
-    private LinearLayout aGroupItemWrapper;
-    private CheckBox[] aGroupCheckBoxList;
-
-    private MaterialCardView bGroupWrapper;
-    private LinearLayout bGroupItemWrapper;
-    private CheckBox[] bGroupCheckBoxList;
-
-    private MaterialCardView cGroupWrapper;
-    private LinearLayout cGroupItemWrapper;
-    private CheckBox[] cGroupCheckBoxList;
-
-    private MaterialCardView dGroupWrapper;
-    private LinearLayout dGroupItemWrapper;
-    private CheckBox[] dGroupCheckBoxList;
-
-    private MaterialCardView eGroupWrapper;
-    private LinearLayout eGroupItemWrapper;
-    private CheckBox[] eGroupCheckBoxList;
-
     // instance variable
     private GroupingEventData groupingEventData = null;
     private int muscleAreaStandardId = 0;
-    private HashMap<Integer, Event> checkedEventList = new HashMap<>();
-    private ArrayList<Event> noCheckedEventList = new ArrayList<>();
-
 
     // instance variable
     private LinearLayout groupListWrapper;
@@ -105,36 +74,6 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         // [iv/C]LinearLayout : groupListWrapper connection
         this.groupListWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_group_list_wrapper);
 
-        // [iv/C]MaterialCardView : connect
-        this.aGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_a_group_wrapper);
-
-        // [iv/C]LinearLayout : connect
-        this.aGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_a_group_item_wrapper);
-
-        // [iv/C]MaterialCardView : connect
-        this.bGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_b_group_wrapper);
-
-        // [iv/C]LinearLayout : connect
-        this.bGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_b_group_item_wrapper);
-
-        // [iv/C]MaterialCardView : connect
-        this.cGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_c_group_wrapper);
-
-        // [iv/C]LinearLayout : connect
-        this.cGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_c_group_item_wrapper);
-
-        // [iv/C]MaterialCardView : connect
-        this.dGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_d_group_wrapper);
-
-        // [iv/C]LinearLayout : connect
-        this.dGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_d_group_item_wrapper);
-
-        // [iv/C]MaterialCardView : connect
-        this.eGroupWrapper = (MaterialCardView) getView().findViewById(R.id.f_direct_selection_e_group_wrapper);
-
-        // [iv/C]LinearLayout : connect
-        this.eGroupItemWrapper = (LinearLayout) getView().findViewById(R.id.f_direct_selection_e_group_item_wrapper);
-
     }
 
     @Override
@@ -146,35 +85,26 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         if (this.groupingEventData != null && (0 < this.muscleAreaStandardId)) {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>+_+_+_+_+_+_+_+_+_+_ DirectSelectionSectionManager 2. initWidget 조건 성립");
 
+            // [iv/C]HashMap<GroupType, DirectSelectionGroupItem> :
             this.groupItemList = new HashMap<GroupType, DirectSelectionGroupItem>();
 
+            // [lv/C]LayoutInflater :
             LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             // [1] a group
             initGroupListWrapper(inflater, GroupType.A_GROUP, this.groupingEventData.getAGroupEventArrayList());
 
             // [2] b group
+            initGroupListWrapper(inflater, GroupType.B_GROUP, this.groupingEventData.getBGroupEventArrayList());
 
             // [3] c group
+            initGroupListWrapper(inflater, GroupType.C_GROUP, this.groupingEventData.getCGroupEventArrayList());
+
             // [4] d group
+            initGroupListWrapper(inflater, GroupType.D_GROUP, this.groupingEventData.getDGroupEventArrayList());
+
             // [5] e group
-
-
-
-//            // [method] : A group 의 데이터를 표시하는 과정 진행
-//            this.aGroupCheckBoxList = makeGroupCheckBox(this.aGroupWrapper, this.aGroupItemWrapper, this.groupingEventData.getAGroupEventArrayList(), STANDARD_ID_A_GROUP);
-//
-//            // [method] : B group 의 데이터를 표시하는 과정 진행
-//            this.bGroupCheckBoxList = makeGroupCheckBox(this.bGroupWrapper, this.bGroupItemWrapper, this.groupingEventData.getBGroupEventArrayList(), STANDARD_ID_B_GROUP);
-//
-//            // [method] : C group 의 데이터를 표시하는 과정 진행
-//            this.cGroupCheckBoxList = makeGroupCheckBox(this.cGroupWrapper, this.cGroupItemWrapper, this.groupingEventData.getCGroupEventArrayList(), STANDARD_ID_C_GROUP);
-//
-//            // [method] : D group 의 데이터를 표시하는 과정 진행
-//            this.dGroupCheckBoxList = makeGroupCheckBox(this.dGroupWrapper, this.dGroupItemWrapper, this.groupingEventData.getDGroupEventArrayList(), STANDARD_ID_D_GROUP);
-//
-//            // [method] : E group 의 데이터를 표시하는 과정 진행
-//            this.eGroupCheckBoxList = makeGroupCheckBox(this.eGroupWrapper, this.eGroupItemWrapper, this.groupingEventData.getEGroupEventArrayList(), STANDARD_ID_E_GROUP);
+            initGroupListWrapper(inflater, GroupType.E_GROUP, this.groupingEventData.getEGroupEventArrayList());
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++>> groupingEventData 를 먼저 설정해주세요.");
@@ -223,6 +153,13 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     } // End of method [setMuscleAreaStandardId]
 
+
+    /**
+     * groupListWrapper 에 groupItem 을 화면에 표시하는 초기 내용을 설정한다.
+     * @param inflater
+     * @param groupType
+     * @param groupEventArrayList
+     */
     private void initGroupListWrapper (LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
         final String METHOD_NAME = "[initGroupListWrapper] ";
         if (groupEventArrayList != null) {
@@ -240,9 +177,16 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
                 addViewToGroupListWrapper(groupItem);
             }
         }
-    }
+    } // End of method [initGroupListWrapper]
 
 
+    /**
+     * 각 그룹별로 groupItem 을 DirectSelectionGroupItem 을 이용하여 객체를 생성한다.
+     * @param inflater
+     * @param groupType
+     * @param groupEventArrayList
+     * @return
+     */
     private DirectSelectionGroupItem createDirectSelectionGroupItem (LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
 
         // [lv/C]DirectSelectionGroupItem :
@@ -256,185 +200,100 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         groupItem.createItem();
 
         return groupItem;
-    }
+
+    } // End of method [createDirectSelectionGroupItem]
 
 
+    /**
+     * DirectSelectionGroupItem 객체를 groupItemList 에 추가하기
+     * @param groupType
+     * @param groupItem
+     */
     private void addItemToGroupItemList(GroupType groupType, DirectSelectionGroupItem groupItem){
         this.groupItemList.put(groupType, groupItem);
-    }
+    } // End of method [addItemToGroupItemList]
 
+
+    /**
+     * DirectSelectionGroupItem 객체의 view(item) 을 groupListWrapper 에 추가하여 화면에 표시하기
+     * @param groupItem
+     */
     private void addViewToGroupListWrapper(DirectSelectionGroupItem groupItem) {
         this.groupListWrapper.addView(groupItem.getItem());
-    }
+    } // End of method [addViewToGroupListWrapper]
 
 
     /**
-     * [method] 하나의 그룹의 eventDataArrayList 로 checkBox 를 만들고 관리하기 위한 id 를 따로 보관한다.
+     * 각 그룹의 EventResultSet 을 모두 합하여 반환한다.
+     * @return
      */
-    private CheckBox[] makeGroupCheckBox(MaterialCardView groupWrapper, LinearLayout groupItemWrapper, ArrayList<Event> groupEventArrayList, int groupStandardId) {
-        final String METHOD_NAME = "[makeGroupCheckBox] ";
+    public EventResultSet getEventResultSetOfAllGroup() {
 
-        // [lv/C]CheckBox : CheckBox 객체를 저장할 변수
-        CheckBox[] groupCheckBoxList = new CheckBox[groupEventArrayList.size()];
+        // [lv/C]EventResultSet : 각 그룹의 EventResultSet 을 모두 합하기 위해서
+        EventResultSet allGroupEventResultSet = new EventResultSet();
 
-        // [check 1] : true(groupEventArrayList 의 size 가 0) -> groupWrapper 를 GONE / false -> groupEventArrayList 의 내용을 groupItemWrapper 에 CheckBox 를 만들어 추가한다.
-        if (groupEventArrayList.isEmpty()) {
+        // a group
+        if (groupItemList.get(GroupType.A_GROUP) != null) {
 
-            // [lv/C]MaterialCardView : 이 그룹의 wrapper 를 GONE
-            groupWrapper.setVisibility(View.GONE);
+            // [lv/C]EventResultSet : a group 의 eventResultSet 가져오기
+            EventResultSet aGroup = groupItemList.get(GroupType.A_GROUP).getEventResultSet();
 
-        } else {
-
-            // [cycle 1] : groupEventArrayList 의 모든 데이터를 CheckBox 로 표시하기
-            for (int index = 0; index < groupEventArrayList.size(); index++) {
-
-                int finalIndex = index;
-
-                // [lv/i]id : id 만들기
-                int id = muscleAreaStandardId + groupStandardId + index;
-
-                // [lv/C]CheckBox : id 를 부여받은 CheckBox 생성하기
-                MaterialCheckBox eventCheckBox = new MaterialCheckBox(getActivity());
-                eventCheckBox.setId(id);
-                eventCheckBox.setText(groupEventArrayList.get(index).getEventName());
-                eventCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                        // [check 1] : true -> checkedEventList 에 event 키 값으로 추가 / false -> checkedEventList 에 추가 되었는지 확인
-                        if (b) {
-
-                            // [iv/C]HashMap<Integer, Event> : id 를 key 로 하여 추가한다.
-                            checkedEventList.put(id, groupEventArrayList.get(finalIndex));
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> key = " + id + " 의 값을 추가한다.");
-
-                            // [lv/C]CheckBox : 색 변경
-                            eventCheckBox.setBackgroundResource(R.color.colorBackgroundGray);
-
-                        } else {
-
-                            // [check 2] : id 를 key 로 하여 추가된 데이터가 있는지 검사한다.
-                            if (checkedEventList.get(id) != null) {
-
-                                // [iv/C]HashMap<Integer, Event> : id 를 key 하여 추가된 데이터가 있으면 삭제한다.
-                                checkedEventList.remove(id);
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> key = " + id + " 을 삭제한다.");
-
-                                // [lv/C]CheckBox : 기존의 색으로 변경
-                                eventCheckBox.setBackgroundResource(R.color.colorBackgroundWhite);
-
-                            } else {
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> key = " + id + " 은 추가되지 않았으므로 삭제하지 않는다.");
-                            } // [check 2]
-                        } // [check 1]
-                    }
-                });
-
-                // [lv/C]LinearLayout : 해당 group 의 itemWrapper 에 위의 CheckBox 를 추가한다.
-                groupItemWrapper.addView(eventCheckBox);
-
-                // [lv/C]CheckBox : a group 의 CheckBox 를 관리하는 리스트에 저장
-                groupCheckBoxList[index] = eventCheckBox;
-
-            } // [cycle 1]
-
-        } // [check 1]
-
-        return groupCheckBoxList;
-    } // End of method [makeGroupCheckBox]
-
-
-
-//    public EventResultSet getEventResultSet() {
-//
-//
-//    }
-
-
-
-
-
-
-    // << ======================== DirectSelectionGroupItem
-    /**
-     * 체크된 종목이 저장되어 있는 checkedEventList 를 key(id) 로 오름차순 정렬한다. 그리고 정렬된 순서로 ArrayList<Event> 객체를 만들어서 반환한다.
-     *
-     * @return 정렬된 순서로 만들어진 ArrayList 객체
-     */
-    public ArrayList<Event> getCheckedEventArrayList() {
-
-        // [lv/C]ArrayList<Event> : 체크된 리스트들을 정렬하여 eventArrayList 에 추가한다.
-        ArrayList<Event> eventArrayList = new ArrayList<>();
-
-        // [lv/C]TreeMap<Integer, Event> : 체크된 항목이 저장되어 있는 checkedEventList 를 key 정렬하기 위해 TreeMap 으로 만든다.
-        TreeMap<Integer, Event> treeMap = new TreeMap<Integer, Event>(this.checkedEventList);
-
-        // [lv/C]Iterator<Integer> : key 를 오름차순으로 정렬
-        Iterator<Integer> sortedKey = treeMap.keySet().iterator();
-
-        // [cycle 1] : sortedKey 로 정렬된 순서대로 모든 데이터확인하기
-        while (sortedKey.hasNext()) {
-
-            // [lv/C]Integer : 정렬된 key 를 sortedKey 에서 가져오기
-            Integer key = sortedKey.next();
-
-            // [lv/C]ArrayList<Event> : treeMap 에서 sortedKey 순서대로 Event 객체를 추가하기
-            eventArrayList.add(treeMap.get(key));
+            // [lv/C]EventResultSet : 합치기
+            allGroupEventResultSet.getSelectedEventArrayList().addAll(aGroup.getSelectedEventArrayList());
+            allGroupEventResultSet.getNoSelectedEventArrayList().addAll(aGroup.getNoSelectedEventArrayList());
 
         }
 
-        return eventArrayList;
-    } // End of method [getCheckedEventArrayList]
+        // b group
+        if (groupItemList.get(GroupType.B_GROUP) != null) {
 
+            // [lv/C]EventResultSet : b group 의 eventResultSet 가져오기
+            EventResultSet bGroup = groupItemList.get(GroupType.B_GROUP).getEventResultSet();
 
+            // [lv/C]EventResultSet : 합치기
+            allGroupEventResultSet.getSelectedEventArrayList().addAll(bGroup.getSelectedEventArrayList());
+            allGroupEventResultSet.getNoSelectedEventArrayList().addAll(bGroup.getNoSelectedEventArrayList());
 
-    // << ======================== 여기서
-    public ArrayList<Event> getNoCheckedEventList() {
+        }
 
-        // [lv/C]ArrayList<Event> : 체크되지 않은 리스트들을 eventArrayList 에 추가한다.
-        ArrayList<Event> eventArrayList = new ArrayList<>();
+        // c group
+        if (groupItemList.get(GroupType.C_GROUP) != null) {
 
-        // [cycle 1] : a group 의 checkBox 의 list 를 검색하여 체크되지 않은 위치(index)의 event(groupingEventData 에서 a group 의 eventArrayList 의 index 위치의 event) 를 추가한다.
-        for (int index=0; index < aGroupCheckBoxList.length ; index++ ) {
+            // [lv/C]EventResultSet : c group 의 eventResultSet 가져오기
+            EventResultSet cGroup =groupItemList.get(GroupType.C_GROUP).getEventResultSet();
 
-            if (!aGroupCheckBoxList[index].isChecked()) {
-                noCheckedEventList.add(groupingEventData.getAGroupEventArrayList().get(index));
-            }
-        } // [cycle 1]
+            // [lv/C]EventResultSet : 합치기
+            allGroupEventResultSet.getSelectedEventArrayList().addAll(cGroup.getSelectedEventArrayList());
+            allGroupEventResultSet.getNoSelectedEventArrayList().addAll(cGroup.getNoSelectedEventArrayList());
 
-        // [cycle 1] : 위와 같은 방식으로 b group 의 체크되지 않은 리스트 추가
-        for (int index=0; index < bGroupCheckBoxList.length ; index++ ) {
+        }
 
-            if (!bGroupCheckBoxList[index].isChecked()) {
-                noCheckedEventList.add(groupingEventData.getBGroupEventArrayList().get(index));
-            }
-        } // [cycle 1]
+        // d group
+        if (groupItemList.get(GroupType.D_GROUP) != null) {
 
-        // [cycle 1] : 위와 같은 방식으로 c group 의 체크되지 않은 리스트 추가
-        for (int index=0; index < cGroupCheckBoxList.length ; index++ ) {
+            // [lv/C]EventResultSet : d group 의 eventResultSet 가져오기
+            EventResultSet dGroup = groupItemList.get(GroupType.D_GROUP).getEventResultSet();
 
-            if (!cGroupCheckBoxList[index].isChecked()) {
-                noCheckedEventList.add(groupingEventData.getCGroupEventArrayList().get(index));
-            }
-        } // [cycle 1]
+            // [lv/C]EventResultSet : 합치기
+            allGroupEventResultSet.getSelectedEventArrayList().addAll(dGroup.getSelectedEventArrayList());
+            allGroupEventResultSet.getNoSelectedEventArrayList().addAll(dGroup.getNoSelectedEventArrayList());
 
-        // [cycle 1] : 위와 같은 방식으로 d group 의 체크되지 않은 리스트 추가
-        for (int index=0; index < dGroupCheckBoxList.length ; index++ ) {
+        }
 
-            if (!dGroupCheckBoxList[index].isChecked()) {
-                noCheckedEventList.add(groupingEventData.getDGroupEventArrayList().get(index));
-            }
-        } // [cycle 1]
+        // e group
+        if (groupItemList.get(GroupType.E_GROUP) != null) {
 
-        // [cycle 1] : 위와 같은 방식으로 e group 의 체크되지 않은 리스트 추가
-        for (int index=0; index < eGroupCheckBoxList.length ; index++ ) {
+            // [lv/C]EventResultSet : e group 의 eventResultSet 가져오기
+            EventResultSet eGroup = groupItemList.get(GroupType.E_GROUP).getEventResultSet();
 
-            if (!eGroupCheckBoxList[index].isChecked()) {
-                noCheckedEventList.add(groupingEventData.getEGroupEventArrayList().get(index));
-            }
-        } // [cycle 1]
+            // [lv/C]EventResultSet : 합치기
+            allGroupEventResultSet.getSelectedEventArrayList().addAll(eGroup.getSelectedEventArrayList());
+            allGroupEventResultSet.getNoSelectedEventArrayList().addAll(eGroup.getNoSelectedEventArrayList());
 
+        }
 
-        return noCheckedEventList;
-    }
+        return allGroupEventResultSet;
+    } // End of method [getEventResultSetOfAllGroup]
+    
+
 }

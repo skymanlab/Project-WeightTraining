@@ -20,6 +20,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.EachGroupRandomItem;
 
@@ -155,19 +156,18 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
 
         } else {
 
-            // [lv/C]Step4D1Fragment  : step 6 fragment 생성 및 각 MuscleArea 의 EventResultSet 객체를 넘기기
-            MakerStep6Fragment step6Fragment = MakerStep6Fragment.newInstance(
+            // [lv/C]MakerStep4Fragment : step 4 fragment 생성
+            MakerStep4Fragment step4Fragment = MakerStep4Fragment.newInstance(
                     chestEventResultSet,
                     shoulderEventResultSet,
                     latEventResultSet,
                     upperBodyEventResultSet,
                     armEventResultSet,
-                    etcEventResultSet
-            );
+                    etcEventResultSet);
 
-            // [lv/C]FragmentTransaction :
+            // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.nav_home_content_wrapper, step6Fragment);
+            transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
             transaction.addToBackStack(null);
             transaction.commit();
 
