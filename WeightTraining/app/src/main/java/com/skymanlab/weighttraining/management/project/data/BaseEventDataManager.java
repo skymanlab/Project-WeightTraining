@@ -50,6 +50,7 @@ public class BaseEventDataManager {
     private ArrayList<Event> shoulder;
     private ArrayList<Event> lat;
     private ArrayList<Event> leg;
+    private ArrayList<Event> upperBody;
     private ArrayList<Event> arm;
 
     // instance variable
@@ -63,6 +64,7 @@ public class BaseEventDataManager {
         this.shoulder = new ArrayList<>();
         this.lat = new ArrayList<>();
         this.leg = new ArrayList<>();
+        this.upperBody = new ArrayList<>();
         this.arm = new ArrayList<>();
 
     }

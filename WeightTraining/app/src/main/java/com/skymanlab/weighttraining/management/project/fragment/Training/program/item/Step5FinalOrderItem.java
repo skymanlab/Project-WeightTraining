@@ -9,7 +9,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
-public class Step6FinalOrderItem {
+public class Step5FinalOrderItem {
 
     // instance variable
     private LayoutInflater inflater;
@@ -27,7 +27,7 @@ public class Step6FinalOrderItem {
     private TextView muscleAreaNumber;
 
     // constructor
-    private Step6FinalOrderItem(Builder builder) {
+    private Step5FinalOrderItem(Builder builder) {
         this.inflater = builder.inflater;
         this.contentWrapperColor = builder.contentWrapperColor;
         this.event = builder.event;
@@ -83,7 +83,7 @@ public class Step6FinalOrderItem {
      */
     private View inflateItem() {
 
-        return inflater.inflate(R.layout.include_step6_final_order_item, null);
+        return inflater.inflate(R.layout.include_step5_final_order_item, null);
 
     } // End of method [inflateItem]
 
@@ -117,7 +117,7 @@ public class Step6FinalOrderItem {
     private void connectWidgetOfContentWrapper(View view) {
 
         // [iv/C]MaterialCardView : contentWrapper connect
-        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_step4_final_order_item_content_wrapper);
+        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_step5_final_order_item_content_wrapper);
 
     } // End of method [connectWidgetOfContentWrapper]
 
@@ -129,7 +129,7 @@ public class Step6FinalOrderItem {
     private void connectWidgetOfNumber(View view) {
 
         // [iv/C]TextView : number connect
-        this.number = (TextView) view.findViewById(R.id.include_step4_final_order_item_number);
+        this.number = (TextView) view.findViewById(R.id.include_step5_final_order_item_number);
 
     } // End of method [connectWidgetOfNumber]
 
@@ -142,7 +142,7 @@ public class Step6FinalOrderItem {
     private void connectWidgetOfMuscleAreaNumber(View view) {
 
         // [iv/C]TextView : muscleAreaNumber connect
-        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_step4_final_order_item_muscle_area_number);
+        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_step5_final_order_item_muscle_area_number);
 
     } // End of method [connectWidgetOfMuscleAreaNumber]
 
@@ -162,7 +162,7 @@ public class Step6FinalOrderItem {
                 if (itemClickListener != null) {
 
                     // event 의 key 를 넘겨주어서 이 key 로 다음 일을 수행하도록 한다.
-                    itemClickListener.excludeFinalOrderItem(item, event.getKey(), contentWrapperColor);
+                    itemClickListener.excludeFinalOrderItem(item, event, contentWrapperColor);
 
                 } else {
                     throw new NullPointerException("OnItemClickListener 가 생성되지 않았습니다. Builder 를 통해 OnItemClickListener 를 입력해주세요.");
@@ -246,7 +246,7 @@ public class Step6FinalOrderItem {
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnItemClickListener {
-         void excludeFinalOrderItem(View item, String eventKey, int contentWrapperColor);
+         void excludeFinalOrderItem(View item, Event event, int contentWrapperColor);
     }
 
 
@@ -293,8 +293,8 @@ public class Step6FinalOrderItem {
             return this;
         }
 
-        public Step6FinalOrderItem init() {
-            return new Step6FinalOrderItem(this);
+        public Step5FinalOrderItem init() {
+            return new Step5FinalOrderItem(this);
         }
     }
 }

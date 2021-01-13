@@ -46,10 +46,10 @@ public class SetNumberPickerDialog extends DialogFragment {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
 
         // [lv/C]View : 위의 inflater 을 이용하여 custom layout 의 widget 을 사용하기 위한 view 를 가져오기
-        View view = inflater.inflate(R.layout.custom_set_number, null);
+        View view = inflater.inflate(R.layout.custom_dialog_set_number_picker, null);
 
         // [lv/C]NumberPicker : 위의 view 에서 setNumber 에 해당하는 NumberPicker widget mapping / 초기 설정 / bundle 로 넘어온 setNumber 을 초기 값으로 설정
-        final NumberPicker setNumberPicker = (NumberPicker) view.findViewById(R.id.cud_set_number_picker);
+        final NumberPicker setNumberPicker = (NumberPicker) view.findViewById(R.id.custom_dialog_set_number_picker_number);
         setNumberPicker.setMaxValue(MAX_SET_NUMBER);
         setNumberPicker.setMinValue(MIN_SET_NUMBER);
         setNumberPicker.setWrapSelectorWheel(true);
@@ -57,7 +57,7 @@ public class SetNumberPickerDialog extends DialogFragment {
 
         // [lv/C]AlertDialog : 위에서 설정한 view 를 적용한다.
         builder.setView(view)           // error -> 해당 View 를 위에서 부르고 또 여기서 따로 부르면 객체가 통일이 안 되면, numberPicker 가 해당 view 에서만 설정값이 들어가므로 setView 에서 따로 한 View 에는 설정값이 적용되지 않는다.
-                .setPositiveButton(R.string.cud_set_number_bt_change, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.custom_dialog_set_number_picker_alert_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -65,7 +65,7 @@ public class SetNumberPickerDialog extends DialogFragment {
                         listener.onDialogPositiveClick(SetNumberPickerDialog.this, setNumberPicker.getValue());
                     }
                 })
-                .setNegativeButton(R.string.cud_set_number_bt_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.custom_dialog_set_number_picker_alert_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

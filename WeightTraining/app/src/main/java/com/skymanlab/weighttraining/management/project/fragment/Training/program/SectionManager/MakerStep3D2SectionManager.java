@@ -21,7 +21,6 @@ import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.EachGroupRandomItem;
 
 import java.util.HashMap;
@@ -30,7 +29,7 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep3D2SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private MakerStepManager makerStepManager;

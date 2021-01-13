@@ -17,7 +17,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStepManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     public static final int MAKER_TYPE_DIRECT_SELECTION = 0;
@@ -289,6 +289,23 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
         // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_2
         this.secondNumber.setImageResource(SELECTED_NUMBER_6);
 
+        // [iv/C]ImageView : thirdNumber -> INVISIBLE
+        this.thirdNumber.setImageResource(NO_SELECTED_NUMBER_7);
+
+    } // End of method [initStepSix]
+
+
+    /**
+     * [method] step 7 widget init
+     */
+    private void initStepSven() {
+
+        // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_1
+        this.firstNumber.setImageResource(NO_SELECTED_NUMBER_6);
+
+        // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_2
+        this.secondNumber.setImageResource(SELECTED_NUMBER_7);
+
         // [iv/C]ImageView : secondBar -> INVISIBLE
         this.secondBar.setVisibility(ImageView.INVISIBLE);
 
@@ -296,7 +313,6 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
         this.thirdNumber.setVisibility(ImageView.INVISIBLE);
 
     } // End of method [initStepSix]
-
 
     // interface
     public interface OnNextClickListener {

@@ -257,7 +257,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: upper body ::::::::::::::::::::::::::::::::::::: ");
                 // [method] : [3] UPPER_BODY(or LEG) 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
-                GroupingEventData upperBodyGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.LEG, isSelectedMuscleAreaList[3]);
+                GroupingEventData upperBodyGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.UPPER_BODY, isSelectedMuscleAreaList[3]);
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: arm ::::::::::::::::::::::::::::::::::::: ");
                 // [method] : [4] ARM 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행

@@ -24,7 +24,7 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep4SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private MakerStepManager makerStepManager;

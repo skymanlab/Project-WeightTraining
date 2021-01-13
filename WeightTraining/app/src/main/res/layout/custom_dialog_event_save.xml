@@ -12,7 +12,7 @@
 
         <!-- content 1-1. top  -->
         <LinearLayout
-            android:id="@+id/cud_event_item_modification_title_wrapper"
+            android:id="@+id/custom_dialog_event_save_title_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBackgroundSecond"
@@ -21,6 +21,7 @@
 
             <!-- title -->
             <TextView
+                android:id="@+id/custom_dialog_event_save_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -28,7 +29,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:text="@string/cud_event_item_modification_title"
+                android:text="@string/custom_dialog_event_save_title"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="20dp" />
@@ -58,7 +59,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
-                    android:text="@string/cud_event_item_modification_equipment_type"
+                    android:text="@string/custom_dialog_event_save_equipment_type"
                     android:textAlignment="center" />
 
                 <!-- divider -->
@@ -71,7 +72,7 @@
 
                 <!-- list-->
                 <Spinner
-                    android:id="@+id/cud_event_item_modification_equipment_type"
+                    android:id="@+id/custom_dialog_event_save_equipment_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -101,7 +102,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
-                    android:text="@string/cud_event_item_modification_group_type"
+                    android:text="@string/custom_dialog_event_save_group_type"
                     android:textAlignment="center" />
 
                 <!-- divider -->
@@ -114,7 +115,7 @@
 
                 <!-- list -->
                 <Spinner
-                    android:id="@+id/cud_event_item_modification_group_type"
+                    android:id="@+id/custom_dialog_event_save_group_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -141,7 +142,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/cud_event_item_modification_event_name"
+                    android:text="@string/custom_dialog_event_save_event_name"
                     android:textAlignment="center" />
 
                 <!-- divider -->
@@ -154,7 +155,7 @@
 
                 <!-- input -->
                 <EditText
-                    android:id="@+id/cud_event_item_modification_event_name"
+                    android:id="@+id/custom_dialog_event_save_event_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" />
@@ -181,7 +182,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
-                    android:text="@string/cud_event_item_modification_proper_weight"
+                    android:text="@string/custom_dialog_event_save_proper_weight"
                     android:textAlignment="center" />
 
 
@@ -193,7 +194,7 @@
                     android:background="?android:attr/listDivider" />
 
                 <EditText
-                    android:id="@+id/cud_event_item_modification_proper_weight"
+                    android:id="@+id/custom_dialog_event_save_proper_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -220,7 +221,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
-                    android:text="@string/cud_event_item_modification_max_weight"
+                    android:text="@string/custom_dialog_event_save_max_weight"
                     android:textAlignment="center" />
 
                 <!-- divider -->
@@ -233,7 +234,7 @@
 
                 <!-- input -->
                 <EditText
-                    android:id="@+id/cud_event_item_modification_max_weight"
+                    android:id="@+id/custom_dialog_event_save_max_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -241,48 +242,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView><!-- End of content 1-6 -->
 
-<!--        &lt;!&ndash; content 1-7. modify, cancel button &ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:layout_marginRight="5dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            &lt;!&ndash; cancel &ndash;&gt;-->
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:id="@+id/cud_event_item_modification_cancel"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="?attr/selectableItemBackground"-->
-<!--                android:elevation="5dp"-->
-<!--                android:padding="10dp"-->
-<!--                android:text="@string/cud_event_item_modification_bt_cancel"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textColor="@color/colorTextSecond"-->
-<!--                android:textSize="16dp" />-->
-
-<!--            &lt;!&ndash; modify &ndash;&gt;-->
-<!--            <View-->
-<!--                android:layout_width="1dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="?android:attr/listDivider" />-->
-
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:id="@+id/cud_event_item_modification_modify"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="?attr/selectableItemBackground"-->
-<!--                android:elevation="5dp"-->
-<!--                android:padding="10dp"-->
-<!--                android:text="@string/cud_event_item_modification_bt_modify"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textColor="@color/colorTextSecond"-->
-<!--                android:textSize="16dp" />-->
-<!--        </LinearLayout>&lt;!&ndash; End of content 1-7 &ndash;&gt;-->
     </LinearLayout>
 
 </LinearLayout>

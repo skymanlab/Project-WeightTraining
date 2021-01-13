@@ -15,7 +15,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
@@ -23,7 +22,6 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionI
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectSelectionFragmentPagerAdapter;
 
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep3D1SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Fragment fragment;
@@ -124,7 +122,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                 case LAT:
                     latEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
                     break;
-                case LEG:
+                case UPPER_BODY:
                     upperBodyEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
                     break;
                 case ARM:

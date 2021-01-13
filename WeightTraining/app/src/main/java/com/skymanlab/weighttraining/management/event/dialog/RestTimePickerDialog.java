@@ -53,10 +53,10 @@ public class RestTimePickerDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         // [lv/C]View : 위의 inflater 을 이용하여 custom layout 의 widget 을 사용하기 위한 view 를 가져오기
-        View view = inflater.inflate(R.layout.custom_rest_time, null);
+        View view = inflater.inflate(R.layout.custom_dialog_rest_time_picker, null);
 
         // [lv/C]NumberPicker : 위의 view 에서 restTime 의 minute 에 해당하는 NumberPicker widget mapping / 초기 설정 / bundle 로 넘어온 restTimeMinuteNumber 을 초기 값으로 설정
-        final NumberPicker restTimeMinutePicker = (NumberPicker) view.findViewById(R.id.cud_rest_time_minute);
+        final NumberPicker restTimeMinutePicker = (NumberPicker) view.findViewById(R.id.custom_dialog_rest_time_picker_minute);
         restTimeMinutePicker.setMaxValue(MAX_NUMBER);
         restTimeMinutePicker.setMinValue(MIN_NUMBER);
         restTimeMinutePicker.setWrapSelectorWheel(true);
@@ -64,7 +64,7 @@ public class RestTimePickerDialog extends DialogFragment {
         restTimeMinutePicker.setValue(this.restTimeMinuteNumber);
 
         // [lv/C]NumberPicker : 위의 view 에서 restTime 의 second 에 해당하는 NumberPicker widget mapping / 초기 설정 / bundle 로 넘어온 restTimeSecondNumber 을 초기 값으로 설정
-        final NumberPicker restTimeSecondPicker = (NumberPicker) view.findViewById(R.id.cud_rest_time_second);
+        final NumberPicker restTimeSecondPicker = (NumberPicker) view.findViewById(R.id.custom_dialog_rest_time_picker_second);
         restTimeSecondPicker.setMaxValue(MAX_NUMBER);
         restTimeSecondPicker.setMinValue(MIN_NUMBER);
         restTimeSecondPicker.setWrapSelectorWheel(true);
@@ -78,7 +78,7 @@ public class RestTimePickerDialog extends DialogFragment {
 
         // [lv/C]AlertDialog.Builder : builder 초기 설정
         builder.setView(view)
-                .setPositiveButton(R.string.cud_rest_time_bt_change, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.custom_dialog_rest_time_picker_alert_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -90,7 +90,7 @@ public class RestTimePickerDialog extends DialogFragment {
 
                     }
                 })
-                .setNegativeButton(R.string.cud_rest_time_bt_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.custom_dialog_rest_time_picker_alert_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

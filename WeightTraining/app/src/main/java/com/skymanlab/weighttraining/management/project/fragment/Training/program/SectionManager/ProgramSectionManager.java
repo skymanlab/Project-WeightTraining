@@ -1,6 +1,8 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.view.View;
 
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +11,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.card.MaterialCardView;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.dialog.EventDialog;
+import com.skymanlab.weighttraining.management.project.data.type.EquipmentType;
+import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep1Fragment;
@@ -18,7 +25,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] ProgramSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instructor
     private MaterialCardView programMaker;
@@ -46,6 +53,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
 
     @Override
     public void initWidget() {
+        final String METHOD_NAME = "[initWidget] ";
 
         // [iv/C]MaterialCardView : programMaker click listener
         this.programMaker.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +72,6 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
             }
         });
 
-
         // [iv/C]MaterialCardView : myProgram click listener
         this.myProgram.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +88,6 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
 
             }
         });
-
 
         // [iv/C]MaterialCardView : recommendProgram click listener
         this.recommendProgram.setOnClickListener(new View.OnClickListener() {

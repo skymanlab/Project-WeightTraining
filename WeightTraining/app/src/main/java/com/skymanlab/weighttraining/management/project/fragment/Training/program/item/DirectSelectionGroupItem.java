@@ -152,7 +152,7 @@ public class DirectSelectionGroupItem {
     private void initWidgetOfTitle() {
 
         // text
-        this.title.setText(DataManager.convertHanguleOfGroupType(groupType) + "111");
+        this.title.setText(DataManager.convertHanguleOfGroupType(groupType));
     }
 
 

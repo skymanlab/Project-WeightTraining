@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,7 @@ import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 
 import java.util.ArrayList;
 
-public class EventModificationDialog2 extends DialogFragment {
+public class EventModificationDialog extends DialogFragment {
 
     // constance
     public static final String CLASS_NAME = "[ED] EventModificationDialog2";
@@ -53,7 +52,7 @@ public class EventModificationDialog2 extends DialogFragment {
     private EditText maxWeight;
 
     // constructor
-    public EventModificationDialog2(Activity activity, String uid, ArrayList<Event> eventArrayList, int position) {
+    public EventModificationDialog(Activity activity, String uid, ArrayList<Event> eventArrayList, int position) {
         this.activity = activity;
         this.uid = uid;
         this.eventArrayList = eventArrayList;
@@ -74,7 +73,7 @@ public class EventModificationDialog2 extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         // [lv/C]View : layoutInflater 을 통해 custom layout 가져오기
-        View view = inflater.inflate(R.layout.custom_dialog_event_item_modification, null);
+        View view = inflater.inflate(R.layout.custom_dialog_event_modification, null);
 
         // [method] : widget mapping
         mappingWidget(view);
@@ -86,7 +85,7 @@ public class EventModificationDialog2 extends DialogFragment {
         // [lv/C]AlertDialog.Builder : builder 객체 생성 및 초기
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view)
-                .setPositiveButton(R.string.cud_rest_time_bt_change, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.custom_dialog_event_modification_alert_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -94,7 +93,7 @@ public class EventModificationDialog2 extends DialogFragment {
                         updateContentProcess();
                     }
                 })
-                .setNegativeButton(R.string.cud_rest_time_bt_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.custom_dialog_event_modification_alert_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -110,22 +109,22 @@ public class EventModificationDialog2 extends DialogFragment {
     private void mappingWidget(View view) {
 
         // [iv/C]LinearLayout : titleWrapper mapping
-        this.titleWrapper = (LinearLayout) view.findViewById(R.id.cud_event_item_modification_title_wrapper);
+        this.titleWrapper = (LinearLayout) view.findViewById(R.id.custom_dialog_event_modification_title_wrapper);
 
         // [iv/C]Spinner : equipmentType mapping
-        this.equipmentType = (Spinner) view.findViewById(R.id.cud_event_item_modification_equipment_type);
+        this.equipmentType = (Spinner) view.findViewById(R.id.custom_dialog_event_modification_equipment_type);
 
         // [iv/C]Spinner : equipmentType mapping
-        this.groupType = (Spinner) view.findViewById(R.id.cud_event_item_modification_group_type);
+        this.groupType = (Spinner) view.findViewById(R.id.custom_dialog_event_modification_group_type);
 
         // [ic/C]EditText : eventName mapping
-        this.eventName = (EditText) view.findViewById(R.id.cud_event_item_modification_event_name);
+        this.eventName = (EditText) view.findViewById(R.id.custom_dialog_event_modification_event_name);
 
         // [ic/C]EditText : properWeight mapping
-        this.properWeight = (EditText) view.findViewById(R.id.cud_event_item_modification_proper_weight);
+        this.properWeight = (EditText) view.findViewById(R.id.custom_dialog_event_modification_proper_weight);
 
         // [ic/C]EditText : maxWeight mapping
-        this.maxWeight = (EditText) view.findViewById(R.id.cud_event_item_modification_max_weight);
+        this.maxWeight = (EditText) view.findViewById(R.id.custom_dialog_event_modification_max_weight);
 
 
     } // End of method [mappingWidget]
@@ -214,14 +213,14 @@ public class EventModificationDialog2 extends DialogFragment {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/false :  0 보다 크거나 같은 수가 아니야! <=");
 
                 // [lv/C]Toast : 0 보다 크거나 같은 수를 입력해주세요!
-                Toast.makeText(getActivity(), R.string.cud_event_item_modification_snack_0_up_input, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.custom_dialog_event_modification_snack_0_up_input, Toast.LENGTH_SHORT).show();
                 return false;
             } // [check 2]
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 입력되지 않은 값이 있어! <=");
             // [lv/C]Toast : 모든 값을 입력해주세요!
-            Toast.makeText(getActivity(), R.string.cud_event_item_modification_snack_all_input, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.custom_dialog_event_modification_snack_all_input, Toast.LENGTH_SHORT).show();
             return false;
         } // [check 1]
 
@@ -263,7 +262,7 @@ public class EventModificationDialog2 extends DialogFragment {
                     // [check 1] : error 발생 안함
                     if (error == null) {
                         // 성공
-                        Toast.makeText(activity, R.string.cud_event_item_modification_snack_modify_success, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.custom_dialog_event_modification_snack_modify_success, Toast.LENGTH_SHORT).show();
                     } else {
                         // error 발생
                     } // [check 1]

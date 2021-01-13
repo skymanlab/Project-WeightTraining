@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <!-- title -->
         <com.google.android.material.card.MaterialCardView
@@ -21,34 +17,51 @@
             app:cardElevation="10dp">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                android:text="@string/cud_set_number_title"
+                android:text="@string/custom_dialog_rest_time_picker_title"
                 android:textSize="30dp" />
         </com.google.android.material.card.MaterialCardView><!-- End of title -->
 
-        <!-- set number -->
+        <!-- rest time -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
+            <!-- minute(분) -->
             <NumberPicker
-                android:id="@+id/cud_set_number_picker"
+                android:id="@+id/custom_dialog_rest_time_picker_minute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:paddingLeft="10dp"
-                android:text="@string/cud_set_number_tag" />
-        </LinearLayout><!-- End of set number-->
+                android:paddingRight="10dp"
+                android:text="@string/custom_dialog_rest_time_picker_minute_tag" />
+
+            <!-- second(초) -->
+            <NumberPicker
+                android:id="@+id/custom_dialog_rest_time_picker_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/custom_dialog_rest_time_picker_second_tag" />
+
+        </LinearLayout><!-- End of rest time -->
+
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

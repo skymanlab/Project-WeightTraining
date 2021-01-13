@@ -111,7 +111,7 @@ public class MakerStep3D1Fragment extends Fragment {
             makeFragment(latGroupingEventData, MuscleArea.LAT);
 
             // [method] : upperBody GroupingEventData 의 데이터 유무를 확인하여, fragment 를 생성하고 추가하는 과정 진행
-            makeFragment(upperBodyGroupingEventData, MuscleArea.LEG);
+            makeFragment(upperBodyGroupingEventData, MuscleArea.UPPER_BODY);
 
             // [method] : arm GroupingEventData 의 데이터 유무를 확인하여, fragment 를 생성하고 추가하는 과정 진행
             makeFragment(armGroupingEventData, MuscleArea.ARM);

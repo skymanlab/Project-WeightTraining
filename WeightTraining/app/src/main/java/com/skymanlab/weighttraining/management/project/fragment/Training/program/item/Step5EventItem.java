@@ -11,7 +11,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
-public class Step6EventItem {
+public class Step5EventItem {
 
     // instance variable
     private LayoutInflater inflater;
@@ -30,7 +30,7 @@ public class Step6EventItem {
     private TextView eventName;                     // [4] event name
 
     // constructor
-    public Step6EventItem(Builder builder) {
+    public Step5EventItem(Builder builder) {
         this.inflater = builder.inflater;
         this.contentWrapperColor = builder.contentWrapperColor;
         this.event = builder.event;
@@ -118,7 +118,7 @@ public class Step6EventItem {
      * @return event 의 한 항목인 item 이다.
      */
     private View inflateItem() {
-        return inflater.inflate(R.layout.include_step6_event_item, null);
+        return inflater.inflate(R.layout.include_step5_event_item, null);
     } // End of method [inflateItem]
 
 
@@ -154,7 +154,7 @@ public class Step6EventItem {
     private void connectWidgetOfContentWrapper(View view) {
 
         // [iv/C]MaterialCardView : contentWrapper connect
-        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_step4_event_item_content_wrapper);
+        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_step5_event_item_content_wrapper);
 
     } // End of method [connectWidgetOfContentWrapper]
 
@@ -167,7 +167,7 @@ public class Step6EventItem {
     private void connectWidgetOfMoreInfo(View view) {
 
         // [iv/C]ImageView : moreInfo connect
-        this.moreInfo = (ImageView) view.findViewById(R.id.include_step4_event_item_more_info);
+        this.moreInfo = (ImageView) view.findViewById(R.id.include_step5_event_item_more_info);
 
     } // End of method [connectWidgetOfMoreInfo]
 
@@ -180,7 +180,7 @@ public class Step6EventItem {
     private void connectWidgetOfMuscleAreaNumber(View view) {
 
         // [iv/C]TextView : muscleAreaNumber connect
-        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_step4_event_item_muscle_area_number);
+        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_step5_event_item_muscle_area_number);
 
     } // End of method [connectWidgetOfMuscleAreaNumber]
 
@@ -193,7 +193,7 @@ public class Step6EventItem {
     private void connectWidgetOfEventName(View view) {
 
         // [iv/C]TextView : eventName connect
-        this.eventName = (TextView) view.findViewById(R.id.include_step4_event_item_event_name);
+        this.eventName = (TextView) view.findViewById(R.id.include_step5_event_item_event_name);
 
     } // End of method [connectWidgetOfEventName]
 
@@ -213,7 +213,7 @@ public class Step6EventItem {
                 if (itemClickListener != null) {
 
                     // event 의 key 를 넘겨주어서 이 key 로 다음 일을 수행하도록 한다.
-                    itemClickListener.includeFinalOrderItem(item, contentWrapper, event.getKey());
+                    itemClickListener.includeFinalOrderItem(item, contentWrapper, event);
 
                 } else {
                     throw new NullPointerException("OnItemClickListener 가 생성되지 않았습니다. Builder 를 통해 OnItemClickListener 를 입력해주세요.");
@@ -328,7 +328,7 @@ public class Step6EventItem {
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnItemClickListener {
-        void includeFinalOrderItem(View item, MaterialCardView contentWrapper, String eventKey);
+        void includeFinalOrderItem(View item, MaterialCardView contentWrapper, Event event);
     }
 
 
@@ -375,8 +375,8 @@ public class Step6EventItem {
             return this;
         }
 
-        public Step6EventItem init() {
-            return new Step6EventItem(this);
+        public Step5EventItem init() {
+            return new Step5EventItem(this);
         }
     }
 }

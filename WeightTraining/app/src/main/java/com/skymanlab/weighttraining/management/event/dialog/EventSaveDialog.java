@@ -31,10 +31,9 @@ import com.skymanlab.weighttraining.management.project.data.type.EquipmentType;
 import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class EventItemAddDialog extends DialogFragment {
+public class EventSaveDialog extends DialogFragment {
 
     // constance
     public static final String CLASS_NAME = "[ED] EventItemAddDialog";
@@ -57,7 +56,7 @@ public class EventItemAddDialog extends DialogFragment {
     private AlertDialog.Builder builder;
 
     // constructor
-    public EventItemAddDialog(Context context, MuscleArea muscleArea) {
+    public EventSaveDialog(Context context, MuscleArea muscleArea) {
         this.context= context;
         this.muscleArea = muscleArea;
     }
@@ -73,20 +72,20 @@ public class EventItemAddDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         // [lv/C]View : layoutInflater 을 통해 custom layout 가져오기
-        View view = inflater.inflate(R.layout.custom_dialog_event_item, null);
+        View view = inflater.inflate(R.layout.custom_dialog_event_save, null);
 
         // [method] : widget mapping
         mappingWidget(view);
 
         // [method] : widget init
-        initWidget(R.string.cud_event_item_add_title);
+        initWidget(R.string.custom_dialog_event_save_title);
 
         // [iv/C]builder : 객체 생성
         this.builder = new AlertDialog.Builder(getContext());
 
         // [iv/C]builder : 위의 view 를 AlertDialog 의 커스텀 레이아웃으로
         this.builder.setView(view)
-                .setPositiveButton(R.string.cud_event_item_add_alert_add_bt_positive, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.custom_dialog_event_save_alert_save_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -95,7 +94,7 @@ public class EventItemAddDialog extends DialogFragment {
                         
                     }
                 })
-                .setNegativeButton(R.string.cud_event_item_add_alert_add_bt_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.custom_dialog_event_save_alert_save_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -113,25 +112,25 @@ public class EventItemAddDialog extends DialogFragment {
     private void mappingWidget(View view) {
 
         // [iv/C]LinearLayout : titleWrapper mapping
-        this.titleWrapper = (LinearLayout) view.findViewById(R.id.cud_event_item_title_wrapper);
+        this.titleWrapper = (LinearLayout) view.findViewById(R.id.custom_dialog_event_save_title_wrapper);
 
         // [iv/C]TextView : title mapping
-        this.title = (TextView) view.findViewById(R.id.cud_event_item_title);
+        this.title = (TextView) view.findViewById(R.id.custom_dialog_event_save_title);
 
         // [iv/C]Spinner : equipmentType mapping
-        this.equipmentType = (Spinner) view.findViewById(R.id.cud_event_item_equipment_type);
+        this.equipmentType = (Spinner) view.findViewById(R.id.custom_dialog_event_save_equipment_type);
 
         // [iv/C]Spinner : equipmentType mapping
-        this.groupType = (Spinner) view.findViewById(R.id.cud_event_item_group_type);
+        this.groupType = (Spinner) view.findViewById(R.id.custom_dialog_event_save_group_type);
 
         // [ic/C]EditText : eventName mapping
-        this.eventName = (EditText) view.findViewById(R.id.cud_event_item_event_name);
+        this.eventName = (EditText) view.findViewById(R.id.custom_dialog_event_save_event_name);
 
         // [ic/C]EditText : properWeight mapping
-        this.properWeight = (EditText) view.findViewById(R.id.cud_event_item_proper_weight);
+        this.properWeight = (EditText) view.findViewById(R.id.custom_dialog_event_save_proper_weight);
 
         // [ic/C]EditText : maxWeight mapping
-        this.maxWeight = (EditText) view.findViewById(R.id.cud_event_item_max_weight);
+        this.maxWeight = (EditText) view.findViewById(R.id.custom_dialog_event_save_max_weight);
 
 
     } // End of method [mappingWidget]
@@ -209,14 +208,14 @@ public class EventItemAddDialog extends DialogFragment {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/false :  0 보다 크거나 같은 수가 아니야! <=");
 
                 // [lv/C]Toast : 0 보다 크거나 같은 수를 입력해주세요!
-                Toast.makeText(context, R.string.cud_event_item_add_snack_0_up_input, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.custom_dialog_event_save_snack_0_up_input, Toast.LENGTH_SHORT).show();
                 return false;
             } // [check 2]
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 입력되지 않은 값이 있어! <=");
             // [lv/C]Toast : 모든 값을 입력해주세요!
-            Toast.makeText(context, R.string.cud_event_item_add_snack_all_input, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.custom_dialog_event_save_snack_all_input, Toast.LENGTH_SHORT).show();
             return false;
         } // [check 1]
 
@@ -260,12 +259,12 @@ public class EventItemAddDialog extends DialogFragment {
                     if (error == null) {
 
                         // "입력에 성공하였습니다." Toast 메시지 표시
-                        Toast.makeText(context, R.string.cud_event_item_add_snack_input_success, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.custom_dialog_event_save_snack_input_success, Toast.LENGTH_SHORT).show();
 
                     } else {
 
                         // "입력에 실패하였습니다." Toast 메시지 표시
-                        Toast.makeText(context, R.string.cud_event_item_add_snack_input_fail, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.custom_dialog_event_save_snack_input_fail, Toast.LENGTH_SHORT).show();
                     } // [check 2]
                 }
             });
@@ -273,7 +272,7 @@ public class EventItemAddDialog extends DialogFragment {
         } else {
 
             // "모든 데이터를 입력해주세요." Toast 메시지 표시
-            Toast.makeText(context, R.string.cud_event_item_add_snack_all_input, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.custom_dialog_event_save_snack_all_input, Toast.LENGTH_SHORT).show();
 
         } // [check 1]
 

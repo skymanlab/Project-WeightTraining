@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep6SectionManager;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,24 +27,14 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 public class MakerStep6Fragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTP] MakerStep6Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String CLASS_NAME = "[PFTP] MakerStep5Fragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
-    private static final String CHEST_EVENT_RESULT_SET = "chestEventResultSet";
-    private static final String SHOULDER_EVENT_RESULT_SET = "shoulderEventResultSet";
-    private static final String LAT_EVENT_RESULT_SET = "latEventResultSet";
-    private static final String UPPER_BODY_EVENT_RESULT_SET = "upperBodyEventResultSet";
-    private static final String ARM_EVENT_RESULT_SET = "armEventResultSet";
-    private static final String ETC_EVENT_RESULT_SET = "etcEventResultSet";
+    private static final String FINAL_ORDER_EVENT_ARRAY_LIST = "finalOrderEventArrayList";
 
     // instance variable
-    private EventResultSet chestEventResultSet;
-    private EventResultSet shoulderEventResultSet;
-    private EventResultSet latEventResultSet;
-    private EventResultSet upperBodyEventResultSet;
-    private EventResultSet armEventResultSet;
-    private EventResultSet etcEventResultSet;
+    private ArrayList<Event> finalOrderEventArrayList;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -56,25 +49,15 @@ public class MakerStep6Fragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment Step4D1Fragment.
+     * @return A new instance of fragment MakerStep5Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MakerStep6Fragment newInstance(EventResultSet chest,
-                                                 EventResultSet shoulder,
-                                                 EventResultSet lat,
-                                                 EventResultSet upperBody,
-                                                 EventResultSet arm,
-                                                 EventResultSet etc) {
+    public static MakerStep6Fragment newInstance(ArrayList<Event> finalOrderEventArrayList) {
 
         MakerStep6Fragment fragment = new MakerStep6Fragment();
 
         Bundle args = new Bundle();
-        args.putSerializable(CHEST_EVENT_RESULT_SET, chest);             // [0] chest
-        args.putSerializable(SHOULDER_EVENT_RESULT_SET, shoulder);       // [1] shoulder
-        args.putSerializable(LAT_EVENT_RESULT_SET, lat);                 // [2] lat
-        args.putSerializable(UPPER_BODY_EVENT_RESULT_SET, upperBody);    // [3] upper body
-        args.putSerializable(ARM_EVENT_RESULT_SET, arm);                 // [4] arm
-        args.putSerializable(ETC_EVENT_RESULT_SET, etc);                 // [5] etc
+        args.putSerializable(FINAL_ORDER_EVENT_ARRAY_LIST, finalOrderEventArrayList);
         fragment.setArguments(args);
 
         return fragment;
@@ -84,15 +67,8 @@ public class MakerStep6Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
-            this.chestEventResultSet = (EventResultSet) getArguments().getSerializable(CHEST_EVENT_RESULT_SET);          // [0] chest
-            this.shoulderEventResultSet = (EventResultSet) getArguments().getSerializable(SHOULDER_EVENT_RESULT_SET);    // [1] shoulder
-            this.latEventResultSet = (EventResultSet) getArguments().getSerializable(LAT_EVENT_RESULT_SET);              // [2] lat
-            this.upperBodyEventResultSet = (EventResultSet) getArguments().getSerializable(UPPER_BODY_EVENT_RESULT_SET); // [3] upper body
-            this.armEventResultSet = (EventResultSet) getArguments().getSerializable(ARM_EVENT_RESULT_SET);              // [4] arm
-            this.etcEventResultSet = (EventResultSet) getArguments().getSerializable(ETC_EVENT_RESULT_SET);              // [5] etc
+            this.finalOrderEventArrayList = (ArrayList<Event>) getArguments().getSerializable(FINAL_ORDER_EVENT_ARRAY_LIST);
         }
-
     }
 
     @Override
@@ -105,7 +81,6 @@ public class MakerStep6Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
 
         // [iv/C]FragmentTopBarManager : step 6 fragment top bar
         this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
@@ -114,16 +89,8 @@ public class MakerStep6Fragment extends Fragment {
 
         // [iv/C]Step4D1SectionManager : step 6 fragment section
         this.sectionManager = new MakerStep6SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
-        this.sectionManager.setSelectedChestEventArrayList(this.chestEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedShoulderEventArrayList(this.shoulderEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedLatEventArrayList(this.latEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedUpperBodyEventArrayList(this.upperBodyEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedArmEventArrayList(this.armEventResultSet.getSelectedEventArrayList());
-        this.sectionManager.setSelectedEtcEventArrayList(this.etcEventResultSet.getSelectedEventArrayList());
+        this.sectionManager.setFinalOrderEventArrayList(this.finalOrderEventArrayList);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
-
     }
-
-
 }

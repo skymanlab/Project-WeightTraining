@@ -19,7 +19,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog2;
+import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog;
 import com.skymanlab.weighttraining.management.project.data.DataFormatter;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
@@ -147,7 +147,7 @@ public class EventItemFoldableLvAdapter extends BaseAdapter {
 //                dialog.setDialog();
 
                 // [lv/C]EventModificationDialog2 :
-                EventModificationDialog2 dialog = new EventModificationDialog2(targetActivity, uid, eventArrayList, position);
+                EventModificationDialog dialog = new EventModificationDialog(targetActivity, uid, eventArrayList, position);
                 dialog.setCancelable(false);
                 dialog.show(fragmentManager, "EventModificationDialog");
             }

@@ -22,7 +22,8 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog2;
+import com.skymanlab.weighttraining.management.event.dialog.EventDialog;
+import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
 
     // constant
     private static final String CLASS_NAME = "[PFTLA] EventListRvAdapter";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private ArrayList<Event> eventArrayList;
@@ -98,11 +99,24 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
      * [method] modify click listener
      */
     private void setClickListenerOfModify(int position) {
+        final String METHOD_NAME = "[setClickListenerOfModify] ";
 
-        // [lv/C]EventModificationDialog2 :
-        EventModificationDialog2 dialog = new EventModificationDialog2(this.activity, FirebaseAuth.getInstance().getCurrentUser().getUid(), eventArrayList, position);
+        // [lv/C]String : EventDialog 에서 제공하는 setArguments() 메소드를 사용하여, arguments 항목을 설정한다.
+        String[] arguments = EventDialog.setArguments(activity.getString(R.string.custom_dialog_event_update_title),
+                activity.getString(R.string.custom_dialog_event_update_positive_title),
+                activity.getString(R.string.custom_dialog_event_update_negative_title));
+
+        // [lv/C]EventDialog : event dialog 를 생성
+        EventDialog dialog = EventDialog.newInstance(eventArrayList.get(position), arguments);
+        dialog.setClickListener(new EventDialog.OnPositiveClickListener() {
+            @Override
+            public void setClickListener() {
+                // event 데이터 수정하기
+                dialog.updateContent();
+            }
+        });
         dialog.setCancelable(false);
-        dialog.show(fragmentManager, "EventModificationDialog");
+        dialog.show(fragmentManager, null);
 
     } // End of method [setClickListenerOfModify]
 

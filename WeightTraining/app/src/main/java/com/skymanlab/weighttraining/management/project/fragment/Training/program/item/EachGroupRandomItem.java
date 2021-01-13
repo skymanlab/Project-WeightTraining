@@ -155,6 +155,19 @@ public class EachGroupRandomItem {
         // e group
         connectWidgetOfEGroup(view);
 
+        if (groupingEventData.getAGroupEventArrayList().isEmpty()
+                && groupingEventData.getBGroupEventArrayList().isEmpty()
+                && groupingEventData.getCGroupEventArrayList().isEmpty()
+                && groupingEventData.getDGroupEventArrayList().isEmpty()
+                && groupingEventData.getEGroupEventArrayList().isEmpty()) {
+
+            aGroupWrapper.setVisibility(View.GONE);
+            bGroupWrapper.setVisibility(View.GONE);
+            cGroupWrapper.setVisibility(View.GONE);
+            dGroupWrapper.setVisibility(View.GONE);
+            eGroupWrapper.setVisibility(View.GONE);
+        }
+
     } // End of method [connectWidget]
 
 
@@ -179,6 +192,7 @@ public class EachGroupRandomItem {
 
         // spinner
         this.aGroupSpinner = (AppCompatSpinner) view.findViewById(R.id.include_maker_type_each_group_random_item_a_group_spinner);
+
 
     } // End of method [connectWidgetOfAGroup]
 

@@ -27,7 +27,7 @@ public class EachListFragmentPagerAdapter extends FragmentStateAdapter {
         EachListFragment chestList = EachListFragment.newInstance(MuscleArea.CHEST);
         EachListFragment shoulderList = EachListFragment.newInstance(MuscleArea.SHOULDER);
         EachListFragment latList = EachListFragment.newInstance(MuscleArea.LAT);
-        EachListFragment upperBodyList = EachListFragment.newInstance(MuscleArea.LEG);
+        EachListFragment upperBodyList = EachListFragment.newInstance(MuscleArea.UPPER_BODY);
         EachListFragment armList = EachListFragment.newInstance(MuscleArea.ARM);
         EachListFragment etcList = EachListFragment.newInstance(MuscleArea.ETC);
 

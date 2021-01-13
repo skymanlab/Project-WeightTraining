@@ -317,10 +317,20 @@ public class DataManager {
                 // [lv/C]MuscleArea : "LEG" -> MuscleArea.LEG
                 convertedMuscleArea = MuscleArea.LEG;
                 break;
+            case "UPPER_BODY":
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/UPPER_BODY 가 입력되었습니다. <=");
+                // [lv/C]MuscleArea : "UPPER_BODY" -> MuscleArea.UPPER_BODY
+                convertedMuscleArea = MuscleArea.UPPER_BODY;
+                break;
             case "ARM":
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ARM 가 입력되었습니다. <=");
                 // [lv/C]MuscleArea : "ARM" -> MuscleArea.ARM
                 convertedMuscleArea = MuscleArea.ARM;
+                break;
+            case "ETC":
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ETC 가 입력되었습니다. <=");
+                // [lv/C]MuscleArea : "ETC" -> MuscleArea.ETC
+                convertedMuscleArea = MuscleArea.ETC;
                 break;
             default:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/default : 잘못된 값이 입력되었습니다. <=");
@@ -365,11 +375,20 @@ public class DataManager {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
                 // [lv/C]String : MuscleArea.LEG -> "다리"
                 convertedHangule = "다리";
+            case UPPER_BODY:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/UPPER_BODY 가 입력되었습니다. <=");
+                // [lv/C]String : MuscleArea.UPPER_BODY -> "다리"
+                convertedHangule = "하체";
                 break;
             case ARM:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ARM 가 입력되었습니다. <=");
                 // [lv/C]String : MuscleArea.ARM -> "팔"
                 convertedHangule = "팔";
+                break;
+            case ETC:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ETC 가 입력되었습니다. <=");
+                // [lv/C]String : MuscleArea.ETC -> "기타"
+                convertedHangule = "기타";
                 break;
             default:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/default : 잘못된 값이 입력되었습니다. <=");
@@ -415,11 +434,20 @@ public class DataManager {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
                 // [lv/i]convertedColorInt : MuscleArea.LEG -> R.color.colorBackgroundFourth
                 convertedColorInt = R.color.colorBackgroundFourth;
+            case UPPER_BODY:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/UPPER_BODY 가 입력되었습니다. <=");
+                // [lv/i]convertedColorInt : MuscleArea.UPPER_BODY -> R.color.colorBackgroundFourth
+                convertedColorInt = R.color.colorBackgroundFourth;
                 break;
             case ARM:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ARM 가 입력되었습니다. <=");
                 // [lv/i]convertedColorInt : MuscleArea.ARM -> R.color.colorBackgroundFifth
                 convertedColorInt = R.color.colorBackgroundFifth;
+                break;
+            case ETC:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ETC 가 입력되었습니다. <=");
+                // [lv/i]convertedColorInt : MuscleArea.ETC -> R.color.colorBackgroundSixth
+                convertedColorInt = R.color.colorBackgroundSixth;
                 break;
             default:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/default : 잘못된 값이 입력되었습니다. <=");
