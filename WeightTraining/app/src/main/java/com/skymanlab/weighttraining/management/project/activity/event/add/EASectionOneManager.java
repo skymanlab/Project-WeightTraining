@@ -219,9 +219,9 @@ public class EASectionOneManager extends SectionManager implements SectionInitia
 
         // [lv/C]AlertDialog : builder 객체 생성 / 초기 설정 및 노출
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.cu_event_item_alert_save_title)
-                .setMessage(R.string.cu_event_item_alert_save_message)
-                .setPositiveButton(R.string.cu_event_item_alert_save_bt_positive, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.event_add_section_1_alert_save_title)
+                .setMessage(R.string.event_add_section_1_alert_save_message)
+                .setPositiveButton(R.string.event_add_section_1_alert_save_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -230,7 +230,7 @@ public class EASectionOneManager extends SectionManager implements SectionInitia
 
                     }
                 })
-                .setNegativeButton(R.string.cu_event_item_alert_save_bt_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.event_add_section_1_alert_save_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -294,7 +294,7 @@ public class EASectionOneManager extends SectionManager implements SectionInitia
 
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : 모두 입력되지 않았어! <=");
-            Toast.makeText(getActivity(), R.string.cu_event_item_toast_error_input_event, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.event_add_section_1_snack_not_all_input, Toast.LENGTH_SHORT).show();
         } // [check 1]
 
         return isAllInputted;

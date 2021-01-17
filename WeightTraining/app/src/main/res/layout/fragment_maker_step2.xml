@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,94 +35,119 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
                 android:text="@string/f_maker_step2_comment"
                 android:textAlignment="center" />
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:columnCount="2"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/f_maker_step2_chest"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/toggle_selector_1"
-                    android:textOff="@string/f_maker_step2_chest"
-                    android:textOn="@string/f_maker_step2_chest" />
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/f_maker_step2_shoulder"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/toggle_selector_2"
-                    android:textOff="@string/f_maker_step2_shoulder"
-                    android:textOn="@string/f_maker_step2_shoulder" />
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/f_maker_step2_lat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/toggle_selector_3"
-                    android:textOff="@string/f_maker_step2_lat"
-                    android:textOn="@string/f_maker_step2_lat" />
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/f_maker_step2_upper_body"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/toggle_selector_4"
-                    android:textOff="@string/f_maker_step2_upper_body"
-                    android:textOn="@string/f_maker_step2_upper_body" />
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/f_maker_step2_arm"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/toggle_selector_5"
-                    android:textOff="@string/f_maker_step2_arm"
-                    android:textOn="@string/f_maker_step2_arm" />
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/f_maker_step2_etc"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/toggle_selector_6"
-                    android:textOff="@string/f_maker_step2_etc"
-                    android:textOn="@string/f_maker_step2_etc" />
-            </GridLayout>
-
-            <FrameLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginTop="20dp">
 
-                <androidx.core.widget.ContentLoadingProgressBar
-                    android:id="@+id/f_maker_step2_progress_bar"
-                    style="?android:progressBarStyle"
-                    android:visibility="invisible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
 
-            </FrameLayout>
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/f_maker_step2_muscle_area_toggle_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        app:selectionRequired="false"
+                        app:singleSelection="false">
+
+                        <!-- chest -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/f_maker_step2_chest"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/f_maker_step2_chest"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp" />
+
+                        <!-- shoulder -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/f_maker_step2_shoulder"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/f_maker_step2_shoulder"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp" />
+
+                        <!-- lat -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/f_maker_step2_lat"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/f_maker_step2_lat"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp" />
+
+                        <!-- upper body -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/f_maker_step2_upper_body"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/f_maker_step2_upper_body"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp" />
+
+                        <!-- arm -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/f_maker_step2_arm"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/f_maker_step2_arm"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp" />
+
+                        <!-- etc -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/f_maker_step2_etc"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/f_maker_step2_etc"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp" />
+
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <!-- progress bar -->
+                    <androidx.core.widget.ContentLoadingProgressBar
+                        android:id="@+id/f_maker_step2_progress_bar"
+                        style="?android:progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="invisible" />
+                </FrameLayout>
+            </ScrollView>
         </LinearLayout><!-- step content -->
 
         <!-- step direction selector -->

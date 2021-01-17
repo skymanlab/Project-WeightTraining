@@ -500,8 +500,8 @@ public class EachGroupRandomItem {
             return this;
         }
 
-        // init
-        public EachGroupRandomItem init() {
+        // create
+        public EachGroupRandomItem create() {
             return new EachGroupRandomItem(this);
         }
     }

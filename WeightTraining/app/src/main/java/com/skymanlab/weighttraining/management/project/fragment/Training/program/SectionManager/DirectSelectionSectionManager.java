@@ -40,7 +40,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] DirectSelectionSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final int STANDARD_ID_CHEST = 100;
@@ -195,7 +195,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
                 .setGroupType(groupType)
                 .setGroupEventArrayList(groupEventArrayList)
                 .setStandardId(muscleAreaStandardId)
-                .init();
+                .create();
 
         groupItem.createItem();
 

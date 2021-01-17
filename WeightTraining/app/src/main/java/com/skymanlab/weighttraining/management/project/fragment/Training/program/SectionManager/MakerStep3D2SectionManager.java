@@ -197,7 +197,7 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
                 .setInflater(inflater)
                 .setGroupingEventData(groupingEventData)
                 .setMuscleArea(muscleArea)
-                .init();
+                .create();
 
         eachGroupRandomItem.createItem();
 

@@ -125,8 +125,8 @@ public class SetNumberPickerDialog extends DialogFragment {
 
     // positive, negative button 클릭에 관한 메소드를 정하도록 interface 로 만든다.
     public interface NoticeDialogListener {
-        public void onDialogPositiveClick(SetNumberPickerDialog dialog, int setNumber);
+        void onDialogPositiveClick(SetNumberPickerDialog dialog, int setNumber);
 
-        public void onDialogNegativeClick(SetNumberPickerDialog dialog);
+        void onDialogNegativeClick(SetNumberPickerDialog dialog);
     }
 }

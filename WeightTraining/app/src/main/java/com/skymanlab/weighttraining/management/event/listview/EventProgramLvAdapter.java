@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +24,7 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 
 import java.util.ArrayList;
 
-public class EventProgramItemLvAdapter extends BaseAdapter {
+public class EventProgramLvAdapter extends BaseAdapter {
 
     // constance
     public static final String CLASS_NAME = "[EL] EventProgramItemLvAdapter";
@@ -41,7 +40,7 @@ public class EventProgramItemLvAdapter extends BaseAdapter {
     private TextView restTimeSecond;
 
     // constructor
-    public EventProgramItemLvAdapter(Activity activity, MuscleArea muscleArea, TextView setNumber, TextView restTimeMinute, TextView restTimeSecond) {
+    public EventProgramLvAdapter(Activity activity, MuscleArea muscleArea, TextView setNumber, TextView restTimeMinute, TextView restTimeSecond) {
         this.activity = activity;
         this.muscleArea = muscleArea;
         this.setNumber = setNumber;
@@ -72,15 +71,15 @@ public class EventProgramItemLvAdapter extends BaseAdapter {
         Context context = parent.getContext();
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.custom_event_program_item, parent, false);
+            convertView = inflater.inflate(R.layout.custom_list_event_program_item, parent, false);
         }
 
         // mapping
-        TextView eventName = (TextView) convertView.findViewById(R.id.cu_event_program_item_event_name);
-        TextView properWeight = (TextView) convertView.findViewById(R.id.cu_event_program_item_proper_weight);
-        final TextView maxWeight = (TextView) convertView.findViewById(R.id.cu_event_program_item_max_weight);
-        MaterialTextView start = (MaterialTextView) convertView.findViewById(R.id.cu_event_program_item_bt_start);
-        MaterialCardView startWrapper = (MaterialCardView) convertView.findViewById(R.id.cu_event_program_item_start_wrapper);
+        TextView eventName = (TextView) convertView.findViewById(R.id.custom_list_event_program_item_event_name);
+        TextView properWeight = (TextView) convertView.findViewById(R.id.custom_list_event_program_item_proper_weight);
+        final TextView maxWeight = (TextView) convertView.findViewById(R.id.custom_list_event_program_item_max_weight);
+        MaterialTextView start = (MaterialTextView) convertView.findViewById(R.id.custom_list_event_program_item_bt_start);
+        MaterialCardView startWrapper = (MaterialCardView) convertView.findViewById(R.id.custom_list_event_program_item_start_wrapper);
 
         // [lv/C]ArrayList<Event> : event program 에서 선택된 리스트 중 해당 position 의 event 객체 가져오기
         final Event event = (Event) getItem(position);

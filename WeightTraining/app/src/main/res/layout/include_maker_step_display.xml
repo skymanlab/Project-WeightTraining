@@ -19,7 +19,7 @@
             android:id="@+id/include_maker_step_display_first_number"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/second_number_1"/>
+            android:src="@drawable/step_display_side_number_1"/>
 
         <ImageView
             android:id="@+id/include_maker_step_display_first_bar"
@@ -27,13 +27,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/step_bar" />
+            android:src="@drawable/step_display_bar" />
 
         <ImageView
             android:id="@+id/include_maker_step_display_second_number"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/primary_number_2" />
+            android:src="@drawable/step_display_middle_number_2" />
 
         <ImageView
 
@@ -42,13 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/step_bar" />
+            android:src="@drawable/step_display_bar" />
 
         <ImageView
             android:id="@+id/include_maker_step_display_third_number"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/second_number_3" />
+            android:src="@drawable/step_display_side_number_3" />
 
     </LinearLayout><!-- End of step -->
 

@@ -23,15 +23,14 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.dialog.EventDialog;
-import com.skymanlab.weighttraining.management.event.dialog.EventModificationDialog;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
 import java.util.ArrayList;
 
-public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.ViewHolder> {
+public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscleAreaListRvAdapter.ViewHolder> {
 
     // constant
-    private static final String CLASS_NAME = "[PFTLA] EventListRvAdapter";
+    private static final String CLASS_NAME = "[PFTLA] EachMuscleAreaListRvAdapter";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -40,7 +39,7 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
     private FragmentManager fragmentManager;
 
     // constructor
-    public EachListRvAdapter(ArrayList<Event> eventArrayList, Activity activity, FragmentManager fragmentManager) {
+    public EachMuscleAreaListRvAdapter(ArrayList<Event> eventArrayList, Activity activity, FragmentManager fragmentManager) {
         this.eventArrayList = eventArrayList;
         this.activity = activity;
         this.fragmentManager = fragmentManager;
@@ -51,7 +50,7 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         // [lv/C]View : create a new view.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_event_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_event_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -107,13 +106,14 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
                 activity.getString(R.string.custom_dialog_event_update_negative_title));
 
         // [lv/C]EventDialog : event dialog 를 생성
-        EventDialog dialog = EventDialog.newInstance(eventArrayList.get(position), arguments);
-        dialog.setClickListener(new EventDialog.OnPositiveClickListener() {
+        EventDialog dialog = EventDialog.newInstance(eventArrayList.get(position).getMuscleArea(),eventArrayList.get(position), arguments);
+        dialog.setDatabaseListener(new EventDialog.DatabaseListener() {
             @Override
-            public void setClickListener() {
-                // event 데이터 수정하기
-                dialog.updateContent();
+            public void setDatabaseListener(Event event) {
+                // EventDialog 에서 제동하는 database 에 event 내용을 수정하는 메소드를 실행한다.
+                dialog.updateContent(event, EventDialog.MESSAGE_TYPE_SNACK_BAR);
             }
+
         });
         dialog.setCancelable(false);
         dialog.show(fragmentManager, null);
@@ -235,15 +235,15 @@ public class EachListRvAdapter extends RecyclerView.Adapter<EachListRvAdapter.Vi
          */
         private void connectWidget(View itemView) {
 
-            count = (TextView) itemView.findViewById(R.id.cu_event_item_count);
-            eventName = (TextView) itemView.findViewById(R.id.cu_event_item_event_name);
+            count = (TextView) itemView.findViewById(R.id.custom_list_event_item_count);
+            eventName = (TextView) itemView.findViewById(R.id.custom_list_event_item_event_name);
 
-            equipmentType = (TextView) itemView.findViewById(R.id.cu_event_item_equipment_type);
-            groupType = (TextView) itemView.findViewById(R.id.cu_event_item_group_type);
-            properWeight = (TextView) itemView.findViewById(R.id.cu_event_item_proper_weight);
-            maxWeight = (TextView) itemView.findViewById(R.id.cu_event_item_max_weight);
-            modify = (TextView) itemView.findViewById(R.id.cu_event_item_modify);
-            delete = (TextView) itemView.findViewById(R.id.cu_event_item_delete);
+            equipmentType = (TextView) itemView.findViewById(R.id.custom_list_event_item_equipment_type);
+            groupType = (TextView) itemView.findViewById(R.id.custom_list_event_item_group_type);
+            properWeight = (TextView) itemView.findViewById(R.id.custom_list_event_item_proper_weight);
+            maxWeight = (TextView) itemView.findViewById(R.id.custom_list_event_item_max_weight);
+            modify = (TextView) itemView.findViewById(R.id.custom_list_event_item_modify);
+            delete = (TextView) itemView.findViewById(R.id.custom_list_event_item_delete);
         }
     }
 }

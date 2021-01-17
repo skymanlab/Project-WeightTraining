@@ -18,7 +18,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.listview.EventProgramItemLvAdapter;
+import com.skymanlab.weighttraining.management.event.listview.EventProgramLvAdapter;
 import com.skymanlab.weighttraining.management.project.activity.SectionInitialization;
 import com.skymanlab.weighttraining.management.project.activity.SectionManager;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
@@ -51,7 +51,7 @@ public class EPLSectionTwoManager extends SectionManager implements SectionIniti
     private MaterialTextView complete;
 
     // instance variable
-    private EventProgramItemLvAdapter adapter;
+    private EventProgramLvAdapter adapter;
 
     // instance variable
     private int completedCounter = 0;
@@ -81,7 +81,7 @@ public class EPLSectionTwoManager extends SectionManager implements SectionIniti
         return isCompleted;
     }
 
-    public EventProgramItemLvAdapter getAdapter() {
+    public EventProgramLvAdapter getAdapter() {
         return adapter;
     }
 
@@ -202,7 +202,7 @@ public class EPLSectionTwoManager extends SectionManager implements SectionIniti
 
         final String METHOD_NAME = "[setProgramListLv] ";
         // [lv/C]EventSelectionItemLvAdapter :
-        this.adapter = new EventProgramItemLvAdapter(getActivity(), getMuscleArea(), setNumber, restTimeMinute, restTimeSecond);
+        this.adapter = new EventProgramLvAdapter(getActivity(), getMuscleArea(), setNumber, restTimeMinute, restTimeSecond);
         this.adapter.setEventArrayList(this.selectedEventArrayList);
         this.adapter.setIsCompleted(this.isCompleted);
 

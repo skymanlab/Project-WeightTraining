@@ -5,68 +5,59 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!-- main -->
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:background="@color/colorBackgroundGray"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
-
-            <!-- count -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/cu_event_item_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_gothic_bold"
-                android:padding="5dp"
-                android:text="@string/cu_event_item_count"
-                android:textColor="@color/colorTextSecond"
-                android:textSize="20dp" />
-
-            <!-- title -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/cu_event_item_event_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/nanum_gothic_bold"
-                android:padding="5dp"
-                android:text="@string/cu_event_item_event_name"
-                android:textColor="@color/colorTextSecond"
-                android:textSize="18dp" />
-
-            <!-- expand selector -->
-            <ImageView
-                android:id="@+id/cu_event_item_expand_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_expand_more_24"/>
-
-        </LinearLayout>
-
-        <!-- content -->
-        <LinearLayout
-            android:id="@+id/cu_event_item_content_wrapper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <!-- count -->
+                <TextView
+                    android:id="@+id/custom_list_event_item_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_gothic_bold"
+                    android:padding="5dp"
+                    android:text="@string/custom_list_event_item_count"
+                    android:textColor="@color/colorTextSecond"
+                    android:textSize="20dp" />
+
+                <!-- title -->
+                <TextView
+                    android:id="@+id/custom_list_event_item_event_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_gothic_bold"
+                    android:padding="5dp"
+                    android:text="@string/custom_list_event_item_event_name"
+                    android:textColor="@color/colorTextSecond"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="?android:attr/listDivider" />
 
             <!-- content 1. equipment type -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:gravity="center"
-                android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
                 android:paddingRight="20dp"
@@ -77,7 +68,7 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
-                    android:text="@string/cu_event_item_equipment_type" />
+                    android:text="@string/custom_list_event_item_equipment_type" />
 
                 <!-- divider -->
                 <View
@@ -89,12 +80,12 @@
 
                 <!-- content -->
                 <TextView
-                    android:id="@+id/cu_event_item_equipment_type"
+                    android:id="@+id/custom_list_event_item_equipment_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
                     android:paddingLeft="10dp"
-                    android:text="@string/cu_event_item_equipment_type_default" />
+                    android:text="@string/custom_list_event_item_equipment_type_default" />
             </LinearLayout><!-- End of content 1 -->
 
             <!-- content 2. group type -->
@@ -113,7 +104,7 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
-                    android:text="@string/cu_event_item_group_type" />
+                    android:text="@string/custom_list_event_item_group_type" />
 
                 <!-- divider -->
                 <View
@@ -125,12 +116,12 @@
 
                 <!-- content -->
                 <TextView
-                    android:id="@+id/cu_event_item_group_type"
+                    android:id="@+id/custom_list_event_item_group_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
-                    android:paddingLeft="10dp"
-                    android:text="@string/cu_event_item_group_type_default" />
+                    android:paddingStart="10dp"
+                    android:text="@string/custom_list_event_item_group_type_default" />
             </LinearLayout><!-- End of content 2 -->
 
             <!-- content 3.proper weight -->
@@ -149,7 +140,7 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
-                    android:text="@string/cu_event_item_proper_weight" />
+                    android:text="@string/custom_list_event_item_proper_weight" />
 
                 <!-- divider -->
                 <View
@@ -161,12 +152,12 @@
 
                 <!-- content -->
                 <TextView
-                    android:id="@+id/cu_event_item_proper_weight"
+                    android:id="@+id/custom_list_event_item_proper_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
                     android:paddingLeft="10dp"
-                    android:text="@string/cu_event_item_proper_weight_default" />
+                    android:text="@string/custom_list_event_item_proper_weight_default" />
             </LinearLayout><!-- End of content 3 -->
 
             <!-- content 4.proper weight -->
@@ -185,7 +176,7 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
-                    android:text="@string/cu_event_item_proper_weight" />
+                    android:text="@string/custom_list_event_item_proper_weight" />
 
                 <!-- divider -->
                 <View
@@ -197,32 +188,29 @@
 
                 <!-- content -->
                 <TextView
-                    android:id="@+id/cu_event_item_max_weight"
+                    android:id="@+id/custom_list_event_item_max_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_gothic"
                     android:paddingLeft="10dp"
-                    android:text="@string/cu_event_item_max_weight_default" />
+                    android:text="@string/custom_list_event_item_max_weight_default" />
             </LinearLayout><!-- End of content 4 -->
 
-            <View
-                android:id="@+id/divider6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
-                android:background="?android:attr/listDivider" />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginRight="20dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:background="?android:attr/listDivider" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="5dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <!-- modify button -->
                 <com.google.android.material.card.MaterialCardView
@@ -230,15 +218,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/colorBackgroundGray">
+                    app:cardBackgroundColor="@color/colorBackgroundGray"
+                    app:cardCornerRadius="10dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/cu_event_item_modify"
+                        android:id="@+id/custom_list_event_item_modify"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
                         android:padding="10dp"
-                        android:text="@string/cu_event_item_modify"
+                        android:text="@string/custom_list_event_item_modify"
                         android:textAlignment="center"
                         android:textColor="@color/colorTextSecond" />
 
@@ -250,26 +239,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/colorBackgroundGray">
+                    app:cardBackgroundColor="@color/colorBackgroundGray"
+                    app:cardCornerRadius="10dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/cu_event_item_delete"
+                        android:id="@+id/custom_list_event_item_delete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:padding="10dp"
-                        android:text="@string/cu_event_item_delete"
+                        android:text="@string/custom_list_event_item_delete"
                         android:textAlignment="center"
                         android:textColor="@color/colorTextSecond" />
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-        </LinearLayout><!-- End of content -->
 
-        <View
-            android:id="@+id/divider4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-    </LinearLayout><!-- End of main -->
+            <!--            <View-->
+            <!--                android:id="@+id/divider4"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="1dp"-->
+            <!--                android:background="?android:attr/listDivider" />-->
 
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

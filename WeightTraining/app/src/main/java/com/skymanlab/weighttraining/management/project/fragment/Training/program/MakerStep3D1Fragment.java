@@ -28,7 +28,7 @@ public class MakerStep3D1Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] MakerStep3D1Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final String CHEST_GROUPING_EVENT_DATA = "chestGroupingEventData";
@@ -132,11 +132,7 @@ public class MakerStep3D1Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final String METHOD_NAME = "[onViewCreated] ";
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "1. fragment = " + this.fragmentArrayList);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "2. fragment size = " + this.fragmentArrayList.size());
 
         // [iv/C]FragmentTopBarManager : step 3-1 fragment top bar
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));

@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".management.project.fragment.Training.list.EachListFragment">
+    tools:context=".management.project.fragment.Training.list.EachMuscleAreaListFragment">
 
     <!-- recycler view -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/f_each_list_recycler_view"
+        android:id="@+id/f_each_muscle_area_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
 
     <!-- progress bar -->
     <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/f_each_list_progress_bar"
+        android:id="@+id/f_each_muscle_area_list_progress_bar"
         style="?android:progressBarStyle"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
 
     <!-- add button -->
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/f_each_list_bt_add"
+        android:id="@+id/f_each_muscle_area_list_bt_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"

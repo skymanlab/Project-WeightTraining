@@ -46,10 +46,17 @@ public class EventDialog extends DialogFragment {
     public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
+    public static final int MESSAGE_TYPE_NONE = 0;
+    public static final int MESSAGE_TYPE_SNACK_BAR = 1;
+    public static final int MESSAGE_TYPE_LOG = 2;
+
+    // constant
+    private static final String MUSCLE_AREA = "muscleArea";
     private static final String EVENT = "event";
     private static final String SET_ARGUMENTS = "setArguments";
 
     // instance variable
+    private MuscleArea muscleArea;
     private Event event;
     private String[] arguments;
 
@@ -57,7 +64,6 @@ public class EventDialog extends DialogFragment {
     private View customView;
 
     // instance variable
-    private LinearLayout titleWrapper;
     private TextView title;
     private Spinner equipmentType;
     private Spinner groupType;
@@ -68,24 +74,25 @@ public class EventDialog extends DialogFragment {
     private MaterialTextView negative;
 
     // instance variable
-    private OnPositiveClickListener clickListener;
+    private DatabaseListener databaseListener;
 
     // constructor
-    public EventDialog() {
+    private EventDialog() {
 
     }
 
     //setter
-    public void setClickListener(OnPositiveClickListener clickListener) {
-        this.clickListener = clickListener;
+    public void setDatabaseListener(DatabaseListener databaseListener) {
+        this.databaseListener = databaseListener;
     }
 
     // newInstance
-    public static EventDialog newInstance(Event event, String[] arguments) {
+    public static EventDialog newInstance(MuscleArea muscleArea, Event event, String[] arguments) {
 
         EventDialog dialog = new EventDialog();
 
         Bundle args = new Bundle();
+        args.putSerializable(MUSCLE_AREA, muscleArea);
         args.putSerializable(EVENT, event);
         args.putStringArray(SET_ARGUMENTS, arguments);
         dialog.setArguments(args);
@@ -93,6 +100,15 @@ public class EventDialog extends DialogFragment {
 
     }
 
+
+    /**
+     * newInstance 에 parameter 로 보내는 arguments 를 설정하여 해당 객체를 반환한다.
+     *
+     * @param title
+     * @param positiveTitle
+     * @param negativeTitle
+     * @return
+     */
     public static String[] setArguments(String title, String positiveTitle, String negativeTitle) {
 
         String[] arguments = new String[3];
@@ -111,10 +127,12 @@ public class EventDialog extends DialogFragment {
 
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= data getter(from bundle) =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         if (getArguments() != null) {
+            this.muscleArea = (MuscleArea) getArguments().getSerializable(MUSCLE_AREA);
             this.event = (Event) getArguments().getSerializable(EVENT);
             this.arguments = getArguments().getStringArray(SET_ARGUMENTS);
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> Dialog event = " + this.event);
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> muscle area = " + this.muscleArea);
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> title = " + this.arguments[0]);
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> positive title = " + this.arguments[1]);
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> negative title = " + this.arguments[2]);
@@ -130,7 +148,7 @@ public class EventDialog extends DialogFragment {
 
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= layout setting =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [lv/C]View : layoutInflater 을 통해 custom layout 가져오기
-        customView = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog_event, null);
+        customView = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog_event_integrated, null);
 
         // [method] : widget mapping
         connectWidget(customView);
@@ -149,9 +167,6 @@ public class EventDialog extends DialogFragment {
      * [method] widget connect
      */
     private void connectWidget(View view) {
-
-        // [iv/C]LinearLayout : titleWrapper connect
-        this.titleWrapper = (LinearLayout) view.findViewById(R.id.custom_dialog_event_title_wrapper);
 
         // [iv/C]TextView : title connect
         this.title = (TextView) view.findViewById(R.id.custom_dialog_event_title);
@@ -226,9 +241,46 @@ public class EventDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
 
-                if (clickListener != null) {
+                if (databaseListener != null) {
 
-                    clickListener.setClickListener();
+                    // [lv/C]Event : widget 과 event 로 데이터베이스에 보낼 Event 객체 생성
+                    Event data = new Event();
+
+                    // [check 1] :
+                    if (checkWhetherInputAllEventData()) {
+
+                        // [check 2] : event 가 있으면 해당 event 를 수정하는 경우, null 이면 새로운 Event 객체를 저장하는 경우이다.
+                        if (event != null) {
+
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>---------- event  있습니다.");
+                            // update
+                            data.setKey(event.getKey());
+                            data.setEventName(eventName.getText().toString());
+                            data.setMuscleArea(event.getMuscleArea());
+                            data.setEquipmentType(DataManager.convertEquipmentType(equipmentType.getSelectedItemPosition()));
+                            data.setGroupType(DataManager.convertGroupType(groupType.getSelectedItemPosition()));
+                            data.setProperWeight(Float.parseFloat(properWeight.getText().toString()));
+                            data.setMaxWeight(Float.parseFloat(maxWeight.getText().toString()));
+                            data.setSelectionCounter(event.getSelectionCounter());
+                        } else {
+
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>---------- event is null");
+
+                            // save
+                            data.setKey(null);
+                            data.setEventName(eventName.getText().toString());
+                            data.setMuscleArea(muscleArea);
+                            data.setEquipmentType(DataManager.convertEquipmentType(equipmentType.getSelectedItemPosition()));
+                            data.setGroupType(DataManager.convertGroupType(groupType.getSelectedItemPosition()));
+                            data.setProperWeight(Float.parseFloat(properWeight.getText().toString()));
+                            data.setMaxWeight(Float.parseFloat(maxWeight.getText().toString()));
+                            data.setSelectionCounter(0);
+
+                        } // [check 2]
+                    } // [check 1]
+
+
+                    databaseListener.setDatabaseListener(data);
                 }
 
             }
@@ -244,6 +296,7 @@ public class EventDialog extends DialogFragment {
         });
 
     } // End of method [initWidget]
+
 
     /**
      * [method] equipmentType adapter
@@ -312,129 +365,138 @@ public class EventDialog extends DialogFragment {
     } // End of method [checkWhetherInputAllEventData]
 
 
+    // =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Database =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
     /**
      * [method] Firebase database 에 데이터를 수정하는 과정을 진행
      */
-    public void updateContent() {
+    public void updateContent(Event event, int messageType) {
         final String METHOD_NAME = "[updateContent] ";
 
-        // [check 1] : 입력 데이터 검사
-        if (checkWhetherInputAllEventData()) {
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 1. event name = " + event.getEventName());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 2. MUSCLE_AREA = " + event.getMuscleArea());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 3. EQUIPMENT_TYPE = " + event.getEquipmentType());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 4. GROUP_TYPE = " + event.getGroupType());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 5. PROPER_WEIGHT = " + event.getProperWeight());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 6. MAX_WEIGHT = " + event.getMaxWeight());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 7. SELECTION_COUNTER = " + event.getSelectionCounter());
 
-            String eventNameContent = eventName.getText().toString();                                                               // 1. event name
-            MuscleArea muscleAreaContent = event.getMuscleArea();                                                                   // 2. muscle area
-            EquipmentType equipmentTypeContent = DataManager.convertEquipmentType(this.equipmentType.getSelectedItemPosition());    // 3. equipment tyep
-            GroupType groupTypeContent = DataManager.convertGroupType(this.groupType.getSelectedItemPosition());                    // 4. group type
-            float properWeightContent = Float.parseFloat(this.properWeight.getText().toString());                                   // 5. proper weight
-            float maxWeightContent = Float.parseFloat(this.maxWeight.getText().toString());                                         // 6. max weight
-            long selectionCounter = event.getSelectionCounter();                                                                    // 7. selection count
+        // [lv/C]HashMap<String, Object> :
+        HashMap<String, Object> content = new HashMap<>();
+        content.put(Event.EVENT_NAME, event.getEventName());               // [1] event name
+        content.put(Event.MUSCLE_AREA, event.getMuscleArea());             // [2] muscle area
+        content.put(Event.EQUIPMENT_TYPE, event.getEquipmentType());       // [3] equipment type
+        content.put(Event.GROUP_TYPE, event.getGroupType());               // [4] group type
+        content.put(Event.PROPER_WEIGHT, event.getProperWeight());         // [5] proper weight
+        content.put(Event.MAX_WEIGHT, event.getMaxWeight());               // [6] max weight
+        content.put(Event.SELECTION_COUNTER, event.getSelectionCounter()); // [7] selection counter
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "1. event name = " + eventNameContent);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "2. muscle area = " + muscleAreaContent);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "3. equipment type = " + equipmentTypeContent);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "4. group type = " + groupTypeContent);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "5. proper weight = " + properWeightContent);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "6. max weight = " + maxWeightContent);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "7. selection counter = " + selectionCounter);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----> key = " + event.getKey());
+        // [lv/C]DatabaseReference :
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
+        db.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(event.getMuscleArea().toString())
+                .child(event.getKey())
+                .updateChildren(content, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
 
-            // [lv/C]HashMap<String, Object> :
-            HashMap<String, Object> data = new HashMap<>();
-            data.put(Event.Entry.COLUMN_NAME_EVENT_NAME, eventNameContent);
-            data.put(Event.Entry.COLUMN_NAME_MUSCLE_AREA, muscleAreaContent);
-            data.put(Event.Entry.COLUMN_NAME_EQUIPMENT_TYPE, equipmentTypeContent);
-            data.put(Event.Entry.COLUMN_NAME_GROUP_TYPE, groupTypeContent);
-            data.put(Event.Entry.COLUMN_NAME_PROPER_WEIGHT, properWeightContent);
-            data.put(Event.Entry.COLUMN_NAME_MAX_WEIGHT, maxWeightContent);
-            data.put(Event.Entry.COLUMN_NAME_SELECTION_COUNTER, selectionCounter);
+                        // messageType 에 따라 결과 메시지 표시하기
+                        showMessage(error, messageType, R.string.custom_dialog_event_update_snack_db_success, R.string.custom_dialog_event_update_snack_db_error);
 
-            // [lv/C]DatabaseReference :
-            DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
-            db.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(event.getMuscleArea().toString())
-                    .child(event.getKey())
-                    .updateChildren(data, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                    }
+                });
 
-                            // [check 1] : error 발생 안함
-                            if (error == null) {
-                                // success
-                                Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.custom_dialog_event_update_snack_db_success, Snackbar.LENGTH_SHORT).show();
-
-                                // dialog 종료
-                                dismiss();
-
-                            } else {
-                                // error 발생
-                                Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.custom_dialog_event_update_snack_db_error, Snackbar.LENGTH_SHORT).show();
-
-                                // dialog 종료
-                                dismiss();
-                            } // [check 1]
-                        }
-                    });
-
-        } // [check 1]
-
+        // dialog 종료
+        dismiss();
     } // End of method [updateContent]
 
 
     /**
      * [method] Firebase database 에 데이터를 저장하는 과정을 진행한다.
      */
-    private void saveContent() {
+    public void saveContent(Event event, int messageType) {
+        final String METHOD_NAME = "[saveContent] ";
 
-        // [check 1] : 입력데이터 검사
-        if (checkWhetherInputAllEventData()) {
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 1. event name = " + event.getEventName());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 2. MUSCLE_AREA = " + event.getMuscleArea());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 3. EQUIPMENT_TYPE = " + event.getEquipmentType());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 4. GROUP_TYPE = " + event.getGroupType());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 5. PROPER_WEIGHT = " + event.getProperWeight());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 6. MAX_WEIGHT = " + event.getMaxWeight());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> 7. SELECTION_COUNTER = " + event.getSelectionCounter());
 
-            String eventNameContent = eventName.getText().toString();                                                               // 1. event name
-            MuscleArea muscleAreaContent = event.getMuscleArea();                                                                   // 2. muscle area
-            EquipmentType equipmentTypeContent = DataManager.convertEquipmentType(this.equipmentType.getSelectedItemPosition());    // 3. equipment tyep
-            GroupType groupTypeContent = DataManager.convertGroupType(this.groupType.getSelectedItemPosition());                    // 4. group type
-            float properWeightContent = Float.parseFloat(this.properWeight.getText().toString());                                   // 5. proper weight
-            float maxWeightContent = Float.parseFloat(this.maxWeight.getText().toString());                                         // 6. max weight
-            int selectionCount = 0;                                                                                                 // 7. selection count
+        // [lv/C]HashMap<String, Object> :
+        HashMap<String, Object> content = new HashMap<>();
+        content.put(Event.EVENT_NAME, event.getEventName());               // [1] event name
+        content.put(Event.MUSCLE_AREA, event.getMuscleArea());             // [2] muscle area
+        content.put(Event.EQUIPMENT_TYPE, event.getEquipmentType());       // [3] equipment type
+        content.put(Event.GROUP_TYPE, event.getGroupType());               // [4] group type
+        content.put(Event.PROPER_WEIGHT, event.getProperWeight());         // [5] proper weight
+        content.put(Event.MAX_WEIGHT, event.getMaxWeight());               // [6] max weight
+        content.put(Event.SELECTION_COUNTER, event.getSelectionCounter()); // [7] selection counter
 
-            // [lv/C]HashMap<String, Object> :
-            HashMap<String, Object> data = new HashMap<>();
-            data.put(Event.Entry.COLUMN_NAME_EVENT_NAME, eventNameContent);
-            data.put(Event.Entry.COLUMN_NAME_MUSCLE_AREA, muscleAreaContent);
-            data.put(Event.Entry.COLUMN_NAME_EQUIPMENT_TYPE, equipmentTypeContent);
-            data.put(Event.Entry.COLUMN_NAME_GROUP_TYPE, groupTypeContent);
-            data.put(Event.Entry.COLUMN_NAME_PROPER_WEIGHT, properWeightContent);
-            data.put(Event.Entry.COLUMN_NAME_MAX_WEIGHT, maxWeightContent);
-            data.put(Event.Entry.COLUMN_NAME_SELECTION_COUNTER, selectionCount);
+        // [lv/C]DatabaseReference :
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
+        db.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(event.getMuscleArea().toString())
+                .push()
+                .setValue(content, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
 
-            // [lv/C]DatabaseReference :
-            DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
-            db.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(event.getMuscleArea().toString())
-                    .push()
-                    .setValue(data, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        // messageType 에 따라 결과 메시지 표시하기
+                        showMessage(error, messageType, R.string.custom_dialog_event_save_snack_db_success, R.string.custom_dialog_event_save_snack_db_error);
+                    }
+                });
 
-                            // [check 2] : error 발생 안 했음
-                            if (error == null) {
-
-                                // "입력에 성공하였습니다." Toast 메시지 표시
-                                Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.custom_dialog_event_save_snack_db_success, Snackbar.LENGTH_SHORT);
-
-                            } else {
-
-                                // "입력에 실패하였습니다." Toast 메시지 표시
-                                Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.custom_dialog_event_save_snack_input_fail, Snackbar.LENGTH_SHORT);
-                            } // [check 2]
-                        }
-                    });
-
-        }  // [check 1]
+        // dialog 종료
+        dismiss();
 
     } // End of method [saveContent]
 
-    public interface OnPositiveClickListener {
-        void setClickListener();
+
+    private void showMessage(DatabaseError error, int messageType, int successMessageId, int errorMessageId) {
+        final String METHOD_NAME = "[showMessage] ";
+
+        // [switch 1] : messageType 에 따라
+        switch (messageType) {
+
+            case MESSAGE_TYPE_NONE:
+                break;
+
+            case MESSAGE_TYPE_SNACK_BAR:
+
+                if (error == null) {
+                    // success message
+                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), successMessageId, Snackbar.LENGTH_SHORT);
+
+                } else {
+                    // error message
+                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), errorMessageId, Snackbar.LENGTH_SHORT);
+                }
+
+                break;
+
+            case MESSAGE_TYPE_LOG:
+
+                if (error == null) {
+                    // success message
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, getActivity().getString(successMessageId));
+                } else {
+                    // error message
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, getActivity().getString(errorMessageId));
+                }
+
+                break;
+
+        } // [switch 1]
+
+    }
+
+
+    // =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public interface DatabaseListener {
+        void setDatabaseListener(Event event);
     }
 
 }

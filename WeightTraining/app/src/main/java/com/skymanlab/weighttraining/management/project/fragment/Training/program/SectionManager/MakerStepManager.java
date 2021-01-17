@@ -34,22 +34,22 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     public static final int STEP_SEVEN = 7;
 
     // constant
-    private static final int SELECTED_NUMBER_1 = R.drawable.primary_number_1;
-    private static final int SELECTED_NUMBER_2 = R.drawable.primary_number_2;
-    private static final int SELECTED_NUMBER_3 = R.drawable.primary_number_3;
-    private static final int SELECTED_NUMBER_4 = R.drawable.primary_number_4;
-    private static final int SELECTED_NUMBER_5 = R.drawable.primary_number_5;
-    private static final int SELECTED_NUMBER_6 = R.drawable.primary_number_6;
-    private static final int SELECTED_NUMBER_7 = R.drawable.primary_number_7;
+    private static final int SELECTED_NUMBER_1 = R.drawable.step_display_middle_number_1;
+    private static final int SELECTED_NUMBER_2 = R.drawable.step_display_middle_number_2;
+    private static final int SELECTED_NUMBER_3 = R.drawable.step_display_middle_number_3;
+    private static final int SELECTED_NUMBER_4 = R.drawable.step_display_middle_number_4;
+    private static final int SELECTED_NUMBER_5 = R.drawable.step_display_middle_number_5;
+    private static final int SELECTED_NUMBER_6 = R.drawable.step_display_middle_number_6;
+    private static final int SELECTED_NUMBER_7 = R.drawable.step_display_middle_number_7;
 
     // constant
-    private static final int NO_SELECTED_NUMBER_1 = R.drawable.third_number_1;
-    private static final int NO_SELECTED_NUMBER_2 = R.drawable.third_number_2;
-    private static final int NO_SELECTED_NUMBER_3 = R.drawable.third_number_3;
-    private static final int NO_SELECTED_NUMBER_4 = R.drawable.third_number_4;
-    private static final int NO_SELECTED_NUMBER_5 = R.drawable.third_number_5;
-    private static final int NO_SELECTED_NUMBER_6 = R.drawable.third_number_6;
-    private static final int NO_SELECTED_NUMBER_7 = R.drawable.third_number_7;
+    private static final int NO_SELECTED_NUMBER_1 = R.drawable.step_display_side_number_1;
+    private static final int NO_SELECTED_NUMBER_2 = R.drawable.step_display_side_number_2;
+    private static final int NO_SELECTED_NUMBER_3 = R.drawable.step_display_side_number_3;
+    private static final int NO_SELECTED_NUMBER_4 = R.drawable.step_display_side_number_4;
+    private static final int NO_SELECTED_NUMBER_5 = R.drawable.step_display_side_number_5;
+    private static final int NO_SELECTED_NUMBER_6 = R.drawable.step_display_side_number_6;
+    private static final int NO_SELECTED_NUMBER_7 = R.drawable.step_display_side_number_7;
 
     // instance variable : step counter
     private ImageView firstNumber;

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
@@ -26,7 +27,7 @@ public class MakerStep3D3Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] MakerStep3D3Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final String CHEST_GROUPING_EVENT_DATA = "chestGroupingEventData";
@@ -81,6 +82,7 @@ public class MakerStep3D3Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final String METHOD_NAME = "[onCreate] ";
         if (getArguments() != null) {
             // bundle 에서 넘어온 데이터 가져오기
             this.chestGroupingEventData = (GroupingEventData) getArguments().getSerializable(CHEST_GROUPING_EVENT_DATA);
@@ -90,11 +92,16 @@ public class MakerStep3D3Fragment extends Fragment {
             this.armGroupingEventData = (GroupingEventData) getArguments().getSerializable(ARM_GROUPING_EVENT_DATA);
             this.etcGroupingEventData = (GroupingEventData) getArguments().getSerializable(ETC_GROUPING_EVENT_DATA);
         }
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> savedInstanceState = " + savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final String METHOD_NAME = "[onCreateView] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> savedInstanceState = " + savedInstanceState);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_maker_step3_3, container, false);
     }
@@ -102,6 +109,10 @@ public class MakerStep3D3Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final String METHOD_NAME = "[onViewCreated] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> savedInstanceState = " + savedInstanceState);
+        if (savedInstanceState != null)
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> savedInstanceState back = " + savedInstanceState.getInt("back"));
 
         // [iv/C]FragmentTopBarManager : step 3-3 fragment top bar manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
@@ -119,6 +130,25 @@ public class MakerStep3D3Fragment extends Fragment {
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        final String METHOD_NAME = "[onActivityCreated] ";
+        outState.putInt("key", 112);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>> onSaveInstanceState");
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final String METHOD_NAME = "[onActivityCreated] ";
+
+        if (savedInstanceState != null) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>> onActivityCreated");
+        }
 
     }
 }

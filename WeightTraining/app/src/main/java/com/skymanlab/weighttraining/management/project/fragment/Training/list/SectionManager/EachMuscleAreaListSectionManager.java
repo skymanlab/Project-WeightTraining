@@ -22,17 +22,18 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.dialog.EventDialog;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EachListRvAdapter;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EachMuscleAreaListRvAdapter;
 
 import java.util.ArrayList;
 
-public class EachListSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
+public class EachMuscleAreaListSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFTLS] EachListSectionManager";
+    private static final String CLASS_NAME = "[PFTLS] EachMuscleAreaListSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -45,12 +46,12 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
     private ImageButton add;
 
     // instance variable
-    private EachListRvAdapter adapter;
+    private EachMuscleAreaListRvAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Event> eventArrayList;
 
     // constructor
-    public EachListSectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment, MuscleArea muscleArea) {
+    public EachMuscleAreaListSectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment, MuscleArea muscleArea) {
         super(activity, view, fragmentManager);
         this.fragment = fragment;
         this.muscleArea = muscleArea;
@@ -60,13 +61,13 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
     public void connectWidget() {
 
         // [iv/C]RecyclerView : recyclerView connect
-        this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_each_list_recycler_view);
+        this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_each_muscle_area_list_recycler_view);
 
         // [iv/C]ContentLoadingProgressBar : progressBar connect
-        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_each_list_progress_bar);
+        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_each_muscle_area_list_progress_bar);
 
         // [iv/C]ImageButton : add connect
-        this.add = (ImageButton) getView().findViewById(R.id.f_each_list_bt_add);
+        this.add = (ImageButton) getView().findViewById(R.id.f_each_muscle_area_list_bt_add);
 
     }
 
@@ -84,6 +85,25 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
             @Override
             public void onClick(View view) {
 
+                // [lv/C]String : EventDialog 에서 제공하는 setArguments() 메소드를 사용하여, arguments 항목을 설정한다.
+                String[] arguments = EventDialog.setArguments(
+                        getActivity().getString(R.string.custom_dialog_event_save_title),
+                        getActivity().getString(R.string.custom_dialog_event_save_positive_title),
+                        getActivity().getString(R.string.custom_dialog_event_save_negative_title));
+
+                // [lv/C]EventDialog : event dialog 를 생성
+                EventDialog dialog = EventDialog.newInstance(muscleArea, null, arguments);
+                dialog.setDatabaseListener(new EventDialog.DatabaseListener() {
+                    @Override
+                    public void setDatabaseListener(Event event) {
+
+                        // EventDialog 에서 제동하는 database 에 event 내용을 저장하는 메소드를 실행한다.
+                        dialog.saveContent(event, EventDialog.MESSAGE_TYPE_SNACK_BAR);
+                    }
+
+                });
+                dialog.setCancelable(false);
+                dialog.show(getFragmentManager(), null);
             }
         });
 
@@ -105,7 +125,7 @@ public class EachListSectionManager extends FragmentSectionManager implements Fr
         this.recyclerView.setLayoutManager(layoutManager);
 
         // [iv/C]EachListRvAdapter : recyclerView 의 adapter 생성
-        this.adapter = new EachListRvAdapter(eventArrayList, getActivity(), getFragmentManager());
+        this.adapter = new EachMuscleAreaListRvAdapter(eventArrayList, getActivity(), getFragmentManager());
 
         // [iv/C] : recyclerView 의 adapter setting
         this.recyclerView.setAdapter(this.adapter);

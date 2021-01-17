@@ -16,7 +16,7 @@ import com.skymanlab.weighttraining.management.event.program.data.EventResultSet
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep5Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.SelectedEventRvAdapter;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.Step4EventRvAdapter;
 
 import java.util.ArrayList;
 
@@ -144,7 +144,7 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
         this.selectedEventListWrapper.setLayoutManager(layoutManager);
 
         // [iv/C]SelectedEventItemRvAdapter : recyclerView 의 adapter 생성
-        SelectedEventRvAdapter adapter = new SelectedEventRvAdapter(selectedEventArrayList);
+        Step4EventRvAdapter adapter = new Step4EventRvAdapter(selectedEventArrayList);
 
         // [iv/C] : recyclerView 의 adapter setting
         this.selectedEventListWrapper.setAdapter(adapter);

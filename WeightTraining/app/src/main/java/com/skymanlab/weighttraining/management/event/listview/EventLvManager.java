@@ -21,14 +21,14 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 
 import java.util.ArrayList;
 
-public class EventItemLvManager {
+public class EventLvManager {
 
     // constructor
     private static final String CLASS_NAME = "[EL] EventItemLvManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private EventItemLvAdapter eventItemLvAdapter;
+    private EventLvAdapter eventLvAdapter;
 
     // instance variable
     private Activity activity;
@@ -45,7 +45,7 @@ public class EventItemLvManager {
     private ArrayList<Boolean> isFolded;
 
     // constructor
-    public EventItemLvManager(Activity activity, FragmentManager fragmentManager, ListView targetListView, ProgressBar progressBar, String uid, MuscleArea muscleArea) {
+    public EventLvManager(Activity activity, FragmentManager fragmentManager, ListView targetListView, ProgressBar progressBar, String uid, MuscleArea muscleArea) {
         this.activity = activity;
         this.fragmentManager = fragmentManager;
         this.targetListView = targetListView;
@@ -69,20 +69,20 @@ public class EventItemLvManager {
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_3/true : targetListView 에 데이터를 뿌려줄거야! <=");
             // [iv/C]EventItemLvAdapter : ListView adapter 생성
-            this.eventItemLvAdapter = new EventItemLvAdapter(this.activity, this.fragmentManager, this.uid);
+            this.eventLvAdapter = new EventLvAdapter(this.activity, this.fragmentManager, this.uid);
 //            this.eventItemLvAdapter.setDataOfEventArrayList(this.eventArrayList);
-            this.eventItemLvAdapter.setEventArrayList(this.eventArrayList);
-            this.eventItemLvAdapter.setIsFolded(this.isFolded);
+            this.eventLvAdapter.setEventArrayList(this.eventArrayList);
+            this.eventLvAdapter.setIsFolded(this.isFolded);
 
             // [iv/C]ListView : targetListView 와 eventItemLvAdapter 를 연결하기
-            this.targetListView.setAdapter(this.eventItemLvAdapter);
+            this.targetListView.setAdapter(this.eventLvAdapter);
 
             // [lv/C]DatabaseReference :
             DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
 
             // [lv/C]Query :
 //            Query query = db.child(this.uid).child(this.muscleArea.toString());
-            Query query = db.child("W9QHPdGS5kMzeIyL4N0u8JCD5Wj1").child(this.muscleArea.toString());
+            Query query = db.child(uid).child(this.muscleArea.toString());
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -113,7 +113,7 @@ public class EventItemLvManager {
 //                    eventItemLvAdapter.setDataOfEventArrayList(eventArrayList);
 
                     // [iv/C]ArrayList<Event> : adapter 변경된 내용 적용하기
-                    eventItemLvAdapter.notifyDataSetChanged();
+                    eventLvAdapter.notifyDataSetChanged();
 
                     // [iv/C]ListView : targetListView 을 VISIBLE 로
                     targetListView.setVisibility(ListView.VISIBLE);

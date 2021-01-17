@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep4SectionManager;
@@ -25,7 +26,7 @@ public class MakerStep4Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] MakerStep4Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final String CHEST_EVENT_RESULT_SET = "chestEventResultSet";
@@ -122,5 +123,49 @@ public class MakerStep4Fragment extends Fragment {
         this.sectionManager.setEtcEventResultSet(this.etcEventResultSet);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+    }
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt("back", 11);
+        super.onSaveInstanceState(outState);
+        final String METHOD_NAME = "[onSaveInstanceState] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>. onSaveInstanceState ");
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        final String METHOD_NAME = "[onPause] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>. onPause ");
+
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        final String METHOD_NAME = "[onStop] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>. onStop ");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();   final String METHOD_NAME = "[onDestroyView] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>. onDestroyView ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();   final String METHOD_NAME = "[onDestroy] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>. onDestroy ");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();   final String METHOD_NAME = "[onDetach] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>. onDetach ");
     }
 }

@@ -11,6 +11,8 @@ import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,23 +35,25 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D3Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep2SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private int step1SelectedType;
 
     // instance variable
-    private ToggleButton chest;
-    private ToggleButton shoulder;
-    private ToggleButton lat;
-    private ToggleButton upperBody;
-    private ToggleButton arm;
-    private ToggleButton etc;
+    private MaterialButtonToggleGroup muscleAreaToggleGroup;
+        private MaterialButton chest;
+    private MaterialButton shoulder;
+    private MaterialButton lat;
+    private MaterialButton upperBody;
+    private MaterialButton arm;
+    private MaterialButton etc;
     private ContentLoadingProgressBar progressBar;
 
     // instance variable
@@ -67,23 +71,26 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     @Override
     public void connectWidget() {
 
-        // [iv/C]ToggleButton : [0] chest connect
-        this.chest = (ToggleButton) getView().findViewById(R.id.f_maker_step2_chest);
+        // [iv/C]MaterialButtonToggleGroup :  connect
+        this.muscleAreaToggleGroup = (MaterialButtonToggleGroup) getView().findViewById(R.id.f_maker_step2_muscle_area_toggle_group);
 
-        // [iv/C]ToggleButton : [1] shoulder connect
-        this.shoulder = (ToggleButton) getView().findViewById(R.id.f_maker_step2_shoulder);
+        // [iv/C]MaterialButton : chest connect
+        this.chest = (MaterialButton) getView().findViewById(R.id.f_maker_step2_chest);
 
-        // [iv/C]ToggleButton : [2] lat connect
-        this.lat = (ToggleButton) getView().findViewById(R.id.f_maker_step2_lat);
+        // [iv/C]MaterialButton : shoulder connect
+        this.shoulder = (MaterialButton) getView().findViewById(R.id.f_maker_step2_shoulder);
 
-        // [iv/C]ToggleButton : [3] upperBody connect
-        this.upperBody = (ToggleButton) getView().findViewById(R.id.f_maker_step2_upper_body);
+        // [iv/C]MaterialButton : lat connect
+        this.lat = (MaterialButton) getView().findViewById(R.id.f_maker_step2_lat);
 
-        // [iv/C]ToggleButton : [4] arm connect
-        this.arm = (ToggleButton) getView().findViewById(R.id.f_maker_step2_arm);
+        // [iv/C]MaterialButton : upperBody connect
+        this.upperBody = (MaterialButton) getView().findViewById(R.id.f_maker_step2_upper_body);
 
-        // [iv/C]ToggleButton : [5] etc connect
-        this.etc = (ToggleButton) getView().findViewById(R.id.f_maker_step2_etc);
+        // [iv/C]MaterialButton : arm connect
+        this.arm = (MaterialButton) getView().findViewById(R.id.f_maker_step2_arm);
+
+        // [iv/C]MaterialButton : etc connect
+        this.etc = (MaterialButton) getView().findViewById(R.id.f_maker_step2_etc);
 
         // [iv/C]ContentLoadingProgressBar : progressBar connect
         this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_maker_step2_progress_bar);
@@ -92,6 +99,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
     @Override
     public void initWidget() {
+        final String METHOD_NAME = "[initWidget] ";
 
         // [iv/C]MakerStepManager : step 2 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
         this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_TWO);
@@ -106,68 +114,53 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
             isSelected = false;
         }
 
-        // [iv/C]ToggleButton : [0] chest change listener
-        this.chest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // [iv/C]MaterialButtonToggleGroup : toggle button checked listener
+        muscleAreaToggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                switch (checkedId) {
+                    case R.id.f_maker_step2_chest:
 
-                // [iv/b]isSelectedMuscleAreaList : isChecked 값을 isSelectedMuscleAreaList[0] 에 저장
-                isSelectedMuscleAreaList[0] = isChecked;
-            }
-        });
+                        // [iv/b]isSelectedMuscleAreaList : chest 의 체크 여부 저장
+                        isSelectedMuscleAreaList[0] = isChecked;
 
+                        break;
 
-        // [iv/C]ToggleButton : [1] shoulder change listener
-        this.shoulder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    case R.id.f_maker_step2_shoulder:
 
-                // [iv/b]isSelectedMuscleAreaList : isChecked 값을 isSelectedMuscleAreaList[1] 에 저장
-                isSelectedMuscleAreaList[1] = isChecked;
-            }
-        });
+                        // [iv/b]isSelectedMuscleAreaList : shoulder 의 체크 여부 저장
+                        isSelectedMuscleAreaList[1] = isChecked;
 
+                        break;
 
-        // [iv/C]ToggleButton : [2] lat change listener
-        this.lat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    case R.id.f_maker_step2_lat:
 
-                // [iv/b]isSelectedMuscleAreaList : isChecked 값을 isSelectedMuscleAreaList[2] 에 저장
-                isSelectedMuscleAreaList[2] = isChecked;
-            }
-        });
+                        // [iv/b]isSelectedMuscleAreaList : lat 의 체크 여부 저장
+                        isSelectedMuscleAreaList[2] = isChecked;
 
+                        break;
 
-        // [iv/C]ToggleButton : [3] upperBody change listener
-        this.upperBody.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    case R.id.f_maker_step2_upper_body:
 
-                // [iv/b]isSelectedMuscleAreaList : isChecked 값을 isSelectedMuscleAreaList[3] 에 저장
-                isSelectedMuscleAreaList[3] = isChecked;
-            }
-        });
+                        // [iv/b]isSelectedMuscleAreaList : upper body 의 체크 여부 저장
+                        isSelectedMuscleAreaList[3] = isChecked;
 
+                        break;
 
-        // [iv/C]ToggleButton : [4] arm change listener
-        this.arm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    case R.id.f_maker_step2_arm:
 
-                // [iv/b]isSelectedMuscleAreaList : isChecked 값을 isSelectedMuscleAreaList[4] 에 저장
-                isSelectedMuscleAreaList[4] = isChecked;
-            }
-        });
+                        // [iv/b]isSelectedMuscleAreaList : arm 의 체크 여부 저장
+                        isSelectedMuscleAreaList[4] = isChecked;
 
+                        break;
 
-        // [iv/C]ToggleButton : [5] etc change listener
-        this.etc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    case R.id.f_maker_step2_etc:
 
-                // [iv/b]isSelectedMuscleAreaList : isChecked 값을 isSelectedMuscleAreaList[0] 에 저장
-                isSelectedMuscleAreaList[5] = isChecked;
+                        // [iv/b]isSelectedMuscleAreaList : etc 의 체크 여부 저장
+                        isSelectedMuscleAreaList[5] = isChecked;
+
+                        break;
+                }
             }
         });
 
@@ -184,9 +177,9 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
         // [check 1] : 6가지의 MuscleArea 중 하나라도 선택한 것이 있을 때만 다음 단계 진행
-        if (checkSelectedMuscleArea()) {
+        if (0 < this.muscleAreaToggleGroup.getCheckedButtonIds().size() ) {
 
-            // [iv/C]ContentLoadingProgressBar : VISIABLE
+            // [iv/C]ContentLoadingProgressBar : VISIBLE
             this.progressBar.setVisibility(View.VISIBLE);
 
             // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
@@ -198,30 +191,6 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
             Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_next, Snackbar.LENGTH_SHORT).show();
 
         } // [check 1]
-
-    }
-
-    private boolean checkSelectedMuscleArea() {
-
-        // [lv/i]selectedCounter : 선택된 개수를 카운트한다.
-        int selectedCounter = 0;
-
-        // [cycle 1] : 각 MuscleArea 의 isSelectedMuscleAreaList 를 확인하여 모두 선택된 값이 없을 때는 false 를 리턴한다.
-        for (int index = 0; index < this.isSelectedMuscleAreaList.length; index++) {
-
-            // [check 1] : 선택된 목록이면 selectedCounter 를 +1 증가한다.
-            if (this.isSelectedMuscleAreaList[index]) {
-                selectedCounter++;
-            } // [check 1]
-
-        } // [cycle 1]
-
-        // [check 2] : selected counter 가 0 이면 false, 0 이상이면 true 를 반환한다.
-        if (selectedCounter == 0) {
-            return false;
-        } else {
-            return true;
-        } // [check 2]
 
     }
 

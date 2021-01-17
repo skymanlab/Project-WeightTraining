@@ -6,9 +6,9 @@
 
     <!-- content -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/include_step5_event_item_content_wrapper"
+        android:id="@+id/include_maker_step5_event_item_content_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_margin="5dp"
         android:background="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/colorBackgroundSecond"
@@ -20,7 +20,7 @@
 
         <!-- more info -->
         <ImageView
-            android:id="@+id/include_step5_event_item_more_info"
+            android:id="@+id/include_maker_step5_event_item_more_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_more_vert_24"
@@ -34,10 +34,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/include_step5_event_item_muscle_area_number"
+                android:id="@+id/include_maker_step5_event_item_muscle_area_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textAlignment="center"
@@ -51,14 +51,15 @@
                 android:background="@color/colorBackgroundWhite" />
 
             <TextView
-                android:id="@+id/include_step5_event_item_event_name"
+                android:id="@+id/include_maker_step5_event_item_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/colorTextPrimary"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="12sp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView><!-- End of content -->
 

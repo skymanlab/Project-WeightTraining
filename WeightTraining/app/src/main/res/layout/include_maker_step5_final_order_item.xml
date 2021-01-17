@@ -6,7 +6,7 @@
 
     <!-- content -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/include_step5_final_order_item_content_wrapper"
+        android:id="@+id/include_maker_step5_final_order_item_content_wrapper"
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_margin="5dp"
@@ -25,14 +25,14 @@
 
             <!-- number -->
             <TextView
-                android:id="@+id/include_step5_final_order_item_number"
+                android:id="@+id/include_maker_step5_final_order_item_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10sp"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="10sp" />
+                android:textAlignment="center"/>
 
             <View
                 android:layout_width="match_parent"
@@ -43,14 +43,15 @@
 
             <!-- muscle area number -->
             <TextView
-                android:id="@+id/include_step5_final_order_item_muscle_area_number"
+                android:id="@+id/include_maker_step5_final_order_item_muscle_area_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorTextPrimary" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="12dp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView><!-- End of content -->
 </androidx.constraintlayout.widget.ConstraintLayout>

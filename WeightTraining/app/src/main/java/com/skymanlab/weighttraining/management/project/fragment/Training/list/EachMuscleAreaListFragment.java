@@ -14,18 +14,17 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
-import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager.EachListSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager.EachMuscleAreaListSectionManager;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EachListFragment#newInstance} factory method to
+ * Use the {@link EachMuscleAreaListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EachListFragment extends Fragment {
+public class EachMuscleAreaListFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTL] EachListFragment";
+    private static final String CLASS_NAME = "[PFTL] EachMuscleAreaListFragment";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
@@ -35,10 +34,10 @@ public class EachListFragment extends Fragment {
     private MuscleArea muscleArea;
 
     // instance variable
-    private EachListSectionManager sectionManager;
+    private EachMuscleAreaListSectionManager sectionManager;
 
     // constructor
-    public EachListFragment() {
+    public EachMuscleAreaListFragment() {
         // Required empty public constructor
     }
 
@@ -49,8 +48,8 @@ public class EachListFragment extends Fragment {
      * @return A new instance of fragment EachListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EachListFragment newInstance(MuscleArea muscleArea) {
-        EachListFragment fragment = new EachListFragment();
+    public static EachMuscleAreaListFragment newInstance(MuscleArea muscleArea) {
+        EachMuscleAreaListFragment fragment = new EachMuscleAreaListFragment();
         Bundle args = new Bundle();
         args.putSerializable(MUSCLE_AREA, muscleArea);
         fragment.setArguments(args);
@@ -69,7 +68,7 @@ public class EachListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_each_list, container, false);
+        return inflater.inflate(R.layout.fragment_each_muscle_area_list, container, false);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class EachListFragment extends Fragment {
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> muscleArea " + muscleArea);
 
         // [iv/C]EachListSectionManager : each list fragment section manager
-        this.sectionManager = new EachListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this, this.muscleArea);
+        this.sectionManager = new EachMuscleAreaListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this, this.muscleArea);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }

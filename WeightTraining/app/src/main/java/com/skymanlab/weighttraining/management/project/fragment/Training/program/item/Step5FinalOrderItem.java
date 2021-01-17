@@ -83,7 +83,7 @@ public class Step5FinalOrderItem {
      */
     private View inflateItem() {
 
-        return inflater.inflate(R.layout.include_step5_final_order_item, null);
+        return inflater.inflate(R.layout.include_maker_step5_final_order_item, null);
 
     } // End of method [inflateItem]
 
@@ -117,7 +117,7 @@ public class Step5FinalOrderItem {
     private void connectWidgetOfContentWrapper(View view) {
 
         // [iv/C]MaterialCardView : contentWrapper connect
-        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_step5_final_order_item_content_wrapper);
+        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_maker_step5_final_order_item_content_wrapper);
 
     } // End of method [connectWidgetOfContentWrapper]
 
@@ -129,7 +129,7 @@ public class Step5FinalOrderItem {
     private void connectWidgetOfNumber(View view) {
 
         // [iv/C]TextView : number connect
-        this.number = (TextView) view.findViewById(R.id.include_step5_final_order_item_number);
+        this.number = (TextView) view.findViewById(R.id.include_maker_step5_final_order_item_number);
 
     } // End of method [connectWidgetOfNumber]
 
@@ -142,7 +142,7 @@ public class Step5FinalOrderItem {
     private void connectWidgetOfMuscleAreaNumber(View view) {
 
         // [iv/C]TextView : muscleAreaNumber connect
-        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_step5_final_order_item_muscle_area_number);
+        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_maker_step5_final_order_item_muscle_area_number);
 
     } // End of method [connectWidgetOfMuscleAreaNumber]
 
@@ -293,7 +293,8 @@ public class Step5FinalOrderItem {
             return this;
         }
 
-        public Step5FinalOrderItem init() {
+        // create
+        public Step5FinalOrderItem create() {
             return new Step5FinalOrderItem(this);
         }
     }

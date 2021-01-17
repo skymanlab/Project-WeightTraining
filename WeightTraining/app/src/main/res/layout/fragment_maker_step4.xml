@@ -35,14 +35,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
                 android:text="@string/f_maker_step4_comment"
                 android:textAlignment="center" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/f_maker_step4_selected_event_list_wrapper"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/browser_actions_bg_grey"
+                app:cardCornerRadius="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/f_maker_step4_selected_event_list_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"/>
+            </com.google.android.material.card.MaterialCardView>
+
 
         </LinearLayout>
 

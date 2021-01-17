@@ -158,7 +158,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                     etcEventResultSet);
 
             // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FragmentTransaction transaction = fragment.getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
             transaction.addToBackStack(null);
             transaction.commit();

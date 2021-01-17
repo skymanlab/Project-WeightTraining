@@ -5,14 +5,14 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cu_selected_event_item_content_wrapper"
+        android:id="@+id/custom_list_step4_event_item_content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@color/colorBackgroundFirst"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,26 +26,31 @@
             android:padding="10dp">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/cu_selected_event_item_muscle_area_number"
-                android:layout_width="90dp"
+                android:id="@+id/custom_list_step4_event_item_number"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cu_selected_event_item_muscle_area_number"
-                android:textColor="@color/colorTextPrimary"
-                app:drawableStartCompat="@drawable/menu_icon_white" />
+                android:layout_marginEnd="10dp"
+                android:text="@string/custom_list_step4_event_item_number_default"
+                android:textSize="20sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/custom_list_step4_event_item_muscle_area"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/custom_list_step4_event_item_muscle_area_default" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorBackgroundWhite" />
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorBackgroundGray" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/cu_selected_event_item_event_name"
+                android:id="@+id/custom_list_step4_event_item_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTextPrimary"
-                android:text="@string/cu_selected_event_item_event_name" />
+                android:text="@string/custom_list_step4_event_item_event_name_default" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

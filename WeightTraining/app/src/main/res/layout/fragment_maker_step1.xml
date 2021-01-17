@@ -36,49 +36,59 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
                 android:text="@string/f_maker_step1_comment"
                 android:textAlignment="center" />
+
 
             <!-- button -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:useDefaultMargins="true"
-                android:columnCount="3"
+                android:layout_margin="20dp"
+                android:columnCount="1"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/f_maker_step1_direct_selection"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
+                    android:includeFontPadding="true"
+                    android:padding="15sp"
                     android:text="@string/f_maker_step1_direct_selection"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundFirst" />
+                    app:cornerRadius="10dp"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/f_maker_step1_each_random_selection"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
+                    android:includeFontPadding="true"
+                    android:padding="15sp"
                     android:text="@string/f_maker_step1_each_random_selection"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundSecond" />
+                    app:cornerRadius="10dp"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/f_maker_step1_all_random_selection"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
+                    android:includeFontPadding="true"
+                    android:padding="15sp"
                     android:text="@string/f_maker_step1_all_random_selection"
-                    android:textColor="@color/colorTextPrimary"
-                    app:backgroundTint="@color/colorBackgroundThird" />
+                    app:cornerRadius="10dp"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1dp" />
 
 
             </GridLayout>

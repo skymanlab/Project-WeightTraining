@@ -11,16 +11,16 @@ import androidx.annotation.Nullable;
 import com.skymanlab.weighttraining.R;
 
 
-public class CheckableEventProgram extends LinearLayout implements Checkable {
+public class CheckableEventProgramItem extends LinearLayout implements Checkable {
 
 
-    public CheckableEventProgram(Context context, @Nullable AttributeSet attrs) {
+    public CheckableEventProgramItem(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     public boolean isChecked() {
-        CheckBox eventChecker = (CheckBox) findViewById(R.id.cu_event_program_item_ch_event);
+        CheckBox eventChecker = (CheckBox) findViewById(R.id.custom_list_event_program_item_checker);
 
         return eventChecker.isChecked();
     }
@@ -28,7 +28,7 @@ public class CheckableEventProgram extends LinearLayout implements Checkable {
     @Override
     public void setChecked(boolean checked) {
 
-        CheckBox eventChecker = (CheckBox) findViewById(R.id.cu_event_program_item_ch_event);
+        CheckBox eventChecker = (CheckBox) findViewById(R.id.custom_list_event_program_item_checker);
 
         if (eventChecker.isChecked() != checked) {
             eventChecker.setChecked(checked);
@@ -37,7 +37,7 @@ public class CheckableEventProgram extends LinearLayout implements Checkable {
 
     @Override
     public void toggle() {
-        CheckBox eventChecker = (CheckBox) findViewById(R.id.cu_event_program_item_ch_event);
+        CheckBox eventChecker = (CheckBox) findViewById(R.id.custom_list_event_program_item_checker);
 
 
         setChecked(eventChecker.isChecked() ? false : true);

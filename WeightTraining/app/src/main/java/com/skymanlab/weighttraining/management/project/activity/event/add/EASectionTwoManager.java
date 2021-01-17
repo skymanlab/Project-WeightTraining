@@ -17,7 +17,7 @@ import com.skymanlab.weighttraining.EventListActivity;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.listview.EventItemLvManager;
+import com.skymanlab.weighttraining.management.event.listview.EventLvManager;
 import com.skymanlab.weighttraining.management.project.activity.SectionInitialization;
 import com.skymanlab.weighttraining.management.project.activity.SectionManager;
 import com.skymanlab.weighttraining.management.project.data.SessionManager;
@@ -138,7 +138,7 @@ public class EASectionTwoManager extends SectionManager implements SectionInitia
     private void setListViewOfEventListLv() {
 
         // [lv/C]EventItemLvManager : ListView 에 eventArrayList 를 연결하는 메니저 생성
-        EventItemLvManager lvManager = new EventItemLvManager(getActivity(),fragmentManager, eventListLv, progressBar, getFirebaseUser().getUid(), getMuscleArea());
+        EventLvManager lvManager = new EventLvManager(getActivity(),fragmentManager, eventListLv, progressBar, getFirebaseUser().getUid(), getMuscleArea());
         lvManager.setListView();
 
     } // End of method [setListViewOfEventListLv]

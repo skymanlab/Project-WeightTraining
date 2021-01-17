@@ -99,7 +99,7 @@
                             android:layout_height="45dp"
                             android:layout_columnWeight="1"
                             android:layout_gravity="center"
-                            android:src="@drawable/more_fitness_center" />
+                            android:src="@drawable/more_menu_1_fitness_center" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                             android:layout_height="45dp"
                             android:layout_columnWeight="1"
                             android:layout_gravity="center"
-                            android:src="@drawable/more_target" />
+                            android:src="@drawable/more_menu_3_target" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                             android:layout_height="45dp"
                             android:layout_columnWeight="1"
                             android:layout_gravity="center"
-                            android:src="@drawable/more_setting" />
+                            android:src="@drawable/more_menu_2_setting" />
 
                         <TextView
                             android:layout_width="wrap_content"

@@ -178,7 +178,7 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
             // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
-            transaction.addToBackStack(null);
+            transaction.addToBackStack("step3-3");
             transaction.commit();
 
         } // [check 1]
@@ -222,7 +222,7 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
                 .setInflater(inflater)
                 .setMuscleArea(muscleArea)
                 .setGroupingEventData(groupingEventData)
-                .init();
+                .create();
 
         allGroupRandomItem.createItem();
 

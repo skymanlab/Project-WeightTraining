@@ -118,7 +118,7 @@ public class Step5EventItem {
      * @return event 의 한 항목인 item 이다.
      */
     private View inflateItem() {
-        return inflater.inflate(R.layout.include_step5_event_item, null);
+        return inflater.inflate(R.layout.include_maker_step5_event_item, null);
     } // End of method [inflateItem]
 
 
@@ -154,7 +154,7 @@ public class Step5EventItem {
     private void connectWidgetOfContentWrapper(View view) {
 
         // [iv/C]MaterialCardView : contentWrapper connect
-        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_step5_event_item_content_wrapper);
+        this.contentWrapper = (MaterialCardView) view.findViewById(R.id.include_maker_step5_event_item_content_wrapper);
 
     } // End of method [connectWidgetOfContentWrapper]
 
@@ -167,7 +167,7 @@ public class Step5EventItem {
     private void connectWidgetOfMoreInfo(View view) {
 
         // [iv/C]ImageView : moreInfo connect
-        this.moreInfo = (ImageView) view.findViewById(R.id.include_step5_event_item_more_info);
+        this.moreInfo = (ImageView) view.findViewById(R.id.include_maker_step5_event_item_more_info);
 
     } // End of method [connectWidgetOfMoreInfo]
 
@@ -180,7 +180,7 @@ public class Step5EventItem {
     private void connectWidgetOfMuscleAreaNumber(View view) {
 
         // [iv/C]TextView : muscleAreaNumber connect
-        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_step5_event_item_muscle_area_number);
+        this.muscleAreaNumber = (TextView) view.findViewById(R.id.include_maker_step5_event_item_muscle_area_number);
 
     } // End of method [connectWidgetOfMuscleAreaNumber]
 
@@ -193,7 +193,7 @@ public class Step5EventItem {
     private void connectWidgetOfEventName(View view) {
 
         // [iv/C]TextView : eventName connect
-        this.eventName = (TextView) view.findViewById(R.id.include_step5_event_item_event_name);
+        this.eventName = (TextView) view.findViewById(R.id.include_maker_step5_event_item_event_name);
 
     } // End of method [connectWidgetOfEventName]
 
@@ -375,7 +375,8 @@ public class Step5EventItem {
             return this;
         }
 
-        public Step5EventItem init() {
+        // create
+        public Step5EventItem create() {
             return new Step5EventItem(this);
         }
     }

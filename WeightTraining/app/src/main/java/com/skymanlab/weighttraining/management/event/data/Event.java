@@ -10,6 +10,16 @@ import java.io.Serializable;
 
 public class Event implements Serializable {
 
+    // constant
+    public static final String KEY ="key";
+    public static final String EVENT_NAME = "eventName";
+    public static final String MUSCLE_AREA = "muscleArea";
+    public static final String EQUIPMENT_TYPE = "equipmentType";
+    public static final String GROUP_TYPE = "groupType";
+    public static final String PROPER_WEIGHT = "properWeight";
+    public static final String MAX_WEIGHT = "maxWeight";
+    public static final String SELECTION_COUNTER = "selectionCounter";
+
     // instance variable
     private String key;                     // 0. key
     private String eventName;               // 1. event name = 종목 이름

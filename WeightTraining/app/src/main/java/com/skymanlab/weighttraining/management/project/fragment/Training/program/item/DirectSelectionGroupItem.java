@@ -184,6 +184,7 @@ public class DirectSelectionGroupItem {
         MaterialCheckBox eventItem = new MaterialCheckBox(activity);
         eventItem.setId(id);
         eventItem.setText(event.getEventName());
+        eventItem.setChecked(false);
         eventItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -271,8 +272,8 @@ public class DirectSelectionGroupItem {
             return this;
         }
 
-        // init
-        public DirectSelectionGroupItem init() {
+        // create
+        public DirectSelectionGroupItem create() {
             return new DirectSelectionGroupItem(this);
         }
     }

@@ -24,29 +24,34 @@
             android:layout_height="wrap_content" />
 
         <!-- step content -->
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fillViewport="true">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/f_maker_step3_2_each_group_random_list_wrapper"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/f_maker_step3_2_comment"
+                android:textAlignment="center" />
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
+                android:layout_marginTop="20dp"
+                android:fillViewport="true">
+                <LinearLayout
+                    android:id="@+id/f_maker_step3_2_each_group_random_list_wrapper"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/f_maker_step3_2_comment"
-                    android:textAlignment="center" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"/>
 
-            </LinearLayout>
-        </ScrollView><!-- End of step content -->
+            </ScrollView>
+        </LinearLayout><!-- End of step content -->
 
         <!-- step direction selector -->
         <include

@@ -224,8 +224,8 @@ public class AllGroupRandomItem  {
             return this;
         }
 
-        // init
-        public AllGroupRandomItem init() {
+        // create
+        public AllGroupRandomItem create() {
             return new AllGroupRandomItem(this);
         }
     }

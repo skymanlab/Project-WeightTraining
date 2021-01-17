@@ -121,7 +121,14 @@
 
     <!-- Fragment : program, step6 -->
     <string name="f_maker_step6_comment">각 항목별로 초기 설정을 해주세요.</string>
-    <string name="f_maker_step6_"></string>
+    <string name="f_maker_step6_program_setting_title">전체 설정</string>
+    <string name="f_maker_step6_program_setting_set_number">세트 수</string>
+    <string name="f_maker_step6_program_setting_set_number_tag">회</string>
+    <string name="f_maker_step6_program_setting_rest_time">휴식 시간</string>
+    <string name="f_maker_step6_program_setting_rest_time_minute_tag">분</string>
+    <string name="f_maker_step6_program_setting_rest_time_second_tag">초</string>
+    <string name="f_maker_step6_detail_program_setting_title">부분 설정</string>
+    <string name="f_maker_step6_detail_program_setting_"></string>
 
     <!-- Fragment : my program -->
     <string name="f_my_program_comment">내가 만든 프로그램 목록입니다.</string>
@@ -189,9 +196,15 @@
     <string name="event_add_section_1_event_name">종목 이름</string>
     <string name="event_add_section_1_proper_weight">적정 중량</string>
     <string name="event_add_section_1_max_weight">최대 중량</string>
+    <string name="event_add_section_1_snack_not_all_input"></string>
     <string name="event_add_section_1_bt_add">추가하기</string>
     <string name="event_add_section_2_title">▶ 목록</string>
     <string name="event_add_section_2_bt_display">더보기</string>
+    <!-- AlertDialog : event add / section 1 / save -->
+    <string name="event_add_section_1_alert_save_title">해당 종목을 저장하시겠습니까?</string>
+    <string name="event_add_section_1_alert_save_message">해당 종목을 데이터베이스에서 저장합니다.</string>
+    <string name="event_add_section_1_alert_save_bt_positive">저장</string>
+    <string name="event_add_section_1_alert_save_bt_negative">취소</string>
 
     <!-- Activity : event list-->
     <string name="event_list_title_chest">가슴운동 목록</string>
@@ -283,47 +296,65 @@
     <string name="event_program_process_alert_back_press_bt_negative">취소</string>
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom listView,  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom listView +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Custom : event item -->
-    <string name="cu_event_item_count">1.</string>
-    <string name="cu_event_item_event_name">종목 이름</string>
-    <string name="cu_event_item_modify">수 정</string>
-    <string name="cu_event_item_delete">삭 제</string>
-    <string name="cu_event_item_equipment_type">▶ 운동기구 종류</string>
-    <string name="cu_event_item_equipment_type_default">예) 바벨</string>
-    <string name="cu_event_item_group_type">▶ 그룹 유형</string>
-    <string name="cu_event_item_group_type_default">예) A 그룹</string>
-    <string name="cu_event_item_proper_weight">▶ 적정 중량</string>
-    <string name="cu_event_item_proper_weight_default">예) 15kg</string>
-    <string name="cu_event_item_max_weight">▶ 최대 중량</string>
-    <string name="cu_event_item_max_weight_default">예) 45kg</string>
-    <string name="cu_event_item_toast_error_input_event">모두 입력해주세요.</string>
-    <!-- AlertDialog : modify -->
-    <string name="cu_event_item_alert_save_title">해당 내용을 저장하시겠습니까?</string>
-    <string name="cu_event_item_alert_save_message">모든 내용이 데이터베이스에 저장됩니다.</string>
-    <string name="cu_event_item_alert_save_bt_positive">저장</string>
-    <string name="cu_event_item_alert_save_bt_negative">취소</string>
+    <string name="custom_list_event_item_count">1.</string>
+    <string name="custom_list_event_item_event_name">종목 이름</string>
+    <string name="custom_list_event_item_modify">수 정</string>
+    <string name="custom_list_event_item_delete">삭 제</string>
+    <string name="custom_list_event_item_equipment_type">▶ 운동기구 종류</string>
+    <string name="custom_list_event_item_equipment_type_default">예) 바벨</string>
+    <string name="custom_list_event_item_group_type">▶ 그룹 유형</string>
+    <string name="custom_list_event_item_group_type_default">예) A 그룹</string>
+    <string name="custom_list_event_item_proper_weight">▶ 적정 중량</string>
+    <string name="custom_list_event_item_proper_weight_default">예) 15kg</string>
+    <string name="custom_list_event_item_max_weight">▶ 최대 중량</string>
+    <string name="custom_list_event_item_max_weight_default">예) 45kg</string>
+    <string name="custom_list_event_item_toast_error_input_event">모두 입력해주세요.</string>
+
+    <!-- Custom : foldable event item -->
+    <string name="custom_list_foldable_event_item_count">1.</string>
+    <string name="custom_list_foldable_event_item_event_name">종목 이름</string>
+    <string name="custom_list_foldable_event_item_modify">수 정</string>
+    <string name="custom_list_foldable_event_item_delete">삭 제</string>
+    <string name="custom_list_foldable_event_item_equipment_type">▶ 운동기구 종류</string>
+    <string name="custom_list_foldable_event_item_equipment_type_default">예) 바벨</string>
+    <string name="custom_list_foldable_event_item_group_type">▶ 그룹 유형</string>
+    <string name="custom_list_foldable_event_item_group_type_default">예) A 그룹</string>
+    <string name="custom_list_foldable_event_item_proper_weight">▶ 적정 중량</string>
+    <string name="custom_list_foldable_event_item_proper_weight_default">예) 15kg</string>
+    <string name="custom_list_foldable_event_item_max_weight">▶ 최대 중량</string>
+    <string name="custom_list_foldable_event_item_max_weight_default">예) 45kg</string>
+    <string name="custom_list_foldable_event_item_toast_error_input_event">모두 입력해주세요.</string>
 
     <!-- Custom : event program item-->
-    <string name="cu_event_program_item_bt_start">시작</string>
-    <string name="cu_event_program_item_event_name"> 예) 숄더프레스</string>
-    <string name="cu_event_program_item_proper_weight">▶ 적정 무게 : </string>
-    <string name="cu_event_program_item_proper_weight_default">예) 45kg</string>
-    <string name="cu_event_program_item_max_weight">▶ 최대 무게 : </string>
-    <string name="cu_event_program_item_max_weight_default">예) 80kg</string>
-    <string name="cu_event_program_item_"></string>
+    <string name="custom_list_event_program_item_bt_start">시작</string>
+    <string name="custom_list_event_program_item_event_name"> 예) 숄더프레스</string>
+    <string name="custom_list_event_program_item_proper_weight">▶ 적정 무게 : </string>
+    <string name="custom_list_event_program_item_proper_weight_default">예) 45kg</string>
+    <string name="custom_list_event_program_item_max_weight">▶ 최대 무게 : </string>
+    <string name="custom_list_event_program_item_max_weight_default">예) 80kg</string>
+    <string name="custom_list_event_program_item_"></string>
 
-    <!-- Custom : selected event item -->
-    <string name="cu_selected_event_item_muscle_area_number">예) 가슴 1</string>
-    <string name="cu_selected_event_item_event_name">예) 벤치 프레스</string>
+    <!-- Custom : step 4 event item -->
+    <string name="custom_list_step4_event_item_number_default">0</string>
+    <string name="custom_list_step4_event_item_muscle_area_default">어깨</string>
+    <string name="custom_list_step4_event_item_event_name_default">오버헤드 숄더 프레스</string>
+
+    <!-- Custom : step 6 event item -->
+    <string name="custom_list_step6_event_item_number_default">0</string>
+    <string name="custom_list_step6_event_item_muscle_area_default">가슴</string>
+    <string name="custom_list_step6_event_item_event_name_default">벤치 프레스</string>
+    <string name="custom_list_step6_event_item_go_content_description">go</string>
+
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Custom Dialog : event -->
     <string name="custom_dialog_event_title">예제</string>
-    <string name="custom_dialog_event_update_title">종목 수정하기</string>
+    <string name="custom_dialog_event_update_title">종목 수정</string>
     <string name="custom_dialog_event_equipment_type">운동기구 종류</string>
     <string name="custom_dialog_event_group_type">그룹 유형</string>
     <string name="custom_dialog_event_event_name">종목 이름</string>
@@ -332,8 +363,6 @@
     <string name="custom_dialog_event_bt_positive_default">확인</string>
     <string name="custom_dialog_event_bt_negative_default">취소</string>
     <string name="custom_dialog_event_"></string>
-
-
 
     <string name="custom_dialog_event_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
     <string name="custom_dialog_event_snack_all_input">모든 값을 입력해주세요!</string>
@@ -405,9 +434,18 @@
     <string name="custom_dialog_rest_time_picker_alert_bt_positive">변경</string>
     <string name="custom_dialog_rest_time_picker_alert_bt_negative">취소</string>
 
+    <!-- Custom Dialog : partial setting -->
+    <string name="custom_dialog_detail_program_setting_event_name_default">벤치 프레스</string>
+    <string name="custom_dialog_detail_program_setting_set_number">세트 수</string>
+    <string name="custom_dialog_detail_program_setting_set_number_tag">회</string>
+    <string name="custom_dialog_detail_program_setting_rest_time">휴식 시간</string>
+    <string name="custom_dialog_detail_program_setting_rest_time_minute_tag">분</string>
+    <string name="custom_dialog_detail_program_setting_rest_time_second_tag">초</string>
+    <string name="custom_dialog_detail_program_setting_alert_bt_positive">설정</string>
+    <string name="custom_dialog_detail_program_setting_alert_bt_negative">취소</string>
+
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ pop up +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
 
     <!-- Popup Menu : event add section 2 -->
     <string name="event_add_section_2_popup_update">갱신하기</string>
@@ -456,6 +494,26 @@
     <string name="nav_bottom_bar_intervene">참견</string>
     <string name="nav_bottom_bar_more">더보기</string>
 
+    <!-- ListView Adapter : event lv adapter -->
+    <string name="event_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_lv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
+    <!-- AlertDialog : event item lv adapter 의 delete -->
+    <string name="event_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_lv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_lv_adapter_alert_delete_bt_negative">취소</string>
+
+
+    <!-- ListView Adapter : event item foldable lv adapter -->
+    <string name="event_item_foldable_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_item_foldable_lv_adapter_snack_db_delete_error">실패하였습니다.</string>
+    <!-- AlertDialog : event item foldable lv adapter -->
+    <string name="event_item_foldable_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_bt_negative">취소</string>
+
+
     <!-- RecyclerView Adapter : event list rv adapter -->
     <string name="each_list_rv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
     <string name="each_list_rv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
@@ -469,24 +527,6 @@
     <string name="each_list_rv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
     <string name="each_list_rv_adapter_alert_delete_bt_positive">삭제</string>
     <string name="each_list_rv_adapter_alert_delete_bt_negative">취소</string>
-
-    <!-- ListView Adapter : event item lv adapter -->
-    <string name="event_item_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
-    <string name="event_item_lv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
-    <!-- AlertDialog : event item lv adapter 의 delete -->
-    <string name="event_item_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="event_item_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="event_item_lv_adapter_alert_delete_bt_positive">삭제</string>
-    <string name="event_item_lv_adapter_alert_delete_bt_negative">취소</string>
-
-    <!-- ListView Adapter : event item foldable lv adapter -->
-    <string name="event_item_foldable_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
-    <string name="event_item_foldable_lv_adapter_snack_db_delete_error">실패하였습니다.</string>
-    <!-- AlertDialog : event item foldable lv adapter -->
-    <string name="event_item_foldable_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="event_item_foldable_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="event_item_foldable_lv_adapter_alert_delete_bt_positive">삭제</string>
-    <string name="event_item_foldable_lv_adapter_alert_delete_bt_negative">취소</string>
 
     <!-- ListView Adapter : event program item lv adapter -->
     <string name="event_program_item_lv_adapter_snack_rest_time_no_setting">휴식시간을 정하지 않았습니다.</string>

@@ -36,11 +36,11 @@ public class DirectSelectionFragment extends Fragment {
     private static final String GROUPING_EVENT_DATA = "groupingEventData";
 
     // instance variable
-    private MuscleArea muscleArea = null;
-    private GroupingEventData groupingEventData = null;
+    private MuscleArea muscleArea ;
+    private GroupingEventData groupingEventData ;
 
     // instance variable
-    private DirectSelectionSectionManager sectionManager = null;
+    private DirectSelectionSectionManager sectionManager ;
 
     // constructor
     public DirectSelectionFragment() {

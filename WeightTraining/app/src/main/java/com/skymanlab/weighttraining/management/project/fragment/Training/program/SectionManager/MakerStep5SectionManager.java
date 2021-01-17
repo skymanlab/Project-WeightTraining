@@ -50,7 +50,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
     private ArrayList<Event> selectedEtcEventArrayList;
 
     // instance variable :
-    private HorizontalScrollView finalOrderListScroll;      // [1] final order 의 목록(list)을 보여주기 위한 scroll view
+    private ScrollView finalOrderListScroll;                // [1] final order 의 목록(list)을 보여주기 위한 scroll view
     private LinearLayout finalOrderListWrapper;             // [1] final order 의 목록(list)을 보여주는 scroll view 에서 각 항목(item)을 담을 linear layout
     private GridLayout eventListWrapper;                    // [2] event 의 목록(list)을 보여주는 scroll view 안에 각 항목(item)을 담을 grid layout
 
@@ -96,8 +96,8 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
     @Override
     public void connectWidget() {
 
-        // [iv/C]HorizontalScrollView : finalOrderListScroll connect
-        this.finalOrderListScroll = (HorizontalScrollView) getView().findViewById(R.id.f_maker_step5_final_order_list_scroll);
+        // [iv/C]ScrollView : finalOrderListScroll connect
+        this.finalOrderListScroll = (ScrollView) getView().findViewById(R.id.f_maker_step5_final_order_list_scroll);
 
         // [iv/C]LinearLayout : finalOrderListWrapper connect
         this.finalOrderListWrapper = (LinearLayout) getView().findViewById(R.id.f_maker_step5_final_order_list_wrapper);
@@ -296,7 +296,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
                             public void run() {
 
                                 // [iv/C]HorizontalScrollView : 마지막으로 이동
-                                finalOrderListScroll.fullScroll(ScrollView.FOCUS_RIGHT);
+                                finalOrderListScroll.fullScroll(ScrollView.FOCUS_DOWN);
 
                             }
                         });
@@ -311,7 +311,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
 
                 })
-                .init();
+                .create();
 
         // [lv/C]Step4EventItem : event 의 item 을 생성한다.
         eventItem.createItem();
@@ -355,7 +355,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
 
                 })
-                .init();
+                .create();
 
         // [lv/C]Step4FinalOrderItem : item 생성
         finalOrderItem.createItem();
