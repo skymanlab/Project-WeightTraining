@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         // constant
         private static final String CLASS_NAME = "[AcInner]_SettingFragment";
-        private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+        private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
         // instance variable
         private Preference basicEventData;

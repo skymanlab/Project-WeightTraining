@@ -39,7 +39,7 @@
                 android:text="@string/f_maker_step6_comment"
                 android:textAlignment="center" />
 
-            <!-- all setting -->
+            <!-- program setting -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 app:cardBackgroundColor="@color/browser_actions_bg_grey"
                 app:cardCornerRadius="10dp">
 

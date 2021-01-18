@@ -27,7 +27,7 @@ public class MakerStep3D3Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] MakerStep3D3Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String CHEST_GROUPING_EVENT_DATA = "chestGroupingEventData";

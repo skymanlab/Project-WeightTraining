@@ -119,16 +119,21 @@
     <string name="f_maker_step5_selected_item_list_title">선택 목록</string>
     <string name="f_maker_step5_snack_final_order_not_complete">아직 최종 순서를 완성하지 않았습니다.</string>
 
-    <!-- Fragment : program, step6 -->
+    <!-- Fragment : maker step6 -->
     <string name="f_maker_step6_comment">각 항목별로 초기 설정을 해주세요.</string>
-    <string name="f_maker_step6_program_setting_title">전체 설정</string>
+    <string name="f_maker_step6_program_setting_title">프로그램 설정</string>
     <string name="f_maker_step6_program_setting_set_number">세트 수</string>
     <string name="f_maker_step6_program_setting_set_number_tag">회</string>
     <string name="f_maker_step6_program_setting_rest_time">휴식 시간</string>
     <string name="f_maker_step6_program_setting_rest_time_minute_tag">분</string>
     <string name="f_maker_step6_program_setting_rest_time_second_tag">초</string>
-    <string name="f_maker_step6_detail_program_setting_title">부분 설정</string>
+    <string name="f_maker_step6_detail_program_setting_title">세부 프로그램 설정</string>
     <string name="f_maker_step6_detail_program_setting_"></string>
+    <string name="f_maker_step6_snack_setting_data_error">프로그램 설정들을 확인해주세요.</string>
+
+    <!-- Fragment : maker step7-->
+    <string name="f_maker_step7_comment">결과를 확인합니다.</string>
+    <string name="f_maker_step7_"></string>
 
     <!-- Fragment : my program -->
     <string name="f_my_program_comment">내가 만든 프로그램 목록입니다.</string>
@@ -348,6 +353,8 @@
     <string name="custom_list_step6_event_item_event_name_default">벤치 프레스</string>
     <string name="custom_list_step6_event_item_go_content_description">go</string>
 
+    <!-- Custom : step 7 event item -->
+    <string name="custom_list_step7_event_item_more_content_description">더보기</string>
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

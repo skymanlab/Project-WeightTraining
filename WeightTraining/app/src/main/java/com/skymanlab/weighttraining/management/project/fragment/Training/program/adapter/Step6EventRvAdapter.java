@@ -3,7 +3,6 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -13,22 +12,26 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
-import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step6DetailProgramSettingDialog;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step6DetailProgramDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapter.ViewHolder> {
 
     // instance variable
     private FragmentManager fragmentManager;
     private ArrayList<Event> finalOrderList;
+    private HashMap<String, DetailProgram> detailProgramList;
+
 
     // constructor
     public Step6EventRvAdapter(Builder builder) {
         this.fragmentManager = builder.fragmentManager;
         this.finalOrderList = builder.finalOrderList;
+        this.detailProgramList = builder.detailProgramList;
     }
 
     @NonNull
@@ -47,7 +50,7 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
             @Override
             public void onClick(View view) {
 
-                Step6DetailProgramSettingDialog dialog = Step6DetailProgramSettingDialog.newInstance(finalOrderList.get(position));
+                Step6DetailProgramDialog dialog = Step6DetailProgramDialog.newInstance(finalOrderList.get(position), detailProgramList.get(finalOrderList.get(position).getKey()));
                 dialog.setCancelable(false);
                 dialog.show(fragmentManager, "PartialSetting");
 
@@ -124,6 +127,7 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
         // instance variable
         private FragmentManager fragmentManager;
         private ArrayList<Event> finalOrderList;
+        private HashMap<String, DetailProgram> detailProgramList;
 
         // constructor
         public Builder() {
@@ -138,6 +142,11 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
 
         public Builder setFinalOrderList(ArrayList<Event> finalOrderList) {
             this.finalOrderList = finalOrderList;
+            return this;
+        }
+
+        public Builder setDetailProgramList(HashMap<String, DetailProgram> detailProgramList) {
+            this.detailProgramList = detailProgramList;
             return this;
         }
 

@@ -34,7 +34,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
 
     // constant
     private static final String CLASS_NAME = "[PFTLS] EachMuscleAreaListSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Fragment fragment;

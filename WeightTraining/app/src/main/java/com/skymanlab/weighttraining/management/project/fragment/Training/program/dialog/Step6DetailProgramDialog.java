@@ -16,9 +16,10 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
+import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
 
-public class Step6DetailProgramSettingDialog extends DialogFragment {
+public class Step6DetailProgramDialog extends DialogFragment {
 
     // constant
     private static final String CLASS_NAME = "[Ac] Step6PartialSettingDialog";
@@ -33,9 +34,11 @@ public class Step6DetailProgramSettingDialog extends DialogFragment {
 
     // constant
     private static final String EVENT = "event";
+    private static final String DETAIL_PROGRAM = "detailProgram";
 
     // instance variable
     private Event event;
+    private DetailProgram detailProgram;
 
     // instance variable
     private View customView;
@@ -45,7 +48,7 @@ public class Step6DetailProgramSettingDialog extends DialogFragment {
     private NumberPicker restTimeSecond;
 
     // constructor
-    public Step6DetailProgramSettingDialog() {
+    public Step6DetailProgramDialog() {
 
     }
 
@@ -55,12 +58,13 @@ public class Step6DetailProgramSettingDialog extends DialogFragment {
      * @param event
      * @return
      */
-    public static Step6DetailProgramSettingDialog newInstance(Event event) {
+    public static Step6DetailProgramDialog newInstance(Event event, DetailProgram detailProgram) {
 
-        Step6DetailProgramSettingDialog dialog = new Step6DetailProgramSettingDialog();
+        Step6DetailProgramDialog dialog = new Step6DetailProgramDialog();
 
         Bundle args = new Bundle();
         args.putSerializable(EVENT, event);
+        args.putSerializable(DETAIL_PROGRAM, detailProgram);
         dialog.setArguments(args);
         return dialog;
     }
@@ -71,6 +75,7 @@ public class Step6DetailProgramSettingDialog extends DialogFragment {
         final String METHOD_NAME = "[onCreate] ";
         if (getArguments() != null) {
             this.event = (Event) getArguments().getSerializable(EVENT);
+            this.detailProgram = (DetailProgram) getArguments().getSerializable(DETAIL_PROGRAM);
         }
     }
 
@@ -144,10 +149,10 @@ public class Step6DetailProgramSettingDialog extends DialogFragment {
      * layout 의 widget init
      */
     private void initWidget() {
-        final String METHOD_NAME ="[initWidget] ";
+        final String METHOD_NAME = "[initWidget] ";
 
         // nav_home_content_wrapper 에 표시되어있는 Fragment 인 MakerStep6Fragment 를 가져오기
-        MakerStep6Fragment fragment = (MakerStep6Fragment)getParentFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
+        MakerStep6Fragment fragment = (MakerStep6Fragment) getParentFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "parent fragment = " + fragment);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program set number = " + fragment.getSectionManager().getDataOfProgramSettingSetNumber());
@@ -160,17 +165,38 @@ public class Step6DetailProgramSettingDialog extends DialogFragment {
         // [iv/C]NumberPicker : setNumber init
         this.setNumber.setMaxValue(9);
         this.setNumber.setMinValue(0);
-        this.setNumber.setValue(fragment.getSectionManager().getDataOfProgramSettingSetNumber());
 
         // [iv/C]NumberPicker : restTimeMinute init
         this.restTimeMinute.setMaxValue(59);
         this.restTimeMinute.setMinValue(0);
-        this.restTimeMinute.setValue(fragment.getSectionManager().getDataOfProgramSettingRestTimeMinute());
 
         // [iv/C]NumberPicker : init
         this.restTimeSecond.setMaxValue(59);
         this.restTimeSecond.setMinValue(0);
-        this.restTimeSecond.setValue(fragment.getSectionManager().getDataOfProgramSettingRestTimeSecond());
+
+
+        // [check 1] : detailProgram 의 따라 각 number picker 의 초기 값이 달라진다.
+        if (detailProgram == null) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program setting 으로 초기값 설정");
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> set number = " + fragment.getSectionManager().getDataOfProgramSettingSetNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time minute = " + fragment.getSectionManager().getDataOfProgramSettingRestTimeMinute());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time second = " + fragment.getSectionManager().getDataOfProgramSettingRestTimeSecond());
+
+            this.setNumber.setValue(fragment.getSectionManager().getDataOfProgramSettingSetNumber());
+            this.restTimeMinute.setValue(fragment.getSectionManager().getDataOfProgramSettingRestTimeMinute());
+            this.restTimeSecond.setValue(fragment.getSectionManager().getDataOfProgramSettingRestTimeSecond());
+
+        } else {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> detail program setting 으로 초기값을 설정한다.");
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> set number = " + detailProgram.getSetNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> rest time minute = " + detailProgram.getRestTimeMinute());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> rest time second = " + detailProgram.getRestTimeSecond());
+            this.setNumber.setValue(detailProgram.getSetNumber());
+            this.restTimeMinute.setValue(detailProgram.getRestTimeMinute());
+            this.restTimeSecond.setValue(detailProgram.getRestTimeSecond());
+
+        } // [check 1]
 
     } // End of method [initWidget]
 

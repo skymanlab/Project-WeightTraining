@@ -1,6 +1,8 @@
 package com.skymanlab.weighttraining.management.event.program.data;
 
-public class DetailProgram {
+import java.io.Serializable;
+
+public class DetailProgram implements Serializable {
 
     // instance variable
     private String key;
