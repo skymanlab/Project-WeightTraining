@@ -1,117 +1,132 @@
-package com.skymanlab.weighttraining.management.project.fragment.More;
+package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.skymanlab.weighttraining.LoginActivity;
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.user.data.User;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
+import com.squareup.picasso.Picasso;
 
-public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
+public class MoreUserInfoSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFM] MoreSectionManager";
+    private static final String CLASS_NAME = "[PFMS] MoreSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private MaterialTextView logout;
-    private MaterialTextView withdraw;
-    private LinearLayout fitnessCenter;
-    private LinearLayout target;
-    private LinearLayout setting;
+    private ImageView photo;
+    private MaterialButton photoChange;
+    private TextView authProvider;
+    private TextView email;
+    private TextView name;
+    private TextView logout;
+    private TextView withdraw;
 
     // constructor
-    public MoreSectionManager(Activity activity, View view) {
-        super(activity, view);
+    public MoreUserInfoSectionManager(Activity activity, View view, Fragment fragment) {
+        super(activity, view, fragment);
     }
 
     @Override
     public void connectWidget() {
 
-        // [iv/C]MaterialTextView : logout connect
-        this.logout = (MaterialTextView) getView().findViewById(R.id.f_more_user_logout);
+        // [iv/C]ImageView : photo connect
+        this.photo = (ImageView) getView().findViewById(R.id.f_more_user_info_photo);
 
-        // [iv/C]MaterialTextView : withdraw connect
-        this.withdraw = (MaterialTextView) getView().findViewById(R.id.f_more_user_withdraw);
+        // [iv/C]MaterialButton : photoChange connect
+        this.photoChange = (MaterialButton) getView().findViewById(R.id.f_more_user_info_photo_change);
 
-        // [iv/C]LinearLayout : fitnessCenter connect
-        this.fitnessCenter = (LinearLayout) getView().findViewById(R.id.f_more_fitness_center);
+        // [iv/C]TextView :  connect
+        this.authProvider = (TextView) getView().findViewById(R.id.f_more_user_info_auth_provider);
 
-        // [iv/C]LinearLayout : target connect
-        this.target = (LinearLayout) getView().findViewById(R.id.f_more_target);
+        // [iv/C]TextView :  connect
+        this.email = (TextView) getView().findViewById(R.id.f_more_user_info_email);
 
-        // [iv/C]LinearLayout : setting connect
-        this.setting = (LinearLayout) getView().findViewById(R.id.f_more_setting);
+        // [iv/C]TextView :  connect
+        this.name = (TextView) getView().findViewById(R.id.f_more_user_info_name);
 
+        // [iv/C]TextView :  connect
+        this.logout = (TextView) getView().findViewById(R.id.f_more_user_info_logout);
+
+        // [iv/C]TextView :  connect
+        this.withdraw = (TextView) getView().findViewById(R.id.f_more_user_info_withdraw);
     }
 
     @Override
     public void initWidget() {
 
-        // [iv/C]MaterialTextView : logout click listener
-        this.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // [lv/C]FirebaseUser : FirebaseAuth 를 통해 user 정보 가져오기
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                // [method] : logout 과정 진행
-               logoutUser();
-            }
-        });
+        // [check 1] : user 정보가 있을 때만
+        if (firebaseUser != null) {
 
-        // [iv/C]MaterialTextView : withdraw click listener
-        this.withdraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            // [iv/C]ImageView : userPhoto 를 둥근 이미지로 만들기 위한 설정 / Picasso 를 이용하여 userPhotoUrl 을 로드하기
+            Picasso.get().load(firebaseUser.getPhotoUrl()).into(this.photo);
+            this.photo.setBackground(new ShapeDrawable(new OvalShape()));
+            this.photo.setClipToOutline(true);
 
-                // [method] : withdraw 과정 진행
-                withdrawUser();
-            }
-        });
+            // [photoChange] click listener
+            this.photoChange.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        // [iv/C]LinearLayout : fitnessCenter click listener
-        this.fitnessCenter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
 
-            }
-        });
+            // [authProvider] text
+            this.authProvider.setText(firebaseUser.getProviderId());
 
-        // [iv/C]LinearLayout : target click listener
-        this.target.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            // [email] text
+            this.email.setText(firebaseUser.getEmail());
 
-            }
-        });
+            // [name] text
+            this.name.setText(firebaseUser.getDisplayName());
 
-        // [iv/C]LinearLayout : setting click listener
-        this.setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            // [logout] click listener
+            this.logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                // [iv/C]Intent : SettingsActivity 로 이동하는
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
+                    // [method] firebase 에서 logout 하기
+                    logoutUser();
+                }
+            });
+
+            // [withdraw] click listener
+            this.withdraw.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // [method] firebase 에서 탈퇴하기
+                    withdrawUser();
+
+                }
+            });
+        }
 
     }
+
 
     /**
      * [method] App logout
@@ -198,6 +213,4 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
                 .show();
 
     } // End of method [withdrawUser]
-
-
 }

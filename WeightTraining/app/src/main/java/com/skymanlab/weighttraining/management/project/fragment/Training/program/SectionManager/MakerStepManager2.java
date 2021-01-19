@@ -13,7 +13,7 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 
-public class MakerStepManager extends FragmentSectionManager implements FragmentSectionInitializable {
+public class MakerStepManager2 extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStepManager";
@@ -58,30 +58,13 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private ImageView firstBar;
     private ImageView secondBar;
 
-    // instance variable : step direction selector
-    private Button previous;
-    private Button next;
-
     // instance variable
     private int step;
 
-    // instance variable
-    private OnNextClickListener nextClickListener;
-    private OnPreviousClickListener previousClickListener;
-
     // constructor
-    public MakerStepManager(View view, FragmentManager fragmentManager, int step) {
+    public MakerStepManager2(View view, FragmentManager fragmentManager, int step) {
         super(view, fragmentManager);
         this.step = step;
-    }
-
-    // setter
-    public void setPreviousClickListener(OnPreviousClickListener previousClickListener) {
-        this.previousClickListener = previousClickListener;
-    }
-
-    public void setNextClickListener(OnNextClickListener nextClickListener) {
-        this.nextClickListener = nextClickListener;
     }
 
     @Override
@@ -102,60 +85,11 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
         // [iv/C]ImageView : secondBar connect
         this.secondBar = (ImageView) getView().findViewById(R.id.include_maker_step_display_second_bar);
 
-        // [iv/C]Button : previous connect
-        this.previous = (Button) getView().findViewById(R.id.include_maker_step_selector_previous);
-
-        // [iv/C]Button : next connect
-        this.next = (Button) getView().findViewById(R.id.include_maker_step_selector_next);
-
     }
 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
-
-        // [iv/C]Button : previous 공통적으로 이전 fragment 로 이동하므로
-        this.previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // [check 1] : click listener 가?
-                if (previousClickListener != null) {
-
-                    // [lv/C]AlertDialog : listener 를 통해 결과로 AlertDialog 객체를 가져온다.
-                    AlertDialog dialog = previousClickListener.setClickListenerOfPrevious();
-
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> Dialog = " + dialog);
-                    // [check 2] : 위의 dialog 의 객체 유무를 통해 결절하기
-                    if (dialog != null) {
-
-                        // [lv/C]AlertDialog : 해당 객체로 만들어진 dialog 를 표시하기
-                        dialog.show();
-
-                    } else {
-
-                        // [lv/C]FragmentManager : fragmentManager 를 통해서 stack 에서 pop 하여 이전 Fragment 로 이동
-                        getFragmentManager().popBackStack();
-
-                    } // [check 2]
-
-                } else {
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> 리스터 생성 안됨");
-                } // [check 1]
-
-            }
-        });
-
-        // [iv/C]Button : next click listener
-        this.next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // 각 단계마다 다른 설정이 필요하면 각 단계를 초기화하는 method 에서 설정을 해준다.
-                // [iv/C]OnNextClickListener : 외부에서 만들어진 OnNextClickListener 를 통해 해당 버튼의 과정을 진행하는 코드를 수행한다.
-                nextClickListener.setClickListenerOfNext();
-            }
-        });
 
         // [check 1] : 몇 번째 단계인가요?
         switch (this.step) {
@@ -307,14 +241,5 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
 
     } // End of method [initStepSix]
 
-    // interface
-    public interface OnNextClickListener {
-        void setClickListenerOfNext();
-    }
-
-    // interface
-    public interface OnPreviousClickListener {
-        AlertDialog setClickListenerOfPrevious();
-    }
 
 }

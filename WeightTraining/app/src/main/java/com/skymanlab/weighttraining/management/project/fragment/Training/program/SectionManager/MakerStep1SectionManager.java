@@ -16,13 +16,11 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionI
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep2Fragment;
 
-public class MakerStep1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
+public class MakerStep1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep1SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
-    // instance variable : step process manager
-    private MakerStepManager makerStepManager;
 
     // instance variable : widget
     private MaterialButton directSelection;         // [0] type
@@ -37,13 +35,13 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
     @Override
     public void connectWidget() {
 
-        // [iv/C]MaterialButton : [0] directSelection connect
+        // [directSelection] connect
         this.directSelection = (MaterialButton) getView().findViewById(R.id.f_maker_step1_direct_selection);
 
-        // [iv/C]MaterialButton : [1] eachRandomSelection connect
+        // [eachRandomSelection] connect
         this.eachRandomSelection = (MaterialButton) getView().findViewById(R.id.f_maker_step1_each_random_selection);
 
-        // [iv/C]MaterialButton : [2] allRandomSelection connect
+        // [allRandomSelection] connect
         this.allRandomSelection = (MaterialButton) getView().findViewById(R.id.f_maker_step1_all_random_selection);
 
     }
@@ -53,14 +51,7 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
 
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MakerStepManager : step 1 단계 설정
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_ONE);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
-
-        // [iv/C]MaterialButton : directSelection click listener
+        // [MaterialButton] [directSelection] click listener
         this.directSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +67,7 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
             }
         });
 
-        // [iv/C]MaterialButton : eachRandomSelection click listener
+        // [MaterialButton] [eachRandomSelection] click listener
         this.eachRandomSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +83,7 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
             }
         });
 
-        // [iv/C]MaterialButton : allRandomSelection click listener
+        // [MaterialButton] [allRandomSelection] click listener
         this.allRandomSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,22 +101,13 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
 
     }
 
-    @Override
-    public void setClickListenerOfNext() {
-
-    }
-
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
-    }
 
     /**
      * [method] Step 2 로 이동
      */
     private void moveStep2(Fragment fragment) {
 
-        // [lv/C]FragmentTransaction : fragmentManger 를 통해서 FragmentTransaction 객체 가져오기 -> 이동할 fragment 설정, back stack 에 넣기 -> transaction 마무리(이동)
+        // [FragmentTransaction] [transaction] fragment 로 이동하기
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_home_content_wrapper, fragment);
         transaction.addToBackStack(null);

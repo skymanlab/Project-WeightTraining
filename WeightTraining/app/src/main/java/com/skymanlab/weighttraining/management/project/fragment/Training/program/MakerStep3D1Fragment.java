@@ -16,6 +16,8 @@ import com.skymanlab.weighttraining.management.event.program.data.GroupingEventD
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep3D1SectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager2;
 
 import java.util.ArrayList;
 
@@ -52,6 +54,7 @@ public class MakerStep3D1Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
+    private MakerStepManager2 makerStepManager;
     private MakerStep3D1SectionManager sectionManager;
 
     // constructor
@@ -134,22 +137,41 @@ public class MakerStep3D1Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]FragmentTopBarManager : step 3-1 fragment top bar
+        // [FragmentTopBarManager] [topBarManager] maker step 3-1 fragment 의 top bar manager 설정
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step3D1SectionManager : step 3-1 content section manager
+        // [MakerStepManager2] [makerStepManager] maker step 3-1 단계 설정
+        this.makerStepManager = new MakerStepManager2(getView(), getParentFragmentManager(), MakerStepManager.STEP_THREE);
+        this.makerStepManager.connectWidget();
+        this.makerStepManager.initWidget();
+
+        // [MakerStep3D1SectionManager] [sectionManager] maker step 3-1 fragment section manager 설정
         this.sectionManager = new MakerStep3D1SectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this);
         this.sectionManager.setFragmentArrayList(this.fragmentArrayList);
         this.sectionManager.setFragmentMuscleAreaList(this.fragmentMuscleAreaList);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
+        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
+        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
+            @Override
+            public void setStartButtonClickListener() {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+        this.topBarManager.initWidgetOfStartButton(null);
+        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
+        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
+
     }
 
+
     /**
-     * [method]
+     * 해당 muscleArea 의 groupingEventData 를 보여주기 위한 Fragment 객체 생성하여 fragmentArrayList 추가한다. 그리고 해당 fragment 의 muscleArea 를 차례대로 fragmentMuscleAreaList 에 추가한다.
+     * @param groupingEventData
+     * @param muscleArea
      */
     private void makeFragment(GroupingEventData groupingEventData, MuscleArea muscleArea) {
         final String METHOD_NAME = "[makeFragment] ";

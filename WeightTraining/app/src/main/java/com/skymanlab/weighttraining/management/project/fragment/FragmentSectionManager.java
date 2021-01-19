@@ -3,6 +3,7 @@ package com.skymanlab.weighttraining.management.project.fragment;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 public class FragmentSectionManager {
@@ -11,6 +12,7 @@ public class FragmentSectionManager {
     private Activity activity;
     private View view;
     private FragmentManager fragmentManager;
+    private Fragment fragment;
 
     // constructor
     public FragmentSectionManager(View view, FragmentManager fragmentManager) {
@@ -27,6 +29,17 @@ public class FragmentSectionManager {
         this.activity = activity;
         this.view = view;
         this.fragmentManager = fragmentManager;
+    }
+
+    public FragmentSectionManager(View view, Fragment fragment) {
+        this.view = view;
+        this.fragment = fragment;
+    }
+
+    public FragmentSectionManager(Activity activity, View view, Fragment fragment) {
+        this.activity = activity;
+        this.view = view;
+        this.fragment = fragment;
     }
 
     public FragmentSectionManager(View view) {
@@ -46,4 +59,7 @@ public class FragmentSectionManager {
         return fragmentManager;
     }
 
+    public Fragment getFragment() {
+        return fragment;
+    }
 }

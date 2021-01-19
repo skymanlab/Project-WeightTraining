@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".management.project.fragment.More.MoreUserInfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/include_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- photo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/f_more_user_info_photo"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/f_more_user_info_photo_change"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_more_user_info_photo_change"
+                app:strokeColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- auth provider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_light"
+                android:text="@string/f_more_user_info_auth_provider"
+                android:textColor="@color/colorTextBack" />
+
+            <TextView
+                android:id="@+id/f_more_user_info_auth_provider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/eland_choice_bold"
+                android:text="@string/f_more_user_info_auth_provider_default"
+                android:textColor="@color/colorTextBack" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <!--  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_light"
+                android:text="@string/f_more_user_info_email"
+                android:textColor="@color/colorTextBack" />
+
+            <TextView
+                android:id="@+id/f_more_user_info_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/eland_choice_bold"
+                android:text="@string/f_more_user_info_email_default"
+                android:textColor="@color/colorTextBack" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <!--  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_light"
+                android:text="@string/f_more_user_info_name"
+                android:textColor="@color/colorTextBack" />
+
+            <TextView
+                android:id="@+id/f_more_user_info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/eland_choice_bold"
+                android:text="@string/f_more_user_info_name_default"
+                android:textColor="@color/colorTextBack" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp">
+
+            <TextView
+                android:id="@+id/f_more_user_info_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_more_user_info_logout" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/f_more_user_info_withdraw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_more_user_info_withdraw" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

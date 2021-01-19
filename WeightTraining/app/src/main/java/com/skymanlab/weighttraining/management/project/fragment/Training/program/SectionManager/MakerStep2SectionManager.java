@@ -1,6 +1,7 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
@@ -30,6 +31,7 @@ import com.skymanlab.weighttraining.management.event.program.util.GroupingEventU
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D1Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D2Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D3Fragment;
@@ -37,7 +39,7 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 import java.util.ArrayList;
 import java.util.List;
 
-public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
+public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep2SectionManager";
@@ -48,7 +50,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
     // instance variable
     private MaterialButtonToggleGroup muscleAreaToggleGroup;
-        private MaterialButton chest;
+    private MaterialButton chest;
     private MaterialButton shoulder;
     private MaterialButton lat;
     private MaterialButton upperBody;
@@ -56,8 +58,6 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     private MaterialButton etc;
     private ContentLoadingProgressBar progressBar;
 
-    // instance variable
-    private MakerStepManager makerStepManager;
 
     // instance variable
     private boolean[] isSelectedMuscleAreaList; // toggle button 에서 클릭 한 값을 알아내는
@@ -101,12 +101,6 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MakerStepManager : step 2 단계 설정 / OnNextClickListener 는 이 클래스에 implements 하여 override 된 함수에 구현한다.
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_TWO);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
 
         // [iv/b]isSelectedMuscleAreaList : ToggleButton 과 1:1 매핑한 값을 초기화한다.(초기값은 false 이다.)
         this.isSelectedMuscleAreaList = new boolean[6];
@@ -166,32 +160,36 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
     }
 
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
-    }
 
-    @Override
-    public void setClickListenerOfNext() {
+    /**
+     * 다음 단계를 진행하기 위한 과정을 EndButtonLister 객체를 생성하여 반환한다.
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        return new FragmentTopBarManager.EndButtonListener() {
+            @Override
+            public void setEndButtonClickListener() {
 
-        final String METHOD_NAME = "[setClickListenerOfNext] ";
+                final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        // [check 1] : 6가지의 MuscleArea 중 하나라도 선택한 것이 있을 때만 다음 단계 진행
-        if (0 < this.muscleAreaToggleGroup.getCheckedButtonIds().size() ) {
+                // [check 1] : 6가지의 MuscleArea 중 하나라도 선택한 것이 있을 때만 다음 단계 진행
+                if (0 < muscleAreaToggleGroup.getCheckedButtonIds().size()) {
 
-            // [iv/C]ContentLoadingProgressBar : VISIBLE
-            this.progressBar.setVisibility(View.VISIBLE);
+                    // [iv/C]ContentLoadingProgressBar : VISIBLE
+                    progressBar.setVisibility(View.VISIBLE);
 
-            // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
-            loadContent();
+                    // [method] : firebase database 에서 선택한 MuscleArea 의 목록을 가져와서 그룹화하고 step 1 에서 선택한 타입의 Fragment 로 이동하는 과정 진행
+                    loadContent();
 
-        } else {
+                } else {
 
-            // "근육 부위를 하나라도 선택해주세요." Snack Bar 메시지 출력
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_next, Snackbar.LENGTH_SHORT).show();
+                    // "근육 부위를 하나라도 선택해주세요." Snack Bar 메시지 출력
+                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_next, Snackbar.LENGTH_SHORT).show();
 
-        } // [check 1]
-
+                } // [check 1]
+            }
+        };
     }
 
 
@@ -236,7 +234,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 // [method] : [5] ETC 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
                 GroupingEventData etcGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.ETC, isSelectedMuscleAreaList[5]);
 
-                // [method] : chest, shoulder, lat, upperBody, arm, etc groupingEventData 를 담아서 step 1-0 에서 선택한 type 에 맞게 Fragment 이동
+                // [method] chest, shoulder, lat, upperBody, arm, etc groupingEventData 를 담아서 step 1-0 에서 선택한 type 에 맞게 Fragment 이동
                 moveNextStep(chestGroupingEventData, shoulderGroupingEventData, latGroupingEventData, upperBodyGroupingEventData, armGroupingEventData, etcGroupingEventData);
 
             }
@@ -337,5 +335,6 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
         } // [check 1]
 
     } // End of method [moveNextStep]
+
 
 }

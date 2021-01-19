@@ -45,7 +45,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp">
 
@@ -149,12 +149,5 @@
                 </FrameLayout>
             </ScrollView>
         </LinearLayout><!-- step content -->
-
-        <!-- step direction selector -->
-        <include
-            layout="@layout/include_maker_step_selector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" /><!-- End of step direction selector -->
     </LinearLayout>
-
 </FrameLayout>

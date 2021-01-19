@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.user.data.User;
+import com.skymanlab.weighttraining.management.project.fragment.More.MoreUserInfoFragment;
 import com.squareup.picasso.Picasso;
 
 public class FragmentTopUserManager extends FragmentSectionManager implements FragmentSectionInitializable{
@@ -23,13 +25,14 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
     private ImageView userPhoto;
     private TextView userName;
     private TextView userEmail;
+    private ImageView moreInfo;
 
     // instance variable
     private boolean shouldDisplayEmail;
 
     // constructor
-    public FragmentTopUserManager(View view, boolean shouldDisplayEmail) {
-        super(view);
+    public FragmentTopUserManager(View view, Fragment fragment, boolean shouldDisplayEmail) {
+        super(view, fragment);
         this.shouldDisplayEmail = shouldDisplayEmail;
     }
 
@@ -45,6 +48,9 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
         // [iv/C]TextView : userEmail connect
         this.userEmail = (TextView) getView().findViewById(R.id.include_top_user_email);
 
+        // [iv/C]ImageView : moreInfo connect
+        this.moreInfo = (ImageView)getView().findViewById(R.id.include_top_user_more_info);
+
     }
 
     @Override
@@ -54,6 +60,23 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
 
         // [method] : user info 의 초기 내용을 설정한다.
         initUserInfo();
+        
+        // [iv/C]ImageView : moreInfo click listener
+        this.moreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+                // [lv/C]Fragment : more user info fragment 생성
+                Fragment moreUserInfo = MoreUserInfoFragment.newInstance();
+
+                // fragment 로 이동
+                FragmentTransaction transaction = getFragment().getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_home_content_wrapper, moreUserInfo);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                
+            }
+        });
     }
 
 

@@ -20,13 +20,14 @@ import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.DirectSelectionFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.DirectSelectionFragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class MakerStep3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
+public class MakerStep3D1SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep3D1SectionManager";
@@ -38,9 +39,6 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
     // instance variable
     private ArrayList<DirectSelectionFragment> fragmentArrayList;
     private ArrayList<MuscleArea> fragmentMuscleAreaList;
-
-    // instance variable
-    private MakerStepManager makerStepManager;
 
     // instance variable
     private TabLayout tabLayout;
@@ -80,91 +78,90 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
 
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MakerStepManager : step 3-1
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_THREE);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
 
         // [method] : 위에서 추가한 fragmentArrayList 와 fragmentTitleList 로 viewPager 를 만들기
         initViewPager();
 
     }
 
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
-    }
 
-    @Override
-    public void setClickListenerOfNext() {
-        final String METHOD_NAME = "[setClickListenerOfNext] ";
+    /**
+     * 다음 단계를 진행하기 위한 과정을 EndButtonLister 객체를 생성하여 반환한다.
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        return new FragmentTopBarManager.EndButtonListener() {
+            @Override
+            public void setEndButtonClickListener() {
 
-        // [lv/C]EventResultSet : 각 muscleARea 별로 EventResultSet 생성하기
-        EventResultSet chestEventResultSet = new EventResultSet();
-        EventResultSet shoulderEventResultSet = new EventResultSet();
-        EventResultSet latEventResultSet = new EventResultSet();
-        EventResultSet upperBodyEventResultSet = new EventResultSet();
-        EventResultSet armEventResultSet = new EventResultSet();
-        EventResultSet etcEventResultSet = new EventResultSet();
+                final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        // [cycle 1] : fragment 의 각 muscleArea 의 CheckBox 에서 표시된 항목을 가져온다.
-        for (int index = 0; index < fragmentArrayList.size(); index++) {
+                // [lv/C]EventResultSet : 각 muscleARea 별로 EventResultSet 생성하기
+                EventResultSet chestEventResultSet = new EventResultSet();
+                EventResultSet shoulderEventResultSet = new EventResultSet();
+                EventResultSet latEventResultSet = new EventResultSet();
+                EventResultSet upperBodyEventResultSet = new EventResultSet();
+                EventResultSet armEventResultSet = new EventResultSet();
+                EventResultSet etcEventResultSet = new EventResultSet();
 
-            switch (fragmentMuscleAreaList.get(index)) {
-                case CHEST:
-                    chestEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
-                    break;
-                case SHOULDER:
-                    shoulderEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
-                    break;
-                case LAT:
-                    latEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
-                    break;
-                case UPPER_BODY:
-                    upperBodyEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
-                    break;
-                case ARM:
-                    armEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
-                    break;
-                case ETC:
-                    etcEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
-                    break;
+                // [cycle 1] : fragment 의 각 muscleArea 의 CheckBox 에서 표시된 항목을 가져온다.
+                for (int index = 0; index < fragmentArrayList.size(); index++) {
+
+                    switch (fragmentMuscleAreaList.get(index)) {
+                        case CHEST:
+                            chestEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                            break;
+                        case SHOULDER:
+                            shoulderEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                            break;
+                        case LAT:
+                            latEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                            break;
+                        case UPPER_BODY:
+                            upperBodyEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                            break;
+                        case ARM:
+                            armEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                            break;
+                        case ETC:
+                            etcEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                            break;
+                    }
+                } // [cycle 1]
+
+
+                // [check 1] : 각 muscleARea 의 selectedEventArrayList 에 데이터가 있을 때만 다음 단계를 진행한다.
+                if (chestEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && shoulderEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && latEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && upperBodyEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && armEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
+
+                    // "선택되지 않았습니다." snack bar 메시지 출력
+                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
+
+                } else {
+
+                    // [lv/C]MakerStep4Fragment : step 4 fragment 생성
+                    MakerStep4Fragment step4Fragment = MakerStep4Fragment.newInstance(
+                            chestEventResultSet,
+                            shoulderEventResultSet,
+                            latEventResultSet,
+                            upperBodyEventResultSet,
+                            armEventResultSet,
+                            etcEventResultSet);
+
+                    // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
+                    FragmentTransaction transaction = fragment.getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                } // [check 1]
             }
-        } // [cycle 1]
-
-
-        // [check 1] : 각 muscleARea 의 selectedEventArrayList 에 데이터가 있을 때만 다음 단계를 진행한다.
-        if (chestEventResultSet.getSelectedEventArrayList().isEmpty()
-                && shoulderEventResultSet.getSelectedEventArrayList().isEmpty()
-                && latEventResultSet.getSelectedEventArrayList().isEmpty()
-                && upperBodyEventResultSet.getSelectedEventArrayList().isEmpty()
-                && armEventResultSet.getSelectedEventArrayList().isEmpty()
-                && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
-
-            // "선택되지 않았습니다." snack bar 메시지 출력
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
-
-        } else {
-
-            // [lv/C]MakerStep4Fragment : step 4 fragment 생성
-            MakerStep4Fragment step4Fragment = MakerStep4Fragment.newInstance(
-                    chestEventResultSet,
-                    shoulderEventResultSet,
-                    latEventResultSet,
-                    upperBodyEventResultSet,
-                    armEventResultSet,
-                    etcEventResultSet);
-
-            // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
-            FragmentTransaction transaction = fragment.getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-        } // [check 1]
-
+        };
     }
 
 

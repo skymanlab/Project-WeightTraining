@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- message -->
+            <!-- indication -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,9 +55,11 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
+                    android:fontFamily="@font/eland_choice_medium"
                     android:includeFontPadding="true"
                     android:padding="15sp"
                     android:text="@string/f_maker_step1_direct_selection"
+                    android:textColor="@color/common_google_signin_btn_text_light_default"
                     app:cornerRadius="10dp"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="1dp" />
@@ -69,9 +71,11 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
+                    android:fontFamily="@font/eland_choice_medium"
                     android:includeFontPadding="true"
                     android:padding="15sp"
                     android:text="@string/f_maker_step1_each_random_selection"
+                    android:textColor="@color/common_google_signin_btn_text_light_default"
                     app:cornerRadius="10dp"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="1dp" />
@@ -83,9 +87,11 @@
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
+                    android:fontFamily="@font/eland_choice_medium"
                     android:includeFontPadding="true"
                     android:padding="15sp"
                     android:text="@string/f_maker_step1_all_random_selection"
+                    android:textColor="@color/common_google_signin_btn_text_light_default"
                     app:cornerRadius="10dp"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="1dp" />
@@ -94,11 +100,6 @@
             </GridLayout>
         </LinearLayout><!-- step content -->
 
-        <!-- step direction selector -->
-        <include
-            layout="@layout/include_maker_step_selector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" /><!-- End of step direction selector -->
 
     </LinearLayout>
 

@@ -45,7 +45,12 @@
     <string name="f_more_fitness_center">피트니스 센터</string>
     <string name="f_more_target">목표</string>
     <string name="f_more_setting">설정</string>
-    <string name="f_more_"></string>
+    <string name="f_more_register_day_count_title">등록일</string>
+    <string name="f_more_register_day_count_default">- 일</string>
+    <string name="f_more_training_count_title">운동 횟수</string>
+    <string name="f_more_training_count_default">- 회</string>
+    <string name="f_more_notice">공지사항</string>
+    <string name="f_more_service_center">고객센터</string>
     <!-- Fragment AlertDialog : logout user -->
     <string name="f_more_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
     <string name="f_more_alert_logout_user_message">로그아웃을 진행합니다.</string>
@@ -56,6 +61,19 @@
     <string name="f_more_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
     <string name="f_more_alert_withdraw_user_bt_positive">탈퇴</string>
     <string name="f_more_alert_withdraw_user_bt_negative">취소</string>
+
+    <!-- Fragment : more user info -->
+    <string name="f_more_user_info_title">내 정보</string>
+    <string name="f_more_user_info_photo_change">변경</string>
+    <string name="f_more_user_info_auth_provider">인증 제공자</string>
+    <string name="f_more_user_info_auth_provider_default">구글</string>
+    <string name="f_more_user_info_email">이메일</string>
+    <string name="f_more_user_info_email_default">skyman1325@gmail.com</string>
+    <string name="f_more_user_info_name">이름</string>
+    <string name="f_more_user_info_name_default">장동익</string>
+    <string name="f_more_user_info_logout">로그아웃</string>
+    <string name="f_more_user_info_withdraw">회원탈퇴</string>
+    <string name="f_more_user_info_"></string>
 
     <!-- Fragment : list -->
     <string name="f_list_title">목록</string>
@@ -74,6 +92,8 @@
     <string name="f_program_menu_recommend_program_comment">추천 프로그램</string>
     <string name="f_program_menu_recommend_program_go">추천 프로그램 보러가기</string>
 
+    <string name="f_maker_step_end_button_next">다음</string>
+    <string name="f_maker_step_end_button_complete">완료</string>
     <!-- Fragment : maker step1 -->
     <string name="f_maker_step1_comment">만들기 방식을 선택해주세요.</string>
     <string name="f_maker_step1_direct_selection">직접 선택</string>
@@ -93,7 +113,7 @@
     <string name="f_maker_step2_arm">팔</string>
     <string name="f_maker_step2_etc">기타</string>
     <string name="f_maker_step2_snack_next">근육 부위를 하나라도 선택해주세요.</string>
-    <string name="f_maker_step2_snack_load_content_db_error"></string>
+    <string name="f_maker_step2_snack_load_content_db_error">데이터베이스 에러로 해당 데이터를 가져오지 못 하였습니다.</string>
 
     <!-- Fragment : maker step3-1 -->
     <string name="f_maker_step3_1_comment">해당 종목을 선택해주세요.</string>
@@ -141,6 +161,11 @@
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ include layout +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Include Layout : top bar -->
+    <string name="include_top_bar_start_text_previous">이전</string>
+    <string name="include_top_bar_end_text_next">다음</string>
+    <string name="include_top_bar_end_text_complete">완료</string>
 
     <!-- Include Layout : maker step selector -->
     <string name="include_maker_step_selector_previous">이전</string>

@@ -11,50 +11,66 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- bar menu -->
+            <!-- user photo -->
             <ImageView
                 android:id="@+id/include_top_user_photo"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:background="?attr/selectableItemBackground" />
+                android:layout_marginEnd="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="TODO" />
 
+            <!-- user info -->
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <!-- user name -->
                 <TextView
                     android:id="@+id/include_top_user_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/nanum_gothic_bold"
-                    android:textSize="20sp"></TextView>
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorTextBack"></TextView>
 
                 <!-- user email -->
                 <TextView
                     android:id="@+id/include_top_user_email"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanum_gothic" />
+                    android:fontFamily="@font/eland_choice_light"
+                    android:textColor="@android:color/holo_orange_dark"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- user info more -->
+            <ImageView
+                android:id="@+id/include_top_user_more_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/right"
+                android:contentDescription="TODO" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

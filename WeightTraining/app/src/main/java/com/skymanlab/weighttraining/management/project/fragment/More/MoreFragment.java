@@ -15,6 +15,7 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopUserManager;
+import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.MoreSectionManager;
 import com.skymanlab.weighttraining.management.user.data.User;
 
 /**
@@ -26,7 +27,7 @@ public class MoreFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFM] MoreFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -76,7 +77,7 @@ public class MoreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final String METHOD_NAME = "[onViewCreated] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ more fragment ++++++++++++");
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<start> more fragment 의 Log manager 를 실행합니다!");
 
         // [iv/C]FragmentTopBarManager : fragment top bar section manager
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_more_title));
@@ -84,7 +85,7 @@ public class MoreFragment extends Fragment {
         this.topBarManager.initWidget();
 
         // [iv/C] : FragmentTopUserManager : fragment top user section manager
-        this.topUserManager = new FragmentTopUserManager(view, true);
+        this.topUserManager = new FragmentTopUserManager(view, this, true);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
 

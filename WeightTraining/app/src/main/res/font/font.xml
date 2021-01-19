@@ -5,8 +5,30 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/nanum_gothic"></font>
+        android:font="@font/nanum_gothic"/>
 
     <font
-        android:font="@font/nanum_gothic_bold"></font>
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/nanum_gothic_bold"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/eland_choice_bold"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/eland_choice_light"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/eland_choice_medium"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/eland_nice_medium"/>
 </font-family>

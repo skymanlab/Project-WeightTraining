@@ -40,14 +40,11 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
     @Override
     public void connectWidget() {
 
-        // [iv/C]MaterialCardView : programMaker connect
+        // [ MaterialCardView ] widget connect
         this.programMaker = (MaterialCardView)getView().findViewById(R.id.f_program_menu_program_maker);
-
-        // [iv/C]MaterialCardView : myProgram connect
         this.myProgram = (MaterialCardView)getView().findViewById(R.id.f_program_menu_my_program);
-
-        // [iv/C]MaterialCardView : recommendProgram connect
         this.recommendProgram = (MaterialCardView)getView().findViewById(R.id.f_program_menu_recommend_program);
+
 
     }
 
@@ -55,7 +52,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MaterialCardView : programMaker click listener
+        // [MaterialCardView] [programMaker] click listener
         this.programMaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +69,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
             }
         });
 
-        // [iv/C]MaterialCardView : myProgram click listener
+        // [MaterialCardView] [myProgram] click listener
         this.myProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +86,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
             }
         });
 
-        // [iv/C]MaterialCardView : recommendProgram click listener
+        // [MaterialCardView] [recommendProgram] click listener
         this.recommendProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

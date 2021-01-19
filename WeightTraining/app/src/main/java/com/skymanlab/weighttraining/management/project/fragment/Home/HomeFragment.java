@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
         this.topBarManager.initWidget();
 
         // [iv/C]FragmentTopUserManager : fragment top user section manager
-        this.topUserManager = new FragmentTopUserManager(view, false);
+        this.topUserManager = new FragmentTopUserManager(view, this,false);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
     }

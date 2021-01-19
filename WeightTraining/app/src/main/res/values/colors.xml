@@ -17,6 +17,6 @@
     <color name="colorBackgroundSixth">#66BB6A</color>
 
     <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextSecond">#000000</color>
+    <color name="colorTextBack">#000000</color>
 
 </resources>

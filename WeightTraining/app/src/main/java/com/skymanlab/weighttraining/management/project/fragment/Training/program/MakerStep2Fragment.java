@@ -14,6 +14,8 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep2SectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +36,7 @@ public class MakerStep2Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
+    private MakerStepManager2 makerStepManager;
     private MakerStep2SectionManager sectionManager;
 
     // constructor
@@ -81,14 +84,31 @@ public class MakerStep2Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // [iv/C]FragmentTopBarManager :
+        // [FragmentTopBarManager] [topBarManager] maker step2 fragment 의 top bar manager 설정
         this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step2D1SectionManager :
+        // [MakerStepManager2] [makerStepManager] maker step 2 단계 설정
+        this.makerStepManager = new MakerStepManager2(getView(), getParentFragmentManager(), MakerStepManager.STEP_TWO);
+        this.makerStepManager.connectWidget();
+        this.makerStepManager.initWidget();
+
+        // [MakerStep2SectionManager] [sectionManager] maker step 2 fragment section manager 설정
         this.sectionManager = new MakerStep2SectionManager(getActivity(),view, getActivity().getSupportFragmentManager(), this.step1SelectedType);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+
+        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
+        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
+            @Override
+            public void setStartButtonClickListener() {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+        this.topBarManager.initWidgetOfStartButton(null);
+        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
+        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
+
     }
 }

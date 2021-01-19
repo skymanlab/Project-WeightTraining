@@ -23,7 +23,7 @@
             android:fontFamily="@font/nanum_gothic_bold"
             android:padding="5dp"
             android:text="@string/custom_list_foldable_event_item_count"
-            android:textColor="@color/colorTextSecond"
+            android:textColor="@color/colorTextBack"
             android:textSize="20dp" />
 
         <!-- title -->
@@ -35,7 +35,7 @@
             android:fontFamily="@font/nanum_gothic_bold"
             android:padding="5dp"
             android:text="@string/custom_list_foldable_event_item_event_name"
-            android:textColor="@color/colorTextSecond"
+            android:textColor="@color/colorTextBack"
             android:textSize="18dp" />
 
         <!-- expand selector -->
@@ -234,7 +234,7 @@
                     android:padding="10dp"
                     android:text="@string/custom_list_foldable_event_item_modify"
                     android:textAlignment="center"
-                    android:textColor="@color/colorTextSecond" />
+                    android:textColor="@color/colorTextBack" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -254,7 +254,7 @@
                     android:padding="10dp"
                     android:text="@string/custom_list_foldable_event_item_delete"
                     android:textAlignment="center"
-                    android:textColor="@color/colorTextSecond" />
+                    android:textColor="@color/colorTextBack" />
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </LinearLayout><!-- End of content -->

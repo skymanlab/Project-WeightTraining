@@ -151,7 +151,7 @@ public class EventProgramProcessActivity extends AppCompatActivity implements Re
 
         // [iv/C]EPSPSectionManager : section 의 restTimeCounter(TextView) widget 을 선택된 값으로 설정하기
         this.section.getRestTimeCounter().setText(DataFormatter.setTimeFormat(restTimeMinuteNumber, restTimeSecondNumber));
-        this.section.getRestTimeCounter().setTextColor(ContextCompat.getColor(this, R.color.colorTextSecond));
+        this.section.getRestTimeCounter().setTextColor(ContextCompat.getColor(this, R.color.colorTextBack));
 
         // [iv/C]EPSPSectionManager : section 의 restTime 을 변경된 값으로 설정하기
         this.section.setRestTime(DataManager.convertMillisecondOfRestTime(restTimeMinuteNumber, restTimeSecondNumber));

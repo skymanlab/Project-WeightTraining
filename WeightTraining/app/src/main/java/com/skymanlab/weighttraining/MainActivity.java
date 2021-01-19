@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             try {
 
                 // [method] : 3초 지연
-                sleep(3000);
+                sleep(2000);
 
                 // [lv/C]Intent : LoginActivity 이동하는 intent 생성 및 이동
                 Intent intent = new Intent(this.context, LoginActivity.class);

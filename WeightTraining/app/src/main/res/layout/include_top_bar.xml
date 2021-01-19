@@ -4,42 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/include_top_bar_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="parent"
+    <!-- content -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/include_top_bar_content_wrapper"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- content -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/include_top_bar_content_wrapper"
+        <!-- title -->
+        <TextView
+            android:id="@+id/include_top_bar_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            app:cardElevation="5dp">
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/include_top_bar_dimen_title_side_blank"
+            android:layout_marginEnd="@dimen/include_top_bar_dimen_title_side_blank"
+            android:fontFamily="@font/eland_choice_medium"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextBack"
+            android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <!-- start image -->
+        <ImageView
+            android:id="@+id/include_top_bar_start_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/include_top_bar_dimen_side_blank"
+            android:clickable="false"
+            android:src="@drawable/left"
+            android:visibility="gone"
+            android:contentDescription="@string/include_top_bar_start_text_previous" />
 
-                <!-- title -->
-                <TextView
-                    android:id="@+id/include_top_bar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/nanum_gothic_bold"
-                    android:textSize="20dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        <!-- start text -->
+        <TextView
+            android:id="@+id/include_top_bar_start_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/include_top_bar_dimen_side_blank"
+            android:clickable="false"
+            android:fontFamily="@font/eland_choice_light"
+            android:textColor="@color/colorTextBack"
+            android:visibility="gone" />
 
-    </LinearLayout>
+        <!-- end image -->
+        <ImageView
+            android:id="@+id/include_top_bar_end_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/include_top_bar_dimen_side_blank"
+            android:clickable="false"
+            android:src="@drawable/right"
+            android:visibility="gone"
+            android:contentDescription="@string/include_top_bar_end_text_next"/>
 
+        <!-- end text -->
+        <TextView
+            android:id="@+id/include_top_bar_end_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/include_top_bar_dimen_side_blank"
+            android:clickable="false"
+            android:fontFamily="@font/eland_choice_light"
+            android:textColor="@color/colorTextBack"
+            android:visibility="visible" />
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

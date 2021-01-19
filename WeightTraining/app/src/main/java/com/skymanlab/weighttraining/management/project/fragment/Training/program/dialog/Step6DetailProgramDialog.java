@@ -155,9 +155,9 @@ public class Step6DetailProgramDialog extends DialogFragment {
         MakerStep6Fragment fragment = (MakerStep6Fragment) getParentFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "parent fragment = " + fragment);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program set number = " + fragment.getSectionManager().getDataOfProgramSettingSetNumber());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program rest time minute = " + fragment.getSectionManager().getDataOfProgramSettingRestTimeMinute());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program rest time second = " + fragment.getSectionManager().getDataOfProgramSettingRestTimeSecond());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program set number = " + fragment.getSectionManager().getValueOfProgramSettingSetNumber());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program rest time minute = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeMinute());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program rest time second = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeSecond());
 
         // text
         this.eventName.setText(event.getEventName());
@@ -178,13 +178,13 @@ public class Step6DetailProgramDialog extends DialogFragment {
         // [check 1] : detailProgram 의 따라 각 number picker 의 초기 값이 달라진다.
         if (detailProgram == null) {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program setting 으로 초기값 설정");
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> set number = " + fragment.getSectionManager().getDataOfProgramSettingSetNumber());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time minute = " + fragment.getSectionManager().getDataOfProgramSettingRestTimeMinute());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time second = " + fragment.getSectionManager().getDataOfProgramSettingRestTimeSecond());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> set number = " + fragment.getSectionManager().getValueOfProgramSettingSetNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time minute = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeMinute());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time second = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeSecond());
 
-            this.setNumber.setValue(fragment.getSectionManager().getDataOfProgramSettingSetNumber());
-            this.restTimeMinute.setValue(fragment.getSectionManager().getDataOfProgramSettingRestTimeMinute());
-            this.restTimeSecond.setValue(fragment.getSectionManager().getDataOfProgramSettingRestTimeSecond());
+            this.setNumber.setValue(fragment.getSectionManager().getValueOfProgramSettingSetNumber());
+            this.restTimeMinute.setValue(fragment.getSectionManager().getValueOfProgramSettingRestTimeMinute());
+            this.restTimeSecond.setValue(fragment.getSectionManager().getValueOfProgramSettingRestTimeSecond());
 
         } else {
 

@@ -359,7 +359,7 @@ public class EPSPSectionManager extends SectionManager implements SectionInitial
             isStartingStep[stepNumber] = true;
 
             // [iv/C]TextView : restTimeCounter 를 초기화하기
-            this.restTimeCounter.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorTextSecond));
+            this.restTimeCounter.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorTextBack));
             this.restTimeCounter.setText(DataFormatter.setTimeFormat(0));
 
             // [iv/C]TextView : restTimeChange 가 작동 안 하도록(RestTimePickerDialog 가 안 나타나도록)

@@ -46,10 +46,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_margin="20dp"
                     app:cardBackgroundColor="@color/browser_actions_bg_grey"
                     app:cardCornerRadius="10dp">
 
@@ -66,13 +63,7 @@
                         android:layout_height="match_parent" />
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-
         </FrameLayout><!-- End of step content -->
 
-        <!-- step direction selector -->
-        <include
-            layout="@layout/include_maker_step_selector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" /><!-- End of step direction selector -->
     </LinearLayout>
 </FrameLayout>
