@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".management.project.fragment.Intervene.InterveneFragment">
+    android:orientation="vertical"
+    tools:context=".management.project.fragment.Intervene.InterventionFragment">
 
-    <LinearLayout
+
+    <!-- top bar -->
+    <include
+        layout="@layout/include_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:background="@color/browser_actions_divider_color" />
+
+    <!-- content container -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <!-- top bar -->
-        <include
-            layout="@layout/include_top_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- content container -->
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView><!-- End of content container -->
 
-            </LinearLayout>
-        </ScrollView><!-- End of content container -->
-
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

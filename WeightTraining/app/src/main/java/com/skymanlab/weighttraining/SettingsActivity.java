@@ -2,6 +2,9 @@ package com.skymanlab.weighttraining;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -23,10 +27,21 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String CLASS_NAME = "[Ac] SettingsActivity";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
+    // instance variable
+    private TextView title;
+    private ImageView startButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+
+        // widget connect
+        connectWidget();
+
+        // widget init
+        initWidget();
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.settings, new SettingsFragment())
@@ -35,8 +50,33 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+
     }
 
+    private void connectWidget() {
+
+        this.title = (TextView) findViewById(R.id.include_top_bar_title);
+        this.startButton = (ImageView) findViewById(R.id.include_top_bar_start_image);
+    }
+
+    private void initWidget() {
+
+        // [TextView] [title] text
+        this.title.setText(R.string.f_setting_title);
+
+        // [ImageView] [startButton] VISIBLE / click listener
+        this.startButton.setVisibility(View.VISIBLE);
+        this.startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+            }
+        });
+    }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= preference fragment =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public static class SettingsFragment extends PreferenceFragmentCompat {
 
         // constant
@@ -67,7 +107,6 @@ public class SettingsActivity extends AppCompatActivity {
                 this.basicEventData.setEnabled(false);
 
             } // [check 1]
-
 
 
             // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= user_info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

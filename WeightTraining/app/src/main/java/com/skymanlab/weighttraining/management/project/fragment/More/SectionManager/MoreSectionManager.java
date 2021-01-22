@@ -1,32 +1,19 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.opengl.Matrix;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.skymanlab.weighttraining.LoginActivity;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.user.data.User;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -46,21 +33,21 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private MaterialButton serviceCenter;
 
     // constructor
-    public MoreSectionManager(Activity activity, View view) {
-        super(activity, view);
+    public MoreSectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     @Override
     public void connectWidget() {
 
         // [iv/C]LinearLayout : connect
-        this.registerDayCountWrapper = (LinearLayout)getView().findViewById(R.id.f_more_register_day_count_wrapper);
+        this.registerDayCountWrapper = (LinearLayout) getView().findViewById(R.id.f_more_register_day_count_wrapper);
 
         // [iv/C]TextView : connect
         this.registerDayCount = (TextView) getView().findViewById(R.id.f_more_register_day_count);
 
         // [iv/C]LinearLayout : connect
-        this.trainingCountWrapper = (LinearLayout)getView().findViewById(R.id.f_more_training_count_wrapper);
+        this.trainingCountWrapper = (LinearLayout) getView().findViewById(R.id.f_more_training_count_wrapper);
 
         // [iv/C]TextView : connect
         this.trainingCount = (TextView) getView().findViewById(R.id.f_more_training_count);
@@ -112,8 +99,9 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             public void onClick(View v) {
 
                 // [iv/C]Intent : SettingsActivity 로 이동하는
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                getActivity().startActivity(intent);
+                Intent intent = new Intent(getFragment().getActivity(), SettingsActivity.class);
+                getFragment().getActivity().startActivity(intent);
+
             }
         });
 
@@ -139,7 +127,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     /**
      * register day count 와 관련된 widget 들의 초기 내용을 설정한다.
      */
-    private void initWidgetOfRegisterDayCount(){
+    private void initWidgetOfRegisterDayCount() {
 
         // [iv/C]LinearLayout : registerCountWrapper click listener
         this.registerDayCountWrapper.setOnClickListener(new View.OnClickListener() {
@@ -172,8 +160,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
 
     } // End of method [initWidgetOfTrainingCount]
-
-
 
 
 }

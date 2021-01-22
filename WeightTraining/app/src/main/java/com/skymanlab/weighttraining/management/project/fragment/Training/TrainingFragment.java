@@ -40,26 +40,17 @@ public class TrainingFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment EventFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TrainingFragment newInstance(User user) {
-
-        final String METHOD_NAME = "[newInstance] ";
-
+    public static TrainingFragment newInstance() {
         TrainingFragment fragment = new TrainingFragment();
-        Bundle args = new Bundle();;
-        fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -77,13 +68,13 @@ public class TrainingFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ training fragment ++++++++++++");
 
-        // [iv/C]FragmentTopBarManager : fragment top bar section manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_training_title));
+        // [FragmentTopBarManager] [topBarManager] this is 'training' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_training_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]TrainingSectionManager : training fragment section manager
-        this.sectionManager = new TrainingSectionManager(getActivity(), view);
+        // [MoreSectionManager] [sectionManager] this is 'training' fragment's section manager.
+        this.sectionManager = new TrainingSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
     }

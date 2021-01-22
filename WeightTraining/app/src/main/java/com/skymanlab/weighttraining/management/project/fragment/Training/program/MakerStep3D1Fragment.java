@@ -7,17 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep3D1SectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager2;
 
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class MakerStep3D1Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
-    private MakerStepManager2 makerStepManager;
+    private MakerStepManager makerStepManager;
     private MakerStep3D1SectionManager sectionManager;
 
     // constructor
@@ -128,7 +127,6 @@ public class MakerStep3D1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_maker_step3_1, container, false);
     }
 
@@ -137,18 +135,18 @@ public class MakerStep3D1Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
-        // [FragmentTopBarManager] [topBarManager] maker step 3-1 fragment 의 top bar manager 설정
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
+        // [FragmentTopBarManager] [topBarManager] this is 'maker step 3-1' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [MakerStepManager2] [makerStepManager] maker step 3-1 단계 설정
-        this.makerStepManager = new MakerStepManager2(getView(), getParentFragmentManager(), MakerStepManager.STEP_THREE);
+        this.makerStepManager = new MakerStepManager(this, view, MakerStepManager.STEP_THREE);
         this.makerStepManager.connectWidget();
         this.makerStepManager.initWidget();
 
-        // [MakerStep3D1SectionManager] [sectionManager] maker step 3-1 fragment section manager 설정
-        this.sectionManager = new MakerStep3D1SectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this);
+        // [MakerStep3D1SectionManager] [sectionManager] this is 'maker step 3-1' fragment's section manager.
+        this.sectionManager = new MakerStep3D1SectionManager(this, view);
         this.sectionManager.setFragmentArrayList(this.fragmentArrayList);
         this.sectionManager.setFragmentMuscleAreaList(this.fragmentMuscleAreaList);
         this.sectionManager.connectWidget();
@@ -157,8 +155,12 @@ public class MakerStep3D1Fragment extends Fragment {
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
         this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
             @Override
-            public void setStartButtonClickListener() {
-                getParentFragmentManager().popBackStack();
+            public AlertDialog setStartButtonClickListener() {
+
+                // [method] fragment manager 를 통해 back stack 에서 pop!
+                getActivity().getSupportFragmentManager().popBackStack();
+
+                return null;
             }
         });
         this.topBarManager.initWidgetOfStartButton(null);
@@ -170,6 +172,7 @@ public class MakerStep3D1Fragment extends Fragment {
 
     /**
      * 해당 muscleArea 의 groupingEventData 를 보여주기 위한 Fragment 객체 생성하여 fragmentArrayList 추가한다. 그리고 해당 fragment 의 muscleArea 를 차례대로 fragmentMuscleAreaList 에 추가한다.
+     *
      * @param groupingEventData
      * @param muscleArea
      */

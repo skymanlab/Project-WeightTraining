@@ -2,6 +2,7 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -12,6 +13,7 @@ import android.widget.ScrollView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,6 +26,7 @@ import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.Step5EventItem;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.Step5FinalOrderItem;
@@ -32,14 +35,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class MakerStep5SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
+public class MakerStep5SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep6SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
-
-    // instance variable
-    private MakerStepManager makerStepManager;
 
     // instance variable
     private ArrayList<Event> selectedChestEventArrayList;
@@ -64,8 +64,8 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
     private ArrayList<Event> finalOrderList;
 
     // constructor
-    public MakerStep5SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
-        super(activity, view, fragmentManager);
+    public MakerStep5SectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     // setter
@@ -111,13 +111,6 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MakerStepManager : step 5
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_FIVE);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
-
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------- chest -------------------------------------------------");
         LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, selectedChestEventArrayList);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------- shoulder -------------------------------------------------");
@@ -141,7 +134,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
         this.finalOrderList = new ArrayList<>();
 
         // [lv/C]LayoutInflater : layout inflater 가져오기
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getFragment().getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // [0] chest
         initItemByMuscleArea(inflater, this.selectedChestEventArrayList);
@@ -163,42 +156,57 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
     }
 
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
+
+    /**
+     * 다음 단계를 진행하기 위한 과정을 EndButtonLister 객체를 생성하여 반환한다.
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        final String METHOD_NAME = "[newEndButtonListenerInstance] ";
+
+        return new FragmentTopBarManager.EndButtonListener() {
+            @Override
+            public AlertDialog setEndButtonClickListener() {
+
+                int allMuscleAreaEventArrayListSize = selectedChestEventArrayList.size() + selectedShoulderEventArrayList.size() + selectedLatEventArrayList.size() + selectedUpperBodyEventArrayList.size() + selectedArmEventArrayList.size() + selectedEtcEventArrayList.size();
+
+                // [check 1] : 총 개수와 finalOrderListWrapper 에 포함되어 있는 view 의 개수와 같을 때만
+                if (allMuscleAreaEventArrayListSize == finalOrderListWrapper.getChildCount()) {
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> 다음 단계를 진행합니다.");
+
+                    // [cycle ] :
+                    for (int index = 0; index < finalOrderList.size(); index++) {
+
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> event name = " + finalOrderList.get(index).getEventName());
+                    } // [cycle ]
+
+                    // [lv/C]MakerStep6Fragment : step 6 fragment
+                    MakerStep6Fragment step6Fragment = MakerStep6Fragment.newInstance(finalOrderList);
+
+                    FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_home_content_wrapper, step6Fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                } else {
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step5_snack_final_order_not_complete, Snackbar.LENGTH_SHORT).show();
+                } // [check 1]
+
+                return null;
+            }
+        };
     }
 
-    @Override
-    public void setClickListenerOfNext() {
-        final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        int allMuscleAreaEventArrayListSize = selectedChestEventArrayList.size() + selectedShoulderEventArrayList.size() + selectedLatEventArrayList.size() + selectedUpperBodyEventArrayList.size() + selectedArmEventArrayList.size() + selectedEtcEventArrayList.size();
-
-        // [check 1] : 총 개수와 finalOrderListWrapper 에 포함되어 있는 view 의 개수와 같을 때만
-        if (allMuscleAreaEventArrayListSize == finalOrderListWrapper.getChildCount()) {
-
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> 다음 단계를 진행합니다.");
-
-            // [cycle ] :
-            for (int index=0; index < this.finalOrderList.size() ; index++ ) {
-
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " +index + " >> event name = " + this.finalOrderList.get(index).getEventName());
-            } // [cycle ]
-            
-            // [lv/C]MakerStep6Fragment : step 6 fragment
-            MakerStep6Fragment step6Fragment = MakerStep6Fragment.newInstance(finalOrderList);
-
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.nav_home_content_wrapper, step6Fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-        } else {
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step5_snack_final_order_not_complete, Snackbar.LENGTH_SHORT).show();
-        } // [check 1]
-
-    }
-
+    /**
+     * 표시해야하는 muscleArea 의 Step5EventItem 객체를 생성하고 eventItemList 와 eventListWrapper 에 추가하여 화면에 표시한다.
+     * 그리고 Step5FinalOrderItem 객체를 생성하여 finalOrderItemList 에 추가하여 해당 view 를 관리한다.
+     *
+     * @param inflater
+     * @param eventArrayList
+     */
     private void initItemByMuscleArea(LayoutInflater inflater, ArrayList<Event> eventArrayList) {
 
         // [check 1] : eventArrayList 의 데이터가 있을 때만 item 을 생성하는 초기 설정을 진행한다.
@@ -271,7 +279,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
         // [lv/C]Step4EventItem : event item 의 초기 내용을 설정한다.
         Step5EventItem eventItem = new Step5EventItem.Builder()
                 .setInflater(inflater)
-                .setContentWrapperColor(ContextCompat.getColor(getActivity(), DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())))
+                .setContentWrapperColor(ContextCompat.getColor(getFragment().getActivity(), DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())))
                 .setEvent(event)
                 .setEventNumber(eventNumber)
                 .setItemClickListener(new Step5EventItem.OnItemClickListener() {
@@ -303,7 +311,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
                         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= event =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                         // [lv/C]MaterialCardView : contentWrapper 의 색을 변경
-                        contentWrapper.setCardBackgroundColor(getActivity().getColor(R.color.colorBackgroundGray));
+                        contentWrapper.setCardBackgroundColor(getFragment().getActivity().getColor(R.color.colorBackgroundGray));
 
                         // [lv/C]View : view 의 click 금지
                         item.setEnabled(false);
@@ -320,13 +328,21 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
     } // End of method [createEventItem]
 
 
+    /**
+     * 해당 event 에 해당하는 Step5FinalOrderItem 객체를 생성하여 반환한다.
+     *
+     * @param inflater
+     * @param event
+     * @param eventNumber
+     * @return
+     */
     private Step5FinalOrderItem createFinalOrderItem(LayoutInflater inflater, Event event, int eventNumber) {
         final String METHOD_NAME = "[Step4FinalOrderItem] ";
 
         // [lv/C]Step4FinalOrderItem : final order item 의 초기 내용을 설정한다.
         Step5FinalOrderItem finalOrderItem = new Step5FinalOrderItem.Builder()
                 .setInflater(inflater)
-                .setContentWrapperColor(ContextCompat.getColor(getActivity(), DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())))
+                .setContentWrapperColor(ContextCompat.getColor(getFragment().getActivity(), DataManager.convertColorIntOfMuscleArea(event.getMuscleArea())))
                 .setEvent(event)
                 .setEventNumber(eventNumber)
                 .setItemClickListener(new Step5FinalOrderItem.OnItemClickListener() {
@@ -353,7 +369,6 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
                     }
 
-
                 })
                 .create();
 
@@ -366,7 +381,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
 
     /**
-     * finalOrderListWrapper 에
+     * finalOrderListWrapper 에 추가된 view 들을 순서대로 각 item 의 number 를 재설정한다.
      *
      * @param eventKey
      */
@@ -384,6 +399,8 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
 
     /**
+     * Step5EventItem 객체를 eventListWrapper 에 해당 객체의 view 를 추가하여 화면에 표시한다.
+     *
      * @param eventItem
      */
     private void addViewToEventListWrapper(Step5EventItem eventItem) {
@@ -403,7 +420,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
                 params.width = (eventListWrapper.getWidth() - (eventListWrapper.getPaddingLeft() + eventListWrapper.getPaddingRight())) / eventListWrapper.getColumnCount();
 
                 // Ui Thread 를 이용하여 params 를 item 에 적용한다.
-                getActivity().runOnUiThread(new Runnable() {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
@@ -445,7 +462,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
                 params.width = (eventListWrapper.getWidth() - (eventListWrapper.getPaddingLeft() + eventListWrapper.getPaddingRight())) / eventListWrapper.getColumnCount();
 
                 // Ui Thread 를 이용하여 params 를 item 에 적용한다.
-                getActivity().runOnUiThread(new Runnable() {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 

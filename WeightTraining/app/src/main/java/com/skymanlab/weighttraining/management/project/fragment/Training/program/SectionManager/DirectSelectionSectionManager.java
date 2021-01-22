@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.card.MaterialCardView;
@@ -58,9 +59,9 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     private LinearLayout groupListWrapper;
     private HashMap<GroupType, DirectSelectionGroupItem> groupItemList;
 
-   // constructor
-    public DirectSelectionSectionManager(Activity activity, View view, FragmentManager fragmentManager) {
-        super(activity, view, fragmentManager);
+    // constructor
+    public DirectSelectionSectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     // setter
@@ -89,7 +90,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
             this.groupItemList = new HashMap<GroupType, DirectSelectionGroupItem>();
 
             // [lv/C]LayoutInflater :
-            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) getFragment().getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             // [1] a group
             initGroupListWrapper(inflater, GroupType.A_GROUP, this.groupingEventData.getAGroupEventArrayList());
@@ -156,15 +157,17 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     /**
      * groupListWrapper 에 groupItem 을 화면에 표시하는 초기 내용을 설정한다.
+     *
      * @param inflater
      * @param groupType
      * @param groupEventArrayList
      */
-    private void initGroupListWrapper (LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
+    private void initGroupListWrapper(LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
         final String METHOD_NAME = "[initGroupListWrapper] ";
+
         if (groupEventArrayList != null) {
 
-            if (!groupEventArrayList.isEmpty()){
+            if (!groupEventArrayList.isEmpty()) {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "------------==>> group item 생성 ");
                 // DirectSelectionGroupItem 으로 groupItem 을 생성하기
@@ -182,15 +185,16 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     /**
      * 각 그룹별로 groupItem 을 DirectSelectionGroupItem 을 이용하여 객체를 생성한다.
+     *
      * @param inflater
      * @param groupType
      * @param groupEventArrayList
      * @return
      */
-    private DirectSelectionGroupItem createDirectSelectionGroupItem (LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
+    private DirectSelectionGroupItem createDirectSelectionGroupItem(LayoutInflater inflater, GroupType groupType, ArrayList<Event> groupEventArrayList) {
 
         // [lv/C]DirectSelectionGroupItem :
-        DirectSelectionGroupItem groupItem = new DirectSelectionGroupItem.Builder(getActivity())
+        DirectSelectionGroupItem groupItem = new DirectSelectionGroupItem.Builder(getFragment().getActivity())
                 .setInflater(inflater)
                 .setGroupType(groupType)
                 .setGroupEventArrayList(groupEventArrayList)
@@ -206,16 +210,18 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     /**
      * DirectSelectionGroupItem 객체를 groupItemList 에 추가하기
+     *
      * @param groupType
      * @param groupItem
      */
-    private void addItemToGroupItemList(GroupType groupType, DirectSelectionGroupItem groupItem){
+    private void addItemToGroupItemList(GroupType groupType, DirectSelectionGroupItem groupItem) {
         this.groupItemList.put(groupType, groupItem);
     } // End of method [addItemToGroupItemList]
 
 
     /**
      * DirectSelectionGroupItem 객체의 view(item) 을 groupListWrapper 에 추가하여 화면에 표시하기
+     *
      * @param groupItem
      */
     private void addViewToGroupListWrapper(DirectSelectionGroupItem groupItem) {
@@ -225,6 +231,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
     /**
      * 각 그룹의 EventResultSet 을 모두 합하여 반환한다.
+     *
      * @return
      */
     public EventResultSet getEventResultSetOfAllGroup() {
@@ -260,7 +267,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
         if (groupItemList.get(GroupType.C_GROUP) != null) {
 
             // [lv/C]EventResultSet : c group 의 eventResultSet 가져오기
-            EventResultSet cGroup =groupItemList.get(GroupType.C_GROUP).getEventResultSet();
+            EventResultSet cGroup = groupItemList.get(GroupType.C_GROUP).getEventResultSet();
 
             // [lv/C]EventResultSet : 합치기
             allGroupEventResultSet.getSelectedEventArrayList().addAll(cGroup.getSelectedEventArrayList());
@@ -294,6 +301,6 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
 
         return allGroupEventResultSet;
     } // End of method [getEventResultSetOfAllGroup]
-    
+
 
 }

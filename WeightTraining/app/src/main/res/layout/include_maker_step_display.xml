@@ -4,52 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- step -->
     <LinearLayout
-        android:id="@+id/include_maker_step_display_content_wrapper"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/maker_step_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/include_maker_step_display_first_number"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/step_display_side_number_1"/>
+            <!-- step -->
+            <LinearLayout
+                android:id="@+id/include_maker_step_display_content_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/include_maker_step_display_first_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/step_display_bar" />
+                <ImageView
+                    android:id="@+id/include_maker_step_display_first_number"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/step_display_side_number_1" />
 
-        <ImageView
-            android:id="@+id/include_maker_step_display_second_number"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/step_display_middle_number_2" />
+                <ImageView
+                    android:id="@+id/include_maker_step_display_first_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/step_display_bar" />
 
-        <ImageView
+                <ImageView
+                    android:id="@+id/include_maker_step_display_second_number"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/step_display_middle_number_2" />
 
-            android:id="@+id/include_maker_step_display_second_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/step_display_bar" />
+                <ImageView
 
-        <ImageView
-            android:id="@+id/include_maker_step_display_third_number"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/step_display_side_number_3" />
+                    android:id="@+id/include_maker_step_display_second_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/step_display_bar" />
 
-    </LinearLayout><!-- End of step -->
+                <ImageView
+                    android:id="@+id/include_maker_step_display_third_number"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/step_display_side_number_3" />
 
+            </LinearLayout><!-- End of step -->
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

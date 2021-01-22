@@ -40,27 +40,15 @@
 
     <!-- Fragment : more -->
     <string name="f_more_title">더보기</string>
-    <string name="f_more_user_logout">로그아웃</string>
-    <string name="f_more_user_withdraw">탈퇴</string>
-    <string name="f_more_fitness_center">피트니스 센터</string>
-    <string name="f_more_target">목표</string>
-    <string name="f_more_setting">설정</string>
     <string name="f_more_register_day_count_title">등록일</string>
     <string name="f_more_register_day_count_default">- 일</string>
     <string name="f_more_training_count_title">운동 횟수</string>
     <string name="f_more_training_count_default">- 회</string>
+    <string name="f_more_fitness_center">피트니스 센터</string>
+    <string name="f_more_target">목표</string>
+    <string name="f_more_setting">설정</string>
     <string name="f_more_notice">공지사항</string>
     <string name="f_more_service_center">고객센터</string>
-    <!-- Fragment AlertDialog : logout user -->
-    <string name="f_more_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
-    <string name="f_more_alert_logout_user_message">로그아웃을 진행합니다.</string>
-    <string name="f_more_alert_logout_user_bt_positive">로그아웃</string>
-    <string name="f_more_alert_logout_user_bt_negative">취소</string>
-    <!-- Fragment AlertDialog : withdraw user -->
-    <string name="f_more_alert_withdraw_user_title">탈퇴를 진행하시겠습니까?</string>
-    <string name="f_more_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
-    <string name="f_more_alert_withdraw_user_bt_positive">탈퇴</string>
-    <string name="f_more_alert_withdraw_user_bt_negative">취소</string>
 
     <!-- Fragment : more user info -->
     <string name="f_more_user_info_title">내 정보</string>
@@ -74,6 +62,19 @@
     <string name="f_more_user_info_logout">로그아웃</string>
     <string name="f_more_user_info_withdraw">회원탈퇴</string>
     <string name="f_more_user_info_"></string>
+    <!-- Fragment AlertDialog : logout user -->
+    <string name="f_more_user_info_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
+    <string name="f_more_user_info_alert_logout_user_message">로그아웃을 진행합니다.</string>
+    <string name="f_more_user_info_alert_logout_user_bt_positive">로그아웃</string>
+    <string name="f_more_user_info_alert_logout_user_bt_negative">취소</string>
+    <!-- Fragment AlertDialog : withdraw user -->
+    <string name="f_more_user_info_alert_withdraw_user_title">탈퇴를 진행하시겠습니까?</string>
+    <string name="f_more_user_info_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
+    <string name="f_more_user_info_alert_withdraw_user_bt_positive">탈퇴</string>
+    <string name="f_more_user_info_alert_withdraw_user_bt_negative">취소</string>
+
+    <!-- Fragment : setting -->
+    <string name="f_setting_title">환경설정</string>
 
     <!-- Fragment : list -->
     <string name="f_list_title">목록</string>
@@ -92,10 +93,12 @@
     <string name="f_program_menu_recommend_program_comment">추천 프로그램</string>
     <string name="f_program_menu_recommend_program_go">추천 프로그램 보러가기</string>
 
+    <!-- Fragment : maker -->
     <string name="f_maker_step_end_button_next">다음</string>
     <string name="f_maker_step_end_button_complete">완료</string>
+
     <!-- Fragment : maker step1 -->
-    <string name="f_maker_step1_comment">만들기 방식을 선택해주세요.</string>
+    <string name="f_maker_step1_indication">만들기 방식을 선택해주세요.</string>
     <string name="f_maker_step1_direct_selection">직접 선택</string>
     <string name="f_maker_step1_each_random_selection">그룹 별 랜덤 선택</string>
     <string name="f_maker_step1_all_random_selection">전체 그룹 랜덤 선택</string>
@@ -105,7 +108,7 @@
     <string name="f_maker_step1_"></string>
 
     <!-- Fragment : maker step2 -->
-    <string name="f_maker_step2_comment">근육 부의를 선택해주세요.(중복 가능)</string>
+    <string name="f_maker_step2_indication">근육 부의를 선택해주세요.(중복 가능)</string>
     <string name="f_maker_step2_chest">가슴</string>
     <string name="f_maker_step2_shoulder">어깨</string>
     <string name="f_maker_step2_lat">등</string>
@@ -116,31 +119,31 @@
     <string name="f_maker_step2_snack_load_content_db_error">데이터베이스 에러로 해당 데이터를 가져오지 못 하였습니다.</string>
 
     <!-- Fragment : maker step3-1 -->
-    <string name="f_maker_step3_1_comment">해당 종목을 선택해주세요.</string>
+    <string name="f_maker_step3_1_indication">해당 종목을 선택해주세요.</string>
     <string name="f_maker_step3_1_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
     <!-- Fragment : program, step 3-1, direct selection -->
     <string name="f_direct_selection_group_title">아래의 목록에서 해당 종목을 선택하세요.</string>
 
     <!-- Fragment : maker step3-2 -->
-    <string name="f_maker_step3_2_comment">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
+    <string name="f_maker_step3_2_indication">각 근육 부위의 그룹별로 개수를 정해주세요.</string>
     <string name="f_maker_step3_2_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
     <!-- Fragment : maker step3-3 -->
-    <string name="f_maker_step3_3_comment">각 근육 부위의 전체에서 개수를 정해주세요.</string>
+    <string name="f_maker_step3_3_indication">각 근육 부위의 전체에서 개수를 정해주세요.</string>
     <string name="f_maker_step3_3_snack_next_check_true">아무것도 선택되지 않았습니다.</string>
 
     <!-- Fragment : maker step4 -->
-    <string name="f_maker_step4_comment">선택된 항목들을 확인합니다.</string>
+    <string name="f_maker_step4_indication">선택된 항목들을 확인합니다.</string>
 
     <!-- Fragment : maker step5 -->
-    <string name="f_maker_step5_comment">순서를 정해주세요.</string>
+    <string name="f_maker_step5_indication">순서를 정해주세요.</string>
     <string name="f_maker_step5_final_order_list_title">최종 순서</string>
     <string name="f_maker_step5_selected_item_list_title">선택 목록</string>
     <string name="f_maker_step5_snack_final_order_not_complete">아직 최종 순서를 완성하지 않았습니다.</string>
 
     <!-- Fragment : maker step6 -->
-    <string name="f_maker_step6_comment">각 항목별로 초기 설정을 해주세요.</string>
+    <string name="f_maker_step6_indication">각 항목별로 초기 설정을 해주세요.</string>
     <string name="f_maker_step6_program_setting_title">프로그램 설정</string>
     <string name="f_maker_step6_program_setting_set_number">세트 수</string>
     <string name="f_maker_step6_program_setting_set_number_tag">회</string>
@@ -152,11 +155,19 @@
     <string name="f_maker_step6_snack_setting_data_error">프로그램 설정들을 확인해주세요.</string>
 
     <!-- Fragment : maker step7-->
-    <string name="f_maker_step7_comment">결과를 확인합니다.</string>
-    <string name="f_maker_step7_"></string>
+    <string name="f_maker_step7_indication">결과를 확인합니다.</string>
+    <string name="f_maker_step7_result_title">프로그램 확인    ></string>
+    <string name="f_maker_step7_result_nick_name_input">별칭을 입력해주세요.</string>
+    <string name="f_maker_step7_result_set_number">- 세트 수</string>
+    <string name="f_maker_step7_result_set_number_default">0 회</string>
+    <string name="f_maker_step7_result_rest_time">- 휴식 시간</string>
+    <string name="f_maker_step7_result_rest_time_default">0분 0초</string>
+    <string name="f_maker_step7_program_result_title">프로그램 설정</string>
+    <string name="f_maker_step7_detail_program_result_title">세부 프로그램 설정</string>
+    <string name="f_maker_step7_result_"></string>
 
     <!-- Fragment : my program -->
-    <string name="f_my_program_comment">내가 만든 프로그램 목록입니다.</string>
+    <string name="f_my_program_indication">내가 만든 프로그램 목록입니다.</string>
     <string name="f_my_program_"></string>
 
 
@@ -181,6 +192,16 @@
     <string name="include_maker_type_all_group_random_item_muscle_area">어떤 부위 일까요?</string>
     <string name="include_maker_type_all_group_random_item_menu">전체</string>
 
+    <!-- Include Layout : maker step7 detail program setting -->
+    <string name="include_maker_step7_detail_program_result_item_muscle_area">근육 부위</string>
+    <string name="include_maker_step7_detail_program_result_item_muscle_area_default">가슴</string>
+    <string name="include_maker_step7_detail_program_result_item_divider">/</string>
+    <string name="include_maker_step7_detail_program_result_item_event_name">종목 이름</string>
+    <string name="include_maker_step7_detail_program_result_item_event_name_default">벤치 프레스</string>
+    <string name="include_maker_step7_detail_program_result_item_set_number">- 세트 수</string>
+    <string name="include_maker_step7_detail_program_result_item_set_number_default">0 회</string>
+    <string name="include_maker_step7_detail_program_result_item_rest_time">- 휴식 시간</string>
+    <string name="include_maker_step7_detail_program_result_item_rest_time_default">0분 0초</string>
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ activity +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
@@ -565,5 +586,19 @@
     <string name="event_program_item_lv_adapter_snack_set_number_no_setting">세트 수를 입력해주세요.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 </resources>

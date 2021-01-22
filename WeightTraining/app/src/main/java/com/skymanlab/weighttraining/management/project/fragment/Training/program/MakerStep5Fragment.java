@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep5SectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +47,7 @@ public class MakerStep5Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
+    private MakerStepManager makerStepManager;
     private MakerStep5SectionManager sectionManager;
 
     // constructor
@@ -107,13 +110,18 @@ public class MakerStep5Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]FragmentTopBarManager : step 5 fragment top bar
-        this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
+        // [FragmentTopBarManager] [topBarManager] this is 'maker step 5' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step4D1SectionManager : step 5 fragment section
-        this.sectionManager = new MakerStep5SectionManager(getActivity(), getView(), getActivity().getSupportFragmentManager());
+        // [MakerStepManager2] [makerStepManager] maker step 5 단계 설정
+        this.makerStepManager = new MakerStepManager(this, view, MakerStepManager.STEP_FIVE);
+        this.makerStepManager.connectWidget();
+        this.makerStepManager.initWidget();
+
+        // [MakerStep5SectionManager] [sectionManager] maker step 5 fragment section manager 설정
+        this.sectionManager = new MakerStep5SectionManager(this, view);
         this.sectionManager.setSelectedChestEventArrayList(this.chestEventResultSet.getSelectedEventArrayList());
         this.sectionManager.setSelectedShoulderEventArrayList(this.shoulderEventResultSet.getSelectedEventArrayList());
         this.sectionManager.setSelectedLatEventArrayList(this.latEventResultSet.getSelectedEventArrayList());
@@ -122,6 +130,21 @@ public class MakerStep5Fragment extends Fragment {
         this.sectionManager.setSelectedEtcEventArrayList(this.etcEventResultSet.getSelectedEventArrayList());
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+
+        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
+        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
+            @Override
+            public AlertDialog setStartButtonClickListener() {
+
+                // [method] fragment manager 를 통해 back stack 에서 pop!
+                getActivity().getSupportFragmentManager().popBackStack();
+
+                return null;
+            }
+        });
+        this.topBarManager.initWidgetOfStartButton(null);
+        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
+        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
 
     }
 

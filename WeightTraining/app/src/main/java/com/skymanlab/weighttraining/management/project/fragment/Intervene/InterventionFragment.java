@@ -14,15 +14,13 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.user.data.User;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link InterveneFragment#newInstance} factory method to
+ * Use the {@link InterventionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InterveneFragment extends Fragment {
-
+public class InterventionFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFI] InterveneFragment";
@@ -31,7 +29,7 @@ public class InterveneFragment extends Fragment {
     // instance variable
     private FragmentTopBarManager topBarManager;
 
-    public InterveneFragment() {
+    public InterventionFragment() {
         // Required empty public constructor
     }
 
@@ -39,26 +37,17 @@ public class InterveneFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment InterveneFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static InterveneFragment newInstance(User user) {
-
-        final String METHOD_NAME = "[newInstance] ";
-
-        InterveneFragment fragment = new InterveneFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
+    public static InterventionFragment newInstance() {
+        InterventionFragment fragment = new InterventionFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -76,8 +65,8 @@ public class InterveneFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ intervene fragment ++++++++++++");
 
-        // [iv/C]FragmentTopBarManager : fragment top bar section manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_intervene_title));
+        // [FragmentTopBarManager] [topBarManager] this is 'Intervene' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_intervene_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 

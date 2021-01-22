@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.skymanlab.weighttraining.R;
@@ -51,6 +52,9 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private static final int NO_SELECTED_NUMBER_6 = R.drawable.step_display_side_number_6;
     private static final int NO_SELECTED_NUMBER_7 = R.drawable.step_display_side_number_7;
 
+    // instance variable
+    private int step;
+
     // instance variable : step counter
     private ImageView firstNumber;
     private ImageView secondNumber;
@@ -58,30 +62,10 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private ImageView firstBar;
     private ImageView secondBar;
 
-    // instance variable : step direction selector
-    private Button previous;
-    private Button next;
-
-    // instance variable
-    private int step;
-
-    // instance variable
-    private OnNextClickListener nextClickListener;
-    private OnPreviousClickListener previousClickListener;
-
     // constructor
-    public MakerStepManager(View view, FragmentManager fragmentManager, int step) {
-        super(view, fragmentManager);
+    public MakerStepManager(Fragment fragment, View view, int step) {
+        super(fragment, view);
         this.step = step;
-    }
-
-    // setter
-    public void setPreviousClickListener(OnPreviousClickListener previousClickListener) {
-        this.previousClickListener = previousClickListener;
-    }
-
-    public void setNextClickListener(OnNextClickListener nextClickListener) {
-        this.nextClickListener = nextClickListener;
     }
 
     @Override
@@ -102,86 +86,40 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
         // [iv/C]ImageView : secondBar connect
         this.secondBar = (ImageView) getView().findViewById(R.id.include_maker_step_display_second_bar);
 
-        // [iv/C]Button : previous connect
-        this.previous = (Button) getView().findViewById(R.id.include_maker_step_selector_previous);
-
-        // [iv/C]Button : next connect
-        this.next = (Button) getView().findViewById(R.id.include_maker_step_selector_next);
-
     }
 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]Button : previous 공통적으로 이전 fragment 로 이동하므로
-        this.previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // [check 1] : click listener 가?
-                if (previousClickListener != null) {
-
-                    // [lv/C]AlertDialog : listener 를 통해 결과로 AlertDialog 객체를 가져온다.
-                    AlertDialog dialog = previousClickListener.setClickListenerOfPrevious();
-
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> Dialog = " + dialog);
-                    // [check 2] : 위의 dialog 의 객체 유무를 통해 결절하기
-                    if (dialog != null) {
-
-                        // [lv/C]AlertDialog : 해당 객체로 만들어진 dialog 를 표시하기
-                        dialog.show();
-
-                    } else {
-
-                        // [lv/C]FragmentManager : fragmentManager 를 통해서 stack 에서 pop 하여 이전 Fragment 로 이동
-                        getFragmentManager().popBackStack();
-
-                    } // [check 2]
-
-                } else {
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> 리스터 생성 안됨");
-                } // [check 1]
-
-            }
-        });
-
-        // [iv/C]Button : next click listener
-        this.next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // 각 단계마다 다른 설정이 필요하면 각 단계를 초기화하는 method 에서 설정을 해준다.
-                // [iv/C]OnNextClickListener : 외부에서 만들어진 OnNextClickListener 를 통해 해당 버튼의 과정을 진행하는 코드를 수행한다.
-                nextClickListener.setClickListenerOfNext();
-            }
-        });
-
         // [check 1] : 몇 번째 단계인가요?
         switch (this.step) {
             case STEP_ONE:
-                // [method] : step 1 의 widget 초기화
+                // [method] maker step 1 로 단계 설정
                 initStepOne();
                 break;
             case STEP_TWO:
-                // [method] : step 2 의 widget 초기화
+                // [method] maker step 2 로 단계 설정
                 initStepTwo();
                 break;
             case STEP_THREE:
-                // [method] : step 3 의 widget 초기화
+                // [method] maker step 3 로 단계 설정
                 initStepThree();
                 break;
             case STEP_FOUR:
-                // [method] : step 4 의 widget 초기화
+                // [method] maker step 4 로 단계 설정
                 initStepFour();
                 break;
             case STEP_FIVE:
-                // [method] : step 5 의 widget 초기화
+                // [method] maker step 5 로 단계 설정
                 initStepFive();
                 break;
             case STEP_SIX:
-                // [method] : step 6 의 widget 초기화
+                // [method] maker step 6 로 단계 설정
                 initStepSix();
+            case STEP_SEVEN:
+                // [method] maker step 7 로 단계 설정
+                initStepSven();
                 break;
         }
 
@@ -192,11 +130,9 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepOne() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [firstNumber] VISIBLE -> INVISIBLE
         this.firstNumber.setVisibility(ImageView.INVISIBLE);
-
-        // [firstBar] VISIBLE -> INVISIBLE
-        this.firstBar.setVisibility(ImageView.INVISIBLE);
 
         // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_1
         this.secondNumber.setImageResource(SELECTED_NUMBER_1);
@@ -204,6 +140,9 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
         // [iv/C]ImageView : thirdNumber -> NO_SELECTED_NUMBER_2
         this.thirdNumber.setImageResource(NO_SELECTED_NUMBER_2);
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= bar =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // [firstBar] VISIBLE -> INVISIBLE
+        this.firstBar.setVisibility(ImageView.INVISIBLE);
 
     } // End of method [initStepOne]
 
@@ -212,6 +151,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepTwo() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_1
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_1);
 
@@ -228,6 +168,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepThree() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_2
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_2);
 
@@ -244,6 +185,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepFour() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_3
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_3);
 
@@ -260,6 +202,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepFive() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_4
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_4);
 
@@ -276,6 +219,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepSix() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_1
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_5);
 
@@ -293,28 +237,21 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
      */
     private void initStepSven() {
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_1
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_6);
 
         // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_2
         this.secondNumber.setImageResource(SELECTED_NUMBER_7);
 
-        // [iv/C]ImageView : secondBar -> INVISIBLE
-        this.secondBar.setVisibility(ImageView.INVISIBLE);
-
         // [iv/C]ImageView : thirdNumber -> INVISIBLE
         this.thirdNumber.setVisibility(ImageView.INVISIBLE);
 
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= bar =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // [iv/C]ImageView : secondBar -> INVISIBLE
+        this.secondBar.setVisibility(ImageView.INVISIBLE);
+
     } // End of method [initStepSix]
 
-    // interface
-    public interface OnNextClickListener {
-        void setClickListenerOfNext();
-    }
-
-    // interface
-    public interface OnPreviousClickListener {
-        AlertDialog setClickListenerOfPrevious();
-    }
 
 }

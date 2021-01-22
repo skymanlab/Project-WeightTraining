@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep3D2SectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +47,7 @@ public class MakerStep3D2Fragment extends Fragment {
 
     // instance variable
     private FragmentTopBarManager topBarManager;
+    private MakerStepManager makerStepManager;
     private MakerStep3D2SectionManager sectionManager;
 
     // constructor
@@ -63,7 +66,6 @@ public class MakerStep3D2Fragment extends Fragment {
 
         MakerStep3D2Fragment fragment = new MakerStep3D2Fragment();
 
-        // bundle 에 데이터를 추가하고, fragment 에 넘겨주기
         Bundle args = new Bundle();
         args.putSerializable(CHEST_GROUPING_EVENT_DATA, chest);
         args.putSerializable(SHOULDER_GROUPING_EVENT_DATA, shoulder);
@@ -81,7 +83,6 @@ public class MakerStep3D2Fragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            // bundle 에서 넘어온 데이터 가져오기
             this.chestGroupingEventData = (GroupingEventData) getArguments().getSerializable(CHEST_GROUPING_EVENT_DATA);
             this.shoulderGroupingEventData = (GroupingEventData) getArguments().getSerializable(SHOULDER_GROUPING_EVENT_DATA);
             this.latGroupingEventData = (GroupingEventData) getArguments().getSerializable(LAT_GROUPING_EVENT_DATA);
@@ -102,13 +103,18 @@ public class MakerStep3D2Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // [iv/C]FragmentTopBarManager : step 3-2 fragment top bar manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), getView(), getString(R.string.f_program_menu_program_maker));
+        // [FragmentTopBarManager] [topBarManager] this is 'maker step 3-2' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step3D2SectionManager : step 3-2 fragment section manager
-        this.sectionManager = new MakerStep3D2SectionManager(getActivity(), view, getActivity().getSupportFragmentManager());
+        // [MakerStepManager2] [makerStepManager] maker step 3-2 단계 설정
+        this.makerStepManager = new MakerStepManager(this, view, MakerStepManager.STEP_THREE);
+        this.makerStepManager.connectWidget();
+        this.makerStepManager.initWidget();
+
+        // [MakerStep3D2SectionManager] [sectionManager] this is 'maker step 3-2' fragment's section manager.
+        this.sectionManager = new MakerStep3D2SectionManager(this, view);
         this.sectionManager.setChestGroupingEventData(chestGroupingEventData);
         this.sectionManager.setShoulderGroupingEventData(shoulderGroupingEventData);
         this.sectionManager.setLatGroupingEventData(latGroupingEventData);
@@ -117,6 +123,21 @@ public class MakerStep3D2Fragment extends Fragment {
         this.sectionManager.setEtcGroupingEventData(etcGroupingEventData);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
-        
+
+        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
+        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
+            @Override
+            public AlertDialog setStartButtonClickListener() {
+
+                // [method] fragment manager 를 통해 back stack 에서 pop!
+                getActivity().getSupportFragmentManager().popBackStack();
+
+                return null;
+            }
+        });
+        this.topBarManager.initWidgetOfStartButton(null);
+        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
+        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
+
     }
 }

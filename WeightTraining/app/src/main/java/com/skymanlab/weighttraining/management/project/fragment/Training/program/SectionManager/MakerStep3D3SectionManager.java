@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,22 +21,17 @@ import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep4Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.AllGroupRandomItem;
 
 import java.util.HashMap;
 
-public class MakerStep3D3SectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnPreviousClickListener, MakerStepManager.OnNextClickListener {
+public class MakerStep3D3SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep3D3SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
-
-    // instance variable
-    private MakerStepManager makerStepManager;
-
-    // instance variable :
-    private LinearLayout allGroupRandomListWrapper;
 
     // instance variable
     private GroupingEventData chestGroupingEventData;
@@ -45,12 +41,15 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
     private GroupingEventData armGroupingEventData;
     private GroupingEventData etcGroupingEventData;
 
+    // instance variable :
+    private LinearLayout allGroupRandomListWrapper;
+
     // instance variable
     private HashMap<MuscleArea, AllGroupRandomItem> allGroupRandomItemList;
 
     // constructor
-    public MakerStep3D3SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
-        super(activity, view, fragmentManager);
+    public MakerStep3D3SectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     // setter
@@ -89,18 +88,11 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
     @Override
     public void initWidget() {
 
-        // [iv/C]MakerStepManager : step 3-3 step manager
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_THREE);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
-
         // [iv/C]HashMap<String, AllGroupRandomItem> :
         this.allGroupRandomItemList = new HashMap<MuscleArea, AllGroupRandomItem>();
 
         // [lv/C]LayoutInflater :
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getFragment().getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // [1] chest
         initAllGroupRandomListWrapper(inflater, MuscleArea.CHEST, chestGroupingEventData);
@@ -122,67 +114,76 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
 
     }
 
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
+
+    /**
+     * 다음 단계를 진행하기 위한 과정을 EndButtonLister 객체를 생성하여 반환한다.
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        final String METHOD_NAME = "[newEndButtonListenerInstance] ";
+
+        return new FragmentTopBarManager.EndButtonListener() {
+            @Override
+            public AlertDialog setEndButtonClickListener() {
+
+                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 각 MuscleArea 의 random data 를 생성 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                // [1] chest
+                EventResultSet chestEventResultSet = createRandomResultSet(MuscleArea.CHEST, chestGroupingEventData);
+
+                // [2] shoulder
+                EventResultSet shoulderEventResultSet = createRandomResultSet(MuscleArea.SHOULDER, shoulderGroupingEventData);
+
+                // [3] lat
+                EventResultSet latEventResultSet = createRandomResultSet(MuscleArea.LAT, latGroupingEventData);
+
+                // [4] upper body
+                EventResultSet upperBodyEventResultSet = createRandomResultSet(MuscleArea.UPPER_BODY, upperBodyGroupingEventData);
+
+                // [5] arm
+                EventResultSet armEventResultSet = createRandomResultSet(MuscleArea.ARM, armGroupingEventData);
+
+                // [6] etc
+                EventResultSet etcEventResultSet = createRandomResultSet(MuscleArea.ETC, etcGroupingEventData);
+
+
+                // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= step 4-1 로 넘어가는 과정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                // [check 1] : 각 MuscleArea 의 selectedEventArrayList 가 모두 0 이면 다음 단계로 넘어가지 못함
+                if (chestEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && shoulderEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && latEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && upperBodyEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && armEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
+
+                    // "선택되지 않았습니다." snack bar 메시지 출력
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_3_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
+
+                } else {
+
+                    // [lv/C]MakerStep4Fragment : step 4 fragment 생성
+                    MakerStep4Fragment step4Fragment = MakerStep4Fragment.newInstance(
+                            chestEventResultSet,
+                            shoulderEventResultSet,
+                            latEventResultSet,
+                            upperBodyEventResultSet,
+                            armEventResultSet,
+                            etcEventResultSet);
+
+                    // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
+                    FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
+                    transaction.addToBackStack("step3-3");
+                    transaction.commit();
+
+                } // [check 1]
+
+                return null;
+            }
+        };
     }
 
-    @Override
-    public void setClickListenerOfNext() {
-        final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 각 MuscleArea 의 random data 를 생성 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [1] chest
-        EventResultSet chestEventResultSet = createRandomResultSet(MuscleArea.CHEST, chestGroupingEventData);
-
-        // [2] shoulder
-        EventResultSet shoulderEventResultSet = createRandomResultSet(MuscleArea.SHOULDER, shoulderGroupingEventData);
-
-        // [3] lat
-        EventResultSet latEventResultSet = createRandomResultSet(MuscleArea.LAT, latGroupingEventData);
-
-        // [4] upper body
-        EventResultSet upperBodyEventResultSet = createRandomResultSet(MuscleArea.UPPER_BODY, upperBodyGroupingEventData);
-
-        // [5] arm
-        EventResultSet armEventResultSet = createRandomResultSet(MuscleArea.ARM, armGroupingEventData);
-
-        // [6] etc
-        EventResultSet etcEventResultSet = createRandomResultSet(MuscleArea.ETC, etcGroupingEventData);
-
-
-        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= step 4-1 로 넘어가는 과정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [check 1] : 각 MuscleArea 의 selectedEventArrayList 가 모두 0 이면 다음 단계로 넘어가지 못함
-        if (chestEventResultSet.getSelectedEventArrayList().isEmpty()
-                && shoulderEventResultSet.getSelectedEventArrayList().isEmpty()
-                && latEventResultSet.getSelectedEventArrayList().isEmpty()
-                && upperBodyEventResultSet.getSelectedEventArrayList().isEmpty()
-                && armEventResultSet.getSelectedEventArrayList().isEmpty()
-                && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
-
-            // "선택되지 않았습니다." snack bar 메시지 출력
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_3_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
-
-        } else {
-
-            // [lv/C]MakerStep4Fragment : step 4 fragment 생성
-            MakerStep4Fragment step4Fragment = MakerStep4Fragment.newInstance(
-                    chestEventResultSet,
-                    shoulderEventResultSet,
-                    latEventResultSet,
-                    upperBodyEventResultSet,
-                    armEventResultSet,
-                    etcEventResultSet);
-
-            // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
-            transaction.addToBackStack("step3-3");
-            transaction.commit();
-
-        } // [check 1]
-    }
     /**
      * allGroupRandomListWrapper 에 AllGroupRandomItem 을 생성하고 그 view 를 추가하여 화면에 표시한다.
      *
@@ -218,7 +219,7 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
     private AllGroupRandomItem createAllGroupRandomItem(LayoutInflater inflater, MuscleArea muscleArea, GroupingEventData groupingEventData) {
 
         // [lv/C]AllGroupRandomItem : item 생성
-        AllGroupRandomItem allGroupRandomItem = new AllGroupRandomItem.Builder(getActivity())
+        AllGroupRandomItem allGroupRandomItem = new AllGroupRandomItem.Builder(getFragment().getActivity())
                 .setInflater(inflater)
                 .setMuscleArea(muscleArea)
                 .setGroupingEventData(groupingEventData)
@@ -266,12 +267,14 @@ public class MakerStep3D3SectionManager extends FragmentSectionManager implement
         EventResultSet eventResultSet = new EventResultSet();
 
         if (groupingEventData != null) {
-            // [lv/C]Random :
+
+            // [RandomEventSelectionUtil] [util] all random type 으로 랜덤 선택
             RandomEventSelectionUtil util = new RandomEventSelectionUtil(ProgramType.ALL_RANDOM, this.allGroupRandomItemList.get(key).getItemOfAllGroupSpinner());
             util.setGroupingEventData(groupingEventData);
             util.setIntegratedEventArrayList();
             util.selectRandomEvent();
 
+            // [EventResultSet] [eventResultSet] util 에서 랜덤으로 선택된 목록과 그 나머지 목록으로 객체 생성
             eventResultSet.setSelectedEventArrayList(util.getSelectedEventArrayList());
             eventResultSet.setNoSelectedEventArrayList(util.getNoSelectedEventArrayList());
         }

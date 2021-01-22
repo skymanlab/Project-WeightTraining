@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,15 +35,13 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
+    private Fragment fragment;
     private ArrayList<Event> eventArrayList;
-    private Activity activity;
-    private FragmentManager fragmentManager;
 
     // constructor
-    public EachMuscleAreaListRvAdapter(ArrayList<Event> eventArrayList, Activity activity, FragmentManager fragmentManager) {
+    public EachMuscleAreaListRvAdapter(Fragment fragment, ArrayList<Event> eventArrayList) {
         this.eventArrayList = eventArrayList;
-        this.activity = activity;
-        this.fragmentManager = fragmentManager;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -101,12 +100,12 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
         final String METHOD_NAME = "[setClickListenerOfModify] ";
 
         // [lv/C]String : EventDialog 에서 제공하는 setArguments() 메소드를 사용하여, arguments 항목을 설정한다.
-        String[] arguments = EventDialog.setArguments(activity.getString(R.string.custom_dialog_event_update_title),
-                activity.getString(R.string.custom_dialog_event_update_positive_title),
-                activity.getString(R.string.custom_dialog_event_update_negative_title));
+        String[] arguments = EventDialog.setArguments(fragment.getString(R.string.custom_dialog_event_update_title),
+                fragment.getString(R.string.custom_dialog_event_update_positive_title),
+                fragment.getString(R.string.custom_dialog_event_update_negative_title));
 
         // [lv/C]EventDialog : event dialog 를 생성
-        EventDialog dialog = EventDialog.newInstance(eventArrayList.get(position).getMuscleArea(),eventArrayList.get(position), arguments);
+        EventDialog dialog = EventDialog.newInstance(eventArrayList.get(position).getMuscleArea(), eventArrayList.get(position), arguments);
         dialog.setDatabaseListener(new EventDialog.DatabaseListener() {
             @Override
             public void setDatabaseListener(Event event) {
@@ -116,7 +115,7 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
 
         });
         dialog.setCancelable(false);
-        dialog.show(fragmentManager, null);
+        dialog.show(fragment.getActivity().getSupportFragmentManager(), null);
 
     } // End of method [setClickListenerOfModify]
 
@@ -129,7 +128,7 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
         final String METHOD_NAME = "[setClickListenerOfDelete] ";
 
         // [lv/C]AlertDialog : Builder 로 AlertDialog 객체 생성 / 초기설정
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
         builder.setTitle(R.string.each_list_rv_adapter_alert_delete_title)
                 .setMessage(R.string.each_list_rv_adapter_alert_delete_message)
                 .setPositiveButton(R.string.each_list_rv_adapter_alert_delete_bt_positive, new DialogInterface.OnClickListener() {
@@ -150,12 +149,12 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
                                 if (error == null) {
 
                                     // "삭제가 완료되었습니다." snack bar 메시지 표시
-                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.each_list_rv_adapter_snack_db_delete_success, Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(fragment.getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.each_list_rv_adapter_snack_db_delete_success, Snackbar.LENGTH_SHORT).show();
 
                                 } else {
 
                                     // "삭제를 실패하였습니다." snack bar 메시지 표시
-                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.each_list_rv_adapter_snack_db_delete_error, Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(fragment.getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.each_list_rv_adapter_snack_db_delete_error, Snackbar.LENGTH_SHORT).show();
 
                                 } // [check 1]
                             }

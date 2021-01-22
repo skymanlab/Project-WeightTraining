@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/horizontal_dot_divider"
+            android:layerType="software" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/include_maker_step7_detail_program_result_item_muscle_area"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/include_maker_step7_detail_program_result_item_muscle_area_default"
+                android:textColor="@color/colorTextBack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/include_maker_step7_detail_program_result_item_divider"
+                android:textColor="@color/colorTextBack" />
+
+            <TextView
+                android:id="@+id/include_maker_step7_detail_program_result_item_event_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/include_maker_step7_detail_program_result_item_event_name_default"
+                android:textColor="@color/colorTextBack" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/include_maker_step7_detail_program_result_item_content_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/include_maker_step7_detail_program_result_item_set_number" />
+
+                <TextView
+                    android:id="@+id/include_maker_step7_detail_program_result_item_set_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/include_maker_step7_detail_program_result_item_set_number_default"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorTextBack" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/include_maker_step7_detail_program_result_item_rest_time" />
+
+                <TextView
+                    android:id="@+id/include_maker_step7_detail_program_result_item_rest_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/include_maker_step7_detail_program_result_item_rest_time_default"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorTextBack" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

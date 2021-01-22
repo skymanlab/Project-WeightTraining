@@ -1,12 +1,11 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.SectionManager;
 
-import android.app.Activity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.card.MaterialCardView;
-import com.skymanlab.weighttraining.NavHomeActivity;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
@@ -20,8 +19,8 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
     private MaterialCardView eventProgram;
 
     // constructor
-    public TrainingSectionManager(Activity activity, View view) {
-        super(activity, view);
+    public TrainingSectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     @Override
@@ -43,8 +42,8 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
             @Override
             public void onClick(View v) {
 
-                // [lv/C]FragmentTransaction : TrainingFragment -> ListFragment 이동
-                FragmentTransaction transaction = ((NavHomeActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+                // [FragmentTransaction] [transaction] move 'list' fragment
+                FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.nav_home_content_wrapper, ListFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();
@@ -57,8 +56,8 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
             @Override
             public void onClick(View v) {
 
-                // [lv/C]FragmentTransaction : TrainingFragment -> ProgramFragment 이동
-                FragmentTransaction transaction = ((NavHomeActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+                // [FragmentTransaction] [transaction] move 'program' fragment
+                FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.nav_home_content_wrapper, ProgramFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();

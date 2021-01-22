@@ -1,14 +1,12 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -37,7 +35,6 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep3D3Fragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MakerStep2SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -46,7 +43,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private int step1SelectedType;
+    private int makerType;
 
     // instance variable
     private MaterialButtonToggleGroup muscleAreaToggleGroup;
@@ -58,41 +55,30 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     private MaterialButton etc;
     private ContentLoadingProgressBar progressBar;
 
-
     // instance variable
     private boolean[] isSelectedMuscleAreaList; // toggle button 에서 클릭 한 값을 알아내는
 
     // constructor
-    public MakerStep2SectionManager(Activity activity, View view, FragmentManager fragmentManager, int step1SelectedType) {
-        super(activity, view, fragmentManager);
-        this.step1SelectedType = step1SelectedType;
+    public MakerStep2SectionManager(Fragment fragment, View view, int makerType) {
+        super(fragment, view);
+        this.makerType = makerType;
     }
 
     @Override
     public void connectWidget() {
 
-        // [iv/C]MaterialButtonToggleGroup :  connect
+        // [ MaterialButtonToggleGroup | muscleAreaToggleGroup ] widget
         this.muscleAreaToggleGroup = (MaterialButtonToggleGroup) getView().findViewById(R.id.f_maker_step2_muscle_area_toggle_group);
 
-        // [iv/C]MaterialButton : chest connect
+        // [ MaterialButton ] widget connect
         this.chest = (MaterialButton) getView().findViewById(R.id.f_maker_step2_chest);
-
-        // [iv/C]MaterialButton : shoulder connect
         this.shoulder = (MaterialButton) getView().findViewById(R.id.f_maker_step2_shoulder);
-
-        // [iv/C]MaterialButton : lat connect
         this.lat = (MaterialButton) getView().findViewById(R.id.f_maker_step2_lat);
-
-        // [iv/C]MaterialButton : upperBody connect
         this.upperBody = (MaterialButton) getView().findViewById(R.id.f_maker_step2_upper_body);
-
-        // [iv/C]MaterialButton : arm connect
         this.arm = (MaterialButton) getView().findViewById(R.id.f_maker_step2_arm);
-
-        // [iv/C]MaterialButton : etc connect
         this.etc = (MaterialButton) getView().findViewById(R.id.f_maker_step2_etc);
 
-        // [iv/C]ContentLoadingProgressBar : progressBar connect
+        // [ ContentLoadingProgressBar | progressBar ] widget connect
         this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_maker_step2_progress_bar);
 
     }
@@ -100,7 +86,6 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
-
 
         // [iv/b]isSelectedMuscleAreaList : ToggleButton 과 1:1 매핑한 값을 초기화한다.(초기값은 false 이다.)
         this.isSelectedMuscleAreaList = new boolean[6];
@@ -118,12 +103,24 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                         // [iv/b]isSelectedMuscleAreaList : chest 의 체크 여부 저장
                         isSelectedMuscleAreaList[0] = isChecked;
 
+                        if (isChecked) {
+                            chest.setIconResource(R.drawable.button_icon_check);
+                        } else {
+                            chest.setIconResource(R.drawable.button_icon_arrow);
+                        }
+
                         break;
 
                     case R.id.f_maker_step2_shoulder:
 
                         // [iv/b]isSelectedMuscleAreaList : shoulder 의 체크 여부 저장
                         isSelectedMuscleAreaList[1] = isChecked;
+
+                        if (isChecked) {
+                            shoulder.setIconResource(R.drawable.button_icon_check);
+                        } else {
+                            shoulder.setIconResource(R.drawable.button_icon_arrow);
+                        }
 
                         break;
 
@@ -132,12 +129,24 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                         // [iv/b]isSelectedMuscleAreaList : lat 의 체크 여부 저장
                         isSelectedMuscleAreaList[2] = isChecked;
 
+                        if (isChecked) {
+                            lat.setIconResource(R.drawable.button_icon_check);
+                        } else {
+                            lat.setIconResource(R.drawable.button_icon_arrow);
+                        }
+
                         break;
 
                     case R.id.f_maker_step2_upper_body:
 
                         // [iv/b]isSelectedMuscleAreaList : upper body 의 체크 여부 저장
                         isSelectedMuscleAreaList[3] = isChecked;
+
+                        if (isChecked) {
+                            upperBody.setIconResource(R.drawable.button_icon_check);
+                        } else {
+                            upperBody.setIconResource(R.drawable.button_icon_arrow);
+                        }
 
                         break;
 
@@ -146,12 +155,24 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                         // [iv/b]isSelectedMuscleAreaList : arm 의 체크 여부 저장
                         isSelectedMuscleAreaList[4] = isChecked;
 
+                        if (isChecked) {
+                            arm.setIconResource(R.drawable.button_icon_check);
+                        } else {
+                            arm.setIconResource(R.drawable.button_icon_arrow);
+                        }
+
                         break;
 
                     case R.id.f_maker_step2_etc:
 
                         // [iv/b]isSelectedMuscleAreaList : etc 의 체크 여부 저장
                         isSelectedMuscleAreaList[5] = isChecked;
+
+                        if (isChecked) {
+                            etc.setIconResource(R.drawable.button_icon_check);
+                        } else {
+                            etc.setIconResource(R.drawable.button_icon_arrow);
+                        }
 
                         break;
                 }
@@ -167,11 +188,11 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
      * @return
      */
     public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        final String METHOD_NAME = "[setClickListenerOfNext] ";
+
         return new FragmentTopBarManager.EndButtonListener() {
             @Override
-            public void setEndButtonClickListener() {
-
-                final String METHOD_NAME = "[setClickListenerOfNext] ";
+            public AlertDialog setEndButtonClickListener() {
 
                 // [check 1] : 6가지의 MuscleArea 중 하나라도 선택한 것이 있을 때만 다음 단계 진행
                 if (0 < muscleAreaToggleGroup.getCheckedButtonIds().size()) {
@@ -185,9 +206,10 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 } else {
 
                     // "근육 부위를 하나라도 선택해주세요." Snack Bar 메시지 출력
-                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_next, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_next, Snackbar.LENGTH_SHORT).show();
 
                 } // [check 1]
+                return null;
             }
         };
     }
@@ -246,7 +268,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 if (error != null) {
 
                     // "데이터를 가져오는데 오류가 발생하였습니다." snack bar 메시지 표시
-                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_load_content_db_error, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step2_snack_load_content_db_error, Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -289,10 +311,10 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
         final String METHOD_NAME = "[moveNextStep] ";
 
         // [lv/C]FragmentTransaction : fragmentManager 를 통해 객체 가져오기
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
 
         // [check 1] : step1D0Type 이 뭐냐?
-        switch (this.step1SelectedType) {
+        switch (this.makerType) {
             case MakerStepManager.MAKER_TYPE_DIRECT_SELECTION:
                 // direct
                 // [lv/C]Step3D1Fragment : step 3-1 fragment 객체 생성

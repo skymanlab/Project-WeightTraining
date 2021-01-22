@@ -1,19 +1,13 @@
 package com.skymanlab.weighttraining.management.event.dialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,25 +19,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.data.EventMapping;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
-import com.skymanlab.weighttraining.management.project.data.type.EquipmentType;
-import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EventDialog extends DialogFragment {
 
     // constant
     public static final String CLASS_NAME = "[ED] EventDialog";
-    public static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     public static final int MESSAGE_TYPE_NONE = 0;
@@ -138,6 +127,9 @@ public class EventDialog extends DialogFragment {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> negative title = " + this.arguments[2]);
         }
     }
+
+
+
 
 
     @NonNull
@@ -277,10 +269,11 @@ public class EventDialog extends DialogFragment {
                             data.setSelectionCounter(0);
 
                         } // [check 2]
+
+                        databaseListener.setDatabaseListener(data);
+
                     } // [check 1]
 
-
-                    databaseListener.setDatabaseListener(data);
                 }
 
             }
@@ -403,11 +396,11 @@ public class EventDialog extends DialogFragment {
                         // messageType 에 따라 결과 메시지 표시하기
                         showMessage(error, messageType, R.string.custom_dialog_event_update_snack_db_success, R.string.custom_dialog_event_update_snack_db_error);
 
+                        // dialog 종료
+                        dismiss();
                     }
                 });
 
-        // dialog 종료
-        dismiss();
     } // End of method [updateContent]
 
 
@@ -446,11 +439,12 @@ public class EventDialog extends DialogFragment {
 
                         // messageType 에 따라 결과 메시지 표시하기
                         showMessage(error, messageType, R.string.custom_dialog_event_save_snack_db_success, R.string.custom_dialog_event_save_snack_db_error);
+
+                        // dialog 종료
+                        dismiss();
                     }
                 });
 
-        // dialog 종료
-        dismiss();
 
     } // End of method [saveContent]
 
@@ -467,6 +461,10 @@ public class EventDialog extends DialogFragment {
             case MESSAGE_TYPE_SNACK_BAR:
 
                 if (error == null) {
+
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<fragment activity> = " + getActivity());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<get view> = " + getView());
                     // success message
                     Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), successMessageId, Snackbar.LENGTH_SHORT);
 

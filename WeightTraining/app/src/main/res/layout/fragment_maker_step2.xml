@@ -1,153 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".management.project.fragment.Training.program.MakerStep2Fragment">
 
+    <!-- title -->
+    <include
+        layout="@layout/include_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:background="@color/browser_actions_divider_color" />
+
+    <!-- step display -->
+    <include
+        layout="@layout/include_maker_step_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- step content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- title -->
-        <include
-            layout="@layout/include_top_bar"
+        <!-- indication -->
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/maker_step_content_indication_margin_start"
+            android:layout_marginTop="@dimen/maker_step_content_indication_margin_top"
+            android:layout_marginEnd="@dimen/maker_step_content_indication_margin_end"
+            android:layout_marginBottom="@dimen/maker_step_content_indication_margin_bottom"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_maker_step2_indication"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextBack"
+            android:textSize="15sp" />
 
-        <!-- step counter -->
-        <include
-            layout="@layout/include_maker_step_display"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <!-- step content -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/f_maker_step2_muscle_area_toggle_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="@string/f_maker_step2_comment"
-                android:textAlignment="center" />
+                android:layout_marginStart="@dimen/maker_step_content_item_margin_start"
+                android:layout_marginEnd="@dimen/maker_step_content_item_margin_end"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:selectionRequired="false"
+                app:singleSelection="false">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
-
-                <FrameLayout
+                <!-- chest -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step2_chest"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:includeFontPadding="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/f_maker_step2_chest"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/button_icon_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorPrimary" />
 
-                    <com.google.android.material.button.MaterialButtonToggleGroup
-                        android:id="@+id/f_maker_step2_muscle_area_toggle_group"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="visible"
-                        app:selectionRequired="false"
-                        app:singleSelection="false">
+                <!-- shoulder -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step2_shoulder"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/f_maker_step2_shoulder"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/button_icon_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorPrimary" />
 
-                        <!-- chest -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/f_maker_step2_chest"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="@string/f_maker_step2_chest"
-                            app:strokeColor="@color/colorPrimary"
-                            app:strokeWidth="1dp" />
+                <!-- lat -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step2_lat"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/f_maker_step2_lat"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/button_icon_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorPrimary" />
 
-                        <!-- shoulder -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/f_maker_step2_shoulder"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="@string/f_maker_step2_shoulder"
-                            app:strokeColor="@color/colorPrimary"
-                            app:strokeWidth="1dp" />
+                <!-- upper body -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step2_upper_body"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/f_maker_step2_upper_body"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/button_icon_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorPrimary" />
 
-                        <!-- lat -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/f_maker_step2_lat"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="@string/f_maker_step2_lat"
-                            app:strokeColor="@color/colorPrimary"
-                            app:strokeWidth="1dp" />
+                <!-- arm -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step2_arm"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/f_maker_step2_arm"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/button_icon_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorPrimary" />
 
-                        <!-- upper body -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/f_maker_step2_upper_body"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="@string/f_maker_step2_upper_body"
-                            app:strokeColor="@color/colorPrimary"
-                            app:strokeWidth="1dp" />
+                <!-- etc -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_maker_step2_etc"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="30dp"
+                    android:text="@string/f_maker_step2_etc"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/button_icon_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary"
+                    app:strokeColor="@color/colorPrimary" />
 
-                        <!-- arm -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/f_maker_step2_arm"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="@string/f_maker_step2_arm"
-                            app:strokeColor="@color/colorPrimary"
-                            app:strokeWidth="1dp" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
-                        <!-- etc -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/f_maker_step2_etc"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="@string/f_maker_step2_etc"
-                            app:strokeColor="@color/colorPrimary"
-                            app:strokeWidth="1dp" />
-
-                    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-                    <!-- progress bar -->
-                    <androidx.core.widget.ContentLoadingProgressBar
-                        android:id="@+id/f_maker_step2_progress_bar"
-                        style="?android:progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:visibility="invisible" />
-                </FrameLayout>
-            </ScrollView>
-        </LinearLayout><!-- step content -->
+            <!-- progress bar -->
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/f_maker_step2_progress_bar"
+                style="?android:progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="invisible" />
+        </FrameLayout>
+        <!-- step content -->
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

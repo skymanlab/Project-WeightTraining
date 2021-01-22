@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -68,17 +69,26 @@ public class MyProgramFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]FragmentTopBarManager :
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
+        // [FragmentTopBarManager] [topBarManager] this is 'maker step 1' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
         // [iv/C]Step2D2SectionManager :
-        this.sectionManager = new MyProgramSectionManager(view, getActivity().getSupportFragmentManager());
+        this.sectionManager = new MyProgramSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+
+        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
+        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
+            @Override
+            public AlertDialog setStartButtonClickListener() {
+                getParentFragmentManager().popBackStack();
+                return null;
+            }
+        });
+        this.topBarManager.initWidgetOfStartButton(null);
     }
 }

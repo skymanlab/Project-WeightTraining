@@ -2,6 +2,7 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,7 +12,7 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 
-public class MyProgramSectionManager extends FragmentSectionManager implements FragmentSectionInitializable, MakerStepManager.OnNextClickListener{
+public class MyProgramSectionManager extends FragmentSectionManager implements FragmentSectionInitializable{
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MyProgramSectionManager";
@@ -21,8 +22,8 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
     private RecyclerView list;
 
     // constructor
-    public MyProgramSectionManager(View view, FragmentManager fragmentManager) {
-        super(view, fragmentManager);
+    public MyProgramSectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     @Override
@@ -38,11 +39,4 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
 
     }
 
-    @Override
-    public void setClickListenerOfNext() {
-
-        final String METHOD_NAME = "[setClickListenerOfNext] ";
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++ next button click");
-    }
 }

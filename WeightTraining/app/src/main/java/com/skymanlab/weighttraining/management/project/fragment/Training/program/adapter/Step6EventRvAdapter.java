@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,14 +23,14 @@ import java.util.HashMap;
 public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapter.ViewHolder> {
 
     // instance variable
-    private FragmentManager fragmentManager;
+    private Fragment fragment;
     private ArrayList<Event> finalOrderList;
     private HashMap<String, DetailProgram> detailProgramList;
 
 
     // constructor
     public Step6EventRvAdapter(Builder builder) {
-        this.fragmentManager = builder.fragmentManager;
+        this.fragment = builder.fragment;
         this.finalOrderList = builder.finalOrderList;
         this.detailProgramList = builder.detailProgramList;
     }
@@ -52,7 +53,7 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
 
                 Step6DetailProgramDialog dialog = Step6DetailProgramDialog.newInstance(finalOrderList.get(position), detailProgramList.get(finalOrderList.get(position).getKey()));
                 dialog.setCancelable(false);
-                dialog.show(fragmentManager, "PartialSetting");
+                dialog.show(fragment.getActivity().getSupportFragmentManager(), "PartialSetting");
 
             }
         });
@@ -125,7 +126,7 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
     public static class Builder {
 
         // instance variable
-        private FragmentManager fragmentManager;
+        private Fragment fragment;
         private ArrayList<Event> finalOrderList;
         private HashMap<String, DetailProgram> detailProgramList;
 
@@ -135,8 +136,8 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
         }
 
         // setter
-        public Builder setFragmentManager(FragmentManager fragmentManager) {
-            this.fragmentManager = fragmentManager;
+        public Builder setFragment(Fragment fragment) {
+            this.fragment = fragment;
             return this;
         }
 

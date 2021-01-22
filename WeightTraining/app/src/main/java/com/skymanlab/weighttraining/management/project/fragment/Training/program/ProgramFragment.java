@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -38,19 +39,13 @@ public class ProgramFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ProgramFragment newInstance() {
-
         ProgramFragment fragment = new ProgramFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -64,23 +59,24 @@ public class ProgramFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // [FragmentTopBarManager] [topBarManager] program fragment top bar manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_program_menu_program_maker));
+        // [FragmentTopBarManager] [topBarManager] this is 'program' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [ProgramSectionManager] [sectionManager] program fragment section manager
-        this.sectionManager = new ProgramSectionManager(getActivity(),getView(), getActivity().getSupportFragmentManager());
+        // [ProgramSectionManager] [sectionManager] this is 'training' fragment's section manager.
+        this.sectionManager = new ProgramSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 설정
         this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
             @Override
-            public void setStartButtonClickListener() {
+            public AlertDialog setStartButtonClickListener() {
 
                 // [method] 이전 fragment 로 이동
-                getParentFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
+                return null;
             }
         });
         this.topBarManager.initWidgetOfStartButton(null);

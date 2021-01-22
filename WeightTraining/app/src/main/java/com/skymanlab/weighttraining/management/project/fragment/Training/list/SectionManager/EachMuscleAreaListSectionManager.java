@@ -1,13 +1,11 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +35,6 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private Fragment fragment;
     private MuscleArea muscleArea;
 
     // instance variable
@@ -51,9 +48,8 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
     private ArrayList<Event> eventArrayList;
 
     // constructor
-    public EachMuscleAreaListSectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment, MuscleArea muscleArea) {
-        super(activity, view, fragmentManager);
-        this.fragment = fragment;
+    public EachMuscleAreaListSectionManager(Fragment fragment, View view, MuscleArea muscleArea) {
+        super(fragment, view);
         this.muscleArea = muscleArea;
     }
 
@@ -87,9 +83,9 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
 
                 // [lv/C]String : EventDialog 에서 제공하는 setArguments() 메소드를 사용하여, arguments 항목을 설정한다.
                 String[] arguments = EventDialog.setArguments(
-                        getActivity().getString(R.string.custom_dialog_event_save_title),
-                        getActivity().getString(R.string.custom_dialog_event_save_positive_title),
-                        getActivity().getString(R.string.custom_dialog_event_save_negative_title));
+                        getFragment().getString(R.string.custom_dialog_event_save_title),
+                        getFragment().getString(R.string.custom_dialog_event_save_positive_title),
+                        getFragment().getString(R.string.custom_dialog_event_save_negative_title));
 
                 // [lv/C]EventDialog : event dialog 를 생성
                 EventDialog dialog = EventDialog.newInstance(muscleArea, null, arguments);
@@ -103,7 +99,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
 
                 });
                 dialog.setCancelable(false);
-                dialog.show(getFragmentManager(), null);
+                dialog.showNow(getFragment().getActivity().getSupportFragmentManager(), null);
             }
         });
 
@@ -119,13 +115,13 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
         this.eventArrayList = new ArrayList<>();
 
         // [lv/C]LinearLayoutManager : recyclerView 의 LayoutManager 를 생성 / 1차원으로 표현하기 위해서 LinearLayoutManager 생성
-        this.layoutManager = new LinearLayoutManager(this.getActivity());
+        this.layoutManager = new LinearLayoutManager(getFragment().getActivity());
 
         // [iv/C]RecyclerView : 위의 layoutManager 를 설정하기
         this.recyclerView.setLayoutManager(layoutManager);
 
         // [iv/C]EachListRvAdapter : recyclerView 의 adapter 생성
-        this.adapter = new EachMuscleAreaListRvAdapter(eventArrayList, getActivity(), getFragmentManager());
+        this.adapter = new EachMuscleAreaListRvAdapter(getFragment(), eventArrayList);
 
         // [iv/C] : recyclerView 의 adapter setting
         this.recyclerView.setAdapter(this.adapter);
@@ -158,7 +154,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 데이터를 가져오기 전 UI 설정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]Activity : progressBar 를 이용하여 데이터를 가져오는 중이라는 걸 알림 / GONE -> VISIBLE / workThread 가 아닌 UI Thread 에서 수행
-                getActivity().runOnUiThread(new Runnable() {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
@@ -197,7 +193,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
                 adapter.notifyDataSetChanged();
 
                 // [iv/C]Activity : progressBar 를 이용하여 데이터 가져오기가 완료되었다는 걸 알림 / VISIBLE -> GONE / workThread 가 아닌 UI Thread 에서 수행
-                getActivity().runOnUiThread(new Runnable() {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 

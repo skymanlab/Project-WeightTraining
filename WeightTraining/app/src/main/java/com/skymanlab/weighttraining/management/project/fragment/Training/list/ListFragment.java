@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager.ListSectionManager;
 
@@ -23,7 +25,7 @@ public class ListFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTL] ListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -67,15 +69,36 @@ public class ListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final String METHOD_NAME = "[onViewCreated] ";
 
-        // [iv/C]FragmentTopBarManager : fragment top bar section manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_list_title));
+        // [FragmentTopBarManager] [topBarManager] this is 'list' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_list_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]EventListSectionManager : section manager
-        this.sectionManager = new ListSectionManager(getActivity(), view, this);
+        // [FragmentTopUserManager] [topUserManager] this is 'list' fragment's section manager.
+        this.sectionManager = new ListSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+
+        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
+        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
+            @Override
+            public AlertDialog setStartButtonClickListener() {
+
+                // [method] fragment manager 를 통해 back stack 에서 pop!
+                getActivity().getSupportFragmentManager().popBackStack();
+
+                return null;
+            }
+        });
+        this.topBarManager.initWidgetOfStartButton(null);
+
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getActivity()> ----------- " + getActivity());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getActivity().getSupportFragmentManager()> ----------- " + getActivity().getSupportFragmentManager());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getParentFragmentManager()> ----------- " + getParentFragmentManager());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getChildFragmentManager()> ----------- " + getChildFragmentManager());
+
     }
 }

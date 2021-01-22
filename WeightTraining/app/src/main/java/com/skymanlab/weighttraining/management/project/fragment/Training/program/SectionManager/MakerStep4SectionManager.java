@@ -1,10 +1,9 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
-import android.app.Activity;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,19 +14,17 @@ import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep5Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.Step4EventRvAdapter;
 
 import java.util.ArrayList;
 
-public class MakerStep4SectionManager extends FragmentSectionManager implements FragmentSectionInitializable , MakerStepManager.OnNextClickListener, MakerStepManager.OnPreviousClickListener{
+public class MakerStep4SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep4SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
-
-    // instance variable
-    private MakerStepManager makerStepManager;
 
     // instance variable
     private EventResultSet chestEventResultSet;
@@ -41,8 +38,8 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
     private RecyclerView selectedEventListWrapper;
 
     // constructor
-    public MakerStep4SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
-        super(activity, view, fragmentManager);
+    public MakerStep4SectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     // setter
@@ -82,13 +79,6 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MakerStepManager : step 4
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_FOUR);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
-
         // [lv/C]ArrayList<Event> : 각 muscleArea 의 selected event 를 합치기 위해서
         ArrayList<Event> selectedEventArrayList = new ArrayList<>();
 
@@ -105,40 +95,45 @@ public class MakerStep4SectionManager extends FragmentSectionManager implements 
 
     }
 
-    @Override
-    public void setClickListenerOfNext() {
 
-        // [lv/C]MakerStep5Fragment : step 5 fragment 생성
-        MakerStep5Fragment step5Fragment = MakerStep5Fragment.newInstance(
-                chestEventResultSet,
-                shoulderEventResultSet,
-                latEventResultSet,
-                upperBodyEventResultSet,
-                armEventResultSet,
-                etcEventResultSet
-        );
+    /**
+     * 다음 단계를 진행하기 위한 과정을 EndButtonLister 객체를 생성하여 반환한다.
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        return new FragmentTopBarManager.EndButtonListener() {
+            @Override
+            public AlertDialog setEndButtonClickListener() {
 
-        // [lv/C]FragmentTransaction : step 5 fragment 로 이동
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.nav_home_content_wrapper, step5Fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+                // [lv/C]MakerStep5Fragment : step 5 fragment 생성
+                MakerStep5Fragment step5Fragment = MakerStep5Fragment.newInstance(
+                        chestEventResultSet,
+                        shoulderEventResultSet,
+                        latEventResultSet,
+                        upperBodyEventResultSet,
+                        armEventResultSet,
+                        etcEventResultSet
+                );
 
+                // [lv/C]FragmentTransaction : step 5 fragment 로 이동
+                FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_home_content_wrapper, step5Fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                return null;
+            }
+        };
     }
 
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
-    }
 
     /**
      * recyclerView 의 layout manager 와 adapter 를 설정하는 초기작업 실행
      */
     private void initWidgetOfRecyclerView(ArrayList<Event> selectedEventArrayList) {
 
-
         // [lv/C]LinearLayoutManager : recyclerView 의 LayoutManager 를 생성 / 1차원으로 표현하기 위해서 LinearLayoutManager 생성
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getFragment().getActivity());
 
         // [iv/C]RecyclerView : 위의 layoutManager 를 설정하기
         this.selectedEventListWrapper.setLayoutManager(layoutManager);

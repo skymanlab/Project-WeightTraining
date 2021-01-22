@@ -1,289 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".management.project.fragment.More.MoreFragment">
 
-    <LinearLayout
+    <!-- top bar -->
+    <include
+        layout="@layout/include_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:background="@color/browser_actions_divider_color" />
+
+    <!-- content container -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <!-- top bar -->
-        <include
-            layout="@layout/include_top_bar"
+        <LinearLayout
+            android:id="@+id/f_more_content_wrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <!-- content container -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            <!-- top user info -->
+            <include
+                android:id="@+id/f_more_user_info"
+                layout="@layout/include_top_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/include_top_bar_divider_width"
+                android:background="@color/browser_actions_divider_color" />
 
             <LinearLayout
-                android:id="@+id/f_more_content_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- register day count -->
+                <LinearLayout
+                    android:id="@+id/f_more_register_day_count_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/eland_choice_light"
+                        android:text="@string/f_more_register_day_count_title" />
+
+                    <TextView
+                        android:id="@+id/f_more_register_day_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/eland_choice_bold"
+                        android:text="@string/f_more_register_day_count_default"
+                        android:textColor="@color/colorTextBack"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="?android:attr/listDivider" />
+
+                <!-- training count -->
+                <LinearLayout
+                    android:id="@+id/f_more_training_count_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/eland_choice_light"
+                        android:text="@string/f_more_training_count_title" />
+
+                    <TextView
+                        android:id="@+id/f_more_training_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/eland_choice_bold"
+                        android:text="@string/f_more_training_count_default"
+                        android:textColor="@color/colorTextBack"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/browser_actions_bg_grey" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5sp">
+
+                    <!-- fitness center -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/f_more_fitness_center"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5sp"
+                        android:background="?attr/selectableItemBackground"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@color/browser_actions_bg_grey"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_columnWeight="1"
+                                android:layout_gravity="center"
+                                android:src="@drawable/more_menu_1_fitness_center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/f_more_fitness_center"
+                                android:textSize="9sp" />
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- target -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/f_more_target"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5sp"
+                        android:background="?attr/selectableItemBackground"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@color/browser_actions_bg_grey"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_columnWeight="1"
+                                android:layout_gravity="center"
+                                android:src="@drawable/more_menu_3_target" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/f_more_target"
+                                android:textSize="9sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- setting -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/f_more_setting"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5sp"
+                        android:background="?attr/selectableItemBackground"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@color/browser_actions_bg_grey"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_columnWeight="1"
+                                android:layout_gravity="center"
+                                android:src="@drawable/more_menu_2_setting" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/f_more_setting"
+                                android:textSize="9sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/browser_actions_bg_grey" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- top user info -->
-                <include
-                    android:id="@+id/f_more_user_info"
-                    layout="@layout/include_top_user"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_more_notice"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+
+                    android:paddingStart="20dp"
+                    android:text="@string/f_more_notice"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorTextBack" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
 
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/f_more_service_center"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- register day count -->
-                    <LinearLayout
-                        android:id="@+id/f_more_register_day_count_wrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="20dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/eland_choice_light"
-                            android:text="@string/f_more_register_day_count_title" />
-
-                        <TextView
-                            android:id="@+id/f_more_register_day_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/eland_choice_bold"
-                            android:text="@string/f_more_register_day_count_default"
-                            android:textColor="@color/colorTextBack"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="?android:attr/listDivider" />
-
-                    <!-- training count -->
-                    <LinearLayout
-                        android:id="@+id/f_more_training_count_wrapper"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="20dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/eland_choice_light"
-                            android:text="@string/f_more_training_count_title" />
-
-                        <TextView
-                            android:id="@+id/f_more_training_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/eland_choice_bold"
-                            android:text="@string/f_more_training_count_default"
-                            android:textColor="@color/colorTextBack"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:background="@color/browser_actions_bg_grey" />
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fillViewport="true">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="5sp">
-
-                        <!-- fitness center -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/f_more_fitness_center"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="5sp"
-                            android:background="?attr/selectableItemBackground"
-                            android:visibility="visible"
-                            app:cardBackgroundColor="@color/browser_actions_bg_grey"
-                            app:cardCornerRadius="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_columnWeight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_columnWeight="1"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/more_menu_1_fitness_center" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom|center_horizontal"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/f_more_fitness_center"
-                                    android:textSize="8sp" />
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <!-- target -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/f_more_target"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="5sp"
-                            android:background="?attr/selectableItemBackground"
-                            android:visibility="visible"
-                            app:cardBackgroundColor="@color/browser_actions_bg_grey"
-                            app:cardCornerRadius="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_columnWeight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_columnWeight="1"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/more_menu_3_target" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom|center_horizontal"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/f_more_target"
-                                    android:textSize="8sp" />
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <!-- setting -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/f_more_setting"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="5sp"
-                            android:background="?attr/selectableItemBackground"
-                            android:visibility="visible"
-                            app:cardBackgroundColor="@color/browser_actions_bg_grey"
-                            app:cardCornerRadius="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_columnWeight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_columnWeight="1"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/more_menu_2_setting" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom|center_horizontal"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/f_more_setting"
-                                    android:textSize="8sp" />
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                    </LinearLayout>
-                </HorizontalScrollView>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:background="@color/browser_actions_bg_grey" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/f_more_notice"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/eland_choice_medium"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:paddingStart="20dp"
-                        android:text="@string/f_more_notice"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/colorTextBack" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/f_more_service_center"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/eland_choice_medium"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:paddingStart="20dp"
-                        android:text="@string/f_more_service_center"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/colorTextBack" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/browser_actions_bg_grey" />
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="20dp"
+                    android:text="@string/f_more_service_center"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorTextBack" />
 
             </LinearLayout>
-        </ScrollView><!-- End of content container -->
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/browser_actions_bg_grey" />
 
-</FrameLayout>
+        </LinearLayout>
+    </ScrollView><!-- End of content container -->
+
+</LinearLayout>

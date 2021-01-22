@@ -36,11 +36,11 @@ public class DirectSelectionFragment extends Fragment {
     private static final String GROUPING_EVENT_DATA = "groupingEventData";
 
     // instance variable
-    private MuscleArea muscleArea ;
-    private GroupingEventData groupingEventData ;
+    private MuscleArea muscleArea;
+    private GroupingEventData groupingEventData;
 
     // instance variable
-    private DirectSelectionSectionManager sectionManager ;
+    private DirectSelectionSectionManager sectionManager;
 
     // constructor
     public DirectSelectionFragment() {
@@ -82,8 +82,8 @@ public class DirectSelectionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         final String METHOD_NAME = "[onCreate] ";
+
         if (getArguments() != null) {
             this.muscleArea = (MuscleArea) getArguments().get(MUSCLE_AREA);
             this.groupingEventData = (GroupingEventData) getArguments().getSerializable(GROUPING_EVENT_DATA);
@@ -96,7 +96,7 @@ public class DirectSelectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final String METHOD_NAME= "[onCreateView] ";
+        final String METHOD_NAME = "[onCreateView] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 3. onCreateView ");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_direct_selection, container, false);
@@ -109,11 +109,11 @@ public class DirectSelectionFragment extends Fragment {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 4. onViewCreated ");
 
-        // [iv/C]DirectSelectionSectionManager :
-        this.sectionManager = new DirectSelectionSectionManager(getActivity(), view, getActivity().getSupportFragmentManager());
-        this.sectionManager.connectWidget();
+        // [DirectSelectionSectionManager] [sectionManager] this is 'direct selection' fragment's section manager.
+        this.sectionManager = new DirectSelectionSectionManager(this, view);
         this.sectionManager.setGroupingEventData(this.groupingEventData);
         this.sectionManager.setMuscleAreaStandardId(this.muscleArea);
+        this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 5. onViewCreated  ---- 완료");

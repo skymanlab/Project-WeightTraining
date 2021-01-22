@@ -25,7 +25,7 @@ public class EachMuscleAreaListFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTL] EachMuscleAreaListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final String MUSCLE_AREA = "muscleArea";
@@ -78,9 +78,15 @@ public class EachMuscleAreaListFragment extends Fragment {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> muscleArea " + muscleArea);
 
-        // [iv/C]EachListSectionManager : each list fragment section manager
-        this.sectionManager = new EachMuscleAreaListSectionManager(getActivity(), view, getActivity().getSupportFragmentManager(), this, this.muscleArea);
+        // [FragmentTopUserManager] [topUserManager] this is 'list' fragment's section manager.
+        this.sectionManager = new EachMuscleAreaListSectionManager(this, view, this.muscleArea);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+
+        getActivity().getSupportFragmentManager();
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getActivity() > = " + getActivity());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getActivity().getSupportFragmentManager() > = " + getActivity().getSupportFragmentManager());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getParentFragmentManager() > = " + getParentFragmentManager());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getChildFragmentManager() > = " + getChildFragmentManager());
     }
 }

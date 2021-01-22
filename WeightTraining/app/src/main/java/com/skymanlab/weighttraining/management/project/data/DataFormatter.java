@@ -183,5 +183,17 @@ public class DataFormatter {
 
     } // End of method [setTimeFormat]
 
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= set number format =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    /**
+     * setNumber 를 'n회' format 으로 변환하여 반환한다.
+     * @param setNumber
+     * @return
+     */
+    public static String setSetNumberFormat(int setNumber) {
+
+        return new StringBuilder().append(setNumber).append("세트").toString();
+    }
 }
 

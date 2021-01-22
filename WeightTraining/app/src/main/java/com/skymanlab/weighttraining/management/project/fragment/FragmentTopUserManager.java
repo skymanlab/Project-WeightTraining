@@ -21,18 +21,19 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
     // constant
     private static final String CLASS_NAME = "[PF] FragmentTopUserManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+
+    // instance variable
+    private boolean shouldDisplayEmail;
+
     // instance variable
     private ImageView userPhoto;
     private TextView userName;
     private TextView userEmail;
     private ImageView moreInfo;
 
-    // instance variable
-    private boolean shouldDisplayEmail;
-
     // constructor
-    public FragmentTopUserManager(View view, Fragment fragment, boolean shouldDisplayEmail) {
-        super(view, fragment);
+    public FragmentTopUserManager(Fragment fragment, View view, boolean shouldDisplayEmail) {
+        super(fragment, view);
         this.shouldDisplayEmail = shouldDisplayEmail;
     }
 
@@ -70,7 +71,7 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
                 Fragment moreUserInfo = MoreUserInfoFragment.newInstance();
 
                 // fragment 로 이동
-                FragmentTransaction transaction = getFragment().getParentFragmentManager().beginTransaction();
+                FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.nav_home_content_wrapper, moreUserInfo);
                 transaction.addToBackStack(null);
                 transaction.commit();

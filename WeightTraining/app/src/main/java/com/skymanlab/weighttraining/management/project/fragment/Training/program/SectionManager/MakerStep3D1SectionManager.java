@@ -34,9 +34,6 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private Fragment fragment;
-
-    // instance variable
     private ArrayList<DirectSelectionFragment> fragmentArrayList;
     private ArrayList<MuscleArea> fragmentMuscleAreaList;
 
@@ -48,9 +45,8 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
     private DirectSelectionFragmentPagerAdapter adapter;
 
     // constructor
-    public MakerStep3D1SectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment) {
-        super(activity, view, fragmentManager);
-        this.fragment = fragment;
+    public MakerStep3D1SectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     // setter
@@ -75,9 +71,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
 
     @Override
     public void initWidget() {
-
         final String METHOD_NAME = "[initWidget] ";
-
 
         // [method] : 위에서 추가한 fragmentArrayList 와 fragmentTitleList 로 viewPager 를 만들기
         initViewPager();
@@ -91,11 +85,12 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
      * @return
      */
     public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        final String METHOD_NAME = "[newEndButtonListenerInstance] ";
+
         return new FragmentTopBarManager.EndButtonListener() {
             @Override
-            public void setEndButtonClickListener() {
+            public AlertDialog setEndButtonClickListener() {
 
-                final String METHOD_NAME = "[setClickListenerOfNext] ";
 
                 // [lv/C]EventResultSet : 각 muscleARea 별로 EventResultSet 생성하기
                 EventResultSet chestEventResultSet = new EventResultSet();
@@ -140,7 +135,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                         && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
 
                     // "선택되지 않았습니다." snack bar 메시지 출력
-                    Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step3_1_snack_next_check_true, Snackbar.LENGTH_SHORT).show();
 
                 } else {
 
@@ -154,12 +149,13 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                             etcEventResultSet);
 
                     // [lv/C]FragmentTransaction : step 4 Fragment 로 이동
-                    FragmentTransaction transaction = fragment.getParentFragmentManager().beginTransaction();
+                    FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.nav_home_content_wrapper, step4Fragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
 
                 } // [check 1]
+                return null;
             }
         };
     }
@@ -169,11 +165,10 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
      * [method] fragmentArrayList 의 fragment 로 tabLayout, viewPager 초기화 하기
      */
     public void initViewPager() {
-
         final String METHOD_NAME = "[initViewPager]";
 
         // [iv/C]DirectPagerAdapter : viewPager 의 adapter 생성
-        this.adapter = new DirectSelectionFragmentPagerAdapter(fragment, fragmentArrayList);
+        this.adapter = new DirectSelectionFragmentPagerAdapter(getFragment(), fragmentArrayList);
 
         // [iv/C]ViewPager2 : 위의 adapter 를 연결
         this.viewPager.setAdapter(adapter);

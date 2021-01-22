@@ -43,26 +43,17 @@ public class MoreFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MoreFragment newInstance(User user) {
-
-        final String METHOD_NAME = "[newInstance] ";
-
+    public static MoreFragment newInstance() {
         MoreFragment fragment = new MoreFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -79,18 +70,18 @@ public class MoreFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<start> more fragment 의 Log manager 를 실행합니다!");
 
-        // [iv/C]FragmentTopBarManager : fragment top bar section manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_more_title));
+        // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_more_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C] : FragmentTopUserManager : fragment top user section manager
-        this.topUserManager = new FragmentTopUserManager(view, this, true);
+        // [FragmentTopUserManager] [topUserManager] this is 'more' fragment's top user section manager.
+        this.topUserManager = new FragmentTopUserManager(this, view, true);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
 
-        // [iv/C]MoreSectionManager : more fragment content section manager
-        this.sectionManager = new MoreSectionManager(getActivity(), view);
+        // [MoreSectionManager] [sectionManager] this is 'more' fragment's section manager.
+        this.sectionManager = new MoreSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 

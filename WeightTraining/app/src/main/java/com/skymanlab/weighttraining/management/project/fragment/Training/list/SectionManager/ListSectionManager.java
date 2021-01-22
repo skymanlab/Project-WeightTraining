@@ -1,6 +1,5 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.list.SectionManager;
 
-import android.app.Activity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -22,9 +21,6 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private Fragment fragment;
-
-    // instance variable
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
 
@@ -32,9 +28,8 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
     private EachMuscleAreaListFragmentPagerAdapter pagerAdapter;
 
     // constructor
-    public ListSectionManager(Activity activity, View view, Fragment fragment) {
-        super(activity, view);
-        this.fragment = fragment;
+    public ListSectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     @Override
@@ -52,7 +47,7 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
     public void initWidget() {
 
         // [iv/C]EachListPagerAdapter : ViewPager2 의 adapter 생성
-        this.pagerAdapter = new EachMuscleAreaListFragmentPagerAdapter(fragment);
+        this.pagerAdapter = new EachMuscleAreaListFragmentPagerAdapter(getFragment());
 
         // [iv/C]ViewPager2 : 위의 pagerAdapter 를 연결
         this.viewPager.setAdapter(this.pagerAdapter);
@@ -65,22 +60,22 @@ public class ListSectionManager extends FragmentSectionManager implements Fragme
 
                 switch (position) {
                     case 0:
-                        tab.setText(getActivity().getString(R.string.type_muscle_area_chest));
+                        tab.setText(getFragment().getString(R.string.type_muscle_area_chest));
                         break;
                     case 1:
-                        tab.setText(getActivity().getString(R.string.type_muscle_area_shoulder));
+                        tab.setText(getFragment().getString(R.string.type_muscle_area_shoulder));
                         break;
                     case 2:
-                        tab.setText(getActivity().getString(R.string.type_muscle_area_lat));
+                        tab.setText(getFragment().getString(R.string.type_muscle_area_lat));
                         break;
                     case 3:
-                        tab.setText(getActivity().getString(R.string.type_muscle_area_upper_body));
+                        tab.setText(getFragment().getString(R.string.type_muscle_area_upper_body));
                         break;
                     case 4:
-                        tab.setText(getActivity().getString(R.string.type_muscle_area_arm));
+                        tab.setText(getFragment().getString(R.string.type_muscle_area_arm));
                         break;
                     case 5:
-                        tab.setText(getActivity().getString(R.string.type_muscle_area_etc));
+                        tab.setText(getFragment().getString(R.string.type_muscle_area_etc));
                         break;
                 }
             }

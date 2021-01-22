@@ -3,7 +3,6 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 import android.app.Activity;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,20 +27,16 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
     private MaterialButton allRandomSelection;      // [2] type
 
     // constructor
-    public MakerStep1SectionManager(Activity activity, View view, FragmentManager fragmentManager) {
-        super(activity, view, fragmentManager);
+    public MakerStep1SectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     @Override
     public void connectWidget() {
 
-        // [directSelection] connect
+        // [MaterialButton] widget connect
         this.directSelection = (MaterialButton) getView().findViewById(R.id.f_maker_step1_direct_selection);
-
-        // [eachRandomSelection] connect
         this.eachRandomSelection = (MaterialButton) getView().findViewById(R.id.f_maker_step1_each_random_selection);
-
-        // [allRandomSelection] connect
         this.allRandomSelection = (MaterialButton) getView().findViewById(R.id.f_maker_step1_all_random_selection);
 
     }
@@ -108,7 +103,7 @@ public class MakerStep1SectionManager extends FragmentSectionManager implements 
     private void moveStep2(Fragment fragment) {
 
         // [FragmentTransaction] [transaction] fragment 로 이동하기
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_home_content_wrapper, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

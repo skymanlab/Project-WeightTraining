@@ -3,7 +3,6 @@ package com.skymanlab.weighttraining;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -29,7 +28,7 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 import com.skymanlab.weighttraining.management.project.fragment.Home.HomeFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Intervene.InterveneFragment;
+import com.skymanlab.weighttraining.management.project.fragment.Intervene.InterventionFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.TrainingFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
@@ -52,7 +51,7 @@ public class NavHomeActivity extends AppCompatActivity {
     // instance variable
     private HomeFragment home;
     private TrainingFragment training;
-    private InterveneFragment intervene;
+    private InterventionFragment intervene;
     private MoreFragment more;
 
     @Override
@@ -80,10 +79,10 @@ public class NavHomeActivity extends AppCompatActivity {
         registerBaseEventDataSetting();
 
         // [iv/C]Fragment : 각 Fragment 생성
-        this.home = HomeFragment.newInstance(this.user);
-        this.training = new TrainingFragment();
-        this.intervene = new InterveneFragment();
-        this.more = MoreFragment.newInstance(this.user);
+        this.home = HomeFragment.newInstance();
+        this.training = TrainingFragment.newInstance();
+        this.intervene = InterventionFragment.newInstance();
+        this.more = MoreFragment.newInstance();
 
         // [iv/C]FragmentTransaction : HomeFragment 화면을 보여주고 stack 에 담기
         FragmentTransaction startFragment = getSupportFragmentManager().beginTransaction();
@@ -267,7 +266,7 @@ public class NavHomeActivity extends AppCompatActivity {
 
         // [lv/C]DatabaseReference : Firebase 의 database 에 저장 유무를 확인하기 위한 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
-        
+
         // [lv/C]Query : firebase 의 database 에서 'event/$uid' 에 데이터 유무를 판별하기 위한 query 생성
         Query query = db.child(firebaseUser.getUid());
 
@@ -285,7 +284,7 @@ public class NavHomeActivity extends AppCompatActivity {
                             // true - false : 설정값이 true 인데 데이터베이스에는 저장되어 있지 않으면(false) -> '기본 종목 데이터'를 데이터베이스에 다시 저장해야 한다.
                             // [method] : 기본 종목 데이터 입력하는 과정 진행
                             saveBaseEventData(preferences);
-                        } 
+                        }
                     }
 
                     @Override
@@ -303,7 +302,7 @@ public class NavHomeActivity extends AppCompatActivity {
 
                         if (snapshot.getValue() != null) {
                             // false - true : 설정값은 false 인데 데이터베이스에는 저장되어 있으면(true) -> 설정값을 true 로 변경한다.
-                            
+
                             // [lv/C]SharedPreference : 설정값을 저장하기 위한 객체 생성 / 'base_event_data' 의 값을 true 로 변경
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("base_event_data", "true");
@@ -332,7 +331,7 @@ public class NavHomeActivity extends AppCompatActivity {
                                         }
                                     })
                                     .show();
-                        } 
+                        }
                     }
 
                     @Override

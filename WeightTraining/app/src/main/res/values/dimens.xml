@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="include_top_bar_divider_width">1dp</dimen>
     <dimen name="include_top_bar_dimen_side_blank">15dp</dimen>
     <dimen name="include_top_bar_dimen_title_side_blank">45dp</dimen>
+
+    <!-- maker step content -->
+    <dimen name="maker_step_content_indication_margin_top">10dp</dimen>
+    <dimen name="maker_step_content_indication_margin_start">15dp</dimen>
+    <dimen name="maker_step_content_indication_margin_end">15dp</dimen>
+    <dimen name="maker_step_content_indication_margin_bottom">20dp</dimen>
+    <dimen name="maker_step_content_item_margin_start">15dp</dimen>
+    <dimen name="maker_step_content_item_margin_end">15dp</dimen>
+    <dimen name="maker_step_content_item_margin_bottom">10dp</dimen>
+
 </resources>

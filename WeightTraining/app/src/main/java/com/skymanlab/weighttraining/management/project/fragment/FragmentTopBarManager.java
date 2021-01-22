@@ -1,20 +1,24 @@
 package com.skymanlab.weighttraining.management.project.fragment;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.project.exception.ListenerInstanceNotExistException;
 
 public class FragmentTopBarManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PF] FragmentTopBarManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+
+    // instance variable
+    private String titleContent;
 
     // instance variable
     private StartButtonListener startButtonListener;
@@ -27,12 +31,9 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
     private ImageView endImage;
     private TextView endText;
 
-    // instance variable
-    private String titleContent;
-
     // constructor
-    public FragmentTopBarManager(Activity activity, View view, String titleContent) {
-        super(activity, view);
+    public FragmentTopBarManager(Fragment fragment, View view, String titleContent) {
+        super(fragment, view);
         this.titleContent = titleContent;
     }
 
@@ -91,7 +92,7 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
 
     public void initWidgetOfStartButton(String content) {
-        final String METHOD_NAME ="[initWidgetOfStartButton]" ;
+        final String METHOD_NAME = "[initWidgetOfStartButton]";
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<content> 내용 = " + content);
         // [check 1] : StarButtonListener 를 구현한 객체가 존재할 때만 start button 의 초기 내용을 설정한다.
@@ -108,7 +109,13 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                 this.startText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startButtonListener.setStartButtonClickListener();
+
+                        AlertDialog dialog = startButtonListener.setStartButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
                     }
                 });
 
@@ -121,7 +128,13 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                 this.startImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startButtonListener.setStartButtonClickListener();
+
+                        AlertDialog dialog = startButtonListener.setStartButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
                     }
                 });
 
@@ -133,7 +146,7 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
     }
 
-    public void initWidgetOfEndButton(String content){
+    public void initWidgetOfEndButton(String content) {
         final String METHOD_NAME = "[initWidgetOfEndButton] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<method start> content = " + content);
 
@@ -142,7 +155,7 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
             // [check 2] : content 객체가 존재할 때만
             if (content != null) {
-                
+
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<check 2> 최종 수행하기 전");
 
                 // endText 설정
@@ -153,7 +166,13 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                 this.endText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        endButtonListener.setEndButtonClickListener();
+
+                        AlertDialog dialog = endButtonListener.setEndButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
                     }
                 });
 
@@ -166,7 +185,13 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                 this.endImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        endButtonListener.setEndButtonClickListener();
+
+                        AlertDialog dialog = endButtonListener.setEndButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
                     }
                 });
 
@@ -179,11 +204,11 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    public interface StartButtonListener{
-        void setStartButtonClickListener();
+    public interface StartButtonListener {
+        AlertDialog setStartButtonClickListener();
     }
 
     public interface EndButtonListener {
-        void setEndButtonClickListener();
+        AlertDialog setEndButtonClickListener();
     }
 }

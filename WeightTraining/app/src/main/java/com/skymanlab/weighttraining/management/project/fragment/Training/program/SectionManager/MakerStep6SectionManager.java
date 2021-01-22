@@ -23,6 +23,7 @@ import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.event.program.data.Program;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep7Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.Step6EventRvAdapter;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step6DetailProgramDialog;
@@ -30,19 +31,11 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MakerStep6SectionManager extends FragmentSectionManager implements FragmentSectionInitializable,
-        MakerStepManager.OnPreviousClickListener,
-        MakerStepManager.OnNextClickListener {
+public class MakerStep6SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep6SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
-
-    // instance variable
-    private Fragment fragment;
-
-    // instance variable
-    private MakerStepManager makerStepManager;
 
     // instance variable
     private ArrayList<Event> finalOrderList;
@@ -57,9 +50,8 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
     private HashMap<String, DetailProgram> detailProgramList;
 
     // constructor
-    public MakerStep6SectionManager(Activity activity, View view, FragmentManager fragmentManager, Fragment fragment) {
-        super(activity, view, fragmentManager);
-        this.fragment = fragment;
+    public MakerStep6SectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     // setter
@@ -89,13 +81,6 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
 
         final String METHOD_NAME = "[initWidget] ";
 
-        // [iv/C]MakerStepManager : step 6
-        this.makerStepManager = new MakerStepManager(getView(), getFragmentManager(), MakerStepManager.STEP_SIX);
-        this.makerStepManager.setPreviousClickListener(this);
-        this.makerStepManager.setNextClickListener(this);
-        this.makerStepManager.connectWidget();
-        this.makerStepManager.initWidget();
-
         // [iv/C]HashMap<String, DetailProgram> : 프로그램의 특정 event 의 프로그램만 설정값을 다르게 할 때, 해당 부분의 세부 프로그램으로 저장
         this.detailProgramList = new HashMap<>();
 
@@ -115,7 +100,7 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
         initWidgetOfRecyclerView();
 
         // [iv/C]Fragment : MakerStep6Fragment 의 FragmentManger 를 통해 Step6DetailProgramSettingDialog 에서 보낸 데이터 가져오기
-        fragment.getParentFragmentManager().setFragmentResultListener(Step6DetailProgramDialog.REQUEST_KEY, fragment, new FragmentResultListener() {
+        getFragment().getParentFragmentManager().setFragmentResultListener(Step6DetailProgramDialog.REQUEST_KEY, getFragment(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
@@ -192,42 +177,48 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
 
     }
 
-    @Override
-    public void setClickListenerOfNext() {
+
+    /**
+     * 다음 단계를 진행하기 위한 과정을 EndButtonLister 객체를 생성하여 반환한다.
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
         final String METHOD_NAME = "[setClickListenerOfNext] ";
 
-        // [check 1] : set number 는 0 이상 이어야 하고, rest time 은 0 초 이상이어야 한다.
-        if (checkData()) {
+        return new FragmentTopBarManager.EndButtonListener() {
+            @Override
+            public AlertDialog setEndButtonClickListener() {
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. program 을 생성합니다.");
+                // [check 1] : set number 는 0 이상 이어야 하고, rest time 은 0 초 이상이어야 한다.
+                if (checkData()) {
 
-            // [lv/C]Program : 해당 프로그램의 설정값으로 객체를 생성한다.
-            Program program = new Program();
-            program.setSetNumber(this.programSettingSetNumber.getValue());
-            program.setRestTimeMinute(this.programSettingRestTimeMinute.getValue());
-            program.setRestTimeSecond(this.programSettingRestTimeSecond.getValue());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. program 을 생성합니다.");
 
-            // [lv/C]MakerStep7Fragment : step 7 fragment 생성
-            MakerStep7Fragment step7Fragment = MakerStep7Fragment.newInstance(finalOrderList, program, detailProgramList);
+                    // [lv/C]Program : 해당 프로그램의 설정값으로 객체를 생성한다.
+                    Program program = new Program();
+                    program.setSetNumber(programSettingSetNumber.getValue());
+                    program.setRestTimeMinute(programSettingRestTimeMinute.getValue());
+                    program.setRestTimeSecond(programSettingRestTimeSecond.getValue());
 
-            // [lv/C]FragmentTransaction : step 7 fragment 로 이동
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.nav_home_content_wrapper, step7Fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+                    // [lv/C]MakerStep7Fragment : step 7 fragment 생성
+                    MakerStep7Fragment step7Fragment = MakerStep7Fragment.newInstance(finalOrderList, program, detailProgramList);
 
+                    // [lv/C]FragmentTransaction : step 7 fragment 로 이동
+                    FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_home_content_wrapper, step7Fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
 
-        } else {
+                } else {
 
-            Snackbar.make(getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step6_snack_setting_data_error, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step6_snack_setting_data_error, Snackbar.LENGTH_SHORT).show();
 
-        } // [check 1]
+                } // [check 1]
 
-    }
-
-    @Override
-    public AlertDialog setClickListenerOfPrevious() {
-        return null;
+                return null;
+            }
+        };
     }
 
 
@@ -237,14 +228,14 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
     private void initWidgetOfRecyclerView() {
 
         // [lv/C]LinearLayoutManager : recyclerView 의 LayoutManager 를 생성 / 1차원으로 표현하기 위해서 LinearLayoutManager 생성
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getFragment().getActivity());
 
         // [iv/C]RecyclerView : 위의 layoutManager 를 설정하기
         this.eventListWrapper.setLayoutManager(layoutManager);
 
         // [iv/C]SelectedEventItemRvAdapter : recyclerView 의 adapter 생성
         Step6EventRvAdapter adapter = new Step6EventRvAdapter.Builder()
-                .setFragmentManager(getFragmentManager())
+                .setFragment(getFragment())
                 .setFinalOrderList(this.finalOrderList)
                 .setDetailProgramList(this.detailProgramList)
                 .create();
@@ -257,6 +248,7 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
 
     /**
      * 다른 fragment 에서 programSettingSetNumber widget 의 값이 필요할 때, 해당 메소드의 반환값으로 넘겨준다.
+     *
      * @return
      */
     public int getValueOfProgramSettingSetNumber() {
@@ -267,6 +259,7 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
 
     /**
      * 다른 fragment 에서 programSettingRestTimeMinute widget 의 값이 필요할 때, 해당 메소드의 반환값으로 넘겨준다.
+     *
      * @return
      */
     public int getValueOfProgramSettingRestTimeMinute() {
@@ -276,6 +269,7 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
 
     /**
      * 다른 fragment 에서 programSettingRestTimeSecond widget 의 값이 필요할 때, 해당 메소드의 반환값으로 넘겨준다.
+     *
      * @return
      */
     public int getValueOfProgramSettingRestTimeSecond() {

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".management.project.fragment.Training.program.MakerStep4Fragment">
 
+    <!-- title -->
+    <include
+        layout="@layout/include_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:background="@color/browser_actions_divider_color" />
+
+    <!-- step display -->
+    <include
+        layout="@layout/include_maker_step_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- step content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- top bar -->
-        <include
-            layout="@layout/include_top_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- step display-->
-        <include
-            layout="@layout/include_maker_step_display"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- content -->
-        <LinearLayout
+        <!-- indication -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/maker_step_content_indication_margin_start"
+            android:layout_marginTop="@dimen/maker_step_content_indication_margin_top"
+            android:layout_marginEnd="@dimen/maker_step_content_indication_margin_end"
+            android:layout_marginBottom="@dimen/maker_step_content_indication_margin_bottom"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_maker_step4_indication"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextBack"
+            android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="@string/f_maker_step4_comment"
-                android:textAlignment="center" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/browser_actions_bg_grey"
-                app:cardCornerRadius="10dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/f_maker_step4_selected_event_list_wrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"/>
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </LinearLayout>
-
-        <!-- step -->
-        <include
-            layout="@layout/include_maker_step_selector"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/include_top_bar_divider_width"
+            android:background="@color/browser_actions_divider_color" />
 
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginStart="@dimen/maker_step_content_item_margin_start"-->
+        <!--            android:layout_marginEnd="@dimen/maker_step_content_item_margin_end"-->
+        <!--            app:cardBackgroundColor="@color/browser_actions_bg_grey"-->
+        <!--            app:cardCornerRadius="10dp">-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/f_maker_step4_selected_event_list_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:background="@color/browser_actions_bg_grey"/>
+        <!--        </com.google.android.material.card.MaterialCardView>-->
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

@@ -9,7 +9,8 @@
         android:id="@+id/include_top_bar_content_wrapper"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="0dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="2dp"
         app:cardMaxElevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,9 +39,9 @@
             android:layout_gravity="start|center_vertical"
             android:layout_marginStart="@dimen/include_top_bar_dimen_side_blank"
             android:clickable="false"
+            android:contentDescription="@string/include_top_bar_start_text_previous"
             android:src="@drawable/left"
-            android:visibility="gone"
-            android:contentDescription="@string/include_top_bar_start_text_previous" />
+            android:visibility="gone" />
 
         <!-- start text -->
         <TextView
@@ -51,6 +52,8 @@
             android:layout_marginStart="@dimen/include_top_bar_dimen_side_blank"
             android:clickable="false"
             android:fontFamily="@font/eland_choice_light"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:textColor="@color/colorTextBack"
             android:visibility="gone" />
 
@@ -62,9 +65,9 @@
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="@dimen/include_top_bar_dimen_side_blank"
             android:clickable="false"
+            android:contentDescription="@string/include_top_bar_end_text_next"
             android:src="@drawable/right"
-            android:visibility="gone"
-            android:contentDescription="@string/include_top_bar_end_text_next"/>
+            android:visibility="gone" />
 
         <!-- end text -->
         <TextView
@@ -75,7 +78,9 @@
             android:layout_marginEnd="@dimen/include_top_bar_dimen_side_blank"
             android:clickable="false"
             android:fontFamily="@font/eland_choice_light"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:textColor="@color/colorTextBack"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

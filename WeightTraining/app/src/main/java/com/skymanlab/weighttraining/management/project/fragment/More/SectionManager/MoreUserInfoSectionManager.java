@@ -43,32 +43,32 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
     private TextView withdraw;
 
     // constructor
-    public MoreUserInfoSectionManager(Activity activity, View view, Fragment fragment) {
-        super(activity, view, fragment);
+    public MoreUserInfoSectionManager(Fragment fragment, View view) {
+        super(fragment, view);
     }
 
     @Override
     public void connectWidget() {
 
-        // [iv/C]ImageView : photo connect
+        // [ ImageView | photo ] widget connect
         this.photo = (ImageView) getView().findViewById(R.id.f_more_user_info_photo);
 
-        // [iv/C]MaterialButton : photoChange connect
+        // [ MaterialButton | photoChange ] widget connect
         this.photoChange = (MaterialButton) getView().findViewById(R.id.f_more_user_info_photo_change);
 
-        // [iv/C]TextView :  connect
+        // [ TextView | authProvider ] widget connect
         this.authProvider = (TextView) getView().findViewById(R.id.f_more_user_info_auth_provider);
 
-        // [iv/C]TextView :  connect
+        // [ TextView | email ] widget connect
         this.email = (TextView) getView().findViewById(R.id.f_more_user_info_email);
 
-        // [iv/C]TextView :  connect
+        // [ TextView | name ] widget connect
         this.name = (TextView) getView().findViewById(R.id.f_more_user_info_name);
 
-        // [iv/C]TextView :  connect
+        // [ TextView | logout ] widget connect
         this.logout = (TextView) getView().findViewById(R.id.f_more_user_info_logout);
 
-        // [iv/C]TextView :  connect
+        // [ TextView | withdraw ] widget connect
         this.withdraw = (TextView) getView().findViewById(R.id.f_more_user_info_withdraw);
     }
 
@@ -134,10 +134,10 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
     private void logoutUser() {
 
         // [lv/C]AlertDialog : Builder 객체 생성 / 초기 설정
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.f_more_alert_logout_user_title)
-                .setMessage(R.string.f_more_alert_logout_user_message)
-                .setPositiveButton(R.string.f_more_alert_logout_user_bt_positive, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getFragment().getActivity());
+        builder.setTitle(R.string.f_more_user_info_alert_logout_user_title)
+                .setMessage(R.string.f_more_user_info_alert_logout_user_message)
+                .setPositiveButton(R.string.f_more_user_info_alert_logout_user_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -148,21 +148,22 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
                         Snackbar.make(getView(), "로그아웃이 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
 
                         // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        getActivity().finish();
-                        getActivity().startActivity(intent);
+                        Intent intent = new Intent(getFragment().getActivity(), LoginActivity.class);
+                        getFragment().getActivity().finish();
+                        getFragment().getActivity().startActivity(intent);
 
                         dialog.dismiss();
 
                     }
                 })
-                .setNegativeButton(R.string.f_more_alert_logout_user_bt_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.f_more_user_info_alert_logout_user_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
                 .show();
+
 
     } // End of method [logoutUser]
 
@@ -173,10 +174,10 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
     private void withdrawUser() {
 
         // [lv/C]AlertDialog : Builder 객체 생성 / 초기 설정
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.f_more_alert_withdraw_user_title)
-                .setMessage(R.string.f_more_alert_withdraw_user_message)
-                .setPositiveButton(R.string.f_more_alert_withdraw_user_bt_positive, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getFragment().getActivity());
+        builder.setTitle(R.string.f_more_user_info_alert_withdraw_user_title)
+                .setMessage(R.string.f_more_user_info_alert_withdraw_user_message)
+                .setPositiveButton(R.string.f_more_user_info_alert_withdraw_user_bt_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -193,9 +194,9 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
                                     Snackbar.make(getView(), "탈퇴가 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
 
                                     // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
-                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                    getActivity().finish();
-                                    getActivity().startActivity(intent);
+                                    Intent intent = new Intent(getFragment().getActivity(), LoginActivity.class);
+                                    getFragment().getActivity().finish();
+                                    getFragment().getActivity().startActivity(intent);
 
                                     dialog.dismiss();
                                 } // [check 1]
@@ -204,7 +205,7 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
 
                     }
                 })
-                .setNegativeButton(R.string.f_more_alert_withdraw_user_bt_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.f_more_user_info_alert_withdraw_user_bt_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

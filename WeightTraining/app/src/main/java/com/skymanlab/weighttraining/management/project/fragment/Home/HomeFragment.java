@@ -42,33 +42,17 @@ public class HomeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user FirebaseUser 정보 중 displayName, email, photoUrl 만 담겨있는 객체
      * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(User user) {
-
-        final String METHOD_NAME = "[newInstance] ";
-
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
     }
 
     @Override
@@ -85,13 +69,13 @@ public class HomeFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ home fragment ++++++++++++");
 
-        // [iv/C]FragmentTopBarManager : fragment top bar section manager
-        this.topBarManager = new FragmentTopBarManager(getActivity(), view, getString(R.string.f_home_title));
+        // [FragmentTopBarManager] [topBarManager] this is 'home' fragment's top bar section manager.
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_home_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]FragmentTopUserManager : fragment top user section manager
-        this.topUserManager = new FragmentTopUserManager(view, this,false);
+        // [FragmentTopUserManager] [topUserManager] this is 'home' fragment's top user section manager.
+        this.topUserManager = new FragmentTopUserManager(this, view, false);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
     }

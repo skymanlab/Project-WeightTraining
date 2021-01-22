@@ -1,25 +1,29 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/preference_category_app">
+    <PreferenceCategory
+        app:title="@string/preference_category_app"
+        app:iconSpaceReserved="false"
+        app:allowDividerBelow="true">
 
         <Preference
             app:key="version_info"
-            app:title="@string/preference_category_app_version_info"
-            app:summary="@string/preference_category_app_version_info_summary"/>
+            app:summary="@string/preference_category_app_version_info_summary"
+            app:title="@string/preference_category_app_version_info" />
 
         <Preference
-            app:key="base_event_data"
-            app:title="@string/preference_category_app_basic_event_data"
             app:defaultValue="false"
-            app:summary="@string/preference_category_app_basic_event_data_summary_one"/>
+            app:key="base_event_data"
+            app:summary="@string/preference_category_app_basic_event_data_summary_one"
+            app:title="@string/preference_category_app_basic_event_data" />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/preference_category_user">
+    <PreferenceCategory app:title="@string/preference_category_user"
+        app:iconSpaceReserved="false">
         <Preference
-            app:key="user_info"
             app:defaultValue="false"
-            app:title="@string/preference_category_user_info"/>
+            app:key="user_info"
+            app:title="@string/preference_category_user_info" />
 
     </PreferenceCategory>
 </PreferenceScreen>
