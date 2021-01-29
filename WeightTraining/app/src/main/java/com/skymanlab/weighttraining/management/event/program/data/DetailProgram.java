@@ -5,12 +5,21 @@ import java.io.Serializable;
 public class DetailProgram implements Serializable {
 
     // instance variable
+    private int number;
     private String key;
     private int setNumber;
     private int restTimeMinute;
     private int restTimeSecond;
 
     // getter, setter
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public String getKey() {
         return key;
     }

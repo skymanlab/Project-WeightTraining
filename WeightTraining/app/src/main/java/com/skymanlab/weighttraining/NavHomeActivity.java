@@ -1,6 +1,7 @@
 package com.skymanlab.weighttraining;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
@@ -29,17 +32,18 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 import com.skymanlab.weighttraining.management.project.fragment.Home.HomeFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Intervene.InterventionFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.ActivityResultManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.TrainingFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
 import java.util.HashMap;
 
-public class NavHomeActivity extends AppCompatActivity {
+public class NavHomeActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     // constant
     private static final String CLASS_NAME = "[Ac] NavHomeActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private FirebaseUser firebaseUser;
@@ -110,11 +114,11 @@ public class NavHomeActivity extends AppCompatActivity {
                         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         moveFragment.replace(R.id.nav_home_content_wrapper, training).commitAllowingStateLoss();
                         break;
-                    case R.id.nav_bottom_bar_intervene:
-                        // [lv/C]FragmentTransaction : intervene 이동
-                        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        moveFragment.replace(R.id.nav_home_content_wrapper, intervene).commitAllowingStateLoss();
-                        break;
+//                    case R.id.nav_bottom_bar_intervene:
+//                        // [lv/C]FragmentTransaction : intervene 이동
+//                        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                        moveFragment.replace(R.id.nav_home_content_wrapper, intervene).commitAllowingStateLoss();
+//                        break;
                     case R.id.nav_bottom_bar_more:
                         // [lv/C]FragmentTransaction : more 이동
                         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -125,13 +129,12 @@ public class NavHomeActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-
         final String METHOD_NAME = "[onBackPressed] ";
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++ FragmentTransaction  = " + getSupportFragmentManager().getBackStackEntryCount());
@@ -365,5 +368,48 @@ public class NavHomeActivity extends AppCompatActivity {
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++> firebase 의 database 에 저장되었으며, preference 의 설정 값도 true 로 변경하였습니다.");
 
     } // End of method [saveBaseEventData]
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        final String METHOD_NAME = "[onRequestPermissionsResult] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- request code = " + requestCode);
+
+        ActivityResultManager resultManager = new ActivityResultManager();
+
+        switch (requestCode) {
+            case ActivityResultManager.LOCATION_PERMISSION_REQUEST_CODE:
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Permission Request > 해당 권한 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
+
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
+                resultManager.setNextProcedureForLocationPermissionRequestResult(fragment, permissions, grantResults);
+
+                break;
+        }
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final String METHOD_NAME = "[onActivityResult] ";
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult request code = " + requestCode);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult result code = " + resultCode);
+
+        ActivityResultManager resultManager = new ActivityResultManager();
+
+        switch (requestCode) {
+            case ActivityResultManager.LOCATION_SERVICE_REQUEST_CODE:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Service Request Code > 해당 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
+                resultManager.setNextProcedureForLocationServiceRequestResult(fragment);
+                break;
+        }
+    }
+
 
 }

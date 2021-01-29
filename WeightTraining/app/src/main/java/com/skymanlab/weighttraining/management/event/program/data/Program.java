@@ -10,10 +10,11 @@ public class Program implements Serializable {
     private int setNumber;
     private int restTimeMinute;
     private int restTimeSecond;
+    private int totalSetNumber;
+    private int totalEventNumber;
 
     // getter, setter
     public String getKey() {
-
         return key;
     }
 
@@ -51,5 +52,21 @@ public class Program implements Serializable {
 
     public void setRestTimeSecond(int restTimeSecond) {
         this.restTimeSecond = restTimeSecond;
+    }
+
+    public int getTotalSetNumber() {
+        return totalSetNumber;
+    }
+
+    public void setTotalSetNumber(int totalSetNumber) {
+        this.totalSetNumber = totalSetNumber;
+    }
+
+    public int getTotalEventNumber() {
+        return totalEventNumber;
+    }
+
+    public void setTotalEventNumber(int totalEventNumber) {
+        this.totalEventNumber = totalEventNumber;
     }
 }

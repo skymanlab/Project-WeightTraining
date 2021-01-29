@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">위트라웨이</string>
+    <string name="app_name">웨이트 트레이닝</string>
     <string name="copyright">development by ⓒskymanlab</string>
 
 
@@ -72,6 +72,11 @@
     <string name="f_more_user_info_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
     <string name="f_more_user_info_alert_withdraw_user_bt_positive">탈퇴</string>
     <string name="f_more_user_info_alert_withdraw_user_bt_negative">취소</string>
+
+    <!-- Fragment : fitness center -->
+    <string name="f_fitness_center_title">피트니스 센터</string>
+    <string name="f_fitness_center_snack_not_find">해당 장소를 찾을 수 없습니다.</string>
+    <string name="f_fitness_center_"></string>
 
     <!-- Fragment : setting -->
     <string name="f_setting_title">환경설정</string>
@@ -157,14 +162,19 @@
     <!-- Fragment : maker step7-->
     <string name="f_maker_step7_indication">결과를 확인합니다.</string>
     <string name="f_maker_step7_result_title">프로그램 확인    ></string>
-    <string name="f_maker_step7_result_nick_name_input">별칭을 입력해주세요.</string>
-    <string name="f_maker_step7_result_set_number">- 세트 수</string>
-    <string name="f_maker_step7_result_set_number_default">0 회</string>
-    <string name="f_maker_step7_result_rest_time">- 휴식 시간</string>
-    <string name="f_maker_step7_result_rest_time_default">0분 0초</string>
-    <string name="f_maker_step7_program_result_title">프로그램 설정</string>
-    <string name="f_maker_step7_detail_program_result_title">세부 프로그램 설정</string>
+    <string name="f_maker_step7_result_nick_name_hint">별칭을 입력해주세요.</string>
+    <string name="f_maker_step7_result_program_setting_title">프로그램 설정</string>
+    <string name="f_maker_step7_result_program_setting_set_number">- 세트 수</string>
+    <string name="f_maker_step7_result_program_setting_set_number_default">0 회</string>
+    <string name="f_maker_step7_result_program_setting_rest_time">- 휴식 시간</string>
+    <string name="f_maker_step7_result_program_setting_rest_time_default">0분 0초</string>
+    <string name="f_maker_step7_result_program_setting_total_event_number">- 총 종목 수</string>
+    <string name="f_maker_step7_result_program_setting_total_event_number_default">0 개</string>
+    <string name="f_maker_step7_result_program_setting_total_set_number">- 총 세트 수</string>
+    <string name="f_maker_step7_result_program_setting_total_set_number_default">0 세트</string>
+    <string name="f_maker_step7_result_detail_program_setting_title">세부 프로그램 설정</string>
     <string name="f_maker_step7_result_"></string>
+    <string name="f_maker_step7_result_snack_nick_name_input">별칭을 입력해주세요.</string>
 
     <!-- Fragment : my program -->
     <string name="f_my_program_indication">내가 만든 프로그램 목록입니다.</string>
@@ -584,21 +594,18 @@
     <!-- ListView Adapter : event program item lv adapter -->
     <string name="event_program_item_lv_adapter_snack_rest_time_no_setting">휴식시간을 정하지 않았습니다.</string>
     <string name="event_program_item_lv_adapter_snack_set_number_no_setting">세트 수를 입력해주세요.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- ProjectPermission -->
+    <string name="project_permission_re_request">권한 재 요청</string>
+    <string name="project_permission_re_request_reason">해당 디바이스의 위치를 인식해야 하는 서비스를 이용하기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- PermissionUtil -->
+    <string name="etc_permission_util_snack_location_permission_request_title">위치 권한 요청</string>
+    <string name="etc_permission_util_snack_location_permission_request_message">현재 위치를 알기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
+    <string name="etc_permission_util_snack_location_service_request_title">위치 서비스 요청</string>
+    <string name="etc_permission_util_snack_location_service_request_message">위치 서비스를 활성화해야지 해당 서비스를 사용할 수 있습니다.</string>
+
+    <!-- SearchUtil -->
+    <string name="etc_search_util_snack_not_find_address">주소를 찾지 못 하였습니다.</string>
 
 </resources>

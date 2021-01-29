@@ -195,5 +195,18 @@ public class DataFormatter {
 
         return new StringBuilder().append(setNumber).append("세트").toString();
     }
+
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= total event number format =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    /**
+     * eventNumber 를 'n개' format 으로 변환하여 반환한다.
+     * @param eventNumber
+     * @return
+     */
+    public static String setEventNumberFormat(int eventNumber) {
+
+        return new StringBuilder().append(eventNumber).append("개").toString();
+    }
 }
 

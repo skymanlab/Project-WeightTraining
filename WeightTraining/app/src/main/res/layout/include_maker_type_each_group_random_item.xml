@@ -22,24 +22,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="15dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/include_maker_type_each_group_random_item_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="5dp"
-                android:paddingTop="5dp"
-                android:paddingRight="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/eland_choice_bold"
                 android:text="@string/include_maker_type_each_group_random_muscle_area"
-                app:drawableStartCompat="@drawable/menu_icon" />
+                android:textColor="@color/colorTextBack" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/horizontal_dot_divider"
+                android:layerType="software" />
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -54,7 +54,9 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
                     android:visibility="invisible"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="0dp"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -89,7 +91,9 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
                     android:visibility="invisible"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="0dp"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -124,7 +128,9 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
                     android:visibility="invisible"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="0dp"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -159,7 +165,9 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
                     android:visibility="gone"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="0dp"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -194,7 +202,9 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
                     android:visibility="gone"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="0dp"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"

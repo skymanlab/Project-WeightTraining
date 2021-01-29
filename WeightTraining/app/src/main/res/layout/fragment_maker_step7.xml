@@ -82,14 +82,14 @@
                     android:background="@color/browser_actions_divider_color" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/f_maker_step7_nick_name"
+                    android:id="@+id/f_maker_step7_result_nick_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="center"
-                    android:hint="@string/f_maker_step7_result_nick_name_input"
+                    android:hint="@string/f_maker_step7_result_nick_name_hint"
                     android:textSize="14sp" />
 
                 <!-- program setting -->
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="7dp"
                         android:fontFamily="@font/eland_choice_bold"
-                        android:text="@string/f_maker_step7_program_result_title"
+                        android:text="@string/f_maker_step7_result_program_setting_title"
                         android:textColor="@color/colorTextBack"
                         android:textSize="16sp" />
 
@@ -120,15 +120,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_light"
-                            android:text="@string/f_maker_step7_result_set_number" />
+                            android:text="@string/f_maker_step7_result_program_setting_set_number" />
 
                         <TextView
-                            android:id="@+id/f_maker_step7_program_setting_set_number"
+                            android:id="@+id/f_maker_step7_result_program_setting_set_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/eland_choice_light"
-                            android:text="@string/f_maker_step7_result_set_number_default"
+                            android:text="@string/f_maker_step7_result_program_setting_set_number_default"
                             android:textAlignment="textEnd"
                             android:textColor="@color/colorTextBack" />
                     </LinearLayout>
@@ -143,18 +143,43 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_light"
-                            android:text="@string/f_maker_step7_result_rest_time" />
+                            android:text="@string/f_maker_step7_result_program_setting_rest_time" />
 
                         <TextView
-                            android:id="@+id/f_maker_step7_program_setting_rest_time"
+                            android:id="@+id/f_maker_step7_result_program_setting_rest_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/eland_choice_light"
-                            android:text="@string/f_maker_step7_result_rest_time_default"
+                            android:text="@string/f_maker_step7_result_program_setting_rest_time_default"
                             android:textAlignment="textEnd"
                             android:textColor="@color/colorTextBack" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step7_result_program_setting_total_set_number" />
+
+                        <TextView
+                            android:id="@+id/f_maker_step7_result_program_setting_total_set_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step7_result_program_setting_total_set_number_default"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/colorTextBack" />
+                    </LinearLayout>
+
+
                 </LinearLayout><!-- End of program setting -->
 
                 <View
@@ -179,11 +204,34 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
+                        android:layout_marginBottom="7dp"
                         android:fontFamily="@font/eland_choice_bold"
-                        android:text="@string/f_maker_step7_detail_program_result_title"
+                        android:text="@string/f_maker_step7_result_detail_program_setting_title"
                         android:textColor="@color/colorTextBack"
                         android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step7_result_program_setting_total_event_number" />
+
+                        <TextView
+                            android:id="@+id/f_maker_step7_result_program_setting_total_event_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step7_result_program_setting_total_event_number_default"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/colorTextBack" />
+                    </LinearLayout>
                 </LinearLayout><!-- End of detail program setting -->
 
                 <View

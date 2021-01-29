@@ -200,6 +200,8 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
                     program.setSetNumber(programSettingSetNumber.getValue());
                     program.setRestTimeMinute(programSettingRestTimeMinute.getValue());
                     program.setRestTimeSecond(programSettingRestTimeSecond.getValue());
+                    program.setTotalEventNumber(finalOrderList.size());
+                    program.setTotalSetNumber(getTotalSetNumber());
 
                     // [lv/C]MakerStep7Fragment : step 7 fragment 생성
                     MakerStep7Fragment step7Fragment = MakerStep7Fragment.newInstance(finalOrderList, program, detailProgramList);
@@ -221,6 +223,26 @@ public class MakerStep6SectionManager extends FragmentSectionManager implements 
         };
     }
 
+    private int getTotalSetNumber() {
+
+        int totalSetNumber = 0;
+
+        // [cycle ] :
+        for (int index = 0; index < finalOrderList.size(); index++) {
+
+            DetailProgram detailProgram = detailProgramList.get(finalOrderList.get(index).getKey());
+
+            if (detailProgram == null) {
+                totalSetNumber += programSettingSetNumber.getValue();
+            } else {
+                totalSetNumber += detailProgram.getSetNumber();
+            }
+
+        } // [cycle ]
+
+        return totalSetNumber;
+
+    }
 
     /**
      * recyclerView 의 layout manager 와 adapter 를 설정하는 초기작업 실행

@@ -39,7 +39,7 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep6SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private ArrayList<Event> selectedChestEventArrayList;

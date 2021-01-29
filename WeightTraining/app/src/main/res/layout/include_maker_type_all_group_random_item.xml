@@ -21,47 +21,51 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/include_maker_type_all_group_random_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_gothic"
-                android:paddingTop="5dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/eland_choice_bold"
                 android:text="@string/include_maker_type_all_group_random_item_muscle_area"
-                app:drawableStartCompat="@drawable/menu_icon" />
+                android:textColor="@color/colorTextBack" />
 
             <View
                 android:layout_width="match_parent"
+                android:layout_height="2dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/horizontal_dot_divider"
+                android:layerType="software" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorTextBack"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <TextView
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/include_maker_type_all_group_random_item_menu"/>
+                        android:paddingStart="10dp"
+                        android:text="@string/include_maker_type_all_group_random_item_menu" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/include_maker_type_all_group_random_item_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

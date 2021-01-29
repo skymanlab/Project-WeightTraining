@@ -7,10 +7,22 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.compose.animation.core.Spring;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.event.data.Event;
@@ -20,6 +32,7 @@ import com.skymanlab.weighttraining.management.project.data.DataFormatter;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.TrainingFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.ProgramFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.Step7DetailProgramResultItem;
 
@@ -32,6 +45,15 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
     private static final String CLASS_NAME = "[PFTPS] MakerStep7SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
+    // constant
+    private static final String NICK_NAME = "nickName";
+    private static final String TOTAL_EVENT_NUMBER = "totalEventNumber";
+    private static final String TOTAL_SET_NUMBER = "totalSetNumber";
+    private static final String SET_NUMBER = "setNumber";
+    private static final String DETAIL_PROGRAM_ORDER = "order";
+    private static final String REST_TIME_MINUTE = "restTimeMinute";
+    private static final String REST_TIME_SECOND = "restTimeSecond";
+
     // instance variable
     private ArrayList<Event> finalOrderList;
     private Program program;
@@ -39,8 +61,10 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
 
     // instance variable
     private TextInputEditText nickName;
-    private TextView programResultSetNumber;
-    private TextView programResultRestTime;
+    private TextView programSettingSetNumber;
+    private TextView programSettingRestTime;
+    private TextView programSettingTotalEventNumber;
+    private TextView programSettingTotalSetNumber;
     private ScrollView resultContentWrapper;
     private LinearLayout detailProgramResultListWrapper;
 
@@ -66,13 +90,19 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
     public void connectWidget() {
 
         // [ TextInputEditText | nickName ] widget connect
-        this.nickName = (TextInputEditText) getView().findViewById(R.id.f_maker_step7_nick_name);
+        this.nickName = (TextInputEditText) getView().findViewById(R.id.f_maker_step7_result_nick_name);
 
-        // [ TextView | programResultSetNumber ] widget connect
-        this.programResultSetNumber = (TextView) getView().findViewById(R.id.f_maker_step7_program_setting_set_number);
+        // [ TextView | programSettingSetNumber ] widget connect
+        this.programSettingSetNumber = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_set_number);
 
-        // [ TextView | programResultRestTime ] widget connect
-        this.programResultRestTime = (TextView) getView().findViewById(R.id.f_maker_step7_program_setting_rest_time);
+        // [ TextView | programSettingRestTime ] widget connect
+        this.programSettingRestTime = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_rest_time);
+
+        // [ TextView | programSettingTotalEventNumber ] widget connect
+        this.programSettingTotalEventNumber = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_total_event_number);
+
+        // [ TextView | programSettingTotalSetNumber ] widget connect
+        this.programSettingTotalSetNumber = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_total_set_number);
 
         // [ ScrollView | resultContentWrapper ] widget connect
         this.resultContentWrapper = (ScrollView) getView().findViewById(R.id.f_maker_step7_result_content_wrapper);
@@ -85,11 +115,17 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
     @Override
     public void initWidget() {
 
-        // [TextView] [programResultSetNumber] text
-        this.programResultSetNumber.setText(DataFormatter.setSetNumberFormat(this.program.getSetNumber()));
+        // [TextView] [programSettingSetNumber] text
+        this.programSettingSetNumber.setText(DataFormatter.setSetNumberFormat(this.program.getSetNumber()));
 
-        // [TextView] [programResultRestTime] text
-        this.programResultRestTime.setText(DataFormatter.setTimeFormat(this.program.getRestTimeMinute(), this.program.getRestTimeSecond()));
+        // [TextView] [programSettingRestTime] text
+        this.programSettingRestTime.setText(DataFormatter.setTimeFormat(this.program.getRestTimeMinute(), this.program.getRestTimeSecond()));
+
+        // [ TextView | programSettingTotalEventNumber ]
+        this.programSettingTotalEventNumber.setText(DataFormatter.setEventNumberFormat(this.program.getTotalEventNumber()));
+
+        // [ TextView | programSettingTotalSetNumber ] text
+        this.programSettingTotalSetNumber.setText(DataFormatter.setSetNumberFormat(this.program.getTotalSetNumber()));
 
         // [method]
         initWidgetOfDetailProgramResultListWrapper();
@@ -107,13 +143,14 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
             @Override
             public AlertDialog setEndButtonClickListener() {
 
-                // back stack 에 있던 모든 fragment 를 pop!
-//                getFragment().getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                if (!nickName.getText().toString().equals("")) {
 
-                // 'program' fragment 로 이동
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, ProgramFragment.newInstance())
-                        .commit();
+                    saveContent();
+
+                } else {
+                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step7_result_snack_nick_name_input, Snackbar.LENGTH_SHORT).show();
+                }
+
 
                 return null;
             }
@@ -174,4 +211,86 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
     private void addViewOfDetailProgramResultListWrapper(Step7DetailProgramResultItem detailProgramResultItem) {
         this.detailProgramResultListWrapper.addView(detailProgramResultItem.getItem());
     }
+
+
+    private void saveContent() {
+
+        // [HashMap<String, Object>] [saveData]
+        HashMap<String, Object> saveData = new HashMap<>();
+        saveData.put(NICK_NAME, nickName.getText().toString());
+        saveData.put(TOTAL_EVENT_NUMBER, program.getTotalEventNumber());
+        saveData.put(TOTAL_SET_NUMBER, program.getTotalSetNumber());
+
+        // [DatabaseReference] [db] program/$uid$/$key$/
+        DatabaseReference db = FirebaseDatabase
+                .getInstance()
+                .getReference("program")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        String programKey = db.push().getKey();
+
+        db.child(programKey).setValue(saveData, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                if (error == null) {
+
+                    saveContentOfProgramList(ref);
+
+                    // back stack 에 있던 모든 fragment  를 pop!
+                    getFragment().getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                    // 'program' fragment 로 이동
+                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.nav_home_content_wrapper, TrainingFragment.newInstance())
+                            .commit();
+
+                }
+
+            }
+        });
+    }
+
+    /**
+     * program/&uid/&programKey&/list 의 하위 항목으로 저장한다.
+     *
+     * @param dbRef
+     */
+    private void saveContentOfProgramList(DatabaseReference dbRef) {
+
+        // [cycle ] :
+        for (int index = 0; index < finalOrderList.size(); index++) {
+
+            // 해당 eventKey 에 해당하는 detailProgram 을 가져온다.
+            DetailProgram detailProgram = detailProgramList.get(finalOrderList.get(index).getKey());
+
+            HashMap<String, Object> saveData = new HashMap<>();
+
+            // detailProgram 객체의 유무에 따라 saveData 설정 방법이 다름
+            if (detailProgram != null) {
+
+                // detailProgram 내용을 토대로 저장
+                saveData.put(DETAIL_PROGRAM_ORDER, index);
+                saveData.put(SET_NUMBER, detailProgram.getSetNumber());
+                saveData.put(REST_TIME_MINUTE, detailProgram.getRestTimeMinute());
+                saveData.put(REST_TIME_SECOND, detailProgram.getRestTimeSecond());
+
+            } else {
+
+                // program 내용을 토대로 저장
+                saveData.put(DETAIL_PROGRAM_ORDER, index);
+                saveData.put(SET_NUMBER, program.getSetNumber());
+                saveData.put(REST_TIME_MINUTE, program.getRestTimeMinute());
+                saveData.put(REST_TIME_SECOND, program.getRestTimeSecond());
+
+            }
+
+
+            // program/$uid$/$programKey$/list/$eventKey$/ 에 saveData 를 저장한다.
+            dbRef.child("list")
+                    .child(finalOrderList.get(index).getKey())
+                    .setValue(saveData);
+        } // [cycle ]
+    }
+
 }

@@ -1,10 +1,14 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
 import android.content.Intent;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
@@ -14,6 +18,7 @@ import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -31,6 +36,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private MaterialCardView setting;
     private MaterialButton notice;
     private MaterialButton serviceCenter;
+
 
     // constructor
     public MoreSectionManager(Fragment fragment, View view) {
@@ -82,6 +88,12 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View v) {
 
+                // fitnessCenterFragment 로 이동
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
 
@@ -90,6 +102,10 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View v) {
 
+                // 현재 위치 알아오기
+
+                Intent callGPSSettingIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                getFragment().getActivity().startActivityForResult(callGPSSettingIntent, 3000);
             }
         });
 

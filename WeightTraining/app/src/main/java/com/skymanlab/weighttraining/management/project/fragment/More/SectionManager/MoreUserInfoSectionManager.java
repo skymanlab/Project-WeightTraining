@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso;
 public class MoreUserInfoSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFMS] MoreSectionManager";
+    private static final String CLASS_NAME = "[PFMS] MoreUserInfoSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable

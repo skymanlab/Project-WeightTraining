@@ -1,13 +1,17 @@
 package com.skymanlab.weighttraining.management.project.fragment.Home;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.skymanlab.weighttraining.R;
@@ -31,12 +35,12 @@ public class HomeFragment extends Fragment {
     // instance variable
     private FragmentTopBarManager topBarManager;
     private FragmentTopUserManager topUserManager;
+    private HomeSectionManager sectionManager;
 
     // constructor
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     /**
      * Use this factory method to create a new instance of
@@ -78,5 +82,12 @@ public class HomeFragment extends Fragment {
         this.topUserManager = new FragmentTopUserManager(this, view, false);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
+
+        // [HomeSectionManager] [sectionManager]
+        this.sectionManager = new HomeSectionManager(this, view);
+        this.sectionManager.connectWidget();
+        this.sectionManager.initWidget();
+
     }
+
 }

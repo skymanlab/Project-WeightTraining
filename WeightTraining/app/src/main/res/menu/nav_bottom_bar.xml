@@ -9,10 +9,10 @@
         android:id="@+id/nav_bottom_bar_training"
         android:title="@string/nav_bottom_bar_training"
         android:icon="@drawable/nav_bottom_bar_menu_2_training"/>
-    <item
-        android:id="@+id/nav_bottom_bar_intervene"
-        android:title="@string/nav_bottom_bar_intervene"
-        android:icon="@drawable/nav_bottom_bar_menu_3_intervene"/>
+<!--    <item-->
+<!--        android:id="@+id/nav_bottom_bar_intervene"-->
+<!--        android:title="@string/nav_bottom_bar_intervene"-->
+<!--        android:icon="@drawable/nav_bottom_bar_menu_3_intervene"/>-->
     <item
         android:id="@+id/nav_bottom_bar_more"
         android:title="@string/nav_bottom_bar_more"

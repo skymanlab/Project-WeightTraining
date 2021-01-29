@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,6 +39,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/include_top_bar_divider_width"
                 android:background="@color/browser_actions_divider_color" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/browser_actions_bg_grey" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/f_home_ad_mob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom"
+                app:adSize="SMART_BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+
+            <TextView
+                android:id="@+id/f_home_test_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="테스트 중"/>
         </LinearLayout>
     </ScrollView><!-- End of content container -->
 
