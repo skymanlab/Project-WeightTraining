@@ -1,42 +1,22 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.GoogleMapManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.LocationUpdateManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.LocationUpdateUtil;
-import com.skymanlab.weighttraining.management.project.fragment.More.SearchUtil;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
+import com.skymanlab.weighttraining.management.project.ApiManager.GoogleMapManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.SearchUtil;
 
 public class FitnessCenterSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -46,7 +26,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
     // instance variable
     private SearchView addressSearchView;
-    private Button button;
 
     // instance variable : google map api
     private GoogleMap gMap;
@@ -67,8 +46,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
         // [SearchView] [addressSearchView]
         this.addressSearchView = (SearchView) getView().findViewById(R.id.f_fitness_center_address_search);
-
-        button = (Button) getView().findViewById(R.id.f_fitness_center_button);
 
     }
 
@@ -94,14 +71,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
-            }
-        });
-
-        this.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                googleMapManager.startLocationUpdate();
             }
         });
     }

@@ -15,6 +15,7 @@ import com.skymanlab.weighttraining.LoginActivity;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.AuthenticationManager;
 
 public class LSectionManager extends SectionManager implements SectionInitialization {
 
@@ -23,15 +24,15 @@ public class LSectionManager extends SectionManager implements SectionInitializa
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private GoogleSignInClient googleSignInClient;
+    private AuthenticationManager authenticationManager;
 
     // instance variable
     private SignInButton googleAuth;
 
     // constructor
-    public LSectionManager(Activity activity, GoogleSignInClient googleSignInClient) {
+    public LSectionManager(Activity activity, AuthenticationManager authenticationManager) {
         super(activity);
-        this.googleSignInClient = googleSignInClient;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -53,24 +54,12 @@ public class LSectionManager extends SectionManager implements SectionInitializa
             @Override
             public void onClick(View v) {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> Google Sign-In Button 클릭!");
-                
+
                 // [method] : 로그인 과정 진행
-                singIn();
+                authenticationManager.singIn();
             }
         });
 
     }
-
-
-    /**
-     * [method] GoogleSignInClient 를 통해 인증화면으로 이동  -> 결과를 Intent 로 받아오기
-     */
-    private void singIn() {
-
-        // [lv/C]Intent : Google 인증을 위한 화면으로 이동
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        getActivity().startActivityForResult(signInIntent, LoginActivity.RC_SIGN_IN);
-
-    } // End of method [singIn]
 
 }

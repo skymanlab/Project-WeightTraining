@@ -1,16 +1,13 @@
-package com.skymanlab.weighttraining.management.project.fragment.More;
+package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.app.Activity;
 import android.location.Address;
 import android.location.Geocoder;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.developer.LogManager;
 
 import java.io.IOException;
 import java.util.List;

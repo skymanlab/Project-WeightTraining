@@ -1,79 +1,41 @@
 {
   "project_info": {
-    "project_number": "124099927534",
-    "firebase_url": "https://weight-training-pro-default-rtdb.firebaseio.com",
-    "project_id": "weight-training-pro",
-    "storage_bucket": "weight-training-pro.appspot.com"
+    "project_number": "35551038113",
+    "project_id": "wetraway",
+    "storage_bucket": "wetraway.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:124099927534:android:483d4d0c5edf7dccdc42ff",
-        "android_client_info": {
-          "package_name": "com.skyman.weighttrainingpro"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "124099927534-84v6m2evr0runlp18tf71s0hrds94hjl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.skyman.weighttrainingpro",
-            "certificate_hash": "cadc2dc644c130214554aec5eae2b68521718004"
-          }
-        },
-        {
-          "client_id": "124099927534-r1d6v4lkmbjk0mipnhenp3rak8ujs8hc.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCvCO5sAAZv-SLSH_T5yJTF0l5-ZlXd4eQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "124099927534-r1d6v4lkmbjk0mipnhenp3rak8ujs8hc.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:124099927534:android:9ce712ee7830c585dc42ff",
+        "mobilesdk_app_id": "1:35551038113:android:fd869eb3d8caa264debee0",
         "android_client_info": {
           "package_name": "com.skymanlab.weighttraining"
         }
       },
       "oauth_client": [
         {
-          "client_id": "124099927534-r8b12a1oqsbll7rehh95td4fsuj6sv9m.apps.googleusercontent.com",
+          "client_id": "35551038113-oec65rshs8a4oasgpp863faaa8kvf621.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.skymanlab.weighttraining",
-            "certificate_hash": "b96764fd9dcd4f936c649d40f0633f061f049972"
+            "certificate_hash": "b497fec5425af79e33cdc9e3ed9f57d1c8b75e85"
           }
         },
         {
-          "client_id": "124099927534-r1d6v4lkmbjk0mipnhenp3rak8ujs8hc.apps.googleusercontent.com",
+          "client_id": "35551038113-80dh6op13k08em44huvgqpebn9i1rdh0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCvCO5sAAZv-SLSH_T5yJTF0l5-ZlXd4eQ"
+          "current_key": "AIzaSyAuchDE0iJ5Ue3UjPHrRNCV-2Oe9I9dH5Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "124099927534-r1d6v4lkmbjk0mipnhenp3rak8ujs8hc.apps.googleusercontent.com",
+              "client_id": "35551038113-80dh6op13k08em44huvgqpebn9i1rdh0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

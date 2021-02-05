@@ -2,6 +2,7 @@ package com.skymanlab.weighttraining;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +14,13 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManager;
 
 public class MainActivity extends AppCompatActivity {
 
     // constant
     private static final String CLASS_NAME = "[Ac] MainActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private ImageView log;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * [innerClass] user table 에서
      */
-    class MoveActivity extends Thread  {
+    class MoveActivity extends Thread {
 
         // instance variable
         private Context context;
@@ -65,13 +67,22 @@ public class MainActivity extends AppCompatActivity {
 
             final String METHOD_NAME = "[run] ";
 
+            Class targetActivity = null;
+
+            if (SettingsManager.checkKeepLoggedIn(MainActivity.this)) {
+                targetActivity = NavHomeActivity.class;
+            } else {
+                targetActivity = LoginActivity.class;
+            }
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetActivity > 목표 = " + targetActivity);
+
             try {
 
                 // [method] : 3초 지연
                 sleep(2000);
 
-                // [lv/C]Intent : LoginActivity 이동하는 intent 생성 및 이동
-                Intent intent = new Intent(this.context, LoginActivity.class);
+                // [lv/C]Intent : targetActivity 이동하는 intent 생성 및 이동
+                Intent intent = new Intent(this.context, targetActivity);
                 finish();
                 startActivity(intent);
 

@@ -1,4 +1,4 @@
-package com.skymanlab.weighttraining.management.project.fragment.More;
+package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,7 +6,6 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -142,7 +141,7 @@ public class LocationUpdateManager {
                     try {
                         // Show the dialog by calling startResolutionForResult(),
                         // and check the result in onActivityResult()
-                        resolvable.startResolutionForResult(activity, ActivityResultManager.RESOLUTION_REQUEST_CODE);
+                        resolvable.startResolutionForResult(activity, PermissionResultManager.RESOLUTION_REQUEST_CODE);
                     } catch (IntentSender.SendIntentException sendIntentException) {
                         sendIntentException.printStackTrace();
                     }

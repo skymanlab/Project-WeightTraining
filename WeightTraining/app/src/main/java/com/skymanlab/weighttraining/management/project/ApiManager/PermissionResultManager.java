@@ -1,22 +1,20 @@
-package com.skymanlab.weighttraining.management.project.fragment.More;
+package com.skymanlab.weighttraining.management.project.ApiManager;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 
-import java.security.Permission;
-
-public class ActivityResultManager {
+public class PermissionResultManager {
 
     // constant
     private static final String CLASS_NAME = PermissionManager.class.getSimpleName();
@@ -26,6 +24,8 @@ public class ActivityResultManager {
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 50000;   // PermissionManager : location permission 요청 결과를 받기 위한
     public static final int LOCATION_SERVICE_REQUEST_CODE = 50001;      // PermissionManager : location service enable 요청 결과를 받기 위한
     public static final int RESOLUTION_REQUEST_CODE = 50002;            // FusedLocationProviderClient : location request 적용 실패 시 -> 요청 결과를 받기 위한
+    public static final int BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE = 50003;
+    public static final int APPLICATION_SETTINGS_REQUEST_CODE = 50004;
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= permission result for ActivityResultLauncher =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -68,9 +68,11 @@ public class ActivityResultManager {
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Request Code 에 따라 다음 절차를 설정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [1] LOCATION_PERMISSION_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [50000] LOCATION_PERMISSION_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public void setNextProcedureForLocationPermissionRequestResult(Fragment targetFragment, String[] permissions, int[] grantResults) {
         final String METHOD_NAME = "[setNextProcedureForLocationPermissionRequestResult] ";
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Fragment > 객체는 ? = " + targetFragment);
 
         // [check 1] 모든 권한이 승인 되었는지 확인
         if (isItApprovedAllPermissions(permissions, grantResults)) {
@@ -79,8 +81,17 @@ public class ActivityResultManager {
 
             // [check 2] targetFragment 가 어떤 Fragment 인지 구분
             if (targetFragment instanceof FitnessCenterFragment) {
+
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterFragment : fragment - sectionManager - googleMapManager 의 init() 수행합니다.");
-                setNextProcedureForGrantedLocationPermissionOfFitnessCenterFragment((FitnessCenterFragment) targetFragment);
+                // FitnessCenterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
+                ((FitnessCenterFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
+
+            } else if (targetFragment instanceof SettingsActivity.SettingsFragment) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > SettingsFragment : 해당 locationPermission 을 set 으로 만듭니다.");
+                ((SettingsActivity.SettingsFragment) targetFragment).setLocationPermissionState();
+                ((SettingsActivity.SettingsFragment) targetFragment).setBackgroundLocationPermissionState();
+
             } // [check 2]
 
         } else {
@@ -110,44 +121,70 @@ public class ActivityResultManager {
         return true;
     }
 
-    private void setNextProcedureForGrantedLocationPermissionOfFitnessCenterFragment(FitnessCenterFragment fragment) {
-        fragment.getSectionManager().getGoogleMapManager().init();
-    }
 
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [2] GPS_ENABLE_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [50001] GPS_ENABLE_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public void setNextProcedureForLocationServiceRequestResult(Fragment targetFragment) {
         final String METHOD_NAME = "[setNextProcedureForLocationServiceRequestResult] ";
 
-        // [PermissionUtil] [util] util 을 이용하여 location service 활성화되었는지 다시 확인하기 위해서
-        PermissionUtil util = new PermissionUtil();
-
-        // [check 1] : 다시 location service 가 활성화 되었는지 확인
-        if (util.checkLocationServicesStatus(targetFragment.getActivity())) {
+        // [check 1] Location Service : GSP, Network 가 활성화 되었는지 확인
+        if (PermissionUtil.isEnabledLocationServices(targetFragment.getActivity(), LocationManager.GPS_PROVIDER)
+                || PermissionUtil.isEnabledLocationServices(targetFragment.getActivity(), LocationManager.NETWORK_PROVIDER)) {
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< location service > 해당 location service 는 활성화 되었습니다.");
 
-            // [check 2] targetFragment 가 어떤 Fragment 인지 구분
+            // [check 2] Fragment : targetFragment 가 FitnessCenterFragment 인지 구분
             if (targetFragment instanceof FitnessCenterFragment) {
+
+                // FitnessCenterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
+                ((FitnessCenterFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterFragment 에 대한 다음 과정을 진행합니다.");
-                setNextProcedureForGrantedLocationServiceOfFitnessCenterFragment((FitnessCenterFragment) targetFragment);
 
             } // [check 2]
 
         } else {
+
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< location service > 해당 location service 는 비활성화 된 상태입니다.");
+
         } // [check 1]
 
-
     }
 
-    private void setNextProcedureForGrantedLocationServiceOfFitnessCenterFragment(FitnessCenterFragment fragment) {
-        fragment.getSectionManager().getGoogleMapManager().init();
-    }
 
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [3] RESOLUTION_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [50002] RESOLUTION_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public void setNextProcedureForResolutionRequestResult() {
 
     }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [50003] BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public void setNextProcedureForBackgroundLocationPermissionRequestResult(Fragment targetFragment) {
+        final String METHOD_NAME = "[setNextProcedureForBackgroundLocationPermissionRequestResult] ";
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > 어디 fragment 인가요? = " + targetFragment);
+
+        if (targetFragment instanceof SettingsActivity.SettingsFragment) {
+
+            // SettingsFragment : 'Location Permission' 과 'Background Location Permission' 의 상태에 따른 화면 설정 method 를 실행한다.
+            ((SettingsActivity.SettingsFragment) targetFragment).setLocationPermissionState();
+            ((SettingsActivity.SettingsFragment) targetFragment).setBackgroundLocationPermissionState();
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< SettingsFragment > 설정 화면을 다시 설정하고 있습니다. ");
+        }
+
+    }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= [50004] APPLICATION_SETTINGS_REQUEST_CODE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public void setNextProcedureForApplicationSettingRequestResult(Fragment targetFragment) {
+        final String METHOD_NAME = "[setNextProcedureForApplicationPermissionRequestResult] ";
+
+        if (targetFragment instanceof SettingsActivity.SettingsFragment) {
+
+            // SettingsFragment : 'Location Permission' 과 'Background Location Permission' 의 상태에 따른 화면 설정 method 를 실행한다.
+            ((SettingsActivity.SettingsFragment) targetFragment).setLocationPermissionState();
+            ((SettingsActivity.SettingsFragment) targetFragment).setBackgroundLocationPermissionState();
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< SettingsFragment > 설정 화면을 다시 설정하고 있습니다. ");
+        }
+
+    }
+
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Listener =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface PermissionResultListener {

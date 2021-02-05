@@ -12,16 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/f_fitness_center_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="클릭" />
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/f_fitness_center_address_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         app:iconifiedByDefault="false" />
 
     <fragment

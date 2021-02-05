@@ -1,29 +1,21 @@
-package com.skymanlab.weighttraining.management.project.fragment.More;
+package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
-import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 
-import java.io.IOException;
 import java.util.List;
 
 public class GoogleMapManager {
@@ -59,7 +51,7 @@ public class GoogleMapManager {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< google Map Manager > 구글 맵의 초기 설정을 시작합니다.==================================================================");
         permissionManager = new PermissionManager(activity);
-        permissionManager.init(new PermissionManager.GrantedPermissionListener() {
+        permissionManager.initLocationPermission(new PermissionManager.GrantedPermissionListener() {
             @Override
             public void setNextProcedure() {
 
@@ -72,6 +64,8 @@ public class GoogleMapManager {
                 // my location 사용가능 한지 파악 후
                 initMyLocation();
 
+                // 초기 위치
+                markInitialLocation();
             }
         });
 
@@ -88,7 +82,6 @@ public class GoogleMapManager {
 
     private void initMyLocation() {
         final String METHOD_NAME = "[initMyLocation] ";
-
 
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -130,6 +123,12 @@ public class GoogleMapManager {
         // [LocationUpdateManager] [updateManager] 초기 데이터로 초기 설정을 한다.
         this.updateManager.init();
 
+    }
+
+
+    public void markInitialLocation() {
+        final String METHOD_NAME = "[markInitialLocation] ";
+
         // last location 으로 초기 위치 설정
         this.updateManager.getLastLocation(activity, new OnSuccessListener<Location>() {
             @Override
@@ -160,7 +159,6 @@ public class GoogleMapManager {
                 }
             }
         });
-
     }
 
 
@@ -246,7 +244,6 @@ public class GoogleMapManager {
         }
 
     }
-
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Builder =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

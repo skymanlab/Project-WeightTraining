@@ -50,10 +50,16 @@
         <!-- 구글 map 사용하기 위해 API 키를 추가하는 작업이다.-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCMzKT5dQt1ihcVOZjicwpJstML6iP-D50" />
+            android:value="AIzaSyAL37PQvlC-vKQXnlssQPfky87uwgeRYnQ" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <!-- Broadcast Receiver : fitness center geofence -->
+        <receiver android:name=".management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver"
+            android:exported="true"
+            android:enabled="true">
+        </receiver>
 
     </application>
 

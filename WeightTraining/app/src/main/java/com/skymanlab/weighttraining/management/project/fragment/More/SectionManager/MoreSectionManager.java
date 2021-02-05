@@ -1,30 +1,46 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
+import androidx.work.Configuration;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.Operation;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterListenableWorker;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterLocationUpdateWorker;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFM] MoreSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private LinearLayout registerDayCountWrapper;
@@ -37,6 +53,9 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private MaterialButton notice;
     private MaterialButton serviceCenter;
 
+
+    // instance variable :
+    FitnessCenterGeofenceManager geofenceManager;
 
     // constructor
     public MoreSectionManager(Fragment fragment, View view) {
@@ -76,6 +95,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
     @Override
     public void initWidget() {
+        final String METHOD_NAME = "[initWidget] ";
 
         // register day count 관련 widget 등의 초기 내용을 설정한다.
         initWidgetOfRegisterDayCount();
@@ -102,10 +122,11 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View v) {
 
-                // 현재 위치 알아오기
-
-                Intent callGPSSettingIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                getFragment().getActivity().startActivityForResult(callGPSSettingIntent, 3000);
+                // fitnessCenterFragment 로 이동
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_home_content_wrapper, FitnessCenterRegisterFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -121,11 +142,14 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             }
         });
 
+
+        geofenceManager = new FitnessCenterGeofenceManager(getFragment().getActivity(), new LatLng(36.139007, 128.333612));
+        geofenceManager.init();
+
         // [iv/C]MaterialButton : notice click listener
         this.notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 

@@ -1,8 +1,13 @@
 package com.skymanlab.weighttraining;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,7 +20,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
+import androidx.work.Worker;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,15 +60,25 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.AuthenticationManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceService;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterLocationUpdateWorker;
+import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.NotificationManager;
 import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 import com.skymanlab.weighttraining.management.project.fragment.Home.HomeFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Intervene.InterventionFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.ActivityResultManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.PermissionResultManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.TrainingFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class NavHomeActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -58,6 +99,7 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
     private InterventionFragment intervene;
     private MoreFragment more;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +110,6 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
 
         // [iv/C]FirebaseUser : user 정보 가져오기
         this.firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        // [iv/C]User : FirebaseUser 의 정보 중 displayName, email, photoUrl 을 담는다.
-        this.user = new User();
-        this.user.setName(this.firebaseUser.getDisplayName());
-        this.user.setEmail(this.firebaseUser.getEmail());
-        this.user.setPhotoUrl(this.firebaseUser.getPhotoUrl().toString());
-        this.user.setUid(this.firebaseUser.getUid());
 
         // [method] : firebase database 에 나의 정보가 저장되어 있지 않으면, 나의 정보를 database 에 저장한다.
         registerFirstUserSetting(this.firebaseUser);
@@ -129,6 +164,8 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
             }
         });
 
+        NotificationManager notificationManager = new NotificationManager(this);
+        notificationManager.createNotificationChannel();
 
     }
 
@@ -152,6 +189,7 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
+                            AuthenticationManager.signOutFromOnFinish(NavHomeActivity.this);
                             finish();
                         }
                     })
@@ -167,11 +205,16 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
     } // End of method [onBackPressed]
 
 
+    @Override
+    protected void onDestroy() {
+        final String METHOD_NAME = "[onDestroy] ";
+        super.onDestroy();
+    }
+
     /**
      * [method] FirebaseDatabase 에서 user 의 하위 목록에 나의 uid 가 있는지 검사하여 없으면, 인증받은 FirebaseUser 객체의 정보를 'user/uid' 에 데이터를 저장한다.
      */
     private void registerFirstUserSetting(FirebaseUser firebaseUser) {
-
         final String METHOD_NAME = "[registerFirstAuth] ";
 
         // [lv/C]DatabaseReference : user/$uid 을 가져오기 위한
@@ -266,6 +309,7 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
         // [lv/C]String : 'base_event_data' 에 저장되어 있는 값을 가져온다.
         String baseEventData = preferences.getString("base_event_data", "false");
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ 기존 base_event_data 확인 = " + baseEventData);
+
 
         // [lv/C]DatabaseReference : Firebase 의 database 에 저장 유무를 확인하기 위한 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
@@ -376,15 +420,15 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
         final String METHOD_NAME = "[onRequestPermissionsResult] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- request code = " + requestCode);
 
-        ActivityResultManager resultManager = new ActivityResultManager();
+        PermissionResultManager permissionResultManager = new PermissionResultManager();
 
         switch (requestCode) {
-            case ActivityResultManager.LOCATION_PERMISSION_REQUEST_CODE:
+            case PermissionResultManager.LOCATION_PERMISSION_REQUEST_CODE:
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Permission Request > 해당 권한 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
 
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
-                resultManager.setNextProcedureForLocationPermissionRequestResult(fragment, permissions, grantResults);
+                permissionResultManager.setNextProcedureForLocationPermissionRequestResult(fragment, permissions, grantResults);
 
                 break;
         }
@@ -400,13 +444,13 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult request code = " + requestCode);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult result code = " + resultCode);
 
-        ActivityResultManager resultManager = new ActivityResultManager();
+        PermissionResultManager permissionResultManager = new PermissionResultManager();
 
         switch (requestCode) {
-            case ActivityResultManager.LOCATION_SERVICE_REQUEST_CODE:
+            case PermissionResultManager.LOCATION_SERVICE_REQUEST_CODE:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Service Request Code > 해당 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
-                resultManager.setNextProcedureForLocationServiceRequestResult(fragment);
+                permissionResultManager.setNextProcedureForLocationServiceRequestResult(fragment);
                 break;
         }
     }

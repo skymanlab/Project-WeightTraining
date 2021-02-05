@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.skymanlab.weighttraining.LoginActivity;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.project.ApiManager.AuthenticationManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
@@ -108,8 +109,7 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
                 @Override
                 public void onClick(View view) {
 
-                    // [method] firebase 에서 logout 하기
-                    logoutUser();
+                    AuthenticationManager.showSignOutDialog(getFragment().getActivity());
                 }
             });
 
@@ -118,9 +118,7 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
                 @Override
                 public void onClick(View view) {
 
-                    // [method] firebase 에서 탈퇴하기
-                    withdrawUser();
-
+                    AuthenticationManager.withdrawUser(getFragment().getActivity());
                 }
             });
         }
@@ -128,90 +126,4 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
     }
 
 
-    /**
-     * [method] App logout
-     */
-    private void logoutUser() {
-
-        // [lv/C]AlertDialog : Builder 객체 생성 / 초기 설정
-        AlertDialog.Builder builder = new AlertDialog.Builder(getFragment().getActivity());
-        builder.setTitle(R.string.f_more_user_info_alert_logout_user_title)
-                .setMessage(R.string.f_more_user_info_alert_logout_user_message)
-                .setPositiveButton(R.string.f_more_user_info_alert_logout_user_bt_positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        // [lv/C]FirebaseAuth : signOut 을 호출하여 사용자를 로그아웃한다.
-                        FirebaseAuth.getInstance().signOut();
-
-                        // [lv/C]Snackbar : 로그아웃 완료 메시지
-                        Snackbar.make(getView(), "로그아웃이 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
-
-                        // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
-                        Intent intent = new Intent(getFragment().getActivity(), LoginActivity.class);
-                        getFragment().getActivity().finish();
-                        getFragment().getActivity().startActivity(intent);
-
-                        dialog.dismiss();
-
-                    }
-                })
-                .setNegativeButton(R.string.f_more_user_info_alert_logout_user_bt_negative, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-
-
-    } // End of method [logoutUser]
-
-
-    /**
-     * [method] App withdraw : Firebase 에 등록된 사용자를 삭제한다.
-     */
-    private void withdrawUser() {
-
-        // [lv/C]AlertDialog : Builder 객체 생성 / 초기 설정
-        AlertDialog.Builder builder = new AlertDialog.Builder(getFragment().getActivity());
-        builder.setTitle(R.string.f_more_user_info_alert_withdraw_user_title)
-                .setMessage(R.string.f_more_user_info_alert_withdraw_user_message)
-                .setPositiveButton(R.string.f_more_user_info_alert_withdraw_user_bt_positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        // [lv/C]FirebaseUser :
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                                // [check 1] : task 의 성공여부를 받는다.
-                                if (task.isSuccessful()) {
-
-                                    // [lv/C]Snackbar : 탈퇴 완료 메시지
-                                    Snackbar.make(getView(), "탈퇴가 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
-
-                                    // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
-                                    Intent intent = new Intent(getFragment().getActivity(), LoginActivity.class);
-                                    getFragment().getActivity().finish();
-                                    getFragment().getActivity().startActivity(intent);
-
-                                    dialog.dismiss();
-                                } // [check 1]
-                            }
-                        });
-
-                    }
-                })
-                .setNegativeButton(R.string.f_more_user_info_alert_withdraw_user_bt_negative, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-
-    } // End of method [withdrawUser]
 }

@@ -62,16 +62,6 @@
     <string name="f_more_user_info_logout">로그아웃</string>
     <string name="f_more_user_info_withdraw">회원탈퇴</string>
     <string name="f_more_user_info_"></string>
-    <!-- Fragment AlertDialog : logout user -->
-    <string name="f_more_user_info_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
-    <string name="f_more_user_info_alert_logout_user_message">로그아웃을 진행합니다.</string>
-    <string name="f_more_user_info_alert_logout_user_bt_positive">로그아웃</string>
-    <string name="f_more_user_info_alert_logout_user_bt_negative">취소</string>
-    <!-- Fragment AlertDialog : withdraw user -->
-    <string name="f_more_user_info_alert_withdraw_user_title">탈퇴를 진행하시겠습니까?</string>
-    <string name="f_more_user_info_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
-    <string name="f_more_user_info_alert_withdraw_user_bt_positive">탈퇴</string>
-    <string name="f_more_user_info_alert_withdraw_user_bt_negative">취소</string>
 
     <!-- Fragment : fitness center -->
     <string name="f_fitness_center_title">피트니스 센터</string>
@@ -531,16 +521,32 @@
 
     <!-- Preference : category title -->
     <string name="preference_category_app">어플</string>
-    <string name="preference_category_user">사용자</string>
+    <string name="preference_category_location">위치</string>
+
+    <!-- Preference : key -->
+    <string name="preference_key_version_info">versionInfo</string>
+    <string name="preference_key_base_event_data">baseEventData</string>
+    <string name="preference_key_keep_logged_in">keepLoggedIn</string>
+    <string name="preference_key_location_permission">locationPermission</string>
+    <string name="preference_key_background_location_permission">backgroundLocationPermission</string>
+    <string name="preference_key_"></string>
 
     <!-- Preference : category item -->
-    <string name="preference_category_app_version_info">버전 정보</string>
+    <string name="preference_category_app_version_info_title">버전 정보</string>
     <string name="preference_category_app_version_info_summary">현재 최신 버전은 ⓥ 0.1 입니다.</string>
-    <string name="preference_category_app_basic_event_data">기본 데이터 등록</string>
+    <string name="preference_category_app_basic_event_data_title">기본 데이터 등록</string>
     <string name="preference_category_app_basic_event_data_summary_one">아직 기본 데이터가 등록되지 않았습니다.</string>
     <string name="preference_category_app_basic_event_data_summary_two">기본 데이터 등록이 완료되었습니다.</string>
-    <string name="preference_category_user_info">사용자 정보</string>
-    <string name="preference_category_user_keep_logged_in">로그인 유지</string>
+    <string name="preference_category_app_keep_logged_in_title">로그인 유지</string>
+
+    <string name="preference_category_location_permission_title">위치 권한</string>
+    <string name="preference_category_location_permission_granted">위치 권한이 승인되었습니다.</string>
+    <string name="preference_category_location_permission_denied">위치 권한이 거부되었습니다.</string>
+    <string name="preference_category_location_background_permission_title">백그라운드 위치 권한</string>
+    <string name="preference_category_location_background_permission_not_enable">먼저 위치 권한을 승인해주세요.</string>
+    <string name="preference_category_location_background_permission_granted">백그라운드 위치 권한이 승인되었습니다.</string>
+    <string name="preference_category_location_background_permission_denied">백그라운드 위치 권한이 거부되었습니다.</string>
+    <string name="preference_category_location_background_permission_user_denied">백그라운드 위치 권한이 사용자에 의해 거부되었습니다. 어플리케이션 설정에서 항상 허용으로 변경해주세요.</string>
 
     <!-- Preference, AlertDialog : base event data save -->
     <string name="preference_alert_base_event_data_save_title">기본 데이터를 저장하겠습니까?</string>
@@ -599,13 +605,32 @@
     <string name="project_permission_re_request">권한 재 요청</string>
     <string name="project_permission_re_request_reason">해당 디바이스의 위치를 인식해야 하는 서비스를 이용하기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
 
-    <!-- PermissionUtil -->
-    <string name="etc_permission_util_snack_location_permission_request_title">위치 권한 요청</string>
-    <string name="etc_permission_util_snack_location_permission_request_message">현재 위치를 알기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
-    <string name="etc_permission_util_snack_location_service_request_title">위치 서비스 요청</string>
-    <string name="etc_permission_util_snack_location_service_request_message">위치 서비스를 활성화해야지 해당 서비스를 사용할 수 있습니다.</string>
+    <!-- PermissionManager -->
+    <string name="etc_permission_manager_snack_location_permission_request_title">위치 권한 요청</string>
+    <string name="etc_permission_manager_snack_location_permission_request_message">현재 위치를 알기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
+    <string name="etc_permission_manager_snack_location_service_request_title">위치 서비스 요청</string>
+    <string name="etc_permission_manager_snack_location_service_request_message">위치 서비스를 활성화해야지 해당 서비스를 사용할 수 있습니다.</string>
+    <string name="etc_permission_manager_snack_background_location_permission_request_title">백그라운드 권한 요청</string>
+    <string name="etc_permission_manager_snack_background_location_permission_request_message">지정한 위치의 접근 알림을 사용하기 위해 위치 권한을 항상 승인으로 변경해주셔야 합니다.</string>
 
     <!-- SearchUtil -->
     <string name="etc_search_util_snack_not_find_address">주소를 찾지 못 하였습니다.</string>
+
+
+    <!-- AuthenticationManager-->
+    <string name="etc_authentication_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
+    <string name="etc_authentication_alert_logout_user_message">로그아웃을 진행합니다.</string>
+    <string name="etc_authentication_alert_logout_user_bt_positive">로그아웃</string>
+    <string name="etc_authentication_alert_logout_user_bt_negative">취소</string>
+    <string name="etc_authentication_alert_withdraw_user_title">탈퇴를 진행하시겠습니까?</string>
+    <string name="etc_authentication_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
+    <string name="etc_authentication_alert_withdraw_user_bt_positive">탈퇴</string>
+    <string name="etc_authentication_alert_withdraw_user_bt_negative">취소</string>
+
+    <!-- NotificationManager -->
+    <string name="etc_notification_manager_fitness_center_channel_name">위치 알림</string>
+    <string name="etc_notification_manager_fitness_center_channel_description">해당 위치에 접근하는 알림을 표시합니다.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
