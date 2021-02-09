@@ -1,21 +1,12 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.work.Configuration;
-import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.Operation;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
@@ -23,18 +14,11 @@ import com.google.android.material.card.MaterialCardView;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterListenableWorker;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterLocationUpdateWorker;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofencingManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -55,7 +39,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
 
     // instance variable :
-    FitnessCenterGeofenceManager geofenceManager;
+    FitnessCenterGeofencingManager geofenceManager;
 
     // constructor
     public MoreSectionManager(Fragment fragment, View view) {
@@ -122,11 +106,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View v) {
 
-                // fitnessCenterFragment 로 이동
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, FitnessCenterRegisterFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
             }
         });
 
@@ -142,14 +121,11 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             }
         });
 
-
-        geofenceManager = new FitnessCenterGeofenceManager(getFragment().getActivity(), new LatLng(36.139007, 128.333612));
-        geofenceManager.init();
-
         // [iv/C]MaterialButton : notice click listener
         this.notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
 
@@ -157,12 +133,13 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.serviceCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 
     }
 
+
+    
 
     /**
      * register day count 와 관련된 widget 들의 초기 내용을 설정한다.
@@ -182,6 +159,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
     } // End of method [initWidgetOfRegisterDayCount]
 
+    
 
     /**
      * training count 와 관련된 widwget 들의 초기 내용을 설정한다.

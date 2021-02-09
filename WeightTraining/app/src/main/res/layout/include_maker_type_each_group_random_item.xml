@@ -31,7 +31,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/eland_choice_bold"
                 android:text="@string/include_maker_type_each_group_random_muscle_area"
-                android:textColor="@color/colorTextBack" />
+                android:textColor="@color/colorTextBlack" />
 
             <View
                 android:layout_width="match_parent"

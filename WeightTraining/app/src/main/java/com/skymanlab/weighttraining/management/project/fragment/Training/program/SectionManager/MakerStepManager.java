@@ -33,6 +33,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     public static final int STEP_FIVE = 5;
     public static final int STEP_SIX = 6;
     public static final int STEP_SEVEN = 7;
+    public static final int STEP_EIGHT = 8;
 
     // constant
     private static final int SELECTED_NUMBER_1 = R.drawable.step_display_middle_number_1;
@@ -42,6 +43,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private static final int SELECTED_NUMBER_5 = R.drawable.step_display_middle_number_5;
     private static final int SELECTED_NUMBER_6 = R.drawable.step_display_middle_number_6;
     private static final int SELECTED_NUMBER_7 = R.drawable.step_display_middle_number_7;
+    private static final int SELECTED_NUMBER_8 = R.drawable.step_display_middle_number_8;
 
     // constant
     private static final int NO_SELECTED_NUMBER_1 = R.drawable.step_display_side_number_1;
@@ -51,6 +53,7 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private static final int NO_SELECTED_NUMBER_5 = R.drawable.step_display_side_number_5;
     private static final int NO_SELECTED_NUMBER_6 = R.drawable.step_display_side_number_6;
     private static final int NO_SELECTED_NUMBER_7 = R.drawable.step_display_side_number_7;
+    private static final int NO_SELECTED_NUMBER_8 = R.drawable.step_display_side_number_8;
 
     // instance variable
     private int step;
@@ -117,7 +120,12 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
             case STEP_SIX:
                 // [method] maker step 6 로 단계 설정
                 initStepSix();
+                break;
             case STEP_SEVEN:
+                // [method] maker step 7 로 단계 설정
+                initStepSven();
+                break;
+            case STEP_EIGHT:
                 // [method] maker step 7 로 단계 설정
                 initStepSven();
                 break;
@@ -220,13 +228,13 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private void initStepSix() {
 
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_1
+        // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_5
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_5);
 
-        // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_2
+        // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_6
         this.secondNumber.setImageResource(SELECTED_NUMBER_6);
 
-        // [iv/C]ImageView : thirdNumber -> INVISIBLE
+        // [iv/C]ImageView : thirdNumber -> NO_SELECTED_NUMBER_7
         this.thirdNumber.setImageResource(NO_SELECTED_NUMBER_7);
 
     } // End of method [initStepSix]
@@ -238,11 +246,33 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
     private void initStepSven() {
 
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-        // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_1
+        // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_6
         this.firstNumber.setImageResource(NO_SELECTED_NUMBER_6);
 
-        // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_2
+        // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_7
         this.secondNumber.setImageResource(SELECTED_NUMBER_7);
+
+        // [iv/C]ImageView : thirdNumber -> NO_SELECTED_NUMBER_8
+        this.thirdNumber.setImageResource(NO_SELECTED_NUMBER_8);
+
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= bar =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // [iv/C]ImageView : secondBar -> INVISIBLE
+        this.secondBar.setVisibility(ImageView.INVISIBLE);
+
+    } // End of method [initStepSix]
+
+
+    /**
+     * [method] step 8 widget init
+     */
+    private void initStepEight() {
+
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= number =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // [iv/C]ImageView : firstNumber -> NO_SELECTED_NUMBER_7
+        this.firstNumber.setImageResource(NO_SELECTED_NUMBER_7);
+
+        // [iv/C]ImageView : secondNumber -> SELECTED_NUMBER_8
+        this.secondNumber.setImageResource(SELECTED_NUMBER_8);
 
         // [iv/C]ImageView : thirdNumber -> INVISIBLE
         this.thirdNumber.setVisibility(ImageView.INVISIBLE);
@@ -252,6 +282,5 @@ public class MakerStepManager extends FragmentSectionManager implements Fragment
         this.secondBar.setVisibility(ImageView.INVISIBLE);
 
     } // End of method [initStepSix]
-
 
 }

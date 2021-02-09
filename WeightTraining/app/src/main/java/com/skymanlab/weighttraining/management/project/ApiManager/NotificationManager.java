@@ -9,11 +9,15 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.skymanlab.weighttraining.R;
+import com.squareup.picasso.Picasso;
 
 public class NotificationManager {
 
     // constant
-    private static final String CHANNEL_ID_ = "FitnessCenterNotification";
+    public static final int NOTIFICATION_FITNESS_CENTER = 40000;
+
+    // constant
+    private static final String CHANNEL_ID_FITNESS_CENTER = "FitnessCenterNotification";
 
     // instance
     private Activity activity;
@@ -36,28 +40,29 @@ public class NotificationManager {
 
             // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Fitness Center channel =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
             // 이름, 설명, 중요도
-            CharSequence name = activity.getString(R.string.etc_notification_manager_fitness_center_channel_name);
-            String description = activity.getString(R.string.etc_notification_manager_fitness_center_channel_description);
+            CharSequence name = activity.getString(R.string.etc_notification_manager_channel_id_fitness_center_notification_name);
+            String description = activity.getString(R.string.etc_notification_manager_channel_id_fitness_center_notification_description);
             int importance = android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
             // 채널 생성
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID_, name, importance);
-            channel.setDescription(description);
+            NotificationChannel channelFitnessCenterGeofencingNotification = new NotificationChannel(CHANNEL_ID_FITNESS_CENTER, name, importance);
+            channelFitnessCenterGeofencingNotification.setDescription(description);
 
             // 채널 등록
             android.app.NotificationManager notificationManager = activity.getSystemService(android.app.NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            notificationManager.createNotificationChannel(channelFitnessCenterGeofencingNotification);
 
 
         }
     }
 
-    public static void showNotification(Context context, int notificationId, String title, String text) {
+    public static void sendFitnessCenterNotification(Context context, int notificationId, String title, String message) {
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_FITNESS_CENTER)
                 .setSmallIcon(R.drawable.icon)
                 .setContentTitle(title)
-                .setContentText(text)
+                .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
@@ -65,12 +70,12 @@ public class NotificationManager {
 
     }
 
-    public void showNotification(int notificationId, String title, String text) {
+    public void sendFitnessCenterNotification(int notificationId, String title, String message) {
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(activity.getApplicationContext(), CHANNEL_ID_)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(activity.getApplicationContext(), CHANNEL_ID_FITNESS_CENTER)
                 .setSmallIcon(R.drawable.icon)
                 .setContentTitle(title)
-                .setContentText(text)
+                .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(activity.getApplicationContext());

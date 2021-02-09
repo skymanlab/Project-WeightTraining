@@ -15,63 +15,62 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
+import com.skymanlab.weighttraining.management.event.program.data.Program;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep6SectionManager;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep8SectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MakerStep6Fragment#newInstance} factory method to
+ * Use the {@link MakerStep8Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MakerStep6Fragment extends Fragment {
+public class MakerStep8Fragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFTP] MakerStep6Fragment";
+    private static final String CLASS_NAME = "[PFTP] MakerStep8Fragment";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final String FINAL_ORDER_LIST = "finalOrderList";
-    private static final String MUSCLE_AREA_ARRAY_LIST = "muscleAreaArrayList";
+    private static final String PROGRAM = "program";
+    private static final String DETAIL_PROGRAM_LIST = "detailProgramList";
 
     // instance variable
     private ArrayList<Event> finalOrderList;
-    private ArrayList<MuscleArea> muscleAreaArrayList;
+    private Program program;
+    private HashMap<String, DetailProgram> detailProgramList;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
     private MakerStepManager makerStepManager;
-    private MakerStep6SectionManager sectionManager;
+    private MakerStep8SectionManager sectionManager;
+
 
     // constructor
-    public MakerStep6Fragment() {
+    public MakerStep8Fragment() {
         // Required empty public constructor
-    }
-
-    // getter
-    public MakerStep6SectionManager getSectionManager() {
-        return sectionManager;
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment MakerStep5Fragment.
+     * @return A new instance of fragment MakerStep7Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MakerStep6Fragment newInstance(ArrayList<Event> finalOrderList, ArrayList<MuscleArea> muscleAreaArrayList) {
-
-        MakerStep6Fragment fragment = new MakerStep6Fragment();
-
+    public static MakerStep8Fragment newInstance(ArrayList<Event> finalOrderList, Program program, HashMap<String, DetailProgram> detailProgramList) {
+        MakerStep8Fragment fragment = new MakerStep8Fragment();
         Bundle args = new Bundle();
         args.putSerializable(FINAL_ORDER_LIST, finalOrderList);
-        args.putSerializable(MUSCLE_AREA_ARRAY_LIST, muscleAreaArrayList);
+        args.putSerializable(PROGRAM, program);
+        args.putSerializable(DETAIL_PROGRAM_LIST, detailProgramList);
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -80,7 +79,8 @@ public class MakerStep6Fragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             this.finalOrderList = (ArrayList<Event>) getArguments().getSerializable(FINAL_ORDER_LIST);
-            this.muscleAreaArrayList = (ArrayList<MuscleArea>) getArguments().getSerializable(MUSCLE_AREA_ARRAY_LIST);
+            this.program = (Program) getArguments().getSerializable(PROGRAM);
+            this.detailProgramList = (HashMap<String, DetailProgram>) getArguments().getSerializable(DETAIL_PROGRAM_LIST);
         }
     }
 
@@ -88,7 +88,7 @@ public class MakerStep6Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maker_step6, container, false);
+        return inflater.inflate(R.layout.fragment_maker_step8, container, false);
     }
 
     @Override
@@ -96,26 +96,43 @@ public class MakerStep6Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final String METHOD_NAME = "[onViewCreated] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program set number  = " + program.getSetNumber());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time minute  = " + program.getRestTimeMinute());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time second = " + program.getRestTimeSecond());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= detail program array list = " + detailProgramList.size());
 
-        for (int index = 0; index < this.muscleAreaArrayList.size(); index++) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Muscle Area List > << " + index + " >> 근육 부위는 ? = " + this.muscleAreaArrayList.get(index));
+        if (0 < detailProgramList.size()) {
+            Iterator iterator = detailProgramList.keySet().iterator();
+
+            while (iterator.hasNext()) {
+
+                String key = (String) iterator.next();
+
+                for (int index = 0; index < finalOrderList.size(); index++) {
+
+                    if (finalOrderList.get(index).getKey().equals(key)) {
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "detail program list 이 있는 even 의 name = " + finalOrderList.get(index).getEventName());
+                    }
+
+                } // [cycle ]
+            }
         }
 
-
-        // [FragmentTopBarManager] [topBarManager] this is 'maker step 6' fragment's top bar section manager.
+        // [FragmentTopBarManager] [topBarManager] this is 'maker step 8' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [MakerStepManager2] [makerStepManager] maker step 6 단계 설정
-        this.makerStepManager = new MakerStepManager(this, view, MakerStepManager.STEP_SIX);
+        // [MakerStepManager2] [makerStepManager] maker step 8 단계 설정
+        this.makerStepManager = new MakerStepManager(this, view, MakerStepManager.STEP_EIGHT);
         this.makerStepManager.connectWidget();
         this.makerStepManager.initWidget();
 
-        // [MakerStep6SectionManager] [sectionManager] this is 'maker step 6' fragment's section manager.
-        this.sectionManager = new MakerStep6SectionManager(this, view);
+        // [MakerStep5SectionManager] [sectionManager] maker step 8 fragment section manager 설정
+        this.sectionManager = new MakerStep8SectionManager(this, view);
         this.sectionManager.setFinalOrderList(this.finalOrderList);
-        this.sectionManager.setMuscleAreaArrayList(this.muscleAreaArrayList);
+        this.sectionManager.setProgram(this.program);
+        this.sectionManager.setDetailProgramList(this.detailProgramList);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
@@ -129,14 +146,10 @@ public class MakerStep6Fragment extends Fragment {
 
                 return null;
             }
-
         });
         this.topBarManager.initWidgetOfStartButton(null);
         this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "..................--- fragment = " + this);
+        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_complete));
 
     }
-
 }

@@ -12,18 +12,266 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/f_fitness_center_address_search"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_default"
+        android:background="@color/colorDividerDefault" />
+
+    <!-- Section 1 : register -->
+    <FrameLayout
+        android:id="@+id/f_fitness_center_go_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        app:iconifiedByDefault="false" />
+        android:paddingStart="@dimen/section_padding_start"
+        android:paddingTop="@dimen/section_padding_top"
+        android:paddingEnd="@dimen/section_padding_end"
+        android:paddingBottom="@dimen/section_padding_bottom">
 
-    <fragment
-        android:id="@+id/f_fitness_center_map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/f_fitness_center_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_bold"
+                android:text="@string/f_fitness_center_name"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_title_size" />
+
+            <TextView
+                android:id="@+id/f_fitness_center_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_fitness_center_address"
+                android:textSize="@dimen/text_sub_title_size" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/right" />
+
+    </FrameLayout> <!-- End of Section 1 -->
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".management.project.fragment.More.FitnessCenterFragment" />
+        android:layout_height="@dimen/divider_section"
+        android:background="@color/colorDividerSection" />
+
+    <!-- Section 2 : register Info -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/section_padding_start"
+        android:paddingTop="@dimen/section_padding_top"
+        android:paddingEnd="@dimen/section_padding_end"
+        android:paddingBottom="@dimen/section_padding_bottom">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:gravity="center_vertical"
+            android:text="@string/f_fitness_center_info"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/text_section_title_size" />
+
+        <include
+            layout="@layout/include_dot_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_fitness_center_contract_date"
+                    android:textColor="@color/colorTextBlack" />
+
+                <View
+                    android:layout_width="@dimen/divider_default"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+                    android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+                    android:background="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/f_fitness_center_contract_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/f_fitness_center_contract_date_default" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_fitness_center_expiry_date"
+                    android:textColor="@color/colorTextBlack" />
+
+                <View
+                    android:layout_width="@dimen/divider_default"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+                    android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+                    android:background="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/f_fitness_center_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/f_fitness_center_expiry_date_default" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_fitness_center_attendance_date"
+                    android:textColor="@color/colorTextBlack" />
+
+                <View
+                    android:layout_width="@dimen/divider_default"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+                    android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+                    android:background="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/f_fitness_center_attendance_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_light"
+                    android:text="@string/f_fitness_center_attendance_date_default" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout><!-- End of Section 2 -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_section"
+        android:background="@color/colorDividerSection" />
+
+    <!-- Section 3 : -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/section_padding_start"
+        android:paddingTop="@dimen/section_padding_top"
+        android:paddingEnd="@dimen/section_padding_end"
+        android:paddingBottom="@dimen/section_padding_bottom">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:gravity="center_vertical"
+            android:text="@string/f_fitness_center_setting_info"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/text_section_title_size" />
+
+        <include
+            layout="@layout/include_dot_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_fitness_center_setting_info_access_notification"
+                android:textColor="@color/colorTextBlack" />
+
+            <View
+                android:layout_width="@dimen/divider_default"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+                android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+                android:background="@color/colorTextBlack" />
+
+            <TextView
+                android:id="@+id/f_fitness_center_setting_info_access_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_light"
+                android:text="@string/f_fitness_center_setting_info_access_notification_default" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_fitness_center_setting_info_is_disclosed"
+                android:textColor="@color/colorTextBlack" />
+
+            <View
+                android:layout_width="@dimen/divider_default"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+                android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+                android:background="@color/colorTextBlack" />
+
+            <TextView
+                android:id="@+id/f_fitness_center_setting_info_is_disclosed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_light"
+                android:text="@string/f_fitness_center_setting_info_is_disclosed_default" />
+        </LinearLayout>
+
+    </LinearLayout><!-- End of Section 3 -->
 
 </LinearLayout>

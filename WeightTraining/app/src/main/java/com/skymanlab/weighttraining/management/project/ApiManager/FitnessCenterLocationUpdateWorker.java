@@ -109,7 +109,10 @@ public class FitnessCenterLocationUpdateWorker extends Worker {
                     public void onLocationResult(LocationResult locationResult) {
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Update > 업데이트 중 += " + locationResult);
 
-                        NotificationManager.showNotification(mContext, 1000, "아잉", "< Update > 업데이트 중 += " + locationResult);
+                        NotificationManager.sendFitnessCenterNotification(
+                                mContext,
+                                1000,
+                                "아잉", "< Update > 업데이트 중 += " + locationResult);
                     }
                 },
                 Looper.getMainLooper());

@@ -1,12 +1,17 @@
 package com.skymanlab.weighttraining.management.event.program.data;
 
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Program implements Serializable {
 
     // instance variable
     private String key;
-    private String programName;
+    private String nickName;
+    private ArrayList<MuscleArea> muscleAreaList;
+    private ArrayList<DetailProgram> detailProgramList;
     private int setNumber;
     private int restTimeMinute;
     private int restTimeSecond;
@@ -22,12 +27,28 @@ public class Program implements Serializable {
         this.key = key;
     }
 
-    public String getProgramName() {
-        return programName;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setProgramName(String programName) {
-        this.programName = programName;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public ArrayList<MuscleArea> getMuscleAreaList() {
+        return muscleAreaList;
+    }
+
+    public void setMuscleAreaList(ArrayList<MuscleArea> muscleAreaList) {
+        this.muscleAreaList = muscleAreaList;
+    }
+
+    public ArrayList<DetailProgram> getDetailProgramList() {
+        return detailProgramList;
+    }
+
+    public void setDetailProgramList(ArrayList<DetailProgram> detailProgramList) {
+        this.detailProgramList = detailProgramList;
     }
 
     public int getSetNumber() {

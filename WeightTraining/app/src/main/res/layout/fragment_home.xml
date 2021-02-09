@@ -15,7 +15,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:layout_height="@dimen/divider_default"
         android:background="@color/browser_actions_divider_color" />
 
     <!-- content container -->
@@ -37,12 +37,12 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/include_top_bar_divider_width"
+                android:layout_height="@dimen/divider_default"
                 android:background="@color/browser_actions_divider_color" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/divider_section"
                 android:background="@color/browser_actions_bg_grey" />
 
             <com.google.android.gms.ads.AdView

@@ -14,46 +14,131 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/browser_actions_bg_grey" />
-
+        android:layout_height="@dimen/divider_default"
+        android:background="@color/colorDividerDefault" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/f_fitness_center_register_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:iconifiedByDefault="false" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:paddingEnd="12dp"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@color/browser_actions_bg_grey" />
+
+    <include
+        layout="@layout/include_dot_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/divider_horizontal_layout_Start"
+        android:layout_marginEnd="@dimen/divider_horizontal_layout_End" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_medium"
-            android:text="주소"
-            android:textColor="@color/colorTextBack" />
+            android:text="@string/f_fitness_center_register_address"
+            android:textColor="@color/colorTextBlack" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+            android:layout_marginEnd="@dimen/divider_vertical_layout_End"
             android:background="@color/browser_actions_title_color" />
 
+        <TextView
+            android:id="@+id/f_fitness_center_register_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_fitness_center_register_address_default" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/f_fitness_center_register_contract_date_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_medium"
-            android:text="경상북도 구미시 도량동 614-1 번지"
-            android:textColor="@color/colorTextBack" />
+            android:text="@string/f_fitness_center_register_contract_date"
+            android:textColor="@color/colorTextBlack" />
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+            android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+            android:background="@color/browser_actions_title_color" />
+
+        <TextView
+            android:id="@+id/f_fitness_center_register_contract_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_fitness_center_register_contract_date_default" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/f_fitness_center_register_expiry_date_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_fitness_center_register_expiry_date"
+            android:textColor="@color/colorTextBlack" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+            android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+            android:background="@color/browser_actions_title_color" />
+
+        <TextView
+            android:id="@+id/f_fitness_center_register_expiry_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_fitness_center_register_contract_date_default" />
+    </LinearLayout>
+
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_default"
+        android:background="@color/colorDividerDefault" />-->
 
     <View
         android:layout_width="match_parent"

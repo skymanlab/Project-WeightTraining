@@ -9,10 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,10 +19,10 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 
-public class FitnessCenterGeofenceManager {
+public class FitnessCenterGeofencingManager {
 
     // constant
-    private static final String CLASS_NAME = FitnessCenterGeofenceManager.class.getSimpleName();
+    private static final String CLASS_NAME = FitnessCenterGeofencingManager.class.getSimpleName();
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
     // instance
     private Activity activity;
@@ -36,7 +34,7 @@ public class FitnessCenterGeofenceManager {
     private PendingIntent pendingIntent;
 
     // constructor
-    public FitnessCenterGeofenceManager(Activity activity, LatLng location) {
+    public FitnessCenterGeofencingManager(Activity activity, LatLng location) {
         this.activity = activity;
         this.location = location;
     }
@@ -49,27 +47,24 @@ public class FitnessCenterGeofenceManager {
     public void init() {
 
         // geofencingClient 가져오기
-        this.geofencingClient = FitnessCenterGeofenceUtil.createGeofencingClient(activity.getApplicationContext());
+        this.geofencingClient = FitnessCenterGeofencingUtil.createGeofencingClient(activity);
 
         // Geofence 생성
-        Geofence geofence = FitnessCenterGeofenceUtil.createGeofence(
+        Geofence geofence = FitnessCenterGeofencingUtil.createGeofence(
                 location,
-                FitnessCenterGeofenceUtil.GEOFENCE_RADIUS_IN_METERS,
-                FitnessCenterGeofenceUtil.GEOFENCE_EXPIRATION_IN_MILLISECONDS,
-                FitnessCenterGeofenceUtil.GEOFENCE_TRANSITION_TYPE
+                FitnessCenterGeofencingUtil.GEOFENCE_RADIUS_IN_METERS,
+                FitnessCenterGeofencingUtil.GEOFENCE_EXPIRATION_IN_MILLISECONDS,
+                FitnessCenterGeofencingUtil.GEOFENCE_TRANSITION_TYPE
 
         );
         // PendingIntent : application context 에
-        this.pendingIntent = FitnessCenterGeofenceUtil.createPendingIntent(activity.getApplicationContext());
+        this.pendingIntent = FitnessCenterGeofencingUtil.createPendingIntent(activity);
 
         //
-        this.geofencingRequest = FitnessCenterGeofenceUtil.createGeofencingRequest(
-                FitnessCenterGeofenceUtil.GEOFENCING_REQUEST_INITIAL_TRIGGER,
+        this.geofencingRequest = FitnessCenterGeofencingUtil.createGeofencingRequest(
+                FitnessCenterGeofencingUtil.GEOFENCING_REQUEST_INITIAL_TRIGGER,
                 geofence
         );
-
-//        GeofenceStatusCodes geofenceStatusCodes = new GeofenceStatusCodes.
-
 
     }
 

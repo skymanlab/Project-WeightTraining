@@ -15,13 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <View
+        <include
+            layout="@layout/include_dot_divider"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/horizontal_dot_divider"
-            android:layerType="software" />
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,12 +27,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/include_maker_step7_detail_program_result_item_muscle_area"
+                android:id="@+id/include_maker_step8_detail_program_result_item_muscle_area"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/eland_choice_medium"
-                android:text="@string/include_maker_step7_detail_program_result_item_muscle_area_default"
-                android:textColor="@color/colorTextBack" />
+                android:text="@string/include_maker_step8_detail_program_result_item_muscle_area_default"
+                android:textColor="@color/colorTextBlack" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,21 +40,21 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
                 android:fontFamily="@font/eland_choice_medium"
-                android:text="@string/include_maker_step7_detail_program_result_item_divider"
-                android:textColor="@color/colorTextBack" />
+                android:text="@string/include_maker_step8_detail_program_result_item_divider"
+                android:textColor="@color/colorTextBlack" />
 
             <TextView
-                android:id="@+id/include_maker_step7_detail_program_result_item_event_name"
+                android:id="@+id/include_maker_step8_detail_program_result_item_event_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/eland_choice_medium"
-                android:text="@string/include_maker_step7_detail_program_result_item_event_name_default"
-                android:textColor="@color/colorTextBack" />
+                android:text="@string/include_maker_step8_detail_program_result_item_event_name_default"
+                android:textColor="@color/colorTextBlack" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/include_maker_step7_detail_program_result_item_content_wrapper"
+            android:id="@+id/include_maker_step8_detail_program_result_item_content_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -72,17 +69,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_light"
-                    android:text="@string/include_maker_step7_detail_program_result_item_set_number" />
+                    android:text="@string/include_maker_step8_detail_program_result_item_set_number" />
 
                 <TextView
-                    android:id="@+id/include_maker_step7_detail_program_result_item_set_number"
+                    android:id="@+id/include_maker_step8_detail_program_result_item_set_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/eland_choice_light"
-                    android:text="@string/include_maker_step7_detail_program_result_item_set_number_default"
+                    android:text="@string/include_maker_step8_detail_program_result_item_set_number_default"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/colorTextBack" />
+                    android:textColor="@color/colorTextBlack" />
             </LinearLayout>
 
             <LinearLayout
@@ -95,17 +92,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_light"
-                    android:text="@string/include_maker_step7_detail_program_result_item_rest_time" />
+                    android:text="@string/include_maker_step8_detail_program_result_item_rest_time" />
 
                 <TextView
-                    android:id="@+id/include_maker_step7_detail_program_result_item_rest_time"
+                    android:id="@+id/include_maker_step8_detail_program_result_item_rest_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/eland_choice_light"
-                    android:text="@string/include_maker_step7_detail_program_result_item_rest_time_default"
+                    android:text="@string/include_maker_step8_detail_program_result_item_rest_time_default"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/colorTextBack" />
+                    android:textColor="@color/colorTextBlack" />
             </LinearLayout>
         </LinearLayout>
 

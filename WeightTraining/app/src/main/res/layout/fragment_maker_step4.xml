@@ -15,7 +15,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:layout_height="@dimen/divider_default"
         android:background="@color/browser_actions_divider_color" />
 
     <!-- step display -->
@@ -41,28 +41,20 @@
             android:fontFamily="@font/eland_choice_medium"
             android:text="@string/f_maker_step4_indication"
             android:textAlignment="center"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/include_top_bar_divider_width"
+            android:layout_height="@dimen/divider_default"
             android:background="@color/browser_actions_divider_color" />
-
-        <!--        <com.google.android.material.card.MaterialCardView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_marginStart="@dimen/maker_step_content_item_margin_start"-->
-        <!--            android:layout_marginEnd="@dimen/maker_step_content_item_margin_end"-->
-        <!--            app:cardBackgroundColor="@color/browser_actions_bg_grey"-->
-        <!--            app:cardCornerRadius="10dp">-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/f_maker_step4_selected_event_list_wrapper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:background="@color/browser_actions_bg_grey"/>
-        <!--        </com.google.android.material.card.MaterialCardView>-->
     </LinearLayout>
 </LinearLayout>

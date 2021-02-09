@@ -1,72 +1,52 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
-import android.content.Context;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.compose.animation.core.Spring;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.event.program.data.Program;
-import com.skymanlab.weighttraining.management.project.data.DataFormatter;
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.TrainingFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.ProgramFragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.Step7DetailProgramResultItem;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep7Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.Step7EventRvAdapter;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step7DetailProgramDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class MakerStep7SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] MakerStep7SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep6SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
-
-    // constant
-    private static final String NICK_NAME = "nickName";
-    private static final String TOTAL_EVENT_NUMBER = "totalEventNumber";
-    private static final String TOTAL_SET_NUMBER = "totalSetNumber";
-    private static final String SET_NUMBER = "setNumber";
-    private static final String DETAIL_PROGRAM_ORDER = "order";
-    private static final String REST_TIME_MINUTE = "restTimeMinute";
-    private static final String REST_TIME_SECOND = "restTimeSecond";
 
     // instance variable
     private ArrayList<Event> finalOrderList;
-    private Program program;
-    private HashMap<String, DetailProgram> detailProgramList;
+    private ArrayList<MuscleArea> muscleAreaArrayList;
+    private int programSettingSetNumber;
+    private int programSettingRestTimeMinute;
+    private int programSettingRestTimeSecond;
 
     // instance variable
-    private TextInputEditText nickName;
-    private TextView programSettingSetNumber;
-    private TextView programSettingRestTime;
-    private TextView programSettingTotalEventNumber;
-    private TextView programSettingTotalSetNumber;
-    private ScrollView resultContentWrapper;
-    private LinearLayout detailProgramResultListWrapper;
+    private RecyclerView eventListWrapper;
+
+    // instance variable
+    private HashMap<String, DetailProgram> detailProgramList;
 
     // constructor
     public MakerStep7SectionManager(Fragment fragment, View view) {
@@ -78,57 +58,81 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
         this.finalOrderList = finalOrderList;
     }
 
-    public void setProgram(Program program) {
-        this.program = program;
+    public void setMuscleAreaArrayList(ArrayList<MuscleArea> muscleAreaArrayList) {
+        this.muscleAreaArrayList = muscleAreaArrayList;
     }
 
-    public void setDetailProgramList(HashMap<String, DetailProgram> detailProgramList) {
-        this.detailProgramList = detailProgramList;
+    public void setProgramSettingSetNumber(int programSettingSetNumber) {
+        this.programSettingSetNumber = programSettingSetNumber;
+    }
+
+    public void setProgramSettingRestTimeMinute(int programSettingRestTimeMinute) {
+        this.programSettingRestTimeMinute = programSettingRestTimeMinute;
+    }
+
+    public void setProgramSettingRestTimeSecond(int programSettingRestTimeSecond) {
+        this.programSettingRestTimeSecond = programSettingRestTimeSecond;
     }
 
     @Override
     public void connectWidget() {
 
-        // [ TextInputEditText | nickName ] widget connect
-        this.nickName = (TextInputEditText) getView().findViewById(R.id.f_maker_step7_result_nick_name);
-
-        // [ TextView | programSettingSetNumber ] widget connect
-        this.programSettingSetNumber = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_set_number);
-
-        // [ TextView | programSettingRestTime ] widget connect
-        this.programSettingRestTime = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_rest_time);
-
-        // [ TextView | programSettingTotalEventNumber ] widget connect
-        this.programSettingTotalEventNumber = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_total_event_number);
-
-        // [ TextView | programSettingTotalSetNumber ] widget connect
-        this.programSettingTotalSetNumber = (TextView) getView().findViewById(R.id.f_maker_step7_result_program_setting_total_set_number);
-
-        // [ ScrollView | resultContentWrapper ] widget connect
-        this.resultContentWrapper = (ScrollView) getView().findViewById(R.id.f_maker_step7_result_content_wrapper);
-
-        // [ LinearLayout | detailProgramResultListWrapper ] widget connect
-        this.detailProgramResultListWrapper = (LinearLayout) getView().findViewById(R.id.f_maker_step7_result_detail_program_setting_list_wrapper);
+        // [iv/C]RecyclerView :
+        this.eventListWrapper = (RecyclerView) getView().findViewById(R.id.f_maker_step6_detail_program_setting_event_list_wrapper);
 
     }
 
     @Override
     public void initWidget() {
+        final String METHOD_NAME = "[initWidget] ";
 
-        // [TextView] [programSettingSetNumber] text
-        this.programSettingSetNumber.setText(DataFormatter.setSetNumberFormat(this.program.getSetNumber()));
+        //
+        initDetailProgramList();
 
-        // [TextView] [programSettingRestTime] text
-        this.programSettingRestTime.setText(DataFormatter.setTimeFormat(this.program.getRestTimeMinute(), this.program.getRestTimeSecond()));
+        // recyclerView 의 초기 내용을 설정한다.
+        initWidgetOfRecyclerView();
 
-        // [ TextView | programSettingTotalEventNumber ]
-        this.programSettingTotalEventNumber.setText(DataFormatter.setEventNumberFormat(this.program.getTotalEventNumber()));
+        // [iv/C]Fragment : MakerStep7Fragment 의 FragmentManger 를 통해 Step7DetailProgramSettingDialog 에서 보낸 데이터 가져오기
+        getFragment().getParentFragmentManager().setFragmentResultListener(Step7DetailProgramDialog.REQUEST_KEY, getFragment(), new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
-        // [ TextView | programSettingTotalSetNumber ] text
-        this.programSettingTotalSetNumber.setText(DataFormatter.setSetNumberFormat(this.program.getTotalSetNumber()));
+                // dialog 에서 key, setNumber, restTimeMinute, restTimeSecond 가져오기
+                String dialogKey = result.getString(Step7DetailProgramDialog.DETAIL_PROGRAM_EVENT_KEY);
+                int dialogSetNumber = result.getInt(Step7DetailProgramDialog.DETAIL_PROGRAM_SET_NUMBER);
+                int dialogRestTimeMinute = result.getInt(Step7DetailProgramDialog.DETAIL_PROGRAM_REST_TIME_MINUTE);
+                int dialogRestTimeSecond = result.getInt(Step7DetailProgramDialog.DETAIL_PROGRAM_REST_TIME_SECOND);
 
-        // [method]
-        initWidgetOfDetailProgramResultListWrapper();
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "A-1. dialog 에서 가져온 key = " + dialogKey);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "A-2. dialog 에서 가져온 setNumber = " + dialogSetNumber);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "A-3. dialog 에서 가져온 restTimeMinute = " + dialogRestTimeMinute);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "A-4. dialog 에서 가져온 restTimeSecond = " + dialogRestTimeSecond);
+
+                if (programSettingSetNumber == dialogSetNumber && programSettingRestTimeMinute == dialogRestTimeMinute && programSettingRestTimeSecond == dialogRestTimeSecond) {
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "dialog 에 설정된 내용과 기존 프로그램 설정값에서 변환것 없음");
+                    return;
+                }
+
+                DetailProgram detailProgram = detailProgramList.get(dialogKey);
+                if (detailProgram.getSetNumber() == dialogSetNumber
+                        && detailProgram.getRestTimeMinute() == dialogRestTimeMinute
+                        && detailProgram.getRestTimeSecond() == dialogRestTimeSecond) {
+
+                    // 바뀐 것 없음
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< dialog 의 내용들 > 바뀐 것이 없어요.");
+
+                } else {
+
+                    // 바뀐 것 있으니 새로 반영할 것!
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< dialog 의 내용들 > 바뀐 것이 있어요");
+                    detailProgramList.get(dialogKey).setSetNumber(dialogSetNumber);
+                    detailProgramList.get(dialogKey).setRestTimeMinute(dialogRestTimeMinute);
+                    detailProgramList.get(dialogKey).setRestTimeSecond(dialogRestTimeSecond);
+
+                }
+
+            }
+        });
 
     }
 
@@ -139,158 +143,194 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
      * @return
      */
     public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        final String METHOD_NAME = "[newEndButtonListenerInstance] ";
+
         return new FragmentTopBarManager.EndButtonListener() {
             @Override
             public AlertDialog setEndButtonClickListener() {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-                if (!nickName.getText().toString().equals("")) {
 
-                    saveContent();
+                Iterator iterator = detailProgramList.keySet().iterator();
 
-                } else {
-                    Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_maker_step7_result_snack_nick_name_input, Snackbar.LENGTH_SHORT).show();
+                int index = 0;
+                while (iterator.hasNext()) {
+                    String key = (String) iterator.next();
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getOrder = " + detailProgramList.get(key).getOrder());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getEventName = " + detailProgramList.get(key).getEventName());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getMuscleArea = " + detailProgramList.get(key).getMuscleArea());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getSetNumber = " + detailProgramList.get(key).getSetNumber());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeMinute = " + detailProgramList.get(key).getRestTimeMinute());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeSecond = " + detailProgramList.get(key).getRestTimeSecond());
+
+                    index++;
+
                 }
 
+                if (allCheckData()) {
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< all data > 모든 데이터가 조건에 성립합니다.");
+                } else {
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< all data > 어떤 한 데이터가 조건에 맞지 않습니다.");
+                }
+
+                // [lv/C]Program : 해당 프로그램의 설정값으로 객체를 생성한다.
+                Program program = new Program();
+                program.setMuscleAreaList(muscleAreaArrayList);
+                program.setTotalEventNumber(finalOrderList.size());
+                program.setTotalSetNumber(getTotalSetNumber());
+
+                // [lv/C]MakerStep7Fragment : step 7 fragment 생성
+//                MakerStep7Fragment step7Fragment = MakerStep7Fragment.newInstance(finalOrderList, program, detailProgramList);
+
+                // [lv/C]FragmentTransaction : step 7 fragment 로 이동
+//                FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.nav_home_content_wrapper, step7Fragment);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< total set number >> =====> " + getTotalSetNumber());
 
                 return null;
             }
         };
     }
 
+    private void initDetailProgramList() {
+        final String METHOD_NAME = "[initDetailProgramList] ";
 
-    private void initWidgetOfDetailProgramResultListWrapper() {
+        this.detailProgramList = new HashMap<>();
 
-        // [LayoutInflater] [inflater] activity 에서 fragmentManager 를 가져오기
-        LayoutInflater inflater = (LayoutInflater) getFragment().getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        // [cycle 1] : finalOrderList 의 각 event 로 초기 내용 설정하기
         for (int index = 0; index < this.finalOrderList.size(); index++) {
 
-            addViewOfDetailProgramResultListWrapper(createViewOfDetailProgramResultItem(inflater, finalOrderList.get(index), detailProgramList.get(finalOrderList.get(index).getKey())));
+            // DetailProgram 의 초기 내용을 설정한다.
+            DetailProgram detailProgram = new DetailProgram();
+            detailProgram.setOrder(index + 1);                                              // order : key
+            detailProgram.setMuscleArea(finalOrderList.get(index).getMuscleArea());         // muscle area
+            detailProgram.setEventKey(finalOrderList.get(index).getKey());                  // event key
+            detailProgram.setEventName(finalOrderList.get(index).getEventName());           // event name
+            detailProgram.setSetNumber(programSettingSetNumber);                            // set number
+            detailProgram.setRestTimeMinute(programSettingRestTimeMinute);                  // rest time minute
+            detailProgram.setRestTimeSecond(programSettingRestTimeSecond);                  // rest time second
 
-        } // [cycle 1]
+            // 위의 detailProgram 을 리스트에 추가한다.
+            detailProgramList.put(detailProgram.getEventKey(), detailProgram);
 
-
-        // resultContentWrapper 인 scrollView 를 최상단으로 이동한다.
-        getFragment().getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                // [ScrollView] [resultContentWrapper] 최상단으로 이동
-                resultContentWrapper.fullScroll(View.SCROLL_INDICATOR_TOP);
-
-            }
-        });
-
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< event Name >> ====> " + detailProgram.getEventName());
+        }
     }
 
 
     /**
-     * finalOrderList 의 각 event 와 그와 대응되는 detailProgram 으로 detailProgramSettingItem 객체를 생성하여 반환한다.
+     * recyclerView 의 layout manager 와 adapter 를 설정하는 초기작업 실행
+     */
+    private void initWidgetOfRecyclerView() {
+
+        // [lv/C]LinearLayoutManager : recyclerView 의 LayoutManager 를 생성 / 1차원으로 표현하기 위해서 LinearLayoutManager 생성
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getFragment().getActivity());
+
+        // [iv/C]RecyclerView : 위의 layoutManager 를 설정하기
+        this.eventListWrapper.setLayoutManager(layoutManager);
+
+        // [iv/C]SelectedEventItemRvAdapter : recyclerView 의 adapter 생성
+        Step7EventRvAdapter adapter = new Step7EventRvAdapter.Builder()
+                .setFragment(getFragment())
+                .setFinalOrderList(this.finalOrderList)
+                .setDetailProgramList(this.detailProgramList)
+                .create();
+
+        // [iv/C] : recyclerView 의 adapter setting
+        this.eventListWrapper.setAdapter(adapter);
+
+    } // End of method [initWidgetOfRecyclerView]
+
+
+    /**
+     * 모든 detailProgram 객체의 setNumber 를 합한 수를 반환한다.
      *
-     * @param inflater
-     * @param event
-     * @param detailProgram
      * @return
      */
-    private Step7DetailProgramResultItem createViewOfDetailProgramResultItem(LayoutInflater inflater, Event event, DetailProgram detailProgram) {
-        return new Step7DetailProgramResultItem.Builder()
-                .setInflater(inflater)
-                .setEvent(event)
-                .setDetailProgram(detailProgram)
-                .newInstance()
-                .createItem();
+    private int getTotalSetNumber() {
+
+        int totalSetNumber = 0;
+
+        Iterator iterator = detailProgramList.keySet().iterator();
+
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            totalSetNumber = totalSetNumber + detailProgramList.get(key).getSetNumber();
+        }
+
+        return totalSetNumber;
+
     }
 
 
     /**
-     * 해당 detailProgramResultItem 의 view 를 detailProgramResultListWrapper 에 추가하여 화면에 표시한다.
+     * program setting 부분의 setNumber, restTimeMinute, restTimeSecond 의 적절한 데이터 변경이 있는지 검사하여 그 결과를 리턴한다.
      *
-     * @param detailProgramResultItem
+     * @return
      */
-    private void addViewOfDetailProgramResultListWrapper(Step7DetailProgramResultItem detailProgramResultItem) {
-        this.detailProgramResultListWrapper.addView(detailProgramResultItem.getItem());
-    }
+    private boolean checkData(int setNumber, int restTimeMinute, int restTimeSecond) {
+        final String METHOD_NAME = "[checkData] ";
 
+        // [check 1] : setNumber 는 0 이상일때만
+        if (0 < setNumber) {
 
-    private void saveContent() {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. set number 조건 통과");
 
-        // [HashMap<String, Object>] [saveData]
-        HashMap<String, Object> saveData = new HashMap<>();
-        saveData.put(NICK_NAME, nickName.getText().toString());
-        saveData.put(TOTAL_EVENT_NUMBER, program.getTotalEventNumber());
-        saveData.put(TOTAL_SET_NUMBER, program.getTotalSetNumber());
+            // '분' 이 0 이더라도 '초' 가 0 이상이면 조건 만족한다.
+            boolean restTimeChecker1 = (0 == restTimeMinute) && (0 < restTimeSecond) ? true : false;
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. rest time checker 1 = " + restTimeChecker1);
 
-        // [DatabaseReference] [db] program/$uid$/$key$/
-        DatabaseReference db = FirebaseDatabase
-                .getInstance()
-                .getReference("program")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            // '분' 이 0 이상이면 '초' 는 0 이거나 그 이상이면 조건에 만족한다.
+            boolean restTimeChecker2 = (0 < restTimeMinute) && (0 <= restTimeSecond) ? true : false;
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. rest time checker 2 = " + restTimeChecker2);
 
-        String programKey = db.push().getKey();
+            // [check 2] : restTimeMinute, restTimeSecond 는 restTime 으로 조건을 검사한다.
+            if (restTimeChecker1 || restTimeChecker2) {
 
-        db.child(programKey).setValue(saveData, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-
-                if (error == null) {
-
-                    saveContentOfProgramList(ref);
-
-                    // back stack 에 있던 모든 fragment  를 pop!
-                    getFragment().getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-                    // 'program' fragment 로 이동
-                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.nav_home_content_wrapper, TrainingFragment.newInstance())
-                            .commit();
-
-                }
-
-            }
-        });
-    }
-
-    /**
-     * program/&uid/&programKey&/list 의 하위 항목으로 저장한다.
-     *
-     * @param dbRef
-     */
-    private void saveContentOfProgramList(DatabaseReference dbRef) {
-
-        // [cycle ] :
-        for (int index = 0; index < finalOrderList.size(); index++) {
-
-            // 해당 eventKey 에 해당하는 detailProgram 을 가져온다.
-            DetailProgram detailProgram = detailProgramList.get(finalOrderList.get(index).getKey());
-
-            HashMap<String, Object> saveData = new HashMap<>();
-
-            // detailProgram 객체의 유무에 따라 saveData 설정 방법이 다름
-            if (detailProgram != null) {
-
-                // detailProgram 내용을 토대로 저장
-                saveData.put(DETAIL_PROGRAM_ORDER, index);
-                saveData.put(SET_NUMBER, detailProgram.getSetNumber());
-                saveData.put(REST_TIME_MINUTE, detailProgram.getRestTimeMinute());
-                saveData.put(REST_TIME_SECOND, detailProgram.getRestTimeSecond());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-2. rest time 조건 통과");
+                return true;
 
             } else {
 
-                // program 내용을 토대로 저장
-                saveData.put(DETAIL_PROGRAM_ORDER, index);
-                saveData.put(SET_NUMBER, program.getSetNumber());
-                saveData.put(REST_TIME_MINUTE, program.getRestTimeMinute());
-                saveData.put(REST_TIME_SECOND, program.getRestTimeSecond());
-
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-2. rest time 조건 불충분");
+                return false;
             }
 
+        } else {
 
-            // program/$uid$/$programKey$/list/$eventKey$/ 에 saveData 를 저장한다.
-            dbRef.child("list")
-                    .child(finalOrderList.get(index).getKey())
-                    .setValue(saveData);
-        } // [cycle ]
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. set number 조건 불충분");
+            return false;
+
+        } // [check 1]
+
+    } // End of method [checkData]
+
+
+    private boolean allCheckData() {
+        final String METHOD_NAME = "[allCheckData] ";
+
+        Iterator iterator = detailProgramList.keySet().iterator();
+
+        int index = 0;
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getOrder = " + detailProgramList.get(key).getOrder());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getEventName = " + detailProgramList.get(key).getEventName());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getMuscleArea = " + detailProgramList.get(key).getMuscleArea());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getSetNumber = " + detailProgramList.get(key).getSetNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeMinute = " + detailProgramList.get(key).getRestTimeMinute());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeSecond = " + detailProgramList.get(key).getRestTimeSecond());
+
+            index++;
+            if (!checkData(detailProgramList.get(key).getSetNumber(), detailProgramList.get(key).getRestTimeMinute(), detailProgramList.get(key).getRestTimeSecond())) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

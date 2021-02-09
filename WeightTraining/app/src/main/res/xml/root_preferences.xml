@@ -29,7 +29,6 @@
         app:iconSpaceReserved="false"
         app:title="@string/preference_category_location">
 
-
         <Preference
             app:key="@string/preference_key_location_permission"
             app:summary="@string/preference_category_location_permission_denied"
@@ -39,6 +38,19 @@
             android:title="@string/preference_category_location_background_permission_title"
             app:key="@string/preference_key_background_location_permission"
             app:summary="@string/preference_category_location_background_permission_denied" />
-
     </PreferenceCategory>
+
+<!--    &lt;!&ndash; notification &ndash;&gt;-->
+<!--    <PreferenceCategory-->
+<!--        app:allowDividerBelow="true"-->
+<!--        app:iconSpaceReserved="false"-->
+<!--        app:title="@string/preference_category_notification_title">-->
+
+
+
+<!--        <SwitchPreference-->
+<!--            app:key="@string/preference_key_fitness_center_geofencing"-->
+<!--            app:title="@string/preference_category_notification_fitness_center_geofencing"/>-->
+
+<!--    </PreferenceCategory>-->
 </PreferenceScreen>

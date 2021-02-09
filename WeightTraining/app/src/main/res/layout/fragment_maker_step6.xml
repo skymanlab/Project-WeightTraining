@@ -15,7 +15,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:layout_height="@dimen/divider_default"
         android:background="@color/browser_actions_divider_color" />
 
     <!-- step display -->
@@ -27,7 +27,7 @@
     <!-- step content -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <!-- indication -->
@@ -41,183 +41,144 @@
             android:fontFamily="@font/eland_choice_medium"
             android:text="@string/f_maker_step6_indication"
             android:textAlignment="center"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:textSize="15sp" />
 
-        <!-- program setting -->
-        <com.google.android.material.card.MaterialCardView
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_section"
+            android:background="@color/colorDividerSection" />
+
+        <!-- set number -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/browser_actions_bg_grey"
-            app:cardCornerRadius="10dp">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/section_padding_start"
+            android:paddingTop="@dimen/section_padding_top"
+            android:paddingEnd="@dimen/section_padding_end"
+            android:paddingBottom="@dimen/section_padding_bottom">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_maker_step6_program_setting_set_number"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_section_title_size" />
+
+            <include
+                layout="@layout/include_dot_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <NumberPicker
+                    android:id="@+id/f_maker_step6_program_setting_set_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:scaleX="0.9"
+                    android:scaleY="0.9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/f_maker_step6_program_setting_set_number_tag" />
+
+            </LinearLayout>
+        </LinearLayout><!-- End of set number -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_section"
+            android:background="@color/colorDividerSection" />
+
+        <!-- rest time -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/section_padding_start"
+            android:paddingTop="@dimen/section_padding_top"
+            android:paddingEnd="@dimen/section_padding_end"
+            android:paddingBottom="@dimen/section_padding_bottom">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_medium"
+                android:text="@string/f_maker_step6_program_setting_rest_time"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_section_title_size" />
+
+            <include
+                layout="@layout/include_dot_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <!-- title -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/f_maker_step6_program_setting_title"
-                    android:textAlignment="center" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="?android:attr/listDivider" />
-
-                <!-- content -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="1dp">
+                    android:orientation="horizontal">
 
-                    <!-- set number -->
-                    <com.google.android.material.card.MaterialCardView
+                    <NumberPicker
+                        android:id="@+id/f_maker_step6_program_setting_rest_time_minute"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="10dp">
+                        android:layout_height="90dp"
+                        android:scaleX="0.9"
+                        android:scaleY="0.9" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/f_maker_step6_program_setting_set_number" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <NumberPicker
-                                    android:id="@+id/f_maker_step6_program_setting_set_number"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="90dp"
-                                    android:scaleX="0.9"
-                                    android:scaleY="0.9" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:text="@string/f_maker_step6_program_setting_set_number_tag" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- rest time -->
-                    <com.google.android.material.card.MaterialCardView
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="10dp">
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center"
+                        android:text="@string/f_maker_step6_program_setting_rest_time_minute_tag" />
+                </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/f_maker_step6_program_setting_rest_time" />
+                    <NumberPicker
+                        android:id="@+id/f_maker_step6_program_setting_rest_time_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:scaleX="0.9"
+                        android:scaleY="0.9" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <NumberPicker
-                                    android:id="@+id/f_maker_step6_program_setting_rest_time_minute"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="90dp"
-                                    android:scaleX="0.9"
-                                    android:scaleY="0.9" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginRight="10dp"
-                                    android:gravity="center"
-                                    android:text="@string/f_maker_step6_program_setting_rest_time_minute_tag" />
-
-                                <NumberPicker
-                                    android:id="@+id/f_maker_step6_program_setting_rest_time_second"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="90dp"
-                                    android:scaleX="0.9"
-                                    android:scaleY="0.9" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:text="@string/f_maker_step6_program_setting_rest_time_second_tag" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout><!-- End of content -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center"
+                        android:text="@string/f_maker_step6_program_setting_rest_time_second_tag" />
+                </LinearLayout>
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView><!-- End of all setting -->
+        </LinearLayout> <!-- End of rest time -->
 
-        <!-- partial setting -->
-        <com.google.android.material.card.MaterialCardView
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/browser_actions_bg_grey"
-            app:cardCornerRadius="10dp">
+            android:background="@color/colorDividerSection" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/f_maker_step6_detail_program_setting_title"
-                    android:textAlignment="center" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="?android:attr/listDivider" />
-
-                <!-- content -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/f_maker_step6_detail_program_setting_event_list_wrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </LinearLayout>

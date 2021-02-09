@@ -236,7 +236,7 @@
             android:padding="10dp"
             android:text="@string/custom_dialog_event_bt_negative_default"
             android:textAlignment="center"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:textSize="16dp" />
 
         <!-- modify -->
@@ -254,7 +254,7 @@
             android:padding="10dp"
             android:text="@string/custom_dialog_event_bt_positive_default"
             android:textAlignment="center"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:textSize="16dp" />
     </LinearLayout><!-- End of Button -->
 </LinearLayout>

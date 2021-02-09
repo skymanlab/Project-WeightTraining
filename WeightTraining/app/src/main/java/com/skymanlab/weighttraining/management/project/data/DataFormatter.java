@@ -188,6 +188,7 @@ public class DataFormatter {
 
     /**
      * setNumber 를 'n회' format 으로 변환하여 반환한다.
+     *
      * @param setNumber
      * @return
      */
@@ -201,6 +202,7 @@ public class DataFormatter {
 
     /**
      * eventNumber 를 'n개' format 으로 변환하여 반환한다.
+     *
      * @param eventNumber
      * @return
      */
@@ -208,5 +210,22 @@ public class DataFormatter {
 
         return new StringBuilder().append(eventNumber).append("개").toString();
     }
+
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= total set number format =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    /**
+     * totalSetNumber 을 '총 n세트' format 으로 변환하여 반환한다.
+     * @param totalSetNumber
+     * @return
+     */
+    public static String setTotalSetNumberFormat(int totalSetNumber) {
+        return new StringBuilder()
+                .append("총 ")
+                .append(totalSetNumber)
+                .append("세트")
+                .toString();
+    }
+
 }
 

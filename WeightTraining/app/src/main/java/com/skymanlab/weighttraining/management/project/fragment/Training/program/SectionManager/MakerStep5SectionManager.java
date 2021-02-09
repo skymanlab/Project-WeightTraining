@@ -24,6 +24,7 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
@@ -38,7 +39,7 @@ import java.util.Iterator;
 public class MakerStep5SectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFTPS] MakerStep6SectionManager";
+    private static final String CLASS_NAME = "[PFTPS] MakerStep5SectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
@@ -60,8 +61,9 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
     // instance variable : [2] event
     private HashMap<String, Step5EventItem> eventItemList;
 
-    // instance variable
+    // instance variable : next step 으로 넘어갈 데이터
     private ArrayList<Event> finalOrderList;
+    private ArrayList<MuscleArea> muscleAreaArrayList;
 
     // constructor
     public MakerStep5SectionManager(Fragment fragment, View view) {
@@ -133,6 +135,9 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
         // [iv/C]HashMap<String, Event> :
         this.finalOrderList = new ArrayList<>();
 
+        // [iv/C]ArrayList<MuscleARea>
+        this.muscleAreaArrayList = new ArrayList<>();
+
         // [lv/C]LayoutInflater : layout inflater 가져오기
         LayoutInflater inflater = (LayoutInflater) getFragment().getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -176,14 +181,14 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
 
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> 다음 단계를 진행합니다.");
 
-                    // [cycle ] :
+                    // [cycle ] :  그냥 확인 하기 위해서
                     for (int index = 0; index < finalOrderList.size(); index++) {
 
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> event name = " + finalOrderList.get(index).getEventName());
                     } // [cycle ]
 
                     // [lv/C]MakerStep6Fragment : step 6 fragment
-                    MakerStep6Fragment step6Fragment = MakerStep6Fragment.newInstance(finalOrderList);
+                    MakerStep6Fragment step6Fragment = MakerStep6Fragment.newInstance(finalOrderList, muscleAreaArrayList);
 
                     FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.nav_home_content_wrapper, step6Fragment);
@@ -208,9 +213,14 @@ public class MakerStep5SectionManager extends FragmentSectionManager implements 
      * @param eventArrayList
      */
     private void initItemByMuscleArea(LayoutInflater inflater, ArrayList<Event> eventArrayList) {
+        final String METHOD_NAME = "[initItemByMuscleArea]";
 
         // [check 1] : eventArrayList 의 데이터가 있을 때만 item 을 생성하는 초기 설정을 진행한다.
         if (!eventArrayList.isEmpty()) {
+            
+            // muscle area 추가
+            muscleAreaArrayList.add(eventArrayList.get(0).getMuscleArea());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Muscle Area > " + eventArrayList.get(0).getMuscleArea());
 
             // [cycle 1] : eventArrayList 의 각 항목들을 이용하여 Step4EventItem 과 Step4FinalOrderItem 의 객체를 생성하는 초기 설정을 한다.
             for (int index = 0; index < eventArrayList.size(); index++) {

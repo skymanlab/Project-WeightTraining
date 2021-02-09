@@ -28,7 +28,6 @@ public class MyProgramFragment extends Fragment {
     private static final String CLASS_NAME = "[PFTP] MyProgramFragment";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
-
     // instance variable
     private FragmentTopBarManager topBarManager;
     private MyProgramSectionManager sectionManager;
@@ -72,11 +71,11 @@ public class MyProgramFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
 
         // [FragmentTopBarManager] [topBarManager] this is 'maker step 1' fragment's top bar section manager.
-        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_my_program_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]Step2D2SectionManager :
+        // [iv/C]MyProgramSectionManager :
         this.sectionManager = new MyProgramSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();

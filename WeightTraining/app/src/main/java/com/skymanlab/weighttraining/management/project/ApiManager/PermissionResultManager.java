@@ -13,6 +13,7 @@ import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
 
 public class PermissionResultManager {
 
@@ -80,11 +81,11 @@ public class PermissionResultManager {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< location permission > == 모든 권한을 승인하였습니다.");
 
             // [check 2] targetFragment 가 어떤 Fragment 인지 구분
-            if (targetFragment instanceof FitnessCenterFragment) {
+            if (targetFragment instanceof FitnessCenterRegisterFragment) {
 
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterFragment : fragment - sectionManager - googleMapManager 의 init() 수행합니다.");
-                // FitnessCenterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
-                ((FitnessCenterFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterRegisterFragment : fragment - sectionManager - googleMapManager 의 init() 수행합니다.");
+                // FitnessCenterRegisterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
+                ((FitnessCenterRegisterFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
 
             } else if (targetFragment instanceof SettingsActivity.SettingsFragment) {
 
@@ -132,11 +133,11 @@ public class PermissionResultManager {
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< location service > 해당 location service 는 활성화 되었습니다.");
 
-            // [check 2] Fragment : targetFragment 가 FitnessCenterFragment 인지 구분
-            if (targetFragment instanceof FitnessCenterFragment) {
+            // [check 2] Fragment : targetFragment 가 FitnessCenterRegisterFragment 인지 구분
+            if (targetFragment instanceof FitnessCenterRegisterFragment) {
 
-                // FitnessCenterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
-                ((FitnessCenterFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
+                // FitnessCenterRegisterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
+                ((FitnessCenterRegisterFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterFragment 에 대한 다음 과정을 진행합니다.");
 
             } // [check 2]

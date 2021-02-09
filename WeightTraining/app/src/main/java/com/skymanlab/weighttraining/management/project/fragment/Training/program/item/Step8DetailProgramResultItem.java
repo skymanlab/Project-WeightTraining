@@ -11,7 +11,7 @@ import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.project.data.DataFormatter;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
-public class Step7DetailProgramResultItem {
+public class Step8DetailProgramResultItem {
 
     // instance variable
     private LayoutInflater inflater;
@@ -30,7 +30,7 @@ public class Step7DetailProgramResultItem {
     private TextView restTime;
 
     // constructor
-    private Step7DetailProgramResultItem(Builder builder) {
+    private Step8DetailProgramResultItem(Builder builder) {
         this.inflater = builder.inflater;
         this.event = builder.event;
         this.detailProgram = builder.detailProgram;
@@ -46,7 +46,7 @@ public class Step7DetailProgramResultItem {
     /**
      * item 을 만들고 설정을 초기화한다.
      */
-    public Step7DetailProgramResultItem createItem() {
+    public Step8DetailProgramResultItem createItem() {
 
         // [iv/C]View : item 생성하기
         this.item = inflateItem();
@@ -70,7 +70,7 @@ public class Step7DetailProgramResultItem {
      */
     private View inflateItem() {
 
-        return inflater.inflate(R.layout.include_maker_step7_detail_program_result_item, null);
+        return inflater.inflate(R.layout.include_maker_step8_detail_program_result_item, null);
 
     } // End of method [inflateItem]
 
@@ -84,11 +84,11 @@ public class Step7DetailProgramResultItem {
      */
     private void connectWidget(View view) {
 
-        this.muscleArea = (TextView) view.findViewById(R.id.include_maker_step7_detail_program_result_item_muscle_area);
-        this.eventName = (TextView) view.findViewById(R.id.include_maker_step7_detail_program_result_item_event_name);
-        this.contentWrapper = (LinearLayout) view.findViewById(R.id.include_maker_step7_detail_program_result_item_content_wrapper);
-        this.setNumber = (TextView) view.findViewById(R.id.include_maker_step7_detail_program_result_item_set_number);
-        this.restTime = (TextView) view.findViewById(R.id.include_maker_step7_detail_program_result_item_rest_time);
+        this.muscleArea = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_muscle_area);
+        this.eventName = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_event_name);
+        this.contentWrapper = (LinearLayout) view.findViewById(R.id.include_maker_step8_detail_program_result_item_content_wrapper);
+        this.setNumber = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_set_number);
+        this.restTime = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_rest_time);
 
     }
 
@@ -203,8 +203,8 @@ public class Step7DetailProgramResultItem {
         }
 
         // create
-        public Step7DetailProgramResultItem newInstance() {
-            return new Step7DetailProgramResultItem(this);
+        public Step8DetailProgramResultItem newInstance() {
+            return new Step8DetailProgramResultItem(this);
         }
     }
 }

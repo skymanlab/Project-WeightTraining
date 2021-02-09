@@ -17,6 +17,10 @@
     <color name="colorBackgroundSixth">#66BB6A</color>
 
     <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextBack">#000000</color>
+    <color name="colorTextBlack">#000000</color>
+
+    <color name="colorDividerDefault">@color/browser_actions_divider_color</color>
+    <color name="colorDividerBlack">#000000</color>
+    <color name="colorDividerSection">@color/browser_actions_bg_grey</color>
 
 </resources>

@@ -15,7 +15,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:layout_height="@dimen/divider_default"
         android:background="@color/browser_actions_divider_color" />
 
     <!-- step display -->
@@ -41,12 +41,12 @@
             android:fontFamily="@font/eland_choice_medium"
             android:text="@string/f_maker_step3_2_indication"
             android:textAlignment="center"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/include_top_bar_divider_width"
+            android:layout_height="@dimen/divider_default"
             android:background="@color/browser_actions_divider_color" />
 
         <ScrollView

@@ -30,16 +30,12 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/eland_choice_bold"
                 android:text="@string/include_maker_type_direct_selection_group_item_title"
-                android:textColor="@color/colorTextBack" />
+                android:textColor="@color/colorTextBlack" />
 
-            <View
+            <include
+                layout="@layout/include_dot_divider"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/horizontal_dot_divider"
-                android:layerType="software" />
-
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:id="@+id/include_maker_type_direct_selection_group_item_event_list_wrapper"

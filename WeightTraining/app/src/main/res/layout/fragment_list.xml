@@ -39,7 +39,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/include_top_bar_divider_width"
+            android:layout_height="@dimen/divider_default"
             android:background="@color/browser_actions_divider_color" />
 
         <androidx.viewpager2.widget.ViewPager2

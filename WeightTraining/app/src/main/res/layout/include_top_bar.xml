@@ -28,7 +28,7 @@
             android:layout_marginEnd="@dimen/include_top_bar_dimen_title_side_blank"
             android:fontFamily="@font/eland_choice_medium"
             android:textAlignment="center"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:textSize="18sp" />
 
         <!-- start image -->
@@ -54,7 +54,7 @@
             android:fontFamily="@font/eland_choice_medium"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:visibility="gone" />
 
         <!-- end image -->
@@ -80,7 +80,7 @@
             android:fontFamily="@font/eland_choice_medium"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:textColor="@color/colorTextBack"
+            android:textColor="@color/colorTextBlack"
             android:visibility="gone" />
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

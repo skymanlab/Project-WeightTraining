@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_expand_less_24"
-                    android:contentDescription="@string/custom_list_step7_event_item_more_content_description" />
+                    android:contentDescription="@string/custom_list_step8_event_item_more_content_description" />
 
             </LinearLayout>
 

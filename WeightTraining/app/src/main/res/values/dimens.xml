@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="include_top_bar_divider_width">1dp</dimen>
     <dimen name="include_top_bar_dimen_side_blank">15dp</dimen>
     <dimen name="include_top_bar_dimen_title_side_blank">45dp</dimen>
+
+    <!-- divider -->
+    <dimen name="divider_default">1dp</dimen>
+    <dimen name="divider_section">10dp</dimen>
+    <dimen name="divider_vertical_default">1dp</dimen>
+    <dimen name="divider_vertical_layout_Start">7dp</dimen>
+    <dimen name="divider_vertical_layout_End">7dp</dimen>
+    <dimen name="divider_horizontal_layout_Start">20dp</dimen>
+    <dimen name="divider_horizontal_layout_End">20dp</dimen>
+
+    <!-- section : padding -->
+    <dimen name="section_padding_top">20dp</dimen>
+    <dimen name="section_padding_start">20dp</dimen>
+    <dimen name="section_padding_end">20dp</dimen>
+    <dimen name="section_padding_bottom">15dp</dimen>
+
+    <!-- text -->
+    <dimen name="text_title_size">20sp</dimen>
+    <dimen name="text_sub_title_size">15sp</dimen>
+    <dimen name="text_section_title_size">17sp</dimen>
+
+    <!-- item -->
+    <dimen name="item_margin_top">5dp</dimen>
+    <dimen name="item_margin_bottom">5dp</dimen>
+    <dimen name="item_padding_top">20dp</dimen>
+    <dimen name="item_padding_start">20dp</dimen>
+    <dimen name="item_padding_end">20dp</dimen>
+    <dimen name="item_padding_bottom">10dp</dimen>
+
 
     <!-- maker step content -->
     <dimen name="maker_step_content_indication_margin_top">10dp</dimen>

@@ -15,7 +15,7 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
     // constant
     private static final String CLASS_NAME = "[PF] FragmentTopBarManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private String titleContent;

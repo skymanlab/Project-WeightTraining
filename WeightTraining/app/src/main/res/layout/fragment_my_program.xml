@@ -14,8 +14,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/include_top_bar_divider_width"
-        android:background="@color/browser_actions_divider_color" />
+        android:layout_height="@dimen/divider_default"
+        android:background="@color/colorDividerDefault" />
 
     <!-- content -->
     <LinearLayout
@@ -24,21 +24,13 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/f_my_program_indication"
-            android:textAlignment="center" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/f_my_program_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+            android:background="@color/browser_actions_bg_grey"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
 
     </LinearLayout><!-- End of content -->
 </LinearLayout>

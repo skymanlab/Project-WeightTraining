@@ -1,13 +1,8 @@
 package com.skymanlab.weighttraining;
 
-import android.Manifest;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -20,33 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
-import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
-import androidx.work.Worker;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.GeofencingClient;
-import com.google.android.gms.location.GeofencingRequest;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.GroundOverlay;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,11 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.AuthenticationManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceService;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterLocationUpdateWorker;
-import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.NotificationManager;
 import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 import com.skymanlab.weighttraining.management.project.fragment.Home.HomeFragment;
@@ -75,10 +39,7 @@ import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragmen
 import com.skymanlab.weighttraining.management.project.fragment.Training.TrainingFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class NavHomeActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 

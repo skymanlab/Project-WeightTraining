@@ -35,7 +35,7 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="2dp"
                 android:fontFamily="@font/nanum_gothic"
-                android:textColor="@color/colorTextBack"
+                android:textColor="@color/colorTextBlack"
                 android:textSize="13dp" />
 
             <LinearLayout

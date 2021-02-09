@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".management.project.fragment.Training.program.MakerStep8Fragment">
+
+    <!-- title -->
+    <include
+        layout="@layout/include_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_default"
+        android:background="@color/browser_actions_divider_color" />
+
+    <!-- step display -->
+    <include
+        layout="@layout/include_maker_step_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- step content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- indication -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/maker_step_content_indication_margin_start"
+            android:layout_marginTop="@dimen/maker_step_content_indication_margin_top"
+            android:layout_marginEnd="@dimen/maker_step_content_indication_margin_end"
+            android:layout_marginBottom="@dimen/maker_step_content_indication_margin_bottom"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/f_maker_step8_indication"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_default"
+            android:background="@color/browser_actions_divider_color" />
+
+        <ScrollView
+            android:id="@+id/f_maker_step8_result_content_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/browser_actions_bg_grey"
+            android:fillViewport="true"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/maker_step_content_item_margin_bottom"
+                android:background="@color/colorBackgroundWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/eland_choice_bold"
+                    android:text="@string/f_maker_step8_result_title"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_default"
+                    android:background="@color/browser_actions_divider_color" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_maker_step8_result_nick_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:hint="@string/f_maker_step8_result_nick_name_hint"
+                    android:textSize="14sp" />
+
+                <!-- program setting -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="7dp"
+                        android:fontFamily="@font/eland_choice_bold"
+                        android:text="@string/f_maker_step8_result_program_setting_title"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_set_number" />
+
+                        <TextView
+                            android:id="@+id/f_maker_step8_result_program_setting_set_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_set_number_default"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/colorTextBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_rest_time" />
+
+                        <TextView
+                            android:id="@+id/f_maker_step8_result_program_setting_rest_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_rest_time_default"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/colorTextBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_total_set_number" />
+
+                        <TextView
+                            android:id="@+id/f_maker_step8_result_program_setting_total_set_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_total_set_number_default"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/colorTextBlack" />
+                    </LinearLayout>
+
+
+                </LinearLayout><!-- End of program setting -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_default"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@android:color/background_dark" />
+
+
+                <!-- detail program setting -->
+                <LinearLayout
+                    android:id="@+id/f_maker_step8_result_detail_program_setting_list_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="7dp"
+                        android:fontFamily="@font/eland_choice_bold"
+                        android:text="@string/f_maker_step8_result_detail_program_setting_title"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_total_event_number" />
+
+                        <TextView
+                            android:id="@+id/f_maker_step8_result_program_setting_total_event_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/eland_choice_light"
+                            android:text="@string/f_maker_step8_result_program_setting_total_event_number_default"
+                            android:textAlignment="textEnd"
+                            android:textColor="@android:color/black" />
+                    </LinearLayout>
+                </LinearLayout><!-- End of detail program setting -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_default"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@android:color/background_dark" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

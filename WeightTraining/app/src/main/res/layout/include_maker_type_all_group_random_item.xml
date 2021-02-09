@@ -31,7 +31,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/eland_choice_bold"
                 android:text="@string/include_maker_type_all_group_random_item_muscle_area"
-                android:textColor="@color/colorTextBack" />
+                android:textColor="@color/colorTextBlack" />
 
             <View
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
-                app:strokeColor="@color/colorTextBack"
+                app:strokeColor="@color/colorTextBlack"
                 app:strokeWidth="1dp">
 
                 <LinearLayout

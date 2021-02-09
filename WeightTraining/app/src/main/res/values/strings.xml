@@ -65,8 +65,35 @@
 
     <!-- Fragment : fitness center -->
     <string name="f_fitness_center_title">피트니스 센터</string>
-    <string name="f_fitness_center_snack_not_find">해당 장소를 찾을 수 없습니다.</string>
+    <string name="f_fitness_center_go_register"></string>
+    <string name="f_fitness_center_name">피트니스 센터를</string>
+    <string name="f_fitness_center_address">등록해주세요.</string>
+    <string name="f_fitness_center_info">등록 정보</string>
+    <string name="f_fitness_center_contract_date">등록일</string>
+    <string name="f_fitness_center_contract_date_default">피트니스 센터에 등록한 날짜입니다.</string>
+    <string name="f_fitness_center_expiry_date">만료일</string>
+    <string name="f_fitness_center_expiry_date_default">피트니스 센터 등록 마지막 날입니다.</string>
+    <string name="f_fitness_center_attendance_date">출석일</string>
+    <string name="f_fitness_center_attendance_date_default">피트니스 센터에서 운동을 한 일 수입니다.</string>
+    <string name="f_fitness_center_setting_info">피트니스 센터 설정 정보</string>
+    <string name="f_fitness_center_setting_info_is_disclosed">공개 여부</string>
+    <string name="f_fitness_center_setting_info_is_disclosed_default">다른 사람에게 피트니스 센터 등록 공개 여부에 대한 설정입니다.</string>
+    <string name="f_fitness_center_setting_info_access_notification">접근 알림</string>
+    <string name="f_fitness_center_setting_info_access_notification_default">피트니스 센터에 접근여부를 알림으로 알려줄지에 대한 설정값입니다.</string>
     <string name="f_fitness_center_"></string>
+
+    <!-- Fragment : fitness center register -->
+    <string name="f_fitness_center_register_title">피트니스 센터 등록</string>
+    <string name="f_fitness_center_register_top_bar_end_button_register">등록</string>
+    <string name="f_fitness_center_register_address">주소</string>
+    <string name="f_fitness_center_register_address_default">검색에 성공하면 해당 주소가 표시됩니다.</string>
+    <string name="f_fitness_center_register_period">등록 기간</string>
+    <string name="f_fitness_center_register_period_default">클릭하셔서 등록 기간을 설정해주세요.</string>
+    <string name="f_fitness_center_register_contract_date">등록일</string>
+    <string name="f_fitness_center_register_contract_date_default">클릭하여 등록일을 설정해주세요.</string>
+    <string name="f_fitness_center_register_expiry_date">만료일</string>
+    <string name="f_fitness_center_register_expiry_date_default">클릭하여 만료일을 설정해주세요.</string>
+    <string name="f_fitness_center_register_"></string>
 
     <!-- Fragment : setting -->
     <string name="f_setting_title">환경설정</string>
@@ -138,7 +165,7 @@
     <string name="f_maker_step5_snack_final_order_not_complete">아직 최종 순서를 완성하지 않았습니다.</string>
 
     <!-- Fragment : maker step6 -->
-    <string name="f_maker_step6_indication">각 항목별로 초기 설정을 해주세요.</string>
+    <string name="f_maker_step6_indication">전체적인 프로그램의 설정값을 정해주세요.</string>
     <string name="f_maker_step6_program_setting_title">프로그램 설정</string>
     <string name="f_maker_step6_program_setting_set_number">세트 수</string>
     <string name="f_maker_step6_program_setting_set_number_tag">회</string>
@@ -150,26 +177,34 @@
     <string name="f_maker_step6_snack_setting_data_error">프로그램 설정들을 확인해주세요.</string>
 
     <!-- Fragment : maker step7-->
-    <string name="f_maker_step7_indication">결과를 확인합니다.</string>
-    <string name="f_maker_step7_result_title">프로그램 확인    ></string>
-    <string name="f_maker_step7_result_nick_name_hint">별칭을 입력해주세요.</string>
-    <string name="f_maker_step7_result_program_setting_title">프로그램 설정</string>
-    <string name="f_maker_step7_result_program_setting_set_number">- 세트 수</string>
-    <string name="f_maker_step7_result_program_setting_set_number_default">0 회</string>
-    <string name="f_maker_step7_result_program_setting_rest_time">- 휴식 시간</string>
-    <string name="f_maker_step7_result_program_setting_rest_time_default">0분 0초</string>
-    <string name="f_maker_step7_result_program_setting_total_event_number">- 총 종목 수</string>
-    <string name="f_maker_step7_result_program_setting_total_event_number_default">0 개</string>
-    <string name="f_maker_step7_result_program_setting_total_set_number">- 총 세트 수</string>
-    <string name="f_maker_step7_result_program_setting_total_set_number_default">0 세트</string>
-    <string name="f_maker_step7_result_detail_program_setting_title">세부 프로그램 설정</string>
-    <string name="f_maker_step7_result_"></string>
-    <string name="f_maker_step7_result_snack_nick_name_input">별칭을 입력해주세요.</string>
+    <string name="f_maker_step7_indication">세부항목에 대한 설정값을 정해주세요.</string>
+    <string name="f_maker_step7_"></string>
+
+    <!-- Fragment : maker step8-->
+    <string name="f_maker_step8_indication">결과를 확인합니다.</string>
+    <string name="f_maker_step8_result_title">프로그램 확인    ></string>
+    <string name="f_maker_step8_result_nick_name_hint">별칭을 입력해주세요.</string>
+    <string name="f_maker_step8_result_program_setting_title">프로그램 설정</string>
+    <string name="f_maker_step8_result_program_setting_set_number">- 세트 수</string>
+    <string name="f_maker_step8_result_program_setting_set_number_default">0 회</string>
+    <string name="f_maker_step8_result_program_setting_rest_time">- 휴식 시간</string>
+    <string name="f_maker_step8_result_program_setting_rest_time_default">0분 0초</string>
+    <string name="f_maker_step8_result_program_setting_total_event_number">- 총 종목 수</string>
+    <string name="f_maker_step8_result_program_setting_total_event_number_default">0 개</string>
+    <string name="f_maker_step8_result_program_setting_total_set_number">- 총 세트 수</string>
+    <string name="f_maker_step8_result_program_setting_total_set_number_default">0 세트</string>
+    <string name="f_maker_step8_result_detail_program_setting_title">세부 프로그램 설정</string>
+    <string name="f_maker_step8_result_"></string>
+    <string name="f_maker_step8_result_snack_nick_name_input">별칭을 입력해주세요.</string>
 
     <!-- Fragment : my program -->
+    <string name="f_my_program_title">프로그램 목록</string>
     <string name="f_my_program_indication">내가 만든 프로그램 목록입니다.</string>
     <string name="f_my_program_"></string>
 
+    <!-- Fragment : my program detail -->
+    <string name="f_my_program_detail_title">세부정보</string>
+    <string name="f_my_program_detail_"></string>
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ include layout +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
@@ -193,15 +228,15 @@
     <string name="include_maker_type_all_group_random_item_menu">전체</string>
 
     <!-- Include Layout : maker step7 detail program setting -->
-    <string name="include_maker_step7_detail_program_result_item_muscle_area">근육 부위</string>
-    <string name="include_maker_step7_detail_program_result_item_muscle_area_default">가슴</string>
-    <string name="include_maker_step7_detail_program_result_item_divider">/</string>
-    <string name="include_maker_step7_detail_program_result_item_event_name">종목 이름</string>
-    <string name="include_maker_step7_detail_program_result_item_event_name_default">벤치 프레스</string>
-    <string name="include_maker_step7_detail_program_result_item_set_number">- 세트 수</string>
-    <string name="include_maker_step7_detail_program_result_item_set_number_default">0 회</string>
-    <string name="include_maker_step7_detail_program_result_item_rest_time">- 휴식 시간</string>
-    <string name="include_maker_step7_detail_program_result_item_rest_time_default">0분 0초</string>
+    <string name="include_maker_step8_detail_program_result_item_muscle_area">근육 부위</string>
+    <string name="include_maker_step8_detail_program_result_item_muscle_area_default">가슴</string>
+    <string name="include_maker_step8_detail_program_result_item_divider">/</string>
+    <string name="include_maker_step8_detail_program_result_item_event_name">종목 이름</string>
+    <string name="include_maker_step8_detail_program_result_item_event_name_default">벤치 프레스</string>
+    <string name="include_maker_step8_detail_program_result_item_set_number">- 세트 수</string>
+    <string name="include_maker_step8_detail_program_result_item_set_number_default">0 회</string>
+    <string name="include_maker_step8_detail_program_result_item_rest_time">- 휴식 시간</string>
+    <string name="include_maker_step8_detail_program_result_item_rest_time_default">0분 0초</string>
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ activity +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
@@ -400,7 +435,12 @@
     <string name="custom_list_step6_event_item_go_content_description">go</string>
 
     <!-- Custom : step 7 event item -->
-    <string name="custom_list_step7_event_item_more_content_description">더보기</string>
+    <string name="custom_list_step8_event_item_more_content_description">더보기</string>
+
+    <!-- Custom : my program item -->
+    <string name="custom_list_my_program_item_program_nick_name">프로그램 별칭입니다.</string>
+    <string name="custom_list_my_program_item_all_muscle_area_list">가슴 / 어깨 / 등 / 하체 / 팔 / 기타</string>
+    <string name="custom_list_my_program_item_total_set_number">총 20세트</string>
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -524,11 +564,14 @@
     <string name="preference_category_location">위치</string>
 
     <!-- Preference : key -->
+    <string name="preference_key_initial_setting">initialSetting</string>
     <string name="preference_key_version_info">versionInfo</string>
     <string name="preference_key_base_event_data">baseEventData</string>
     <string name="preference_key_keep_logged_in">keepLoggedIn</string>
     <string name="preference_key_location_permission">locationPermission</string>
     <string name="preference_key_background_location_permission">backgroundLocationPermission</string>
+    <string name="preference_key_fitness_center_geofencing">fitnessCenterGeofencing</string>
+    <string name="preference_key_is_disclosed_fitness_center">isDisclosedFitnessCenter</string>
     <string name="preference_key_"></string>
 
     <!-- Preference : category item -->
@@ -547,6 +590,14 @@
     <string name="preference_category_location_background_permission_granted">백그라운드 위치 권한이 승인되었습니다.</string>
     <string name="preference_category_location_background_permission_denied">백그라운드 위치 권한이 거부되었습니다.</string>
     <string name="preference_category_location_background_permission_user_denied">백그라운드 위치 권한이 사용자에 의해 거부되었습니다. 어플리케이션 설정에서 항상 허용으로 변경해주세요.</string>
+
+    <string name="preference_category_notification_title">알림</string>
+    <string name="preference_category_notification_fitness_center_geofencing">피트니스 센터 접근 알림</string>
+    <string name="preference_category_notification_fitness_center_geofencing_summary_no_register">피트니스 센터가 등록되어 있지 않습니다.</string>
+    <string name="preference_category_notification_fitness_center_geofencing_summary_on_register">피스트니 센터에 접근 알림을 알려주지 않습니다.</string>
+    <string name="preference_category_notification_fitness_center_geofencing_summary_off_register">피스트니 센터에 접근하면 알림으로 알려줍니다.</string>
+
+    <string name="preference_category_"></string>
 
     <!-- Preference, AlertDialog : base event data save -->
     <string name="preference_alert_base_event_data_save_title">기본 데이터를 저장하겠습니까?</string>
@@ -615,7 +666,7 @@
 
     <!-- SearchUtil -->
     <string name="etc_search_util_snack_not_find_address">주소를 찾지 못 하였습니다.</string>
-
+    <string name="etc_search_util_snack_find_address_error">에러가 발생하였습니다.</string>
 
     <!-- AuthenticationManager-->
     <string name="etc_authentication_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
@@ -628,8 +679,16 @@
     <string name="etc_authentication_alert_withdraw_user_bt_negative">취소</string>
 
     <!-- NotificationManager -->
-    <string name="etc_notification_manager_fitness_center_channel_name">위치 알림</string>
-    <string name="etc_notification_manager_fitness_center_channel_description">해당 위치에 접근하는 알림을 표시합니다.</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_name">피트니스 센터 알림</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_description">피트니스 센터에 접근하는 알림을 표시합니다.</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_"></string>
+
+    <!-- FitnessCenterGeofencingService -->
+    <string name="etc_fitness_center_geofencing_notification_title">피트니스 센터 알림</string>
+    <string name="etc_fitness_center_geofencing_transition_type_dwell">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
+    <string name="etc_fitness_center_geofencing_transition_type_enter">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
+    <string name="etc_fitness_center_geofencing_transition_type_exit">운동을 끝내고 가시나요?</string>
+    <string name="etc_fitness_center_geofencing_transition_type_default"></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

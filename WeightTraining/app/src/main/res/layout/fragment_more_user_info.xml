@@ -14,7 +14,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/include_top_bar_divider_width"
+        android:layout_height="@dimen/divider_default"
         android:background="@color/browser_actions_divider_color" />
 
     <!-- photo -->
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_light"
             android:text="@string/f_more_user_info_auth_provider"
-            android:textColor="@color/colorTextBack" />
+            android:textColor="@color/colorTextBlack" />
 
         <TextView
             android:id="@+id/f_more_user_info_auth_provider"
@@ -69,7 +69,7 @@
             android:layout_marginTop="5sp"
             android:fontFamily="@font/eland_choice_bold"
             android:text="@string/f_more_user_info_auth_provider_default"
-            android:textColor="@color/colorTextBack" />
+            android:textColor="@color/colorTextBlack" />
     </LinearLayout>
 
     <View
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_light"
             android:text="@string/f_more_user_info_email"
-            android:textColor="@color/colorTextBack" />
+            android:textColor="@color/colorTextBlack" />
 
         <TextView
             android:id="@+id/f_more_user_info_email"
@@ -98,7 +98,7 @@
             android:layout_marginTop="5sp"
             android:fontFamily="@font/eland_choice_bold"
             android:text="@string/f_more_user_info_email_default"
-            android:textColor="@color/colorTextBack" />
+            android:textColor="@color/colorTextBlack" />
     </LinearLayout>
 
     <View
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_light"
             android:text="@string/f_more_user_info_name"
-            android:textColor="@color/colorTextBack" />
+            android:textColor="@color/colorTextBlack" />
 
         <TextView
             android:id="@+id/f_more_user_info_name"
@@ -127,7 +127,7 @@
             android:layout_marginTop="5sp"
             android:fontFamily="@font/eland_choice_bold"
             android:text="@string/f_more_user_info_name_default"
-            android:textColor="@color/colorTextBack" />
+            android:textColor="@color/colorTextBlack" />
     </LinearLayout>
 
     <View

@@ -5,9 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -16,12 +14,12 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step6DetailProgramDialog;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step7DetailProgramDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapter.ViewHolder> {
+public class Step7EventRvAdapter extends RecyclerView.Adapter<Step7EventRvAdapter.ViewHolder> {
 
     // instance variable
     private Fragment fragment;
@@ -29,8 +27,9 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
     private HashMap<String, DetailProgram> detailProgramList;
 
 
+
     // constructor
-    public Step6EventRvAdapter(Builder builder) {
+    public Step7EventRvAdapter(Builder builder) {
         this.fragment = builder.fragment;
         this.finalOrderList = builder.finalOrderList;
         this.detailProgramList = builder.detailProgramList;
@@ -41,7 +40,7 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // [lv/C]View : create a new view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_step6_event_item, parent, false);
-        return new Step6EventRvAdapter.ViewHolder(view);
+        return new Step7EventRvAdapter.ViewHolder(view);
     }
 
     @Override
@@ -52,7 +51,10 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
             @Override
             public void onClick(View view) {
 
-                Step6DetailProgramDialog dialog = Step6DetailProgramDialog.newInstance(finalOrderList.get(position), detailProgramList.get(finalOrderList.get(position).getKey()));
+                Step7DetailProgramDialog dialog = Step7DetailProgramDialog.newInstance(
+                        finalOrderList.get(position),
+                        detailProgramList.get(finalOrderList.get(position).getKey())
+                );
                 dialog.setCancelable(false);
                 dialog.show(fragment.getActivity().getSupportFragmentManager(), "PartialSetting");
 
@@ -76,7 +78,6 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
     }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc method =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ViewHolder =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -153,8 +154,8 @@ public class Step6EventRvAdapter extends RecyclerView.Adapter<Step6EventRvAdapte
         }
 
         // create
-        public Step6EventRvAdapter create() {
-            return new Step6EventRvAdapter(this);
+        public Step7EventRvAdapter create() {
+            return new Step7EventRvAdapter(this);
         }
     }
 

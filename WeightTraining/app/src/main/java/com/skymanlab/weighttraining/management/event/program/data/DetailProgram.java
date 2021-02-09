@@ -1,31 +1,51 @@
 package com.skymanlab.weighttraining.management.event.program.data;
 
+import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+
 import java.io.Serializable;
 
 public class DetailProgram implements Serializable {
 
     // instance variable
-    private int number;
-    private String key;
+    private int order;
+    private MuscleArea muscleArea;
+    private String eventKey;
+    private String eventName;
     private int setNumber;
     private int restTimeMinute;
     private int restTimeSecond;
 
     // getter, setter
-    public int getNumber() {
-        return number;
+    public int getOrder() {
+        return order;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setOrder(int order) {
+        this.order = order;
     }
 
-    public String getKey() {
-        return key;
+    public MuscleArea getMuscleArea() {
+        return muscleArea;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setMuscleArea(MuscleArea muscleArea) {
+        this.muscleArea = muscleArea;
+    }
+
+    public String getEventKey() {
+        return eventKey;
+    }
+
+    public void setEventKey(String eventKey) {
+        this.eventKey = eventKey;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public int getSetNumber() {

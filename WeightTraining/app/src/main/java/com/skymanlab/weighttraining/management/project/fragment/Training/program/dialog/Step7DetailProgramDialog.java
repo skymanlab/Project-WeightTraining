@@ -18,8 +18,9 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep7Fragment;
 
-public class Step6DetailProgramDialog extends DialogFragment {
+public class Step7DetailProgramDialog extends DialogFragment {
 
     // constant
     private static final String CLASS_NAME = "[Ac] Step6PartialSettingDialog";
@@ -48,7 +49,7 @@ public class Step6DetailProgramDialog extends DialogFragment {
     private NumberPicker restTimeSecond;
 
     // constructor
-    public Step6DetailProgramDialog() {
+    public Step7DetailProgramDialog() {
 
     }
 
@@ -58,9 +59,9 @@ public class Step6DetailProgramDialog extends DialogFragment {
      * @param event
      * @return
      */
-    public static Step6DetailProgramDialog newInstance(Event event, DetailProgram detailProgram) {
+    public static Step7DetailProgramDialog newInstance(Event event, DetailProgram detailProgram) {
 
-        Step6DetailProgramDialog dialog = new Step6DetailProgramDialog();
+        Step7DetailProgramDialog dialog = new Step7DetailProgramDialog();
 
         Bundle args = new Bundle();
         args.putSerializable(EVENT, event);
@@ -151,53 +152,62 @@ public class Step6DetailProgramDialog extends DialogFragment {
     private void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // nav_home_content_wrapper 에 표시되어있는 Fragment 인 MakerStep6Fragment 를 가져오기
-        MakerStep6Fragment fragment = (MakerStep6Fragment) getParentFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "parent fragment = " + fragment);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program set number = " + fragment.getSectionManager().getValueOfProgramSettingSetNumber());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program rest time minute = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeMinute());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program rest time second = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeSecond());
-
         // text
         this.eventName.setText(event.getEventName());
 
         // [iv/C]NumberPicker : setNumber init
         this.setNumber.setMaxValue(9);
         this.setNumber.setMinValue(0);
+        this.setNumber.setValue(detailProgram.getSetNumber());
 
         // [iv/C]NumberPicker : restTimeMinute init
         this.restTimeMinute.setMaxValue(59);
         this.restTimeMinute.setMinValue(0);
+        this.restTimeMinute.setValue(detailProgram.getRestTimeMinute());
 
         // [iv/C]NumberPicker : init
         this.restTimeSecond.setMaxValue(59);
         this.restTimeSecond.setMinValue(0);
+        this.restTimeSecond.setValue(detailProgram.getRestTimeSecond());
+
+    } // End of method [initWidget]
 
 
-        // [check 1] : detailProgram 의 따라 각 number picker 의 초기 값이 달라진다.
-        if (detailProgram == null) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> program setting 으로 초기값 설정");
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> set number = " + fragment.getSectionManager().getValueOfProgramSettingSetNumber());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time minute = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeMinute());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>> rest time second = " + fragment.getSectionManager().getValueOfProgramSettingRestTimeSecond());
+    private boolean checkData(int setNumber, int restTimeMinute, int restTimeSecond) {
+        final String METHOD_NAME = "[checkData] ";
 
-            this.setNumber.setValue(fragment.getSectionManager().getValueOfProgramSettingSetNumber());
-            this.restTimeMinute.setValue(fragment.getSectionManager().getValueOfProgramSettingRestTimeMinute());
-            this.restTimeSecond.setValue(fragment.getSectionManager().getValueOfProgramSettingRestTimeSecond());
+        // [check 1] : setNumber 는 0 이상일때만
+        if (0 < setNumber) {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. set number 조건 통과");
+
+            // '분' 이 0 이더라도 '초' 가 0 이상이면 조건 만족한다.
+            boolean restTimeChecker1 = (0 == restTimeMinute) && (0 < restTimeSecond) ? true : false;
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. rest time checker 1 = " + restTimeChecker1);
+
+            // '분' 이 0 이상이면 '초' 는 0 이거나 그 이상이면 조건에 만족한다.
+            boolean restTimeChecker2 = (0 < restTimeMinute) && (0 <= restTimeSecond) ? true : false;
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. rest time checker 2 = " + restTimeChecker2);
+
+            // [check 2] : restTimeMinute, restTimeSecond 는 restTime 으로 조건을 검사한다.
+            if (restTimeChecker1 || restTimeChecker2) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-2. rest time 조건 통과");
+                return true;
+
+            } else {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-2. rest time 조건 불충분");
+                return false;
+            }
 
         } else {
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> detail program setting 으로 초기값을 설정한다.");
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> set number = " + detailProgram.getSetNumber());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> rest time minute = " + detailProgram.getRestTimeMinute());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>> rest time second = " + detailProgram.getRestTimeSecond());
-            this.setNumber.setValue(detailProgram.getSetNumber());
-            this.restTimeMinute.setValue(detailProgram.getRestTimeMinute());
-            this.restTimeSecond.setValue(detailProgram.getRestTimeSecond());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "check-1. set number 조건 불충분");
+            return false;
 
         } // [check 1]
 
-    } // End of method [initWidget]
+    } // End of method [checkData]
 
 }

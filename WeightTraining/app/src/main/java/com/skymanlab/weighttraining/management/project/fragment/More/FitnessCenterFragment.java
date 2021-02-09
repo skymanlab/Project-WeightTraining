@@ -1,40 +1,20 @@
 package com.skymanlab.weighttraining.management.project.fragment.More;
 
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceUtil;
-import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateUtil;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterSectionManager;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,7 +73,7 @@ public class FitnessCenterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[] ";
+        final String METHOD_NAME = "[onViewCreated] ";
 
         // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_title));
@@ -125,15 +105,5 @@ public class FitnessCenterFragment extends Fragment {
         super.onResume();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        final String METHOD_NAME = "[onPause] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Update util > 이 존재하나요? " + this.sectionManager.getGoogleMapManager());
-
-        this.sectionManager.getGoogleMapManager().stopLocationUpdate();
-    }
 
 }
