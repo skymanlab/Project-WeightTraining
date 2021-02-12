@@ -4,6 +4,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -26,10 +27,10 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
     private boolean shouldDisplayEmail;
 
     // instance variable
+    private LinearLayout contentWrapper;
     private ImageView userPhoto;
     private TextView userName;
     private TextView userEmail;
-    private ImageView moreInfo;
 
     // constructor
     public FragmentTopUserManager(Fragment fragment, View view, boolean shouldDisplayEmail) {
@@ -40,6 +41,9 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
     @Override
     public void connectWidget() {
 
+        // [ LinearLayout | contentWrapper ]
+        this.contentWrapper = (LinearLayout) getView().findViewById(R.id.include_top_user_content_wrapper);
+
         // [iv/C]ImageView : userPhoto connect
         this.userPhoto = (ImageView) getView().findViewById(R.id.include_top_user_photo);
 
@@ -49,9 +53,6 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
         // [iv/C]TextView : userEmail connect
         this.userEmail = (TextView) getView().findViewById(R.id.include_top_user_email);
 
-        // [iv/C]ImageView : moreInfo connect
-        this.moreInfo = (ImageView)getView().findViewById(R.id.include_top_user_more_info);
-
     }
 
     @Override
@@ -59,11 +60,11 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
 
         final String METHOD_NAME = "[initWidget] ";
 
-        // [method] : user info 의 초기 내용을 설정한다.
+        // user info 의 초기 내용 설정하기
         initUserInfo();
         
-        // [iv/C]ImageView : moreInfo click listener
-        this.moreInfo.setOnClickListener(new View.OnClickListener() {
+        // [ LinearLayout | contentWrapper ] click listener
+        this.contentWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content">
 
     <!-- content -->
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
+        android:id="@+id/include_top_user_content_wrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -14,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -36,7 +37,7 @@
                 android:contentDescription="TODO" />
 
             <!-- user info -->
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -61,16 +62,15 @@
                     android:fontFamily="@font/eland_choice_light"
                     android:textColor="@android:color/holo_orange_dark"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
             <!-- user info more -->
             <ImageView
-                android:id="@+id/include_top_user_more_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/right"
                 android:contentDescription="TODO" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
