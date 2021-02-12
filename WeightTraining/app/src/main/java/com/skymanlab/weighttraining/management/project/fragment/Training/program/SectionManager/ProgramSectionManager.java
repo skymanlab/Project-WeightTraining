@@ -35,7 +35,7 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
         // [ MaterialCardView ] widget connect
         this.programMaker = (MaterialCardView) getView().findViewById(R.id.f_program_menu_program_maker);
         this.myProgram = (MaterialCardView) getView().findViewById(R.id.f_program_menu_my_program);
-        this.recommendProgram = (MaterialCardView) getView().findViewById(R.id.f_program_menu_recommend_program);
+//        this.recommendProgram = (MaterialCardView) getView().findViewById(R.id.f_program_menu_recommend_program);
 
     }
 
@@ -78,12 +78,12 @@ public class ProgramSectionManager extends FragmentSectionManager implements Fra
         });
 
         // [MaterialCardView] [recommendProgram] click listener
-        this.recommendProgram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        this.recommendProgram.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
     }
 }

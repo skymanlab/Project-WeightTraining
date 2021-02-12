@@ -94,7 +94,7 @@
     <string name="f_fitness_center_register_expiry_date">만료일</string>
     <string name="f_fitness_center_register_expiry_date_default">클릭하여 만료일을 설정해주세요.</string>
     <string name="f_fitness_center_register_snack_no_location_permission">위치 권한이 거부되었습니다.</string>
-    <string name="f_fitness_center_register_alert_register_title">검색된 피트니스 센터를 등록하시겠습니까?</string>
+    <string name="f_fitness_center_register_alert_register_title">피트니스 센터를 등록하시겠습니까?</string>
     <string name="f_fitness_center_register_alert_register_message">검색된 피트니스 센터를 나의 피트니스 센터로 등록합니다.</string>
     <string name="f_fitness_center_register_alert_register_bt_positive">등록</string>
     <string name="f_fitness_center_register_alert_register_bt_negative">취소</string>
@@ -111,11 +111,11 @@
 
     <!-- Fragment : program -->
     <string name="f_program_title">프로그램</string>
-    <string name="f_program_menu_program_maker">프로그램 만들기</string>
+    <string name="f_program_menu_program_maker">만들기</string>
     <string name="f_program_menu_program_maker_go">프로그램 만들기</string>
     <string name="f_program_menu_program_maker_comment">직접 선택, 그룹별 선택, 전체 그룹에서 선택으로 프로그램을 만들 수 있습니다.</string>
     <string name="f_program_menu_my_program">나의 프로그램</string>
-    <string name="f_program_menu_my_program_comment">나의 프로그램 목록을 </string>
+    <string name="f_program_menu_my_program_comment">나의 프로그램 목록을 확인할 수 있습니다.</string>
     <string name="f_program_menu_my_program_go">나의 프로그램 보러가기</string>
     <string name="f_program_menu_recommend_program">추천 프로그램</string>
     <string name="f_program_menu_recommend_program_comment">추천 프로그램</string>

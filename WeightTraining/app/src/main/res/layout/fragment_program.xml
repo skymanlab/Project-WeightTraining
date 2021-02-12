@@ -18,6 +18,101 @@
         android:layout_height="@dimen/divider_default"
         android:background="@color/browser_actions_divider_color" />
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/maker_step_gradient"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <!-- fitness center -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5sp"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/colorBackgroundWhite"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/program_menu_1_program_maker" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- fitness center -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5sp"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/colorBackgroundWhite"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/program_menu_2_my_program" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- fitness center -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5sp"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="invisible"
+                app:cardBackgroundColor="@color/colorBackgroundWhite"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/program_menu_3_recommend_program" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <!-- content container -->
     <ScrollView
         android:layout_width="match_parent"
@@ -28,325 +123,115 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="50dp">
+            android:orientation="vertical">
 
-            <HorizontalScrollView
+            <include
+                layout="@layout/include_divider_default_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Maker -->
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:id="@+id/f_program_menu_program_maker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/maker_step_gradient">
+                android:background="?attr/selectableItemBackground"
+                app:cardCornerRadius="0dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/section_padding_start"
+                    android:paddingTop="@dimen/section_padding_top"
+                    android:paddingEnd="@dimen/section_padding_end"
+                    android:paddingBottom="@dimen/section_padding_bottom">
 
-                    <!-- fitness center -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="5sp"
-                        android:background="?attr/selectableItemBackground"
-                        android:visibility="visible"
-                        app:cardBackgroundColor="@color/colorBackgroundWhite"
-                        app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end|center_vertical"
+                        android:orientation="vertical">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_bold"
+                            android:text="@string/f_program_menu_program_maker"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="@dimen/text_section_title_size" />
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnWeight="1"
-                                android:layout_gravity="center"
-                                android:src="@drawable/program_menu_1_program_maker" />
-
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- fitness center -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="5sp"
-                        android:background="?attr/selectableItemBackground"
-                        android:visibility="visible"
-                        app:cardBackgroundColor="@color/colorBackgroundWhite"
-                        app:cardCornerRadius="10dp">
-
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eland_choice_medium"
+                            android:paddingTop="10dp"
+                            android:text="@string/f_program_menu_program_maker_comment" />
+                    </LinearLayout>
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnWeight="1"
-                                android:layout_gravity="center"
-                                android:src="@drawable/program_menu_2_my_program" />
-
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- fitness center -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="5sp"
-                        android:background="?attr/selectableItemBackground"
-                        android:visibility="invisible"
-                        app:cardBackgroundColor="@color/colorBackgroundWhite"
-                        app:cardCornerRadius="10dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_columnWeight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnWeight="1"
-                                android:layout_gravity="center"
-                                android:src="@drawable/program_menu_3_recommend_program" />
-
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/right" />
                 </LinearLayout>
-            </HorizontalScrollView>
+            </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of Maker -->
 
-            <!-- menu -->
-            <GridLayout
+            <include
+                layout="@layout/include_divider_default_section"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:columnCount="1"
-                android:orientation="horizontal"
-                android:rowCount="2">
+                android:layout_height="wrap_content" />
 
-                <!-- menu[1] : program make -->
-                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                    android:id="@+id/f_program_menu_program_maker"
-                    android:layout_width="0dp"
+            <!-- My Program -->
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:id="@+id/f_program_menu_my_program"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_marginTop="10dp"
-                    android:background="?attr/selectableItemBackground">
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/section_padding_start"
+                    android:paddingTop="@dimen/section_padding_top"
+                    android:paddingEnd="@dimen/section_padding_end"
+                    android:paddingBottom="@dimen/section_padding_bottom">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="20dp">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end|center_vertical"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/program_menu_1_program_maker" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:orientation="vertical"
-                                android:paddingTop="5dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nanum_gothic_bold"
-                                    android:text="@string/f_program_menu_program_maker"
-                                    android:textAlignment="textStart"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:fontFamily="@font/nanum_gothic"
-                                    android:text="@string/f_program_menu_program_maker_comment" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="end|center_vertical"
-                            android:orientation="horizontal">
+                            android:fontFamily="@font/eland_choice_bold"
+                            android:text="@string/f_program_menu_my_program"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="@dimen/text_section_title_size" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="@string/f_program_menu_program_maker_go" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/training_arrow_right" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of menu[1] -->
-
-                <!-- menu[2] : my program -->
-                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                    android:id="@+id/f_program_menu_my_program"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_marginTop="10dp"
-                    android:background="?attr/selectableItemBackground">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/program_menu_2_my_program" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:orientation="vertical"
-                                android:paddingTop="5dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nanum_gothic_bold"
-                                    android:text="@string/f_program_menu_my_program"
-                                    android:textAlignment="textStart"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:fontFamily="@font/nanum_gothic"
-                                    android:text="@string/f_program_menu_my_program_comment" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="end|center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="@string/f_program_menu_my_program_go" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/training_arrow_right" />
-                        </LinearLayout>
+                            android:fontFamily="@font/eland_choice_medium"
+                            android:paddingTop="10dp"
+                            android:text="@string/f_program_menu_my_program_comment" />
                     </LinearLayout>
-                </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of menu[2] -->
 
-
-                <!-- menu[2] : my program -->
-                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                    android:id="@+id/f_program_menu_recommend_program"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="?attr/selectableItemBackground">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/program_menu_3_recommend_program" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:orientation="vertical"
-                                android:paddingTop="5dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nanum_gothic_bold"
-                                    android:text="@string/f_program_menu_recommend_program"
-                                    android:textAlignment="textStart"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:fontFamily="@font/nanum_gothic"
-                                    android:text="@string/f_program_menu_recommend_program_comment" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="end|center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="@string/f_program_menu_recommend_program_go" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/training_arrow_right" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of my program -->
-            </GridLayout><!-- End of list -->
-
-
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/right" />
+                </LinearLayout>
+            </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of My Program -->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
