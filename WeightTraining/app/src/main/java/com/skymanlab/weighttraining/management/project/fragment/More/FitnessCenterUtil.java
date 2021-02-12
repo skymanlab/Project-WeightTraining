@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.skymanlab.weighttraining.management.user.FitnessCenter.FitnessCenter;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
 
 public class FitnessCenterUtil {
 
@@ -66,6 +66,6 @@ public class FitnessCenterUtil {
     }
 
     public interface OnSuccessListener {
-        void setWidget(FitnessCenter fitnessCenter);
+        void setWidget(UserFitnessCenter userFitnessCenter);
     }
 }

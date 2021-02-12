@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.event.program.data.Program;
+import com.skymanlab.weighttraining.management.program.data.Program;
 import com.skymanlab.weighttraining.management.project.data.DataFormatter;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
@@ -50,6 +50,7 @@ public class MyProgramRvAdapter extends RecyclerView.Adapter<MyProgramRvAdapter.
 
                 fragment.getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.nav_home_content_wrapper, MyProgramDetailFragment.newInstance(programArrayList.get(position)))
+                        .addToBackStack(null)
                         .commit();
 
             }
@@ -59,7 +60,7 @@ public class MyProgramRvAdapter extends RecyclerView.Adapter<MyProgramRvAdapter.
         holder.programNickName.setText(programArrayList.get(position).getNickName());
 
         // all muscle Area List
-        holder.allMuscleAreaList.setText(getAllMuscleAreaList(programArrayList.get(position).getMuscleAreaList()));
+        holder.allMuscleAreaList.setText(getAllMuscleAreaListTitle(programArrayList.get(position).getMuscleAreaList()));
 
         // total set number
         holder.totalSetNumber.setText(DataFormatter.setTotalSetNumberFormat(programArrayList.get(position).getTotalSetNumber()));
@@ -73,7 +74,7 @@ public class MyProgramRvAdapter extends RecyclerView.Adapter<MyProgramRvAdapter.
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Etc Method =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    private String getAllMuscleAreaList(ArrayList<MuscleArea> muscleAreaList) {
+    private String getAllMuscleAreaListTitle(ArrayList<MuscleArea> muscleAreaList) {
 
         StringBuilder allMuscleAreaList = new StringBuilder();
         for (int index = 0; index < muscleAreaList.size(); index++) {
@@ -107,4 +108,7 @@ public class MyProgramRvAdapter extends RecyclerView.Adapter<MyProgramRvAdapter.
             this.totalSetNumber = (TextView) itemView.findViewById(R.id.custom_list_my_program_item_total_set_number);
         }
     }
+
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Builder =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 }

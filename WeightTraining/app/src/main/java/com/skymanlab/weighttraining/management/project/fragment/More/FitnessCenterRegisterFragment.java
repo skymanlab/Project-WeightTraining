@@ -97,12 +97,7 @@ public class FitnessCenterRegisterFragment extends Fragment {
             }
         });
         this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(new FragmentTopBarManager.EndButtonListener() {
-            @Override
-            public AlertDialog setEndButtonClickListener() {
-                return null;
-            }
-        });
+        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
         this.topBarManager.initWidgetOfEndButton(getString(R.string.f_fitness_center_register_top_bar_end_button_register));
     }
 

@@ -3,8 +3,8 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,11 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.program.data.Program;
+import com.skymanlab.weighttraining.management.program.data.Program;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.list.adapter.EachMuscleAreaListRvAdapter;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.MyProgramRvAdapter;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
 
     // instance variable
     private RecyclerView recyclerView;
+    private ContentLoadingProgressBar progressBar;
 
     // instance variable
     private ArrayList<Program> programArrayList;
@@ -51,8 +51,11 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
     @Override
     public void connectWidget() {
 
-        // [iv/C]RecyclerView : list connect
+        // [ RecyclerView | recyclerView ]
         this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_my_program_recycler_view);
+
+        // [ ContentLoadingProgressBar | progressBar ]
+        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_my_program_progress_bar);
 
     }
 
@@ -61,19 +64,51 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
         final String METHOD_NAME = "[loadContent] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<< my program >");
 
-        this.programArrayList = new ArrayList<>();
+        // 데이터베이스에서 program 리스트 가져오기
         loadContent();
+
     }
+
+    /**
+     * recyclerView 의 layout manager 와 adapter 를 설정하는 초기작업 실행
+     */
+    private void initWidgetOfRecyclerView() {
+
+        // [lv/C]LinearLayoutManager : recyclerView 의 LayoutManager 를 생성 / 1차원으로 표현하기 위해서 LinearLayoutManager 생성
+        this.layoutManager = new LinearLayoutManager(getFragment().getActivity());
+
+        // [iv/C]RecyclerView : 위의 layoutManager 를 설정하기
+        this.recyclerView.setLayoutManager(layoutManager);
+
+        // [iv/C]EachListRvAdapter : recyclerView 의 adapter 생성
+        this.adapter = new MyProgramRvAdapter(getFragment(), programArrayList);
+
+        // [iv/C] : recyclerView 의 adapter setting
+        this.recyclerView.setAdapter(this.adapter);
+
+    } // End of method [initWidgetOfRecyclerView]
 
 
     private void loadContent() {
 
+        this.programArrayList = new ArrayList<>();
+
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("program");
 
         Query query = db.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot == null) {
+                    progressBar.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
+                    return;
+                }
 
                 for (DataSnapshot search : snapshot.getChildren()) {
 
@@ -102,9 +137,17 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
                     // program 추가하기
                     programArrayList.add(program);
 
-                    // 받아온 데이터로
-                    initWidgetOfRecyclerView();
                 }
+
+                // 받아온 데이터로
+                initWidgetOfRecyclerView();
+
+                progressBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
             }
 
             @Override
@@ -130,24 +173,5 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
         }
     }
 
-
-    /**
-     * recyclerView 의 layout manager 와 adapter 를 설정하는 초기작업 실행
-     */
-    private void initWidgetOfRecyclerView() {
-
-        // [lv/C]LinearLayoutManager : recyclerView 의 LayoutManager 를 생성 / 1차원으로 표현하기 위해서 LinearLayoutManager 생성
-        this.layoutManager = new LinearLayoutManager(getFragment().getActivity());
-
-        // [iv/C]RecyclerView : 위의 layoutManager 를 설정하기
-        this.recyclerView.setLayoutManager(layoutManager);
-
-        // [iv/C]EachListRvAdapter : recyclerView 의 adapter 생성
-        this.adapter = new MyProgramRvAdapter(getFragment(), programArrayList);
-
-        // [iv/C] : recyclerView 의 adapter setting
-        this.recyclerView.setAdapter(this.adapter);
-
-    } // End of method [initWidgetOfRecyclerView]
 
 }

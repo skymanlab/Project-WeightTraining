@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
+import com.skymanlab.weighttraining.management.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep4SectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;

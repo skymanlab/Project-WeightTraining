@@ -92,7 +92,7 @@ public class ELSectionManager extends SectionManager implements SectionInitializ
                 this.titleWrapper.setBackgroundResource(R.color.colorBackgroundThird);
                 break;
 
-            case LEG:
+            case LOWER_BODY:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/leg 가 입려되었습니다. <=");
                 // [iv/C]LinearLayout : titleWrapper 의 색을 R.color.colorBackgroundFourth 으로 설정
                 this.titleWrapper.setBackgroundResource(R.color.colorBackgroundFourth);

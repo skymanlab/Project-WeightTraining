@@ -1,9 +1,8 @@
-package com.skymanlab.weighttraining.management.event.program.util;
+package com.skymanlab.weighttraining.management.program.util;
 
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GroupingEventUtil  {

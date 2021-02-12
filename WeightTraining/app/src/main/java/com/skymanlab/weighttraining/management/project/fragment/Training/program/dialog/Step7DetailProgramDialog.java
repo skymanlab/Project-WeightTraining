@@ -2,9 +2,9 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.progra
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -12,13 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep6Fragment;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep7Fragment;
+import com.skymanlab.weighttraining.management.program.data.DetailProgram;
 
 public class Step7DetailProgramDialog extends DialogFragment {
 
@@ -47,6 +46,8 @@ public class Step7DetailProgramDialog extends DialogFragment {
     private NumberPicker setNumber;
     private NumberPicker restTimeMinute;
     private NumberPicker restTimeSecond;
+    private Button positive;
+    private Button negative;
 
     // constructor
     public Step7DetailProgramDialog() {
@@ -99,29 +100,7 @@ public class Step7DetailProgramDialog extends DialogFragment {
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= AlertDialog init =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         // [lv/C]AlertDialog : dialog init
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(this.customView)
-                .setPositiveButton(R.string.custom_dialog_detail_program_setting_alert_bt_positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        // [lv/C]Bundle : 전달할 데이터 설정
-                        Bundle args = new Bundle();
-                        args.putString(DETAIL_PROGRAM_EVENT_KEY, event.getKey());
-                        args.putInt(DETAIL_PROGRAM_SET_NUMBER, setNumber.getValue());
-                        args.putInt(DETAIL_PROGRAM_REST_TIME_MINUTE, restTimeMinute.getValue());
-                        args.putInt(DETAIL_PROGRAM_REST_TIME_SECOND, restTimeSecond.getValue());
-                        args.putString("hello", "안녕");
-
-                        // FragmentManager 의 FragmentResultListener 를 통해서 args 를 전달
-                        getParentFragmentManager().setFragmentResult(REQUEST_KEY, args);
-                    }
-                })
-                .setNegativeButton(R.string.custom_dialog_detail_program_setting_alert_bt_negative, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dismiss();
-                    }
-                });
+        builder.setView(this.customView);
 
         return builder.create();
     }
@@ -143,6 +122,13 @@ public class Step7DetailProgramDialog extends DialogFragment {
 
         // [iv/C]NumberPicker : restTimeSecond connect
         this.restTimeSecond = (NumberPicker) this.customView.findViewById(R.id.custom_dialog_detail_program_setting_rest_time_second);
+
+        // [Button] [positive] widget connect
+        this.positive = (Button) this.customView.findViewById(R.id.custom_dialog_detail_program_setting_bt_positive);
+
+        // [Button] [negative] widget connect
+        this.negative = (Button) this.customView.findViewById(R.id.custom_dialog_detail_program_setting_bt_negative);
+
 
     } // End of method [connectWidget]
 
@@ -169,6 +155,40 @@ public class Step7DetailProgramDialog extends DialogFragment {
         this.restTimeSecond.setMaxValue(59);
         this.restTimeSecond.setMinValue(0);
         this.restTimeSecond.setValue(detailProgram.getRestTimeSecond());
+
+        // positive click listener
+        this.positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (checkData(setNumber.getValue(), restTimeMinute.getValue(), restTimeSecond.getValue())) {
+
+                    // [lv/C]Bundle : 전달할 데이터 설정
+                    Bundle args = new Bundle();
+                    args.putString(DETAIL_PROGRAM_EVENT_KEY, event.getKey());
+                    args.putInt(DETAIL_PROGRAM_SET_NUMBER, setNumber.getValue());
+                    args.putInt(DETAIL_PROGRAM_REST_TIME_MINUTE, restTimeMinute.getValue());
+                    args.putInt(DETAIL_PROGRAM_REST_TIME_SECOND, restTimeSecond.getValue());
+                    args.putString("hello", "안녕");
+
+                    // FragmentManager 의 FragmentResultListener 를 통해서 args 를 전달
+                    getParentFragmentManager().setFragmentResult(REQUEST_KEY, args);
+
+                    dismiss();
+
+                } else {
+                    Snackbar.make(customView, R.string.custom_dialog_detail_program_setting_snack_setting_data_error, Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // negative click listener
+        this.negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
     } // End of method [initWidget]
 

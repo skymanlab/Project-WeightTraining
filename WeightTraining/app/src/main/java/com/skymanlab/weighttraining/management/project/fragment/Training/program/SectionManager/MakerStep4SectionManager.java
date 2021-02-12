@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
+import com.skymanlab.weighttraining.management.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;

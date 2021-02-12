@@ -23,36 +23,36 @@ public class RightDataChecker {
     /**
      * [method] User 데이터 객체가 있고 할당받은 count 가 있는지 판별하여 그 결과를 true 혹은 false 를 반환한다.
      */
-    public static boolean checkWhetherRightUser(User user) {
-
-        final String METHOD_NAME = "[checkWhetherRightUser] ";
-
-        // [lv/b]isRightUser : 정확한 user 냐?
-        boolean isRightUser = false;
-
-        // [check 1] : User 객체 있습니다.
-        if (user != null) {
-
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : user 데이터는 생성되었습니다. 이제 내용만 확인하면 됩니다.  <=");
-
-            // [check 2] : count 값을 할당 받은 회원이다.
-            if (0 < user.getCount()) {
-
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/true : 당신은 [" + user.getCount() + "] 번째 유저입니다. <=");
-
-                // [lv/b]isRightUser : 이 앱에 등록한 회원이 맞군요!
-                isRightUser = true;
-
-            } else {
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/false : 넌 이 앱의 회원 아니야! <=");
-            } // [check 2]
-
-        } else {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : User 객체도 생성되지 않았어! <=");
-        } // [check 1]
-
-        return isRightUser;
-    } // End of method [checkWhetherRightUser]
+//    public static boolean checkWhetherRightUser(User user) {
+//
+//        final String METHOD_NAME = "[checkWhetherRightUser] ";
+//
+//        // [lv/b]isRightUser : 정확한 user 냐?
+//        boolean isRightUser = false;
+//
+//        // [check 1] : User 객체 있습니다.
+//        if (user != null) {
+//
+//            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : user 데이터는 생성되었습니다. 이제 내용만 확인하면 됩니다.  <=");
+//
+//            // [check 2] : count 값을 할당 받은 회원이다.
+//            if (0 < user.getCount()) {
+//
+//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/true : 당신은 [" + user.getCount() + "] 번째 유저입니다. <=");
+//
+//                // [lv/b]isRightUser : 이 앱에 등록한 회원이 맞군요!
+//                isRightUser = true;
+//
+//            } else {
+//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/false : 넌 이 앱의 회원 아니야! <=");
+//            } // [check 2]
+//
+//        } else {
+//            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/false : User 객체도 생성되지 않았어! <=");
+//        } // [check 1]
+//
+//        return isRightUser;
+//    } // End of method [checkWhetherRightUser]
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Event =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -141,7 +141,7 @@ public class RightDataChecker {
                 case CHEST:
                 case SHOULDER:
                 case LAT:
-                case LEG:
+                case LOWER_BODY:
                 case ARM:
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_2/ : CHEST, SHOULDER, LAT, LEG, ARM 중에 하나입니다. <=");
                     return true;

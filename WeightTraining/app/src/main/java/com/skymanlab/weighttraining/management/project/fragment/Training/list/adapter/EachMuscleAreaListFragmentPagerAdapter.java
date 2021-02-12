@@ -27,7 +27,7 @@ public class EachMuscleAreaListFragmentPagerAdapter extends FragmentStateAdapter
         EachMuscleAreaListFragment chestList = EachMuscleAreaListFragment.newInstance(MuscleArea.CHEST);
         EachMuscleAreaListFragment shoulderList = EachMuscleAreaListFragment.newInstance(MuscleArea.SHOULDER);
         EachMuscleAreaListFragment latList = EachMuscleAreaListFragment.newInstance(MuscleArea.LAT);
-        EachMuscleAreaListFragment upperBodyList = EachMuscleAreaListFragment.newInstance(MuscleArea.UPPER_BODY);
+        EachMuscleAreaListFragment lowerBodyList = EachMuscleAreaListFragment.newInstance(MuscleArea.LOWER_BODY);
         EachMuscleAreaListFragment armList = EachMuscleAreaListFragment.newInstance(MuscleArea.ARM);
         EachMuscleAreaListFragment etcList = EachMuscleAreaListFragment.newInstance(MuscleArea.ETC);
 
@@ -40,7 +40,7 @@ public class EachMuscleAreaListFragmentPagerAdapter extends FragmentStateAdapter
             case 2:
                 return latList;
             case 3:
-                return upperBodyList;
+                return lowerBodyList;
             case 4:
                 return armList;
             case 5:

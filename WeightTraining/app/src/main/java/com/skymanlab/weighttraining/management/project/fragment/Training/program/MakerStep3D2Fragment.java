@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep3D2SectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
@@ -33,7 +33,7 @@ public class MakerStep3D2Fragment extends Fragment {
     private static final String CHEST_GROUPING_EVENT_DATA = "chestGroupingEventData";
     private static final String SHOULDER_GROUPING_EVENT_DATA = "shoulderGroupingEventData";
     private static final String LAT_GROUPING_EVENT_DATA = "latGroupingEventData";
-    private static final String UPPER_BODY_GROUPING_EVENT_DATA = "upperBodyGroupingEventData";
+    private static final String LOWER_BODY_GROUPING_EVENT_DATA = "lowerBodyGroupingEventData";
     private static final String ARM_GROUPING_EVENT_DATA = "armGroupingEventData";
     private static final String ETC_GROUPING_EVENT_DATA = "etcGroupingEventData";
 
@@ -41,7 +41,7 @@ public class MakerStep3D2Fragment extends Fragment {
     private GroupingEventData chestGroupingEventData;
     private GroupingEventData shoulderGroupingEventData;
     private GroupingEventData latGroupingEventData;
-    private GroupingEventData upperBodyGroupingEventData;
+    private GroupingEventData lowerBodyGroupingEventData;
     private GroupingEventData armGroupingEventData;
     private GroupingEventData etcGroupingEventData;
 
@@ -70,7 +70,7 @@ public class MakerStep3D2Fragment extends Fragment {
         args.putSerializable(CHEST_GROUPING_EVENT_DATA, chest);
         args.putSerializable(SHOULDER_GROUPING_EVENT_DATA, shoulder);
         args.putSerializable(LAT_GROUPING_EVENT_DATA, lat);
-        args.putSerializable(UPPER_BODY_GROUPING_EVENT_DATA, upperBody);
+        args.putSerializable(LOWER_BODY_GROUPING_EVENT_DATA, upperBody);
         args.putSerializable(ARM_GROUPING_EVENT_DATA, arm);
         args.putSerializable(ETC_GROUPING_EVENT_DATA, etc);
         fragment.setArguments(args);
@@ -86,7 +86,7 @@ public class MakerStep3D2Fragment extends Fragment {
             this.chestGroupingEventData = (GroupingEventData) getArguments().getSerializable(CHEST_GROUPING_EVENT_DATA);
             this.shoulderGroupingEventData = (GroupingEventData) getArguments().getSerializable(SHOULDER_GROUPING_EVENT_DATA);
             this.latGroupingEventData = (GroupingEventData) getArguments().getSerializable(LAT_GROUPING_EVENT_DATA);
-            this.upperBodyGroupingEventData = (GroupingEventData) getArguments().getSerializable(UPPER_BODY_GROUPING_EVENT_DATA);
+            this.lowerBodyGroupingEventData = (GroupingEventData) getArguments().getSerializable(LOWER_BODY_GROUPING_EVENT_DATA);
             this.armGroupingEventData = (GroupingEventData) getArguments().getSerializable(ARM_GROUPING_EVENT_DATA);
             this.etcGroupingEventData = (GroupingEventData) getArguments().getSerializable(ETC_GROUPING_EVENT_DATA);
         }
@@ -118,7 +118,7 @@ public class MakerStep3D2Fragment extends Fragment {
         this.sectionManager.setChestGroupingEventData(chestGroupingEventData);
         this.sectionManager.setShoulderGroupingEventData(shoulderGroupingEventData);
         this.sectionManager.setLatGroupingEventData(latGroupingEventData);
-        this.sectionManager.setUpperBodyGroupingEventData(upperBodyGroupingEventData);
+        this.sectionManager.setLowerBodyGroupingEventData(lowerBodyGroupingEventData);
         this.sectionManager.setArmGroupingEventData(armGroupingEventData);
         this.sectionManager.setEtcGroupingEventData(etcGroupingEventData);
         this.sectionManager.connectWidget();

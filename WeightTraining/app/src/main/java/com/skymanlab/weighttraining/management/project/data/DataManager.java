@@ -312,15 +312,15 @@ public class DataManager {
                 // [lv/C]MuscleArea : "LAT" -> MuscleArea.LAT
                 convertedMuscleArea = MuscleArea.LAT;
                 break;
-            case "LEG":
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
-                // [lv/C]MuscleArea : "LEG" -> MuscleArea.LEG
-                convertedMuscleArea = MuscleArea.LEG;
-                break;
-            case "UPPER_BODY":
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/UPPER_BODY 가 입력되었습니다. <=");
+//            case "LEG":
+//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
+//                // [lv/C]MuscleArea : "LEG" -> MuscleArea.LEG
+//                convertedMuscleArea = MuscleArea.LEG;
+//                break;
+            case "LOWER_BODY":
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LOWER_BODY 가 입력되었습니다. <=");
                 // [lv/C]MuscleArea : "UPPER_BODY" -> MuscleArea.UPPER_BODY
-                convertedMuscleArea = MuscleArea.UPPER_BODY;
+                convertedMuscleArea = MuscleArea.LOWER_BODY;
                 break;
             case "ARM":
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/ARM 가 입력되었습니다. <=");
@@ -371,13 +371,13 @@ public class DataManager {
                 // [lv/C]String : MuscleArea.LAT -> "등"
                 convertedHangule = "등";
                 break;
-            case LEG:
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
-                // [lv/C]String : MuscleArea.LEG -> "다리"
-                convertedHangule = "다리";
-            case UPPER_BODY:
+//            case LEG:
+//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
+//                // [lv/C]String : MuscleArea.LEG -> "다리"
+//                convertedHangule = "다리";
+            case LOWER_BODY:
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/UPPER_BODY 가 입력되었습니다. <=");
-                // [lv/C]String : MuscleArea.UPPER_BODY -> "다리"
+                // [lv/C]String : MuscleArea.LOWER_BODY -> "하체"
                 convertedHangule = "하체";
                 break;
             case ARM:
@@ -430,13 +430,13 @@ public class DataManager {
                 // [lv/i]convertedColorInt : MuscleArea.LAT -> R.color.colorBackgroundThird
                 convertedColorInt = R.color.colorBackgroundThird;
                 break;
-            case LEG:
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
-                // [lv/i]convertedColorInt : MuscleArea.LEG -> R.color.colorBackgroundFourth
-                convertedColorInt = R.color.colorBackgroundFourth;
-            case UPPER_BODY:
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/UPPER_BODY 가 입력되었습니다. <=");
-                // [lv/i]convertedColorInt : MuscleArea.UPPER_BODY -> R.color.colorBackgroundFourth
+//            case LEG:
+//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LEG 가 입력되었습니다. <=");
+//                // [lv/i]convertedColorInt : MuscleArea.LEG -> R.color.colorBackgroundFourth
+//                convertedColorInt = R.color.colorBackgroundFourth;
+            case LOWER_BODY:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LOWER_BODY 가 입력되었습니다. <=");
+                // [lv/i]convertedColorInt : MuscleArea.LOWER_BODY -> R.color.colorBackgroundFourth
                 convertedColorInt = R.color.colorBackgroundFourth;
                 break;
             case ARM:

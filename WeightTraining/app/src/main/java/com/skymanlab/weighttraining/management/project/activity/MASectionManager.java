@@ -98,7 +98,7 @@ public class MASectionManager extends SectionManager implements SectionInitializ
             public void onClick(View v) {
 
                 // [method] : click listener 설정하기
-                setClickListener(MuscleArea.LEG);
+                setClickListener(MuscleArea.LOWER_BODY);
 
             }
         });

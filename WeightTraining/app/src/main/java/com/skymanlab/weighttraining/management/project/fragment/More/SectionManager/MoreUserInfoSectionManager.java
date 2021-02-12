@@ -109,7 +109,7 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
                 @Override
                 public void onClick(View view) {
 
-                    AuthenticationManager.showSignOutDialog(getFragment().getActivity());
+                    AuthenticationManager.showDialogOfSignOut(getFragment().getActivity());
                 }
             });
 
@@ -118,7 +118,7 @@ public class MoreUserInfoSectionManager extends FragmentSectionManager implement
                 @Override
                 public void onClick(View view) {
 
-                    AuthenticationManager.withdrawUser(getFragment().getActivity());
+                    AuthenticationManager.showDialogOfWithdraw(getFragment().getActivity());
                 }
             });
         }

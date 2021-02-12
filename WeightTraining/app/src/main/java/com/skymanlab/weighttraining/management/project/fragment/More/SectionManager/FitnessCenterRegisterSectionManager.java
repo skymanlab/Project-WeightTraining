@@ -1,6 +1,10 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -9,15 +13,20 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.GoogleMapManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateUtil;
 import com.skymanlab.weighttraining.management.project.ApiManager.PermissionManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.PermissionUtil;
 import com.skymanlab.weighttraining.management.project.ApiManager.SearchUtil;
@@ -25,9 +34,11 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionI
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class FitnessCenterRegisterSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -41,11 +52,14 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
 
     // instance variable
     private SearchView addressSearchView;
-    private TextView address;
+    private TextView searchedAddress;
     private LinearLayout contractDateWrapper;
     private TextView contractDate;
     private LinearLayout expiryDateWrapper;
     private TextView expiryDate;
+
+    // instance variable
+    private Address fitnessCenterAddress = null;
 
     // constructor
     public FitnessCenterRegisterSectionManager(Fragment fragment, View view) {
@@ -63,8 +77,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
         // [SearchView] [addressSearchView]
         this.addressSearchView = (SearchView) getView().findViewById(R.id.f_fitness_center_register_search);
 
-        // [TextView] [address] widget connect
-        this.address = (TextView) getView().findViewById(R.id.f_fitness_center_register_address);
+        // [TextView] [searchedAddress] widget connect
+        this.searchedAddress = (TextView) getView().findViewById(R.id.f_fitness_center_register_address);
 
         // [LinearLayout] [contractDateWrapper] widget connect
         this.contractDateWrapper = (LinearLayout) getView().findViewById(R.id.f_fitness_center_register_contract_date_wrapper);
@@ -99,18 +113,32 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
 
                     if (PermissionUtil.hasPermissionList(getFragment().getActivity(), PermissionManager.LOCATION_PERMISSION_LIST)) {
 
-                        address.post(new Runnable() {
-                            @Override
-                            public void run() {
+                        SearchUtil.searchAddress(
+                                getFragment().getActivity(),
+                                query,
+                                new SearchUtil.OnSuccessListener() {
+                                    @Override
+                                    public void showAddress(Address address) {
+                                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<><><.m.,m,m");
 
-                                address.setText(SearchUtil.searchAddress(getFragment().getActivity(), gMap, query));
-                            }
-                        });
+                                        // 해당 address 를 fitnessCenterAddress 로 등록
+                                        fitnessCenterAddress = address;
 
-//                        address.setText(SearchUtil.searchAddress(getFragment().getActivity(), gMap, query));
+                                        // address 에 대한 LatLng 객체 생성
+                                        LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
+
+                                        // [ TextView | searchedAddress ] text
+                                        searchedAddress.setText(address.getAddressLine(0));
+
+                                        // 구글 맵에 address 의 LatLng 위치에 마커로 표시
+                                        LocationUpdateUtil.showMarkerToMap(getFragment().getActivity(), gMap, address);
+
+                                    }
+                                });
 
                     } else {
 
+                        Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar), R.string.f_fitness_center_register_snack_no_location_permission, Snackbar.LENGTH_SHORT).show();
                     }
                 }
 
@@ -207,12 +235,36 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
     }
 
 
-    private FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
-        return  new FragmentTopBarManager.EndButtonListener() {
+    /**
+     * EndButton
+     *
+     * @return
+     */
+    public FragmentTopBarManager.EndButtonListener newEndButtonListenerInstance() {
+        return new FragmentTopBarManager.EndButtonListener() {
             @Override
             public AlertDialog setEndButtonClickListener() {
-                return null;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getFragment().getContext());
+                builder.setTitle(R.string.f_fitness_center_register_alert_register_title)
+                        .setMessage(R.string.f_fitness_center_register_alert_register_message)
+                        .setPositiveButton(R.string.f_fitness_center_register_alert_register_bt_positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setNegativeButton(R.string.f_fitness_center_register_alert_register_bt_negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                return builder.create();
             }
         };
     }
+
+
 }

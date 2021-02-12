@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Event implements Serializable {
 
     // constant
-    public static final String KEY ="key";
+    public static final String KEY = "key";
     public static final String EVENT_NAME = "eventName";
     public static final String MUSCLE_AREA = "muscleArea";
     public static final String EQUIPMENT_TYPE = "equipmentType";

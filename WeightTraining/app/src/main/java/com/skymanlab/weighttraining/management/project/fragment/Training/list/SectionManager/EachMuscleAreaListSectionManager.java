@@ -154,7 +154,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 데이터를 가져오기 전 UI 설정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]Activity : progressBar 를 이용하여 데이터를 가져오는 중이라는 걸 알림 / GONE -> VISIBLE / workThread 가 아닌 UI Thread 에서 수행
-                getFragment().getActivity().runOnUiThread(new Runnable() {
+                progressBar.post(new Runnable() {
                     @Override
                     public void run() {
 
@@ -193,7 +193,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
                 adapter.notifyDataSetChanged();
 
                 // [iv/C]Activity : progressBar 를 이용하여 데이터 가져오기가 완료되었다는 걸 알림 / VISIBLE -> GONE / workThread 가 아닌 UI Thread 에서 수행
-                getFragment().getActivity().runOnUiThread(new Runnable() {
+                progressBar.post(new Runnable() {
                     @Override
                     public void run() {
 

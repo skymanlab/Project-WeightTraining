@@ -1,6 +1,10 @@
 package com.skymanlab.weighttraining.management.project.data;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.skymanlab.weighttraining.management.developer.Display;
@@ -40,7 +44,7 @@ public class BaseEventDataManager {
     static final float DEFAULT_WEIGHT = 0.0f;
     // constant
     private static final String CLASS_NAME = "[PD] BaseEventDataManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private String uid;
@@ -49,31 +53,21 @@ public class BaseEventDataManager {
     private ArrayList<Event> chest;
     private ArrayList<Event> shoulder;
     private ArrayList<Event> lat;
-    private ArrayList<Event> leg;
-    private ArrayList<Event> upperBody;
+    private ArrayList<Event> lowerBody;
     private ArrayList<Event> arm;
+    private ArrayList<Event> etc;
 
-    // instance variable
-    private DatabaseReference databaseReference;
 
     // constructor
     public BaseEventDataManager(String uid) {
-
         this.uid = uid;
-        this.chest = new ArrayList<>();
-        this.shoulder = new ArrayList<>();
-        this.lat = new ArrayList<>();
-        this.leg = new ArrayList<>();
-        this.upperBody = new ArrayList<>();
-        this.arm = new ArrayList<>();
-
     }
 
-    /**
-     * [method] 각 부위의 데이터를 만든다.
-     *
-     */
-    public void makeAllBaseEvent() {
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 외부에서 저장하기 위한 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    public void init() {
+        final String METHOD_NAME = "[saveContent] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< method > 모든 부위에 초기 데이터를 생성합니다.");
 
         // [method] : chest 데이터 만들기
         setChest();
@@ -85,70 +79,91 @@ public class BaseEventDataManager {
         setLat();
 
         // [method] : leg 데이터 만들기
-        setLeg();
+        setLowerBody();
 
         // [method] : arm 데이터 만들기
         setArm();
 
     }
 
-    /**
-     * [method] skyman13.cafe24.com/skymanDB 에 각 event 데이터를 입력뒤 count 값을 모두 가져와서 내부 SQLite 에 저장한다.
-     */
-    public void saveAllBaseEvent() {
 
-        final String METHOD_NAME = "[saveAllBaseEvent] ";
+    public void saveContent(DatabaseReference.CompletionListener completionListener) {
+        final String METHOD_NAME = "[saveContent] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< method > 모든 부위에 초기 데이터를 저장합니다.");
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/true : event table 메니저가 준비되었습니다. <=");
+        DatabaseReference reference = FirebaseDatabase
+                .getInstance()
+                .getReference(
+                        FirebaseConstants.DATABASE_FIRST_NODE_EVENT
+                );
 
-        databaseReference = FirebaseDatabase.getInstance().getReference(EVENT_KEY);
+        HashMap<String, Object> childUpdateList = new HashMap<>();
+        // chest
+        childUpdateList.putAll(getHashMapOfEventArrayList(reference, chest, MuscleArea.CHEST));
+        // shoulder
+        childUpdateList.putAll(getHashMapOfEventArrayList(reference, shoulder, MuscleArea.SHOULDER));
+        // lat
+        childUpdateList.putAll(getHashMapOfEventArrayList(reference, lat, MuscleArea.LAT));
+        // lowerBody
+        childUpdateList.putAll(getHashMapOfEventArrayList(reference, lowerBody, MuscleArea.LOWER_BODY));
+        // arm
+        childUpdateList.putAll(getHashMapOfEventArrayList(reference, arm, MuscleArea.ARM));
 
-        // [method] : chest 저장
-        saveEventArrayList(this.chest, MuscleArea.CHEST);
-
-        // [method] : shoulder 저장
-        saveEventArrayList(this.shoulder, MuscleArea.SHOULDER);
-
-        // [method] : lat 저장
-        saveEventArrayList(this.lat, MuscleArea.LAT);
-
-        // [method] : leg 저장
-        saveEventArrayList(this.leg, MuscleArea.LEG);
-
-        // [method] : arm 저장
-        saveEventArrayList(this.arm, MuscleArea.ARM);
+        reference.updateChildren(childUpdateList, completionListener);
 
 
-    } // End of method [saveAllBaseEvent]
-
+    }
 
     /**
      * [method] 해당 부위의 eventArrayList 을 BaseEventRegister 객체를 이용하여 외부, 내부 데이터베이스에 저장
      */
-    private void saveEventArrayList(ArrayList<Event> eventArrayList, MuscleArea muscleArea) {
+    public HashMap<String, Object> getHashMapOfEventArrayList(DatabaseReference reference, ArrayList<Event> eventArrayList, MuscleArea muscleArea) {
+        final String METHOD_NAME = "[getHashMapOfEventArrayList] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< HashMap> " +
+                DataManager.convertHanguleOfMuscleArea(muscleArea) +
+                " 의 데이터를 이용하여 childUpdateList 를 생성 중입니다."
+        );
 
-        final String METHOD_NAME ="[saveEventArrayList] ";
+        HashMap<String, Object> childUpdateList = new HashMap<>();
 
         // [cycle 1] : chest 에 관한 event 데이터 저장
         for (int index = 0; index < eventArrayList.size(); index++) {
 
             // [lv/C]HashMap<String, Object> : eventName, muscleArea, equipmentType, groupType properWeight, maxWeight 담기
             HashMap<String, Object> event = new HashMap<>();
-            event.put("eventName", eventArrayList.get(index).getEventName());
-            event.put("muscleArea", eventArrayList.get(index).getMuscleArea());
-            event.put("equipmentType", eventArrayList.get(index).getEquipmentType());
-            event.put("groupType", eventArrayList.get(index).getGroupType());
-            event.put("properWeight", eventArrayList.get(index).getProperWeight());
-            event.put("maxWeight", eventArrayList.get(index).getMaxWeight());
+            event.put(Event.EVENT_NAME, eventArrayList.get(index).getEventName());
+            event.put(Event.MUSCLE_AREA, eventArrayList.get(index).getMuscleArea());
+            event.put(Event.EQUIPMENT_TYPE, eventArrayList.get(index).getEquipmentType());
+            event.put(Event.GROUP_TYPE, eventArrayList.get(index).getGroupType());
+            event.put(Event.PROPER_WEIGHT, eventArrayList.get(index).getProperWeight());
+            event.put(Event.MAX_WEIGHT, eventArrayList.get(index).getMaxWeight());
+
+            String key = reference
+                    .child(uid)
+                    .child(muscleArea.toString())
+                    .push()
+                    .getKey();
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< KEY > key 를 확인하겠습니다. = " + key);
+
+            StringBuilder path = new StringBuilder()
+                    .append("/")
+                    .append(uid)
+                    .append("/")
+                    .append(muscleArea.toString())
+                    .append("/")
+                    .append(key);
+
+            childUpdateList.put(path.toString(), event);
 
             // [lv/C]DatabaseReference : 'event/uid/muscleArea/key' 에 저장한다.
-            databaseReference.child(uid).child(eventArrayList.get(index).getMuscleArea().toString()).push().setValue(event);
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "uid="+uid + "//muscleArea=" + muscleArea.toString()+ "//key="+databaseReference.getKey());
+//            databaseReference.child(uid).child(eventArrayList.get(index).getMuscleArea().toString()).push().setValue(event);
+//            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "uid="+uid + "//muscleArea=" + muscleArea.toString()+ "//key="+databaseReference.getKey());
 
         } // [cycle 1]
 
-    } // End of method [saveEventArrayList]
+        return childUpdateList;
 
+    } // End of method [saveEventArrayList]
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= getter =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -189,15 +204,15 @@ public class BaseEventDataManager {
         return lat;
     }
 
-    public ArrayList<Event> getLeg() {
-        final String METHOD_NAME = "[getLeg] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LEG 다리 확인 <<<<<<<<<<<<<<<<<<<<<<<< ");
+    public ArrayList<Event> getLowerBody() {
+        final String METHOD_NAME = "[getLowerBody] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOWER_BODY 다리 확인 <<<<<<<<<<<<<<<<<<<<<<<< ");
 //        LogManager.displayLogOfEvent(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, leg);
-        for (int index = 0; index < leg.size(); index++) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<" + index + "번째> event name = " + leg.get(index).getEventName());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<" + index + "번째> group type = " + leg.get(index).getGroupType());
+        for (int index = 0; index < lowerBody.size(); index++) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<" + index + "번째> event name = " + lowerBody.get(index).getEventName());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<" + index + "번째> group type = " + lowerBody.get(index).getGroupType());
         }
-        return leg;
+        return lowerBody;
     }
 
     public ArrayList<Event> getArm() {
@@ -242,6 +257,8 @@ public class BaseEventDataManager {
 
 
         final MuscleArea CHEST = MuscleArea.CHEST;
+
+        this.chest = new ArrayList<>();
 
         // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
         // A_GROUP
@@ -491,6 +508,8 @@ public class BaseEventDataManager {
 
         final MuscleArea SHOULDER = MuscleArea.SHOULDER;
 
+        this.shoulder = new ArrayList<>();
+
         // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
         // A_GROUP :
         // 1. 바벨 오버헤드(밀리터리) 프레스 : 전체 / 바벨
@@ -697,6 +716,8 @@ public class BaseEventDataManager {
 
         final MuscleArea LAT = MuscleArea.LAT;
 
+        this.lat = new ArrayList<>();
+
         // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
         // A_GROUP :
         // 1. 벤트 오버 바벨 로우 (벤트오버 로우) / 바벨
@@ -854,9 +875,121 @@ public class BaseEventDataManager {
 
     } // End of method [setLat]
 
+//
+//    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= leg =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+//    private void setLeg() {
+//
+//        // A_GROUP :
+//        // 1. 스쿼트(풀, 패럴렐, 하프), 프론트 스쿼트,
+//        // 2. 인클라인 스쿼트 머신
+//        // 3. 레그 프레스 / 머신
+//        // 4. 레그 익스텐션 / 머신
+//        // 5. 레그 컬 / 머신
+//        // 6. 런지 / 맨몸 of 스미스머신
+//        // 7. 힙 애드덕터(안쪽, 모으기)
+//        // 8. 힙 어브덕터(바깥쪽, 벌리기) / 없음
+//        // 9. 힙 쓰러스트
+//
+//        final MuscleArea LEG = MuscleArea.LEG;
+//
+//        // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
+//        // 1. 스쿼트(풀, 패럴렐, 하프), 프론트 스쿼트,
+//        Event squat = new Event();
+//        squat.setEventName("스쿼트");
+//        squat.setMuscleArea(LEG);
+//        squat.setEquipmentType(EquipmentType.BARBELL);
+//        squat.setGroupType(GroupType.A_GROUP);
+//        squat.setProperWeight(DEFAULT_WEIGHT);
+//        squat.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(squat);
+//
+//
+//        // 2. 인클라인 스쿼트 머신
+//        Event inclineSquatMachine = new Event();
+//        inclineSquatMachine.setEventName("인클라인 스쿼트 머신");
+//        inclineSquatMachine.setMuscleArea(LEG);
+//        inclineSquatMachine.setEquipmentType(EquipmentType.MACHINE);
+//        inclineSquatMachine.setGroupType(GroupType.A_GROUP);
+//        inclineSquatMachine.setProperWeight(DEFAULT_WEIGHT);
+//        inclineSquatMachine.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(inclineSquatMachine);
+//
+//        // 3. 레그 프레스 / 머신
+//        Event legPress = new Event();
+//        legPress.setEventName("레그 프레스");
+//        legPress.setMuscleArea(LEG);
+//        legPress.setEquipmentType(EquipmentType.MACHINE);
+//        legPress.setGroupType(GroupType.A_GROUP);
+//        legPress.setProperWeight(DEFAULT_WEIGHT);
+//        legPress.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(legPress);
+//
+//        // 4. 레그 익스텐션 / 머신
+//        Event legExtension = new Event();
+//        legExtension.setEventName("레그 익스텐션");
+//        legExtension.setMuscleArea(LEG);
+//        legExtension.setEquipmentType(EquipmentType.MACHINE);
+//        legExtension.setGroupType(GroupType.A_GROUP);
+//        legExtension.setProperWeight(DEFAULT_WEIGHT);
+//        legExtension.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(legExtension);
+//
+//        // 5. 레그 컬 / 머신
+//        Event legCurl = new Event();
+//        legCurl.setEventName("레그 컬");
+//        legCurl.setMuscleArea(LEG);
+//        legCurl.setEquipmentType(EquipmentType.MACHINE);
+//        legCurl.setGroupType(GroupType.A_GROUP);
+//        legCurl.setProperWeight(DEFAULT_WEIGHT);
+//        legCurl.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(legCurl);
+//
+//        // 6. 런지 / 맨몸 of 스미스머신
+//        Event lunge = new Event();
+//        lunge.setEventName("런지");
+//        lunge.setMuscleArea(LEG);
+//        lunge.setEquipmentType(EquipmentType.MACHINE);
+//        lunge.setGroupType(GroupType.A_GROUP);
+//        lunge.setProperWeight(DEFAULT_WEIGHT);
+//        lunge.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(lunge);
+//
+//        // 7. 힙 어덕터(대퇴골 내전근 모으기)
+//        Event hipAdductor = new Event();
+//        hipAdductor.setEventName("힙 어덕터(모으기)");
+//        hipAdductor.setMuscleArea(LEG);
+//        hipAdductor.setEquipmentType(EquipmentType.MACHINE);
+//        hipAdductor.setGroupType(GroupType.A_GROUP);
+//        hipAdductor.setProperWeight(DEFAULT_WEIGHT);
+//        hipAdductor.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(hipAdductor);
+//
+//
+//        // 8. 힙 앱덕터(대퇴골 외전근 벌리기) / 없음
+//        Event hipAbductor = new Event();
+//        hipAbductor.setEventName("힙 앱덕터(벌리기)");
+//        hipAbductor.setMuscleArea(LEG);
+//        hipAbductor.setEquipmentType(EquipmentType.MACHINE);
+//        hipAbductor.setGroupType(GroupType.A_GROUP);
+//        hipAbductor.setProperWeight(DEFAULT_WEIGHT);
+//        hipAbductor.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(hipAbductor);
+//
+//        // 9. 힙 쓰러스트
+//        Event hipThrust = new Event();
+//        hipThrust.setEventName("힙 쓰러스트");
+//        hipThrust.setMuscleArea(LEG);
+//        hipThrust.setEquipmentType(EquipmentType.BARBELL);
+//        hipThrust.setGroupType(GroupType.A_GROUP);
+//        hipThrust.setProperWeight(DEFAULT_WEIGHT);
+//        hipThrust.setMaxWeight(DEFAULT_WEIGHT);
+//        leg.add(hipThrust);
+//
+//    } // End of method [setLeg]
 
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= let =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    private void setLeg() {
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= lower body =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    private void setLowerBody() {
 
         // A_GROUP :
         // 1. 스쿼트(풀, 패럴렐, 하프), 프론트 스쿼트,
@@ -869,102 +1002,104 @@ public class BaseEventDataManager {
         // 8. 힙 어브덕터(바깥쪽, 벌리기) / 없음
         // 9. 힙 쓰러스트
 
-        final MuscleArea LEG = MuscleArea.LEG;
+        final MuscleArea LOWER_BODY = MuscleArea.LOWER_BODY;
+
+        this.lowerBody = new ArrayList<>();
 
         // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
         // 1. 스쿼트(풀, 패럴렐, 하프), 프론트 스쿼트,
         Event squat = new Event();
         squat.setEventName("스쿼트");
-        squat.setMuscleArea(LEG);
+        squat.setMuscleArea(LOWER_BODY);
         squat.setEquipmentType(EquipmentType.BARBELL);
         squat.setGroupType(GroupType.A_GROUP);
         squat.setProperWeight(DEFAULT_WEIGHT);
         squat.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(squat);
+        lowerBody.add(squat);
 
 
         // 2. 인클라인 스쿼트 머신
         Event inclineSquatMachine = new Event();
         inclineSquatMachine.setEventName("인클라인 스쿼트 머신");
-        inclineSquatMachine.setMuscleArea(LEG);
+        inclineSquatMachine.setMuscleArea(LOWER_BODY);
         inclineSquatMachine.setEquipmentType(EquipmentType.MACHINE);
         inclineSquatMachine.setGroupType(GroupType.A_GROUP);
         inclineSquatMachine.setProperWeight(DEFAULT_WEIGHT);
         inclineSquatMachine.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(inclineSquatMachine);
+        lowerBody.add(inclineSquatMachine);
 
         // 3. 레그 프레스 / 머신
         Event legPress = new Event();
         legPress.setEventName("레그 프레스");
-        legPress.setMuscleArea(LEG);
+        legPress.setMuscleArea(LOWER_BODY);
         legPress.setEquipmentType(EquipmentType.MACHINE);
         legPress.setGroupType(GroupType.A_GROUP);
         legPress.setProperWeight(DEFAULT_WEIGHT);
         legPress.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(legPress);
+        lowerBody.add(legPress);
 
         // 4. 레그 익스텐션 / 머신
         Event legExtension = new Event();
         legExtension.setEventName("레그 익스텐션");
-        legExtension.setMuscleArea(LEG);
+        legExtension.setMuscleArea(LOWER_BODY);
         legExtension.setEquipmentType(EquipmentType.MACHINE);
         legExtension.setGroupType(GroupType.A_GROUP);
         legExtension.setProperWeight(DEFAULT_WEIGHT);
         legExtension.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(legExtension);
+        lowerBody.add(legExtension);
 
         // 5. 레그 컬 / 머신
         Event legCurl = new Event();
         legCurl.setEventName("레그 컬");
-        legCurl.setMuscleArea(LEG);
+        legCurl.setMuscleArea(LOWER_BODY);
         legCurl.setEquipmentType(EquipmentType.MACHINE);
         legCurl.setGroupType(GroupType.A_GROUP);
         legCurl.setProperWeight(DEFAULT_WEIGHT);
         legCurl.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(legCurl);
+        lowerBody.add(legCurl);
 
         // 6. 런지 / 맨몸 of 스미스머신
         Event lunge = new Event();
         lunge.setEventName("런지");
-        lunge.setMuscleArea(LEG);
+        lunge.setMuscleArea(LOWER_BODY);
         lunge.setEquipmentType(EquipmentType.MACHINE);
         lunge.setGroupType(GroupType.A_GROUP);
         lunge.setProperWeight(DEFAULT_WEIGHT);
         lunge.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(lunge);
+        lowerBody.add(lunge);
 
         // 7. 힙 어덕터(대퇴골 내전근 모으기)
         Event hipAdductor = new Event();
         hipAdductor.setEventName("힙 어덕터(모으기)");
-        hipAdductor.setMuscleArea(LEG);
+        hipAdductor.setMuscleArea(LOWER_BODY);
         hipAdductor.setEquipmentType(EquipmentType.MACHINE);
         hipAdductor.setGroupType(GroupType.A_GROUP);
         hipAdductor.setProperWeight(DEFAULT_WEIGHT);
         hipAdductor.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(hipAdductor);
+        lowerBody.add(hipAdductor);
 
 
         // 8. 힙 앱덕터(대퇴골 외전근 벌리기) / 없음
         Event hipAbductor = new Event();
         hipAbductor.setEventName("힙 앱덕터(벌리기)");
-        hipAbductor.setMuscleArea(LEG);
+        hipAbductor.setMuscleArea(LOWER_BODY);
         hipAbductor.setEquipmentType(EquipmentType.MACHINE);
         hipAbductor.setGroupType(GroupType.A_GROUP);
         hipAbductor.setProperWeight(DEFAULT_WEIGHT);
         hipAbductor.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(hipAbductor);
+        lowerBody.add(hipAbductor);
 
         // 9. 힙 쓰러스트
         Event hipThrust = new Event();
         hipThrust.setEventName("힙 쓰러스트");
-        hipThrust.setMuscleArea(LEG);
+        hipThrust.setMuscleArea(LOWER_BODY);
         hipThrust.setEquipmentType(EquipmentType.BARBELL);
         hipThrust.setGroupType(GroupType.A_GROUP);
         hipThrust.setProperWeight(DEFAULT_WEIGHT);
         hipThrust.setMaxWeight(DEFAULT_WEIGHT);
-        leg.add(hipThrust);
+        lowerBody.add(hipThrust);
 
-    } // End of method [setLeg]
+    } // End of method [setLowerBody]
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= arm =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -1004,6 +1139,8 @@ public class BaseEventDataManager {
         // 12. 리스트 익스텐션
 
         final MuscleArea ARM = MuscleArea.ARM;
+
+        this.arm = new ArrayList<>();
 
         // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
         // 1. 바벨 컬
@@ -1223,4 +1360,19 @@ public class BaseEventDataManager {
 
     } // End of method [setArm]
 
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    private void setEtc() {
+
+        final MuscleArea ETC = MuscleArea.ETC;
+
+        this.etc = new ArrayList<>();
+
+        // +++++++++++++++++++++++++++++++++++++++++++++ A_GROUP +++++++++++++++++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++++++++++++++++ B_GROUP +++++++++++++++++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++++++++++++++++ C_GROUP +++++++++++++++++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++++++++++++++++ D_GROUP +++++++++++++++++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++++++++++++++++ E_GROUP +++++++++++++++++++++++++++++++++++++++++++++
+
+    }
 }

@@ -13,13 +13,12 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
-import com.skymanlab.weighttraining.management.event.program.util.RandomEventSelectionUtil;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.program.util.RandomEventSelectionUtil;
 import com.skymanlab.weighttraining.management.project.activity.SectionInitialization;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
-import com.skymanlab.weighttraining.management.user.data.User;
 
 import java.util.ArrayList;
 

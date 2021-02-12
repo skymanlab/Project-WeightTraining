@@ -13,8 +13,8 @@ import com.google.android.gms.maps.model.LatLng;
 public class FitnessCenterGeofencingUtil {
 
     // constant
-    public static final float GEOFENCE_RADIUS_IN_METERS = 100f;             // Geofence 반경 : 100[m]
-    public static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS = Geofence.NEVER_EXPIRE;       // Geofence 유지 시간 : 계속 유지
+    public static final float GEOFENCE_RADIUS_IN_METERS = 100f;                                                 // Geofence 반경 : 100[m]
+    public static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS = Geofence.NEVER_EXPIRE;                       // Geofence 유지 시간 : 계속 유지
     public static final int GEOFENCE_TRANSITION_TYPE = Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT;      // Geofence 감지 유형 : 들어올 때랑 나갈때
     public static final int GEOFENCE_LOITERING_DELAY = 60 * 1000;           // Geofence 의 Transition 이 DWELL 일 때, 이를 감지하기 위해 머물러야 하는 시간 : 60 * 1[s] = 1[min]
     public static final int GEOFENCING_REQUEST_INITIAL_TRIGGER = GeofencingRequest.INITIAL_TRIGGER_ENTER;       // 해당 Geonfence 를

@@ -137,12 +137,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         // instance variable : app
         private Preference versionInfo;
-        private Preference basicEventData;
-        private SwitchPreference keepLoggedIn;
+        private Preference isSavedBaseEvent;
+        private SwitchPreference isKeptLoggedIn;
 
         // instance variable : location
-        private Preference locationPermission;
-        private Preference backgroundLocationPermission;
+        private Preference isGrantedLocationPermission;
+        private Preference isGrantedBackgroundLocationPermission;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -188,18 +188,20 @@ public class SettingsActivity extends AppCompatActivity {
          */
         private void initSettingOfBaseEventData() {
 
-            // [Preference] [basicEventData] 기본 종목 데이터에 대한 설정 항목
-            this.basicEventData = findPreference("base_event_data");
-
-            String basicEventDataContent = this.basicEventData.getSharedPreferences().getString("base_event_data", "");
+            // [Preference] [isSavedBaseEvent] 기본 종목 데이터에 대한 설정 항목
+            this.isSavedBaseEvent = findPreference(getString(R.string.preference_key_is_saved_base_event));
 
             // [check 1] : basicEventDataContent 의 값이 뭐냐? / 저장 안 함 = false, 저장 함 = true
-            if (basicEventDataContent.equals("true")) {
+            if (this.isSavedBaseEvent.getSharedPreferences()
+                    .getBoolean(
+                            getString(R.string.preference_key_is_saved_base_event),
+                            false
+                    )) {
 
                 // [iv/C]Preference : summary 를 R.string.preference_category_app_basic_event_data_summary_two 으로 변경하기
-                this.basicEventData.setSummary(R.string.preference_category_app_basic_event_data_summary_two);
-                this.basicEventData.setSelectable(false);
-                this.basicEventData.setEnabled(false);
+                this.isSavedBaseEvent.setSummary(R.string.preference_category_app_basic_event_data_summary_two);
+                this.isSavedBaseEvent.setSelectable(false);
+                this.isSavedBaseEvent.setEnabled(false);
 
             } // [check 1]
 
@@ -211,8 +213,8 @@ public class SettingsActivity extends AppCompatActivity {
          */
         private void initSettingOfKeepLoggedIn() {
 
-            // [SwitchPreference] [keepLoggedIn] 로그인 유지 기능에 대한 설정 항목
-            this.keepLoggedIn = findPreference(getString(R.string.preference_key_keep_logged_in));
+            // [SwitchPreference] [isKeptLoggedIn] 로그인 유지 기능에 대한 설정 항목
+            this.isKeptLoggedIn = findPreference(getString(R.string.preference_key_is_kept_logged_in));
 
         } // End of Method [initSettingOfKeepLoggedIn]
 
@@ -222,8 +224,8 @@ public class SettingsActivity extends AppCompatActivity {
          */
         private void initSettingOfLocationPermission() {
 
-            // [Preference] [locationPermission] 위치 권한에 대한 설정 항목
-            this.locationPermission = findPreference(getString(R.string.preference_key_location_permission));
+            // [Preference] [isGrantedLocationPermission] 위치 권한에 대한 설정 항목
+            this.isGrantedLocationPermission = findPreference(getString(R.string.preference_key_is_granted_location_permission));
 
             setLocationPermissionState();
 
@@ -237,7 +239,7 @@ public class SettingsActivity extends AppCompatActivity {
             final String METHOD_NAME = "[initSettingOfBackgroundLocationPermission] ";
 
             // [Preference] [backgroundLocationPermission] 백그라운드 위치 권한에 대한 설정 항목
-            this.backgroundLocationPermission = findPreference(getString(R.string.preference_key_background_location_permission));
+            this.isGrantedBackgroundLocationPermission = findPreference(getString(R.string.preference_key_is_granted_background_location_permission));
 
             setBackgroundLocationPermissionState();
 
@@ -254,15 +256,15 @@ public class SettingsActivity extends AppCompatActivity {
             if (PermissionUtil.hasPermissionList(getActivity(), PermissionManager.LOCATION_PERMISSION_LIST)) {
 
                 // Location Permission : 비활성화 상태 / 요약 : '승인이 완료되었다'는 문구로
-                this.locationPermission.setSummary(R.string.preference_category_location_permission_granted);
-                this.locationPermission.setEnabled(false);
+                this.isGrantedLocationPermission.setSummary(R.string.preference_category_location_permission_granted);
+                this.isGrantedLocationPermission.setEnabled(false);
 
             } else {
 
                 // Location Permission : 비활성화 상태 / 요약 : '거부 되었다'는 문구로 / click listener : 권한 요청하기
-                this.locationPermission.setSummary(R.string.preference_category_location_permission_denied);
-                this.locationPermission.setEnabled(true);
-                this.locationPermission.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                this.isGrantedLocationPermission.setSummary(R.string.preference_category_location_permission_denied);
+                this.isGrantedLocationPermission.setEnabled(true);
+                this.isGrantedLocationPermission.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
 
@@ -292,8 +294,8 @@ public class SettingsActivity extends AppCompatActivity {
             if (!PermissionUtil.hasPermissionList(getContext(), PermissionManager.LOCATION_PERMISSION_LIST)) {
 
                 // Background Location Permission : 비활성화 상태 / 요약 : '위치 권한이 먼저 승인되어야 한다.'는 문구로
-                this.backgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_not_enable);
-                this.backgroundLocationPermission.setEnabled(false);
+                this.isGrantedBackgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_not_enable);
+                this.isGrantedBackgroundLocationPermission.setEnabled(false);
 
                 return;
             } // [check 1]
@@ -303,8 +305,8 @@ public class SettingsActivity extends AppCompatActivity {
             if (PermissionUtil.hasPermissionList(getContext(), PermissionManager.BACKGROUND_PERMISSION)) {
 
                 // Background Location Permission : 비활성화 상태 / 요약 : '승인이 완료되었다'는 문구로
-                this.backgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_granted);
-                this.backgroundLocationPermission.setEnabled(false);
+                this.isGrantedBackgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_granted);
+                this.isGrantedBackgroundLocationPermission.setEnabled(false);
 
             } else {
 
@@ -313,9 +315,9 @@ public class SettingsActivity extends AppCompatActivity {
 
                     // Background Location Permission : 비활성화 상태 / 요약 : '사용자가 거부하였다'는 문구로 / Click listener : 어플리케이션 설정 화면으로 이동
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Background Location Permission > 사용자가 거부하였음.");
-                    this.backgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_user_denied);
-                    this.backgroundLocationPermission.setEnabled(true);
-                    this.backgroundLocationPermission.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    this.isGrantedBackgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_user_denied);
+                    this.isGrantedBackgroundLocationPermission.setEnabled(true);
+                    this.isGrantedBackgroundLocationPermission.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
 
@@ -333,9 +335,9 @@ public class SettingsActivity extends AppCompatActivity {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Background Location Permission > 아직 거부한 적 없음");
 
                     // summary -> denied 요약문으로 변경 / 확성화 -> true / click -> Location Permission 이 '항상 허용'으로 변경해야합니다.
-                    this.backgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_denied);
-                    this.backgroundLocationPermission.setEnabled(true);
-                    this.backgroundLocationPermission.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    this.isGrantedBackgroundLocationPermission.setSummary(R.string.preference_category_location_background_permission_denied);
+                    this.isGrantedBackgroundLocationPermission.setEnabled(true);
+                    this.isGrantedBackgroundLocationPermission.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Preference > 클릭한 preference 는 ? = " + preference);

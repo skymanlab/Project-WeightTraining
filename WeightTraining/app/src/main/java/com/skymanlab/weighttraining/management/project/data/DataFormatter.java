@@ -5,6 +5,8 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleAreaNextActivityType;
 
+import java.util.ArrayList;
+
 public class DataFormatter {
 
     // constant
@@ -211,11 +213,21 @@ public class DataFormatter {
         return new StringBuilder().append(eventNumber).append("개").toString();
     }
 
+    public static String setTotalEventNumberFormat(int totalEventNumber) {
+
+        return new StringBuilder()
+                .append("총 ")
+                .append(totalEventNumber)
+                .append("개")
+                .toString();
+    }
+
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= total set number format =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     /**
      * totalSetNumber 을 '총 n세트' format 으로 변환하여 반환한다.
+     *
      * @param totalSetNumber
      * @return
      */
@@ -227,5 +239,23 @@ public class DataFormatter {
                 .toString();
     }
 
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= total set number format =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public static String setMuscleAreaList(ArrayList<MuscleArea> muscleAreaArrayList) {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int index = 0; index < muscleAreaArrayList.size(); index++) {
+
+            builder.append(DataManager.convertHanguleOfMuscleArea(muscleAreaArrayList.get(index)));
+
+            if (index != (muscleAreaArrayList.size() - 1)) {
+
+                builder.append(" / ");
+            }
+        }
+
+        return builder.toString();
+    }
 }
 

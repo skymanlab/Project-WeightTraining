@@ -15,17 +15,19 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
-import com.skymanlab.weighttraining.management.event.program.data.Program;
+import com.skymanlab.weighttraining.management.program.data.DetailProgram;
+import com.skymanlab.weighttraining.management.program.data.Program;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep7Fragment;
+import com.skymanlab.weighttraining.management.project.fragment.Training.program.MakerStep8Fragment;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.adapter.Step7EventRvAdapter;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.dialog.Step7DetailProgramDialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -150,52 +152,41 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
             public AlertDialog setEndButtonClickListener() {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-
-                Iterator iterator = detailProgramList.keySet().iterator();
-
-                int index = 0;
-                while (iterator.hasNext()) {
-                    String key = (String) iterator.next();
-
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getOrder = " + detailProgramList.get(key).getOrder());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getEventName = " + detailProgramList.get(key).getEventName());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getMuscleArea = " + detailProgramList.get(key).getMuscleArea());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getSetNumber = " + detailProgramList.get(key).getSetNumber());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeMinute = " + detailProgramList.get(key).getRestTimeMinute());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeSecond = " + detailProgramList.get(key).getRestTimeSecond());
-
-                    index++;
-
-                }
-
                 if (allCheckData()) {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< all data > 모든 데이터가 조건에 성립합니다.");
+
+                    // [lv/C]Program : 해당 프로그램의 설정값으로 객체를 생성한다.
+                    Program program = new Program();
+                    program.setMuscleAreaList(muscleAreaArrayList);
+                    program.setFinalOrderList(finalOrderList);
+                    program.setDetailProgramList(getSortedDetailProgramList());
+                    program.setTotalEventNumber(finalOrderList.size());
+                    program.setTotalSetNumber(getTotalSetNumber());
+
+                    // [lv/C]MakerStep8Fragment : step 8 fragment 생성
+                    MakerStep8Fragment step8Fragment = MakerStep8Fragment.newInstance(program);
+
+                    // [lv/C]FragmentTransaction : step 8 fragment 로 이동
+                    FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_home_content_wrapper, step8Fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< total set number >> =====> " + getTotalSetNumber());
+
                 } else {
 
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< all data > 어떤 한 데이터가 조건에 맞지 않습니다.");
                 }
-
-                // [lv/C]Program : 해당 프로그램의 설정값으로 객체를 생성한다.
-                Program program = new Program();
-                program.setMuscleAreaList(muscleAreaArrayList);
-                program.setTotalEventNumber(finalOrderList.size());
-                program.setTotalSetNumber(getTotalSetNumber());
-
-                // [lv/C]MakerStep7Fragment : step 7 fragment 생성
-//                MakerStep7Fragment step7Fragment = MakerStep7Fragment.newInstance(finalOrderList, program, detailProgramList);
-
-                // [lv/C]FragmentTransaction : step 7 fragment 로 이동
-//                FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.nav_home_content_wrapper, step7Fragment);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< total set number >> =====> " + getTotalSetNumber());
 
                 return null;
             }
         };
     }
 
+
+    /**
+     * Step 6 에서 보낸 programSetting 값과 finalOrderList 로 DetailProgramList 객체를 생성하고 초기화하기
+     */
     private void initDetailProgramList() {
         final String METHOD_NAME = "[initDetailProgramList] ";
 
@@ -243,6 +234,28 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
         this.eventListWrapper.setAdapter(adapter);
 
     } // End of method [initWidgetOfRecyclerView]
+
+
+    /**
+     * detailProgramList 의 DetailProgram 을 order 의 순서대로 정렬하여 ArrayList 객체를 반환한다.
+     *
+     * @return
+     */
+    private ArrayList<DetailProgram> getSortedDetailProgramList() {
+
+        ArrayList<DetailProgram> valueSet = new ArrayList<>();
+
+        valueSet.addAll(detailProgramList.values());
+
+        Collections.sort(valueSet, new Comparator<DetailProgram>() {
+            @Override
+            public int compare(DetailProgram o1, DetailProgram o2) {
+                return ((Comparable) o1.getOrder()).compareTo(o2.getOrder());
+            }
+        });
+
+        return valueSet;
+    }
 
 
     /**
@@ -314,6 +327,21 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
 
         Iterator iterator = detailProgramList.keySet().iterator();
 
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            if (!checkData(detailProgramList.get(key).getSetNumber(), detailProgramList.get(key).getRestTimeMinute(), detailProgramList.get(key).getRestTimeSecond())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private void displayInfoOfDetailProgramList() {
+        final String METHOD_NAME = "[displayInfoOfDetailProgramList] ";
+
+        Iterator iterator = detailProgramList.keySet().iterator();
+
         int index = 0;
         while (iterator.hasNext()) {
             String key = (String) iterator.next();
@@ -326,11 +354,26 @@ public class MakerStep7SectionManager extends FragmentSectionManager implements 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeSecond = " + detailProgramList.get(key).getRestTimeSecond());
 
             index++;
-            if (!checkData(detailProgramList.get(key).getSetNumber(), detailProgramList.get(key).getRestTimeMinute(), detailProgramList.get(key).getRestTimeSecond())) {
-                return false;
-            }
+
         }
-        return true;
+
     }
 
+    private void displayInfoOfDetailProgramArrayList(ArrayList<DetailProgram> detailProgramArrayList) {
+        final String METHOD_NAME = "[displayInfoOfDetailProgramArrayList] ";
+
+        for (int index = 0; index < detailProgramArrayList.size(); index++) {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getOrder =" + detailProgramArrayList.get(index).getOrder());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getMuscleArea =" + detailProgramArrayList.get(index).getMuscleArea());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getEventKey =" + detailProgramArrayList.get(index).getEventKey());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getEventName =" + detailProgramArrayList.get(index).getEventName());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getSetNumber =" + detailProgramArrayList.get(index).getSetNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeMinute =" + detailProgramArrayList.get(index).getRestTimeMinute());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<< " + index + " >> getRestTimeSecond =" + detailProgramArrayList.get(index).getRestTimeSecond());
+
+        }
+
+
+    }
 }

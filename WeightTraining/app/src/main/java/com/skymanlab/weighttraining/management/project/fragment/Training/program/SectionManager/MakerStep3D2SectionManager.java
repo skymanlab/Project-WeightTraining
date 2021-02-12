@@ -12,9 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
-import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
-import com.skymanlab.weighttraining.management.event.program.util.RandomEventSelectionUtil;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.program.data.EventResultSet;
+import com.skymanlab.weighttraining.management.program.util.RandomEventSelectionUtil;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.data.type.ProgramType;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
@@ -38,7 +38,7 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
     private GroupingEventData chestGroupingEventData;
     private GroupingEventData shoulderGroupingEventData;
     private GroupingEventData latGroupingEventData;
-    private GroupingEventData upperBodyGroupingEventData;
+    private GroupingEventData lowerBodyGroupingEventData;
     private GroupingEventData armGroupingEventData;
     private GroupingEventData etcGroupingEventData;
 
@@ -63,8 +63,8 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
         this.latGroupingEventData = latGroupingEventData;
     }
 
-    public void setUpperBodyGroupingEventData(GroupingEventData upperBodyGroupingEventData) {
-        this.upperBodyGroupingEventData = upperBodyGroupingEventData;
+    public void setLowerBodyGroupingEventData(GroupingEventData lowerBodyGroupingEventData) {
+        this.lowerBodyGroupingEventData = lowerBodyGroupingEventData;
     }
 
     public void setArmGroupingEventData(GroupingEventData armGroupingEventData) {
@@ -104,7 +104,7 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
         initEachGroupRandomListWrapper(inflater, MuscleArea.LAT, latGroupingEventData);
 
         // [4] upper body
-        initEachGroupRandomListWrapper(inflater, MuscleArea.UPPER_BODY, upperBodyGroupingEventData);
+        initEachGroupRandomListWrapper(inflater, MuscleArea.LOWER_BODY, lowerBodyGroupingEventData);
 
         // [5] arm
         initEachGroupRandomListWrapper(inflater, MuscleArea.ARM, armGroupingEventData);
@@ -132,7 +132,7 @@ public class MakerStep3D2SectionManager extends FragmentSectionManager implement
                 EventResultSet chestEventResultSet = createEventResultSet(MuscleArea.CHEST, chestGroupingEventData);
                 EventResultSet shoulderEventResultSet = createEventResultSet(MuscleArea.SHOULDER, shoulderGroupingEventData);
                 EventResultSet latEventResultSet = createEventResultSet(MuscleArea.LAT, latGroupingEventData);
-                EventResultSet upperBodyEventResultSet = createEventResultSet(MuscleArea.UPPER_BODY, upperBodyGroupingEventData);
+                EventResultSet upperBodyEventResultSet = createEventResultSet(MuscleArea.LOWER_BODY, lowerBodyGroupingEventData);
                 EventResultSet armEventResultSet = createEventResultSet(MuscleArea.ARM, armGroupingEventData);
                 EventResultSet etcEventResultSet = createEventResultSet(MuscleArea.ETC, etcGroupingEventData);
 

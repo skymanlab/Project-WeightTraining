@@ -112,8 +112,8 @@ public class EASectionTwoManager extends SectionManager implements SectionInitia
                 this.titleWrapper2.setBackgroundResource(R.color.colorBackgroundThird);
                 break;
 
-            case LEG:
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/leg 가 입력되었습니다. <=");
+            case LOWER_BODY:
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=> check_1/LOWER_BODY 가 입력되었습니다. <=");
                 // [iv/C]LinearLayout : titleWrapper2 의 색을 R.color.colorBackgroundFourth 으로 설정
                 this.titleWrapper2.setBackgroundResource(R.color.colorBackgroundFourth);
                 break;

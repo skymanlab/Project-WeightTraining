@@ -14,12 +14,12 @@
 
         <Preference
             app:defaultValue="false"
-            app:key="base_event_data"
+            app:key="@string/preference_key_is_saved_base_event"
             app:summary="@string/preference_category_app_basic_event_data_summary_one"
             app:title="@string/preference_category_app_basic_event_data_title" />
 
         <SwitchPreference
-            app:key="@string/preference_key_keep_logged_in"
+            app:key="@string/preference_key_is_kept_logged_in"
             app:title="@string/preference_category_app_keep_logged_in_title" />
     </PreferenceCategory>
 
@@ -30,27 +30,14 @@
         app:title="@string/preference_category_location">
 
         <Preference
-            app:key="@string/preference_key_location_permission"
+            app:key="@string/preference_key_is_granted_location_permission"
             app:summary="@string/preference_category_location_permission_denied"
             app:title="@string/preference_category_location_permission_title" />
 
         <Preference
             android:title="@string/preference_category_location_background_permission_title"
-            app:key="@string/preference_key_background_location_permission"
+            app:key="@string/preference_key_is_granted_background_location_permission"
             app:summary="@string/preference_category_location_background_permission_denied" />
     </PreferenceCategory>
 
-<!--    &lt;!&ndash; notification &ndash;&gt;-->
-<!--    <PreferenceCategory-->
-<!--        app:allowDividerBelow="true"-->
-<!--        app:iconSpaceReserved="false"-->
-<!--        app:title="@string/preference_category_notification_title">-->
-
-
-
-<!--        <SwitchPreference-->
-<!--            app:key="@string/preference_key_fitness_center_geofencing"-->
-<!--            app:title="@string/preference_category_notification_fitness_center_geofencing"/>-->
-
-<!--    </PreferenceCategory>-->
 </PreferenceScreen>

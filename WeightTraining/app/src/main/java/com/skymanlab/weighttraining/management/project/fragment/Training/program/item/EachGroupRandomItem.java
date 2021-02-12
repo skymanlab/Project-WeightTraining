@@ -1,24 +1,18 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.item;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
-import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
-
-import java.util.ArrayList;
 
 public class EachGroupRandomItem {
 

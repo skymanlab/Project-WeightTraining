@@ -1,10 +1,19 @@
-package com.skymanlab.weighttraining.management.event.program.data;
+package com.skymanlab.weighttraining.management.program.data;
 
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 
 import java.io.Serializable;
 
 public class DetailProgram implements Serializable {
+
+    // constructor
+    public static final String ORDER = "order";
+    public static final String MUSCLE_AREA = "muscleArea";
+    public static final String EVENT_KEY = "eventKey";
+    public static final String EVENT_NAME = "eventName";
+    public static final String SET_NUMBER = "setNumber";
+    public static final String REST_TIME_MINUTE = "restTimeMinute";
+    public static final String REST_TIME_SECOND = "restTimeSecond";
 
     // instance variable
     private int order;

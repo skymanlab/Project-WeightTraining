@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/include_detail_program_item_content_wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:gravity="bottom"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:id="@+id/include_detail_program_item_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_order"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/text_section_title_size" />
+
+
+        <TextView
+            android:id="@+id/include_detail_program_item_muscle_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_muscle_area_default"
+            android:textColor="@color/colorTextBlack"/>
+
+        <View
+            android:layout_width="@dimen/divider_default"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/divider_vertical_layout_Start"
+            android:layout_marginEnd="@dimen/divider_vertical_layout_End"
+            android:background="@color/colorDividerBlack" />
+
+        <TextView
+            android:id="@+id/include_detail_program_item_event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_event_name_default"
+            android:textColor="@color/colorTextBlack" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_set_number" />
+
+        <TextView
+            android:id="@+id/include_detail_program_item_set_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_set_number_default"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorTextBlack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_rest_time" />
+
+        <TextView
+            android:id="@+id/include_detail_program_item_rest_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/eland_choice_medium"
+            android:text="@string/include_detail_program_item_rest_time_default"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorTextBlack" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/include_dot_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

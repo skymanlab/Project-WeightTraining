@@ -17,17 +17,19 @@
             android:id="@+id/custom_dialog_detail_program_setting_event_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/eland_choice_bold"
+            android:padding="10dp"
             android:text="@string/custom_dialog_detail_program_setting_event_name_default"
             android:textAlignment="center"
-            android:padding="10dp"/>
+            android:textSize="@dimen/text_title_size" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/browser_actions_bg_grey"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp"
-            android:background="@color/browser_actions_bg_grey">
+            android:padding="10dp">
 
             <!-- set number -->
             <com.google.android.material.card.MaterialCardView
@@ -125,5 +127,29 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout><!-- End of content -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/custom_dialog_detail_program_setting_bt_negative"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/custom_dialog_detail_program_setting_bt_negative" />
+
+            <Button
+                android:id="@+id/custom_dialog_detail_program_setting_bt_positive"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/custom_dialog_detail_program_setting_bt_positive" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

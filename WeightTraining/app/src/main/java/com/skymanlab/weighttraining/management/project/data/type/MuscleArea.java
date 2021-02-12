@@ -6,8 +6,7 @@ public enum MuscleArea implements Serializable {
     CHEST,      // 가슴
     SHOULDER,   // 어깨
     LAT,        // 등
-    UPPER_BODY, // 하체
-    LEG,        // 다리
+    LOWER_BODY, // 하페
     ARM,        // 팔
     ETC         // 기타
 }

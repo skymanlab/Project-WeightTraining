@@ -66,15 +66,15 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
 
             final String METHOD_NAME = "[run] ";
-
-            Class targetActivity = null;
-
-            if (SettingsManager.checkKeepLoggedIn(MainActivity.this)) {
-                targetActivity = NavHomeActivity.class;
-            } else {
-                targetActivity = LoginActivity.class;
-            }
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetActivity > 목표 = " + targetActivity);
+//
+//            Class targetActivity = null;
+//
+//            if (SettingsManager.checkIsKeptLoggedIn(MainActivity.this)) {
+//                targetActivity = NavHomeActivity.class;
+//            } else {
+//                targetActivity = LoginActivity.class;
+//            }
+//            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetActivity > 목표 = " + targetActivity);
 
             try {
 
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 sleep(2000);
 
                 // [lv/C]Intent : targetActivity 이동하는 intent 생성 및 이동
-                Intent intent = new Intent(this.context, targetActivity);
+                Intent intent = new Intent(this.context, LoginActivity.class);
                 finish();
                 startActivity(intent);
 

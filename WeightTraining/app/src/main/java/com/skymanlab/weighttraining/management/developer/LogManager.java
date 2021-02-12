@@ -56,9 +56,6 @@ public class LogManager {
             // [check 2] : user 객체가 있다.
             if (user != null) {
 
-                Log.d(className, "0. count = " + user.getCount());
-                Log.d(className, "1. name = " + user.getName());
-                Log.d(className, "2. email = " + user.getEmail());
 
             } // [check 2]
 
@@ -87,9 +84,6 @@ public class LogManager {
             // [cycle 1] : userArrayList 의 size 만큼
             for (int index = 0; index < userArrayList.size(); index++) {
 
-                Log.d(className, "0. count = " + userArrayList.get(index).getCount());
-                Log.d(className, "1. name = " + userArrayList.get(index).getName());
-                Log.d(className, "2. email = " + userArrayList.get(index).getEmail());
 
                 Log.d(className, " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ");
 

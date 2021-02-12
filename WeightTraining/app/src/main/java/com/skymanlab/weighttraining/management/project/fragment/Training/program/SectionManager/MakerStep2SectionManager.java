@@ -1,13 +1,11 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
-import android.app.Activity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
@@ -24,8 +22,8 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
-import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
+import com.skymanlab.weighttraining.management.program.util.GroupingEventUtil;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
@@ -246,7 +244,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: upper body ::::::::::::::::::::::::::::::::::::: ");
                 // [method] : [3] UPPER_BODY(or LEG) 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
-                GroupingEventData upperBodyGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.UPPER_BODY, isSelectedMuscleAreaList[3]);
+                GroupingEventData lowerBodyGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.LOWER_BODY, isSelectedMuscleAreaList[3]);
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "::::::::::::::::::::::::::::::::::::: arm ::::::::::::::::::::::::::::::::::::: ");
                 // [method] : [4] ARM 의 선택된 항목일 때, Fragment 객체를 생성하여 fragmentArrayList 에 추가하는 과정 진행
@@ -257,7 +255,7 @@ public class MakerStep2SectionManager extends FragmentSectionManager implements 
                 GroupingEventData etcGroupingEventData = loadContentByMuscleArea(snapshot, MuscleArea.ETC, isSelectedMuscleAreaList[5]);
 
                 // [method] chest, shoulder, lat, upperBody, arm, etc groupingEventData 를 담아서 step 1-0 에서 선택한 type 에 맞게 Fragment 이동
-                moveNextStep(chestGroupingEventData, shoulderGroupingEventData, latGroupingEventData, upperBodyGroupingEventData, armGroupingEventData, etcGroupingEventData);
+                moveNextStep(chestGroupingEventData, shoulderGroupingEventData, latGroupingEventData, lowerBodyGroupingEventData, armGroupingEventData, etcGroupingEventData);
 
             }
 

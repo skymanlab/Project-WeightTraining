@@ -1,4 +1,4 @@
-package com.skymanlab.weighttraining.management.event.program.data;
+package com.skymanlab.weighttraining.management.program.data;
 
 import com.skymanlab.weighttraining.management.event.data.Event;
 

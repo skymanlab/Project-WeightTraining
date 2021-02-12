@@ -11,10 +11,14 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofencingManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.InitializationManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManager;
+import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
@@ -133,13 +137,14 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.serviceCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                SettingsManager.displayAllSettingsValue(getFragment().getContext());
+
             }
         });
 
     }
 
-
-    
 
     /**
      * register day count 와 관련된 widget 들의 초기 내용을 설정한다.
@@ -159,7 +164,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
     } // End of method [initWidgetOfRegisterDayCount]
 
-    
 
     /**
      * training count 와 관련된 widwget 들의 초기 내용을 설정한다.

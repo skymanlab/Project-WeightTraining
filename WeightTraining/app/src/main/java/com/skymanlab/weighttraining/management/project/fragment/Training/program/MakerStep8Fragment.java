@@ -14,16 +14,10 @@ import android.view.ViewGroup;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
-import com.skymanlab.weighttraining.management.event.program.data.Program;
+import com.skymanlab.weighttraining.management.program.data.Program;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStep8SectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager.MakerStepManager;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,14 +31,10 @@ public class MakerStep8Fragment extends Fragment {
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
-    private static final String FINAL_ORDER_LIST = "finalOrderList";
     private static final String PROGRAM = "program";
-    private static final String DETAIL_PROGRAM_LIST = "detailProgramList";
 
     // instance variable
-    private ArrayList<Event> finalOrderList;
     private Program program;
-    private HashMap<String, DetailProgram> detailProgramList;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -64,12 +54,10 @@ public class MakerStep8Fragment extends Fragment {
      * @return A new instance of fragment MakerStep7Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MakerStep8Fragment newInstance(ArrayList<Event> finalOrderList, Program program, HashMap<String, DetailProgram> detailProgramList) {
+    public static MakerStep8Fragment newInstance(Program program) {
         MakerStep8Fragment fragment = new MakerStep8Fragment();
         Bundle args = new Bundle();
-        args.putSerializable(FINAL_ORDER_LIST, finalOrderList);
         args.putSerializable(PROGRAM, program);
-        args.putSerializable(DETAIL_PROGRAM_LIST, detailProgramList);
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,9 +66,7 @@ public class MakerStep8Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.finalOrderList = (ArrayList<Event>) getArguments().getSerializable(FINAL_ORDER_LIST);
             this.program = (Program) getArguments().getSerializable(PROGRAM);
-            this.detailProgramList = (HashMap<String, DetailProgram>) getArguments().getSerializable(DETAIL_PROGRAM_LIST);
         }
     }
 
@@ -96,27 +82,27 @@ public class MakerStep8Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final String METHOD_NAME = "[onViewCreated] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program set number  = " + program.getSetNumber());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time minute  = " + program.getRestTimeMinute());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time second = " + program.getRestTimeSecond());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= detail program array list = " + detailProgramList.size());
+//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program set number  = " + program.getSetNumber());
+//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time minute  = " + program.getRestTimeMinute());
+//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time second = " + program.getRestTimeSecond());
+//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= detail program array list = " + detailProgramList.size());
 
-        if (0 < detailProgramList.size()) {
-            Iterator iterator = detailProgramList.keySet().iterator();
-
-            while (iterator.hasNext()) {
-
-                String key = (String) iterator.next();
-
-                for (int index = 0; index < finalOrderList.size(); index++) {
-
-                    if (finalOrderList.get(index).getKey().equals(key)) {
-                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "detail program list 이 있는 even 의 name = " + finalOrderList.get(index).getEventName());
-                    }
-
-                } // [cycle ]
-            }
-        }
+//        if (0 < detailProgramList.size()) {
+//            Iterator iterator = detailProgramList.keySet().iterator();
+//
+//            while (iterator.hasNext()) {
+//
+//                String key = (String) iterator.next();
+//
+//                for (int index = 0; index < finalOrderList.size(); index++) {
+//
+//                    if (finalOrderList.get(index).getKey().equals(key)) {
+//                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "detail program list 이 있는 even 의 name = " + finalOrderList.get(index).getEventName());
+//                    }
+//
+//                } // [cycle ]
+//            }
+//        }
 
         // [FragmentTopBarManager] [topBarManager] this is 'maker step 8' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
@@ -130,9 +116,7 @@ public class MakerStep8Fragment extends Fragment {
 
         // [MakerStep5SectionManager] [sectionManager] maker step 8 fragment section manager 설정
         this.sectionManager = new MakerStep8SectionManager(this, view);
-        this.sectionManager.setFinalOrderList(this.finalOrderList);
         this.sectionManager.setProgram(this.program);
-        this.sectionManager.setDetailProgramList(this.detailProgramList);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
@@ -150,6 +134,36 @@ public class MakerStep8Fragment extends Fragment {
         this.topBarManager.initWidgetOfStartButton(null);
         this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
         this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_complete));
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        displayInfoOfProgram();
+
+    }
+
+
+    private void displayInfoOfProgram() {
+        final String METHOD_NAME = "[displayInfoOfProgram] ";
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> getKey = " + program.getKey());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> getNickName = " + program.getNickName());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> getTotalEventNumber = " + program.getTotalEventNumber());
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> getTotalSetNumber = " + program.getTotalSetNumber());
+
+        for (int index = 0; index < program.getMuscleAreaList().size(); index++) {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<muscleArea>>> = " + program.getMuscleAreaList().get(index));
+        }
+
+        for (int index = 0; index < program.getDetailProgramList().size(); index++) {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getOrder = " + program.getDetailProgramList().get(index).getOrder());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getMuscleArea = " + program.getDetailProgramList().get(index).getMuscleArea());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getEventKey = " + program.getDetailProgramList().get(index).getEventKey());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getEventName = " + program.getDetailProgramList().get(index).getEventName());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getSetNumber = " + program.getDetailProgramList().get(index).getSetNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getRestTimeMinute = " + program.getDetailProgramList().get(index).getRestTimeMinute());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> << " + index + " >> <<<DetailProgramList>>> getRestTimeSecond = " + program.getDetailProgramList().get(index).getRestTimeSecond());
+        }
 
     }
 }

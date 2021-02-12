@@ -6,18 +6,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.DetailProgram;
+import com.skymanlab.weighttraining.management.program.data.DetailProgram;
 import com.skymanlab.weighttraining.management.project.data.DataFormatter;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 
-public class Step8DetailProgramResultItem {
+public class Step8DetailProgramSettingItem {
 
     // instance variable
     private LayoutInflater inflater;
-    private Event event;
     private DetailProgram detailProgram;
-
 
     // instance variable : view
     private View item;
@@ -30,9 +27,8 @@ public class Step8DetailProgramResultItem {
     private TextView restTime;
 
     // constructor
-    private Step8DetailProgramResultItem(Builder builder) {
+    private Step8DetailProgramSettingItem(Builder builder) {
         this.inflater = builder.inflater;
-        this.event = builder.event;
         this.detailProgram = builder.detailProgram;
     }
 
@@ -46,7 +42,7 @@ public class Step8DetailProgramResultItem {
     /**
      * item 을 만들고 설정을 초기화한다.
      */
-    public Step8DetailProgramResultItem createItem() {
+    public Step8DetailProgramSettingItem createItem() {
 
         // [iv/C]View : item 생성하기
         this.item = inflateItem();
@@ -70,7 +66,7 @@ public class Step8DetailProgramResultItem {
      */
     private View inflateItem() {
 
-        return inflater.inflate(R.layout.include_maker_step8_detail_program_result_item, null);
+        return inflater.inflate(R.layout.include_maker_step8_detail_program_setting_item, null);
 
     } // End of method [inflateItem]
 
@@ -84,11 +80,11 @@ public class Step8DetailProgramResultItem {
      */
     private void connectWidget(View view) {
 
-        this.muscleArea = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_muscle_area);
-        this.eventName = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_event_name);
-        this.contentWrapper = (LinearLayout) view.findViewById(R.id.include_maker_step8_detail_program_result_item_content_wrapper);
-        this.setNumber = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_set_number);
-        this.restTime = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_result_item_rest_time);
+        this.muscleArea = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_setting_item_muscle_area);
+        this.eventName = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_setting_item_event_name);
+        this.contentWrapper = (LinearLayout) view.findViewById(R.id.include_maker_step8_detail_program_setting_item_content_wrapper);
+        this.setNumber = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_setting_item_set_number);
+        this.restTime = (TextView) view.findViewById(R.id.include_maker_step8_detail_program_setting_item_rest_time);
 
     }
 
@@ -132,7 +128,8 @@ public class Step8DetailProgramResultItem {
     private void initWidgetOfMuscleAre() {
 
         // text
-        this.muscleArea.setText(DataManager.convertHanguleOfMuscleArea(event.getMuscleArea()));
+        if (detailProgram != null)
+            this.muscleArea.setText(DataManager.convertHanguleOfMuscleArea(detailProgram.getMuscleArea()));
 
     } // End of method [initWidget]
 
@@ -140,17 +137,18 @@ public class Step8DetailProgramResultItem {
     private void initWidgetOfEventName() {
 
         // text
-        this.eventName.setText(event.getEventName());
+        if (detailProgram != null)
+            this.eventName.setText(detailProgram.getEventName());
 
     } // End of method [initWidget]
 
 
     private void initWidgetOfContentWrapper() {
 
-        // visible
-        if (detailProgram == null) {
-            this.contentWrapper.setVisibility(View.GONE);
-        }
+//        // visible
+//        if (detailProgram == null) {
+//            this.contentWrapper.setVisibility(View.GONE);
+//        }
 
     } // End of method [initWidget]
 
@@ -178,7 +176,6 @@ public class Step8DetailProgramResultItem {
 
         // instance variable
         private LayoutInflater inflater;
-        private Event event;
         private DetailProgram detailProgram;
 
         // constructor
@@ -192,19 +189,14 @@ public class Step8DetailProgramResultItem {
             return this;
         }
 
-        public Builder setEvent(Event event) {
-            this.event = event;
-            return this;
-        }
-
         public Builder setDetailProgram(DetailProgram detailProgram) {
             this.detailProgram = detailProgram;
             return this;
         }
 
         // create
-        public Step8DetailProgramResultItem newInstance() {
-            return new Step8DetailProgramResultItem(this);
+        public Step8DetailProgramSettingItem newInstance() {
+            return new Step8DetailProgramSettingItem(this);
         }
     }
 }

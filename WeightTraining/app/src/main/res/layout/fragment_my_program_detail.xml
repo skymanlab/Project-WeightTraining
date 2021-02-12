@@ -17,4 +17,125 @@
         android:background="@color/browser_actions_divider_color" />
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/section_padding_start"
+            android:paddingTop="@dimen/section_padding_top"
+            android:paddingEnd="@dimen/section_padding_end"
+            android:paddingBottom="@dimen/section_padding_bottom">
+
+            <TextView
+                android:id="@+id/f_my_program_detail_nick_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_bold"
+                android:text="@string/f_my_program_detail_nick_name_default"
+                android:textAlignment="center"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_title_size" />
+
+            <include
+                layout="@layout/include_divider_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- muscle area list -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_my_program_detail_muscle_area_list" />
+
+                <TextView
+                    android:id="@+id/f_my_program_detail_muscle_area_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_my_program_detail_muscle_area_list_default"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorTextBlack" />
+            </LinearLayout><!-- End of muscle area list -->
+
+            <!-- total event number -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_my_program_detail_total_event_number" />
+
+                <TextView
+                    android:id="@+id/f_my_program_detail_total_event_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_my_program_detail_total_event_number_default"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorTextBlack" />
+            </LinearLayout><!-- End of total event number -->
+
+            <!-- total set number -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_my_program_detail_total_set_number" />
+
+                <TextView
+                    android:id="@+id/f_my_program_detail_total_set_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/f_my_program_detail_total_set_number_default"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorTextBlack" />
+            </LinearLayout><!-- End of total set number -->
+
+            <include
+                layout="@layout/include_divider_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/f_my_program_detail_detail_program_list_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

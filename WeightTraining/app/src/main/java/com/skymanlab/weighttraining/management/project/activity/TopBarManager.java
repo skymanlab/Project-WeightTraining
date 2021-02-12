@@ -313,9 +313,9 @@ public class TopBarManager extends SectionManager implements SectionInitializati
         final String METHOD_NAME = "[saveBaseEvent] ";
 
         // [lv/C]BaseEventDataManager : 기본 event 데이터 관리자 생성 및 기본 데이터 저장
-        BaseEventDataManager dataManager = new BaseEventDataManager(getFirebaseUser().getUid());
-        dataManager.makeAllBaseEvent();
-        dataManager.saveAllBaseEvent();
+//        BaseEventDataManager dataManager = new BaseEventDataManager(getFirebaseUser().getUid());
+//        dataManager.makeAllBaseEvent();
+//        dataManager.saveAllBaseEvent();
 
         // [lv/C]SharedPreference : 설정을 위한 객체 생성 / base_event_data 를  false -> true 로 변경
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());

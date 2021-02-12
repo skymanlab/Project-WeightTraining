@@ -1,41 +1,26 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
-import android.app.Activity;
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
-import com.skymanlab.weighttraining.management.event.program.data.GroupingEventData;
-import com.skymanlab.weighttraining.management.event.program.util.GroupingEventUtil;
-import com.skymanlab.weighttraining.management.project.data.DataManager;
+import com.skymanlab.weighttraining.management.program.data.EventResultSet;
+import com.skymanlab.weighttraining.management.program.data.GroupingEventData;
 import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.Training.program.item.DirectSelectionGroupItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class DirectSelectionSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -47,7 +32,7 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
     private static final int STANDARD_ID_CHEST = 100;
     private static final int STANDARD_ID_SHOULDER = 200;
     private static final int STANDARD_ID_LAT = 300;
-    private static final int STANDARD_ID_UPPER_BODY = 400;
+    private static final int STANDARD_ID_LOWER_BODY = 400;
     private static final int STANDARD_ID_ARM = 500;
     private static final int STANDARD_ID_ETC = 600;
 
@@ -135,13 +120,10 @@ public class DirectSelectionSectionManager extends FragmentSectionManager implem
                 // [iv/i]muscleAreaStandardId : LAT standardId 할당
                 this.muscleAreaStandardId = STANDARD_ID_LAT;
                 break;
-            case UPPER_BODY:
+            case LOWER_BODY:
                 // [iv/i]muscleAreaStandardId : UPPER_BODY standardId 할당
-                this.muscleAreaStandardId = STANDARD_ID_UPPER_BODY;
+                this.muscleAreaStandardId = STANDARD_ID_LOWER_BODY;
                 break;
-            case LEG:
-                // [iv/i]muscleAreaStandardId : LEG standardId 할당
-                this.muscleAreaStandardId = STANDARD_ID_UPPER_BODY;
             case ARM:
                 // [iv/i]muscleAreaStandardId : ARM standardId 할당
                 this.muscleAreaStandardId = STANDARD_ID_ARM;

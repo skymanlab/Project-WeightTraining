@@ -6,20 +6,37 @@ import java.util.Map;
 
 public class User implements Serializable {
 
+    // constant
+    public static final String UID = "uid";
+    public static final String NUMBER = "number";
+    public static final String NAME = "name";
+    public static final String EMAIL = "email";
+    public static final String PHOTO_URL = "photoUrl";
+    public static final String IS_SAVED_BASE_EVENT = " isSavedBaseEvent";
+
     // instant variable
-    private long count;             // 0. count
-    private String name;            // 1. name
-    private String email;           // 2. email
-    private String photoUrl;        // 3. photoUrl
-    private String uid;             // 4. uid
+    private String uid;             // 0. uid
+    private long number;
+    private String name;            // 2. name
+    private String email;           // 3. email
+    private String photoUrl;        // 4. photoUr
+    private boolean isSavedBaseEvent;
 
     // method : getter, setter
-    public long getCount() {
-        return count;
+    public String getUid() {
+        return uid;
     }
 
-    public void setCount(long count) {
-        this.count = count;
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public long getNumber() {
+        return number;
+    }
+
+    public void setNumber(long number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -46,11 +63,11 @@ public class User implements Serializable {
         this.photoUrl = photoUrl;
     }
 
-    public String getUid() {
-        return uid;
+    public boolean isSavedBaseEvent() {
+        return isSavedBaseEvent;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setSavedBaseEvent(boolean savedBaseEvent) {
+        isSavedBaseEvent = savedBaseEvent;
     }
 }

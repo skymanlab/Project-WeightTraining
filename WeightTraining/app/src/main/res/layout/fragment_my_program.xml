@@ -18,11 +18,10 @@
         android:background="@color/colorDividerDefault" />
 
     <!-- content -->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/f_my_program_recycler_view"
@@ -32,5 +31,12 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp" />
 
-    </LinearLayout><!-- End of content -->
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/f_my_program_progress_bar"
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </FrameLayout><!-- End of content -->
 </LinearLayout>

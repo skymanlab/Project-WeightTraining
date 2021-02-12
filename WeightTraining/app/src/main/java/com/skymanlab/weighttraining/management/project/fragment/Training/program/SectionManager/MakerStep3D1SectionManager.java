@@ -1,12 +1,10 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
-import android.app.Activity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -15,7 +13,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.event.program.data.EventResultSet;
+import com.skymanlab.weighttraining.management.program.data.EventResultSet;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
@@ -96,7 +94,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                 EventResultSet chestEventResultSet = new EventResultSet();
                 EventResultSet shoulderEventResultSet = new EventResultSet();
                 EventResultSet latEventResultSet = new EventResultSet();
-                EventResultSet upperBodyEventResultSet = new EventResultSet();
+                EventResultSet lowerBodyEventResultSet = new EventResultSet();
                 EventResultSet armEventResultSet = new EventResultSet();
                 EventResultSet etcEventResultSet = new EventResultSet();
 
@@ -113,8 +111,8 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                         case LAT:
                             latEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
                             break;
-                        case UPPER_BODY:
-                            upperBodyEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
+                        case LOWER_BODY:
+                            lowerBodyEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
                             break;
                         case ARM:
                             armEventResultSet = fragmentArrayList.get(index).getSectionManager().getEventResultSetOfAllGroup();
@@ -130,7 +128,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                 if (chestEventResultSet.getSelectedEventArrayList().isEmpty()
                         && shoulderEventResultSet.getSelectedEventArrayList().isEmpty()
                         && latEventResultSet.getSelectedEventArrayList().isEmpty()
-                        && upperBodyEventResultSet.getSelectedEventArrayList().isEmpty()
+                        && lowerBodyEventResultSet.getSelectedEventArrayList().isEmpty()
                         && armEventResultSet.getSelectedEventArrayList().isEmpty()
                         && etcEventResultSet.getSelectedEventArrayList().isEmpty()) {
 
@@ -144,7 +142,7 @@ public class MakerStep3D1SectionManager extends FragmentSectionManager implement
                             chestEventResultSet,
                             shoulderEventResultSet,
                             latEventResultSet,
-                            upperBodyEventResultSet,
+                            lowerBodyEventResultSet,
                             armEventResultSet,
                             etcEventResultSet);
 
