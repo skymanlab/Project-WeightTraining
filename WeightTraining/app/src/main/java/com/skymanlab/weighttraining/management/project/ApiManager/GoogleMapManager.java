@@ -96,7 +96,6 @@ public class GoogleMapManager {
             // my location button click listener 등록
             googleMap.setOnMyLocationButtonClickListener(createOnMyLocationButtonClickListener());
 
-
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< My location >  location 를 가져오기 위한 설정을 진행합니다.");
 
             // 위치 업데이트를 하기위한 초기 설정하기
@@ -142,8 +141,11 @@ public class GoogleMapManager {
                     // [LatLng] [lastLatLng] location 으로 LatLng 객체로 생성
                     LatLng lastLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-                    // googleMap 에 lastLatLng 의 위치에 마커 표시
-                    LocationUpdateUtil.showMarkerToMap(activity, googleMap, lastLatLng);
+                    // googleMap 에 lastLatLng 의 위치에 마커 표시 -> 이동
+//                    LocationUpdateUtil.showMarkerToMap(activity, googleMap, lastLatLng);
+
+                    // latLatLng 으로 위치 이동만
+                    LocationUpdateUtil.moveLocation(googleMap, lastLatLng);
 
                 } else {
 

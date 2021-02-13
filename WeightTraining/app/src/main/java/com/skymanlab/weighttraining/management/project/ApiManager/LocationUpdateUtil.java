@@ -111,4 +111,29 @@ public class LocationUpdateUtil {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(address.getLatitude(), address.getLongitude()), CAMERA_ZOOM));
 
     }
+
+    public static void showMarkerListToMap() {
+
+    }
+
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= move =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    public static void moveLocation(GoogleMap googleMap, Address address) {
+
+        googleMap.clear();
+        googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(address.getLatitude(), address.getLongitude()),
+                        CAMERA_ZOOM
+                )
+        );
+    }
+
+    public static void moveLocation(GoogleMap googleMap, LatLng latLng) {
+
+        googleMap.clear();
+        googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM)
+        );
+    }
 }
