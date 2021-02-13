@@ -1,28 +1,22 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofencingManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.InitializationManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManager;
-import com.skymanlab.weighttraining.management.project.data.BaseEventDataManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 

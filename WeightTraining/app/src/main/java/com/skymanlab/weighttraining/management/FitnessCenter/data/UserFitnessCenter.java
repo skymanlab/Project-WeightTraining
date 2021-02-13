@@ -1,9 +1,10 @@
 package com.skymanlab.weighttraining.management.FitnessCenter.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UserFitnessCenter {
+public class UserFitnessCenter implements Serializable {
 
     // constant
     public static final String FITNESS_CENTER_KEY = "fitnessCenterKey";

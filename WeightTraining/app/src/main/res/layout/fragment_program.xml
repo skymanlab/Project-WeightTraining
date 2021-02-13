@@ -126,7 +126,7 @@
             android:orientation="vertical">
 
             <include
-                layout="@layout/include_divider_default_section"
+                layout="@layout/include_divider_section_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -180,7 +180,7 @@
             </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of Maker -->
 
             <include
-                layout="@layout/include_divider_default_section"
+                layout="@layout/include_divider_section_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

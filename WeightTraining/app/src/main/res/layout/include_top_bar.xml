@@ -29,7 +29,7 @@
             android:fontFamily="@font/eland_choice_medium"
             android:textAlignment="center"
             android:textColor="@color/colorTextBlack"
-            android:textSize="18sp" />
+            android:textSize="19sp" />
 
         <!-- start image -->
         <ImageView
@@ -102,7 +102,6 @@
                 android:paddingBottom="5dp"
                 android:text="다음"
                 android:textColor="@color/colorTextBlack"
-                android:textSize="16sp"
                 android:visibility="gone" />
         </LinearLayout>
 

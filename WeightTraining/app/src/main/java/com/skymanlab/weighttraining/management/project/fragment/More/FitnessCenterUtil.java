@@ -42,7 +42,7 @@ public class FitnessCenterUtil {
     }
 
 
-    public static  void getAllFitnessCenterLocation() {
+    public static void getAllFitnessCenterLocation() {
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference(DB_TARGET_FITNESS_CENTER_NODE);
 

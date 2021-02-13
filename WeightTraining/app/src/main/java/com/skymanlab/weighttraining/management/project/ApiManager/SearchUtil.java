@@ -82,6 +82,7 @@ public class SearchUtil {
         // [Geocoder] [geocoder] 주소를 가져오기 위한 api
         Geocoder geocoder = new Geocoder(activity.getApplicationContext(), Locale.getDefault());
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Geocoder > 객체는 ? = " + geocoder);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Locale > getDefault ? = " + Locale.getDefault());
 
         // [List<Address>] [addressList] geocoder 로 가져온 주소 리스트를 받기위한 객체
         List<Address> addressList = null;
@@ -89,7 +90,7 @@ public class SearchUtil {
         try {
 
             // [List<Address>] [addressList] geocoder 를 이용하여 해당 주소로 위치가져오기
-            addressList = geocoder.getFromLocationName(addressText, 1);
+            addressList = geocoder.getFromLocationName(addressText, 2);
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > 리스트 객체 = " + addressList);
 

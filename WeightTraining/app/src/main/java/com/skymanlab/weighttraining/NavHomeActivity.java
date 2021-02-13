@@ -204,42 +204,50 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         final String METHOD_NAME = "[onRequestPermissionsResult] ";
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- request code = " + requestCode);
-//
-//        PermissionResultManager permissionResultManager = new PermissionResultManager();
-//
-//        switch (requestCode) {
-//            case PermissionResultManager.LOCATION_PERMISSION_REQUEST_CODE:
-//
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Permission Request > 해당 권한 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
-//
-//                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
-//                permissionResultManager.setNextProcedureForLocationPermissionRequestResult(fragment, permissions, grantResults);
-//
-//                break;
-//        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- request code = " + requestCode);
+
+        PermissionResultManager permissionResultManager = new PermissionResultManager();
+
+        switch (requestCode) {
+
+            case PermissionResultManager.LOCATION_PERMISSION_REQUEST_CODE:
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Permission Request > 해당 권한 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
+                permissionResultManager.setNextProcedureForLocationPermissionRequestResult(
+                        getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper),
+                        permissions,
+                        grantResults
+                );
+
+                break;
+        }
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         final String METHOD_NAME = "[onActivityResult] ";
-//
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult request code = " + requestCode);
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult result code = " + resultCode);
-//
-//        PermissionResultManager permissionResultManager = new PermissionResultManager();
-//
-//        switch (requestCode) {
-//            case PermissionResultManager.LOCATION_SERVICE_REQUEST_CODE:
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Service Request Code > 해당 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
-//                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper);
-//                permissionResultManager.setNextProcedureForLocationServiceRequestResult(fragment);
-//                break;
-//        }
+        super.onActivityResult(requestCode, resultCode, data);
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult request code = " + requestCode);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> ---- onActivityResult result code = " + resultCode);
+
+        PermissionResultManager permissionResultManager = new PermissionResultManager();
+
+        switch (requestCode) {
+
+            case PermissionResultManager.LOCATION_SERVICE_REQUEST_CODE:
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Service Request Code > 해당 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
+                permissionResultManager.setNextProcedureForLocationServiceRequestResult(
+                        getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper)
+                );
+
+                break;
+
+        }
     }
 
 

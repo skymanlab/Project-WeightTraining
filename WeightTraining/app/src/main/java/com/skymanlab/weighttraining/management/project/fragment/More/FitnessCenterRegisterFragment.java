@@ -12,11 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterRegisterSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterSectionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,21 +23,19 @@ import com.skymanlab.weighttraining.management.project.fragment.More.SectionMana
 public class FitnessCenterRegisterFragment extends Fragment {
 
     // constant
-    private static final String CLASS_NAME = "[PFM] FitnessCenterRegisterFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final String FITNESS_CENTER_NAME = "fitnessCenterName";
+    private static final String FITNESS_CENTER_ADDRESS = "fitnessCenterAddress";
+
+    // instance variable
+    private String fitnessCenterName;
+    private String fitnessCenterAddress;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
     private FitnessCenterRegisterSectionManager sectionManager;
 
-    // constructor
     public FitnessCenterRegisterFragment() {
         // Required empty public constructor
-    }
-
-    // getter
-    public FitnessCenterRegisterSectionManager getSectionManager() {
-        return sectionManager;
     }
 
     /**
@@ -50,9 +45,12 @@ public class FitnessCenterRegisterFragment extends Fragment {
      * @return A new instance of fragment FitnessCenterRegisterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FitnessCenterRegisterFragment newInstance() {
+    public static FitnessCenterRegisterFragment newInstance(String fitnessCenterName,
+                                                            String fitnessCenterAddress) {
         FitnessCenterRegisterFragment fragment = new FitnessCenterRegisterFragment();
         Bundle args = new Bundle();
+        args.putString(FITNESS_CENTER_NAME, fitnessCenterName);
+        args.putString(FITNESS_CENTER_ADDRESS, fitnessCenterAddress);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,6 +59,8 @@ public class FitnessCenterRegisterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            this.fitnessCenterName = getArguments().getString(FITNESS_CENTER_NAME);
+            this.fitnessCenterAddress = getArguments().getString(FITNESS_CENTER_ADDRESS);
         }
     }
 
@@ -74,42 +74,37 @@ public class FitnessCenterRegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
 
-        // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
-        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_register_title));
-        this.topBarManager.connectWidget();
-        this.topBarManager.initWidget();
+        // top bar
+        topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_register_title));
+        topBarManager.connectWidget();
+        topBarManager.initWidget();
 
-        // [FitnessCenterSectionManager] [sectionManager] this is 'more' fragment's section manager.
-        this.sectionManager = new FitnessCenterRegisterSectionManager(this, view);
-        this.sectionManager.connectWidget();
-        this.sectionManager.initWidget();
+        // section
+        sectionManager = new FitnessCenterRegisterSectionManager(this, view);
+        sectionManager.setFitnessCenterName(fitnessCenterName);
+        sectionManager.setFitnessCenterAddress(fitnessCenterAddress);
+        sectionManager.connectWidget();
+        sectionManager.initWidget();
 
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 를 생성하여 start button click listener 설정하기
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        // top bar : start button
+        topBarManager.setStartButtonListener(
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
+        topBarManager.initWidgetOfStartButton(null);
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_fitness_center_register_top_bar_end_button_register));
+        // top bar : end button
+        topBarManager.setEndButtonListener(
+                this.sectionManager.newInstanceOfEndButtonListener()
+        );
+        topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_fitness_center_register_top_bar_end_button)
+        );
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        final String METHOD_NAME = "[onPause] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Update util > 이 존재하나요? " + this.sectionManager.getGoogleMapManager());
-
-        this.sectionManager.getGoogleMapManager().stopLocationUpdate();
-    }
-
 }

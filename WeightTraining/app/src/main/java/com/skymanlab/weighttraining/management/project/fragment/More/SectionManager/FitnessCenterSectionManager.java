@@ -1,25 +1,16 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.GoogleMapManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.LocationUpdateManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.SearchUtil;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 
 public class FitnessCenterSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -61,7 +52,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
             public void onClick(View v) {
 
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, new FitnessCenterRegisterFragment())
+                        .replace(R.id.nav_home_content_wrapper, new FitnessCenterSearchFragment())
                         .addToBackStack(null)
                         .commit();
             }
