@@ -54,33 +54,57 @@
             android:fontFamily="@font/eland_choice_medium"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:text="이전"
             android:textColor="@color/colorTextBlack"
             android:visibility="gone" />
 
-        <!-- end image -->
-        <ImageView
-            android:id="@+id/include_top_bar_end_image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="@dimen/include_top_bar_dimen_side_blank"
-            android:clickable="false"
-            android:contentDescription="@string/include_top_bar_end_text_next"
-            android:src="@drawable/right"
-            android:visibility="gone" />
 
-        <!-- end text -->
-        <TextView
-            android:id="@+id/include_top_bar_end_text"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="@dimen/include_top_bar_dimen_side_blank"
-            android:clickable="false"
-            android:fontFamily="@font/eland_choice_medium"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textColor="@color/colorTextBlack"
-            android:visibility="gone" />
+            android:orientation="horizontal">
+
+            <!-- end image 1 -->
+            <ImageView
+                android:id="@+id/include_top_bar_end_image_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/include_top_bar_end_button_layout_marginStart"
+                android:clickable="false"
+                android:contentDescription="@string/include_top_bar_end_text_next"
+                android:src="@drawable/right"
+                android:visibility="gone" />
+
+            <!-- end image 2 -->
+            <ImageView
+                android:id="@+id/include_top_bar_end_image_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/include_top_bar_end_button_layout_marginStart"
+                android:clickable="false"
+                android:contentDescription="@string/include_top_bar_end_text_next"
+                android:src="@drawable/notification"
+                android:visibility="gone" />
+
+
+            <!-- end text -->
+            <TextView
+                android:id="@+id/include_top_bar_end_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/include_top_bar_end_button_layout_marginStart"
+                android:clickable="false"
+                android:fontFamily="@font/eland_choice_medium"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="다음"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

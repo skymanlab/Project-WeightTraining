@@ -2,6 +2,7 @@
 <resources>
     <dimen name="include_top_bar_dimen_side_blank">15dp</dimen>
     <dimen name="include_top_bar_dimen_title_side_blank">45dp</dimen>
+    <dimen name="include_top_bar_end_button_layout_marginStart">10dp</dimen>
 
     <!-- divider -->
     <dimen name="divider_default">1dp</dimen>
