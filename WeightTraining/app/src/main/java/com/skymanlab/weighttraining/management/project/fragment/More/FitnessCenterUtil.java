@@ -4,6 +4,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,6 +14,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
+import com.skymanlab.weighttraining.management.user.data.User;
+
+import java.util.HashMap;
 
 public class FitnessCenterUtil {
 
@@ -19,18 +25,22 @@ public class FitnessCenterUtil {
     public static final String DB_TARGET_USER_NODE = "user";
     public static final String DB_TARGET_FITNESS_CENTER_NODE = "fitnessCenter";
 
-    public static void showFitnessCenterInfo(TextView name, TextView address) {
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference(DB_TARGET_USER_NODE);
+    public static void getMyFitnessCenterData(OnDataProcessingListener listener) {
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference(FirebaseConstants.DATABASE_FIRST_NODE_USER);
 
         Query query = db
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(DB_TARGET_FITNESS_CENTER_NODE);
+                .child(User.FITNESS_CENTER);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                UserFitnessCenter userFitnessCenter = snapshot.getValue(UserFitnessCenter.class);
+
+                listener.showData(userFitnessCenter);
             }
 
             @Override
@@ -38,6 +48,34 @@ public class FitnessCenterUtil {
 
             }
         });
+
+    }
+
+    public static void saveContentOfMyFitnessCenterData(String uid, UserFitnessCenter userFitnessCenter) {
+
+        // 저장할 데이터
+        HashMap<String, Object> saveData = new HashMap<>();
+        saveData.put(UserFitnessCenter.MEMBER_NUMBER, userFitnessCenter.getMemberNumber());
+        saveData.put(UserFitnessCenter.FIRST_ADDRESS, userFitnessCenter.getFirstAddress());
+        saveData.put(UserFitnessCenter.SECOND_ADDRESS, userFitnessCenter.getSecondAddress());
+        saveData.put(UserFitnessCenter.THIRD_ADDRESS, userFitnessCenter.getThirdAddress());
+        saveData.put(UserFitnessCenter.CONTRACT_DATE, userFitnessCenter.getContractDate());
+        saveData.put(UserFitnessCenter.EXPIRY_DATE, userFitnessCenter.getExpiryDate());
+//        saveData.put(UserFitnessCenter.IS_DISCLOSED, userFitnessCenter.isDisclosed());
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        reference.child(FirebaseConstants.DATABASE_FIRST_NODE_USER)
+                .child(uid)
+                .child(User.FITNESS_CENTER)
+                .setValue(saveData)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+
 
     }
 
@@ -65,7 +103,7 @@ public class FitnessCenterUtil {
 
     }
 
-    public interface OnSuccessListener {
-        void setWidget(UserFitnessCenter userFitnessCenter);
+    public interface OnDataProcessingListener {
+        void showData(UserFitnessCenter userFitnessCenter);
     }
 }

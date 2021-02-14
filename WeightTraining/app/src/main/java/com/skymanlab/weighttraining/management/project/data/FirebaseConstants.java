@@ -7,7 +7,7 @@ public class FirebaseConstants {
      *
      */
     public static final String DATABASE_FIRST_NODE_USER = "user";
-    public static final String DATABASE_SUB_NODE_USER_COUNTER = "userCounter";
+    public static final String DATABASE_NODE_USER_COUNTER_OF_USER = "userCounter";
 
     /**
      *

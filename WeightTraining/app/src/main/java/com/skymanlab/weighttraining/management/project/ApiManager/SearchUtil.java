@@ -59,6 +59,7 @@ public class SearchUtil {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getCountryName = " + addressList.get(0).getCountryName());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getAdminArea = " + addressList.get(0).getAdminArea());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getSubAdminArea = " + addressList.get(0).getSubAdminArea());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getLocality = " + addressList.get(0).getLocality());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getSubLocality = " + addressList.get(0).getSubLocality());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getFeatureName = " + addressList.get(0).getFeatureName());
@@ -106,9 +107,11 @@ public class SearchUtil {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getCountryName = " + addressList.get(0).getCountryName());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getAdminArea = " + addressList.get(0).getAdminArea());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getSubAdminArea = " + addressList.get(0).getSubAdminArea());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getLocality = " + addressList.get(0).getLocality());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getSubLocality = " + addressList.get(0).getSubLocality());
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getFeatureName = " + addressList.get(0).getFeatureName());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > getMaxAddressLineIndex = " + addressList.get(0).getMaxAddressLineIndex());
 
                 // 검색된 주소를 리스너에게 넘겨주기
                 onSuccessListener.showAddress(addressList.get(0));
@@ -130,9 +133,6 @@ public class SearchUtil {
 
     }
 
-    public static LatLng convertAddressToLatLng(Address address) {
-        return new LatLng(address.getLatitude(), address.getLongitude());
-    }
 
 
     public interface OnSuccessListener {

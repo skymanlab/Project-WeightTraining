@@ -1,5 +1,9 @@
 package com.skymanlab.weighttraining.management.user.data;
 
+import androidx.compose.ui.semantics.ProgressBarRangeInfo;
+
+import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +17,7 @@ public class User implements Serializable {
     public static final String EMAIL = "email";
     public static final String PHOTO_URL = "photoUrl";
     public static final String IS_SAVED_BASE_EVENT = " isSavedBaseEvent";
+    public static final String FITNESS_CENTER = "fitnessCenter";
 
     // instant variable
     private String uid;             // 0. uid
@@ -21,6 +26,7 @@ public class User implements Serializable {
     private String email;           // 3. email
     private String photoUrl;        // 4. photoUr
     private boolean isSavedBaseEvent;
+    private UserFitnessCenter userFitnessCenter;
 
     // method : getter, setter
     public String getUid() {
@@ -69,5 +75,13 @@ public class User implements Serializable {
 
     public void setSavedBaseEvent(boolean savedBaseEvent) {
         isSavedBaseEvent = savedBaseEvent;
+    }
+
+    public UserFitnessCenter getUserFitnessCenter() {
+        return userFitnessCenter;
+    }
+
+    public void setUserFitnessCenter(UserFitnessCenter userFitnessCenter) {
+        this.userFitnessCenter = userFitnessCenter;
     }
 }

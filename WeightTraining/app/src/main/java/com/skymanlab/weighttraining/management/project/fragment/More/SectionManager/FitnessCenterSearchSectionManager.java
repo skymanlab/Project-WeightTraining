@@ -44,7 +44,7 @@ import java.util.Locale;
 public class FitnessCenterSearchSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
-    private static final String CLASS_NAME = "[PFMS] FitnessCenterRegisterSectionManager";
+    private static final String CLASS_NAME = "[PFMS] FitnessCenterSearchSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable : google map api
@@ -118,6 +118,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                                         // 구글 맵에 address 의 LatLng 위치에 마커로 표시
                                         LocationUpdateUtil.showMarkerToMap(getFragment().getActivity(), gMap, address);
 
+
                                     }
                                 });
 
@@ -176,15 +177,41 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
             @Override
             public AlertDialog setEndButtonClickListener() {
 
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > fitnessCenterAddress = " + fitnessCenterAddress);
+
                 if (checkData()) {
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===================================================");
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > true");
+
+                    String firstAddress = fitnessCenterAddress.getAdminArea();
+                    String secondAddress = getSecondAddress(fitnessCenterAddress);
+                    String thirdAddress = fitnessCenterAddress.getAddressLine(0);
+                    double latitude = fitnessCenterAddress.getLatitude();
+                    double longitude = fitnessCenterAddress.getLongitude();
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > firstAddress = " + firstAddress);
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > secondAddress = " + secondAddress);
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > thirdAddress = " + thirdAddress);
+
+                    FitnessCenterRegisterFragment fragment = FitnessCenterRegisterFragment.newInstance(
+                            addressSearchView.getQuery().toString(),
+                            firstAddress,
+                            secondAddress,
+                            thirdAddress,
+                            latitude,
+                            longitude
+                    );
+
                     getFragment().getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(
                                     R.id.nav_home_content_wrapper,
-                                    FitnessCenterRegisterFragment.newInstance(addressSearchView.getQuery().toString(), searchedAddress.getText().toString())
+                                    fragment
                             )
                             .addToBackStack(null)
                             .commit();
+
+
                 } else {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > false");
                     Snackbar.make(
@@ -221,5 +248,13 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
         return false;
     }
 
+    private String getSecondAddress(Address address) {
+
+        if (address.getLocality() != null) {
+            return address.getLocality();
+        } else {
+            return address.getSubLocality();
+        }
+    }
 
 }

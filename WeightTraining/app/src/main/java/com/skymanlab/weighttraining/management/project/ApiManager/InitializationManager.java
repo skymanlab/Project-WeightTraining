@@ -106,7 +106,7 @@ public class InitializationManager {
 
                 // userCounter
                 Integer userCounter = currentData
-                        .child(FirebaseConstants.DATABASE_SUB_NODE_USER_COUNTER)
+                        .child(FirebaseConstants.DATABASE_NODE_USER_COUNTER_OF_USER)
                         .getValue(Integer.class);
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Integer > userCounter = " + userCounter);
 
@@ -134,7 +134,7 @@ public class InitializationManager {
 
                     // 저장
                     currentData
-                            .child(FirebaseConstants.DATABASE_SUB_NODE_USER_COUNTER).setValue(userCounter);      // 경로 : user/userCounter
+                            .child(FirebaseConstants.DATABASE_NODE_USER_COUNTER_OF_USER).setValue(userCounter);      // 경로 : user/userCounter
                     currentData
                             .child(uid).setValue(userValue);                                                     // 경로 : user/uid
 

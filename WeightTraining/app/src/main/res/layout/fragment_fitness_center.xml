@@ -45,6 +45,7 @@
                 android:id="@+id/f_fitness_center_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
                 android:fontFamily="@font/eland_choice_medium"
                 android:text="@string/f_fitness_center_address"
                 android:textSize="@dimen/text_sub_title_size" />
@@ -52,17 +53,27 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/f_fitness_center_go_register_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:src="@drawable/right" />
 
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/f_fitness_center_progress_bar"
+            style="?android:progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
     </FrameLayout> <!-- End of Section 1 -->
 
-    <View
+    <include
+        layout="@layout/include_divider_black"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_section"
-        android:background="@color/colorDividerSection" />
+        android:layout_marginStart="@dimen/divider_horizontal_layout_Start"
+        android:layout_marginEnd="@dimen/divider_horizontal_layout_End"
+        android:layout_height="wrap_content"/>
 
     <!-- Section 2 : register Info -->
     <LinearLayout
@@ -74,9 +85,11 @@
         android:paddingEnd="@dimen/section_padding_end"
         android:paddingBottom="@dimen/section_padding_bottom">
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
+            android:id="@+id/f_fitness_center_registerInfo_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/eland_choice_medium"
             android:gravity="center_vertical"
             android:text="@string/f_fitness_center_info"
@@ -93,7 +106,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="visible">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,7 +158,7 @@
                     android:background="@color/colorTextBlack" />
 
                 <TextView
-                    android:id="@+id/f_fitness_center_"
+                    android:id="@+id/f_fitness_center_expiry_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_light"
@@ -164,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_fitness_center_attendance_date"
+                    android:text="@string/f_fitness_center_attendance_date_count"
                     android:textColor="@color/colorTextBlack" />
 
                 <View
@@ -175,20 +187,23 @@
                     android:background="@color/colorTextBlack" />
 
                 <TextView
-                    android:id="@+id/f_fitness_center_attendance_date"
+                    android:id="@+id/f_fitness_center_attendance_date_counter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_light"
-                    android:text="@string/f_fitness_center_attendance_date_default" />
+                    android:text="@string/f_fitness_center_attendance_date_count_default" />
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout><!-- End of Section 2 -->
 
-    <View
+    <include
+        layout="@layout/include_divider_black"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_section"
-        android:background="@color/colorDividerSection" />
+        android:layout_marginStart="@dimen/divider_horizontal_layout_Start"
+        android:layout_marginEnd="@dimen/divider_horizontal_layout_End"
+        android:layout_height="wrap_content"/>
+
 
     <!-- Section 3 : -->
     <LinearLayout
@@ -200,12 +215,14 @@
         android:paddingEnd="@dimen/section_padding_end"
         android:paddingBottom="@dimen/section_padding_bottom">
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
+            android:id="@+id/f_fitness_center_settingInfo_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/eland_choice_medium"
             android:gravity="center_vertical"
-            android:text="@string/f_fitness_center_setting_info"
+            android:text="@string/f_fitness_center_setting_info_title"
             android:textColor="@color/colorTextBlack"
             android:textSize="@dimen/text_section_title_size" />
 
@@ -225,7 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/eland_choice_medium"
-                android:text="@string/f_fitness_center_setting_info_access_notification"
+                android:text="@string/f_fitness_center_setting_info_is_allowed_access_notification"
                 android:textColor="@color/colorTextBlack" />
 
             <View
@@ -236,11 +253,11 @@
                 android:background="@color/colorTextBlack" />
 
             <TextView
-                android:id="@+id/f_fitness_center_setting_info_access_notification"
+                android:id="@+id/f_fitness_center_setting_info_is_allowed_access_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/eland_choice_light"
-                android:text="@string/f_fitness_center_setting_info_access_notification_default" />
+                android:text="@string/f_fitness_center_setting_info_is_allowed_access_notification_default" />
         </LinearLayout>
 
         <LinearLayout
@@ -273,5 +290,6 @@
         </LinearLayout>
 
     </LinearLayout><!-- End of Section 3 -->
+
 
 </LinearLayout>

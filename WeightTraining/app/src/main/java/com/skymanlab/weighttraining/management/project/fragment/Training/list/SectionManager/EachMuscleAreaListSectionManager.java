@@ -153,17 +153,10 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------> snapshot content = " + snapshot);
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 데이터를 가져오기 전 UI 설정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                // [iv/C]Activity : progressBar 를 이용하여 데이터를 가져오는 중이라는 걸 알림 / GONE -> VISIBLE / workThread 가 아닌 UI Thread 에서 수행
-                progressBar.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        // [iv/C]ContentLoadingProgressBar : progressBar 를 GONE -> VISIBLE 로
-                        progressBar.setVisibility(View.VISIBLE);
-
-                    }
-                });
-
+                if (snapshot.getValue() == null) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    return;
+                }
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= DB 에서 데이터 가져오기 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 // [iv/C]ArrayList<Event> : 모든 종목을 추가하기 전에 기존의 데이터 clear
@@ -192,16 +185,8 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
                 // [iv/C]EachListRvAdapter : adapter 의 데이터들이 변경되었을음 알리기
                 adapter.notifyDataSetChanged();
 
-                // [iv/C]Activity : progressBar 를 이용하여 데이터 가져오기가 완료되었다는 걸 알림 / VISIBLE -> GONE / workThread 가 아닌 UI Thread 에서 수행
-                progressBar.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        // [iv/C]ContentLoadingProgressBar : progressBar 를 GONE -> VISIBLE 로
-                        progressBar.setVisibility(View.GONE);
-
-                    }
-                });
+                // [iv/C]ContentLoadingProgressBar : progressBar 를 GONE -> VISIBLE 로
+                progressBar.setVisibility(View.INVISIBLE);
 
             }
 

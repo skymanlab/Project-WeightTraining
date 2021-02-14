@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".management.project.fragment.Training.list.EachMuscleAreaListFragment">
 
     <!-- recycler view -->
@@ -11,16 +11,15 @@
         android:id="@+id/f_each_muscle_area_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
     <!-- progress bar -->
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/f_each_muscle_area_list_progress_bar"
         style="?android:progressBarStyle"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_gravity="center" />
 
     <!-- add button -->
     <androidx.appcompat.widget.AppCompatImageButton
@@ -34,8 +33,8 @@
         android:scaleX="1"
         android:scaleY="1"
         android:src="@drawable/event_add_circle"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </FrameLayout>

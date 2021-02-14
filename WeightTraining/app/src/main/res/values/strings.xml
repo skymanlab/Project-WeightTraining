@@ -73,13 +73,17 @@
     <string name="f_fitness_center_contract_date_default">피트니스 센터에 등록한 날짜입니다.</string>
     <string name="f_fitness_center_expiry_date">만료일</string>
     <string name="f_fitness_center_expiry_date_default">피트니스 센터 등록 마지막 날입니다.</string>
-    <string name="f_fitness_center_attendance_date">출석일</string>
-    <string name="f_fitness_center_attendance_date_default">피트니스 센터에서 운동을 한 일 수입니다.</string>
-    <string name="f_fitness_center_setting_info">피트니스 센터 설정 정보</string>
+    <string name="f_fitness_center_attendance_date_count">출석일수</string>
+    <string name="f_fitness_center_attendance_date_count_default">피트니스 센터에서 출석한 일 수입니다.</string>
+    <string name="f_fitness_center_setting_info_title">피트니스 센터 설정 정보</string>
+    <string name="f_fitness_center_setting_info_is_allowed_access_notification">접근 알림</string>
+    <string name="f_fitness_center_setting_info_is_allowed_access_notification_true">피트니스 센터에 접근하면 알림으로 알려줍니다.</string>
+    <string name="f_fitness_center_setting_info_is_allowed_access_notification_false">피트니스 센터에 접근 알림을 중지합니다.</string>
+    <string name="f_fitness_center_setting_info_is_allowed_access_notification_default">피트니스 센터에 접근여부를 알림으로 알려줄지에 대한 설정값입니다.</string>
     <string name="f_fitness_center_setting_info_is_disclosed">공개 여부</string>
     <string name="f_fitness_center_setting_info_is_disclosed_default">다른 사람에게 피트니스 센터 등록 공개 여부에 대한 설정입니다.</string>
-    <string name="f_fitness_center_setting_info_access_notification">접근 알림</string>
-    <string name="f_fitness_center_setting_info_access_notification_default">피트니스 센터에 접근여부를 알림으로 알려줄지에 대한 설정값입니다.</string>
+    <string name="f_fitness_center_setting_info_is_disclosed_true">피트니스 센터 회원임을 공개합니다.</string>
+    <string name="f_fitness_center_setting_info_is_disclosed_false">피트니스 센터 회원임을 공개하지 않습니다.</string>
     <string name="f_fitness_center_"></string>
 
     <!-- Fragment : fitness center search -->
@@ -110,6 +114,8 @@
     <string name="f_fitness_center_register_alert_register_message">검색된 피트니스 센터를 나의 피트니스 센터로 등록합니다.</string>
     <string name="f_fitness_center_register_alert_register_bt_positive">등록</string>
     <string name="f_fitness_center_register_alert_register_bt_negative">취소</string>
+    <string name="f_fitness_center_register_snack_no_selected_date">등록일, 마감일이 선택되지 않았습니다.</string>
+    <string name="f_fitness_center_register_snack_save_complete">데이터 저장이 완료되었습니다.</string>
     <string name="f_fitness_center_register_"></string>
 
     <!-- Fragment : setting -->

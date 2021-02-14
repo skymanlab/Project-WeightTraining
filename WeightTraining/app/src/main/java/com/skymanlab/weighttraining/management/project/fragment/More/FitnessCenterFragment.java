@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterSectionManager;
 
@@ -75,6 +76,8 @@ public class FitnessCenterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------===================================================>");
+
         // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_title));
         this.topBarManager.connectWidget();
@@ -96,7 +99,6 @@ public class FitnessCenterFragment extends Fragment {
             }
         });
         this.topBarManager.initWidgetOfStartButton(null);
-
 
     }
 
