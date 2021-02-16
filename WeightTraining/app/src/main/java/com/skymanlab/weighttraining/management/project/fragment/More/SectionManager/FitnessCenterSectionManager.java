@@ -109,24 +109,13 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
     @Override
     public void initWidget() {
 
-        // goRegister click listener : FitnessCenterRegisterFragment 로 이동
-        this.goRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, new FitnessCenterSearchFragment())
-                        .addToBackStack(FitnessCenterFragment.class.getSimpleName())
-                        .commit();
-            }
-        });
-
         // 경로 user/uid/fitnessCenter 항목을 읽어오기
         loadContent(
                 FirebaseAuth.getInstance().getCurrentUser().getUid()
         );
 
     }
+
 
     public void initWidgetOfFitnessCenterSection(String fitnessCenterName,
                                                  String fitnessCenterAddress) {
@@ -218,6 +207,21 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > snapshot = " + snapshot);
 
                                 if (snapshot.getValue() == null) {
+                                    // 데이터베이스에 저장된 데이터가 없을 때 -> 
+
+                                    // goRegister click listener : FitnessCenterRegisterFragment 로 이동
+                                    goRegister.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                                                    .replace(R.id.nav_home_content_wrapper, new FitnessCenterSearchFragment())
+                                                    .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+                                                    .commit();
+                                        }
+                                    });
+                                    
+                                    // progress bar 숨기기
                                     progressBar.setVisibility(View.INVISIBLE);
                                     return;
                                 }
@@ -225,19 +229,17 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                 UserFitnessCenter userFitnessCenter = snapshot.getValue(UserFitnessCenter.class);
 
                                 if (userFitnessCenter != null) {
+                                    // 데이터베이스에 저장된 데이터가 있을 때 ->
 
-                                    attendanceDateList = new ArrayList<>();
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------------------------------------------------");
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > attendanceDateList = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST));
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > attendanceDateList / getChildren = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > attendanceDateList / getChildrenCount = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildrenCount());
 
-
+                                    // 출석일 날짜 리스트를 가져온다.
+                                    attendanceDateList = new ArrayList<>();
                                     for (DataSnapshot search : snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren()) {
-
-//                                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > search 의 출석 일수 리스트 = " + search.getValue());
                                         attendanceDateList.add(search.getValue(String.class));
-
                                     }
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===============");
 
@@ -249,9 +251,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getExpiryDate = " + userFitnessCenter.getExpiryDate());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > isAllowedAccessNotification = " + userFitnessCenter.getIsAllowedAccessNotification());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter >  = " + userFitnessCenter.getIsDisclosed());
-
-
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===============");
 
                                     for (int index = 0; index < attendanceDateList.size(); index++) {
                                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > date = " + attendanceDateList.get(index));

@@ -2,20 +2,29 @@ package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Location;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleMapManager {
@@ -30,6 +39,7 @@ public class GoogleMapManager {
     private int interval;
     private int fastestInterval;
     private int priority;
+    private ArrayList<FitnessCenter> fitnessCenterArrayList;
 
     // instance variable
     private LocationUpdateManager updateManager;
@@ -43,6 +53,7 @@ public class GoogleMapManager {
         this.interval = builder.interval;
         this.fastestInterval = builder.fastestInterval;
         this.priority = builder.priority;
+        this.fitnessCenterArrayList = builder.fitnessCenterArrayList;
     }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= initialize setting  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -101,6 +112,9 @@ public class GoogleMapManager {
             // 위치 업데이트를 하기위한 초기 설정하기
             initLocationUpdate();
 
+            // marker click listener 등록
+            googleMap.setOnMarkerClickListener(createOnMarkerClickListener());
+
         } else {
             // 권한 거부에 대한 다음 과정 진행
         }
@@ -135,28 +149,33 @@ public class GoogleMapManager {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< last location > 마지막 위치가 있는지 확인합니다. = " + location);
                 if (location != null) {
-                    // 마지막 위치 표시
+                    // 마지막 위치 표시 ->
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< lat location > 마지막 위치가 있습니다. 마지막 위치를 표시합니다. / 위도:" + location.getLatitude() + ", 경도: " + location.getLongitude());
 
                     // [LatLng] [lastLatLng] location 으로 LatLng 객체로 생성
                     LatLng lastLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-                    // googleMap 에 lastLatLng 의 위치에 마커 표시 -> 이동
-//                    LocationUpdateUtil.showMarkerToMap(activity, googleMap, lastLatLng);
-
                     // latLatLng 으로 위치 이동만
                     LocationUpdateUtil.moveLocation(googleMap, lastLatLng);
 
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===========================================================================");
+                    // lastLatLng 에서 firstAddress, secondAddress 를 구한다. 그리고 이것으로 firebase database 에서 저장된 데이터를 가져온다.
+                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(activity, googleMap, fitnessCenterArrayList);
+                    markerManager.execute(lastLatLng);
+
                 } else {
 
-                    // 기본 위치 표시
-
+                    // 기본 위치 표시 ->
                     // [LatLng] [lastLatLng] 서울을 기본 위치로 하여 LatLng 객체로 생성
                     LatLng defaultLatLng = LocationUpdateUtil.SEOUL;
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< last location > 위치 없음 기존 위치로 표시합니다. / 위도:" + defaultLatLng.latitude + ", 경도:" + defaultLatLng.longitude);
 
-                    // googleMap 에 lastLatLng 의 위치에 마커 표시
-                    LocationUpdateUtil.showMarkerToMap(activity, googleMap, defaultLatLng);
+                    // googleMap 에 lastLatLng 의 위치로 이동만
+                    LocationUpdateUtil.moveLocation(googleMap, defaultLatLng);
+
+                    // defaultLatLng 에서 firstAddress, secondAddress 를 구한다. 그리고 이것으로 firebase database 에서 저장된 데이터를 가져온다.
+                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(activity, googleMap, fitnessCenterArrayList);
+                    markerManager.execute(defaultLatLng);
 
                 }
             }
@@ -193,6 +212,51 @@ public class GoogleMapManager {
             public boolean onMyLocationButtonClick() {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< my location button click listener > 나의 위치 버튼을 클릭하여서 현재 위치로 이동 합니다.");
                 return false;
+            }
+        };
+    }
+
+    private GoogleMap.OnMarkerClickListener createOnMarkerClickListener() {
+        final String METHOD_NAME = "[createOnMyLocationButtonClickListener] ";
+        return new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > marker = " + marker.getTitle());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > marker = " + marker.getSnippet());
+
+                Address address = SearchUtil.searchLAddress(activity, marker.getPosition());
+
+                String firstAddress = SearchUtil.getFirstAddress(address);
+                String secondAddress = SearchUtil.getSecondAddress(address);
+                String thirdAddress = address.getAddressLine(0);
+                double latitude = address.getLatitude();
+                double longitude = address.getLongitude();
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > firstAddress = " + firstAddress);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > secondAddress = " + secondAddress);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > thirdAddress = " + thirdAddress);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > latitude = " + latitude);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > longitude = " + longitude);
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle(R.string.etc_google_map_manager_alert_marker_title)
+                        .setMessage("이름 : " + marker.getTitle() + "\n" + "주소 : " + marker.getSnippet())
+                        .setPositiveButton(R.string.etc_google_map_manager_alert_marker_bt_positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setNegativeButton(R.string.etc_google_map_manager_alert_marker_bt_negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .show();
+
+                return true;
             }
         };
     }
@@ -257,6 +321,7 @@ public class GoogleMapManager {
         private int interval;
         private int fastestInterval;
         private int priority;
+        private ArrayList<FitnessCenter> fitnessCenterArrayList;
 
         // constructor
         public Builder() {
@@ -285,6 +350,11 @@ public class GoogleMapManager {
 
         public Builder setPriority(int priority) {
             this.priority = priority;
+            return this;
+        }
+
+        public Builder setFitnessCenterArrayList(ArrayList<FitnessCenter> fitnessCenterArrayList) {
+            this.fitnessCenterArrayList = fitnessCenterArrayList;
             return this;
         }
 

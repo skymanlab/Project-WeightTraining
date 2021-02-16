@@ -22,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.GoogleMapManager;
@@ -34,9 +35,11 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionI
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -57,6 +60,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
 
     // instance variable
     private Address fitnessCenterAddress = null;
+    private ArrayList<FitnessCenter> fitnessCenterArrayList = null;
 
     // constructor
     public FitnessCenterSearchSectionManager(Fragment fragment, View view) {
@@ -109,15 +113,22 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                                         // 해당 address 를 fitnessCenterAddress 로 등록
                                         fitnessCenterAddress = address;
 
-                                        // address 에 대한 LatLng 객체 생성
-                                        LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
-
                                         // [ TextView | searchedAddress ] text
                                         searchedAddress.setText(address.getAddressLine(0));
 
-                                        // 구글 맵에 address 의 LatLng 위치에 마커로 표시
-                                        LocationUpdateUtil.showMarkerToMap(getFragment().getActivity(), gMap, address);
+                                        if (checkFitnessCenter(address.getLatitude(), address.getLongitude())) {
+                                            // 기존에 등록되어 있는 피트니스 센터가 있으면
+                                            // 그 위치로 이동만
+                                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< check fitness center > 기존의 피트니스 센터가 존재한다.");
+                                            LocationUpdateUtil.moveLocation(gMap, address);
 
+                                        } else {
+                                            // 기존에 등록되지 않은 피트니스 센터이면
+                                            // 구글 맵에 마커표시하고 그 위치로 이동
+                                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< check fitness center > 처음 검색된 피트니스 센터이다.");
+                                            LocationUpdateUtil.showMarkerToMap(getFragment().getActivity(), gMap, address);
+
+                                        }
 
                                     }
                                 });
@@ -148,6 +159,8 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
             @Override
             public void onMapReady(GoogleMap googleMap) {
 
+                fitnessCenterArrayList = new ArrayList<>();
+
                 // [GoogleMap] [gMap] 전연 변수로 사용하기 위해서
                 gMap = googleMap;
 
@@ -157,6 +170,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                         .setInterval(LocationUpdateManager.INTERNAL)
                         .setFastestInterval(LocationUpdateManager.FASTEST_INTERNAL)
                         .setPriority(LocationUpdateManager.PRIORITY)
+                        .setFitnessCenterArrayList(fitnessCenterArrayList)
                         .create();
 
                 googleMapManager.init();
@@ -178,39 +192,50 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
             public AlertDialog setEndButtonClickListener() {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > fitnessCenterAddress = " + fitnessCenterAddress);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                for (int index = 0; index < fitnessCenterArrayList.size(); index++) {
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getName = " + fitnessCenterArrayList.get(index).getName());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getThirdAddress = " + fitnessCenterArrayList.get(index).getThirdAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getLatitude = " + fitnessCenterArrayList.get(index).getLatitude());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getLongitude = " + fitnessCenterArrayList.get(index).getLongitude());
+                }
 
                 if (checkData()) {
 
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===================================================");
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > true");
 
-                    String firstAddress = fitnessCenterAddress.getAdminArea();
-                    String secondAddress = getSecondAddress(fitnessCenterAddress);
-                    String thirdAddress = fitnessCenterAddress.getAddressLine(0);
-                    double latitude = fitnessCenterAddress.getLatitude();
-                    double longitude = fitnessCenterAddress.getLongitude();
-
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > firstAddress = " + firstAddress);
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > secondAddress = " + secondAddress);
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > thirdAddress = " + thirdAddress);
-
-                    FitnessCenterRegisterFragment fragment = FitnessCenterRegisterFragment.newInstance(
-                            addressSearchView.getQuery().toString(),
-                            firstAddress,
-                            secondAddress,
-                            thirdAddress,
-                            latitude,
-                            longitude
-                    );
-
-                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(
-                                    R.id.nav_home_content_wrapper,
-                                    fragment
-                            )
-                            .addToBackStack(null)
-                            .commit();
-
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===================================================");
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > true");
+//
+//                    String fitnessCenterName = addressSearchView.getQuery().toString();
+//                    String firstAddress = fitnessCenterAddress.getAdminArea();
+//                    String secondAddress = getSecondAddress(fitnessCenterAddress);
+//                    String thirdAddress = fitnessCenterAddress.getAddressLine(0);
+//                    double latitude = fitnessCenterAddress.getLatitude();
+//                    double longitude = fitnessCenterAddress.getLongitude();
+//
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > fitnessCenterName = " + fitnessCenterName);
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > firstAddress = " + firstAddress);
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > secondAddress = " + secondAddress);
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > thirdAddress = " + thirdAddress);
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > latitude = " + latitude);
+//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > longitude = " + longitude);
+//
+//                    FitnessCenterRegisterFragment fragment = FitnessCenterRegisterFragment.newInstance(
+//                            addressSearchView.getQuery().toString(),
+//                            firstAddress,
+//                            secondAddress,
+//                            thirdAddress,
+//                            latitude,
+//                            longitude
+//                    );
+//
+//                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+//                            .replace(
+//                                    R.id.nav_home_content_wrapper,
+//                                    fragment
+//                            )
+//                            .addToBackStack(null)
+//                            .commit();
 
                 } else {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > false");
@@ -255,6 +280,18 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
         } else {
             return address.getSubLocality();
         }
+    }
+
+    private boolean checkFitnessCenter(double latitude, double longitude) {
+        final String METHOD_NAME = "[checkFitnessCenter] ";
+
+        for (int index = 0; index < fitnessCenterArrayList.size(); index++) {
+            if (fitnessCenterArrayList.get(index).getLatitude() == latitude && fitnessCenterArrayList.get(index).getLongitude() == longitude) {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===============>> 기존의 피트니스 센터가 존재합니다.");
+                return true;
+            }
+        }
+        return false;
     }
 
 }

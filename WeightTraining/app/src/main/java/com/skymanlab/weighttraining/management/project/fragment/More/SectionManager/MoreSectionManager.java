@@ -17,6 +17,7 @@ import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManage
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -123,6 +124,11 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_home_content_wrapper, FitnessCenterSearchFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
 
             }
         });

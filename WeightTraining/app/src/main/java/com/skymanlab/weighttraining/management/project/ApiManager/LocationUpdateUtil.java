@@ -53,6 +53,19 @@ public class LocationUpdateUtil {
     }
 
 
+    public static MarkerOptions createMarkerOptions(double latitude, double longitude, String title, String snippet) {
+        final String METHOD_NAME = "[createCurrentMarkerOptions] ";
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(latitude, longitude));
+        markerOptions.title(title);
+        markerOptions.snippet(snippet);
+        markerOptions.visible(true);
+
+        return markerOptions;
+    }
+
+
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= marker content =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public static String getMarkerAddress(Activity activity, LatLng currentLatLng) {
         final String METHOD_NAME = "[getMarkerTitle] ";
@@ -95,7 +108,7 @@ public class LocationUpdateUtil {
         MarkerOptions markerOptions = createMarkerOptions(activity, latLng);
 
         Log.d(LocationUpdateUtil.class.getSimpleName(), "onLocationResult: markerOptions = " + markerOptions);
-        googleMap.clear();
+//        googleMap.clear();
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM));
 
@@ -106,13 +119,9 @@ public class LocationUpdateUtil {
         MarkerOptions markerOptions = createMarkerOptions(activity, address);
 
         Log.d(LocationUpdateUtil.class.getSimpleName(), "onLocationResult: markerOptions = " + markerOptions);
-        googleMap.clear();
+//        googleMap.clear();
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(address.getLatitude(), address.getLongitude()), CAMERA_ZOOM));
-
-    }
-
-    public static void showMarkerListToMap() {
 
     }
 
@@ -120,7 +129,6 @@ public class LocationUpdateUtil {
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= move =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public static void moveLocation(GoogleMap googleMap, Address address) {
 
-        googleMap.clear();
         googleMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
                         new LatLng(address.getLatitude(), address.getLongitude()),
@@ -131,7 +139,6 @@ public class LocationUpdateUtil {
 
     public static void moveLocation(GoogleMap googleMap, LatLng latLng) {
 
-        googleMap.clear();
         googleMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM)
         );
