@@ -90,6 +90,8 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > search = " + search.getValue());
 
                             FitnessCenter fitnessCenter = search.getValue(FitnessCenter.class);
+                            fitnessCenter.setFirstAddress(firstAddress);
+                            fitnessCenter.setSecondAddress(secondAddress);
                             fitnessCenter.setThirdAddress(search.getKey());
 
                             if (fitnessCenter != null) {

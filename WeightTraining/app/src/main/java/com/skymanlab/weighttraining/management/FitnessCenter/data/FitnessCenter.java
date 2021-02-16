@@ -2,7 +2,9 @@ package com.skymanlab.weighttraining.management.FitnessCenter.data;
 
 import android.location.Address;
 
-public class FitnessCenter {
+import java.io.Serializable;
+
+public class FitnessCenter implements Serializable {
 
     // constant
     public static final String NAME = "name";
@@ -33,6 +35,7 @@ public class FitnessCenter {
         this.name = name;
     }
 
+    public String getFirstAddress() {
         return firstAddress;
     }
 

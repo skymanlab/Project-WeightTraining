@@ -9,15 +9,22 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofencingManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterMemberManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
+
+import java.util.ArrayList;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
@@ -125,10 +132,25 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View view) {
 
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, FitnessCenterSearchFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+//                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.nav_home_content_wrapper, FitnessCenterSearchFragment.newInstance())
+//                        .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+//                        .commit();
+
+                FitnessCenterMemberManager memberManager = new FitnessCenterMemberManager(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                memberManager.init(new FitnessCenterMemberManager.OnMemberManipulateListener() {
+                    @Override
+                    public void manipulateMemberList(ArrayList<Member> memberArrayList) {
+
+                        for (int index = 0; index < memberArrayList.size(); index++) {
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getMemberNumber = " + memberArrayList.get(index).getMemberNumber());
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getUserName = " + memberArrayList.get(index).getUserName());
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getIsActive = " + memberArrayList.get(index).getIsActive());
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getIsDisclosed = " + memberArrayList.get(index).getIsDisclosed());
+                        }
+
+                    }
+                });
 
             }
         });

@@ -59,7 +59,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
     private TextView searchedAddress;
 
     // instance variable
-    private Address fitnessCenterAddress = null;
+    private FitnessCenter fitnessCenter = null;
     private ArrayList<FitnessCenter> fitnessCenterArrayList = null;
 
     // constructor
@@ -110,9 +110,6 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                                     public void showAddress(Address address) {
                                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<<<><><.m.,m,m");
 
-                                        // 해당 address 를 fitnessCenterAddress 로 등록
-                                        fitnessCenterAddress = address;
-
                                         // [ TextView | searchedAddress ] text
                                         searchedAddress.setText(address.getAddressLine(0));
 
@@ -122,11 +119,25 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< check fitness center > 기존의 피트니스 센터가 존재한다.");
                                             LocationUpdateUtil.moveLocation(gMap, address);
 
+                                            // FitnessCenterArrayList 에서 기존의 FitnessCenter 객체 가져오기
+                                            fitnessCenter = getFitnessCenter(address.getLatitude(), address.getLongitude());
+
+                                            // 이미 존재한다고 사용자에게 알려주기
+                                            Snackbar.make(
+                                                    getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar),
+                                                    R.string.f_fitness_center_search_snack_already_exist,
+                                                    Snackbar.LENGTH_LONG
+                                            )
+                                                    .show();
+
                                         } else {
                                             // 기존에 등록되지 않은 피트니스 센터이면
                                             // 구글 맵에 마커표시하고 그 위치로 이동
                                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< check fitness center > 처음 검색된 피트니스 센터이다.");
                                             LocationUpdateUtil.showMarkerToMap(getFragment().getActivity(), gMap, address);
+
+                                            // 새로운 FitnessCenter 객체 생성하기
+                                            fitnessCenter = newInstanceOfFitnessCenter(address);
 
                                         }
 
@@ -165,7 +176,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                 gMap = googleMap;
 
                 googleMapManager = new GoogleMapManager.Builder()
-                        .setActivity(getFragment().getActivity())
+                        .setFragment(getFragment())
                         .setGoogleMap(gMap)
                         .setInterval(LocationUpdateManager.INTERNAL)
                         .setFastestInterval(LocationUpdateManager.FASTEST_INTERNAL)
@@ -191,8 +202,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
             @Override
             public AlertDialog setEndButtonClickListener() {
 
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > fitnessCenterAddress = " + fitnessCenterAddress);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++++++++++++++++++++++++++ fitnessCenterArrayList +++++++++++++++++++++++++++++++++++");
                 for (int index = 0; index < fitnessCenterArrayList.size(); index++) {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getName = " + fitnessCenterArrayList.get(index).getName());
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getThirdAddress = " + fitnessCenterArrayList.get(index).getThirdAddress());
@@ -200,54 +210,30 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< " + index + " > getLongitude = " + fitnessCenterArrayList.get(index).getLongitude());
                 }
 
-                if (checkData()) {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++++++++++++++++++++++++++ fitnessCenter +++++++++++++++++++++++++++++++++++");
+                if (fitnessCenter != null) {
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getName = " + fitnessCenter.getName());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getFirstAddress = " + fitnessCenter.getFirstAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getSecondAddress = " + fitnessCenter.getSecondAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getThirdAddress = " + fitnessCenter.getThirdAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLatitude = " + fitnessCenter.getLatitude());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLongitude = " + fitnessCenter.getLongitude());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getMemberCounter = " + fitnessCenter.getMemberCounter());
 
-
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===================================================");
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > true");
-//
-//                    String fitnessCenterName = addressSearchView.getQuery().toString();
-//                    String firstAddress = fitnessCenterAddress.getAdminArea();
-//                    String secondAddress = getSecondAddress(fitnessCenterAddress);
-//                    String thirdAddress = fitnessCenterAddress.getAddressLine(0);
-//                    double latitude = fitnessCenterAddress.getLatitude();
-//                    double longitude = fitnessCenterAddress.getLongitude();
-//
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > fitnessCenterName = " + fitnessCenterName);
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > firstAddress = " + firstAddress);
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > secondAddress = " + secondAddress);
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > thirdAddress = " + thirdAddress);
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > latitude = " + latitude);
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > longitude = " + longitude);
-//
-//                    FitnessCenterRegisterFragment fragment = FitnessCenterRegisterFragment.newInstance(
-//                            addressSearchView.getQuery().toString(),
-//                            firstAddress,
-//                            secondAddress,
-//                            thirdAddress,
-//                            latitude,
-//                            longitude
-//                    );
-//
-//                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-//                            .replace(
-//                                    R.id.nav_home_content_wrapper,
-//                                    fragment
-//                            )
-//                            .addToBackStack(null)
-//                            .commit();
+                    // fitness center register fragment  로 이동
+                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.nav_home_content_wrapper, FitnessCenterRegisterFragment.newInstance(fitnessCenter))
+                            .addToBackStack(null)
+                            .commit();
 
                 } else {
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< checkData > false");
                     Snackbar.make(
                             getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar),
                             R.string.f_fitness_center_search_snack_check_data_false,
                             Snackbar.LENGTH_SHORT
                     )
                             .show();
-
                 }
-
                 return null;
             }
         };
@@ -273,14 +259,6 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
         return false;
     }
 
-    private String getSecondAddress(Address address) {
-
-        if (address.getLocality() != null) {
-            return address.getLocality();
-        } else {
-            return address.getSubLocality();
-        }
-    }
 
     private boolean checkFitnessCenter(double latitude, double longitude) {
         final String METHOD_NAME = "[checkFitnessCenter] ";
@@ -293,5 +271,33 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
         }
         return false;
     }
+
+    private FitnessCenter getFitnessCenter(double latitude, double longitude) {
+        final String METHOD_NAME = "[getFitnessCenter] ";
+
+        for (int index = 0; index < fitnessCenterArrayList.size(); index++) {
+            if (fitnessCenterArrayList.get(index).getLatitude() == latitude && fitnessCenterArrayList.get(index).getLongitude() == longitude) {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===============>> 기존의 피트니스 센터가 존재합니다.");
+                return fitnessCenterArrayList.get(index);
+            }
+        }
+
+        return null;
+    }
+
+    private FitnessCenter newInstanceOfFitnessCenter(Address address) {
+
+        FitnessCenter fitnessCenter = new FitnessCenter();
+
+        fitnessCenter.setName(addressSearchView.getQuery().toString());
+        fitnessCenter.setFirstAddress(SearchUtil.getFirstAddress(address));
+        fitnessCenter.setSecondAddress(SearchUtil.getSecondAddress(address));
+        fitnessCenter.setThirdAddress(address.getAddressLine(0));
+        fitnessCenter.setLatitude(address.getLatitude());
+        fitnessCenter.setLongitude(address.getLongitude());
+
+        return fitnessCenter;
+    }
+
 
 }

@@ -166,7 +166,7 @@
                 android:drawableEnd="@drawable/right"
                 android:fontFamily="@font/eland_choice_medium"
                 android:gravity="center_vertical"
-                android:text="@string/f_fitness_center_register_contract_date_default" />
+                android:text="@string/f_fitness_center_register_expiry_date_default" />
         </LinearLayout>
     </LinearLayout>
 

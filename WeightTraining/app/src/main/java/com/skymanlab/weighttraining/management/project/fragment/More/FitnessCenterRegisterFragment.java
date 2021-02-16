@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterRegisterSectionManager;
 
@@ -23,20 +24,10 @@ import com.skymanlab.weighttraining.management.project.fragment.More.SectionMana
 public class FitnessCenterRegisterFragment extends Fragment {
 
     // constant
-    private static final String FITNESS_CENTER_NAME = "fitnessCenterName";
-    private static final String FITNESS_CENTER_FIRST_ADDRESS = "fitnessCenterFirstAddress";
-    private static final String FITNESS_CENTER_SECOND_ADDRESS = "fitnessCenterSecondAddress";
-    private static final String FITNESS_CENTER_THIRD_ADDRESS = "fitnessCenterThirdAddress";
-    private static final String FITNESS_CENTER_LATITUDE = "fitnessCenterLatitude";
-    private static final String FITNESS_CENTER_LONGITUDE = "fitnessCenterLongitude";
+    private static final String FITNESS_CENTER = "fitnessCenter";
 
     // instance variable
-    private String fitnessCenterName;
-    private String fitnessCenterFirstAddress;
-    private String fitnessCenterSecondAddress;
-    private String fitnessCenterThirdAddress;
-    private double fitnessCenterLatitude;
-    private double fitnessCenterLongitude;
+    private FitnessCenter fitnessCenter;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -53,20 +44,10 @@ public class FitnessCenterRegisterFragment extends Fragment {
      * @return A new instance of fragment FitnessCenterRegisterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FitnessCenterRegisterFragment newInstance(String name,
-                                                            String firstAddress,
-                                                            String secondAddress,
-                                                            String thirdAddress,
-                                                            double latitude,
-                                                            double longitude) {
+    public static FitnessCenterRegisterFragment newInstance(FitnessCenter fitnessCenter) {
         FitnessCenterRegisterFragment fragment = new FitnessCenterRegisterFragment();
         Bundle args = new Bundle();
-        args.putString(FITNESS_CENTER_NAME, name);
-        args.putString(FITNESS_CENTER_FIRST_ADDRESS, firstAddress);
-        args.putString(FITNESS_CENTER_SECOND_ADDRESS, secondAddress);
-        args.putString(FITNESS_CENTER_THIRD_ADDRESS, thirdAddress);
-        args.putDouble(FITNESS_CENTER_LATITUDE, latitude);
-        args.putDouble(FITNESS_CENTER_LONGITUDE, longitude);
+        args.putSerializable(FITNESS_CENTER, fitnessCenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -75,12 +56,7 @@ public class FitnessCenterRegisterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.fitnessCenterName = getArguments().getString(FITNESS_CENTER_NAME);
-            this.fitnessCenterFirstAddress = getArguments().getString(FITNESS_CENTER_FIRST_ADDRESS);
-            this.fitnessCenterSecondAddress = getArguments().getString(FITNESS_CENTER_SECOND_ADDRESS);
-            this.fitnessCenterThirdAddress = getArguments().getString(FITNESS_CENTER_THIRD_ADDRESS);
-            this.fitnessCenterLatitude = getArguments().getDouble(FITNESS_CENTER_LATITUDE);
-            this.fitnessCenterLongitude = getArguments().getDouble(FITNESS_CENTER_LONGITUDE);
+            this.fitnessCenter = (FitnessCenter) getArguments().getSerializable(FITNESS_CENTER);
         }
     }
 
@@ -102,12 +78,7 @@ public class FitnessCenterRegisterFragment extends Fragment {
 
         // section
         sectionManager = new FitnessCenterRegisterSectionManager(this, view);
-        sectionManager.setFitnessCenterName(fitnessCenterName);
-        sectionManager.setFitnessCenterFirstAddress(fitnessCenterFirstAddress);
-        sectionManager.setFitnessCenterSecondAddress(fitnessCenterSecondAddress);
-        sectionManager.setFitnessCenterThirdAddress(fitnessCenterThirdAddress);
-        sectionManager.setFitnessCenterLatitude(fitnessCenterLatitude);
-        sectionManager.setFitnessCenterLongitude(fitnessCenterLongitude);
+        sectionManager.setFitnessCenter(fitnessCenter);
         sectionManager.connectWidget();
         sectionManager.initWidget();
 

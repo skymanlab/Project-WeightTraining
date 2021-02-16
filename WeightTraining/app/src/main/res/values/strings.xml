@@ -93,6 +93,7 @@
     <string name="f_fitness_center_search_address_default">검색에 성공하면 해당 주소가 표시됩니다.</string>
     <string name="f_fitness_center_search_snack_no_location_permission">위치 권한이 거부되었습니다.</string>
     <string name="f_fitness_center_search_snack_check_data_false">피트니스 센터를 먼저 검색해주세요.</string>
+    <string name="f_fitness_center_search_snack_already_exist">이미 존재하는 피트니스 센터입니다. </string>
     <string name="f_fitness_center_search_"></string>
 
 
@@ -619,6 +620,9 @@
     <string name="preference_key_is_granted_background_location_permission">isGrantedBackgroundLocationPermission</string>
     <string name="preference_key_is_enabled_fitness_center_geofencing">isEnabledFitnessCenterGeofencing</string>
     <string name="preference_key_is_disclosed_fitness_center">isDisclosedFitnessCenter</string>
+    <string name="preference_key_first_address">firstAddress</string>
+    <string name="preference_key_second_address">secondAddress</string>
+    <string name="preference_key_third_address">thirdAddress</string>
     <string name="preference_key_"></string>
 
     <!-- Preference : category item -->

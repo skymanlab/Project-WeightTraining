@@ -45,12 +45,7 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
-    private String fitnessCenterName;
-    private String fitnessCenterFirstAddress;
-    private String fitnessCenterSecondAddress;
-    private String fitnessCenterThirdAddress;
-    private double fitnessCenterLatitude;
-    private double fitnessCenterLongitude;
+    private FitnessCenter fitnessCenter;
 
     // instance variable
     private TextView name;
@@ -66,28 +61,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
     }
 
     // setter
-    public void setFitnessCenterName(String fitnessCenterName) {
-        this.fitnessCenterName = fitnessCenterName;
-    }
-
-    public void setFitnessCenterFirstAddress(String fitnessCenterFirstAddress) {
-        this.fitnessCenterFirstAddress = fitnessCenterFirstAddress;
-    }
-
-    public void setFitnessCenterSecondAddress(String fitnessCenterSecondAddress) {
-        this.fitnessCenterSecondAddress = fitnessCenterSecondAddress;
-    }
-
-    public void setFitnessCenterThirdAddress(String fitnessCenterThirdAddress) {
-        this.fitnessCenterThirdAddress = fitnessCenterThirdAddress;
-    }
-
-    public void setFitnessCenterLatitude(double fitnessCenterLatitude) {
-        this.fitnessCenterLatitude = fitnessCenterLatitude;
-    }
-
-    public void setFitnessCenterLongitude(double fitnessCenterLongitude) {
-        this.fitnessCenterLongitude = fitnessCenterLongitude;
+    public void setFitnessCenter(FitnessCenter fitnessCenter) {
+        this.fitnessCenter = fitnessCenter;
     }
 
     @Override
@@ -117,10 +92,10 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
     public void initWidget() {
 
         // [ TextView | name ] text
-        this.name.setText(fitnessCenterName);
+        this.name.setText(fitnessCenter.getName());
 
         // [ TextView | address ] text
-        this.address.setText(fitnessCenterThirdAddress);
+        this.address.setText(fitnessCenter.getThirdAddress());
 
         // [LinearLayout] [contractDateWrapper] click listener
         this.contractDateWrapper.setOnClickListener(new View.OnClickListener() {
@@ -181,16 +156,17 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-
                                 saveContent(
-                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                                        fitnessCenterName,
-                                        fitnessCenterFirstAddress,
-                                        fitnessCenterSecondAddress,
-                                        fitnessCenterThirdAddress,
-                                        fitnessCenterLatitude,
-                                        fitnessCenterLongitude,
+//                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
+//                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                                        "dongik1203",
+                                        "슬기는내꺼",
+                                        fitnessCenter.getName(),
+                                        fitnessCenter.getFirstAddress(),
+                                        fitnessCenter.getSecondAddress(),
+                                        fitnessCenter.getThirdAddress(),
+                                        fitnessCenter.getLatitude(),
+                                        fitnessCenter.getLongitude(),
                                         contractDate.getText().toString(),
                                         expiryDate.getText().toString()
                                 );
@@ -230,6 +206,7 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
 
 
     private boolean checkData() {
+        final String METHOD_NAME = "[checkData] ";
 
         String contractDateDefault = getFragment().getString(R.string.f_fitness_center_register_contract_date_default);
         String expiryDateDefault = getFragment().getString(R.string.f_fitness_center_register_expiry_date_default);
@@ -237,8 +214,22 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
         String selectedContractDate = contractDate.getText().toString();
         String selectedExpiryDate = expiryDate.getText().toString();
 
-        if (!selectedContractDate.equals(contractDateDefault) && !selectedExpiryDate.equals(expiryDateDefault)) {
-            return true;
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > contractDateDefault = " + contractDateDefault);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > expiryDateDefault = " + expiryDateDefault);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > selectedContractDate = " + selectedContractDate);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > selectedExpiryDate = " + selectedExpiryDate);
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > equal contractDate = " + selectedContractDate.equals(contractDateDefault));
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > equal expiryDate = " + selectedExpiryDate.equals(expiryDateDefault));
+
+        if (!selectedContractDate.equals(contractDateDefault)) {
+
+            if (!selectedExpiryDate.equals(expiryDateDefault)) {
+                return true;
+            } else {
+                return false;
+            }
+
         } else {
             return false;
         }
@@ -274,37 +265,45 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                         Integer memberCounter = currentData.child(FitnessCenter.MEMBER_COUNTER).getValue(Integer.class);
 
                         if (memberCounter == null) {
+
                             memberCounter = 1;
+
+                            // 경로 fitnessCenter/주소1/주소2/주소3/ 에 저장할 데이터
+                            HashMap<String, Object> fitnessCenterData = new HashMap<>();
+                            fitnessCenterData.put(FitnessCenter.NAME, fitnessCenterName);                     // 이름
+                            fitnessCenterData.put(FitnessCenter.LATITUDE, latitude);             // 위도
+                            fitnessCenterData.put(FitnessCenter.LONGITUDE, longitude);           // 경도
+                            fitnessCenterData.put(FitnessCenter.MEMBER_COUNTER, memberCounter);  // 회원 카운터
+
+                            // 경로 fitnessCenter/주소1/주소2/주소3/memberList/infoList
+                            HashMap<String, Object> memberData = new HashMap<>();
+                            memberData.put(Member.USER_NAME, userName);
+                            memberData.put(Member.IS_ACTIVE, false);
+                            memberData.put(Member.IS_DISCLOSED, true);
+
+                            // save
+                            currentData.setValue(fitnessCenterData);            // fitnessCenter/주소1/주소2/주소3 에 fitnessCenterData 등록
+                            currentData.child(FitnessCenter.MEMBER_LIST)        // fitnessCenter/주소1/주소2/주소3/memberList 에 memberData 등록
+                                    .child(memberCounter + "")
+                                    .setValue(memberData);
+
                         } else {
+
                             memberCounter += 1;
+
+                            // 경로 fitnessCenter/주소1/주소2/주소3/memberList
+                            HashMap<String, Object> memberData = new HashMap<>();
+                            memberData.put(Member.USER_NAME, userName);
+                            memberData.put(Member.IS_DISCLOSED, true);
+                            memberData.put(Member.IS_ACTIVE, false);
+
+                            // save
+                            currentData.child(FitnessCenter.MEMBER_COUNTER)      // fitnessCenter/주소1/주소2/주소3/memberCounter 에 memberCounter 등록
+                                    .setValue(memberCounter);
+                            currentData.child(FitnessCenter.MEMBER_LIST)        // fitnessCenter/주소1/주소2/주소3/memberList 에 memberData 등록
+                                    .child(memberCounter + "")
+                                    .setValue(memberData);
                         }
-
-                        // 경로 fitnessCenter/주소1/주소2/주소3/ 에 저장할 데이터
-                        HashMap<String, Object> fitnessCenterData = new HashMap<>();
-                        fitnessCenterData.put(FitnessCenter.NAME, fitnessCenterName);                     // 이름
-                        fitnessCenterData.put(FitnessCenter.LATITUDE, latitude);             // 위도
-                        fitnessCenterData.put(FitnessCenter.LONGITUDE, longitude);           // 경도
-                        fitnessCenterData.put(FitnessCenter.MEMBER_COUNTER, memberCounter);  // 회원 카운터
-
-                        // 경로 fitnessCenter/주소1/주소2/주소3/memberList/isDisclosedList 에 저장할 데이터
-                        // '회원번호:true' or '회원번호:false'
-                        HashMap<String, Object> isDisclosedData = new HashMap<>();
-                        isDisclosedData.put(memberCounter + "", true);
-
-                        // 경로 fitnessCenter/주소1/주소2/주소3/memberList/infoList
-                        HashMap<String, Object> infoData = new HashMap<>();
-                        infoData.put(Member.USER_UID, userUid);
-                        infoData.put(Member.USER_NAME, userName);
-
-                        // save
-                        currentData.setValue(fitnessCenterData);
-                        currentData.child(FitnessCenter.MEMBER_LIST)
-                                .child(Member.IS_DISCLOSED_LIST)
-                                .setValue(isDisclosedData);
-                        currentData.child(FitnessCenter.MEMBER_LIST)
-                                .child(Member.INFO_LIST)
-                                .child(memberCounter + "")
-                                .setValue(infoData);
 
                         return Transaction.success(currentData);
                     }
@@ -323,29 +322,21 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                         if (committed) {
 
                             Integer userCounter = currentData.child(FitnessCenter.MEMBER_COUNTER).getValue(Integer.class);
-                            String uid = currentData.child(FitnessCenter.MEMBER_LIST)
-                                    .child(Member.INFO_LIST)
-                                    .child(userCounter.toString())
-                                    .child(Member.USER_UID)
-                                    .getValue(String.class);
-
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Integer > userCounter = " + userCounter);
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > uid = " + uid);
 
                             if (userCounter != null) {
-                                if (uid.equals(userUid)) {
 
+                                saveContentOfMyFitnessCenter(reference,
+                                        userUid,
+                                        fitnessCenterFirstAddress,
+                                        fitnessCenterSecondAddress,
+                                        fitnessCenterThirdAddress,
+                                        fitnessCenterName,
+                                        userCounter,
+                                        contractDate,
+                                        expiryDate
+                                );
 
-                                    saveContentOfMyFitnessCenter(reference,
-                                            userUid,
-                                            fitnessCenterFirstAddress,
-                                            fitnessCenterSecondAddress,
-                                            fitnessCenterThirdAddress,
-                                            fitnessCenterName,
-                                            userCounter,
-                                            contractDate,
-                                            expiryDate);
-                                }
                             }
 
                         }
@@ -363,6 +354,7 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                                               long memberCounter,
                                               String contractDate,
                                               String expiryDate) {
+        final String METHOD_NAME = "[saveContentOfMyFitnessCenter] ";
 
         // 경로 : user/uid/fitnessCenter
         HashMap<String, Object> myFitnessCenterData = new HashMap<>();

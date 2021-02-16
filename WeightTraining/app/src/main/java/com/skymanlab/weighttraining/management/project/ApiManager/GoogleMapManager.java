@@ -2,6 +2,7 @@ package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -11,6 +12,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
@@ -23,6 +25,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ public class GoogleMapManager {
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
-    private Activity activity;
+    private Fragment fragment;
     private GoogleMap googleMap;
     private int interval;
     private int fastestInterval;
@@ -48,7 +51,7 @@ public class GoogleMapManager {
 
     // constructor
     private GoogleMapManager(Builder builder) {
-        this.activity = builder.activity;
+        this.fragment = builder.fragment;
         this.googleMap = builder.googleMap;
         this.interval = builder.interval;
         this.fastestInterval = builder.fastestInterval;
@@ -61,7 +64,7 @@ public class GoogleMapManager {
         final String METHOD_NAME = "[init] ";
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< google Map Manager > 구글 맵의 초기 설정을 시작합니다.==================================================================");
-        permissionManager = new PermissionManager(activity);
+        permissionManager = new PermissionManager(fragment.getActivity());
         permissionManager.initLocationPermission(new PermissionManager.GrantedPermissionListener() {
             @Override
             public void setNextProcedure() {
@@ -94,8 +97,8 @@ public class GoogleMapManager {
     private void initMyLocation() {
         final String METHOD_NAME = "[initMyLocation] ";
 
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(fragment.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(fragment.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< my location > googleMap 에 현재 자신의 위치를 가져올 수 있도록 설정중입니다.");
             // Enable : true 로 변경
@@ -126,7 +129,7 @@ public class GoogleMapManager {
 
         // [LocationUpdateManager] [updateManager] location update 를 사용하기 위한 초기 데이터를 설정한다.
         this.updateManager = new LocationUpdateManager.Builder()
-                .setActivity(activity)
+                .setActivity(fragment.getActivity())
                 .setInterval(interval)
                 .setFastestInterval(fastestInterval)
                 .setPriority(priority)
@@ -143,7 +146,7 @@ public class GoogleMapManager {
         final String METHOD_NAME = "[markInitialLocation] ";
 
         // last location 으로 초기 위치 설정
-        this.updateManager.getLastLocation(activity, new OnSuccessListener<Location>() {
+        this.updateManager.getLastLocation(fragment.getActivity(), new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
 
@@ -160,7 +163,7 @@ public class GoogleMapManager {
 
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===========================================================================");
                     // lastLatLng 에서 firstAddress, secondAddress 를 구한다. 그리고 이것으로 firebase database 에서 저장된 데이터를 가져온다.
-                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(activity, googleMap, fitnessCenterArrayList);
+                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(fragment.getActivity(), googleMap, fitnessCenterArrayList);
                     markerManager.execute(lastLatLng);
 
                 } else {
@@ -174,7 +177,7 @@ public class GoogleMapManager {
                     LocationUpdateUtil.moveLocation(googleMap, defaultLatLng);
 
                     // defaultLatLng 에서 firstAddress, secondAddress 를 구한다. 그리고 이것으로 firebase database 에서 저장된 데이터를 가져온다.
-                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(activity, googleMap, fitnessCenterArrayList);
+                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(fragment.getActivity(), googleMap, fitnessCenterArrayList);
                     markerManager.execute(defaultLatLng);
 
                 }
@@ -222,39 +225,52 @@ public class GoogleMapManager {
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > marker = " + marker.getTitle());
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > marker = " + marker.getSnippet());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "------------------------------- marker -----------------------------");
 
-                Address address = SearchUtil.searchLAddress(activity, marker.getPosition());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > marker = " + marker);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > getTitle = " + marker.getTitle());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Marker > getSnippet = " + marker.getSnippet());
 
-                String firstAddress = SearchUtil.getFirstAddress(address);
-                String secondAddress = SearchUtil.getSecondAddress(address);
-                String thirdAddress = address.getAddressLine(0);
-                double latitude = address.getLatitude();
-                double longitude = address.getLongitude();
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > firstAddress = " + firstAddress);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > secondAddress = " + secondAddress);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > thirdAddress = " + thirdAddress);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > latitude = " + latitude);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > longitude = " + longitude);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "------------------------------- fitnessCenter -----------------------------");
+                FitnessCenter fitnessCenter = getFitnessCenter(marker);
+                
+                if (fitnessCenter != null) {
+                    
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getName = " + fitnessCenter.getName());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getFirstAddress = " + fitnessCenter.getFirstAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getSecondAddress = " + fitnessCenter.getSecondAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getThirdAddress = " + fitnessCenter.getThirdAddress());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLatitude = " + fitnessCenter.getLatitude());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLongitude = " + fitnessCenter.getLongitude());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getMemberCounter = " + fitnessCenter.getMemberCounter());
 
+                    AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
+                    builder.setTitle(R.string.etc_google_map_manager_alert_marker_title)
+                            .setMessage("이름 : " + marker.getTitle() + "\n" + "주소 : " + marker.getSnippet())
+                            .setPositiveButton(R.string.etc_google_map_manager_alert_marker_bt_positive, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setTitle(R.string.etc_google_map_manager_alert_marker_title)
-                        .setMessage("이름 : " + marker.getTitle() + "\n" + "주소 : " + marker.getSnippet())
-                        .setPositiveButton(R.string.etc_google_map_manager_alert_marker_bt_positive, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                                    // fitness center register fragment 로 이동
+                                    fragment.getActivity().getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.nav_home_content_wrapper, FitnessCenterRegisterFragment.newInstance(fitnessCenter))
+                                            .addToBackStack(null)
+                                            .commit();
 
-                            }
-                        })
-                        .setNegativeButton(R.string.etc_google_map_manager_alert_marker_bt_negative, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setNegativeButton(R.string.etc_google_map_manager_alert_marker_bt_negative, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        })
-                        .show();
+                                }
+                            })
+                            .show();
+
+                } else {
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > 처음 검색된 위치이므로 AlertDialog 를 띄우지 않습니다. 다음 버튼을 이용하여 다음 Fragment 로 넘어 가십시요");
+                }
+                
 
                 return true;
             }
@@ -282,12 +298,27 @@ public class GoogleMapManager {
                     // [LatLng] [currentLatLng] Location 의 위도, 경도로 LatLng 객체 생성
                     LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 
-                    LocationUpdateUtil.showMarkerToMap(activity, googleMap, currentLatLng);
+                    LocationUpdateUtil.showMarkerToMap(fragment.getActivity(), googleMap, currentLatLng);
 
                 } // [check 1]
             }
         };
     }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    private FitnessCenter getFitnessCenter(Marker marker) {
+
+        for (int index = 0; index < fitnessCenterArrayList.size(); index++) {
+
+            if (marker.getTitle().equals(fitnessCenterArrayList.get(index).getName())
+                    && marker.getSnippet().equals(fitnessCenterArrayList.get(index).getThirdAddress())) {
+                return fitnessCenterArrayList.get(index);
+            }
+        }
+
+        return null;
+    }
+
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 외부에서 사용하기 위한 method =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // location update start
@@ -295,7 +326,7 @@ public class GoogleMapManager {
         final String METHOD_NAME = "[startLocationUpdate] ";
         if (this.updateManager != null) {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< update manager > 해당 location update 를 실행합니다.");
-            this.updateManager.startLocationUpdate(activity);
+            this.updateManager.startLocationUpdate(fragment.getActivity());
         }
 
     }
@@ -306,7 +337,7 @@ public class GoogleMapManager {
 
         if (this.updateManager != null) {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< update manager stop > 해당 location update 를 중지합니다.");
-            this.updateManager.stopLocationUpdates(activity);
+            this.updateManager.stopLocationUpdates(fragment.getActivity());
         }
 
     }
@@ -316,7 +347,7 @@ public class GoogleMapManager {
     public static class Builder {
 
         // instance variable
-        private Activity activity;
+        private Fragment fragment;
         private GoogleMap googleMap;
         private int interval;
         private int fastestInterval;
@@ -328,8 +359,8 @@ public class GoogleMapManager {
         }
 
         // setter
-        public Builder setActivity(Activity activity) {
-            this.activity = activity;
+        public Builder setFragment(Fragment fragment) {
+            this.fragment = fragment;
             return this;
         }
 
