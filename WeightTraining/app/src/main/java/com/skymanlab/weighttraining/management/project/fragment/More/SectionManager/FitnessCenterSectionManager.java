@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterInfoFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
@@ -45,6 +47,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
     // instance variable
     private TextView registerInfoTitle;
+    private TextView memberNumber;
     private TextView contractDate;
     private TextView expiryDate;
     private TextView attendanceDateCounter;
@@ -84,6 +87,9 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
         // [ TextView | registerInfoTitle ]
         this.registerInfoTitle = (TextView) getView().findViewById(R.id.f_fitness_center_registerInfo_title);
+
+        // [ TextView | memberNumber ]
+        this.memberNumber = (TextView) getView().findViewById(R.id.f_fitness_center_member_number);
 
         // [ TextView | contractDate ]
         this.contractDate = (TextView) getView().findViewById(R.id.f_fitness_center_contract_date);
@@ -131,25 +137,40 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
     }
 
 
-    public void initWidgetOfRegisterInfoSection(String contractDate,
+    public void initWidgetOfRegisterInfoSection(long memberNumber,
+                                                String contractDate,
                                                 String expiryDate,
-                                                int attendanceDateCount) {
+                                                int attendanceDateCount,
+                                                ArrayList<String> attendanceDateList) {
 
         final String METHOD_NAME = "[initWidgetOfRegisterInfoSection] ";
 
+
+        // click listener
         this.registerInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right, 0);
         this.registerInfoTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ zmfflr");
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > contractDate = " + contractDate);
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > expiryDate = " + expiryDate);
+
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(
+                                R.id.nav_home_content_wrapper,
+                                FitnessCenterRegisterInfoFragment.newInstance(contractDate, expiryDate, attendanceDateList)
+                        )
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
 
         // text
+        this.memberNumber.setText(memberNumber + "");
         this.contractDate.setText(contractDate);
         this.expiryDate.setText(expiryDate);
-        this.attendanceDateCounter.setText(attendanceDateCount + " 일");
+        this.attendanceDateCounter.setText("+ " + attendanceDateCount + " 일");
 
     }
 
@@ -158,6 +179,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
         final String METHOD_NAME = "[initWidgetOfSettingInfoSection] ";
 
+        // settingInfoTitle : click listener 및 drawableEnd
         this.settingInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right, 0);
         this.settingInfoTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,7 +242,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                                     .commit();
                                         }
                                     });
-                                    
+
                                     // progress bar 숨기기
                                     progressBar.setVisibility(View.INVISIBLE);
                                     return;
@@ -257,13 +279,25 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                     }
 
                                     // fitness center
-                                    initWidgetOfFitnessCenterSection(userFitnessCenter.getFitnessCenterName(), userFitnessCenter.getThirdAddress());
+                                    initWidgetOfFitnessCenterSection(
+                                            userFitnessCenter.getFitnessCenterName(),
+                                            userFitnessCenter.getThirdAddress()
+                                    );
 
                                     //  register info
-                                    initWidgetOfRegisterInfoSection(userFitnessCenter.getContractDate(), userFitnessCenter.getExpiryDate(), attendanceDateList.size());
+                                    initWidgetOfRegisterInfoSection(
+                                            userFitnessCenter.getMemberNumber(),
+                                            userFitnessCenter.getContractDate(),
+                                            userFitnessCenter.getExpiryDate(),
+                                            attendanceDateList.size(),
+                                            attendanceDateList
+                                    );
 
                                     // setting info
-                                    initWidgetOfSettingInfoSection(userFitnessCenter.getIsAllowedAccessNotification(), userFitnessCenter.getIsDisclosed());
+                                    initWidgetOfSettingInfoSection(
+                                            userFitnessCenter.getIsAllowedAccessNotification(),
+                                            userFitnessCenter.getIsDisclosed()
+                                    );
 
                                     progressBar.setVisibility(View.INVISIBLE);
 

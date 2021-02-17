@@ -14,12 +14,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
 import com.skymanlab.weighttraining.management.user.data.User;
 
 import java.util.HashMap;
 
 public class FitnessCenterUtil {
+
+    // constant
+    private static final String CLASS_NAME = FitnessCenterUtil.class.getSimpleName();
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     public static final String DB_TARGET_USER_NODE = "user";

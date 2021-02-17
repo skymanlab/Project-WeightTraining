@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
+import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterRegisterSectionManager;
 
@@ -22,6 +23,9 @@ import com.skymanlab.weighttraining.management.project.fragment.More.SectionMana
  * create an instance of this fragment.
  */
 public class FitnessCenterRegisterFragment extends Fragment {
+    // constant
+    private static final String CLASS_NAME = "[PFM] FitnessCenterRegisterFragment";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // constant
     private static final String FITNESS_CENTER = "fitnessCenter";

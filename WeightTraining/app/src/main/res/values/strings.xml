@@ -68,6 +68,8 @@
     <string name="f_fitness_center_go_register"></string>
     <string name="f_fitness_center_name">피트니스 센터를</string>
     <string name="f_fitness_center_address">등록해주세요.</string>
+    <string name="f_fitness_center_member_number">회원 번호</string>
+    <string name="f_fitness_center_member_number_default">피트니스 센터 회원 번호입니다.</string>
     <string name="f_fitness_center_info">등록 정보</string>
     <string name="f_fitness_center_contract_date">등록일</string>
     <string name="f_fitness_center_contract_date_default">피트니스 센터에 등록한 날짜입니다.</string>
@@ -118,6 +120,11 @@
     <string name="f_fitness_center_register_snack_no_selected_date">등록일, 마감일이 선택되지 않았습니다.</string>
     <string name="f_fitness_center_register_snack_save_complete">데이터 저장이 완료되었습니다.</string>
     <string name="f_fitness_center_register_"></string>
+
+    <!-- Fragment : fitness center register info -->
+    <string name="f_fitness_center_register_info_title">출석날짜</string>
+    <string name="f_fitness_center_register_info_attendance_date">출석일</string>
+    <string name="f_fitness_center_register_info_"></string>
 
     <!-- Fragment : setting -->
     <string name="f_setting_title">환경설정</string>

@@ -9,12 +9,12 @@
     <color name="colorBackgroundWhite">#FFFFFF</color>
     <color name="colorBackgroundGray">#e6e6e6</color>
 
-    <color name="colorBackgroundFirst">#7E57C2</color>
-    <color name="colorBackgroundSecond">#42A5F5</color>
-    <color name="colorBackgroundThird">#42A5F5</color>
-    <color name="colorBackgroundFourth">#26C6DA</color>
-    <color name="colorBackgroundFifth">#26A69A</color>
-    <color name="colorBackgroundSixth">#66BB6A</color>
+    <color name="colorBackgroundFirst">#FF8A80</color>
+    <color name="colorBackgroundSecond">#EA80FC</color>
+    <color name="colorBackgroundThird">#B388FF</color>
+    <color name="colorBackgroundFourth">#82B1FF</color>
+    <color name="colorBackgroundFifth">#84FFFF</color>
+    <color name="colorBackgroundSixth">#B9F6CA</color>
 
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="colorTextBlack">#000000</color>

@@ -81,4 +81,8 @@ dependencies {
     androidTestImplementation "androidx.work:work-testing:$work_version"
 
     implementation 'com.google.guava:guava:28.0-android'
+
+    // material calendar view
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 }
