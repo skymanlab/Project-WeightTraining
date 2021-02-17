@@ -70,11 +70,17 @@ public class AttendanceCalendarManager {
                 transformAttendanceDate(attendanceDateList)
         );
 
-        // register period decorator
-        RegisterPeriodDecorator registerPeriodDecorator = new RegisterPeriodDecorator(contractDate, expiryDate);
+//        // register period decorator
+//        RegisterPeriodDecorator registerPeriodDecorator = new RegisterPeriodDecorator(contractDate, expiryDate);
+
+        // contract date decorator
+        ContractDateDecorator contractDateDecorator = new ContractDateDecorator(contractDate);
+
+        // expiry date decorator
+        ExpiryDateDecorator expiryDateDecorator = new ExpiryDateDecorator(expiryDate);
 
         // add decorators
-        materialCalendarView.addDecorators(sundayDecorator, saturdayDecorator, attendanceDateDecorator, registerPeriodDecorator);
+        materialCalendarView.addDecorators(sundayDecorator, saturdayDecorator, attendanceDateDecorator, contractDateDecorator, expiryDateDecorator);
 
         // select today
         materialCalendarView.setSelectedDate(CalendarDay.today());
@@ -258,6 +264,60 @@ public class AttendanceCalendarManager {
         @Override
         public void decorate(DayViewFacade view) {
             view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_register_period));
+        }
+    }
+
+
+    /**
+     * Contract Date
+     */
+    public class ContractDateDecorator implements DayViewDecorator{
+
+        // instance variable
+        private String contractDate;
+
+        // constructor
+        public ContractDateDecorator(String contractDate) {
+            this.contractDate = contractDate;
+        }
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+
+            CalendarDay contractCalendarDay = getCalendarDay(contractDate);
+
+            return day.equals(contractCalendarDay);
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_contract_date));
+        }
+    }
+
+
+    /**
+     * Expiry Date
+     */
+    public class ExpiryDateDecorator implements DayViewDecorator{
+
+        // instance variable
+        private String expiryDate;
+
+        // constructor
+        public ExpiryDateDecorator(String expiryDate) {
+            this.expiryDate = expiryDate;
+        }
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+
+            CalendarDay contractCalendarDay = getCalendarDay(expiryDate);
+
+            return day.equals(contractCalendarDay);
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_expiry_date));
         }
     }
 }
