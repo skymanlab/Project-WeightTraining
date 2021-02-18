@@ -26,7 +26,7 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
     // constant
     private static final String CLASS_NAME = FitnessCenterMarkerManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Activity activity;
@@ -66,6 +66,10 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
     protected void onPostExecute(Address address) {
         final String METHOD_NAME = "[doInBackground] ";
         // 후 처리 : UI
+
+        if (address == null){
+            return;
+        }
 
         String firstAddress = SearchUtil.getFirstAddress(address);
         String secondAddress = SearchUtil.getSecondAddress(address);
@@ -132,5 +136,17 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
     }
 
+    @Override
+    protected void onCancelled() {
+        final String METHOD_NAME= "[onCancelled] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ AsyncTask 가 종료 되었습니다.");
+        super.onCancelled();
+    }
 
+    @Override
+    protected void onCancelled(Address address) {
+        final String METHOD_NAME= "[onCancelled] ";
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ AsyncTask 가 종료 되었습니다.========================");
+        super.onCancelled(address);
+    }
 }

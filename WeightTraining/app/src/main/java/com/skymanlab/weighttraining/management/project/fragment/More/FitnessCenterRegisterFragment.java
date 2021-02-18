@@ -25,7 +25,7 @@ import com.skymanlab.weighttraining.management.project.fragment.More.SectionMana
 public class FitnessCenterRegisterFragment extends Fragment {
     // constant
     private static final String CLASS_NAME = "[PFM] FitnessCenterRegisterFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String FITNESS_CENTER = "fitnessCenter";

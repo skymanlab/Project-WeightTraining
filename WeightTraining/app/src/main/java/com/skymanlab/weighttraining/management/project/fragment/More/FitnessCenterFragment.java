@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
@@ -26,7 +27,12 @@ public class FitnessCenterFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFM] FitnessCenterFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    // constant
+    private static final String MY_FITNESS_CENTER = "myFitnessCenter";
+
+    // instance variable
+    private UserFitnessCenter myFitnessCenter;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -49,10 +55,15 @@ public class FitnessCenterFragment extends Fragment {
      * @return A new instance of fragment FitnessCenterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FitnessCenterFragment newInstance() {
+    public static FitnessCenterFragment newInstance(UserFitnessCenter myFitnessCenter) {
+
         FitnessCenterFragment fragment = new FitnessCenterFragment();
+
         Bundle args = new Bundle();
+        args.putSerializable(MY_FITNESS_CENTER, myFitnessCenter);
+
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -61,6 +72,7 @@ public class FitnessCenterFragment extends Fragment {
         super.onCreate(savedInstanceState);
         final String METHOD_NAME = "[onCreate] ";
         if (getArguments() != null) {
+            this.myFitnessCenter = (UserFitnessCenter) getArguments().getSerializable(MY_FITNESS_CENTER);
         }
     }
 
@@ -78,6 +90,16 @@ public class FitnessCenterFragment extends Fragment {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------===================================================>");
 
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > myFitnessCenter 객체는 = " + myFitnessCenter);
+        if (myFitnessCenter != null) {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getFitnessCenterName = " + myFitnessCenter.getFitnessCenterName());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getMemberNumber = " + myFitnessCenter.getMemberNumber());
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getContractDate = " + myFitnessCenter.getContractDate());
+        }
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------===================================================>");
+
         // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_title));
         this.topBarManager.connectWidget();
@@ -85,6 +107,7 @@ public class FitnessCenterFragment extends Fragment {
 
         // [FitnessCenterSectionManager] [sectionManager] this is 'more' fragment's section manager.
         this.sectionManager = new FitnessCenterSectionManager(this, view);
+        this.sectionManager.setMyFitnessCenter(myFitnessCenter);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 

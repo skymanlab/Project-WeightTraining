@@ -1,13 +1,10 @@
 package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Location;
-import android.view.View;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,7 +17,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
@@ -45,9 +41,9 @@ public class GoogleMapManager {
     private ArrayList<FitnessCenter> fitnessCenterArrayList;
 
     // instance variable
-    private LocationUpdateManager updateManager;
     private PermissionManager permissionManager;
-
+    private LocationUpdateManager updateManager;
+    private FitnessCenterMarkerManager markerManager;
 
     // constructor
     private GoogleMapManager(Builder builder) {
@@ -78,8 +74,6 @@ public class GoogleMapManager {
                 // my location 사용가능 한지 파악 후
                 initMyLocation();
 
-                // 초기 위치
-                markInitialLocation();
             }
         });
 
@@ -117,6 +111,9 @@ public class GoogleMapManager {
 
             // marker click listener 등록
             googleMap.setOnMarkerClickListener(createOnMarkerClickListener());
+
+            // 초기 위치
+            markInitialLocation();
 
         } else {
             // 권한 거부에 대한 다음 과정 진행
@@ -162,9 +159,11 @@ public class GoogleMapManager {
                     LocationUpdateUtil.moveLocation(googleMap, lastLatLng);
 
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===========================================================================");
+
                     // lastLatLng 에서 firstAddress, secondAddress 를 구한다. 그리고 이것으로 firebase database 에서 저장된 데이터를 가져온다.
-                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(fragment.getActivity(), googleMap, fitnessCenterArrayList);
+                    markerManager = new FitnessCenterMarkerManager(fragment.getActivity(), googleMap, fitnessCenterArrayList);
                     markerManager.execute(lastLatLng);
+
 
                 } else {
 
@@ -177,8 +176,9 @@ public class GoogleMapManager {
                     LocationUpdateUtil.moveLocation(googleMap, defaultLatLng);
 
                     // defaultLatLng 에서 firstAddress, secondAddress 를 구한다. 그리고 이것으로 firebase database 에서 저장된 데이터를 가져온다.
-                    FitnessCenterMarkerManager markerManager = new FitnessCenterMarkerManager(fragment.getActivity(), googleMap, fitnessCenterArrayList);
+                    markerManager = new FitnessCenterMarkerManager(fragment.getActivity(), googleMap, fitnessCenterArrayList);
                     markerManager.execute(defaultLatLng);
+
 
                 }
             }
@@ -233,9 +233,9 @@ public class GoogleMapManager {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "------------------------------- fitnessCenter -----------------------------");
                 FitnessCenter fitnessCenter = getFitnessCenter(marker);
-                
+
                 if (fitnessCenter != null) {
-                    
+
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getName = " + fitnessCenter.getName());
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getFirstAddress = " + fitnessCenter.getFirstAddress());
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getSecondAddress = " + fitnessCenter.getSecondAddress());
@@ -270,7 +270,7 @@ public class GoogleMapManager {
                 } else {
                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > 처음 검색된 위치이므로 AlertDialog 를 띄우지 않습니다. 다음 버튼을 이용하여 다음 Fragment 로 넘어 가십시요");
                 }
-                
+
 
                 return true;
             }
@@ -342,6 +342,19 @@ public class GoogleMapManager {
 
     }
 
+    // fitness center marker manager -> AsyncTask 종료
+    public void stopFitnessCenterMarkerManager() {
+        final String METHOD_NAME = "[stopFitnessCenterMarkerManager] ";
+
+        if (markerManager != null) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 마커 메니저 > 상태는 ? = " + markerManager.getStatus());
+            if (markerManager.getStatus() == AsyncTask.Status.RUNNING) {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 마커 메니저 > 아직 실행 중입니다.");
+                markerManager.cancel(true);
+            }
+        }
+
+    }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Builder =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public static class Builder {

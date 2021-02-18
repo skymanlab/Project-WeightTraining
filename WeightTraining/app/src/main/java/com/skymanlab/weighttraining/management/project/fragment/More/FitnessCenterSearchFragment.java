@@ -111,6 +111,7 @@ public class FitnessCenterSearchFragment extends Fragment {
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Update util > 이 존재하나요? " + this.sectionManager.getGoogleMapManager());
 
         this.sectionManager.getGoogleMapManager().stopLocationUpdate();
+        this.sectionManager.getGoogleMapManager().stopFitnessCenterMarkerManager();
     }
 
 }

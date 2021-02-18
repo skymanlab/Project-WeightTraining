@@ -1,8 +1,14 @@
+
 package com.skymanlab.weighttraining;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -17,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +54,7 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
 
     // constant
     private static final String CLASS_NAME = "[Ac] NavHomeActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private BottomNavigationView navBottomBar;
@@ -142,7 +149,7 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
         InitializationManager initializationManager = new InitializationManager(this);
         initializationManager.init();
 
-
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------------------=====================================================================================");
     }
 
 

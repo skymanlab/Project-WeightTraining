@@ -26,7 +26,7 @@ public class MakerStep1Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] MakerStep1Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

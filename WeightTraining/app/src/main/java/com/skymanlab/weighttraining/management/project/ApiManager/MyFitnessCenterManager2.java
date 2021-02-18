@@ -1,40 +1,43 @@
 package com.skymanlab.weighttraining.management.project.ApiManager;
 
-import android.view.View;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
 import java.util.ArrayList;
 
-public class MyFitnessCenterManager {
+public class MyFitnessCenterManager2 extends AsyncTask<String, UserFitnessCenter, UserFitnessCenter> {
 
     // constant
-    private static final String CLASS_NAME = MyFitnessCenterManager.class.getSimpleName();
+    private static final String CLASS_NAME = MyFitnessCenterManager2.class.getSimpleName();
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private String uid;
 
     // constructor
-    public MyFitnessCenterManager(String uid) {
+    public MyFitnessCenterManager2(String uid) {
         this.uid = uid;
     }
+
+    @Override
+    protected UserFitnessCenter doInBackground(String... strings) {
+        return null;
+    }
+
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     public void loadContent(OnFitnessCenterEventListener listener) {
         final String METHOD_NAME = "[loadContent] ";
@@ -100,9 +103,6 @@ public class MyFitnessCenterManager {
                 );
 
     }
-
-
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnFitnessCenterEventListener {

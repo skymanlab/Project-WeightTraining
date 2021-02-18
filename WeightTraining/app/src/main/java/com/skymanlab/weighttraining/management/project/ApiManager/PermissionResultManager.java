@@ -18,7 +18,7 @@ public class PermissionResultManager {
 
     // constant
     private static final String CLASS_NAME = PermissionManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 50000;   // PermissionManager : location permission 요청 결과를 받기 위한

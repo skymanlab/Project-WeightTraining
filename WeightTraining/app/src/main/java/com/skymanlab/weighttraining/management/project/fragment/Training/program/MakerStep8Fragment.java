@@ -28,7 +28,7 @@ public class MakerStep8Fragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTP] MakerStep8Fragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String PROGRAM = "program";

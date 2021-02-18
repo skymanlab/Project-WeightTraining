@@ -34,7 +34,7 @@ public class InitializationManager {
 
     // constant
     public static final String CLASS_NAME = InitializationManager.class.getSimpleName();
-    public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    public static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Context context;

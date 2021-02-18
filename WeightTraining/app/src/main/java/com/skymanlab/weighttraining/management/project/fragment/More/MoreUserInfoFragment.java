@@ -26,7 +26,7 @@ public class MoreUserInfoFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFM] MoreUserInfoFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

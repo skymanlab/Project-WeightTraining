@@ -39,11 +39,13 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
+    private UserFitnessCenter myFitnessCenter;
+
+    // instance variable
     private FrameLayout goRegister;
     private ImageView goRegisterImage;
     private TextView fitnessCenterName;
     private TextView fitnessCenterAddress;
-    private ContentLoadingProgressBar progressBar;
 
     // instance variable
     private TextView registerInfoTitle;
@@ -65,6 +67,10 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
         super(fragment, view);
     }
 
+    // setter
+    public void setMyFitnessCenter(UserFitnessCenter myFitnessCenter) {
+        this.myFitnessCenter = myFitnessCenter;
+    }
 
     @Override
     public void connectWidget() {
@@ -80,9 +86,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
         // [TextView] [fitnessCenterAddress] widget connect
         this.fitnessCenterAddress = (TextView) getView().findViewById(R.id.f_fitness_center_address);
-
-        // [ ContentLoadingProgressBar | progressBar ]
-        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_fitness_center_progress_bar);
 
 
         // [ TextView | registerInfoTitle ]
@@ -114,12 +117,50 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
     @Override
     public void initWidget() {
+        final String METHOD_NAME = "[initWidget] ";
 
-        // 경로 user/uid/fitnessCenter 항목을 읽어오기
-        loadContent(
-                FirebaseAuth.getInstance().getCurrentUser().getUid()
-        );
+        // myFitnessCenter 정보가 있으면
+        if (this.myFitnessCenter != null) {
 
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > null 이 아닙니다.");
+
+            // fitness center
+            initWidgetOfFitnessCenterSection(
+                    myFitnessCenter.getFitnessCenterName(),
+                    myFitnessCenter.getThirdAddress()
+            );
+
+            // register info
+            initWidgetOfRegisterInfoSection(
+                    myFitnessCenter.getMemberNumber(),
+                    myFitnessCenter.getContractDate(),
+                    myFitnessCenter.getExpiryDate(),
+                    myFitnessCenter.getAttendanceDateList().size(),
+                    myFitnessCenter.getAttendanceDateList()
+            );
+
+            // setting info
+            initWidgetOfSettingInfoSection(
+                    myFitnessCenter.getIsAllowedAccessNotification(),
+                    myFitnessCenter.getIsDisclosed()
+            );
+
+        } else {
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > null 이예요.");
+
+            // goRegister click listener : FitnessCenterRegisterFragment 로 이동
+            goRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.nav_home_content_wrapper, new FitnessCenterSearchFragment())
+                            .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+                            .commit();
+                }
+            });
+        }
     }
 
 
@@ -243,8 +284,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                         }
                                     });
 
-                                    // progress bar 숨기기
-                                    progressBar.setVisibility(View.INVISIBLE);
                                     return;
                                 }
 
@@ -299,7 +338,6 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
                                             userFitnessCenter.getIsDisclosed()
                                     );
 
-                                    progressBar.setVisibility(View.INVISIBLE);
 
                                 }
 

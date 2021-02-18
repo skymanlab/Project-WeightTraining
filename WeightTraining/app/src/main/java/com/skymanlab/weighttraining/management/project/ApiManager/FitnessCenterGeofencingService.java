@@ -20,7 +20,7 @@ public class FitnessCenterGeofencingService extends JobIntentService {
 
     // constant
     private static final String CLASS_NAME = FitnessCenterGeofencingService.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     private static final int JOB_ID = 573;
 
     /**

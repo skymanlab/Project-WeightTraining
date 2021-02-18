@@ -26,9 +26,6 @@ public class FitnessCenterMemberManager {
     // instance variable
     private String uid;
 
-    // instance variable
-//    private ArrayList<Member> memberArrayList;
-
     // constructor
     public FitnessCenterMemberManager(String uid) {
         this.uid = uid;
@@ -37,66 +34,90 @@ public class FitnessCenterMemberManager {
     public void init(OnMemberManipulateListener listener) {
         final String METHOD_NAME = "[init] ";
 
-//        memberArrayList = new ArrayList<>();
-
+        // Firebase Database
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
         reference.child(FirebaseConstants.DATABASE_FIRST_NODE_USER)
                 .child(uid)
                 .child(User.FITNESS_CENTER)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================>>>>>>>>>====================>>>>>>>>>====================>>>>>>>>>");
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< DataSnapshot > snapshot = " + snapshot);
 
-                        UserFitnessCenter userFitnessCenter = snapshot.getValue(UserFitnessCenter.class);
+                        UserFitnessCenter myFitnessCenter = snapshot.getValue(UserFitnessCenter.class);
 
-                        if (userFitnessCenter != null) {
+                        if (myFitnessCenter == null) {
+                            // 피트니스 센터 등록을 하지 않았을 때
+                            listener.isNotRegisteredTheFitnessCenter();
+                            return;
+                        }
 
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getMemberNumber = " + userFitnessCenter.getMemberNumber());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getFitnessCenterName = " + userFitnessCenter.getFitnessCenterName());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getFirstAddress = " + userFitnessCenter.getFirstAddress());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getSecondAddress = " + userFitnessCenter.getSecondAddress());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getThirdAddress = " + userFitnessCenter.getThirdAddress());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getContractDate = " + userFitnessCenter.getContractDate());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getExpiryDate = " + userFitnessCenter.getExpiryDate());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getIsDisclosed = " + userFitnessCenter.getIsDisclosed());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getIsAllowedAccessNotification = " + userFitnessCenter.getIsAllowedAccessNotification());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getMemberNumber = " + myFitnessCenter.getMemberNumber());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getFitnessCenterName = " + myFitnessCenter.getFitnessCenterName());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getFirstAddress = " + myFitnessCenter.getFirstAddress());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getSecondAddress = " + myFitnessCenter.getSecondAddress());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getThirdAddress = " + myFitnessCenter.getThirdAddress());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getContractDate = " + myFitnessCenter.getContractDate());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getExpiryDate = " + myFitnessCenter.getExpiryDate());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getIsDisclosed = " + myFitnessCenter.getIsDisclosed());
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getIsAllowedAccessNotification = " + myFitnessCenter.getIsAllowedAccessNotification());
 
 
-                            // 유저가 공개 하였을 때만
-                            if (userFitnessCenter.getIsDisclosed()) {
+                        // 내가 공개상태로 설정하였을 때만
+                        if (myFitnessCenter.getIsDisclosed()) {
+                            
+                            // 피트니스 센터를 등록하였고
+                            // 다른 사람에게 나의 등록 여부를 공개하고 싶을 때
+                            // 경로( fitnessCenter/주소1/주소2/주소3/memberList ) 에서 모든 회원의 데이터를 가져온다.
+                            reference.child(FirebaseConstants.DATABASE_FIRST_NODE_FITNESS_CENTER)
+                                    .child(myFitnessCenter.getFirstAddress())
+                                    .child(myFitnessCenter.getSecondAddress())
+                                    .child(myFitnessCenter.getThirdAddress())
+                                    .child(FitnessCenter.MEMBER_LIST)
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                reference.child(FirebaseConstants.DATABASE_FIRST_NODE_FITNESS_CENTER)
-                                        .child(userFitnessCenter.getFirstAddress())
-                                        .child(userFitnessCenter.getSecondAddress())
-                                        .child(userFitnessCenter.getThirdAddress())
-                                        .child(FitnessCenter.MEMBER_LIST)
-                                        .addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< DataSnapshot > snapshot = " + snapshot);
+                                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "----------------------------------");
+                                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< DataSnapshot > snapshot = " + snapshot);
 
-                                                // 데이터가 변경
-                                                ArrayList<Member> memberArrayList = new ArrayList<>();
+                                            // '공개'로 설정된 회원들을 담을 ArrayList
+                                            ArrayList<Member> memberArrayList = new ArrayList<>();
 
-                                                for (DataSnapshot search : snapshot.getChildren()) {
-                                                    Member member = search.getValue(Member.class);
-                                                    member.setMemberNumber(Integer.parseInt(search.getKey()));
+                                            for (DataSnapshot search : snapshot.getChildren()) {
 
+                                                // 회원들의 정보를 member 객체에 담는다. 그리고 회원 번호도 추가한다.
+                                                Member member = search.getValue(Member.class);
+                                                member.setMemberNumber(Integer.parseInt(search.getKey()));
+
+                                                // 공개 상태인 멤버만 memberArrayList 에 추가하기
+                                                if (member.getIsDisclosed()) {
                                                     memberArrayList.add(member);
                                                 }
-                                                listener.manipulateMemberList(memberArrayList);
 
                                             }
+                                            
+                                            // 내가 공개상태일 때
+                                            // 나의 uid 와 myFitnessCenter 정보도 넘겨주고
+                                            // 나와 같은 피트니스 센터에 등록한 회원들 중에서 '공개' 상태인 회원의 목록을 넘겨준다.
+                                            listener.isDisclosedState(uid, myFitnessCenter, memberArrayList);
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                        }
 
-                                            }
-                                        });
-                            }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                        } else {
+
+                            // 피트니스 센터 등록을 하였지만
+                            // 다른 사람에게 공개하고 싶지 않을 때
+                            listener.isNotIsDisclosedState();
                         }
+
 
                     }
 
@@ -110,7 +131,9 @@ public class FitnessCenterMemberManager {
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnMemberManipulateListener {
-        void manipulateMemberList(ArrayList<Member> memberArrayList);
+        void isDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Member> memberArrayList);
+        void isNotIsDisclosedState();
+        void isNotRegisteredTheFitnessCenter();
     }
 
 }

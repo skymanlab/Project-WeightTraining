@@ -12,34 +12,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDividerDefault" />
+
     <include
-        layout="@layout/include_divider_default"
+        layout="@layout/include_divider_section_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/eland_choice_bold"-->
-<!--            android:text="@string/f_fitness_center_register_info_attendance_date"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColor="@color/colorTextBlack"-->
-<!--            android:textSize="@dimen/text_sub_title_size" />-->
-
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/f_fitness_center_register_info_calendar_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:mcv_calendarMode="month"
-            app:mcv_arrowColor="@color/colorBackgroundFirst"
-            app:mcv_selectionColor="@color/colorBackgroundFirst"
-            app:mcv_showOtherDates="decorated_disabled"
-            app:mcv_selectionMode="multiple"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/section_padding_top">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eland_choice_bold"
+                android:text="@string/f_fitness_center_register_info_attendance_date"
+                android:textAlignment="center"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/text_sub_title_size" />
+
+            <include
+                layout="@layout/include_dot_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/f_fitness_center_register_info_calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mcv_arrowColor="@color/colorBackgroundFirst"
+                app:mcv_calendarMode="month"
+                app:mcv_selectionColor="@color/colorBackgroundFirst"
+                app:mcv_selectionMode="multiple"
+                app:mcv_showOtherDates="decorated_disabled" />
+        </LinearLayout>
+
+
+        <include
+            layout="@layout/include_divider_section_full"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 </LinearLayout>

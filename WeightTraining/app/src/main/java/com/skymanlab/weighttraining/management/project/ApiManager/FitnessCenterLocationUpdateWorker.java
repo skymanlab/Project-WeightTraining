@@ -34,7 +34,7 @@ public class FitnessCenterLocationUpdateWorker extends Worker {
 
     // constant
     private static final String CLASS_NAME = FitnessCenterLocationUpdateWorker.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 //    // constant : location request
 //    public static final int INTERNAL = 10000;         // 선호하는 위치 업데이트 수신 간격
 //    public static final int FASTEST_INTERNAL = 1000;  // 업데이트를 처리할 수 있는 가장 빠른 간격

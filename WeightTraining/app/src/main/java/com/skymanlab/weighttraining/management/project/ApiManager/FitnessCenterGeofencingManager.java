@@ -23,7 +23,7 @@ public class FitnessCenterGeofencingManager {
 
     // constant
     private static final String CLASS_NAME = FitnessCenterGeofencingManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // instance
     private Activity activity;
     private LatLng location;

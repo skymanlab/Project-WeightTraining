@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.provider.Settings;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
+import com.skymanlab.weighttraining.management.developer.LogManager;
 
 import java.security.acl.Permission;
 
@@ -46,21 +48,32 @@ public class PermissionManager {
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= fine_location / coarse_location / location service =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public void initLocationPermission(GrantedPermissionListener listener) {
+        final String METHOD_NAME = "[initLocationPermission] ";
 
         if (listener == null)
             return;
 
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==========================================================================");
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==========================================================================");
         // [check 1] Location Permission : 권한이 승인되었는지 확인
         if (PermissionUtil.hasPermissionList(activity, LOCATION_PERMISSION_LIST)) {       // 승인된 경우
 
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============>>>>>>>>> 위치 권한 승인됨");
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============>>>>>>>>> GPS 권한은 = " + PermissionUtil.isEnabledLocationServices(activity, LocationManager.GPS_PROVIDER));
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============>>>>>>>>> 네트워크 권한은 = " + PermissionUtil.isEnabledLocationServices(activity, LocationManager.NETWORK_PROVIDER));
+
+
             // [check 2] Location Permission / gps provider 와 network provider :  GPS, Network 가 활성화 되어 있는지 확인
             if (PermissionUtil.isEnabledLocationServices(activity, LocationManager.GPS_PROVIDER)
-                    || PermissionUtil.isEnabledLocationServices(activity, LocationManager.NETWORK_PROVIDER)) {
+                    && PermissionUtil.isEnabledLocationServices(activity, LocationManager.NETWORK_PROVIDER)) {
 
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===========> 이제 googleMap , location 서비스를 활성화합니다.");
                 // 통과!!! -> 해당 서비스 진행
                 listener.setNextProcedure();
 
             } else {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< GPS 와 네티워크 > 네트워트나 위치 서비스가 활성화되지 않았습니다.");
 
                 // Location Permission / gps provider 와 network provider : 사용자에게 '시스템 위치 설정의 활성화'가 필요한 이유 설명 -> 권한 요청 화면 보여주기
                 PermissionUtil.showSnackbarForLocationServiceRequest(

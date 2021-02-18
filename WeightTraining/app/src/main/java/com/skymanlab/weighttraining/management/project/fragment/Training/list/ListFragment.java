@@ -25,7 +25,7 @@ public class ListFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTL] ListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

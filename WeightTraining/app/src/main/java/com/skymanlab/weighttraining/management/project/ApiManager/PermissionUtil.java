@@ -23,7 +23,7 @@ public class PermissionUtil {
 
     // constant
     private static final String CLASS_NAME = PermissionUtil.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constructor
     public PermissionUtil() {

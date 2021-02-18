@@ -25,7 +25,7 @@ public class EachMuscleAreaListFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFTL] EachMuscleAreaListFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     private static final String MUSCLE_AREA = "muscleArea";

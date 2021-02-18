@@ -67,14 +67,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:src="@drawable/right" />
-
-                <androidx.core.widget.ContentLoadingProgressBar
-                    android:id="@+id/f_fitness_center_progress_bar"
-                    style="?android:progressBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
-
             </FrameLayout> <!-- End of Section 1 -->
 
             <include
