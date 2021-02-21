@@ -11,6 +11,8 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.ApiManager.AttendanceCalendarManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
+import com.skymanlab.weighttraining.management.user.data.Attendance;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 
 import java.util.ArrayList;
 
@@ -19,39 +21,34 @@ public class FitnessCenterRegisterInfoSectionManager extends FragmentSectionMana
 
     // constant
     private static final String CLASS_NAME = "[PFMS] FitnessCenterRegisterInfoSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private String contractDate;
-    private String expiryDate;
-    private ArrayList<String> attendanceDateList;
+    private UserFitnessCenter myFitnessCenter;
+    private ArrayList<Attendance> myAttendanceDateList;
 
     // instance variable
-    private MaterialCalendarView materialCalendarView;
+    private MaterialCalendarView attendanceCalendar;
 
     // constructor
     public FitnessCenterRegisterInfoSectionManager(Fragment fragment, View view) {
         super(fragment, view);
     }
 
+    public void setMyFitnessCenter(UserFitnessCenter myFitnessCenter) {
+        this.myFitnessCenter = myFitnessCenter;
+    }
+
+    public void setMyAttendanceDateList(ArrayList<Attendance> myAttendanceDateList) {
+        this.myAttendanceDateList = myAttendanceDateList;
+    }
+
     // setter
-    public void setAttendanceDateList(ArrayList<String> attendanceDateList) {
-        this.attendanceDateList = attendanceDateList;
-    }
-
-    public void setContractDate(String contractDate) {
-        this.contractDate = contractDate;
-    }
-
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
     @Override
     public void connectWidget() {
 
-        // [ MaterialCalendarView | materialCalendarView ]
-        this.materialCalendarView = (MaterialCalendarView) getView().findViewById(R.id.f_fitness_center_register_info_calendar_view);
+        // [ MaterialCalendarView | attendanceCalendar ]
+        this.attendanceCalendar = (MaterialCalendarView) getView().findViewById(R.id.f_fitness_center_register_info_attendance_calendar);
 
     }
 
@@ -61,10 +58,10 @@ public class FitnessCenterRegisterInfoSectionManager extends FragmentSectionMana
         // init material calendar view
         AttendanceCalendarManager attendanceCalendarManager = new AttendanceCalendarManager(
                 getFragment().getContext(),
-                materialCalendarView,
-                contractDate,
-                expiryDate,
-                attendanceDateList
+                attendanceCalendar,
+                myFitnessCenter.getContractDate(),
+                myFitnessCenter.getExpiryDate(),
+                myAttendanceDateList
         );
         attendanceCalendarManager.init();
 

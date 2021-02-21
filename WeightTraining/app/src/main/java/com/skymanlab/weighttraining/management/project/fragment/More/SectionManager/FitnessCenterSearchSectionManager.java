@@ -48,7 +48,7 @@ public class FitnessCenterSearchSectionManager extends FragmentSectionManager im
 
     // constant
     private static final String CLASS_NAME = "[PFMS] FitnessCenterSearchSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable : google map api
     private GoogleMap gMap;

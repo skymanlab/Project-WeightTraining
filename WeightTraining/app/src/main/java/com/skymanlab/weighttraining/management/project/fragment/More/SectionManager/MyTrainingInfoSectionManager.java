@@ -24,7 +24,7 @@ public class MyTrainingInfoSectionManager extends FragmentSectionManager impleme
 
     // constant
     private static final String CLASS_NAME = "[PFMS] MyTrainingInfoSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private UserTraining myTraining;

@@ -22,7 +22,7 @@ public class FitnessCenterUtil {
 
     // constant
     private static final String CLASS_NAME = FitnessCenterUtil.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     public static final String DB_TARGET_USER_NODE = "user";

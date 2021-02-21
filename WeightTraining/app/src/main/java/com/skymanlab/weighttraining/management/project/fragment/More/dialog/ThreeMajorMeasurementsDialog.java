@@ -28,12 +28,6 @@ import java.util.HashMap;
 
 public class ThreeMajorMeasurementsDialog extends DialogFragment implements FragmentSectionInitializable {
 
-//    // constant
-//    private static final String MY_TRAINING = "myTraining";
-//
-//    // instance variable
-//    private UserTraining myTraining;
-
     // instance variable
     private TextView register;
     private EditText squat;
@@ -41,24 +35,9 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
     private EditText benchPress;
 
 
-//    public static ThreeMajorMeasurementsDialog newInstance(UserTraining myTraining) {
-//
-//        ThreeMajorMeasurementsDialog dialog = new ThreeMajorMeasurementsDialog();
-//
-//        Bundle args = new Bundle();
-//        args.putSerializable(MY_TRAINING, myTraining);
-//
-//        dialog.setArguments(args);
-//
-//        return dialog;
-//    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            this.myTraining = (UserTraining) getArguments().getSerializable(MY_TRAINING);
-//        }
     }
 
     @Nullable
@@ -156,7 +135,6 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
                         } else {
                             Snackbar.make(getView(), R.string.custom_dialog_three_major_measurements_snack_no_input, Snackbar.LENGTH_SHORT).show();
                         }
-
 
                     }
                 }

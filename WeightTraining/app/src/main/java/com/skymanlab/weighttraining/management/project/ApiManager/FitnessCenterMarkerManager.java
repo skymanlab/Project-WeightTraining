@@ -26,7 +26,7 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
     // constant
     private static final String CLASS_NAME = FitnessCenterMarkerManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Activity activity;

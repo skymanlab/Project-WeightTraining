@@ -12,6 +12,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
+import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
@@ -27,13 +28,14 @@ import com.skymanlab.weighttraining.management.user.data.UserTraining;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MoreSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // constant
     private static final String CLASS_NAME = "[PFM] MoreSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private LinearLayout registerDayCountWrapper;
@@ -50,6 +52,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     // instance variable :
     private UserTraining myTrainingData = null;
     private UserFitnessCenter myFitnessCenterData = null;
+    private ArrayList<Attendance> myAttendanceDateList = null;
 
     // constructor
     public MoreSectionManager(Fragment fragment, View view) {
@@ -98,7 +101,8 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         myDataManager.loadContent(new MyUserDataManager.OnFitnessCenterEventListener() {
 
             @Override
-            public void onRegisterMyFitnessCenter(UserTraining userTraining, UserFitnessCenter userFitnessCenter) {
+            public void onRegisterMyFitnessCenter(UserTraining userTraining, UserFitnessCenter userFitnessCenter, ArrayList<Attendance> attendanceDateList) {
+
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< MyFitnessCenterManager > userFitnessCenter 을 가져왔습니다.");
 
                 // =========================================== my fitness center ===========================================
@@ -111,10 +115,13 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
                 );
 
                 // training count 관련 widget 들의 초기 내용을 설정한다.
-                initWidgetOfTrainingCount(userFitnessCenter.getAttendanceDateList().size());
+                initWidgetOfTrainingCount(attendanceDateList.size());
 
-                // =========================================== my training info ===========================================
+                // =========================================== my training data ===========================================
                 myTrainingData = userTraining;
+
+                // =========================================== my attendance date list ===========================================
+                myAttendanceDateList = attendanceDateList;
 
             }
 
@@ -133,7 +140,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
                 // fitnessCenterFragment 로 이동
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance(myFitnessCenterData))
+                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance(myFitnessCenterData, myAttendanceDateList))
                         .addToBackStack(MoreFragment.class.getSimpleName())
                         .commit();
 

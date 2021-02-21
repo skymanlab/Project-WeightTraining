@@ -79,15 +79,15 @@ public class FitnessCenterMemberRvAdapter extends RecyclerView.Adapter<FitnessCe
         switch (member.getActiveState()) {
             case Member.ACTIVE_STATE_ENTER:
                 // fitness center 에 입장
-                stateImage.setImageResource(R.drawable.fitness_center_member_enter);
+                stateImage.setImageResource(R.drawable.attendance_state_enter);
                 break;
             case Member.ACTIVE_STATE_EXERCISE:
                 // 운동 중
-                stateImage.setImageResource(R.drawable.fitness_center_member_exercise);
+                stateImage.setImageResource(R.drawable.attendance_state_exercise);
                 break;
             case Member.ACTIVE_STATE_EXIT:
                 // fitness center 를 퇴장
-                stateImage.setImageResource(R.drawable.fitness_center_member_exist);
+                stateImage.setImageResource(R.drawable.attendance_state_exist);
                 break;
         }
 

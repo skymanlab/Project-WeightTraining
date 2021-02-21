@@ -26,7 +26,7 @@ public class FitnessCenterSearchFragment extends Fragment {
 
     // constant
     private static final String CLASS_NAME = "[PFM] FitnessCenterRegisterFragment";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private FragmentTopBarManager topBarManager;

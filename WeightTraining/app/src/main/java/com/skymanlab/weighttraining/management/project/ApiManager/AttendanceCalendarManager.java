@@ -13,6 +13,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.user.data.Attendance;
 
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
@@ -33,14 +34,14 @@ public class AttendanceCalendarManager {
     private MaterialCalendarView materialCalendarView;
     private String contractDate;
     private String expiryDate;
-    private ArrayList<String> attendanceDateList;
+    private ArrayList<Attendance> attendanceDateList;
 
     // constructor
     public AttendanceCalendarManager(Context context,
                                      MaterialCalendarView materialCalendarView,
                                      String contractDate,
                                      String expiryDate,
-                                     ArrayList<String> attendanceDateList) {
+                                     ArrayList<Attendance> attendanceDateList) {
         this.context = context;
         this.materialCalendarView = materialCalendarView;
         this.contractDate = contractDate;
@@ -69,10 +70,7 @@ public class AttendanceCalendarManager {
         AttendanceDateDecorator attendanceDateDecorator = new AttendanceDateDecorator(
                 transformAttendanceDate(attendanceDateList)
         );
-
-//        // register period decorator
-//        RegisterPeriodDecorator registerPeriodDecorator = new RegisterPeriodDecorator(contractDate, expiryDate);
-
+        
         // contract date decorator
         ContractDateDecorator contractDateDecorator = new ContractDateDecorator(contractDate);
 
@@ -85,29 +83,14 @@ public class AttendanceCalendarManager {
         // select today
         materialCalendarView.setSelectedDate(CalendarDay.today());
 
-//        LocalDate localDate = getLocalDate("2021년 11월 13일");
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LocalDate > getYear = " + localDate.getYear());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LocalDate > getMonth = " + localDate.getMonthValue());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LocalDate > getDayOfMonth = " + localDate.getDayOfMonth());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LocalDate > getDayOfWeek = " + localDate.getDayOfWeek());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LocalDate > getDayOfMonth = " + localDate.getDayOfMonth());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LocalDate > getDayOfYear = " + localDate.getDayOfYear());
-//
-//        CalendarDay calendarDay = CalendarDay.from(localDate);
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< CalendarDay > getYear = " + calendarDay.getYear());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< CalendarDay > getMonth = " + calendarDay.getMonth());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< CalendarDay > getDay = " + calendarDay.getDay());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< CalendarDay > getDate = " + calendarDay.getDate());
-
-
     }
 
     // ================================================ etc ================================================
-    private ArrayList<CalendarDay> transformAttendanceDate(ArrayList<String> attendanceDateList) {
+    private ArrayList<CalendarDay> transformAttendanceDate(ArrayList<Attendance> attendanceDateList) {
         ArrayList<CalendarDay> transformedData = new ArrayList<>();
 
-        for (String attendanceDate : attendanceDateList) {
-            transformedData.add(getCalendarDay(attendanceDate));
+        for (Attendance attendanceDate : attendanceDateList) {
+            transformedData.add(getCalendarDay(attendanceDate.getDate()));
         }
 
         return transformedData;
@@ -224,46 +207,7 @@ public class AttendanceCalendarManager {
 
         @Override
         public void decorate(DayViewFacade view) {
-            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_date_checker));
-        }
-    }
-
-
-    /**
-     *
-     */
-    public class RegisterPeriodDecorator implements DayViewDecorator {
-
-        // instance variable
-        private String contractDate;
-        private String expiryDate;
-
-        // constructor
-        public RegisterPeriodDecorator(String contractDate, String expiryDate) {
-            this.contractDate = contractDate;
-            this.expiryDate = expiryDate;
-        }
-
-        @Override
-        public boolean shouldDecorate(CalendarDay day) {
-
-
-            // contractDate 를 CalendarDay 로 변환
-            CalendarDay contractCalendarDay = CalendarDay.from(
-                    getLocalDate(this.contractDate)
-            );
-
-            // expiryDate 를 CalendarDay 로 변환
-            CalendarDay expiryCalendarDay = CalendarDay.from(
-                    getLocalDate(this.expiryDate)
-            );
-
-            return day.equals(contractCalendarDay) || day.equals(expiryCalendarDay);
-        }
-
-        @Override
-        public void decorate(DayViewFacade view) {
-            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_register_period));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_calendar_date_checker));
         }
     }
 
@@ -290,7 +234,7 @@ public class AttendanceCalendarManager {
 
         @Override
         public void decorate(DayViewFacade view) {
-            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_contract_date));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_calendar_contract_date));
         }
     }
 
@@ -317,7 +261,7 @@ public class AttendanceCalendarManager {
 
         @Override
         public void decorate(DayViewFacade view) {
-            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_expiry_date));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_calendar_expiry_date));
         }
     }
 }

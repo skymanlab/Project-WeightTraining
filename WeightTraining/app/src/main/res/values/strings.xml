@@ -25,12 +25,21 @@
 
     <!-- Fragment : home -->
     <string name="f_home_title">홈</string>
+    <string name="f_home_my_state_title">나의 상태 알림이</string>
+    <string name="f_home_my_attendance_state">나의 출석 상태</string>
+    <string name="f_home_my_attendance_state_check">출석하러가기</string>
+    <string name="f_home_my_attendance_state_on">출석 완료</string>
+    <string name="f_home_my_attendance_state_on_snack">이미 출석 완료 하였습니다.</string>
+    <string name="f_home_my_attendance_state_on_snack_save_complete">출석 완료하였습니다.</string>
+    <string name="f_home_my_attendance_state_off">미출석</string>
+    <string name="f_home_my_active_state">나의 활동 상태</string>
+    <string name="f_home_my_active_state_enter">입장</string>
+    <string name="f_home_my_active_state_exercise">운동 중</string>
+    <string name="f_home_my_active_state_exit">퇴장</string>
     <string name="f_home_fitness_center_member">피트니스 회원 목록</string>
-    <string name="f_home_enter">입장</string>
-    <string name="f_home_exercise">운동 중</string>
-    <string name="f_home_exit">퇴장</string>
     <string name="f_home_fitness_center_not_register">피트니스 센터를 아직 등록하지 않았습니다.</string>
     <string name="f_home_fitness_center_is_not_disclosed">비공개 상태입니다.</string>
+    <string name="f_home_alert_"></string>
     <string name="f_home_"></string>
 
     <!-- Fragment : training -->
@@ -144,6 +153,9 @@
     <!-- Fragment : fitness center register info -->
     <string name="f_fitness_center_register_info_title">등록 정보</string>
     <string name="f_fitness_center_register_info_attendance_date">출석 날짜</string>
+    <string name="f_fitness_center_register_info_attendance_date_contract_date_describe">: 등록일</string>
+    <string name="f_fitness_center_register_info_attendance_date_expiry_date_describe">: 만료일</string>
+    <string name="f_fitness_center_register_info_attendance_date_date_checker_describe">: 출석일</string>
     <string name="f_fitness_center_register_info_"></string>
 
     <!-- Fragment : fitness center setting -->

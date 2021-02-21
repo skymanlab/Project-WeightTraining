@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterSectionManager;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,9 +33,11 @@ public class FitnessCenterFragment extends Fragment {
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // constant
     private static final String MY_FITNESS_CENTER = "myFitnessCenter";
+    private static final String MY_ATTENDANCE_DATE_LIST = "myAttendanceDateList";
 
     // instance variable
     private UserFitnessCenter myFitnessCenter;
+    private ArrayList<Attendance> myAttendanceDateList;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -55,12 +60,14 @@ public class FitnessCenterFragment extends Fragment {
      * @return A new instance of fragment FitnessCenterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FitnessCenterFragment newInstance(UserFitnessCenter myFitnessCenter) {
+    public static FitnessCenterFragment newInstance(UserFitnessCenter myFitnessCenter,
+                                                    ArrayList<Attendance> myAttendanceDateList) {
 
         FitnessCenterFragment fragment = new FitnessCenterFragment();
 
         Bundle args = new Bundle();
         args.putSerializable(MY_FITNESS_CENTER, myFitnessCenter);
+        args.putSerializable(MY_ATTENDANCE_DATE_LIST, myAttendanceDateList);
 
         fragment.setArguments(args);
 
@@ -73,6 +80,7 @@ public class FitnessCenterFragment extends Fragment {
         final String METHOD_NAME = "[onCreate] ";
         if (getArguments() != null) {
             this.myFitnessCenter = (UserFitnessCenter) getArguments().getSerializable(MY_FITNESS_CENTER);
+            this.myAttendanceDateList = (ArrayList<Attendance>) getArguments().getSerializable(MY_ATTENDANCE_DATE_LIST);
         }
     }
 
@@ -108,6 +116,7 @@ public class FitnessCenterFragment extends Fragment {
         // [FitnessCenterSectionManager] [sectionManager] this is 'more' fragment's section manager.
         this.sectionManager = new FitnessCenterSectionManager(this, view);
         this.sectionManager.setMyFitnessCenter(myFitnessCenter);
+        this.sectionManager.setMyAttendanceDateList(myAttendanceDateList);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 

@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
+import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
@@ -21,7 +22,7 @@ public class FitnessCenterMemberManager {
 
     // constant
     private static final String CLASS_NAME = FitnessCenterMemberManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private String uid;
@@ -48,10 +49,23 @@ public class FitnessCenterMemberManager {
 
                         UserFitnessCenter myFitnessCenter = snapshot.getValue(UserFitnessCenter.class);
 
+                        // myFitnessCenter 가 없을 때는
+                        // 내가 등록한 피트니스 센터가 없을 때이다.
                         if (myFitnessCenter == null) {
                             // 피트니스 센터 등록을 하지 않았을 때
                             listener.isNotRegisteredTheFitnessCenter();
                             return;
+                        }
+
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==========================================================");
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석날짜리스트 > 객체 =  " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren());
+
+                        // 내가 등록한 피트니스 센터가 있을 때
+                        ArrayList<Attendance> myAttendanceDateList = new ArrayList<>();
+                        for (DataSnapshot search : snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren()) {
+
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석 날짜 항목 > search = " + search);
+                            myAttendanceDateList.add(search.getValue(Attendance.class));
                         }
 
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "-------< UserFitnessCenter > getMemberNumber = " + myFitnessCenter.getMemberNumber());
@@ -117,7 +131,7 @@ public class FitnessCenterMemberManager {
                                             // 내가 공개상태일 때
                                             // 나의 uid 와 myFitnessCenter 정보도 넘겨주고
                                             // 나와 같은 피트니스 센터에 등록한 회원들 중에서 '공개' 상태인 회원의 목록을 넘겨준다.
-                                            listener.isDisclosedState(uid, myFitnessCenter, myMemberData, memberArrayList);
+                                            listener.isDisclosedState(uid, myFitnessCenter, myAttendanceDateList, myMemberData, memberArrayList);
 
                                         }
 
@@ -130,7 +144,7 @@ public class FitnessCenterMemberManager {
 
                             // 피트니스 센터 등록을 하였지만
                             // 다른 사람에게 공개하고 싶지 않을 때
-                            listener.isNotIsDisclosedState();
+                            listener.isNotIsDisclosedState(uid, myFitnessCenter, myAttendanceDateList);
                         }
 
 
@@ -146,9 +160,9 @@ public class FitnessCenterMemberManager {
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnMemberManipulateListener {
-        void isDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, Member myMemberData, ArrayList<Member> memberArrayList);
+        void isDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList, Member myMemberData, ArrayList<Member> memberArrayList);
 
-        void isNotIsDisclosedState();
+        void isNotIsDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList);
 
         void isNotRegisteredTheFitnessCenter();
     }

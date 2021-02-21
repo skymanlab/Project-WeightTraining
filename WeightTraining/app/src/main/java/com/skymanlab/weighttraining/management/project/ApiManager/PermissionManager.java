@@ -21,7 +21,7 @@ public class PermissionManager {
 
     // constant
     private static final String CLASS_NAME = PermissionManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     public static final String[] LOCATION_PERMISSION_LIST = {

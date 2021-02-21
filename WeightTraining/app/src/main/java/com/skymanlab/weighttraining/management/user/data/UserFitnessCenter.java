@@ -1,5 +1,7 @@
 package com.skymanlab.weighttraining.management.user.data;
 
+import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,18 +23,17 @@ public class UserFitnessCenter implements Serializable {
     public static final String IS_ALLOWED_ACCESS_NOTIFICATION = "isAllowedAccessNotification";
 
     // instance variable
-    private long memberNumber;                      // 회원 번호
-    private String fitnessCenterName;               // 피트니스 센터 이름
-    private String firstAddress;                    // 주소 1
-    private String secondAddress;                   // 주소 2
-    private String thirdAddress;                    // 주소 3
-    private double latitude;                        // 위도 
-    private double longitude;                       // 경도
-    private String contractDate;                    // 계약일
-    private String expiryDate;                      // 만기일
-    private ArrayList<String> attendanceDateList;   // 출석날짜 리스트
-    private boolean isDisclosed;                    // 공개할거냐? : true=공개, false=비공개
-    private boolean isAllowedAccessNotification;    // 접근 알림을 허용할거냐? : true=알려줌, false=안알려줌
+    private long memberNumber;                          // 회원 번호
+    private String fitnessCenterName;                   // 피트니스 센터 이름
+    private String firstAddress;                        // 주소 1
+    private String secondAddress;                       // 주소 2
+    private String thirdAddress;                        // 주소 3
+    private double latitude;                            // 위도
+    private double longitude;                           // 경도
+    private String contractDate;                        // 계약일
+    private String expiryDate;                          // 만기일
+    private boolean isDisclosed;                        // 공개할거냐? : true=공개, false=비공개
+    private boolean isAllowedAccessNotification;        // 접근 알림을 허용할거냐? : true=알려줌, false=안알려줌
 
 
     // getter, setter
@@ -106,14 +107,6 @@ public class UserFitnessCenter implements Serializable {
 
     public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
-    }
-
-    public ArrayList<String> getAttendanceDateList() {
-        return attendanceDateList;
-    }
-
-    public void setAttendanceDateList(ArrayList<String> attendanceDateList) {
-        this.attendanceDateList = attendanceDateList;
     }
 
     public boolean getIsDisclosed() {

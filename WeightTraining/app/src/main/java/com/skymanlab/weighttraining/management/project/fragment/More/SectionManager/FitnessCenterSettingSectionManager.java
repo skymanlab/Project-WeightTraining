@@ -34,7 +34,7 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
 
     // constant
     private static final String CLASS_NAME = "[PFMS] FitnessCenterSettingSectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private UserFitnessCenter myFitnessCenter;

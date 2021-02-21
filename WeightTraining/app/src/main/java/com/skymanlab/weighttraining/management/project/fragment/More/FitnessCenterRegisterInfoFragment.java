@@ -15,6 +15,8 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.SectionManager.FitnessCenterRegisterInfoSectionManager;
+import com.skymanlab.weighttraining.management.user.data.Attendance;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 
 import java.util.ArrayList;
 
@@ -30,14 +32,12 @@ public class FitnessCenterRegisterInfoFragment extends Fragment {
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
-    private static final String ATTENDANCE_DATE_LIST = "attendanceDateList";
-    private static final String CONTRACT_DATE = "contractDate";
-    private static final String EXPIRY_DATE = "expiryDate";
+    private static final String MY_FITNESS_CENTER = "myFitnessCenter";
+    private static final String MY_ATTENDANCE_DATE_LIST = "myAttendanceDateList";
 
     // instance variable
-    private String contractDate;
-    private String expiryDate;
-    private ArrayList<String> attendanceDateList;
+    private UserFitnessCenter myFitnessCenter;
+    private ArrayList<Attendance> myAttendanceDateList;
 
     // instance variable
     private FragmentTopBarManager topBarManager;
@@ -55,16 +55,14 @@ public class FitnessCenterRegisterInfoFragment extends Fragment {
      * @return A new instance of fragment FitnessCenterRegisterInfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FitnessCenterRegisterInfoFragment newInstance(String contractDate,
-                                                                String expiryDate,
-                                                                ArrayList<String> attendanceDateList) {
+    public static FitnessCenterRegisterInfoFragment newInstance(UserFitnessCenter myFitnessCenter,
+                                                                ArrayList<Attendance> myAttendanceDateList) {
 
         FitnessCenterRegisterInfoFragment fragment = new FitnessCenterRegisterInfoFragment();
 
         Bundle args = new Bundle();
-        args.putString(CONTRACT_DATE, contractDate);
-        args.putString(EXPIRY_DATE, expiryDate);
-        args.putStringArrayList(ATTENDANCE_DATE_LIST, attendanceDateList);
+        args.putSerializable(MY_FITNESS_CENTER, myFitnessCenter);
+        args.putSerializable(MY_ATTENDANCE_DATE_LIST, myAttendanceDateList);
 
         fragment.setArguments(args);
 
@@ -75,9 +73,8 @@ public class FitnessCenterRegisterInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.contractDate = getArguments().getString(CONTRACT_DATE);
-            this.expiryDate = getArguments().getString(EXPIRY_DATE);
-            this.attendanceDateList = getArguments().getStringArrayList(ATTENDANCE_DATE_LIST);
+            this.myFitnessCenter = (UserFitnessCenter) getArguments().getSerializable(MY_FITNESS_CENTER);
+            this.myAttendanceDateList = (ArrayList<Attendance>) getArguments().getSerializable(MY_ATTENDANCE_DATE_LIST);
         }
     }
 
@@ -99,9 +96,8 @@ public class FitnessCenterRegisterInfoFragment extends Fragment {
 
         // section manager
         sectionManager = new FitnessCenterRegisterInfoSectionManager(this, view);
-        sectionManager.setContractDate(contractDate);
-        sectionManager.setExpiryDate(expiryDate);
-        sectionManager.setAttendanceDateList(attendanceDateList);
+        sectionManager.setMyFitnessCenter(myFitnessCenter);
+        sectionManager.setMyAttendanceDateList(myAttendanceDateList);
         sectionManager.connectWidget();
         sectionManager.initWidget();
 

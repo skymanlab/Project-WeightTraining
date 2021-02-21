@@ -30,7 +30,7 @@ public class GoogleMapManager {
 
     // constant
     private static final String CLASS_NAME = GoogleMapManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Fragment fragment;

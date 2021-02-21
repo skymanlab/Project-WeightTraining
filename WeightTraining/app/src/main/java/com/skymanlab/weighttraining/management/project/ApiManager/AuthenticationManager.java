@@ -47,7 +47,7 @@ public class AuthenticationManager {
 
     // constant
     private static final String CLASS_NAME = AuthenticationManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // constant
     public static final int RC_SIGN_IN = 9000;
 
