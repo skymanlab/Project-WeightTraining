@@ -38,27 +38,12 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_default"
-                android:background="@color/browser_actions_divider_color" />
+                android:background="@color/colorDividerDefault" />
 
-            <View
+            <include
+                layout="@layout/include_divider_section_default"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_section"
-                android:background="@color/browser_actions_bg_grey" />
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/f_home_ad_mob"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="bottom"
-                app:adSize="SMART_BANNER"
-                app:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_section"
-                android:background="@color/browser_actions_bg_grey" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,46 +70,95 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <com.google.android.material.button.MaterialButtonToggleGroup
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:checkedButton="@+id/f_home_exit"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    android:layout_height="wrap_content">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/f_home_enter"
-                        style="?attr/materialButtonOutlinedStyle"
+                    <TextView
+                        android:id="@+id/f_home_fitness_center_instruction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/eland_choice_medium"
-                        android:text="@string/f_home_enter"
-                        app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
+                        android:fontFamily="@font/eland_choice_light"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:textAlignment="center"/>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/f_home_exit"
-                        style="?attr/materialButtonOutlinedStyle"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/eland_choice_medium"
-                        android:text="@string/f_home_exit"
-                        app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
+                        android:orientation="vertical">
 
-                </com.google.android.material.button.MaterialButtonToggleGroup>
+                        <com.google.android.material.button.MaterialButtonToggleGroup
+                            android:id="@+id/f_home_fitness_center_active_state_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:selectionRequired="true"
+                            app:singleSelection="true">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/f_home_fitness_center_member_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/f_home_fitness_center_active_state_enter"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/eland_choice_medium"
+                                android:text="@string/f_home_enter"
+                                app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/f_home_fitness_center_active_state_exercise"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/eland_choice_medium"
+                                android:text="@string/f_home_exercise"
+                                app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/f_home_fitness_center_active_state_exit"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/eland_choice_medium"
+                                android:text="@string/f_home_exit"
+                                app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
+
+                        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/f_home_fitness_center_member_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+
             </LinearLayout>
 
-            <include
-                layout="@layout/include_divider_section_full"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="@dimen/divider_default"
+                android:background="@color/colorDividerDefault" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/browser_actions_bg_grey">
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/f_home_ad_mob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom"
+                    app:adSize="SMART_BANNER"
+                    app:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView><!-- End of content container -->

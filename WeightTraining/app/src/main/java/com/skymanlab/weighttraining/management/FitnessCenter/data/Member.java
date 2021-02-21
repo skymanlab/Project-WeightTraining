@@ -3,15 +3,20 @@ package com.skymanlab.weighttraining.management.FitnessCenter.data;
 public class Member {
 
     // constant
+    public static final int ACTIVE_STATE_ENTER = 1;
+    public static final int ACTIVE_STATE_EXERCISE = 2;
+    public static final int ACTIVE_STATE_EXIT = 3;
+
+    // constant
     public static final String MEMBER_NUMBER = "memberNumber";
     public static final String USER_NAME = "userName";
-    public static final String IS_ACTIVE = "isActive";
+    public static final String ACTIVE_STATE = "activeState";
     public static final String IS_DISCLOSED = "isDisclosed";
 
     // instance variable
     private long memberNumber;
     private String userName;
-    private boolean isActive;
+    private int activeState;
     private boolean isDisclosed;
 
     // getter, setter
@@ -31,12 +36,12 @@ public class Member {
         this.userName = userName;
     }
 
-    public boolean getIsActive() {
-        return isActive;
+    public int getActiveState() {
+        return activeState;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActiveState(int activeState) {
+        this.activeState = activeState;
     }
 
     public boolean getIsDisclosed() {

@@ -27,7 +27,10 @@
     <string name="f_home_title">홈</string>
     <string name="f_home_fitness_center_member">피트니스 회원 목록</string>
     <string name="f_home_enter">입장</string>
+    <string name="f_home_exercise">운동 중</string>
     <string name="f_home_exit">퇴장</string>
+    <string name="f_home_fitness_center_not_register">피트니스 센터를 아직 등록하지 않았습니다.</string>
+    <string name="f_home_fitness_center_is_not_disclosed">비공개 상태입니다.</string>
     <string name="f_home_"></string>
 
     <!-- Fragment : training -->
@@ -52,7 +55,9 @@
     <string name="f_more_target">목표</string>
     <string name="f_more_setting">설정</string>
     <string name="f_more_notice">공지사항</string>
-    <string name="f_more_service_center">고객센터</string>
+    <string name="f_more_my_training_info">나의 트레이닝</string>
+    <string name="f_more_service_center">건의하기</string>
+    <string name="f_more_service_center_email_title">개발자에게 건의하기</string>
 
     <!-- Fragment : more user info -->
     <string name="f_more_user_info_title">내 정보</string>
@@ -66,6 +71,18 @@
     <string name="f_more_user_info_logout">로그아웃</string>
     <string name="f_more_user_info_withdraw">회원탈퇴</string>
     <string name="f_more_user_info_"></string>
+
+    <!-- Fragment : my training info -->
+    <string name="f_my_training_info_title">나의 트레이닝</string>
+    <string name="f_my_training_info_three_major_measurements">3대 측정</string>
+    <string name="f_my_training_info_three_major_measurements_squat">스쿼트</string>
+    <string name="f_my_training_info_three_major_measurements_squat_default">0 kg</string>
+    <string name="f_my_training_info_three_major_measurements_deadlift">데드 리프트</string>
+    <string name="f_my_training_info_three_major_measurements_deadlift_default">0 kg</string>
+    <string name="f_my_training_info_three_major_measurements_bench_press">벤치 프레스</string>
+    <string name="f_my_training_info_three_major_measurements_bench_press_default">0 kg</string>
+    <string name="f_my_training_info_three_major_measurements_register">등록</string>
+    <string name="f_my_training_info_"></string>
 
     <!-- Fragment : fitness center -->
     <string name="f_fitness_center_title">피트니스 센터</string>
@@ -83,13 +100,13 @@
     <string name="f_fitness_center_attendance_date_count_default">피트니스 센터에서 출석한 일 수입니다.</string>
     <string name="f_fitness_center_setting_info_title">피트니스 센터 설정 정보</string>
     <string name="f_fitness_center_setting_info_is_allowed_access_notification">접근 알림</string>
-    <string name="f_fitness_center_setting_info_is_allowed_access_notification_true">피트니스 센터에 접근하면 알림으로 알려줍니다.</string>
-    <string name="f_fitness_center_setting_info_is_allowed_access_notification_false">피트니스 센터에 접근 알림을 중지합니다.</string>
     <string name="f_fitness_center_setting_info_is_allowed_access_notification_default">피트니스 센터에 접근여부를 알림으로 알려줄지에 대한 설정값입니다.</string>
+    <string name="f_fitness_center_setting_info_is_allowed_access_notification_true">실행 중</string>
+    <string name="f_fitness_center_setting_info_is_allowed_access_notification_false">중지</string>
     <string name="f_fitness_center_setting_info_is_disclosed">공개 여부</string>
     <string name="f_fitness_center_setting_info_is_disclosed_default">다른 사람에게 피트니스 센터 등록 공개 여부에 대한 설정입니다.</string>
-    <string name="f_fitness_center_setting_info_is_disclosed_true">피트니스 센터 회원임을 공개합니다.</string>
-    <string name="f_fitness_center_setting_info_is_disclosed_false">피트니스 센터 회원임을 공개하지 않습니다.</string>
+    <string name="f_fitness_center_setting_info_is_disclosed_true">공개</string>
+    <string name="f_fitness_center_setting_info_is_disclosed_false">비공개</string>
     <string name="f_fitness_center_"></string>
 
     <!-- Fragment : fitness center search -->
@@ -101,7 +118,6 @@
     <string name="f_fitness_center_search_snack_check_data_false">피트니스 센터를 먼저 검색해주세요.</string>
     <string name="f_fitness_center_search_snack_already_exist">이미 존재하는 피트니스 센터입니다. </string>
     <string name="f_fitness_center_search_"></string>
-
 
     <!-- Fragment : fitness center register -->
     <string name="f_fitness_center_register_title">피트니스 센터 등록</string>
@@ -129,6 +145,16 @@
     <string name="f_fitness_center_register_info_title">등록 정보</string>
     <string name="f_fitness_center_register_info_attendance_date">출석 날짜</string>
     <string name="f_fitness_center_register_info_"></string>
+
+    <!-- Fragment : fitness center setting -->
+    <string name="f_fitness_center_setting_title">피트니스 센터 설정</string>
+    <string name="f_fitness_center_setting_is_disclosed">피트니스 센터 공개</string>
+    <string name="f_fitness_center_setting_is_disclosed_text_on">공개 상태입니다.</string>
+    <string name="f_fitness_center_setting_is_disclosed_text_off">비공개 상태입니다.</string>
+    <string name="f_fitness_center_setting_is_allowed_access_notification">피트니스 센터 접근 알림</string>
+    <string name="f_fitness_center_setting_is_allowed_access_notification_text_on">접근 알림을 활성화 되었습니다.</string>
+    <string name="f_fitness_center_setting_is_allowed_access_notification_text_off">접근 알림을 알리지 않습니다.</string>
+    <string name="f_fitness_center_setting_"></string>
 
     <!-- Fragment : setting -->
     <string name="f_setting_title">환경설정</string>
@@ -599,6 +625,15 @@
     <string name="custom_dialog_detail_program_setting_bt_negative">취소</string>
     <string name="custom_dialog_detail_program_setting_snack_setting_data_error">프로그램 설정들을 확인해주세요.</string>
 
+    <!-- Custom dialog : three major measurements -->
+    <string name="custom_dialog_three_major_measurements_title">3대 측정 입력</string>
+    <string name="custom_dialog_three_major_measurements_squat">스쿼트</string>
+    <string name="custom_dialog_three_major_measurements_deadlift">데드리프트</string>
+    <string name="custom_dialog_three_major_measurements_bench_press">벤치 프레스</string>
+    <string name="custom_dialog_three_major_measurements_button_register">등록</string>
+    <string name="custom_dialog_three_major_measurements_snack_no_input">모든 값을 입력해주세요.</string>
+    <string name="custom_dialog_three_major_measurements_"></string>
+
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ pop up +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
@@ -633,11 +668,8 @@
     <string name="preference_key_is_kept_logged_in">isKeptLoggedIn</string>
     <string name="preference_key_is_granted_location_permission">isGrantedLocationPermission</string>
     <string name="preference_key_is_granted_background_location_permission">isGrantedBackgroundLocationPermission</string>
-    <string name="preference_key_is_enabled_fitness_center_geofencing">isEnabledFitnessCenterGeofencing</string>
-    <string name="preference_key_is_disclosed_fitness_center">isDisclosedFitnessCenter</string>
-    <string name="preference_key_first_address">firstAddress</string>
-    <string name="preference_key_second_address">secondAddress</string>
-    <string name="preference_key_third_address">thirdAddress</string>
+    <string name="preference_key_is_disclosed">isDisclosed</string>
+    <string name="preference_key_is_allowed_access_notification">isAllowedAccessNotification</string>
     <string name="preference_key_"></string>
 
     <!-- Preference : category item -->
@@ -761,6 +793,7 @@
     <!-- NotificationManager -->
     <string name="etc_notification_manager_channel_id_fitness_center_notification_name">피트니스 센터 알림</string>
     <string name="etc_notification_manager_channel_id_fitness_center_notification_description">피트니스 센터에 접근하는 알림을 표시합니다.</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_exercise_check">GO</string>
     <string name="etc_notification_manager_channel_id_fitness_center_notification_"></string>
 
     <!-- FitnessCenterGeofencingService -->
@@ -769,6 +802,13 @@
     <string name="etc_fitness_center_geofencing_transition_type_enter">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
     <string name="etc_fitness_center_geofencing_transition_type_exit">운동을 끝내고 가시나요?</string>
     <string name="etc_fitness_center_geofencing_transition_type_default"></string>
+
+    <!-- FitnessCenterGeofencingManager -->
+    <string name="etc_fitness_center_geofencing_manager_add_geofence_success"></string>
+    <string name="etc_fitness_center_geofencing_manager_add_geofence_fail"></string>
+    <string name="etc_fitness_center_geofencing_manager_remove_geofence_success"></string>
+    <string name="etc_fitness_center_geofencing_manager_remove_geofence_fail"></string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

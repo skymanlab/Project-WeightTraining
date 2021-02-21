@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;

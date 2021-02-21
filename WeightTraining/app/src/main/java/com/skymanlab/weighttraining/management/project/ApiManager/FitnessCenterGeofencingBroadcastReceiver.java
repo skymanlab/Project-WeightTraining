@@ -20,9 +20,6 @@ public class FitnessCenterGeofencingBroadcastReceiver extends BroadcastReceiver 
     private static final String CLASS_NAME = FitnessCenterGeofencingBroadcastReceiver.class.getSimpleName();
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
-    // constant
-    public static final String ACTION_FITNESS_CENTER_GEOFENCING = "com.skymanlab.weighttraining.management.project.ApiManager.action" + ".PROCESS_UPDATES";
-
     @Override
     public void onReceive(Context context, Intent intent) {
         final String METHOD_NAME = "[onReceive] ";

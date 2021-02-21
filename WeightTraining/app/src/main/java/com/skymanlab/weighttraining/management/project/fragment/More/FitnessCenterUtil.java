@@ -1,7 +1,5 @@
 package com.skymanlab.weighttraining.management.project.fragment.More;
 
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
 import com.skymanlab.weighttraining.management.user.data.User;

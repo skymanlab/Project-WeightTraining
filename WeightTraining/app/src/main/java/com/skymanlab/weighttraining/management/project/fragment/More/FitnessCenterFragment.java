@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;

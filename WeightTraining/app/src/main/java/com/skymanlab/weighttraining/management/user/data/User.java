@@ -1,12 +1,6 @@
 package com.skymanlab.weighttraining.management.user.data;
 
-import androidx.compose.ui.semantics.ProgressBarRangeInfo;
-
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
-
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class User implements Serializable {
 
@@ -18,10 +12,11 @@ public class User implements Serializable {
     public static final String PHOTO_URL = "photoUrl";
     public static final String IS_SAVED_BASE_EVENT = " isSavedBaseEvent";
     public static final String FITNESS_CENTER = "fitnessCenter";
+    public static final String TRAINING = "training";
 
     // instant variable
     private String uid;             // 0. uid
-    private long number;
+    private long number;            // 1.
     private String name;            // 2. name
     private String email;           // 3. email
     private String photoUrl;        // 4. photoUr

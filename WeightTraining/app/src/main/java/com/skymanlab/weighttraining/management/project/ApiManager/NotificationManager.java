@@ -2,12 +2,15 @@ package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.app.Activity;
 import android.app.NotificationChannel;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.skymanlab.weighttraining.MainActivity;
 import com.skymanlab.weighttraining.R;
 import com.squareup.picasso.Picasso;
 
@@ -58,12 +61,18 @@ public class NotificationManager {
 
     public static void sendFitnessCenterNotification(Context context, int notificationId, String title, String message) {
 
+        Intent home = new Intent(context, MainActivity.class);
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent homePendingIntent = PendingIntent.getActivity(context, 0, home, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_FITNESS_CENTER)
                 .setSmallIcon(R.drawable.icon)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(homePendingIntent)
+                .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(notificationId, builder.build());

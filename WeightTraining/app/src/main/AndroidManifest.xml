@@ -3,7 +3,7 @@
     package="com.skymanlab.weighttraining">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- 포그라운드에서 위치 찾기 -->
@@ -58,11 +58,7 @@
         <!-- Broadcast Receiver : fitness center geofence -->
         <receiver
             android:name=".management.project.ApiManager.FitnessCenterGeofencingBroadcastReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofenceBroadcastReceiver.ACTION_FITNESS_CENTER_GEOFENCING" />
-            </intent-filter>
-        </receiver>
+            android:exported="true"></receiver>
 
     </application>
 

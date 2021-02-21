@@ -1,4 +1,4 @@
-package com.skymanlab.weighttraining.management.FitnessCenter.data;
+package com.skymanlab.weighttraining.management.user.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +12,8 @@ public class UserFitnessCenter implements Serializable {
     public static final String FIRST_ADDRESS = "firstAddress";
     public static final String SECOND_ADDRESS = "secondAddress";
     public static final String THIRD_ADDRESS = "thirdAddress";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
     public static final String CONTRACT_DATE = "contractDate";
     public static final String EXPIRY_DATE = "expiryDate";
     public static final String ATTENDANCE_DATE_LIST = "attendanceDateList";
@@ -24,6 +26,8 @@ public class UserFitnessCenter implements Serializable {
     private String firstAddress;                    // 주소 1
     private String secondAddress;                   // 주소 2
     private String thirdAddress;                    // 주소 3
+    private double latitude;                        // 위도 
+    private double longitude;                       // 경도
     private String contractDate;                    // 계약일
     private String expiryDate;                      // 만기일
     private ArrayList<String> attendanceDateList;   // 출석날짜 리스트
@@ -70,6 +74,22 @@ public class UserFitnessCenter implements Serializable {
 
     public void setThirdAddress(String thirdAddress) {
         this.thirdAddress = thirdAddress;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getContractDate() {

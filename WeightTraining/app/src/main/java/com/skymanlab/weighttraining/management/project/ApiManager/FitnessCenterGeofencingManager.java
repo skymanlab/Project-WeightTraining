@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 
@@ -54,7 +55,8 @@ public class FitnessCenterGeofencingManager {
                 location,
                 FitnessCenterGeofencingUtil.GEOFENCE_RADIUS_IN_METERS,
                 FitnessCenterGeofencingUtil.GEOFENCE_EXPIRATION_IN_MILLISECONDS,
-                FitnessCenterGeofencingUtil.GEOFENCE_TRANSITION_TYPE
+                FitnessCenterGeofencingUtil.GEOFENCE_TRANSITION_TYPE,
+                FitnessCenterGeofencingUtil.GEOFENCE_LOITERING_DELAY
 
         );
         // PendingIntent : application context 에

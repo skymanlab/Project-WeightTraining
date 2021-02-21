@@ -12,16 +12,18 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterGeofencingManager;
-import com.skymanlab.weighttraining.management.project.ApiManager.MyFitnessCenterManager;
+import com.skymanlab.weighttraining.management.project.ApiManager.MyUserDataManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.MyTrainingInfoFragment;
+import com.skymanlab.weighttraining.management.user.data.UserTraining;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -41,13 +43,13 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private MaterialCardView fitnessCenter;
     private MaterialCardView target;
     private MaterialCardView setting;
+    private MaterialCardView myTrainingInfo;
     private MaterialButton notice;
     private MaterialButton serviceCenter;
 
-
     // instance variable :
-    FitnessCenterGeofencingManager geofenceManager;
-    private UserFitnessCenter myFitnessCenter = null;
+    private UserTraining myTrainingData = null;
+    private UserFitnessCenter myFitnessCenterData = null;
 
     // constructor
     public MoreSectionManager(Fragment fragment, View view) {
@@ -69,14 +71,17 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         // [iv/C]TextView : connect
         this.trainingCount = (TextView) getView().findViewById(R.id.f_more_training_count);
 
-        // [iv/C]LinearLayout : fitnessCenter connect
+        // [ MaterialCardView | fitnessCenter ]
         this.fitnessCenter = (MaterialCardView) getView().findViewById(R.id.f_more_fitness_center);
 
-        // [iv/C]LinearLayout : target connect
+        // [ MaterialCardView | target ]
         this.target = (MaterialCardView) getView().findViewById(R.id.f_more_target);
 
-        // [iv/C]LinearLayout : setting connect
+        // [ MaterialCardView | setting ]
         this.setting = (MaterialCardView) getView().findViewById(R.id.f_more_setting);
+
+        // [ MaterialCardView | myTrainingInfo ]
+        this.myTrainingInfo = (MaterialCardView) getView().findViewById(R.id.f_more_my_training_info);
 
         // [iv/C]MaterialButton : connect
         this.notice = (MaterialButton) getView().findViewById(R.id.f_more_notice);
@@ -89,14 +94,16 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        MyFitnessCenterManager myFitnessCenterManager = new MyFitnessCenterManager(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        myFitnessCenterManager.loadContent(new MyFitnessCenterManager.OnFitnessCenterEventListener() {
+        MyUserDataManager myDataManager = new MyUserDataManager(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        myDataManager.loadContent(new MyUserDataManager.OnFitnessCenterEventListener() {
+
             @Override
-            public void onRegisterMyFitnessCenter(UserFitnessCenter userFitnessCenter) {
+            public void onRegisterMyFitnessCenter(UserTraining userTraining, UserFitnessCenter userFitnessCenter) {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< MyFitnessCenterManager > userFitnessCenter 을 가져왔습니다.");
 
+                // =========================================== my fitness center ===========================================
                 // userFitnessCenter
-                myFitnessCenter = userFitnessCenter;
+                myFitnessCenterData = userFitnessCenter;
 
                 // register day count 관련 widget 등의 초기 내용을 설정한다.
                 initWidgetOfRegisterDayCount(
@@ -105,6 +112,9 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
                 // training count 관련 widget 들의 초기 내용을 설정한다.
                 initWidgetOfTrainingCount(userFitnessCenter.getAttendanceDateList().size());
+
+                // =========================================== my training info ===========================================
+                myTrainingData = userTraining;
 
             }
 
@@ -121,11 +131,10 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View v) {
 
-
                 // fitnessCenterFragment 로 이동
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance(myFitnessCenter))
-                        .addToBackStack(null)
+                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance(myFitnessCenterData))
+                        .addToBackStack(MoreFragment.class.getSimpleName())
                         .commit();
 
             }
@@ -151,6 +160,26 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             }
         });
 
+        this.myTrainingInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============================================");
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getSquat = " + myTrainingData.getSquat());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getDeadlift = " + myTrainingData.getDeadlift());
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getBenchPress = " + myTrainingData.getBenchPress());
+
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(
+                                R.id.nav_home_content_wrapper,
+                                MyTrainingInfoFragment.newInstance(myTrainingData)
+                        )
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+
         // [iv/C]MaterialButton : notice click listener
         this.notice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,32 +187,9 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.nav_home_content_wrapper, FitnessCenterSearchFragment.newInstance())
-                        .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+                        .addToBackStack(null)
                         .commit();
 
-//                FitnessCenterMemberManager memberManager = new FitnessCenterMemberManager(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//                memberManager.init(new FitnessCenterMemberManager.OnMemberManipulateListener() {
-//                    @Override
-//                    public void manipulateMemberList(ArrayList<Member> memberArrayList) {
-//
-//                        for (int index = 0; index < memberArrayList.size(); index++) {
-//                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getMemberNumber = " + memberArrayList.get(index).getMemberNumber());
-//                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getUserName = " + memberArrayList.get(index).getUserName());
-//                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getIsActive = " + memberArrayList.get(index).getIsActive());
-//                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "=========< " + index + " > getIsDisclosed = " + memberArrayList.get(index).getIsDisclosed());
-//                        }
-//
-//                    }
-//                });
-
-//                ConnectivityManager manager = (ConnectivityManager) getFragment().getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//                Network currentNetwork = manager.getActiveNetwork();
-//                for (Network network : manager.getAllNetworks()) {
-//                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====> 모든 네트워크 확인 중 = " + network);
-//                }
-//
-//                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 네트워크 상태 > 현재 네트워크 상태는 NET_CAPABILITY_NOT_METERED = " +currentNetwork);
 
             }
         });
@@ -195,10 +201,19 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
                 SettingsManager.displayAllSettingsValue(getFragment().getContext());
 
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setType("text/plain");
+                intent.setPackage("com.google.android.gm");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"skyman1325@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, getFragment().getString(R.string.f_more_service_center_email_title));
+                intent.setType("message/rfc822");
+                getFragment().getActivity().startActivity(intent);
+
             }
         });
 
-    }
+    } // End of method [initWidget]
 
 
     /**

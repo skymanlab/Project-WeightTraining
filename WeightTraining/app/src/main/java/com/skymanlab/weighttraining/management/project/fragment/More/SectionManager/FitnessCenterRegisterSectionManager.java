@@ -24,14 +24,14 @@ import com.google.firebase.database.Transaction;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentTopBarManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
 import java.text.SimpleDateFormat;
@@ -157,10 +157,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             public void onClick(DialogInterface dialog, int which) {
 
                                 saveContent(
-//                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
-//                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                                        "dongik1203",
-                                        "슬기는내꺼",
+                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
                                         fitnessCenter.getName(),
                                         fitnessCenter.getFirstAddress(),
                                         fitnessCenter.getSecondAddress(),
@@ -278,7 +276,7 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             // 경로 fitnessCenter/주소1/주소2/주소3/memberList/infoList
                             HashMap<String, Object> memberData = new HashMap<>();
                             memberData.put(Member.USER_NAME, userName);
-                            memberData.put(Member.IS_ACTIVE, false);
+                            memberData.put(Member.ACTIVE_STATE, Member.ACTIVE_STATE_EXIT);
                             memberData.put(Member.IS_DISCLOSED, true);
 
                             // save
@@ -294,8 +292,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             // 경로 fitnessCenter/주소1/주소2/주소3/memberList
                             HashMap<String, Object> memberData = new HashMap<>();
                             memberData.put(Member.USER_NAME, userName);
+                            memberData.put(Member.ACTIVE_STATE, Member.ACTIVE_STATE_EXIT);
                             memberData.put(Member.IS_DISCLOSED, true);
-                            memberData.put(Member.IS_ACTIVE, false);
 
                             // save
                             currentData.child(FitnessCenter.MEMBER_COUNTER)      // fitnessCenter/주소1/주소2/주소3/memberCounter 에 memberCounter 등록
@@ -331,6 +329,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                                         fitnessCenterFirstAddress,
                                         fitnessCenterSecondAddress,
                                         fitnessCenterThirdAddress,
+                                        latitude,
+                                        longitude,
                                         fitnessCenterName,
                                         userCounter,
                                         contractDate,
@@ -350,6 +350,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                                               String firstAddress,
                                               String secondAddress,
                                               String thirdAddress,
+                                              double latitude,
+                                              double longitude,
                                               String fitnessCenterName,
                                               long memberCounter,
                                               String contractDate,
@@ -361,12 +363,14 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
         myFitnessCenterData.put(UserFitnessCenter.FIRST_ADDRESS, firstAddress);
         myFitnessCenterData.put(UserFitnessCenter.SECOND_ADDRESS, secondAddress);
         myFitnessCenterData.put(UserFitnessCenter.THIRD_ADDRESS, thirdAddress);
+        myFitnessCenterData.put(UserFitnessCenter.LATITUDE, latitude);
+        myFitnessCenterData.put(UserFitnessCenter.LONGITUDE, longitude);
         myFitnessCenterData.put(UserFitnessCenter.FITNESS_CENTER_NAME, fitnessCenterName);
         myFitnessCenterData.put(UserFitnessCenter.MEMBER_NUMBER, memberCounter);
         myFitnessCenterData.put(UserFitnessCenter.CONTRACT_DATE, contractDate);
         myFitnessCenterData.put(UserFitnessCenter.EXPIRY_DATE, expiryDate);
         myFitnessCenterData.put(UserFitnessCenter.IS_DISCLOSED, true);
-        myFitnessCenterData.put(UserFitnessCenter.IS_ALLOWED_ACCESS_NOTIFICATION, true);
+        myFitnessCenterData.put(UserFitnessCenter.IS_ALLOWED_ACCESS_NOTIFICATION, false);
 
         reference.child(FirebaseConstants.DATABASE_FIRST_NODE_USER)
                 .child(uid)
@@ -376,6 +380,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                         new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 데이터베이스 레퍼런스 > ref = " + ref);
 
                                 if (error != null)
                                     return;
@@ -389,8 +395,9 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                                 getFragment().getActivity()
                                         .getSupportFragmentManager()
                                         .popBackStack(
-                                                FitnessCenterFragment.class.getSimpleName(),
+                                                MoreFragment.class.getSimpleName(),
                                                 FragmentManager.POP_BACK_STACK_INCLUSIVE
+
                                         );
 
                             }

@@ -144,7 +144,7 @@ public class SettingsManager {
 
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(
-                        context.getString(R.string.preference_key_is_disclosed_fitness_center),
+                        context.getString(R.string.preference_key_is_disclosed),
                         false
                 );
 
@@ -156,7 +156,7 @@ public class SettingsManager {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(
-                        context.getString(R.string.preference_key_is_disclosed_fitness_center),
+                        context.getString(R.string.preference_key_is_disclosed),
                         isDisclosed
                 )
                 .commit();
@@ -192,9 +192,9 @@ public class SettingsManager {
         boolean isGrantedBackgroundLocationPermission = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(context.getString(R.string.preference_key_is_granted_background_location_permission), false);
         boolean isEnabledFitnessCenterGeofencing = PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(context.getString(R.string.preference_key_is_enabled_fitness_center_geofencing), false);
+                .getBoolean(context.getString(R.string.preference_key_is_allowed_access_notification), false);
         boolean isDisclosedFitnessCenter = PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(context.getString(R.string.preference_key_is_disclosed_fitness_center), false);
+                .getBoolean(context.getString(R.string.preference_key_is_disclosed), false);
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isInitialInstallation = " + isInitialInstallation);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< int > userNumber = " + userNumber);
@@ -252,13 +252,13 @@ public class SettingsManager {
 
         // is enabled fitness center geofencing
         editor.putBoolean(
-                context.getString(R.string.preference_key_is_enabled_fitness_center_geofencing),
+                context.getString(R.string.preference_key_is_allowed_access_notification),
                 false
         );
 
         // is disclosed fitness center
         editor.putBoolean(
-                context.getString(R.string.preference_key_is_disclosed_fitness_center),
+                context.getString(R.string.preference_key_is_disclosed),
                 false
         );
 

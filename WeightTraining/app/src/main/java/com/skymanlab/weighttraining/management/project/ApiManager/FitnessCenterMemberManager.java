@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
@@ -67,7 +67,7 @@ public class FitnessCenterMemberManager {
 
                         // 내가 공개상태로 설정하였을 때만
                         if (myFitnessCenter.getIsDisclosed()) {
-                            
+
                             // 피트니스 센터를 등록하였고
                             // 다른 사람에게 나의 등록 여부를 공개하고 싶을 때
                             // 경로( fitnessCenter/주소1/주소2/주소3/memberList ) 에서 모든 회원의 데이터를 가져온다.
@@ -86,23 +86,38 @@ public class FitnessCenterMemberManager {
                                             // '공개'로 설정된 회원들을 담을 ArrayList
                                             ArrayList<Member> memberArrayList = new ArrayList<>();
 
+                                            // 나의 회원정보가 담긴 Member 객체
+                                            Member myMemberData = null;
+
                                             for (DataSnapshot search : snapshot.getChildren()) {
 
                                                 // 회원들의 정보를 member 객체에 담는다. 그리고 회원 번호도 추가한다.
                                                 Member member = search.getValue(Member.class);
                                                 member.setMemberNumber(Integer.parseInt(search.getKey()));
 
-                                                // 공개 상태인 멤버만 memberArrayList 에 추가하기
+                                                // 공개 상태인 멤버만 memberArrayList 에 추가하기 -> 삭제 (이유: HomeSectionFragment 에서 myFi
                                                 if (member.getIsDisclosed()) {
-                                                    memberArrayList.add(member);
+
+                                                    if (myFitnessCenter.getMemberNumber() == member.getMemberNumber()) {
+                                                        // 나의 회원 정보는 맨 앞으로
+                                                        memberArrayList.add(0, member);
+                                                    } else {
+                                                        memberArrayList.add(member);
+                                                    }
+                                                }
+
+                                                // 위에서 생성한 member 데이터에서 memberNumber 가 나의 회원번호가 같으면
+                                                // 나의 회원 데이터 객체로....
+                                                if (myFitnessCenter.getMemberNumber() == member.getMemberNumber()) {
+                                                    myMemberData = member;
                                                 }
 
                                             }
-                                            
+
                                             // 내가 공개상태일 때
                                             // 나의 uid 와 myFitnessCenter 정보도 넘겨주고
                                             // 나와 같은 피트니스 센터에 등록한 회원들 중에서 '공개' 상태인 회원의 목록을 넘겨준다.
-                                            listener.isDisclosedState(uid, myFitnessCenter, memberArrayList);
+                                            listener.isDisclosedState(uid, myFitnessCenter, myMemberData, memberArrayList);
 
                                         }
 
@@ -131,8 +146,10 @@ public class FitnessCenterMemberManager {
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnMemberManipulateListener {
-        void isDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Member> memberArrayList);
+        void isDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, Member myMemberData, ArrayList<Member> memberArrayList);
+
         void isNotIsDisclosedState();
+
         void isNotRegisteredTheFitnessCenter();
     }
 

@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
-import com.skymanlab.weighttraining.management.project.ApiManager.FitnessCenterMemberManager;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 
 import java.util.ArrayList;
 
@@ -77,12 +76,19 @@ public class FitnessCenterMemberRvAdapter extends RecyclerView.Adapter<FitnessCe
 
     private void initWidgetOfStateImage(ImageView stateImage, Member member) {
 
-        if (member.getIsActive()) {
-            // 활동 중
-            stateImage.setImageResource(R.drawable.fitness_center_member_enter);
-        } else {
-            // 비 활동 중
-            stateImage.setImageResource(R.drawable.fitness_center_member_exist);
+        switch (member.getActiveState()) {
+            case Member.ACTIVE_STATE_ENTER:
+                // fitness center 에 입장
+                stateImage.setImageResource(R.drawable.fitness_center_member_enter);
+                break;
+            case Member.ACTIVE_STATE_EXERCISE:
+                // 운동 중
+                stateImage.setImageResource(R.drawable.fitness_center_member_exercise);
+                break;
+            case Member.ACTIVE_STATE_EXIT:
+                // fitness center 를 퇴장
+                stateImage.setImageResource(R.drawable.fitness_center_member_exist);
+                break;
         }
 
     }

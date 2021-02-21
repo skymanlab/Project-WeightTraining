@@ -26,7 +26,7 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
     // constant
     private static final String CLASS_NAME = FitnessCenterMarkerManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private Activity activity;
@@ -67,7 +67,7 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
         final String METHOD_NAME = "[doInBackground] ";
         // 후 처리 : UI
 
-        if (address == null){
+        if (address == null) {
             return;
         }
 
@@ -76,7 +76,6 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > firstAddress = " + firstAddress);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > secondAddress = " + secondAddress);
-
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -107,12 +106,15 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLongitude = " + fitnessCenter.getLongitude());
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getMemberCounter = " + fitnessCenter.getMemberCounter());
 
+                                long counter = snapshot.child(search.getKey()).child(FitnessCenter.MEMBER_LIST).getChildrenCount();
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > member list 의 현재 등록 된 회원 수 = " + counter);
+
                                 // googleMap 에 마커 추가
                                 googleMap.addMarker(
                                         LocationUpdateUtil.createMarkerOptions(
                                                 fitnessCenter.getLatitude(),
                                                 fitnessCenter.getLongitude(),
-                                                fitnessCenter.getName(),
+                                                fitnessCenter.getName() + "/" + counter + "명",
                                                 fitnessCenter.getThirdAddress()
                                         )
                                 ).showInfoWindow();
@@ -138,14 +140,14 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
     @Override
     protected void onCancelled() {
-        final String METHOD_NAME= "[onCancelled] ";
+        final String METHOD_NAME = "[onCancelled] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ AsyncTask 가 종료 되었습니다.");
         super.onCancelled();
     }
 
     @Override
     protected void onCancelled(Address address) {
-        final String METHOD_NAME= "[onCancelled] ";
+        final String METHOD_NAME = "[onCancelled] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ AsyncTask 가 종료 되었습니다.========================");
         super.onCancelled(address);
     }

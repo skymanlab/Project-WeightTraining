@@ -1,25 +1,21 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.management.FitnessCenter.data.UserFitnessCenter;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
@@ -28,6 +24,7 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionM
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterInfoFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSettingFragment;
 import com.skymanlab.weighttraining.management.user.data.User;
 
 import java.util.ArrayList;
@@ -124,6 +121,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > null 이 아닙니다.");
 
+
             // fitness center
             initWidgetOfFitnessCenterSection(
                     myFitnessCenter.getFitnessCenterName(),
@@ -141,8 +139,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
             // setting info
             initWidgetOfSettingInfoSection(
-                    myFitnessCenter.getIsAllowedAccessNotification(),
-                    myFitnessCenter.getIsDisclosed()
+                    myFitnessCenter
             );
 
         } else {
@@ -156,7 +153,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
                     getFragment().getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.nav_home_content_wrapper, new FitnessCenterSearchFragment())
-                            .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+                            .addToBackStack(null)
                             .commit();
                 }
             });
@@ -215,9 +212,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
     }
 
-    public void initWidgetOfSettingInfoSection(boolean isAllowedAccessNotification,
-                                               boolean isDisclosed) {
-
+    public void initWidgetOfSettingInfoSection(UserFitnessCenter myFitnessCenter) {
         final String METHOD_NAME = "[initWidgetOfSettingInfoSection] ";
 
         // settingInfoTitle : click listener 및 drawableEnd
@@ -227,29 +222,50 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
             public void onClick(View v) {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ 12312313");
+
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(
+                                R.id.nav_home_content_wrapper,
+                                FitnessCenterSettingFragment.newInstance(myFitnessCenter)
+                        )
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
-        // is allowed access notification
-        if (isAllowedAccessNotification) {
-            this.isAllowedAccessNotification.setText(
+        // ========================================================== is allowed access notification ==========================================================
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<=====================================> isAllowedAccessNotification widget 초기화 ");
+        if (myFitnessCenter.getIsAllowedAccessNotification()) {
+
+            isAllowedAccessNotification.setTextColor(ContextCompat.getColor(getFragment().getContext(), R.color.colorTextBlack));
+            isAllowedAccessNotification.setText(
                     getFragment().getString(R.string.f_fitness_center_setting_info_is_allowed_access_notification_true)
             );
+
         } else {
-            this.isAllowedAccessNotification.setText(
+
+            isAllowedAccessNotification.setTextColor(ContextCompat.getColor(getFragment().getContext(), R.color.colorTextDefault));
+            isAllowedAccessNotification.setText(
                     getFragment().getString(R.string.f_fitness_center_setting_info_is_allowed_access_notification_false)
             );
+
         }
 
-        // is disclosed
-        if (isDisclosed) {
-            this.isDisclosed.setText(
+
+        // ========================================================== is disclosed ==========================================================
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<=====================================> isDisclosed widget 초기화 ");
+        if (myFitnessCenter.getIsDisclosed()) {
+
+            isDisclosed.setText(
                     getFragment().getString(R.string.f_fitness_center_setting_info_is_disclosed_true)
             );
+
         } else {
-            this.isDisclosed.setText(
+
+            isDisclosed.setText(
                     getFragment().getString(R.string.f_fitness_center_setting_info_is_disclosed_false)
             );
+
         }
 
     }
@@ -334,8 +350,7 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
                                     // setting info
                                     initWidgetOfSettingInfoSection(
-                                            userFitnessCenter.getIsAllowedAccessNotification(),
-                                            userFitnessCenter.getIsDisclosed()
+                                            userFitnessCenter
                                     );
 
 
