@@ -70,20 +70,17 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final String METHOD_NAME = "[onViewCreated] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ home fragment ++++++++++++");
-
-        // [FragmentTopBarManager] [topBarManager] this is 'home' fragment's top bar section manager.
+        // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_home_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [FragmentTopUserManager] [topUserManager] this is 'home' fragment's top user section manager.
+        // top user
         this.topUserManager = new FragmentTopUserManager(this, view, false);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
 
-        // [HomeSectionManager] [sectionManager]
+        // section
         this.sectionManager = new HomeSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();

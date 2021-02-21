@@ -49,9 +49,6 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     private static final String CLASS_NAME = "[PFH] HomeSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
-    // constant
-    public static final int REQUEST_CODE = 1000;
-
     // instance variable
     private MaterialButtonToggleGroup myActiveStateGroup;
     private TextView myActiveStateIndicator;
@@ -80,10 +77,10 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
         this.myActiveStateIndicator = (TextView) getView().findViewById(R.id.f_home_my_active_state_indicator);
 
         // [ TextView | myAttendanceStateIndicator ]
-        this.myAttendanceStateIndicator = (TextView) getView().findViewById(R.id.f_home_my_attendance_state_indicator);
+        this.myAttendanceStateIndicator = (TextView) getView().findViewById(R.id.f_home_myAttendanceState_indicator);
 
         // [ MaterialButton | myAttendanceStateCheck ]
-        this.myAttendanceStateCheck = (MaterialButton) getView().findViewById(R.id.f_home_my_attendance_state_check);
+        this.myAttendanceStateCheck = (MaterialButton) getView().findViewById(R.id.f_home_myAttendanceState_check);
 
 
         // [ RecyclerView | fitnessCenterMemberRecyclerView ]
@@ -227,17 +224,17 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
                             if (myMemberData.getActiveState() == Member.ACTIVE_STATE_ENTER) {
 
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '입장' 상태입니다.");
-                                myActiveStateGroup.check(R.id.f_home_my_active_state_enter);
+                                myActiveStateGroup.check(R.id.f_home_myActiveState_enter);
 
                             } else if (myMemberData.getActiveState() == Member.ACTIVE_STATE_EXERCISE) {
 
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '운동 중' 상태입니다.");
-                                myActiveStateGroup.check(R.id.f_home_my_active_state_exercise);
+                                myActiveStateGroup.check(R.id.f_home_myActiveState_exercise);
 
                             } else if (myMemberData.getActiveState() == Member.ACTIVE_STATE_EXIT) {
 
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '퇴장' 상태입니다.");
-                                myActiveStateGroup.check(R.id.f_home_my_active_state_exit);
+                                myActiveStateGroup.check(R.id.f_home_myActiveState_exit);
 
                             }
 
@@ -254,14 +251,14 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
                                     if (isChecked) {
                                         switch (checkedId) {
-                                            case R.id.f_home_my_active_state_enter:
+                                            case R.id.f_home_myActiveState_enter:
                                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 토글 버튼 > enter 버튼을 클릭 하였습니다.");
                                                 updateContentOfMyIsActive(myFitnessCenter, Member.ACTIVE_STATE_ENTER);
                                                 break;
-                                            case R.id.f_home_my_active_state_exercise:
+                                            case R.id.f_home_myActiveState_exercise:
                                                 updateContentOfMyIsActive(myFitnessCenter, Member.ACTIVE_STATE_EXERCISE);
                                                 break;
-                                            case R.id.f_home_my_active_state_exit:
+                                            case R.id.f_home_myActiveState_exit:
                                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 토글 버튼 > exist 버튼을 클릭 하였습니다.");
                                                 updateContentOfMyIsActive(myFitnessCenter, Member.ACTIVE_STATE_EXIT);
                                                 break;
@@ -293,7 +290,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
                 myActiveStateGroup.setVisibility(View.GONE);
 
                 // indicator
-                myActiveStateIndicator.setText(R.string.f_home_fitness_center_is_not_disclosed);
+                myActiveStateIndicator.setText(R.string.f_home_indicator_isNotDisclosedFitnessCenter);
 
 
                 // ==================================================== my attendance state ====================================================
@@ -307,7 +304,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
                 fitnessCenterMemberRecyclerView.setVisibility(View.GONE);
 
                 // indicator
-                fitnessCenterMemberIndicator.setText(R.string.f_home_fitness_center_is_not_disclosed);
+                fitnessCenterMemberIndicator.setText(R.string.f_home_indicator_isNotDisclosedFitnessCenter);
 
             }
 
@@ -320,14 +317,14 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
                 myActiveStateGroup.setVisibility(View.GONE);
 
                 // indicator
-                myAttendanceStateIndicator.setText(R.string.f_home_fitness_center_not_register);
+                myAttendanceStateIndicator.setText(R.string.f_home_indicator_doNotRegisterFitnessCenter);
 
                 // ============================================== my attendance state ==============================================
 
 
                 // ============================================== fitness center member list ==============================================
                 // indicator
-                fitnessCenterMemberIndicator.setText(R.string.f_home_fitness_center_not_register);
+                fitnessCenterMemberIndicator.setText(R.string.f_home_indicator_doNotRegisterFitnessCenter);
 
             }
         });
@@ -372,7 +369,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석 상태 > 출석 완료 하였습니다.");
 
             // indicator : '출석 완료' 로 표시
-            myAttendanceStateIndicator.setText(R.string.f_home_my_attendance_state_on);
+            myAttendanceStateIndicator.setText(R.string.f_home_myAttendanceState_stateOn);
 
             // click listener : 이미 출석완료 했다고 알리기
             myAttendanceStateCheck.setOnClickListener(
@@ -382,7 +379,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
                             Snackbar.make(
                                     getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar),
-                                    R.string.f_home_my_attendance_state_on_snack,
+                                    R.string.f_home_myAttendanceState_stateOn_snack_alreadyExist,
                                     Snackbar.LENGTH_SHORT
                             ).show();
                         }
@@ -398,7 +395,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석 상태 > 아직 출석하지 않았습니다.");
 
             // indicator : '미출석' 으로 표시
-            myAttendanceStateIndicator.setText(R.string.f_home_my_attendance_state_off);
+            myAttendanceStateIndicator.setText(R.string.f_home_myAttendanceState_stateOff);
 
             // click listener : attendanceDateList 에 오늘 날짜 저장하기
             myAttendanceStateCheck.setOnClickListener(
@@ -421,7 +418,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
     private void saveContentOfAttendanceDate(String uid, String currentDate) {
 
-        HashMap<String , Object> saveContent = new HashMap<>();
+        HashMap<String, Object> saveContent = new HashMap<>();
         saveContent.put(Attendance.DATE, currentDate);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -438,7 +435,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
                                 Snackbar.make(
                                         getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar),
-                                        R.string.f_home_my_attendance_state_on_snack_save_complete,
+                                        R.string.f_home_myAttendanceState_stateOn_snack_saveComplete,
                                         Snackbar.LENGTH_SHORT
                                 ).show();
                             }

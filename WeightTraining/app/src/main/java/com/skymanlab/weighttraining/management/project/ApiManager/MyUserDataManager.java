@@ -45,7 +45,6 @@ public class MyUserDataManager {
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > snapshot = " + snapshot);
 
                                 if (snapshot.getValue() == null) {
-//                                    progressBar.setVisibility(View.INVISIBLE);
                                     listener.onNotRegister();
                                     return;
                                 }

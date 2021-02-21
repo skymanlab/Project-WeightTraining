@@ -65,27 +65,29 @@ public class MoreUserInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // [FragmentTopBarManager] [topBarManager] this is 'more user info' fragment's top bar section manager.
+        // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_more_user_info_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [MoreSectionManager] [sectionManager] this is 'more user info' fragment's section manager.
+        // section
         this.sectionManager = new MoreUserInfoSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 를 생성하여 start button click listener 설정하기
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        // top bar : start button
+        topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
+                        // [method] fragment manager 를 통해 back stack 에서 pop!
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
 
     }
 }

@@ -75,18 +75,19 @@ public class FitnessCenterSearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
-        // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
-        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_search_title));
-        this.topBarManager.connectWidget();
-        this.topBarManager.initWidget();
+        // top bar
+        topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_search_title));
+        topBarManager.connectWidget();
+        topBarManager.initWidget();
 
-        // [FitnessCenterSectionManager] [sectionManager] this is 'more' fragment's section manager.
-        this.sectionManager = new FitnessCenterSearchSectionManager(this, view);
-        this.sectionManager.connectWidget();
-        this.sectionManager.initWidget();
+        // section
+        sectionManager = new FitnessCenterSearchSectionManager(this, view);
+        sectionManager.connectWidget();
+        sectionManager.initWidget();
 
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 를 생성하여 start button click listener 설정하기
-        this.topBarManager.setStartButtonListener(
+        // top bar : start button
+        topBarManager.initWidgetOfStartButton(
+                null,
                 new FragmentTopBarManager.StartButtonListener() {
                     @Override
                     public AlertDialog setStartButtonClickListener() {
@@ -97,21 +98,22 @@ public class FitnessCenterSearchFragment extends Fragment {
                     }
                 }
         );
-        this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_fitness_center_search_top_bar_end_button));
+
+        // top bar : end button
+        topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_fitness_center_search_top_bar_end_button),
+                sectionManager.newEndButtonListenerInstance()
+        );
     }
 
     @Override
     public void onPause() {
-        super.onPause();
         final String METHOD_NAME = "[onPause] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        super.onPause();
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Update util > 이 존재하나요? " + this.sectionManager.getGoogleMapManager());
-
-        this.sectionManager.getGoogleMapManager().stopLocationUpdate();
-        this.sectionManager.getGoogleMapManager().stopFitnessCenterMarkerManager();
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "========================= 구글 맵에 대한 '위치 업데이트'와 '마커 매니저' 에 대한 중지를 요청합니다. =========================");
+        sectionManager.getGoogleMapManager().stopLocationUpdate();
+        sectionManager.getGoogleMapManager().stopFitnessCenterMarkerManager();
     }
 
 }

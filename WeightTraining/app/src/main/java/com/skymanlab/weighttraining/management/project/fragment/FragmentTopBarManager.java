@@ -1,5 +1,6 @@
 package com.skymanlab.weighttraining.management.project.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,10 +22,6 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
     private String titleContent;
 
     // instance variable
-    private StartButtonListener startButtonListener;
-    private EndButtonListener endButtonListener;
-
-    // instance variable
     private TextView title;
     private ImageView startImage;
     private TextView startText;
@@ -38,14 +35,6 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
         this.titleContent = titleContent;
     }
 
-    // setter
-    public void setStartButtonListener(StartButtonListener startButtonListener) {
-        this.startButtonListener = startButtonListener;
-    }
-
-    public void setEndButtonListener(EndButtonListener endButtonListener) {
-        this.endButtonListener = endButtonListener;
-    }
 
     @Override
     public void connectWidget() {
@@ -95,19 +84,27 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
     } // End of method [initWidgetOfTitle]
 
 
-    public void initWidgetOfStartButton(String content) {
+    // ============================================================== start button ==============================================================
+
+    /**
+     * StartButton 에 String 이 null 일 때와 아닐 때를 구분하여
+     * null 이 아니면 해당 문자열로
+     * null 이면 이미 있는 ImageView 로
+     *
+     * @param text
+     * @param startButtonListener
+     */
+    public void initWidgetOfStartButton(String text, StartButtonListener startButtonListener) {
         final String METHOD_NAME = "[initWidgetOfStartButton]";
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<content> 내용 = " + content);
-        // [check 1] : StarButtonListener 를 구현한 객체가 존재할 때만 start button 의 초기 내용을 설정한다.
-        if (this.startButtonListener != null) {
+        // 리스너는 꼭 등록해주세요!
+        if (startButtonListener != null) {
 
-            // [check 2] : content 객체가 존재할 때만
-            if (content != null) {
+            // text 문자열이 null 이면 '<' 이미지로 대체합니다.
+            if (text != null) {
 
-                // starText 설정 :
-                // [iv/C]TextView : startText init. -> setText : content  /  click 할 수 있도록 / visible / click listener
-                this.startText.setText(content);
+                // StartButton 은 TextView !
+                this.startText.setText(text);
                 this.startText.setClickable(true);
                 this.startText.setVisibility(View.VISIBLE);
                 this.startText.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +122,7 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
             } else {
 
-                // startImage 설정
-                // [iv/C]ImageView : startImage init. -> click 할 수 있도록 / visible / click listener
+                // StartButton 은 ImageView !
                 this.startImage.setClickable(true);
                 this.startImage.setVisibility(View.VISIBLE);
                 this.startImage.setOnClickListener(new View.OnClickListener() {
@@ -141,30 +137,36 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
 
                     }
                 });
-
-            } // [check 2]
+            }
 
         } else {
-            throw new NullPointerException("StarButtonListener 를 구현한 객체를 setStarButtonListener() method 를 사용하여 설정해주세요!");
+            throw new RuntimeException("StarButtonListener 객체를 등록해주세요. null 객체는 안되요.");
         } // [check 1]
 
     }
 
-    public void initWidgetOfEndButton(String title) {
+
+    // ============================================================== end button ==============================================================
+
+    /**
+     * EndButton : TextView 일 때
+     *
+     * @param text
+     * @param endButtonListener
+     */
+    public void initWidgetOfEndButton(String text, EndButtonListener endButtonListener) {
         final String METHOD_NAME = "[initWidgetOfEndButton] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<method start> content = " + title);
 
-        // [check 1] : EndButtonListener 를 구현한 객체가 존재할 때만 end button 의 초기 내용을 설정한다.
-        if (this.endButtonListener != null) {
+        // 리스너는 꼭 등록해주세요!
+        if (endButtonListener != null) {
 
-            // [check 2] : title 객체가 존재할 때만
-            if (title != null) {
+            // text 는 꼭 입력해주세요.
+            if (text != null && !text.equals("")) {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<check 2> 최종 수행하기 전");
 
-                // endText 설정
-                // [iv/C]TextView : endText init. -> setText : title  / click 할 수 있도록 / visible / click listener
-                this.endText.setText(title);
+                // EndButton 은 TextView 로!
+                this.endText.setText(text);
                 this.endText.setClickable(true);
                 this.endText.setVisibility(View.VISIBLE);
                 this.endText.setOnClickListener(new View.OnClickListener() {
@@ -181,68 +183,36 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                 });
 
             } else {
-                throw new RuntimeException("title 을 입력하지 않았습니다.");
+                throw new RuntimeException("text 를 입력해주세요!");
             } // [check 2]
 
         } else {
-            throw new NullPointerException("EndButtonListener 를 구현한 객체를 setEndButtonListener() method 를 사용하여 설정해주세요!");
+            throw new RuntimeException("EndButtonListener 객체를 등록해주세요. null 객체는 안되요.");
         } // [check 1]
+
     }
 
 
-    public void initWidgetOfEndTextButton(String content, EndButtonListener endButtonListener) {
+    /**
+     * EndButton : ImageView 가 하나 일 때
+     *
+     * @param image
+     * @param endButtonListener
+     */
+    public void initWidgetOfEndButton(Drawable image, EndButtonListener endButtonListener) {
         final String METHOD_NAME = "[initWidgetOfEndButton] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<method start> content = " + content);
 
-        // [check 1] : EndButtonListener 를 구현한 객체가 존재할 때만 end button 의 초기 내용을 설정한다.
+        // 리스너는 꼭 등록해주세요!
         if (endButtonListener != null) {
 
-            // [check 2] : content 객체가 존재할 때만
-            if (content != null) {
+            // image 는 꼭 입력해주세요.
+            if (image != null) {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<check 2> 최종 수행하기 전");
-
-                // endText 설정
-                // [iv/C]TextView : endText init. -> setText : content  / click 할 수 있도록 / visible / click listener
-                this.endText.setText(content);
-                this.endText.setClickable(true);
-                this.endText.setVisibility(View.VISIBLE);
-                this.endText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        AlertDialog dialog = endButtonListener.setEndButtonClickListener();
-
-                        if (dialog != null) {
-                            dialog.show();
-                        }
-
-                    }
-                });
-
-            }
-
-        } else {
-            throw new NullPointerException("EndButtonListener 를 구현한 객체를 setEndButtonListener() method 를 사용하여 설정해주세요!");
-        } // [check 1]
-    }
-
-    public void initWidgetOfEndImageButton(int resId, EndButtonListener endButtonListener) {
-        final String METHOD_NAME = "[initWidgetOfEndButton] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<method start> resource id = " + resId);
-
-        // [check 1] : EndButtonListener 를 구현한 객체가 존재할 때만 end button 의 초기 내용을 설정한다.
-        if (endButtonListener != null) {
-
-            // [check 2] : content 객체가 존재할 때만
-            if (0 < resId) {
-
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<check 2> 최종 수행하기 전");
-
-                // [ ImageView | endImage1 ]
-                this.endImage1.setImageResource(resId);
+                // StartButton 은 ImageView !
                 this.endImage1.setClickable(true);
                 this.endImage1.setVisibility(View.VISIBLE);
+                this.endImage1.setImageDrawable(image);
                 this.endImage1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -257,35 +227,48 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                 });
 
             } else {
-                throw new RuntimeException("End Image Button 의 표시할 resource id 가 입력되지 않았습니다.");
-            }
+                throw new RuntimeException("image 의 drawable 을 입력해주세요!");
+            } // [check 2]
 
         } else {
-            throw new NullPointerException("EndButtonListener 를 구현한 객체를 setEndButtonListener() method 를 사용하여 설정해주세요!");
+            throw new RuntimeException("EndButtonListener 객체를 등록해주세요. null 객체는 안되요.");
         } // [check 1]
+
     }
 
 
-    public void initWidgetOfEndImageButton(int firstResId, EndButtonListener firstEndButtonListener, int secondResId, EndButtonListener secondEndButtonListener) {
+    /**
+     * EndButton : ImageView 가 2개 일 때
+     *
+     * @param image_1
+     * @param image_2
+     * @param endButtonListener_1
+     * @param endButtonListener_2
+     */
+    public void initWidgetOfEndButton(Drawable image_1,
+                                      EndButtonListener endButtonListener_1,
+                                      Drawable image_2,
+                                      EndButtonListener endButtonListener_2) {
         final String METHOD_NAME = "[initWidgetOfEndButton] ";
 
-        // [check 1] : EndButtonListener 를 구현한 객체가 존재할 때만 end button 의 초기 내용을 설정한다.
-        if (firstEndButtonListener != null && secondEndButtonListener != null) {
+        // 리스너는 꼭 등록해주세요!
+        if (endButtonListener_1 != null && endButtonListener_2 != null) {
 
-            // [check 2] : content 객체가 존재할 때만
-            if (0 < firstResId && 0 < secondResId) {
+            // image 는 꼭 입력해주세요.
+            if (image_1 != null && image_2 != null) {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<check 2> 최종 수행하기 전");
 
-                // [ ImageView | endImage1 ]
-                this.endImage1.setImageResource(firstResId);
+                // StartButton 은 ImageView  !
+                // 1번 이미지
                 this.endImage1.setClickable(true);
                 this.endImage1.setVisibility(View.VISIBLE);
+                this.endImage1.setImageDrawable(image_1);
                 this.endImage1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        AlertDialog dialog = firstEndButtonListener.setEndButtonClickListener();
+                        AlertDialog dialog = endButtonListener_1.setEndButtonClickListener();
 
                         if (dialog != null) {
                             dialog.show();
@@ -294,15 +277,16 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                     }
                 });
 
-                // [ ImageView | endImage2 ]
-                this.endImage2.setImageResource(secondResId);
+                // StartButton 은 ImageView  !
+                // 2번 이미지
                 this.endImage2.setClickable(true);
                 this.endImage2.setVisibility(View.VISIBLE);
+                this.endImage2.setImageDrawable(image_2);
                 this.endImage2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        AlertDialog dialog = secondEndButtonListener.setEndButtonClickListener();
+                        AlertDialog dialog = endButtonListener_2.setEndButtonClickListener();
 
                         if (dialog != null) {
                             dialog.show();
@@ -311,14 +295,95 @@ public class FragmentTopBarManager extends FragmentSectionManager implements Fra
                     }
                 });
 
-
             } else {
-                throw new RuntimeException("End Image Button 의 표시할 resource id 가 입력되지 않았습니다.");
-            }
+                throw new RuntimeException("1번 2번 이미지를 입력해주세요!");
+            } // [check 2]
 
         } else {
-            throw new NullPointerException("EndButtonListener 를 구현한 객체를 setEndButtonListener() method 를 사용하여 설정해주세요!");
+            throw new RuntimeException("1번과 2번 EndButtonListener 객체를 등록해주세요. null 객체는 안되요.");
         } // [check 1]
+
+    }
+
+
+    public void initWidgetOfEndButton(String text,
+                                      EndButtonListener textEndButtonListener,
+                                      Drawable image_1,
+                                      EndButtonListener imageEndButtonListener_1,
+                                      Drawable image_2,
+                                      EndButtonListener imageEndButtonListener_2) {
+
+        final String METHOD_NAME = "[initWidgetOfEndButton] ";
+
+        // 리스너는 꼭 등록해주세요!
+        if (textEndButtonListener != null && imageEndButtonListener_1 != null && imageEndButtonListener_2 != null) {
+
+            // image 는 꼭 입력해주세요.
+            if (text != null && image_1 != null && image_2 != null) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<check 2> 최종 수행하기 전");
+
+                // StartButton 은 TextView  !
+                this.endText.setText(text);
+                this.endText.setClickable(true);
+                this.endText.setVisibility(View.VISIBLE);
+                this.endText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        AlertDialog dialog = textEndButtonListener.setEndButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
+                    }
+                });
+
+                // StartButton 은 ImageView  !
+                // 1번 이미지
+                this.endImage1.setClickable(true);
+                this.endImage1.setVisibility(View.VISIBLE);
+                this.endImage1.setImageDrawable(image_1);
+                this.endImage1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        AlertDialog dialog = imageEndButtonListener_1.setEndButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
+                    }
+                });
+
+                // StartButton 은 ImageView  !
+                // 2번 이미지
+                this.endImage2.setClickable(true);
+                this.endImage2.setVisibility(View.VISIBLE);
+                this.endImage2.setImageDrawable(image_2);
+                this.endImage2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        AlertDialog dialog = imageEndButtonListener_2.setEndButtonClickListener();
+
+                        if (dialog != null) {
+                            dialog.show();
+                        }
+
+                    }
+                });
+
+            } else {
+                throw new RuntimeException("text, image 1번과 2번 이미지를 입력해주세요!");
+            } // [check 2]
+
+        } else {
+            throw new RuntimeException("text, image 1번과 2번 EndButtonListener 객체를 등록해주세요. null 객체는 안되요.");
+        } // [check 1]
+
     }
 
 

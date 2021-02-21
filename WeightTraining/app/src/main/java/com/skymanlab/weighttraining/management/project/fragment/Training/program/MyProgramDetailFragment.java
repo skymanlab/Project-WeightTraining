@@ -85,26 +85,29 @@ public class MyProgramDetailFragment extends Fragment {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< program > key = " + program.getKey());
 
-        // [FragmentTopBarManager] [topBarManager] this is 'maker step 1' fragment's top bar section manager.
+        // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_my_program_detail_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [iv/C]MyProgramDetailSectionManager :
+        // section
         this.sectionManager = new MyProgramDetailSectionManager(this, view);
         this.sectionManager.setProgram(program);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
-                getParentFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
+        // top bar : start button
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
+
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
 
     }
 

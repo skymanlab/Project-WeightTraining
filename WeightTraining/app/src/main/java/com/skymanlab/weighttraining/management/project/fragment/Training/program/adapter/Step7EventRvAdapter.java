@@ -47,7 +47,7 @@ public class Step7EventRvAdapter extends RecyclerView.Adapter<Step7EventRvAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         // click listener
-        holder.getContentWrapper().setOnClickListener(new View.OnClickListener() {
+        holder.contentWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -62,13 +62,13 @@ public class Step7EventRvAdapter extends RecyclerView.Adapter<Step7EventRvAdapte
         });
 
         // text
-        holder.getNumber().setText((position + 1) + "");
+        holder.number.setText((position + 1) + "");
 
         // text
-        holder.getMuscleArea().setText(DataManager.convertHanguleOfMuscleArea(finalOrderList.get(position).getMuscleArea()));
+        holder.muscleArea.setText(DataManager.convertHanguleOfMuscleArea(finalOrderList.get(position).getMuscleArea()));
 
         // text
-        holder.getEventName().setText(finalOrderList.get(position).getEventName());
+        holder.eventName.setText(finalOrderList.get(position).getEventName());
 
     }
 
@@ -92,34 +92,10 @@ public class Step7EventRvAdapter extends RecyclerView.Adapter<Step7EventRvAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            // [iv/C]MaterialCardView : contentWrapper connect
             this.contentWrapper = (MaterialCardView) itemView.findViewById(R.id.custom_list_step6_event_item_content_wrapper);
-
-            // [iv/C]MaterialTextView : muscleAreaNumber connect
             this.number = (MaterialTextView) itemView.findViewById(R.id.custom_list_step6_event_item_number);
-
-            // [iv/C]MaterialTextView : muscleArea connect
             this.muscleArea = (MaterialTextView) itemView.findViewById(R.id.custom_list_step6_event_item_muscle_area);
-
-            // [iv/C]MaterialTextView : eventName connect
             this.eventName = (MaterialTextView) itemView.findViewById(R.id.custom_list_step6_event_item_event_name);
-        }
-
-        // getter
-        public MaterialCardView getContentWrapper() {
-            return contentWrapper;
-        }
-
-        public MaterialTextView getNumber() {
-            return number;
-        }
-
-        public MaterialTextView getMuscleArea() {
-            return muscleArea;
-        }
-
-        public MaterialTextView getEventName() {
-            return eventName;
         }
     }
 

@@ -49,10 +49,14 @@ public class EachMuscleAreaListFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static EachMuscleAreaListFragment newInstance(MuscleArea muscleArea) {
+
         EachMuscleAreaListFragment fragment = new EachMuscleAreaListFragment();
+
         Bundle args = new Bundle();
         args.putSerializable(MUSCLE_AREA, muscleArea);
+
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -74,19 +78,20 @@ public class EachMuscleAreaListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> muscleArea " + muscleArea);
+        display();
 
-        // [FragmentTopUserManager] [topUserManager] this is 'list' fragment's section manager.
+        // section
         this.sectionManager = new EachMuscleAreaListSectionManager(this, view, this.muscleArea);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
-        getActivity().getSupportFragmentManager();
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getActivity() > = " + getActivity());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getActivity().getSupportFragmentManager() > = " + getActivity().getSupportFragmentManager());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getParentFragmentManager() > = " + getParentFragmentManager());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< getChildFragmentManager() > = " + getChildFragmentManager());
+    }
+
+
+    private void display() {
+        final String METHOD_NAME = "[display] ";
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>> muscleArea " + muscleArea);
     }
 }

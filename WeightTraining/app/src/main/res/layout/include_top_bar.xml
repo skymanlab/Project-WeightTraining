@@ -68,26 +68,23 @@
 
             <!-- end image 1 -->
             <ImageView
-                android:id="@+id/include_top_bar_end_image_1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="@dimen/include_top_bar_end_button_layout_marginStart"
-                android:clickable="false"
-                android:contentDescription="@string/include_top_bar_end_text_next"
-                android:src="@drawable/right"
-                android:visibility="gone" />
-
-            <!-- end image 2 -->
-            <ImageView
                 android:id="@+id/include_top_bar_end_image_2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="@dimen/include_top_bar_end_button_layout_marginStart"
                 android:clickable="false"
                 android:contentDescription="@string/include_top_bar_end_text_next"
-                android:src="@drawable/notification"
                 android:visibility="gone" />
 
+            <!-- end image 2 -->
+            <ImageView
+                android:id="@+id/include_top_bar_end_image_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/include_top_bar_end_button_layout_marginStart"
+                android:clickable="false"
+                android:contentDescription="@string/include_top_bar_end_text_next"
+                android:visibility="gone" />
 
             <!-- end text -->
             <TextView

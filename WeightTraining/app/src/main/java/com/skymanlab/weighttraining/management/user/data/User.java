@@ -11,6 +11,8 @@ public class User implements Serializable {
     public static final String EMAIL = "email";
     public static final String PHOTO_URL = "photoUrl";
     public static final String IS_SAVED_BASE_EVENT = " isSavedBaseEvent";
+
+    // constant
     public static final String FITNESS_CENTER = "fitnessCenter";
     public static final String TRAINING = "training";
 

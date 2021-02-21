@@ -65,7 +65,8 @@ public class MakerStep1Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
+
+        display();
 
         // [FragmentTopBarManager] [topBarManager] this is 'maker step 1' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
@@ -83,17 +84,25 @@ public class MakerStep1Fragment extends Fragment {
         this.sectionManager.initWidget();
 
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 를 생성하여 start button click listener 설정하기
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
+                        // [method] fragment manager 를 통해 back stack 에서 pop!
+                        getActivity().getSupportFragmentManager().popBackStack();
 
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
+                        return null;
+                    }
+                }
+        );
+
+    }
+
+
+    private void display() {
+        final String METHOD_NAME = "[display] ";
 
     }
 }

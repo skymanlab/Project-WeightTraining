@@ -30,7 +30,7 @@
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <!-- fitness center -->
+            <!-- event list -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -58,7 +58,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- fitness center -->
+            <!-- fitness program -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -89,7 +89,8 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- content container -->
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -106,9 +107,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!-- List -->
+            <!-- event list -->
             <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/f_training_event_list"
+                android:id="@+id/f_training_eventList_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -134,7 +135,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_bold"
-                            android:text="@string/f_training_event_list"
+                            android:text="@string/f_training_eventList"
                             android:textColor="@color/colorTextBlack"
                             android:textSize="@dimen/text_section_title_size" />
 
@@ -143,7 +144,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_medium"
                             android:paddingTop="10dp"
-                            android:text="@string/f_training_event_list_comment" />
+                            android:text="@string/f_training_eventList_comment" />
                     </LinearLayout>
 
                     <ImageView
@@ -153,16 +154,16 @@
                         android:layout_marginStart="10dp"
                         android:src="@drawable/right" />
                 </LinearLayout>
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of List -->
+            </com.google.android.material.circularreveal.cardview.CircularRevealCardView><!-- End of event list -->
 
             <include
                 layout="@layout/include_divider_section_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!-- Program -->
+            <!-- fitness program -->
             <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/f_training_event_program"
+                android:id="@+id/f_training_fitnessProgram_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -188,7 +189,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_bold"
-                            android:text="@string/f_training_event_program"
+                            android:text="@string/f_training_fitnessProgram"
                             android:textColor="@color/colorTextBlack"
                             android:textSize="@dimen/text_section_title_size" />
 
@@ -197,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_medium"
                             android:paddingTop="10dp"
-                            android:text="@string/f_training_event_program_comment" />
+                            android:text="@string/f_training_fitnessProgram_comment" />
                     </LinearLayout>
 
                     <ImageView

@@ -95,12 +95,7 @@ public class MakerStep6Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final String METHOD_NAME = "[onViewCreated] ";
-
-        for (int index = 0; index < this.muscleAreaArrayList.size(); index++) {
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Muscle Area List > << " + index + " >> 근육 부위는 ? = " + this.muscleAreaArrayList.get(index));
-        }
-
+        display();
 
         // [FragmentTopBarManager] [topBarManager] this is 'maker step 6' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
@@ -120,23 +115,33 @@ public class MakerStep6Fragment extends Fragment {
         this.sectionManager.initWidget();
 
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
+                        // [method] fragment manager 를 통해 back stack 에서 pop!
+                        getActivity().getSupportFragmentManager().popBackStack();
 
-                return null;
-            }
+                        return null;
+                    }
 
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
+                }
+        );
+        this.topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_maker_step_end_button_next),
+                this.sectionManager.newEndButtonListenerInstance()
+        );
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "..................--- fragment = " + this);
+    }
 
+    private void display() {
+        final String METHOD_NAME = "[display] ";
+
+        for (int index = 0; index < this.muscleAreaArrayList.size(); index++) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Muscle Area List > << " + index + " >> 근육 부위는 ? = " + this.muscleAreaArrayList.get(index));
+        }
     }
 
 }

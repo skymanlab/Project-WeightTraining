@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_bold"
-                    android:text="@string/f_home_my_state_title"
+                    android:text="@string/f_home_myStateTitle"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/text_sub_title_size" />
@@ -68,6 +68,7 @@
                     layout="@layout/include_divider_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
                 <!--my attendance state -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,26 +86,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/eland_choice_medium"
-                            android:text="@string/f_home_my_attendance_state"
+                            android:text="@string/f_home_myAttendanceState"
                             android:textColor="@color/colorTextBlack" />
 
                         <TextView
-                            android:id="@+id/f_home_my_attendance_state_indicator"
+                            android:id="@+id/f_home_myAttendanceState_indicator"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/f_home_my_attendance_state_off"
                             android:textAlignment="textEnd"
                             android:textColor="@color/colorTextCaution" />
 
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/f_home_my_attendance_state_check"
+                        android:id="@+id/f_home_myAttendanceState_check"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/f_home_my_attendance_state_check" />
+                        android:text="@string/f_home_myAttendanceState_check" />
                 </LinearLayout><!-- End of my attendance state -->
 
                 <include
@@ -124,7 +124,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/eland_choice_medium"
-                        android:text="@string/f_home_my_active_state"
+                        android:text="@string/f_home_myActiveState"
                         android:textColor="@color/colorTextBlack" />
 
                     <FrameLayout
@@ -146,33 +146,33 @@
                             app:singleSelection="true">
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/f_home_my_active_state_enter"
+                                android:id="@+id/f_home_myActiveState_enter"
                                 style="?attr/materialButtonOutlinedStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/eland_choice_medium"
-                                android:text="@string/f_home_my_active_state_enter"
+                                android:text="@string/f_home_myActiveState_enter"
                                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/f_home_my_active_state_exercise"
+                                android:id="@+id/f_home_myActiveState_exercise"
                                 style="?attr/materialButtonOutlinedStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/eland_choice_medium"
-                                android:text="@string/f_home_my_active_state_exercise"
+                                android:text="@string/f_home_myActiveState_exercise"
                                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/f_home_my_active_state_exit"
+                                android:id="@+id/f_home_myActiveState_exit"
                                 style="?attr/materialButtonOutlinedStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/eland_choice_medium"
-                                android:text="@string/f_home_my_active_state_exit"
+                                android:text="@string/f_home_myActiveState_exit"
                                 app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
 
                         </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/eland_choice_bold"
-                    android:text="@string/f_home_fitness_center_member"
+                    android:text="@string/f_home_fitnessCenterMemberList_title"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/text_sub_title_size" />

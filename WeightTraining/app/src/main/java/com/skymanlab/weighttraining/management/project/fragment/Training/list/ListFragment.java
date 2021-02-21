@@ -44,11 +44,12 @@ public class ListFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static ListFragment newInstance() {
 
-        final String METHOD_NAME = "[newInstance] ";
-
         ListFragment fragment = new ListFragment();
+
         Bundle args = new Bundle();
+
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -69,7 +70,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
 
         // [FragmentTopBarManager] [topBarManager] this is 'list' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_list_title));
@@ -81,24 +81,20 @@ public class ListFragment extends Fragment {
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        // top bar : start button
+        topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
+                        // [method] fragment manager 를 통해 back stack 에서 pop!
+                        getActivity().getSupportFragmentManager().popBackStack();
 
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getActivity()> ----------- " + getActivity());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getActivity().getSupportFragmentManager()> ----------- " + getActivity().getSupportFragmentManager());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getParentFragmentManager()> ----------- " + getParentFragmentManager());
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<getChildFragmentManager()> ----------- " + getChildFragmentManager());
+                        return null;
+                    }
+                }
+        );
 
     }
 }

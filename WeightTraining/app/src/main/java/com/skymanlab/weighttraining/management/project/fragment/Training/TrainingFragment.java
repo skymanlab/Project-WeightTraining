@@ -63,19 +63,18 @@ public class TrainingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        final String METHOD_NAME = "[onViewCreated] ";
         super.onViewCreated(view, savedInstanceState);
 
-        final String METHOD_NAME = "[onViewCreated] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++ training fragment ++++++++++++");
-
-        // [FragmentTopBarManager] [topBarManager] this is 'training' fragment's top bar section manager.
+        // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_training_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [MoreSectionManager] [sectionManager] this is 'training' fragment's section manager.
+        // section
         this.sectionManager = new TrainingSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
+
     }
 }

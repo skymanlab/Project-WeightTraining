@@ -41,9 +41,6 @@ public class MoreFragment extends Fragment {
     private FragmentTopUserManager topUserManager;
     private MoreSectionManager sectionManager;
 
-    private ConnectivityManager connectivityManager;
-    private ConnectivityManager.NetworkCallback networkCallback;
-
     // constructor
     public MoreFragment() {
         // Required empty public constructor
@@ -66,58 +63,6 @@ public class MoreFragment extends Fragment {
         super.onCreate(savedInstanceState);
         final String METHOD_NAME = "[onCreate] ";
 
-        connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        networkCallback = new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(@NonNull Network network) {
-                super.onAvailable(network);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onAvailable");
-            }
-
-            @Override
-            public void onLosing(@NonNull Network network, int maxMsToLive) {
-                super.onLosing(network, maxMsToLive);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onLosing");
-            }
-
-            @Override
-            public void onLost(@NonNull Network network) {
-                super.onLost(network);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onLost");
-            }
-
-            @Override
-            public void onUnavailable() {
-                super.onUnavailable();
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onUnavailable");
-            }
-
-            @Override
-            public void onCapabilitiesChanged(@NonNull Network network, @NonNull NetworkCapabilities networkCapabilities) {
-                super.onCapabilitiesChanged(network, networkCapabilities);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onCapabilitiesChanged");
-            }
-
-            @Override
-            public void onLinkPropertiesChanged(@NonNull Network network, @NonNull LinkProperties linkProperties) {
-                super.onLinkPropertiesChanged(network, linkProperties);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onLinkPropertiesChanged");
-            }
-
-            @Override
-            public void onBlockedStatusChanged(@NonNull Network network, boolean blocked) {
-                super.onBlockedStatusChanged(network, blocked);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "====================> onBlockedStatusChanged");
-            }
-        };
-        NetworkRequest.Builder builder = new NetworkRequest.Builder()
-                .addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
-                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
-
-        connectivityManager.registerNetworkCallback(
-                builder.build(),
-                networkCallback
-        );
     }
 
     @Override
@@ -134,26 +79,21 @@ public class MoreFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<start> more fragment 의 Log manager 를 실행합니다!");
 
-        // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
+        // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_more_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [FragmentTopUserManager] [topUserManager] this is 'more' fragment's top user section manager.
+        // top user
         this.topUserManager = new FragmentTopUserManager(this, view, true);
         this.topUserManager.connectWidget();
         this.topUserManager.initWidget();
 
-        // [MoreSectionManager] [sectionManager] this is 'more' fragment's section manager.
+        // section
         this.sectionManager = new MoreSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        connectivityManager.unregisterNetworkCallback(networkCallback);
-    }
 }

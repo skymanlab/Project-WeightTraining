@@ -59,27 +59,28 @@ public class ProgramFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // [FragmentTopBarManager] [topBarManager] this is 'program' fragment's top bar section manager.
+        // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 
-        // [ProgramSectionManager] [sectionManager] this is 'training' fragment's section manager.
+        // section
         this.sectionManager = new ProgramSectionManager(this, view);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
 
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        // top bar : start button
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] 이전 fragment 로 이동
-                getActivity().getSupportFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
 
     }
 }

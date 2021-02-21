@@ -62,15 +62,13 @@ public class DirectSelectionFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static DirectSelectionFragment newInstance(MuscleArea muscleArea, GroupingEventData groupingEventData) {
 
-        final String METHOD_NAME = "[newInstance] ";
-
         DirectSelectionFragment fragment = new DirectSelectionFragment();
 
         Bundle args = new Bundle();
         args.putSerializable(MUSCLE_AREA, muscleArea);
         args.putSerializable(GROUPING_EVENT_DATA, groupingEventData);
+
         fragment.setArguments(args);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 1. newInstance ");
 
         return fragment;
     }
@@ -78,22 +76,16 @@ public class DirectSelectionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String METHOD_NAME = "[onCreate] ";
 
         if (getArguments() != null) {
             this.muscleArea = (MuscleArea) getArguments().get(MUSCLE_AREA);
             this.groupingEventData = (GroupingEventData) getArguments().getSerializable(GROUPING_EVENT_DATA);
         }
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 2. onCreate ");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final String METHOD_NAME = "[onCreateView] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 3. onCreateView ");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_direct_selection, container, false);
     }
@@ -101,9 +93,6 @@ public class DirectSelectionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String METHOD_NAME = "[onViewCreated] ";
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 4. onViewCreated ");
 
         // [DirectSelectionSectionManager] [sectionManager] this is 'direct selection' fragment's section manager.
         this.sectionManager = new DirectSelectionSectionManager(this, view);
@@ -111,10 +100,6 @@ public class DirectSelectionFragment extends Fragment {
         this.sectionManager.setMuscleAreaStandardId(this.muscleArea);
         this.sectionManager.connectWidget();
         this.sectionManager.initWidget();
-
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 5. onViewCreated  ---- 완료");
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>>>>----------->>>>> DirectSelectionFragment 5. onViewCreated  ----  sectionManager 는 ? " + sectionManager);
-
 
     }
 

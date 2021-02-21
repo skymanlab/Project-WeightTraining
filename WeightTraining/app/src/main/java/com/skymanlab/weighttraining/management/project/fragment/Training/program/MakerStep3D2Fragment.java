@@ -62,7 +62,12 @@ public class MakerStep3D2Fragment extends Fragment {
      * @return A new instance of fragment Step3D2Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MakerStep3D2Fragment newInstance(GroupingEventData chest, GroupingEventData shoulder, GroupingEventData lat, GroupingEventData upperBody, GroupingEventData arm, GroupingEventData etc) {
+    public static MakerStep3D2Fragment newInstance(GroupingEventData chest,
+                                                   GroupingEventData shoulder,
+                                                   GroupingEventData lat,
+                                                   GroupingEventData upperBody,
+                                                   GroupingEventData arm,
+                                                   GroupingEventData etc) {
 
         MakerStep3D2Fragment fragment = new MakerStep3D2Fragment();
 
@@ -125,19 +130,29 @@ public class MakerStep3D2Fragment extends Fragment {
         this.sectionManager.initWidget();
 
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
+                        // [method] fragment manager 를 통해 back stack 에서 pop!
+                        getActivity().getSupportFragmentManager().popBackStack();
 
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
+                        return null;
+                    }
+                }
+        );
+        this.topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_maker_step_end_button_next),
+                this.sectionManager.newEndButtonListenerInstance()
+        );
+
+    }
+
+
+    private void display() {
+        final String METHOD_NAME = "[display] ";
 
     }
 }

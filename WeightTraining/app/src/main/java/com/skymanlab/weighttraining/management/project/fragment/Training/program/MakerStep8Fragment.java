@@ -81,28 +81,7 @@ public class MakerStep8Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final String METHOD_NAME = "[onViewCreated] ";
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program set number  = " + program.getSetNumber());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time minute  = " + program.getRestTimeMinute());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= program rest time second = " + program.getRestTimeSecond());
-//        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============= detail program array list = " + detailProgramList.size());
-
-//        if (0 < detailProgramList.size()) {
-//            Iterator iterator = detailProgramList.keySet().iterator();
-//
-//            while (iterator.hasNext()) {
-//
-//                String key = (String) iterator.next();
-//
-//                for (int index = 0; index < finalOrderList.size(); index++) {
-//
-//                    if (finalOrderList.get(index).getKey().equals(key)) {
-//                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "detail program list 이 있는 even 의 name = " + finalOrderList.get(index).getEventName());
-//                    }
-//
-//                } // [cycle ]
-//            }
-//        }
+        display();
 
         // [FragmentTopBarManager] [topBarManager] this is 'maker step 8' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
@@ -121,28 +100,27 @@ public class MakerStep8Fragment extends Fragment {
         this.sectionManager.initWidget();
 
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
-
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_complete));
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
-        displayInfoOfProgram();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
+        this.topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_maker_step_end_button_complete),
+                this.sectionManager.newEndButtonListenerInstance()
+        );
 
     }
 
 
-    private void displayInfoOfProgram() {
-        final String METHOD_NAME = "[displayInfoOfProgram] ";
+    private void display() {
+        final String METHOD_NAME = "[display] ";
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> getKey = " + program.getKey());
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Program> getNickName = " + program.getNickName());

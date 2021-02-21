@@ -53,13 +53,13 @@ public class Step4EventRvAdapter extends RecyclerView.Adapter<Step4EventRvAdapte
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">> MuscleArea = " + selectedEventArrayList.get(position).getMuscleArea() + " // EventName = " + selectedEventArrayList.get(position).getEventName());
 
         // number : text
-        holder.getNumber().setText((position+1)+"");
+        holder.number.setText((position+1)+"");
 
         // muscleArea : text
-        holder.getMuscleArea().setText(DataManager.convertHanguleOfMuscleArea(selectedEventArrayList.get(position).getMuscleArea()));
+        holder.muscleArea.setText(DataManager.convertHanguleOfMuscleArea(selectedEventArrayList.get(position).getMuscleArea()));
 
         // eventName : text
-        holder.getEventName().setText(selectedEventArrayList.get(position).getEventName());
+        holder.eventName.setText(selectedEventArrayList.get(position).getEventName());
     }
 
     @Override
@@ -85,23 +85,6 @@ public class Step4EventRvAdapter extends RecyclerView.Adapter<Step4EventRvAdapte
             this.muscleArea = (MaterialTextView) itemView.findViewById(R.id.custom_list_step4_event_item_muscle_area);
             this.eventName = (MaterialTextView) itemView.findViewById(R.id.custom_list_step4_event_item_event_name);
 
-        }
-
-        // getter
-        public MaterialCardView getContentWrapper() {
-            return contentWrapper;
-        }
-
-        public MaterialTextView getNumber() {
-            return number;
-        }
-
-        public MaterialTextView getMuscleArea() {
-            return muscleArea;
-        }
-
-        public MaterialTextView getEventName() {
-            return eventName;
         }
 
     }

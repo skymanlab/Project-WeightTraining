@@ -96,47 +96,31 @@ public class FitnessCenterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final String METHOD_NAME = "[onViewCreated] ";
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------===================================================>");
+        // top bar
+        topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_title));
+        topBarManager.connectWidget();
+        topBarManager.initWidget();
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > myFitnessCenter 객체는 = " + myFitnessCenter);
-        if (myFitnessCenter != null) {
+        // section
+        sectionManager = new FitnessCenterSectionManager(this, view);
+        sectionManager.setMyFitnessCenter(myFitnessCenter);
+        sectionManager.setMyAttendanceDateList(myAttendanceDateList);
+        sectionManager.connectWidget();
+        sectionManager.initWidget();
 
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getFitnessCenterName = " + myFitnessCenter.getFitnessCenterName());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getMemberNumber = " + myFitnessCenter.getMemberNumber());
-            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getContractDate = " + myFitnessCenter.getContractDate());
-        }
+        // top bar : start button
+        topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------===================================================>");
 
-        // [FragmentTopBarManager] [topBarManager] this is 'more' fragment's top bar section manager.
-        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_title));
-        this.topBarManager.connectWidget();
-        this.topBarManager.initWidget();
-
-        // [FitnessCenterSectionManager] [sectionManager] this is 'more' fragment's section manager.
-        this.sectionManager = new FitnessCenterSectionManager(this, view);
-        this.sectionManager.setMyFitnessCenter(myFitnessCenter);
-        this.sectionManager.setMyAttendanceDateList(myAttendanceDateList);
-        this.sectionManager.connectWidget();
-        this.sectionManager.initWidget();
-
-        // [FragmentTopBarManager] [topBarManager] StartButtonListener 를 생성하여 start button click listener 설정하기
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
-
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
 

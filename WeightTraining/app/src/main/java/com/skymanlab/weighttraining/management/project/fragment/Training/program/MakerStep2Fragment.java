@@ -84,6 +84,8 @@ public class MakerStep2Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        display();
+
         // [FragmentTopBarManager] [topBarManager] this is 'maker step 2' fragment's top bar section manager.
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_program_menu_program_maker));
         this.topBarManager.connectWidget();
@@ -100,19 +102,29 @@ public class MakerStep2Fragment extends Fragment {
         this.sectionManager.initWidget();
 
         // [FragmentTopBarManager] [topBarManager] StartButtonListener 와 EndButtonListener 설정
-        this.topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        this.topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                // [method] fragment manager 를 통해 back stack 에서 pop!
-                getActivity().getSupportFragmentManager().popBackStack();
+                        // [method] fragment manager 를 통해 back stack 에서 pop!
+                        getActivity().getSupportFragmentManager().popBackStack();
 
-                return null;
-            }
-        });
-        this.topBarManager.initWidgetOfStartButton(null);
-        this.topBarManager.setEndButtonListener(this.sectionManager.newEndButtonListenerInstance());
-        this.topBarManager.initWidgetOfEndButton(getString(R.string.f_maker_step_end_button_next));
+                        return null;
+                    }
+                }
+        );
+        this.topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_maker_step_end_button_next),
+                this.sectionManager.newEndButtonListenerInstance()
+        );
+
+    }
+
+
+    private void display() {
+        final String METHOD_NAME = "[display] ";
 
     }
 }

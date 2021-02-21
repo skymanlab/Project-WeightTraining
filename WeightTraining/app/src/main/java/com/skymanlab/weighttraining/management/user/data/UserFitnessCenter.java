@@ -18,9 +18,11 @@ public class UserFitnessCenter implements Serializable {
     public static final String LONGITUDE = "longitude";
     public static final String CONTRACT_DATE = "contractDate";
     public static final String EXPIRY_DATE = "expiryDate";
-    public static final String ATTENDANCE_DATE_LIST = "attendanceDateList";
     public static final String IS_DISCLOSED = "isDisclosed";
     public static final String IS_ALLOWED_ACCESS_NOTIFICATION = "isAllowedAccessNotification";
+
+    // constant
+    public static final String ATTENDANCE_DATE_LIST = "attendanceDateList";
 
     // instance variable
     private long memberNumber;                          // 회원 번호

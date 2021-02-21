@@ -22,13 +22,14 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
-import com.skymanlab.weighttraining.management.event.data.EventMapping;
 import com.skymanlab.weighttraining.management.project.activity.SectionInitialization;
 import com.skymanlab.weighttraining.management.project.activity.SectionManager;
 import com.skymanlab.weighttraining.management.project.data.DataManager;
 import com.skymanlab.weighttraining.management.project.data.type.EquipmentType;
 import com.skymanlab.weighttraining.management.project.data.type.GroupType;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
+
+import java.util.HashMap;
 
 
 public class EASectionOneManager extends SectionManager implements SectionInitialization {
@@ -341,33 +342,47 @@ public class EASectionOneManager extends SectionManager implements SectionInitia
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "6. properWeightContent = " + properWeightContent);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "7. maxWeightContent = " + maxWeightContent);
 
+        // [lv/C]HashMap<String, Object> :
+        HashMap<String, Object> mappingData = new HashMap<>();
+        mappingData.put(Event.EVENT_NAME, event.getEventName());
+        mappingData.put(Event.MUSCLE_AREA, event.getMuscleArea());
+        mappingData.put(Event.EQUIPMENT_TYPE, event.getEquipmentType());
+        mappingData.put(Event.GROUP_TYPE, event.getGroupType());
+        mappingData.put(Event.PROPER_WEIGHT, event.getProperWeight());
+        mappingData.put(Event.MAX_WEIGHT, event.getMaxWeight());
+        mappingData.put(Event.SELECTION_COUNTER, event.getSelectionCounter());
+
         // [lv/C]DatabaseReference :
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("event");
 
-        db.child(getFirebaseUser().getUid()).child(getMuscleArea().toString()).push().setValue(EventMapping.mappingHashMapForAdd(event), new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+        db.child(getFirebaseUser().getUid())
+                .child(getMuscleArea().toString())
+                .push()
+                .setValue(
+                        mappingData,
+                        new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
 
-                // [check 1] : error 발생 안 함
-                if (error != null) {
-                    // 에러 발생 
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> +++++++++++++++++++++++++++++++++++ 입력 실패");
-                } else {
-                    // 성공
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> +++++++++++++++++++++++++++++++++++ 입력 성공");
-                    Toast.makeText(getActivity(), "입력을 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                } // [check 1]
-            }
-        });
+                                // [check 1] : error 발생 안 함
+                                if (error != null) {
+                                    // 에러 발생
+                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> +++++++++++++++++++++++++++++++++++ 입력 실패");
+                                } else {
+                                    // 성공
+                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>>> +++++++++++++++++++++++++++++++++++ 입력 성공");
+                                    Toast.makeText(getActivity(), "입력을 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                                } // [check 1]
+                            }
+                        });
 
     } // End of method [saveEvent]
 
 
     /**
      * [method]
-     *
      */
-    private void initContentOfSectionOneWidget () {
+    private void initContentOfSectionOneWidget() {
 
         // [iv/C]EditText : eventName 초기화
         this.eventName.setText("");

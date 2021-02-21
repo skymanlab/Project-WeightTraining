@@ -77,21 +77,23 @@ public class MyTrainingInfoFragment extends Fragment {
         topBarManager.connectWidget();
         topBarManager.initWidget();
 
-        // section manager
+        // section
         sectionManager = new MyTrainingInfoSectionManager(this, view);
         sectionManager.setMyTraining(myTraining);
         sectionManager.connectWidget();
         sectionManager.initWidget();
 
         // top bar : start button
-        topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
-                getActivity().getSupportFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        topBarManager.initWidgetOfStartButton(null);
+        topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+        );
 
     }
 }

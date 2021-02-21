@@ -83,21 +83,24 @@ public class FitnessCenterSettingFragment extends Fragment {
         topBarManager.connectWidget();
         topBarManager.initWidget();
 
-        // section manager
+        // section
         sectionManager = new FitnessCenterSettingSectionManager(this, view);
         sectionManager.setMyFitnessCenter(myFitnessCenter);
         sectionManager.connectWidget();
         sectionManager.initWidget();
 
         // top bar : Start button
-        topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
-                getActivity().getSupportFragmentManager().popBackStack();
-                return null;
-            }
-        });
-        topBarManager.initWidgetOfStartButton(null);
+        topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        return null;
+                    }
+                }
+
+        );
 
     }
 }

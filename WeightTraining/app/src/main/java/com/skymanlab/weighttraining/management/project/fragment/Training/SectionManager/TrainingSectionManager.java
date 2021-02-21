@@ -15,8 +15,8 @@ import com.skymanlab.weighttraining.management.project.fragment.Training.program
 public class TrainingSectionManager extends FragmentSectionManager implements FragmentSectionInitializable {
 
     // instance variable
-    private MaterialCardView eventList;
-    private MaterialCardView eventProgram;
+    private MaterialCardView eventListWrapper;
+    private MaterialCardView fitnessProgramWrapper;
 
     // constructor
     public TrainingSectionManager(Fragment fragment, View view) {
@@ -26,11 +26,11 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
     @Override
     public void connectWidget() {
 
-        // [iv/C]MaterialCardView : eventList connect
-        this.eventList = (MaterialCardView) getView().findViewById(R.id.f_training_event_list);
+        // [ MaterialCardView | eventListWrapper ]
+        this.eventListWrapper = (MaterialCardView) getView().findViewById(R.id.f_training_eventList_wrapper);
 
-        // [iv/C]MaterialCardView : eventProgram connect
-        this.eventProgram = (MaterialCardView) getView().findViewById(R.id.f_training_event_program);
+        // [ MaterialCardView | fitnessProgramWrapper ]
+        this.fitnessProgramWrapper = (MaterialCardView) getView().findViewById(R.id.f_training_fitnessProgram_wrapper);
 
     }
 
@@ -38,7 +38,7 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
     public void initWidget() {
 
         // [iv/C]MaterialCardView : eventList click listener
-        this.eventList.setOnClickListener(new View.OnClickListener() {
+        this.eventListWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -52,7 +52,7 @@ public class TrainingSectionManager extends FragmentSectionManager implements Fr
         });
 
         // [iv/C]MaterialCardView : eventProgram click listener
-        this.eventProgram.setOnClickListener(new View.OnClickListener() {
+        this.fitnessProgramWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

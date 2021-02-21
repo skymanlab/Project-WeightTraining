@@ -34,7 +34,6 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
     private EditText deadlift;
     private EditText benchPress;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

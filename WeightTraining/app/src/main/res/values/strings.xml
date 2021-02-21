@@ -25,31 +25,29 @@
 
     <!-- Fragment : home -->
     <string name="f_home_title">홈</string>
-    <string name="f_home_my_state_title">나의 상태 알림이</string>
-    <string name="f_home_my_attendance_state">나의 출석 상태</string>
-    <string name="f_home_my_attendance_state_check">출석하러가기</string>
-    <string name="f_home_my_attendance_state_on">출석 완료</string>
-    <string name="f_home_my_attendance_state_on_snack">이미 출석 완료 하였습니다.</string>
-    <string name="f_home_my_attendance_state_on_snack_save_complete">출석 완료하였습니다.</string>
-    <string name="f_home_my_attendance_state_off">미출석</string>
-    <string name="f_home_my_active_state">나의 활동 상태</string>
-    <string name="f_home_my_active_state_enter">입장</string>
-    <string name="f_home_my_active_state_exercise">운동 중</string>
-    <string name="f_home_my_active_state_exit">퇴장</string>
-    <string name="f_home_fitness_center_member">피트니스 회원 목록</string>
-    <string name="f_home_fitness_center_not_register">피트니스 센터를 아직 등록하지 않았습니다.</string>
-    <string name="f_home_fitness_center_is_not_disclosed">비공개 상태입니다.</string>
+    <string name="f_home_myStateTitle">나의 상태 알림이</string>
+    <string name="f_home_myAttendanceState">나의 출석 상태</string>
+    <string name="f_home_myAttendanceState_check">출석하기</string>
+    <string name="f_home_myAttendanceState_stateOn">출석 완료</string>
+    <string name="f_home_myAttendanceState_stateOn_snack_alreadyExist">이미 출석 완료 하였습니다.</string>
+    <string name="f_home_myAttendanceState_stateOn_snack_saveComplete">출석 완료하였습니다.</string>
+    <string name="f_home_myAttendanceState_stateOff">미출석</string>
+    <string name="f_home_myActiveState">나의 활동 상태</string>
+    <string name="f_home_myActiveState_enter">입장</string>
+    <string name="f_home_myActiveState_exercise">운동 중</string>
+    <string name="f_home_myActiveState_exit">퇴장</string>
+    <string name="f_home_fitnessCenterMemberList_title">피트니스 회원 목록</string>
+    <string name="f_home_indicator_doNotRegisterFitnessCenter">피트니스 센터를 아직 등록하지 않았습니다.</string>
+    <string name="f_home_indicator_isNotDisclosedFitnessCenter">비공개 상태입니다.</string>
     <string name="f_home_alert_"></string>
     <string name="f_home_"></string>
 
     <!-- Fragment : training -->
     <string name="f_training_title">트레이닝</string>
-    <string name="f_training_event_list">목록</string>
-    <string name="f_training_event_list_comment">각 부위별로 등록되어 있는 목록을 확인합니다.</string>
-    <string name="f_training_event_list_go">목록보러 가기</string>
-    <string name="f_training_event_program">프로그램</string>
-    <string name="f_training_event_program_comment">자신의 운동 프로그램을 만들거나, 추천 프로그램을 가져올 수 있습니다.</string>
-    <string name="f_training_event_program_go">프로그램 만들기</string>
+    <string name="f_training_eventList">종목 리스트</string>
+    <string name="f_training_eventList_comment">각 부위별로 등록되어 있는 목록을 확인합니다.</string>
+    <string name="f_training_fitnessProgram">피트니스 프로그램</string>
+    <string name="f_training_fitnessProgram_comment">자신의 운동 프로그램을 만들거나, 추천 프로그램을 가져올 수 있습니다.</string>
 
     <!-- Fragment : intervene -->
     <string name="f_intervene_title">참견하기</string>

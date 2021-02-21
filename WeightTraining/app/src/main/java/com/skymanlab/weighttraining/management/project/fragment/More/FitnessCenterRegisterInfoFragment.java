@@ -94,7 +94,7 @@ public class FitnessCenterRegisterInfoFragment extends Fragment {
         topBarManager.connectWidget();
         topBarManager.initWidget();
 
-        // section manager
+        // section
         sectionManager = new FitnessCenterRegisterInfoSectionManager(this, view);
         sectionManager.setMyFitnessCenter(myFitnessCenter);
         sectionManager.setMyAttendanceDateList(myAttendanceDateList);
@@ -102,15 +102,18 @@ public class FitnessCenterRegisterInfoFragment extends Fragment {
         sectionManager.initWidget();
 
         // top bar : start button
-        topBarManager.setStartButtonListener(new FragmentTopBarManager.StartButtonListener() {
-            @Override
-            public AlertDialog setStartButtonClickListener() {
+        topBarManager.initWidgetOfStartButton(
+                null,
+                new FragmentTopBarManager.StartButtonListener() {
+                    @Override
+                    public AlertDialog setStartButtonClickListener() {
 
-                getActivity().getSupportFragmentManager().popBackStack();
+                        getActivity().getSupportFragmentManager().popBackStack();
 
-                return null;
-            }
-        });
-        topBarManager.initWidgetOfStartButton(null);
+                        return null;
+                    }
+                }
+        );
+
     }
 }

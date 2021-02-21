@@ -87,7 +87,8 @@ public class FitnessCenterRegisterFragment extends Fragment {
         sectionManager.initWidget();
 
         // top bar : start button
-        topBarManager.setStartButtonListener(
+        topBarManager.initWidgetOfStartButton(
+                null,
                 new FragmentTopBarManager.StartButtonListener() {
                     @Override
                     public AlertDialog setStartButtonClickListener() {
@@ -96,14 +97,12 @@ public class FitnessCenterRegisterFragment extends Fragment {
                     }
                 }
         );
-        topBarManager.initWidgetOfStartButton(null);
 
         // top bar : end button
-        topBarManager.setEndButtonListener(
+        topBarManager.initWidgetOfEndButton(
+                getString(R.string.f_fitness_center_register_top_bar_end_button),
                 this.sectionManager.newInstanceOfEndButtonListener()
         );
-        topBarManager.initWidgetOfEndButton(
-                getString(R.string.f_fitness_center_register_top_bar_end_button)
-        );
+
     }
 }

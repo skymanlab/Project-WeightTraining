@@ -57,15 +57,15 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         // count, eventName, equipmentType, groupType, properWeight, maxWeight
-        holder.getCount().setText((position + 1) + "");
-        holder.getEventName().setText(eventArrayList.get(position).getEventName());
-        holder.getEquipmentType().setText(DataManager.convertHanguleOfEquipmentType(eventArrayList.get(position).getEquipmentType()));
-        holder.getGroupType().setText(DataManager.convertHanguleOfGroupType(eventArrayList.get(position).getGroupType()));
-        holder.getProperWeight().setText(eventArrayList.get(position).getProperWeight() + "");
-        holder.getMaxWeight().setText(eventArrayList.get(position).getMaxWeight() + "");
+        holder.count.setText((position + 1) + "");
+        holder.eventName.setText(eventArrayList.get(position).getEventName());
+        holder.equipmentType.setText(DataManager.convertHanguleOfEquipmentType(eventArrayList.get(position).getEquipmentType()));
+        holder.groupType.setText(DataManager.convertHanguleOfGroupType(eventArrayList.get(position).getGroupType()));
+        holder.properWeight.setText(eventArrayList.get(position).getProperWeight() + "");
+        holder.maxWeight.setText(eventArrayList.get(position).getMaxWeight() + "");
 
         // modify click listener
-        holder.getModify().setOnClickListener(new View.OnClickListener() {
+        holder.modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -75,7 +75,7 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
         });
 
         // delete click listener
-        holder.getDelete().setOnClickListener(new View.OnClickListener() {
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -192,48 +192,6 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            // [method] : widget connect
-            connectWidget(itemView);
-        }
-
-        // getter
-        public TextView getCount() {
-            return count;
-        }
-
-        public TextView getEventName() {
-            return eventName;
-        }
-
-        public TextView getEquipmentType() {
-            return equipmentType;
-        }
-
-        public TextView getGroupType() {
-            return groupType;
-        }
-
-        public TextView getProperWeight() {
-            return properWeight;
-        }
-
-        public TextView getMaxWeight() {
-            return maxWeight;
-        }
-
-        public TextView getModify() {
-            return modify;
-        }
-
-        public TextView getDelete() {
-            return delete;
-        }
-
-        /**
-         * [method] widget connect
-         */
-        private void connectWidget(View itemView) {
-
             count = (TextView) itemView.findViewById(R.id.custom_list_event_item_count);
             eventName = (TextView) itemView.findViewById(R.id.custom_list_event_item_event_name);
 
@@ -243,6 +201,7 @@ public class EachMuscleAreaListRvAdapter extends RecyclerView.Adapter<EachMuscle
             maxWeight = (TextView) itemView.findViewById(R.id.custom_list_event_item_max_weight);
             modify = (TextView) itemView.findViewById(R.id.custom_list_event_item_modify);
             delete = (TextView) itemView.findViewById(R.id.custom_list_event_item_delete);
+
         }
     }
 }
