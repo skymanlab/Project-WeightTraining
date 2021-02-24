@@ -71,7 +71,7 @@ public class MyProgramFragment extends Fragment {
         final String METHOD_NAME = "[onViewCreated] ";
 
         // top bar
-        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_my_program_title));
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_myProgram_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 

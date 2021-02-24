@@ -79,7 +79,7 @@ public class FitnessCenterSettingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // top bar
-        topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitness_center_setting_title));
+        topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_fitnessCenterSetting_title));
         topBarManager.connectWidget();
         topBarManager.initWidget();
 

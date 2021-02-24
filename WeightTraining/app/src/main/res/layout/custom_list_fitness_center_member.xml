@@ -16,7 +16,7 @@
             android:id="@+id/custom_list_fitness_center_member_stateImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/attendance_state_exist" />
+            android:src="@drawable/active_state_exit" />
 
         <TextView
             android:id="@+id/custom_list_fitness_center_member_memberName"

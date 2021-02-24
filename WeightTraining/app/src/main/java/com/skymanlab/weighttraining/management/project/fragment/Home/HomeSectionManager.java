@@ -1,6 +1,7 @@
 package com.skymanlab.weighttraining.management.project.fragment.Home;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
+import com.skymanlab.weighttraining.management.project.ApiManager.NetworkStateChecker;
 import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.User;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
@@ -50,17 +52,19 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
-    private MaterialButtonToggleGroup myActiveStateGroup;
-    private TextView myActiveStateIndicator;
+    private LinearLayout myStateNotificationContentWrapper;
+    private TextView myStateNotificationIndicator;
     private TextView myAttendanceStateIndicator;
     private MaterialButton myAttendanceStateCheck;
+    private MaterialButtonToggleGroup myActiveStateButtonGroup;
+    private TextView myActiveStateIndicator;
 
     // instance variable
     private RecyclerView fitnessCenterMemberRecyclerView;
     private TextView fitnessCenterMemberIndicator;
 
     // instance variable
-    private AdView adView;
+    private AdView adMob;
 
     // constructor
     public HomeSectionManager(Fragment fragment, View view) {
@@ -70,11 +74,11 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     @Override
     public void connectWidget() {
 
-        // [ MaterialButtonToggleGroup | myActiveStateGroup ]
-        this.myActiveStateGroup = (MaterialButtonToggleGroup) getView().findViewById(R.id.f_home_my_active_state_group);
+        // [ LinearLayout | myStateNotificationContentWrapper ]
+        this.myStateNotificationContentWrapper = (LinearLayout) getView().findViewById(R.id.f_home_myStateNotification_content_wrapper);
 
-        // [ TextView | myActiveStateIndicator ]
-        this.myActiveStateIndicator = (TextView) getView().findViewById(R.id.f_home_my_active_state_indicator);
+        // [ TextView | myStateNotificationIndicator ]
+        this.myStateNotificationIndicator = (TextView) getView().findViewById(R.id.f_home_myStateNotification_indicator);
 
         // [ TextView | myAttendanceStateIndicator ]
         this.myAttendanceStateIndicator = (TextView) getView().findViewById(R.id.f_home_myAttendanceState_indicator);
@@ -82,15 +86,21 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
         // [ MaterialButton | myAttendanceStateCheck ]
         this.myAttendanceStateCheck = (MaterialButton) getView().findViewById(R.id.f_home_myAttendanceState_check);
 
+        // [ MaterialButtonToggleGroup | myActiveStateButtonGroup ]
+        this.myActiveStateButtonGroup = (MaterialButtonToggleGroup) getView().findViewById(R.id.f_home_myActiveState_buttonGroup);
+
+        // [ TextView | myActiveStateIndicator ]
+        this.myActiveStateIndicator = (TextView) getView().findViewById(R.id.f_home_myActiveState_indicator);
+
 
         // [ RecyclerView | fitnessCenterMemberRecyclerView ]
-        this.fitnessCenterMemberRecyclerView = (RecyclerView) getView().findViewById(R.id.f_home_fitness_center_member_recycler_view);
+        this.fitnessCenterMemberRecyclerView = (RecyclerView) getView().findViewById(R.id.f_home_fitnessCenterMemberList_recyclerView);
 
         // [ TextView | fitnessCenterMemberIndicator ]
-        this.fitnessCenterMemberIndicator = (TextView) getView().findViewById(R.id.f_home_fitness_center_member_indicator);
+        this.fitnessCenterMemberIndicator = (TextView) getView().findViewById(R.id.f_home_fitnessCenterMemberList_indicator);
 
-        // [ AdView | adView ] widget connect
-        this.adView = (AdView) getView().findViewById(R.id.f_home_ad_mob);
+        // [ AdView | adMob ] widget connect
+        this.adMob = (AdView) getView().findViewById(R.id.f_home_adMob);
 
     }
 
@@ -98,21 +108,42 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
-        // ad mob adView init
-        initWidgetOfAdView();
+        // 네트워크에 연결되지 않으면 사용자에게 알려주고
+        if (!NetworkStateChecker.checkActiveNetwork(getFragment().getContext())) {
+
+            // myStateNotificationIndicator : 이것으로 네트워크 상태를 알려준다.
+            myStateNotificationIndicator.setVisibility(View.VISIBLE);
+            myStateNotificationIndicator.setText(R.string.f_home_snack_notConnectedNetwork);
+
+//            Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_content_wrapper), R.string.f_home_snack_notConnectedNetwork, Snackbar.LENGTH_INDEFINITE)
+//                    .setAction(
+//                            R.string.f_home_snack_notConnectedNetwork_actionButton,
+//                            new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//
+//                                }
+//                            }
+//                    )
+//                    .show();
+            return;
+        }
+
+        // ad mob adMob init
+        initWidgetOfAdMob();
 
         // 나의 fitness center 의 회원 목록을 가져와서
         // 각 상황에 맞게
         // 관련된 widget 들을 초기 내용을 설정한다.
-        loadContentOfFitnessCenterMemberListSection();
+        loadContent();
 
     }
 
 
     /**
-     * Google AdMob 광고를 적응형 베너로 표시합니다.
+     * Widget : adMob
      */
-    private void initWidgetOfAdView() {
+    private void initWidgetOfAdMob() {
 
         MobileAds.initialize(getFragment().getActivity(), new OnInitializationCompleteListener() {
             @Override
@@ -123,8 +154,8 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
         AdRequest adRequest = new AdRequest.Builder().build();
 
-        adView.loadAd(adRequest);
-        adView.setAdListener(new AdListener() {
+        adMob.loadAd(adRequest);
+        adMob.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
@@ -158,208 +189,22 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
     }
 
-    private void initWidgetOfFitnessCenterActiveButtonGroup(boolean isActive) {
 
-    }
+    /**
+     * Widget section : myAttendanceState
+     *
+     * @param uid
+     * @param attendanceDateList
+     */
+    private void initMyAttendanceState(String uid, ArrayList<Attendance> attendanceDateList) {
+        final String METHOD_NAME = "[initMyAttendanceState] ";
 
+        // indicator : VISIBLE
+        myAttendanceStateIndicator.setVisibility(View.VISIBLE);
 
-    private void loadContentOfFitnessCenterMemberListSection() {
-        final String METHOD_NAME = "[loadContent] ";
+        // button : VISIBLE
+        myAttendanceStateCheck.setVisibility(View.VISIBLE);
 
-
-        FitnessCenterMemberManager fitnessCenterMemberManager = new FitnessCenterMemberManager(
-                FirebaseAuth.getInstance().getCurrentUser().getUid()
-        );
-        fitnessCenterMemberManager.init(new FitnessCenterMemberManager.OnMemberManipulateListener() {
-
-            @Override
-            public void isDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList, Member myMemberData, ArrayList<Member> memberArrayList) {
-
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------------------------------------------------------------------------");
-
-                // 내가 등록한 피트니스 센터가 있고 '공개' 상태일 때
-                // fitness center member list section 의 widget 들의 초기 내용을 설정한다.
-                if (myFitnessCenter != null) {
-
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< myFitnessCenter > getIsDisclosed = " + myFitnessCenter.getIsDisclosed());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< myFitnessCenter > getMemberNumber = " + myFitnessCenter.getMemberNumber());
-                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< memberArrayList > size = " + memberArrayList.size());
-
-                    // 주의)
-                    // 피트니스 센터에 등록했는데 나의 회원 정보가 없다면 이상한 일이다.!!!!!!!!!!!
-                    if (myMemberData != null) {
-
-                        // 나의 피트니스 센터에 등록되어 있는 회원 데이터
-                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 멤버 > myMemberData 객체는 ? = " + myMemberData);
-
-                        // 내가 등록한 FitnessCenter 에 회원이 있을 경우에
-                        if (!memberArrayList.isEmpty()) {
-
-                            // ==================================================== recycler view ====================================================
-                            if (fitnessCenterMemberIndicator.getVisibility() == View.VISIBLE) {
-                                fitnessCenterMemberIndicator.setVisibility(View.GONE);
-                            }
-
-                            // ==================================================== recycler view ====================================================
-                            // 만약 recycler view 가 GONE 이면 VISIBLE 로 변경
-                            if (fitnessCenterMemberRecyclerView.getVisibility() == View.GONE) {
-                                fitnessCenterMemberRecyclerView.setVisibility(View.VISIBLE);
-                            }
-                            // recycler view adapter
-                            FitnessCenterMemberRvAdapter adapter = new FitnessCenterMemberRvAdapter(myUid, myFitnessCenter, memberArrayList);
-
-                            // recycler view
-                            // 해당 layout xml 파일에 layoutManager 를 LinearLayout 으로 설정해 놓아서 별다른 설정은 안 해 주었다.
-                            fitnessCenterMemberRecyclerView.setAdapter(adapter);
-
-                            // ==================================================== my active state ====================================================
-                            if (myActiveStateGroup.getVisibility() == View.GONE) {
-                                myActiveStateGroup.setVisibility(View.VISIBLE);
-                            }
-
-                            // 1. 기존의 클릭 리스너 제거 후
-                            myActiveStateGroup.clearOnButtonCheckedListeners();
-
-                            // 2. 나의 member 데이터에 저장되어 있는 isActive 값을 통해 버튼 체크하고
-                            if (myMemberData.getActiveState() == Member.ACTIVE_STATE_ENTER) {
-
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '입장' 상태입니다.");
-                                myActiveStateGroup.check(R.id.f_home_myActiveState_enter);
-
-                            } else if (myMemberData.getActiveState() == Member.ACTIVE_STATE_EXERCISE) {
-
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '운동 중' 상태입니다.");
-                                myActiveStateGroup.check(R.id.f_home_myActiveState_exercise);
-
-                            } else if (myMemberData.getActiveState() == Member.ACTIVE_STATE_EXIT) {
-
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '퇴장' 상태입니다.");
-                                myActiveStateGroup.check(R.id.f_home_myActiveState_exit);
-
-                            }
-
-                            // 3.다시 fitnessCenterActiveButtonGroup 의 '입장', '퇴장' 을 눌렀을 때
-                            // 해당 데이터 베이스의 isActive 를 변경하는
-                            // 리스너를 재 등록 한다.
-                            myActiveStateGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-                                @Override
-                                public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 체크 확인 > group = " + group);
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 체크 확인 > checkedId = " + checkedId);
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 체크 확인 > isChecked = " + isChecked);
-
-                                    if (isChecked) {
-                                        switch (checkedId) {
-                                            case R.id.f_home_myActiveState_enter:
-                                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 토글 버튼 > enter 버튼을 클릭 하였습니다.");
-                                                updateContentOfMyIsActive(myFitnessCenter, Member.ACTIVE_STATE_ENTER);
-                                                break;
-                                            case R.id.f_home_myActiveState_exercise:
-                                                updateContentOfMyIsActive(myFitnessCenter, Member.ACTIVE_STATE_EXERCISE);
-                                                break;
-                                            case R.id.f_home_myActiveState_exit:
-                                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 토글 버튼 > exist 버튼을 클릭 하였습니다.");
-                                                updateContentOfMyIsActive(myFitnessCenter, Member.ACTIVE_STATE_EXIT);
-                                                break;
-                                        }
-                                    }
-
-                                }
-                            });
-
-                            // ==================================================== my attendance state ====================================================
-                            setMyAttendanceState(
-                                    myUid,
-                                    myAttendanceDateList
-                            );
-
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void isNotIsDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList) {
-
-
-                // 내가 등록한 피트니스 센터가 있지만, '비공개' 상태일 때
-
-                // ============================================== my active sate ==============================================
-                // activeStateGroup 도 GONE
-                myActiveStateGroup.setVisibility(View.GONE);
-
-                // indicator
-                myActiveStateIndicator.setText(R.string.f_home_indicator_isNotDisclosedFitnessCenter);
-
-
-                // ==================================================== my attendance state ====================================================
-                setMyAttendanceState(
-                        myUid,
-                        myAttendanceDateList
-                );
-
-                // ============================================== fitness center member list ==============================================
-                // recycler view : 내가 비공개로 했으므로 다른 사람의 접속여부도 알지 못하도록 GONE
-                fitnessCenterMemberRecyclerView.setVisibility(View.GONE);
-
-                // indicator
-                fitnessCenterMemberIndicator.setText(R.string.f_home_indicator_isNotDisclosedFitnessCenter);
-
-            }
-
-            @Override
-            public void isNotRegisteredTheFitnessCenter() {
-                // 내가 등록한 피트니스 센터가 없을 때
-
-                // ============================================== my active sate ==============================================
-                // activeStateGroup 도 GONE
-                myActiveStateGroup.setVisibility(View.GONE);
-
-                // indicator
-                myAttendanceStateIndicator.setText(R.string.f_home_indicator_doNotRegisterFitnessCenter);
-
-                // ============================================== my attendance state ==============================================
-
-
-                // ============================================== fitness center member list ==============================================
-                // indicator
-                fitnessCenterMemberIndicator.setText(R.string.f_home_indicator_doNotRegisterFitnessCenter);
-
-            }
-        });
-    }
-
-
-    private void updateContentOfMyIsActive(UserFitnessCenter myFitnessCenter, int activeState) {
-        final String METHOD_NAME = "[updateContentOfMyIsActive] ";
-
-        HashMap<String, Object> activeUpdate = new HashMap<>();
-        activeUpdate.put(Member.ACTIVE_STATE, activeState);
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child(FirebaseConstants.DATABASE_FIRST_NODE_FITNESS_CENTER)
-                .child(myFitnessCenter.getFirstAddress())
-                .child(myFitnessCenter.getSecondAddress())
-                .child(myFitnessCenter.getThirdAddress())
-                .child(FitnessCenter.MEMBER_LIST)
-                .child(myFitnessCenter.getMemberNumber() + "")
-                .updateChildren(activeUpdate, new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-
-                        if (error != null) {
-                            return;
-                        }
-
-                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 활성화 상태 > 나의 활성화 상태 변경을 완료하였습니다.");
-
-                    }
-                });
-    }
-
-    private void setMyAttendanceState(String uid, ArrayList<Attendance> attendanceDateList) {
-        final String METHOD_NAME = "[saveContentOfAttendanceDate] ";
 
         String currentDate = getCurrentDate();
 
@@ -416,6 +261,243 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
     }
 
+
+    private void loadContent() {
+        final String METHOD_NAME = "[loadContent] ";
+
+        // 나의 UserFitnessCenter 를 토대로 FitnessCenter 의 Member 리스트 가져오기
+        FitnessCenterMemberManager fitnessCenterMemberManager = new FitnessCenterMemberManager(
+                FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
+        fitnessCenterMemberManager.init(new FitnessCenterMemberManager.OnMemberManipulateListener() {
+
+            @Override
+            public void isDisclosedState(String myUid,
+                                         UserFitnessCenter myFitnessCenter,
+                                         ArrayList<Attendance> myAttendanceDateList,
+                                         Member myMemberData, ArrayList<Member> memberArrayList) {
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============================================> 피트니스 센터  , 공개");
+
+                // 내가 등록한 피트니스 센터가 있고 '공개' 상태일 때
+                // fitness center member list section 의 widget 들의 초기 내용을 설정한다.
+                if (myFitnessCenter != null) {
+
+                    // 주의)
+                    // 피트니스 센터에 등록했는데 나의 회원 정보가 없다면 이상한 일이다.!!!!!!!!!!!
+                    if (myMemberData != null) {
+
+                        // 내가 등록한 FitnessCenter 에 회원이 있을 경우에
+                        if (!memberArrayList.isEmpty()) {
+
+                            // ============================================== my state notification ==============================================
+                            // content wrapper : VISIBLE
+                            myStateNotificationContentWrapper.setVisibility(View.VISIBLE);
+
+                            // indicator : GONE
+                            myStateNotificationIndicator.setVisibility(View.GONE);
+
+                            // ==================================================== my attendance state ====================================================
+                            initMyAttendanceState(
+                                    myUid,
+                                    myAttendanceDateList
+                            );
+
+
+                            // ==================================================== my active state ====================================================
+                            // button Group : VISIBLE
+                            myActiveStateButtonGroup.setVisibility(View.VISIBLE);
+
+                            // indicator : GONE
+                            myActiveStateIndicator.setVisibility(View.GONE);
+
+
+                            // 1. 기존의 클릭 리스너 제거 후
+                            myActiveStateButtonGroup.clearOnButtonCheckedListeners();
+
+                            // 2. 나의 member 데이터에 저장되어 있는 isActive 값을 통해 버튼 체크하고
+                            if (myMemberData.getActiveState() == Member.ACTIVE_STATE_ENTER) {
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '입장' 상태입니다.");
+                                myActiveStateButtonGroup.check(R.id.f_home_myActiveState_enter);
+
+                            } else if (myMemberData.getActiveState() == Member.ACTIVE_STATE_EXERCISE) {
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '운동 중' 상태입니다.");
+                                myActiveStateButtonGroup.check(R.id.f_home_myActiveState_exercise);
+
+                            } else if (myMemberData.getActiveState() == Member.ACTIVE_STATE_EXIT) {
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 ActiveState > activeState 가 '퇴장' 상태입니다.");
+                                myActiveStateButtonGroup.check(R.id.f_home_myActiveState_exit);
+
+                            }
+
+                            // 3.다시 fitnessCenterActiveButtonGroup 의 '입장', '퇴장' 을 눌렀을 때
+                            // 해당 데이터 베이스의 isActive 를 변경하는
+                            // 리스너를 재 등록 한다.
+                            myActiveStateButtonGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+                                @Override
+                                public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+
+                                    if (isChecked) {
+                                        switch (checkedId) {
+                                            case R.id.f_home_myActiveState_enter:
+                                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 토글 버튼 > enter 버튼을 클릭 하였습니다.");
+                                                updateContentOfMyActiveState(myFitnessCenter, Member.ACTIVE_STATE_ENTER);
+                                                break;
+                                            case R.id.f_home_myActiveState_exercise:
+                                                updateContentOfMyActiveState(myFitnessCenter, Member.ACTIVE_STATE_EXERCISE);
+                                                break;
+                                            case R.id.f_home_myActiveState_exit:
+                                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 토글 버튼 > exist 버튼을 클릭 하였습니다.");
+                                                updateContentOfMyActiveState(myFitnessCenter, Member.ACTIVE_STATE_EXIT);
+                                                break;
+                                        }
+
+                                    }
+
+                                }
+                            });
+
+                            // ==================================================== fitness center member ====================================================
+                            // recycler view : VISIBLE
+                            fitnessCenterMemberRecyclerView.setVisibility(View.VISIBLE);
+
+                            // indicator : GONE
+                            fitnessCenterMemberIndicator.setVisibility(View.GONE);
+
+                            // recycler view adapter
+                            FitnessCenterMemberRvAdapter adapter = new FitnessCenterMemberRvAdapter(myUid, myFitnessCenter, memberArrayList);
+
+                            // recycler view
+                            // 해당 layout xml 파일에 layoutManager 를 LinearLayout 으로 설정해 놓아서 별다른 설정은 안 해 주었다.
+                            fitnessCenterMemberRecyclerView.setAdapter(adapter);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void isNotIsDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList) {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============================================> 피트니스 센터  , 비공개");
+
+                // 내가 등록한 피트니스 센터가 있지만, '비공개' 상태일 때
+                // ============================================== my state notification ==============================================
+                // content wrapper : VISIBLE
+                myStateNotificationContentWrapper.setVisibility(View.VISIBLE);
+
+                // indicator : GONE
+                myStateNotificationIndicator.setVisibility(View.GONE);
+
+                // ==================================================== my attendance state ====================================================
+
+                initMyAttendanceState(
+                        myUid,
+                        myAttendanceDateList
+                );
+
+                // ============================================== my active sate ==============================================
+                // button group : GONE
+                myActiveStateButtonGroup.setVisibility(View.GONE);
+
+                // indicator : VISIBLE
+                myActiveStateIndicator.setVisibility(View.VISIBLE);
+
+                // '비공개 상태입니다.' 라는 것을 알려준다.
+                myActiveStateIndicator.setText(R.string.f_home_indicator_isNotDisclosedFitnessCenter);
+
+
+                // ============================================== fitness center member list ==============================================
+                // recycler view : GONE (이유 : 내가 비공개로 했으므로 다른 사람의 접속여부도 알지 못하도록 하기 위해서 )
+                fitnessCenterMemberRecyclerView.setVisibility(View.GONE);
+
+                // indicator
+                fitnessCenterMemberIndicator.setVisibility(View.VISIBLE);
+
+                // '비공개 상태입니다.' 라는 것을 알려준다.
+                fitnessCenterMemberIndicator.setText(R.string.f_home_indicator_isNotDisclosedFitnessCenter);
+
+            }
+
+            @Override
+            public void isNotRegisteredTheFitnessCenter() {
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============================================> 피트니스 센터 아직 등록 안됨");
+                // 내가 등록한 피트니스 센터가 없을 때
+
+                // ============================================== my state notification ==============================================
+                // content wrapper : GONE
+                myStateNotificationContentWrapper.setVisibility(View.GONE);
+
+                // indicator : VISIBLE
+                myStateNotificationIndicator.setVisibility(View.VISIBLE);
+
+                // '피트니스 센터를 아직 등록하지 않았습니다.'는 것을 알려준다.
+                myStateNotificationIndicator.setText(R.string.f_home_indicator_doNotRegisterFitnessCenter);
+
+
+                // ============================================== my attendance state ==============================================
+
+
+                // ============================================== my active state ==============================================
+
+
+                // ============================================== fitness center member list ==============================================
+                // recycler view : GONE
+                fitnessCenterMemberRecyclerView.setVisibility(View.GONE);
+
+                // indicator : VISIBLE
+                fitnessCenterMemberIndicator.setVisibility(View.VISIBLE);
+
+                // '피트니스 센터를 아직 등록하지 않았습니다.'는 것을 알려준다.
+                fitnessCenterMemberIndicator.setText(R.string.f_home_indicator_doNotRegisterFitnessCenter);
+
+            }
+        });
+    }
+
+
+    /**
+     * ActiveState 업데이트
+     *
+     * @param myFitnessCenter
+     * @param activeState
+     */
+    private void updateContentOfMyActiveState(UserFitnessCenter myFitnessCenter, int activeState) {
+        final String METHOD_NAME = "[updateContentOfMyActiveState] ";
+
+        HashMap<String, Object> activeUpdate = new HashMap<>();
+        activeUpdate.put(Member.ACTIVE_STATE, activeState);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child(FirebaseConstants.DATABASE_FIRST_NODE_FITNESS_CENTER)
+                .child(myFitnessCenter.getFirstAddress())
+                .child(myFitnessCenter.getSecondAddress())
+                .child(myFitnessCenter.getThirdAddress())
+                .child(FitnessCenter.MEMBER_LIST)
+                .child(myFitnessCenter.getMemberNumber() + "")
+                .updateChildren(activeUpdate, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                        if (error != null) {
+                            return;
+                        }
+
+                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 활성화 상태 > 나의 활성화 상태 변경을 완료하였습니다.");
+
+                    }
+                });
+    }
+
+
+    /**
+     * Attendance Date List 추가하기
+     *
+     * @param uid
+     * @param currentDate
+     */
     private void saveContentOfAttendanceDate(String uid, String currentDate) {
 
         HashMap<String, Object> saveContent = new HashMap<>();
@@ -444,6 +526,12 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
     }
 
+
+    /**
+     * 현재 날짜를 'yyyy년 MM월 dd일' 형태로 변환하여 가져오기
+     *
+     * @return
+     */
     private String getCurrentDate() {
         final String METHOD_NAME = "[getCurrentDate] ";
 
@@ -457,6 +545,13 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     }
 
 
+    /**
+     * attendanceDateList 에 현재 날짜가 포함되었는지 확인하여 포함되어 있으면 true 를 반환한다.
+     *
+     * @param currentDate
+     * @param attendanceDateList
+     * @return
+     */
     private boolean checkAttendanceDate(String currentDate, ArrayList<Attendance> attendanceDateList) {
         final String METHOD_NAME = "[checkAttendanceDate] ";
 

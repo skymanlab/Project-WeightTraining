@@ -23,6 +23,8 @@
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ fragment +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
+    <string name="network_state_notConnectNetwork">네트워크에 연결되지 않아서 데이터를 가져올 수 없습니다.</string>
+
     <!-- Fragment : home -->
     <string name="f_home_title">홈</string>
     <string name="f_home_myStateTitle">나의 상태 알림이</string>
@@ -39,7 +41,8 @@
     <string name="f_home_fitnessCenterMemberList_title">피트니스 회원 목록</string>
     <string name="f_home_indicator_doNotRegisterFitnessCenter">피트니스 센터를 아직 등록하지 않았습니다.</string>
     <string name="f_home_indicator_isNotDisclosedFitnessCenter">비공개 상태입니다.</string>
-    <string name="f_home_alert_"></string>
+    <string name="f_home_snack_notConnectedNetwork">네트워크에 연결되지 않아서 데이터를 가져올 수 없습니다.</string>
+    <string name="f_home_snack_notConnectedNetwork_actionButton">확인</string>
     <string name="f_home_"></string>
 
     <!-- Fragment : training -->
@@ -54,42 +57,47 @@
 
     <!-- Fragment : more -->
     <string name="f_more_title">더보기</string>
-    <string name="f_more_register_day_count_title">등록일</string>
-    <string name="f_more_register_day_count_default">- 일</string>
-    <string name="f_more_training_count_title">운동 횟수</string>
-    <string name="f_more_training_count_default">- 회</string>
-    <string name="f_more_fitness_center">피트니스 센터</string>
+    <string name="f_more_registerDayCount_title">등록일</string>
+    <string name="f_more_registerDayCount_default">- 일</string>
+    <string name="f_more_trainingCount_title">운동 횟수</string>
+    <string name="f_more_trainingCount_default">- 회</string>
+    <string name="f_more_fitnessCenter">피트니스 센터</string>
     <string name="f_more_target">목표</string>
     <string name="f_more_setting">설정</string>
+    <string name="f_more_myTrainingInfo">나의 트레이닝</string>
     <string name="f_more_notice">공지사항</string>
-    <string name="f_more_my_training_info">나의 트레이닝</string>
-    <string name="f_more_service_center">건의하기</string>
-    <string name="f_more_service_center_email_title">개발자에게 건의하기</string>
+    <string name="f_more_serviceCenter">건의하기</string>
+    <string name="f_more_serviceCenter_emailTitle">개발자에게 건의하기</string>
 
-    <!-- Fragment : more user info -->
-    <string name="f_more_user_info_title">내 정보</string>
-    <string name="f_more_user_info_photo_change">변경</string>
-    <string name="f_more_user_info_auth_provider">인증 제공자</string>
-    <string name="f_more_user_info_auth_provider_default">구글</string>
-    <string name="f_more_user_info_email">이메일</string>
-    <string name="f_more_user_info_email_default">skyman1325@gmail.com</string>
-    <string name="f_more_user_info_name">이름</string>
-    <string name="f_more_user_info_name_default">장동익</string>
-    <string name="f_more_user_info_logout">로그아웃</string>
-    <string name="f_more_user_info_withdraw">회원탈퇴</string>
-    <string name="f_more_user_info_"></string>
+    <!-- Fragment : user info -->
+    <string name="f_userInfo_title">내 정보</string>
+    <string name="f_userInfo_photo_change">변경</string>
+    <string name="f_userInfo_authProvider">인증 제공자</string>
+    <string name="f_userInfo_authProvider_default">구글</string>
+    <string name="f_userInfo_email">이메일</string>
+    <string name="f_userInfo_email_default">skyman1325@gmail.com</string>
+    <string name="f_userInfo_name">이름</string>
+    <string name="f_userInfo_name_default">장동익</string>
+    <string name="f_userInfo_logout">로그아웃</string>
+    <string name="f_userInfo_withdraw">회원탈퇴</string>
+    <string name="f_userInfo_"></string>
 
-    <!-- Fragment : my training info -->
-    <string name="f_my_training_info_title">나의 트레이닝</string>
-    <string name="f_my_training_info_three_major_measurements">3대 측정</string>
-    <string name="f_my_training_info_three_major_measurements_squat">스쿼트</string>
-    <string name="f_my_training_info_three_major_measurements_squat_default">0 kg</string>
-    <string name="f_my_training_info_three_major_measurements_deadlift">데드 리프트</string>
-    <string name="f_my_training_info_three_major_measurements_deadlift_default">0 kg</string>
-    <string name="f_my_training_info_three_major_measurements_bench_press">벤치 프레스</string>
-    <string name="f_my_training_info_three_major_measurements_bench_press_default">0 kg</string>
-    <string name="f_my_training_info_three_major_measurements_register">등록</string>
-    <string name="f_my_training_info_"></string>
+    <!-- Fragment : user training info -->
+    <string name="f_userTrainingInfo_title">나의 트레이닝</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_title">3대 측정 무게 입력</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_squat">스쿼트</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_squat_default">0 kg</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_deadlift">데드 리프트</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_deadlift_default">0 kg</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_benchPress">벤치 프레스</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_benchPress_default">0 kg</string>
+    <string name="f_userTrainingInfo_threeMajorMeasurements_register">등록</string>
+    <string name="f_userTrainingInfo_"></string>
+
+    <!-- Fragment : notice -->
+    <string name="f_notice_title">공지사항</string>
+    <string name="f_notice_noData">공지사항이 없습니다.</string>
+    <string name="f_notice_"></string>
 
     <!-- Fragment : fitness center -->
     <string name="f_fitness_center_title">피트니스 센터</string>
@@ -157,14 +165,11 @@
     <string name="f_fitness_center_register_info_"></string>
 
     <!-- Fragment : fitness center setting -->
-    <string name="f_fitness_center_setting_title">피트니스 센터 설정</string>
-    <string name="f_fitness_center_setting_is_disclosed">피트니스 센터 공개</string>
-    <string name="f_fitness_center_setting_is_disclosed_text_on">공개 상태입니다.</string>
-    <string name="f_fitness_center_setting_is_disclosed_text_off">비공개 상태입니다.</string>
-    <string name="f_fitness_center_setting_is_allowed_access_notification">피트니스 센터 접근 알림</string>
-    <string name="f_fitness_center_setting_is_allowed_access_notification_text_on">접근 알림을 활성화 되었습니다.</string>
-    <string name="f_fitness_center_setting_is_allowed_access_notification_text_off">접근 알림을 알리지 않습니다.</string>
-    <string name="f_fitness_center_setting_"></string>
+    <string name="f_fitnessCenterSetting_title">피트니스 센터 설정</string>
+    <string name="f_fitnessCenterSetting_isAllowedAccessNotification">피트니스 센터 접근 알림</string>
+    <string name="f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo">백그라운 위치 권한 승인하기</string>
+    <string name="f_fitnessCenterSetting_isDisclosed">피트니스 센터 공개</string>
+    <string name="f_fitnessCenterSetting_"></string>
 
     <!-- Fragment : setting -->
     <string name="f_setting_title">환경설정</string>
@@ -172,7 +177,8 @@
     <!-- Fragment : list -->
     <string name="f_list_title">목록</string>
 
-    <!-- Fragment : each list -->
+    <!-- Fragment : each muscle area list -->
+    <string name="f_eachMuscleAreaList_indicator_noData">저장된 데이터가 없습니다.</string>
 
     <!-- Fragment : program -->
     <string name="f_program_title">프로그램</string>
@@ -273,21 +279,21 @@
     <string name="f_maker_step8_result_"></string>
 
     <!-- Fragment : my program -->
-    <string name="f_my_program_title">프로그램 목록</string>
-    <string name="f_my_program_indication">내가 만든 프로그램 목록입니다.</string>
-    <string name="f_my_program_"></string>
+    <string name="f_myProgram_title">프로그램 목록</string>
+    <string name="f_myProgram_indication_noData">저장된 프로그램이 없습니다.</string>
+    <string name="f_myProgram_"></string>
 
     <!-- Fragment : my program detail -->
-    <string name="f_my_program_detail_title">세부정보</string>
-    <string name="f_my_program_detail_nick_name_default">프로그램 별칭</string>
-    <string name="f_my_program_detail_muscle_area_list">근육 부위</string>
-    <string name="f_my_program_detail_muscle_area_list_default">가슴 / 어깨 / 등 / 하체 / 팔 / 기타</string>
-    <string name="f_my_program_detail_total_event_number">총 종목 수</string>
-    <string name="f_my_program_detail_total_event_number_default">0 개</string>
-    <string name="f_my_program_detail_total_set_number">총 세트 수</string>
-    <string name="f_my_program_detail_total_set_number_default">0 세트</string>
-    <string name="f_my_program_detail_detail_program_info">세부 프로그램 정보</string>
-    <string name="f_my_program_detail_"></string>
+    <string name="f_myProgramDetail_title">세부정보</string>
+    <string name="f_myProgramDetail_nick_name_default">프로그램 별칭</string>
+    <string name="f_myProgramDetail_muscleAreaList">근육 부위</string>
+    <string name="f_myProgramDetail_muscleAreaList_default">가슴 / 어깨 / 등 / 하체 / 팔 / 기타</string>
+    <string name="f_myProgramDetail_totalEventNumber">총 종목 수</string>
+    <string name="f_myProgramDetail_totalEventNumber_default">0 개</string>
+    <string name="f_myProgramDetail_totalSetNumber">총 세트 수</string>
+    <string name="f_myProgramDetail_totalSetNumber_default">0 세트</string>
+    <string name="f_myProgramDetail_detailProgramList_title">프로그램 순서</string>
+    <string name="f_myProgramDetail_"></string>
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ include layout +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
@@ -331,13 +337,365 @@
     <string name="include_detail_program_item_rest_time_default">0분 0초</string>
     <string name="include_detail_program_item_"></string>
 
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom listView +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Custom : event item -->
+    <string name="custom_list_event_item_count">1.</string>
+    <string name="custom_list_event_item_event_name">종목 이름</string>
+    <string name="custom_list_event_item_modify">수 정</string>
+    <string name="custom_list_event_item_delete">삭 제</string>
+    <string name="custom_list_event_item_equipment_type">▶ 운동기구 종류</string>
+    <string name="custom_list_event_item_equipment_type_default">예) 바벨</string>
+    <string name="custom_list_event_item_group_type">▶ 그룹 유형</string>
+    <string name="custom_list_event_item_group_type_default">예) A 그룹</string>
+    <string name="custom_list_event_item_proper_weight">▶ 적정 중량</string>
+    <string name="custom_list_event_item_proper_weight_default">예) 15kg</string>
+    <string name="custom_list_event_item_max_weight">▶ 최대 중량</string>
+    <string name="custom_list_event_item_max_weight_default">예) 45kg</string>
+    <string name="custom_list_event_item_toast_error_input_event">모두 입력해주세요.</string>
+
+    <!-- Custom : foldable event item -->
+    <string name="custom_list_foldable_event_item_count">1.</string>
+    <string name="custom_list_foldable_event_item_event_name">종목 이름</string>
+    <string name="custom_list_foldable_event_item_modify">수 정</string>
+    <string name="custom_list_foldable_event_item_delete">삭 제</string>
+    <string name="custom_list_foldable_event_item_equipment_type">▶ 운동기구 종류</string>
+    <string name="custom_list_foldable_event_item_equipment_type_default">예) 바벨</string>
+    <string name="custom_list_foldable_event_item_group_type">▶ 그룹 유형</string>
+    <string name="custom_list_foldable_event_item_group_type_default">예) A 그룹</string>
+    <string name="custom_list_foldable_event_item_proper_weight">▶ 적정 중량</string>
+    <string name="custom_list_foldable_event_item_proper_weight_default">예) 15kg</string>
+    <string name="custom_list_foldable_event_item_max_weight">▶ 최대 중량</string>
+    <string name="custom_list_foldable_event_item_max_weight_default">예) 45kg</string>
+    <string name="custom_list_foldable_event_item_toast_error_input_event">모두 입력해주세요.</string>
+
+    <!-- Custom : event program item-->
+    <string name="custom_list_event_program_item_bt_start">시작</string>
+    <string name="custom_list_event_program_item_event_name"> 예) 숄더프레스</string>
+    <string name="custom_list_event_program_item_proper_weight">▶ 적정 무게 : </string>
+    <string name="custom_list_event_program_item_proper_weight_default">예) 45kg</string>
+    <string name="custom_list_event_program_item_max_weight">▶ 최대 무게 : </string>
+    <string name="custom_list_event_program_item_max_weight_default">예) 80kg</string>
+    <string name="custom_list_event_program_item_"></string>
+
+    <!-- Custom : step 4 event item -->
+    <string name="custom_list_step4_event_item_number_default">0</string>
+    <string name="custom_list_step4_event_item_muscle_area_default">어깨</string>
+    <string name="custom_list_step4_event_item_event_name_default">오버헤드 숄더 프레스</string>
+
+    <!-- Custom : step 6 event item -->
+    <string name="custom_list_step6_event_item_number_default">0</string>
+    <string name="custom_list_step6_event_item_muscle_area_default">가슴</string>
+    <string name="custom_list_step6_event_item_event_name_default">벤치 프레스</string>
+    <string name="custom_list_step6_event_item_go_content_description">go</string>
+
+    <!-- Custom : step 7 event item -->
+    <string name="custom_list_step8_event_item_more_content_description">더보기</string>
+
+    <!-- Custom : my program item -->
+    <string name="custom_list_my_program_item_program_nick_name">프로그램 별칭입니다.</string>
+    <string name="custom_list_my_program_item_all_muscle_area_list">가슴 / 어깨 / 등 / 하체 / 팔 / 기타</string>
+    <string name="custom_list_my_program_item_total_set_number">총 20세트</string>
+
+    <!-- Custom : fitness center member -->
+    <string name="custom_list_fitness_center_member_memberName">멤버 이름</string>
+    <string name="custom_list_fitness_center_member_"></string>
+
+    <!-- Custom listView : notice item -->
+    <string name="custom_list_noticeItem_type">업데이트</string>
+    <string name="custom_list_noticeItem_title">나는 심심해서 코딩을 합니다.</string>
+    <string name="custom_list_noticeItem_date">등록일 : 2021년 1월 1일</string>
+    <string name="custom_list_noticeItem_message">오늘은 코딩이 하기 싫다. 왜 하기 싫냐고 하면 코딩이기 때문이다. 그냥 심심해서 시작한 코딩이 이제는 하기가 싫어졌다. 그래도 나는 이번 공지사항 코딩을 완성으로 끝을 내려한다. 막바지가 보인다. </string>
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Custom dialog : three major measurements -->
+    <string name="custom_dialog_threeMajorMeasurements_title">3대 측정 입력</string>
+    <string name="custom_dialog_threeMajorMeasurements_squat">스쿼트</string>
+    <string name="custom_dialog_threeMajorMeasurements_deadlift">데드리프트</string>
+    <string name="custom_dialog_threeMajorMeasurements_benchPress">벤치 프레스</string>
+    <string name="custom_dialog_threeMajorMeasurements_button_register">등록</string>
+    <string name="custom_dialog_threeMajorMeasurements_snack_no_input">모든 값을 입력해주세요.</string>
+    <string name="custom_dialog_threeMajorMeasurements_"></string>
+
+
+    <!-- Custom Dialog : event -->
+    <string name="custom_dialog_event_title">예제</string>
+    <string name="custom_dialog_event_update_title">종목 수정</string>
+    <string name="custom_dialog_event_equipment_type">운동기구 종류</string>
+    <string name="custom_dialog_event_group_type">그룹 유형</string>
+    <string name="custom_dialog_event_event_name">종목 이름</string>
+    <string name="custom_dialog_event_proper_weight">적정 중량</string>
+    <string name="custom_dialog_event_max_weight">최대 중량</string>
+    <string name="custom_dialog_event_bt_positive_default">확인</string>
+    <string name="custom_dialog_event_bt_negative_default">취소</string>
+    <string name="custom_dialog_event_"></string>
+
+    <string name="custom_dialog_event_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
+    <string name="custom_dialog_event_snack_all_input">모든 값을 입력해주세요!</string>
+    <string name="custom_dialog_event_save_positive_title">저장</string>
+    <string name="custom_dialog_event_save_negative_title">취소</string>
+    <string name="custom_dialog_event_update_positive_title">수정</string>
+    <string name="custom_dialog_event_update_negative_title">취소</string>
+    <string name="custom_dialog_event_save_snack_db_success">데이터 저장을 성공하였습니다.</string>
+    <string name="custom_dialog_event_save_snack_db_error">데이터베이스 오류가 발생하였습니다.</string>
+    <string name="custom_dialog_event_update_snack_db_success">데이터 수정을 성공하였습니다.</string>
+    <string name="custom_dialog_event_update_snack_db_error">데이터베이스 오류가 발생하였습니다.</string>
+    <!-- Custom dialog : event 의 save -->
+    <string name="custom_dialog_event_alert_save_title">해당 종목을 추가하시겠습니까?</string>
+    <string name="custom_dialog_event_alert_save_message">데이터베이스에서 해당 종목을 추가합니다.</string>
+    <string name="custom_dialog_event_alert_save_bt_positive">추가</string>
+    <string name="custom_dialog_event_alert_save_bt_negative">취소</string>
+    <!-- Custom dialog : event 의 update -->
+    <string name="custom_dialog_event_alert_update_title">해당 종목을 수정하시겠습니까></string>
+    <string name="custom_dialog_event_alert_update_message">데이터베이스에 해당 종목의 내용을 수정합니다.</string>
+    <string name="custom_dialog_event_alert_update_bt_positive">수정</string>
+    <string name="custom_dialog_event_alert_update_bt_negative">취소</string>
+
+    <!-- Custom Dialog : event save -->
+    <string name="custom_dialog_event_save_title">종목 추가</string>
+    <string name="custom_dialog_event_save_equipment_type">운동기구 종류</string>
+    <string name="custom_dialog_event_save_group_type">그룹 유형</string>
+    <string name="custom_dialog_event_save_event_name">종목 이름</string>
+    <string name="custom_dialog_event_save_proper_weight">적정 중량</string>
+    <string name="custom_dialog_event_save_max_weight">최대 중량</string>
+    <string name="custom_dialog_event_save_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
+    <string name="custom_dialog_event_save_snack_all_input">모든 값을 입력해주세요!</string>
+    <string name="custom_dialog_event_save_snack_input_success">입력에 성공하였습니다.</string>
+    <string name="custom_dialog_event_save_snack_input_fail">입력에 실패하였습니다.</string>
+    <string name="custom_dialog_event_save_snack_"></string>
+    <!-- AlertDialog : event save 의 save -->
+    <string name="custom_dialog_event_save_alert_save_title">해당 종목을 추가하시겠습니까?</string>
+    <string name="custom_dialog_event_save_alert_save_message">데이터베이스에서 해당 종목을 추가합니다.</string>
+    <string name="custom_dialog_event_save_alert_save_bt_positive">추가</string>
+    <string name="custom_dialog_event_save_alert_save_bt_negative">취소</string>
+
+    <!-- Custom Dialog : event modification -->
+    <string name="custom_dialog_event_modification_title">종목 수정</string>
+    <string name="custom_dialog_event_modification_equipment_type">운동기구 종류</string>
+    <string name="custom_dialog_event_modification_group_type">그룹 유형</string>
+    <string name="custom_dialog_event_modification_event_name">종목 이름</string>
+    <string name="custom_dialog_event_modification_proper_weight">적정 중량</string>
+    <string name="custom_dialog_event_modification_max_weight">최대 중량</string>
+    <string name="custom_dialog_event_modification_alert_bt_positive">수정</string>
+    <string name="custom_dialog_event_modification_alert_bt_negative">취소</string>
+    <string name="custom_dialog_event_modification_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
+    <string name="custom_dialog_event_modification_snack_all_input">모든 값을 입력해주세요!</string>
+    <string name="custom_dialog_event_modification_snack_modify_success">수정 성공하였습니다.</string>
+    <!-- AlertDialog : event modification 의 modify -->
+    <string name="custom_dialog_event_modification_alert_modify_title">해당 종목을 수정하시겠습니까></string>
+    <string name="custom_dialog_event_modification_alert_modify_message">데이터베이스에 해당 종목의 내용을 수정합니다.</string>
+    <string name="custom_dialog_event_modification_alert_modify_bt_positive">수정</string>
+    <string name="custom_dialog_event_modification_alert_modify_bt_negative">취소</string>
+
+    <!-- Custom Dialog : set number picker -->
+    <string name="custom_dialog_set_number_picker_title">세트 수</string>
+    <string name="custom_dialog_set_number_picker_number_tag">회</string>
+    <string name="custom_dialog_set_number_picker_alert_bt_positive">변경</string>
+    <string name="custom_dialog_set_number_picker_alert_bt_negative">취소</string>
+
+    <!-- Custom Dialog : rest time picker -->
+    <string name="custom_dialog_rest_time_picker_title">휴식 시간</string>
+    <string name="custom_dialog_rest_time_picker_minute_tag">분</string>
+    <string name="custom_dialog_rest_time_picker_second_tag">초</string>
+    <string name="custom_dialog_rest_time_picker_alert_bt_positive">변경</string>
+    <string name="custom_dialog_rest_time_picker_alert_bt_negative">취소</string>
+
+    <!-- Custom Dialog : detail program setting -->
+    <string name="custom_dialog_detail_program_setting_event_name_default">벤치 프레스</string>
+    <string name="custom_dialog_detail_program_setting_set_number">세트 수</string>
+    <string name="custom_dialog_detail_program_setting_set_number_tag">회</string>
+    <string name="custom_dialog_detail_program_setting_rest_time">휴식 시간</string>
+    <string name="custom_dialog_detail_program_setting_rest_time_minute_tag">분</string>
+    <string name="custom_dialog_detail_program_setting_rest_time_second_tag">초</string>
+    <string name="custom_dialog_detail_program_setting_bt_positive">설정</string>
+    <string name="custom_dialog_detail_program_setting_bt_negative">취소</string>
+    <string name="custom_dialog_detail_program_setting_snack_setting_data_error">프로그램 설정들을 확인해주세요.</string>
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ pop up +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Popup Menu : event add section 2 -->
+    <string name="event_add_section_2_popup_update">갱신하기</string>
+    <string name="event_add_section_2_popup_see_more">자세히 보기</string>
+
+    <!-- Popup Menu : event program list section 1 -->
+    <string name="event_program_list_section_1_popup_event_add">종목 추가하기</string>
+
+    <!-- Popup Menu : top bar menu -->
+    <string name="top_bar_menu_popup_base_event_register">기본 데이터 등록</string>
+    <string name="top_bar_menu_popup_setting">설정</string>
+    <string name="top_bar_menu_popup_user">사용자</string>
+    <string name="top_bar_menu_popup_logout">로그아웃</string>
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ preference +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Preference : title -->
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference : category title -->
+    <string name="preference_category_app">어플</string>
+    <string name="preference_category_location">위치</string>
+
+    <!-- Preference : key -->
+    <string name="preference_key_is_initial_installation">isInitialInstallation</string>
+    <string name="preference_key_user_number">userNumber</string>
+    <string name="preference_key_is_saved_base_event">isSavedBaseEvent</string>
+    <string name="preference_key_version_info">versionInfo</string>
+    <string name="preference_key_is_kept_logged_in">isKeptLoggedIn</string>
+    <string name="preference_key_is_granted_location_permission">isGrantedLocationPermission</string>
+    <string name="preference_key_is_granted_background_location_permission">isGrantedBackgroundLocationPermission</string>
+    <string name="preference_key_is_disclosed">isDisclosed</string>
+    <string name="preference_key_is_allowed_access_notification">isAllowedAccessNotification</string>
+    <string name="preference_key_"></string>
+
+    <!-- Preference : category item -->
+    <string name="preference_category_app_version_info_title">버전 정보</string>
+    <string name="preference_category_app_version_info_summary">현재 최신 버전은 ⓥ 0.1 입니다.</string>
+    <string name="preference_category_app_basic_event_data_title">기본 데이터 등록</string>
+    <string name="preference_category_app_basic_event_data_summary_one">아직 기본 데이터가 등록되지 않았습니다.</string>
+    <string name="preference_category_app_basic_event_data_summary_two">기본 데이터 등록이 완료되었습니다.</string>
+    <string name="preference_category_app_keep_logged_in_title">로그인 유지</string>
+
+    <string name="preference_category_location_permission_title">위치 권한</string>
+    <string name="preference_category_location_permission_granted">위치 권한이 승인되었습니다.</string>
+    <string name="preference_category_location_permission_denied">위치 권한이 거부되었습니다.</string>
+    <string name="preference_category_location_background_permission_title">백그라운드 위치 권한</string>
+    <string name="preference_category_location_background_permission_not_enable">먼저 위치 권한을 승인해주세요.</string>
+    <string name="preference_category_location_background_permission_granted">백그라운드 위치 권한이 승인되었습니다.</string>
+    <string name="preference_category_location_background_permission_denied">백그라운드 위치 권한이 거부되었습니다.</string>
+    <string name="preference_category_location_background_permission_user_denied">백그라운드 위치 권한이 사용자에 의해 거부되었습니다. 어플리케이션 설정에서 항상 허용으로 변경해주세요.</string>
+
+    <string name="preference_category_notification_title">알림</string>
+    <string name="preference_category_notification_fitness_center_geofencing">피트니스 센터 접근 알림</string>
+    <string name="preference_category_notification_fitness_center_geofencing_summary_no_register">피트니스 센터가 등록되어 있지 않습니다.</string>
+    <string name="preference_category_notification_fitness_center_geofencing_summary_on_register">피스트니 센터에 접근 알림을 알려주지 않습니다.</string>
+    <string name="preference_category_notification_fitness_center_geofencing_summary_off_register">피스트니 센터에 접근하면 알림으로 알려줍니다.</string>
+
+    <string name="preference_category_"></string>
+
+    <!-- Preference, AlertDialog : base event data save -->
+    <string name="preference_alert_base_event_data_save_title">기본 데이터를 저장하겠습니까?</string>
+    <string name="preference_alert_base_event_data_save_message">데이터베이스에 기본 종목 데이터를 저장합니다.</string>
+    <string name="preference_alert_base_event_data_save_bt_positive">저장</string>
+    <string name="preference_alert_base_event_data_save_bt_negative">취소</string>
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ etc +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Navigation -->
+    <string name="nav_bottom_bar_home">홈</string>
+    <string name="nav_bottom_bar_training">트레이닝</string>
+    <string name="nav_bottom_bar_intervene">참견</string>
+    <string name="nav_bottom_bar_more">더보기</string>
+
+    <!-- ListView Adapter : event lv adapter -->
+    <string name="event_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_lv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
+    <!-- AlertDialog : event item lv adapter 의 delete -->
+    <string name="event_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_lv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_lv_adapter_alert_delete_bt_negative">취소</string>
+
+    <!-- ListView Adapter : event item foldable lv adapter -->
+    <string name="event_item_foldable_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="event_item_foldable_lv_adapter_snack_db_delete_error">실패하였습니다.</string>
+    <!-- AlertDialog : event item foldable lv adapter -->
+    <string name="event_item_foldable_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="event_item_foldable_lv_adapter_alert_delete_bt_negative">취소</string>
+
+    <!-- RecyclerView Adapter : event list rv adapter -->
+    <string name="each_list_rv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
+    <string name="each_list_rv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
+    <!-- AlertDialog : event list rv adapter 의 update -->
+    <string name="each_list_rv_adapter_alert_update_title">해당 종목을 수정하시겠습니까?</string>
+    <string name="each_list_rv_adapter_alert_update_message">해당 종목을 데이터베이스에서 수정합니다.</string>
+    <string name="each_list_rv_adapter_alert_update_bt_positive">저장</string>
+    <string name="each_list_rv_adapter_alert_update_bt_negative">취소</string>
+    <!-- AlertDialog : event list rv adapter -->
+    <string name="each_list_rv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
+    <string name="each_list_rv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
+    <string name="each_list_rv_adapter_alert_delete_bt_positive">삭제</string>
+    <string name="each_list_rv_adapter_alert_delete_bt_negative">취소</string>
+
+    <!-- ListView Adapter : event program item lv adapter -->
+    <string name="event_program_item_lv_adapter_snack_rest_time_no_setting">휴식시간을 정하지 않았습니다.</string>
+    <string name="event_program_item_lv_adapter_snack_set_number_no_setting">세트 수를 입력해주세요.</string>
+
+    <!-- AuthenticationManager-->
+    <string name="etc_authentication_snack_authentication_failed">인증에 실패하였습니다.</string>
+    <string name="etc_authentication_snack_ApiException_network_error">네트워크에 연결해주세요. </string>
+    <string name="etc_authentication_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
+    <string name="etc_authentication_alert_logout_user_message">로그아웃을 진행합니다.</string>
+    <string name="etc_authentication_alert_logout_user_bt_positive">로그아웃</string>
+    <string name="etc_authentication_alert_logout_user_bt_negative">취소</string>
+    <string name="etc_authentication_alert_withdraw_user_title">탈퇴를 진행하시겠습니까?</string>
+    <string name="etc_authentication_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
+    <string name="etc_authentication_alert_withdraw_user_bt_positive">탈퇴</string>
+    <string name="etc_authentication_alert_withdraw_user_bt_negative">취소</string>
+    <string name="etc_authentication_"></string>
+
+    <!-- PermissionManager -->
+    <string name="etc_permission_manager_snack_location_permission_request_title">위치 권한 요청</string>
+    <string name="etc_permission_manager_snack_location_permission_request_message">현재 위치를 알기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
+    <string name="etc_permission_manager_snack_location_service_request_title">위치 서비스 요청</string>
+    <string name="etc_permission_manager_snack_location_service_request_message">위치 서비스를 활성화해야지 해당 서비스를 사용할 수 있습니다.</string>
+    <string name="etc_permission_manager_snack_background_location_permission_request_title">백그라운드 권한 요청</string>
+    <string name="etc_permission_manager_snack_background_location_permission_request_message">지정한 위치의 접근 알림을 사용하기 위해 위치 권한을 항상 승인으로 변경해주셔야 합니다.</string>
+
+    <!-- GoogleMapManager -->
+    <string name="etc_google_map_manager_snack_notAccessNetwork">네트워크 연결이 되지 않았습니다.</string>
+    <string name="etc_google_map_manager_alert_marker_title">피트니스 센터를 등록하시겠습니까?</string>
+    <string name="etc_google_map_manager_alert_marker_message"></string>
+    <string name="etc_google_map_manager_alert_marker_bt_positive">등록</string>
+    <string name="etc_google_map_manager_alert_marker_bt_negative">취소</string>
+
+    <!-- SearchUtil -->
+    <string name="etc_searchUtil_snack_notAccessNe">네트워크에 연결되지 않았습니다.</string>
+    <string name="etc_searchUtil_snack_showSearchedAddress">해당 주소를 지도에 표시합니다.</string>
+    <string name="etc_searchUtil_snack_notFindAddress">주소를 찾을 수 없습니다.</string>
+    <string name="etc_searchUtil_snack_error">에러가 발생하였습니다.</string>
+
+
+    <!-- NotificationManager -->
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_name">피트니스 센터 알림</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_description">피트니스 센터에 접근하는 알림을 표시합니다.</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_exercise_check">GO</string>
+    <string name="etc_notification_manager_channel_id_fitness_center_notification_"></string>
+
+    <!-- FitnessCenterMarkerManager -->
+    <string name="etc_fitness_center_marker_manager_snack_fitnessCenterArrayList_not_zero_size">해당 지역의 피트니스 센터를 표시하였습니다.</string>
+
+    <!-- FitnessCenterGeofencingService -->
+    <string name="etc_fitness_center_geofencing_notification_title">피트니스 센터 알림</string>
+    <string name="etc_fitness_center_geofencing_transition_type_dwell">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
+    <string name="etc_fitness_center_geofencing_transition_type_enter">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
+    <string name="etc_fitness_center_geofencing_transition_type_exit">운동을 끝내고 가시나요?</string>
+    <string name="etc_fitness_center_geofencing_transition_type_default"></string>
+
+    <!-- FitnessCenterGeofencingManager -->
+    <string name="etc_fitnessCenterGeofencingManager_addGeofence_success">피트니스 센터 접근 알림을 시작합니다.</string>
+    <string name="etc_fitnessCenterGeofencingManager_addGeofence_fail">모니터링 추가 실패</string>
+    <string name="etc_fitnessCenterGeofencingManager_removeGeofence_success">피트니스 센터 접근 알림을 중지합니다.</string>
+    <string name="etc_fitnessCenterGeofencingManager_removeGeofence_fail">모니터링 삭제 실패</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ activity +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <!-- Activity : login -->
     <string name="login_title">로그인</string>
     <string name="login_welcome">Welcome</string>
     <string name="login_message">구글 인증으로 본인을 인증합니다.</string>
-    <string name="login_ch_keep_login">해당 로그인을 유지하시겠습니까?</string>
+    <string name="login_keepLoggedInChecker">로그인을 유지하시겠습니까?</string>
 
     <!-- Activity : home -->
     <string name="home_title">홈</string>
@@ -474,352 +832,5 @@
     <string name="event_program_process_alert_back_press_bt_positive">전 화면으로</string>
     <string name="event_program_process_alert_back_press_bt_negative">취소</string>
 
-
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom listView +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-    <!-- Custom : event item -->
-    <string name="custom_list_event_item_count">1.</string>
-    <string name="custom_list_event_item_event_name">종목 이름</string>
-    <string name="custom_list_event_item_modify">수 정</string>
-    <string name="custom_list_event_item_delete">삭 제</string>
-    <string name="custom_list_event_item_equipment_type">▶ 운동기구 종류</string>
-    <string name="custom_list_event_item_equipment_type_default">예) 바벨</string>
-    <string name="custom_list_event_item_group_type">▶ 그룹 유형</string>
-    <string name="custom_list_event_item_group_type_default">예) A 그룹</string>
-    <string name="custom_list_event_item_proper_weight">▶ 적정 중량</string>
-    <string name="custom_list_event_item_proper_weight_default">예) 15kg</string>
-    <string name="custom_list_event_item_max_weight">▶ 최대 중량</string>
-    <string name="custom_list_event_item_max_weight_default">예) 45kg</string>
-    <string name="custom_list_event_item_toast_error_input_event">모두 입력해주세요.</string>
-
-    <!-- Custom : foldable event item -->
-    <string name="custom_list_foldable_event_item_count">1.</string>
-    <string name="custom_list_foldable_event_item_event_name">종목 이름</string>
-    <string name="custom_list_foldable_event_item_modify">수 정</string>
-    <string name="custom_list_foldable_event_item_delete">삭 제</string>
-    <string name="custom_list_foldable_event_item_equipment_type">▶ 운동기구 종류</string>
-    <string name="custom_list_foldable_event_item_equipment_type_default">예) 바벨</string>
-    <string name="custom_list_foldable_event_item_group_type">▶ 그룹 유형</string>
-    <string name="custom_list_foldable_event_item_group_type_default">예) A 그룹</string>
-    <string name="custom_list_foldable_event_item_proper_weight">▶ 적정 중량</string>
-    <string name="custom_list_foldable_event_item_proper_weight_default">예) 15kg</string>
-    <string name="custom_list_foldable_event_item_max_weight">▶ 최대 중량</string>
-    <string name="custom_list_foldable_event_item_max_weight_default">예) 45kg</string>
-    <string name="custom_list_foldable_event_item_toast_error_input_event">모두 입력해주세요.</string>
-
-    <!-- Custom : event program item-->
-    <string name="custom_list_event_program_item_bt_start">시작</string>
-    <string name="custom_list_event_program_item_event_name"> 예) 숄더프레스</string>
-    <string name="custom_list_event_program_item_proper_weight">▶ 적정 무게 : </string>
-    <string name="custom_list_event_program_item_proper_weight_default">예) 45kg</string>
-    <string name="custom_list_event_program_item_max_weight">▶ 최대 무게 : </string>
-    <string name="custom_list_event_program_item_max_weight_default">예) 80kg</string>
-    <string name="custom_list_event_program_item_"></string>
-
-    <!-- Custom : step 4 event item -->
-    <string name="custom_list_step4_event_item_number_default">0</string>
-    <string name="custom_list_step4_event_item_muscle_area_default">어깨</string>
-    <string name="custom_list_step4_event_item_event_name_default">오버헤드 숄더 프레스</string>
-
-    <!-- Custom : step 6 event item -->
-    <string name="custom_list_step6_event_item_number_default">0</string>
-    <string name="custom_list_step6_event_item_muscle_area_default">가슴</string>
-    <string name="custom_list_step6_event_item_event_name_default">벤치 프레스</string>
-    <string name="custom_list_step6_event_item_go_content_description">go</string>
-
-    <!-- Custom : step 7 event item -->
-    <string name="custom_list_step8_event_item_more_content_description">더보기</string>
-
-    <!-- Custom : my program item -->
-    <string name="custom_list_my_program_item_program_nick_name">프로그램 별칭입니다.</string>
-    <string name="custom_list_my_program_item_all_muscle_area_list">가슴 / 어깨 / 등 / 하체 / 팔 / 기타</string>
-    <string name="custom_list_my_program_item_total_set_number">총 20세트</string>
-
-    <!-- Custom : fitness center member -->
-    <string name="custom_list_fitness_center_member_memberName">멤버 이름</string>
-    <string name="custom_list_fitness_center_member_"></string>
-
-
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-    <!-- Custom Dialog : event -->
-    <string name="custom_dialog_event_title">예제</string>
-    <string name="custom_dialog_event_update_title">종목 수정</string>
-    <string name="custom_dialog_event_equipment_type">운동기구 종류</string>
-    <string name="custom_dialog_event_group_type">그룹 유형</string>
-    <string name="custom_dialog_event_event_name">종목 이름</string>
-    <string name="custom_dialog_event_proper_weight">적정 중량</string>
-    <string name="custom_dialog_event_max_weight">최대 중량</string>
-    <string name="custom_dialog_event_bt_positive_default">확인</string>
-    <string name="custom_dialog_event_bt_negative_default">취소</string>
-    <string name="custom_dialog_event_"></string>
-
-    <string name="custom_dialog_event_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
-    <string name="custom_dialog_event_snack_all_input">모든 값을 입력해주세요!</string>
-    <string name="custom_dialog_event_save_positive_title">저장</string>
-    <string name="custom_dialog_event_save_negative_title">취소</string>
-    <string name="custom_dialog_event_update_positive_title">수정</string>
-    <string name="custom_dialog_event_update_negative_title">취소</string>
-    <string name="custom_dialog_event_save_snack_db_success">데이터 저장을 성공하였습니다.</string>
-    <string name="custom_dialog_event_save_snack_db_error">데이터베이스 오류가 발생하였습니다.</string>
-    <string name="custom_dialog_event_update_snack_db_success">데이터 수정을 성공하였습니다.</string>
-    <string name="custom_dialog_event_update_snack_db_error">데이터베이스 오류가 발생하였습니다.</string>
-    <!-- Custom dialog : event 의 save -->
-    <string name="custom_dialog_event_alert_save_title">해당 종목을 추가하시겠습니까?</string>
-    <string name="custom_dialog_event_alert_save_message">데이터베이스에서 해당 종목을 추가합니다.</string>
-    <string name="custom_dialog_event_alert_save_bt_positive">추가</string>
-    <string name="custom_dialog_event_alert_save_bt_negative">취소</string>
-    <!-- Custom dialog : event 의 update -->
-    <string name="custom_dialog_event_alert_update_title">해당 종목을 수정하시겠습니까></string>
-    <string name="custom_dialog_event_alert_update_message">데이터베이스에 해당 종목의 내용을 수정합니다.</string>
-    <string name="custom_dialog_event_alert_update_bt_positive">수정</string>
-    <string name="custom_dialog_event_alert_update_bt_negative">취소</string>
-
-    <!-- Custom Dialog : event save -->
-    <string name="custom_dialog_event_save_title">종목 추가</string>
-    <string name="custom_dialog_event_save_equipment_type">운동기구 종류</string>
-    <string name="custom_dialog_event_save_group_type">그룹 유형</string>
-    <string name="custom_dialog_event_save_event_name">종목 이름</string>
-    <string name="custom_dialog_event_save_proper_weight">적정 중량</string>
-    <string name="custom_dialog_event_save_max_weight">최대 중량</string>
-    <string name="custom_dialog_event_save_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
-    <string name="custom_dialog_event_save_snack_all_input">모든 값을 입력해주세요!</string>
-    <string name="custom_dialog_event_save_snack_input_success">입력에 성공하였습니다.</string>
-    <string name="custom_dialog_event_save_snack_input_fail">입력에 실패하였습니다.</string>
-    <string name="custom_dialog_event_save_snack_"></string>
-    <!-- AlertDialog : event save 의 save -->
-    <string name="custom_dialog_event_save_alert_save_title">해당 종목을 추가하시겠습니까?</string>
-    <string name="custom_dialog_event_save_alert_save_message">데이터베이스에서 해당 종목을 추가합니다.</string>
-    <string name="custom_dialog_event_save_alert_save_bt_positive">추가</string>
-    <string name="custom_dialog_event_save_alert_save_bt_negative">취소</string>
-
-    <!-- Custom Dialog : event modification -->
-    <string name="custom_dialog_event_modification_title">종목 수정</string>
-    <string name="custom_dialog_event_modification_equipment_type">운동기구 종류</string>
-    <string name="custom_dialog_event_modification_group_type">그룹 유형</string>
-    <string name="custom_dialog_event_modification_event_name">종목 이름</string>
-    <string name="custom_dialog_event_modification_proper_weight">적정 중량</string>
-    <string name="custom_dialog_event_modification_max_weight">최대 중량</string>
-    <string name="custom_dialog_event_modification_alert_bt_positive">수정</string>
-    <string name="custom_dialog_event_modification_alert_bt_negative">취소</string>
-    <string name="custom_dialog_event_modification_snack_0_up_input">0 보다 크거나 같은 수를 입력해주세요!</string>
-    <string name="custom_dialog_event_modification_snack_all_input">모든 값을 입력해주세요!</string>
-    <string name="custom_dialog_event_modification_snack_modify_success">수정 성공하였습니다.</string>
-    <!-- AlertDialog : event modification 의 modify -->
-    <string name="custom_dialog_event_modification_alert_modify_title">해당 종목을 수정하시겠습니까></string>
-    <string name="custom_dialog_event_modification_alert_modify_message">데이터베이스에 해당 종목의 내용을 수정합니다.</string>
-    <string name="custom_dialog_event_modification_alert_modify_bt_positive">수정</string>
-    <string name="custom_dialog_event_modification_alert_modify_bt_negative">취소</string>
-
-    <!-- Custom Dialog : set number picker -->
-    <string name="custom_dialog_set_number_picker_title">세트 수</string>
-    <string name="custom_dialog_set_number_picker_number_tag">회</string>
-    <string name="custom_dialog_set_number_picker_alert_bt_positive">변경</string>
-    <string name="custom_dialog_set_number_picker_alert_bt_negative">취소</string>
-
-    <!-- Custom Dialog : rest time picker -->
-    <string name="custom_dialog_rest_time_picker_title">휴식 시간</string>
-    <string name="custom_dialog_rest_time_picker_minute_tag">분</string>
-    <string name="custom_dialog_rest_time_picker_second_tag">초</string>
-    <string name="custom_dialog_rest_time_picker_alert_bt_positive">변경</string>
-    <string name="custom_dialog_rest_time_picker_alert_bt_negative">취소</string>
-
-    <!-- Custom Dialog : detail program setting -->
-    <string name="custom_dialog_detail_program_setting_event_name_default">벤치 프레스</string>
-    <string name="custom_dialog_detail_program_setting_set_number">세트 수</string>
-    <string name="custom_dialog_detail_program_setting_set_number_tag">회</string>
-    <string name="custom_dialog_detail_program_setting_rest_time">휴식 시간</string>
-    <string name="custom_dialog_detail_program_setting_rest_time_minute_tag">분</string>
-    <string name="custom_dialog_detail_program_setting_rest_time_second_tag">초</string>
-    <string name="custom_dialog_detail_program_setting_bt_positive">설정</string>
-    <string name="custom_dialog_detail_program_setting_bt_negative">취소</string>
-    <string name="custom_dialog_detail_program_setting_snack_setting_data_error">프로그램 설정들을 확인해주세요.</string>
-
-    <!-- Custom dialog : three major measurements -->
-    <string name="custom_dialog_three_major_measurements_title">3대 측정 입력</string>
-    <string name="custom_dialog_three_major_measurements_squat">스쿼트</string>
-    <string name="custom_dialog_three_major_measurements_deadlift">데드리프트</string>
-    <string name="custom_dialog_three_major_measurements_bench_press">벤치 프레스</string>
-    <string name="custom_dialog_three_major_measurements_button_register">등록</string>
-    <string name="custom_dialog_three_major_measurements_snack_no_input">모든 값을 입력해주세요.</string>
-    <string name="custom_dialog_three_major_measurements_"></string>
-
-
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ pop up +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-    <!-- Popup Menu : event add section 2 -->
-    <string name="event_add_section_2_popup_update">갱신하기</string>
-    <string name="event_add_section_2_popup_see_more">자세히 보기</string>
-
-    <!-- Popup Menu : event program list section 1 -->
-    <string name="event_program_list_section_1_popup_event_add">종목 추가하기</string>
-
-    <!-- Popup Menu : top bar menu -->
-    <string name="top_bar_menu_popup_base_event_register">기본 데이터 등록</string>
-    <string name="top_bar_menu_popup_setting">설정</string>
-    <string name="top_bar_menu_popup_user">사용자</string>
-    <string name="top_bar_menu_popup_logout">로그아웃</string>
-
-
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ preference +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-    <!-- Preference : title -->
-    <string name="title_activity_settings">SettingsActivity</string>
-
-    <!-- Preference : category title -->
-    <string name="preference_category_app">어플</string>
-    <string name="preference_category_location">위치</string>
-
-    <!-- Preference : key -->
-    <string name="preference_key_is_initial_installation">isInitialInstallation</string>
-    <string name="preference_key_user_number">userNumber</string>
-    <string name="preference_key_is_saved_base_event">isSavedBaseEvent</string>
-    <string name="preference_key_version_info">versionInfo</string>
-    <string name="preference_key_is_kept_logged_in">isKeptLoggedIn</string>
-    <string name="preference_key_is_granted_location_permission">isGrantedLocationPermission</string>
-    <string name="preference_key_is_granted_background_location_permission">isGrantedBackgroundLocationPermission</string>
-    <string name="preference_key_is_disclosed">isDisclosed</string>
-    <string name="preference_key_is_allowed_access_notification">isAllowedAccessNotification</string>
-    <string name="preference_key_"></string>
-
-    <!-- Preference : category item -->
-    <string name="preference_category_app_version_info_title">버전 정보</string>
-    <string name="preference_category_app_version_info_summary">현재 최신 버전은 ⓥ 0.1 입니다.</string>
-    <string name="preference_category_app_basic_event_data_title">기본 데이터 등록</string>
-    <string name="preference_category_app_basic_event_data_summary_one">아직 기본 데이터가 등록되지 않았습니다.</string>
-    <string name="preference_category_app_basic_event_data_summary_two">기본 데이터 등록이 완료되었습니다.</string>
-    <string name="preference_category_app_keep_logged_in_title">로그인 유지</string>
-
-    <string name="preference_category_location_permission_title">위치 권한</string>
-    <string name="preference_category_location_permission_granted">위치 권한이 승인되었습니다.</string>
-    <string name="preference_category_location_permission_denied">위치 권한이 거부되었습니다.</string>
-    <string name="preference_category_location_background_permission_title">백그라운드 위치 권한</string>
-    <string name="preference_category_location_background_permission_not_enable">먼저 위치 권한을 승인해주세요.</string>
-    <string name="preference_category_location_background_permission_granted">백그라운드 위치 권한이 승인되었습니다.</string>
-    <string name="preference_category_location_background_permission_denied">백그라운드 위치 권한이 거부되었습니다.</string>
-    <string name="preference_category_location_background_permission_user_denied">백그라운드 위치 권한이 사용자에 의해 거부되었습니다. 어플리케이션 설정에서 항상 허용으로 변경해주세요.</string>
-
-    <string name="preference_category_notification_title">알림</string>
-    <string name="preference_category_notification_fitness_center_geofencing">피트니스 센터 접근 알림</string>
-    <string name="preference_category_notification_fitness_center_geofencing_summary_no_register">피트니스 센터가 등록되어 있지 않습니다.</string>
-    <string name="preference_category_notification_fitness_center_geofencing_summary_on_register">피스트니 센터에 접근 알림을 알려주지 않습니다.</string>
-    <string name="preference_category_notification_fitness_center_geofencing_summary_off_register">피스트니 센터에 접근하면 알림으로 알려줍니다.</string>
-
-    <string name="preference_category_"></string>
-
-    <!-- Preference, AlertDialog : base event data save -->
-    <string name="preference_alert_base_event_data_save_title">기본 데이터를 저장하겠습니까?</string>
-    <string name="preference_alert_base_event_data_save_message">데이터베이스에 기본 종목 데이터를 저장합니다.</string>
-    <string name="preference_alert_base_event_data_save_bt_positive">저장</string>
-    <string name="preference_alert_base_event_data_save_bt_negative">취소</string>
-
-
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ etc +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-    <!-- Navigation -->
-    <string name="nav_bottom_bar_home">홈</string>
-    <string name="nav_bottom_bar_training">트레이닝</string>
-    <string name="nav_bottom_bar_intervene">참견</string>
-    <string name="nav_bottom_bar_more">더보기</string>
-
-    <!-- ListView Adapter : event lv adapter -->
-    <string name="event_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
-    <string name="event_lv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
-    <!-- AlertDialog : event item lv adapter 의 delete -->
-    <string name="event_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="event_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="event_lv_adapter_alert_delete_bt_positive">삭제</string>
-    <string name="event_lv_adapter_alert_delete_bt_negative">취소</string>
-
-
-    <!-- ListView Adapter : event item foldable lv adapter -->
-    <string name="event_item_foldable_lv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
-    <string name="event_item_foldable_lv_adapter_snack_db_delete_error">실패하였습니다.</string>
-    <!-- AlertDialog : event item foldable lv adapter -->
-    <string name="event_item_foldable_lv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="event_item_foldable_lv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="event_item_foldable_lv_adapter_alert_delete_bt_positive">삭제</string>
-    <string name="event_item_foldable_lv_adapter_alert_delete_bt_negative">취소</string>
-
-
-    <!-- RecyclerView Adapter : event list rv adapter -->
-    <string name="each_list_rv_adapter_snack_db_delete_success">삭제가 완료되었습니다.</string>
-    <string name="each_list_rv_adapter_snack_db_delete_error">삭제를 실패하였습니다.</string>
-    <!-- AlertDialog : event list rv adapter 의 update -->
-    <string name="each_list_rv_adapter_alert_update_title">해당 종목을 수정하시겠습니까?</string>
-    <string name="each_list_rv_adapter_alert_update_message">해당 종목을 데이터베이스에서 수정합니다.</string>
-    <string name="each_list_rv_adapter_alert_update_bt_positive">저장</string>
-    <string name="each_list_rv_adapter_alert_update_bt_negative">취소</string>
-    <!-- AlertDialog : event list rv adapter -->
-    <string name="each_list_rv_adapter_alert_delete_title">해당 종목을 삭제하시겠습니까?</string>
-    <string name="each_list_rv_adapter_alert_delete_message">해당 종목을 데이터베이스에서 삭제합니다.</string>
-    <string name="each_list_rv_adapter_alert_delete_bt_positive">삭제</string>
-    <string name="each_list_rv_adapter_alert_delete_bt_negative">취소</string>
-
-    <!-- ListView Adapter : event program item lv adapter -->
-    <string name="event_program_item_lv_adapter_snack_rest_time_no_setting">휴식시간을 정하지 않았습니다.</string>
-    <string name="event_program_item_lv_adapter_snack_set_number_no_setting">세트 수를 입력해주세요.</string>
-
-    <!-- ProjectPermission -->
-    <string name="project_permission_re_request">권한 재 요청</string>
-    <string name="project_permission_re_request_reason">해당 디바이스의 위치를 인식해야 하는 서비스를 이용하기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
-
-    <!-- PermissionManager -->
-    <string name="etc_permission_manager_snack_location_permission_request_title">위치 권한 요청</string>
-    <string name="etc_permission_manager_snack_location_permission_request_message">현재 위치를 알기 위해서는 해당 권한을 승인해주셔야 합니다.</string>
-    <string name="etc_permission_manager_snack_location_service_request_title">위치 서비스 요청</string>
-    <string name="etc_permission_manager_snack_location_service_request_message">위치 서비스를 활성화해야지 해당 서비스를 사용할 수 있습니다.</string>
-    <string name="etc_permission_manager_snack_background_location_permission_request_title">백그라운드 권한 요청</string>
-    <string name="etc_permission_manager_snack_background_location_permission_request_message">지정한 위치의 접근 알림을 사용하기 위해 위치 권한을 항상 승인으로 변경해주셔야 합니다.</string>
-
-    <!-- GoogleMapManager -->
-    <string name="etc_google_map_manager_snack_marker">등록하시겠습니까?</string>
-    <string name="etc_google_map_manager_alert_marker_title">피트니스 센터를 등록하시겠습니까?</string>
-    <string name="etc_google_map_manager_alert_marker_message"></string>
-    <string name="etc_google_map_manager_alert_marker_bt_positive">등록</string>
-    <string name="etc_google_map_manager_alert_marker_bt_negative">취소</string>
-
-    <!-- FitnessCenterMarkerManager -->
-    <string name="etc_fitness_center_marker_manager_snack_fitnessCenterArrayList_not_zero_size">해당 지역의 피트니스 센터를 표시하였습니다.</string>
-
-    <!-- SearchUtil -->
-    <string name="etc_search_util_snack_find_address">해당 주소를 지도에 표시합니다.</string>
-    <string name="etc_search_util_snack_not_find_address">주소를 찾지 못 하였습니다.</string>
-    <string name="etc_search_util_snack_find_address_error">에러가 발생하였습니다.</string>
-
-    <!-- AuthenticationManager-->
-    <string name="etc_authentication_snack_authentication_failed">인증에 실패하였습니다.</string>
-    <string name="etc_authentication_snack_ApiException_network_error">네트워크에 연결해주세요. </string>
-    <string name="etc_authentication_alert_logout_user_title">로그아웃을 진행하시겠습니까?</string>
-    <string name="etc_authentication_alert_logout_user_message">로그아웃을 진행합니다.</string>
-    <string name="etc_authentication_alert_logout_user_bt_positive">로그아웃</string>
-    <string name="etc_authentication_alert_logout_user_bt_negative">취소</string>
-    <string name="etc_authentication_alert_withdraw_user_title">탈퇴를 진행하시겠습니까?</string>
-    <string name="etc_authentication_alert_withdraw_user_message">탈퇴를 진행하게 되면 현재 저장되어 있는 모든 내용이 삭제됩니다.</string>
-    <string name="etc_authentication_alert_withdraw_user_bt_positive">탈퇴</string>
-    <string name="etc_authentication_alert_withdraw_user_bt_negative">취소</string>
-    <string name="etc_authentication_"></string>
-
-    <!-- NotificationManager -->
-    <string name="etc_notification_manager_channel_id_fitness_center_notification_name">피트니스 센터 알림</string>
-    <string name="etc_notification_manager_channel_id_fitness_center_notification_description">피트니스 센터에 접근하는 알림을 표시합니다.</string>
-    <string name="etc_notification_manager_channel_id_fitness_center_notification_exercise_check">GO</string>
-    <string name="etc_notification_manager_channel_id_fitness_center_notification_"></string>
-
-    <!-- FitnessCenterGeofencingService -->
-    <string name="etc_fitness_center_geofencing_notification_title">피트니스 센터 알림</string>
-    <string name="etc_fitness_center_geofencing_transition_type_dwell">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
-    <string name="etc_fitness_center_geofencing_transition_type_enter">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
-    <string name="etc_fitness_center_geofencing_transition_type_exit">운동을 끝내고 가시나요?</string>
-    <string name="etc_fitness_center_geofencing_transition_type_default"></string>
-
-    <!-- FitnessCenterGeofencingManager -->
-    <string name="etc_fitness_center_geofencing_manager_add_geofence_success"></string>
-    <string name="etc_fitness_center_geofencing_manager_add_geofence_fail"></string>
-    <string name="etc_fitness_center_geofencing_manager_remove_geofence_success"></string>
-    <string name="etc_fitness_center_geofencing_manager_remove_geofence_fail"></string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

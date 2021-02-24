@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     // constant
     private static final String CLASS_NAME = "[Ac] MainActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private ImageView log;

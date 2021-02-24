@@ -49,7 +49,7 @@
 
                 <!-- register day count -->
                 <LinearLayout
-                    android:id="@+id/f_more_register_day_count_wrapper"
+                    android:id="@+id/f_more_registerDayCount_wrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -63,15 +63,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/eland_choice_light"
-                        android:text="@string/f_more_register_day_count_title" />
+                        android:text="@string/f_more_registerDayCount_title" />
 
                     <TextView
-                        android:id="@+id/f_more_register_day_count"
+                        android:id="@+id/f_more_registerDayCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/eland_choice_bold"
-                        android:text="@string/f_more_register_day_count_default"
+                        android:text="@string/f_more_registerDayCount_default"
                         android:textColor="@color/colorTextBlack"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -83,7 +83,7 @@
 
                 <!-- training count -->
                 <LinearLayout
-                    android:id="@+id/f_more_training_count_wrapper"
+                    android:id="@+id/f_more_trainingCount_wrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -97,15 +97,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/eland_choice_light"
-                        android:text="@string/f_more_training_count_title" />
+                        android:text="@string/f_more_trainingCount_title" />
 
                     <TextView
-                        android:id="@+id/f_more_training_count"
+                        android:id="@+id/f_more_trainingCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/eland_choice_bold"
-                        android:text="@string/f_more_training_count_default"
+                        android:text="@string/f_more_trainingCount_default"
                         android:textColor="@color/colorTextBlack"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -130,7 +130,7 @@
 
                     <!-- fitness center -->
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/f_more_fitness_center"
+                        android:id="@+id/f_more_fitnessCenter"
                         android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:layout_margin="5sp"
@@ -157,7 +157,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom|center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/f_more_fitness_center"
+                                android:text="@string/f_more_fitnessCenter"
                                 android:textSize="9sp" />
                         </LinearLayout>
 
@@ -199,7 +199,7 @@
 
                     <!-- my training -->
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/f_more_my_training_info"
+                        android:id="@+id/f_more_training"
                         android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:layout_margin="5sp"
@@ -225,7 +225,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom|center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/f_more_my_training_info"
+                                android:text="@string/f_more_myTrainingInfo"
                                 android:textSize="9sp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -296,7 +296,7 @@
                     android:background="@color/browser_actions_divider_color" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/f_more_service_center"
+                    android:id="@+id/f_more_serviceCenter"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -304,7 +304,7 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:paddingStart="20dp"
-                    android:text="@string/f_more_service_center"
+                    android:text="@string/f_more_serviceCenter"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorTextBlack" />
 

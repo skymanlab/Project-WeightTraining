@@ -28,6 +28,7 @@ public class LSectionManager extends SectionManager implements SectionInitializa
 
     // instance variable
     private SignInButton googleAuth;
+    private CheckBox keepLoggedInChecker;
 
     // constructor
     public LSectionManager(Activity activity, AuthenticationManager authenticationManager) {
@@ -40,6 +41,9 @@ public class LSectionManager extends SectionManager implements SectionInitializa
 
         // [iv/C]Button : googleAuth connect
         this.googleAuth = (SignInButton) getActivity().findViewById(R.id.login_google_auth);
+
+        // [ CheckBox | keepLoggedInChecker ]
+        this.keepLoggedInChecker = (CheckBox) getActivity().findViewById(R.id.login_keepLoggedInChecker);
 
     }
 
@@ -56,7 +60,9 @@ public class LSectionManager extends SectionManager implements SectionInitializa
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, ">>> Google Sign-In Button 클릭!");
 
                 // [method] : 로그인 과정 진행
-                authenticationManager.singIn();
+                authenticationManager.singIn(
+                        keepLoggedInChecker.isChecked()     // checkBox 의 체크 상태를 가져오기
+                );
             }
         });
 

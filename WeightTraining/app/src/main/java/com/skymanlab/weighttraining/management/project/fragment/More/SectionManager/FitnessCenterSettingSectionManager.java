@@ -1,13 +1,16 @@
 package com.skymanlab.weighttraining.management.project.fragment.More.SectionManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
@@ -41,10 +45,8 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
 
     // instance variable
     private Switch isAllowedAccessNotification;
+    private TextView backgroundLocationPermissionGrantedGo;
     private Switch isDisclosed;
-
-    // instance variable
-    private Bundle changedSetting = new Bundle();
 
     // constructor
     public FitnessCenterSettingSectionManager(Fragment fragment, View view) {
@@ -60,10 +62,13 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
     public void connectWidget() {
 
         // [ Switch | isAllowedAccessNotification ]
-        this.isAllowedAccessNotification = (Switch) getView().findViewById(R.id.f_fitness_center_setting_is_allowed_access_notification);
+        this.isAllowedAccessNotification = (Switch) getView().findViewById(R.id.f_fitnessCenterSetting_isAllowedAccessNotification);
+
+        // [ TextView | backgroundLocationPermissionGrantedGo ]
+        this.backgroundLocationPermissionGrantedGo = (TextView) getView().findViewById(R.id.f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo);
 
         // [ Switch | isDisclosed ]
-        this.isDisclosed = (Switch) getView().findViewById(R.id.f_fitness_center_setting_is_disclosed);
+        this.isDisclosed = (Switch) getView().findViewById(R.id.f_fitnessCenterSetting_isDisclosed);
 
     }
 
@@ -91,6 +96,7 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
      * isAllowedAccessNotification
      */
     private void initWidgetOfIsAllowedAccessNotification() {
+        final String METHOD_NAME = "[initWidgetOfIsAllowedAccessNotification] ";
 
         // 내가 아직 피트니스 센터 등록을 하지 않았을 때는
         if (myFitnessCenter == null) {
@@ -104,7 +110,35 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
 
             // isAllowedAccessNotification 을 사용하지 못 하도록
             isAllowedAccessNotification.setEnabled(false);
+
+            // 사용자가 백그라운드 위치 권한에 대해서 인식하고
+            // 백그라운드 위치 권한을 승인하도록 유도하기
+            backgroundLocationPermissionGrantedGo.setVisibility(View.VISIBLE);
+            backgroundLocationPermissionGrantedGo.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            getFragment().getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                            // 백그라운드 위치 권한을 승인하기 위한 화면(SettingsActivity)으로 이동
+                            Intent intent = new Intent(getFragment().getContext(), SettingsActivity.class);
+
+                            getFragment().getActivity().startActivity(intent);
+
+
+                        }
+                    }
+            );
+
+
             return;
+        } else {
+
+            isAllowedAccessNotification.setEnabled(true);
+
+            backgroundLocationPermissionGrantedGo.setVisibility(View.GONE);
+
         }
 
         // FitnessCenter Geofencing Manager 를 통해 초기화 작업하기
@@ -115,7 +149,6 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
         );
         geofencingManager.init();
 
-        final String METHOD_NAME = "[initWidgetOfIsAllowedAccessNotification] ";
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< myFitnessCenter > latitude = " + myFitnessCenter.getLatitude());
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< myFitnessCenter > latitude = " + myFitnessCenter.getLongitude());
 
@@ -145,6 +178,12 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
                         new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                                // 먼저 데이터베이스에 isAllowedAccessNotification 을 업데이트하고
+                                // 업데이트 내용이 데이터베이스에 반영이 완료되면
+                                // 어플에 피트니스 센터 지오팬스를 등록하거나 삭제한다.
+
+                                // 그러면 네트워크가 연결 안되면 반영이 안되네????
 
                                 // isChecked 여부에 따라 피트니스 센터 지오펜싱 모니터닝 실행 또는 중지 메소드 실행
                                 if (isChecked) {

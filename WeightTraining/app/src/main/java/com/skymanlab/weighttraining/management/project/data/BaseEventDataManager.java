@@ -44,7 +44,7 @@ public class BaseEventDataManager {
     static final float DEFAULT_WEIGHT = 0.0f;
     // constant
     private static final String CLASS_NAME = "[PD] BaseEventDataManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private String uid;

@@ -86,7 +86,7 @@ public class MyProgramDetailFragment extends Fragment {
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< program > key = " + program.getKey());
 
         // top bar
-        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_my_program_detail_title));
+        this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_myProgramDetail_title));
         this.topBarManager.connectWidget();
         this.topBarManager.initWidget();
 

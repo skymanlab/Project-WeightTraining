@@ -40,21 +40,7 @@ public class MakerStep8SectionManager extends FragmentSectionManager implements 
 
     // constant
     private static final String CLASS_NAME = "[PFTPS] MakerStep8SectionManager";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
-
-    // constant : program/$uid$/$key$/
-//    private static final String NICK_NAME = "nickName";
-//    private static final String MUSCLE_AREA_LIST = "muscleAreaList";
-//    private static final String DETAIL_PROGRAM_LIST = "detailProgramList";
-//    private static final String TOTAL_EVENT_NUMBER = "totalEventNumber";
-//    private static final String TOTAL_SET_NUMBER = "totalSetNumber";
-
-    // constant : program/$uid$/$key$/detailProgramList
-//    private static final String ORDER = "order";
-//    private static final String EVENT_NAME = "eventName";
-//    private static final String SET_NUMBER = "setNumber";
-//    private static final String REST_TIME_MINUTE = "restTimeMinute";
-//    private static final String REST_TIME_SECOND = "restTimeSecond";
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Program program;

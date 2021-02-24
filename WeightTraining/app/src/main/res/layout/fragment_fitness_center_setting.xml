@@ -16,34 +16,45 @@
         android:layout_height="@dimen/divider_default"
         android:background="@color/colorDividerDefault" />
 
+    <!-- is allowed access notification -->
     <Switch
-        android:id="@+id/f_fitness_center_setting_is_allowed_access_notification"
+        android:id="@+id/f_fitnessCenterSetting_isAllowedAccessNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/eland_choice_medium"
         android:padding="20dp"
-        android:text="@string/f_fitness_center_setting_is_allowed_access_notification"
+        android:text="@string/f_fitnessCenterSetting_isAllowedAccessNotification"
+        android:textSize="@dimen/text_sub_title_size" />
+
+    <TextView
+        android:id="@+id/f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone"
+        android:fontFamily="@font/eland_choice_light"
+        android:text="@string/f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo" />
+
+    <include
+        layout="@layout/include_dot_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- is disclosed -->
+    <Switch
+        android:id="@+id/f_fitnessCenterSetting_isDisclosed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/eland_choice_medium"
+        android:padding="20dp"
+        android:text="@string/f_fitnessCenterSetting_isDisclosed"
         android:textSize="@dimen/text_sub_title_size" />
 
     <include
         layout="@layout/include_dot_divider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Switch
-        android:id="@+id/f_fitness_center_setting_is_disclosed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/eland_choice_medium"
-        android:padding="20dp"
-        android:text="@string/f_fitness_center_setting_is_disclosed"
-        android:textSize="@dimen/text_sub_title_size" />
-
-    <include
-        layout="@layout/include_dot_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

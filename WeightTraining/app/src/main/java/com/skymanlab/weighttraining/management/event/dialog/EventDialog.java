@@ -32,7 +32,7 @@ public class EventDialog extends DialogFragment {
 
     // constant
     public static final String CLASS_NAME = "[ED] EventDialog";
-    public static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    public static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     public static final int MESSAGE_TYPE_NONE = 0;

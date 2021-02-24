@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
-import com.skymanlab.weighttraining.management.project.fragment.More.MoreUserInfoFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.UserInfoFragment;
 import com.squareup.picasso.Picasso;
 
 public class FragmentTopUserManager extends FragmentSectionManager implements FragmentSectionInitializable{
@@ -69,7 +69,7 @@ public class FragmentTopUserManager extends FragmentSectionManager implements Fr
             public void onClick(View view) {
                 
                 // [lv/C]Fragment : more user info fragment 생성
-                Fragment moreUserInfo = MoreUserInfoFragment.newInstance();
+                Fragment moreUserInfo = UserInfoFragment.newInstance();
 
                 // fragment 로 이동
                 FragmentTransaction transaction = getFragment().getActivity().getSupportFragmentManager().beginTransaction();

@@ -67,18 +67,18 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
         final String METHOD_NAME = "[doInBackground] ";
         // 후 처리 : UI
 
+        // SearchUtil 을 통해 모종의 이유로 Address 객체를 가져오지 못 하였을 때는 중지한다.
         if (address == null) {
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Address > SearchUtil 을 통해 객체를 가져오지 못 하였습니다. 그래서 데이터 베이스에서 가져오지 않습니다.");
             return;
         }
 
+        // SearchUtil 을 사용하여 address 에서 firstAddress 와 secondAddress 가져오기
         String firstAddress = SearchUtil.getFirstAddress(address);
         String secondAddress = SearchUtil.getSecondAddress(address);
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > firstAddress = " + firstAddress);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > secondAddress = " + secondAddress);
-
+        // Address 에서 구한 firstAddress 와 secondAddress 로 내가 사는 지역에 등록된 피트니스 센터를 리스트로 만들어서 가져온다.
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
         reference.child(FirebaseConstants.DATABASE_FIRST_NODE_FITNESS_CENTER)
                 .child(firstAddress)
                 .child(secondAddress)
@@ -87,27 +87,22 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > snapshot = " + snapshot);
 
+                        // 해당 지역('시'나 '구') 에 등록되어 있는 피트니스 센터를 모두 가져온다.
                         for (DataSnapshot search : snapshot.getChildren()) {
 
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > key = " + search.getKey());
-                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > search = " + search.getValue());
-
+                            // 피트니스 센터 데이터를 가져온다.
                             FitnessCenter fitnessCenter = search.getValue(FitnessCenter.class);
-                            fitnessCenter.setFirstAddress(firstAddress);
-                            fitnessCenter.setSecondAddress(secondAddress);
-                            fitnessCenter.setThirdAddress(search.getKey());
+                            fitnessCenter.setFirstAddress(firstAddress);                    // firstAddress
+                            fitnessCenter.setSecondAddress(secondAddress);                  // secondAddress
+                            fitnessCenter.setThirdAddress(search.getKey());                 // thirdAddress : key 가 주소3 이다.
 
                             if (fitnessCenter != null) {
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > fitnessCenter = " + fitnessCenter);
 
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getName = " + fitnessCenter.getName());
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getThirdAddress = " + fitnessCenter.getThirdAddress());
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLatitude = " + fitnessCenter.getLatitude());
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLongitude = " + fitnessCenter.getLongitude());
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getMemberCounter = " + fitnessCenter.getMemberCounter());
-
-                                long counter = snapshot.child(search.getKey()).child(FitnessCenter.MEMBER_LIST).getChildrenCount();
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > member list 의 현재 등록 된 회원 수 = " + counter);
+                                // 피트니스 센터에 등록된 회원의 수를 표시하기 위해서
+                                long counter = snapshot
+                                        .child(search.getKey())
+                                        .child(FitnessCenter.MEMBER_LIST)
+                                        .getChildrenCount();
 
                                 // googleMap 에 마커 추가
                                 googleMap.addMarker(
@@ -123,6 +118,22 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
                             }
 
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "======================================== 데이터베이스 참조 결과 ========================================");
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > key = " + search.getKey());
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > search = " + search.getValue());
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "======================================== FitnessCenter ========================================");
+
+                            if (fitnessCenter != null) {
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > fitnessCenter = " + fitnessCenter);
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getName = " + fitnessCenter.getName());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getThirdAddress = " + fitnessCenter.getThirdAddress());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLatitude = " + fitnessCenter.getLatitude());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getLongitude = " + fitnessCenter.getLongitude());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > getMemberCounter = " + fitnessCenter.getMemberCounter());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< FitnessCenter > member list 의 현재 등록 된 회원 수 = " + snapshot.child(search.getKey()).child(FitnessCenter.MEMBER_LIST).getChildrenCount());
+
+                            }
                         }
 
                         if (0 < fitnessCenterArrayList.size()) {
@@ -138,17 +149,5 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
 
     }
 
-    @Override
-    protected void onCancelled() {
-        final String METHOD_NAME = "[onCancelled] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ AsyncTask 가 종료 되었습니다.");
-        super.onCancelled();
-    }
 
-    @Override
-    protected void onCancelled(Address address) {
-        final String METHOD_NAME = "[onCancelled] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ AsyncTask 가 종료 되었습니다.========================");
-        super.onCancelled(address);
-    }
 }

@@ -47,10 +47,13 @@ public class InitializationManager {
     public void init() {
         final String METHOD_NAME = "[init] ";
 
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "========================================================?");
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser == null) {
             // 인증받지 않았으므로 종료
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, " ============= > 인증받지 않았으므로 종료");
             return;
         }
 
@@ -125,6 +128,7 @@ public class InitializationManager {
                         userCounter += 1;
                     }
 
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 유저 카운트 > 넘버 = " + userCounter);
                     // 2. user 데이터 생성
                     HashMap<String, Object> userValue = new HashMap<>();
                     userValue.put(User.NUMBER, userCounter);

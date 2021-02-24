@@ -35,49 +35,62 @@ public class MyUserDataManager {
         final String METHOD_NAME = "[loadContent] ";
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
         reference.child(FirebaseConstants.DATABASE_FIRST_NODE_USER)
                 .child(uid)
                 .addValueEventListener(
                         new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > snapshot = " + snapshot);
 
                                 if (snapshot.getValue() == null) {
+                                    // 피트니스 센터가 등록되지 않았을 때
+                                    // 리스너를 통해 widget 을 초기화 한다.
                                     listener.onNotRegister();
                                     return;
                                 }
 
-
-                                // ======================================================== training ========================================================
+                                // ======================================================== UserTraining ========================================================
                                 UserTraining myTraining = snapshot.child(User.TRAINING).getValue(UserTraining.class);
 
+                                // ======================================================== UserFitnessCenter ========================================================
+                                // UserFitnessCenter
+                                UserFitnessCenter myFitnessCenter = snapshot.child(User.FITNESS_CENTER).getValue(UserFitnessCenter.class);
+
+                                // ======================================================== Attendance List ========================================================
+                                // Attendance List
+                                ArrayList<Attendance> myAttendanceDateList = new ArrayList<>();
+
+                                // 등록된 피트니스 센터가 있을 때
+                                // 출석한 날짜를 가져와서 추가한다.
+                                if (myFitnessCenter != null) {
+
+                                    for (DataSnapshot search : snapshot.child(User.FITNESS_CENTER).child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren()) {
+                                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석 날짜 항목 > search = " + search);
+                                        myAttendanceDateList.add(search.getValue(Attendance.class));
+                                    }
+
+                                }
+
+                                // 리스너를 통해 가져온 데이터 넘기기
+                                listener.onRegisterMyFitnessCenter(
+                                        myTraining, 
+                                        myFitnessCenter, 
+                                        myAttendanceDateList
+                                );
+
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------------------------------------------------");
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > snapshot = " + snapshot);
+
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------------------------------- child : training ------------------------------------------");
                                 if (myTraining != null) {
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============================================");
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getSquat = " + myTraining.getSquat());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getDeadlift = " + myTraining.getDeadlift());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getBenchPress = " + myTraining.getBenchPress());
                                 }
 
-                                // ======================================================== fitnessCenter ========================================================
-                                UserFitnessCenter myFitnessCenter = snapshot.child(User.FITNESS_CENTER).getValue(UserFitnessCenter.class);
-
-                                ArrayList<Attendance> myAttendanceDateList = new ArrayList<>();
-
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------------------------------- child : fitnessCenter ------------------------------------------");
                                 if (myFitnessCenter != null) {
-                                    // 데이터베이스에 저장된 데이터가 있을 때 ->
-
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "---------------------------------------------------------------------------------");
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > attendanceDateList = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren());
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > attendanceDateList / getChildren = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren());
-                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > attendanceDateList / getChildrenCount = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildrenCount());
-
-                                    // 출석일 날짜 리스트를 가져온다.
-                                    for (DataSnapshot search : snapshot.child(User.FITNESS_CENTER).child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren()) {
-                                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석 날짜 항목 > search = " + search);
-                                        myAttendanceDateList.add(search.getValue(Attendance.class));
-                                    }
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getFitnessCenterName = " + myFitnessCenter.getFitnessCenterName());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getMemberNumber = " + myFitnessCenter.getMemberNumber());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getFirstAddress = " + myFitnessCenter.getFirstAddress());
@@ -89,23 +102,25 @@ public class MyUserDataManager {
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getLongitude = " + myFitnessCenter.getLongitude());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getIsAllowedAccessNotification = " + myFitnessCenter.getIsAllowedAccessNotification());
                                     LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > getIsDisclosed = " + myFitnessCenter.getIsDisclosed());
-
                                 }
 
-                                listener.onRegisterMyFitnessCenter(myTraining, myFitnessCenter, myAttendanceDateList);
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "--------------------------------------- child : attendanceDateList ------------------------------------------");
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석날짜리스트 > snapshot = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석날짜리스트 > snapshot / getChildren = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildren());
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 출석날짜리스트 > snapshot / getChildrenCount = " + snapshot.child(UserFitnessCenter.ATTENDANCE_DATE_LIST).getChildrenCount());
+
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
+                                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 에러 > 코드번호 = " + error.getCode());
                             }
                         }
                 );
 
     }
 
-
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= etc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= interface =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     public interface OnFitnessCenterEventListener {

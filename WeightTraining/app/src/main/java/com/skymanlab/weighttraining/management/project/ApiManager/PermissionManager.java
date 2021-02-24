@@ -133,6 +133,8 @@ public class PermissionManager {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                
+                                // App 설정 화면으로 이동하기
                                 PermissionUtil.requestApplicationSetting(activity, PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE);
 
                             }

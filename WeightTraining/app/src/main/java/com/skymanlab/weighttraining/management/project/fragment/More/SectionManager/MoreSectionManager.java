@@ -12,6 +12,9 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
+import com.skymanlab.weighttraining.management.notice.Notice;
+import com.skymanlab.weighttraining.management.project.ApiManager.NoticeManager;
+import com.skymanlab.weighttraining.management.project.fragment.More.NoticeFragment;
 import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
@@ -23,7 +26,7 @@ import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionM
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.MyTrainingInfoFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.UserTrainingInfoFragment;
 import com.skymanlab.weighttraining.management.user.data.UserTraining;
 
 import java.time.LocalDate;
@@ -45,13 +48,13 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private MaterialCardView fitnessCenter;
     private MaterialCardView target;
     private MaterialCardView setting;
-    private MaterialCardView myTrainingInfo;
+    private MaterialCardView training;
     private MaterialButton notice;
     private MaterialButton serviceCenter;
 
     // instance variable :
-    private UserTraining myTrainingData = null;
-    private UserFitnessCenter myFitnessCenterData = null;
+    private UserTraining myTraining = null;
+    private UserFitnessCenter myFitnessCenter = null;
     private ArrayList<Attendance> myAttendanceDateList = null;
 
     // constructor
@@ -63,19 +66,21 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     public void connectWidget() {
 
         // [iv/C]LinearLayout : connect
-        this.registerDayCountWrapper = (LinearLayout) getView().findViewById(R.id.f_more_register_day_count_wrapper);
+        this.registerDayCountWrapper = (LinearLayout) getView().findViewById(R.id.f_more_registerDayCount_wrapper);
 
         // [iv/C]TextView : connect
-        this.registerDayCount = (TextView) getView().findViewById(R.id.f_more_register_day_count);
+        this.registerDayCount = (TextView) getView().findViewById(R.id.f_more_registerDayCount);
+
 
         // [iv/C]LinearLayout : connect
-        this.trainingCountWrapper = (LinearLayout) getView().findViewById(R.id.f_more_training_count_wrapper);
+        this.trainingCountWrapper = (LinearLayout) getView().findViewById(R.id.f_more_trainingCount_wrapper);
 
         // [iv/C]TextView : connect
-        this.trainingCount = (TextView) getView().findViewById(R.id.f_more_training_count);
+        this.trainingCount = (TextView) getView().findViewById(R.id.f_more_trainingCount);
+
 
         // [ MaterialCardView | fitnessCenter ]
-        this.fitnessCenter = (MaterialCardView) getView().findViewById(R.id.f_more_fitness_center);
+        this.fitnessCenter = (MaterialCardView) getView().findViewById(R.id.f_more_fitnessCenter);
 
         // [ MaterialCardView | target ]
         this.target = (MaterialCardView) getView().findViewById(R.id.f_more_target);
@@ -83,20 +88,22 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         // [ MaterialCardView | setting ]
         this.setting = (MaterialCardView) getView().findViewById(R.id.f_more_setting);
 
-        // [ MaterialCardView | myTrainingInfo ]
-        this.myTrainingInfo = (MaterialCardView) getView().findViewById(R.id.f_more_my_training_info);
+        // [ MaterialCardView | training ]
+        this.training = (MaterialCardView) getView().findViewById(R.id.f_more_training);
+
 
         // [iv/C]MaterialButton : connect
         this.notice = (MaterialButton) getView().findViewById(R.id.f_more_notice);
 
         // [iv/C]MaterialButton : connect
-        this.serviceCenter = (MaterialButton) getView().findViewById(R.id.f_more_service_center);
+        this.serviceCenter = (MaterialButton) getView().findViewById(R.id.f_more_serviceCenter);
     }
 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
+        // ============================================================= 
         MyUserDataManager myDataManager = new MyUserDataManager(FirebaseAuth.getInstance().getCurrentUser().getUid());
         myDataManager.loadContent(new MyUserDataManager.OnFitnessCenterEventListener() {
 
@@ -105,23 +112,31 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< MyFitnessCenterManager > userFitnessCenter 을 가져왔습니다.");
 
-                // =========================================== my fitness center ===========================================
                 // userFitnessCenter
-                myFitnessCenterData = userFitnessCenter;
+                myFitnessCenter = userFitnessCenter;
 
-                // register day count 관련 widget 등의 초기 내용을 설정한다.
-                initWidgetOfRegisterDayCount(
-                        calculateRegisterDayCount(userFitnessCenter.getContractDate())
-                );
+                // userTraining
+                myTraining = userTraining;
 
-                // training count 관련 widget 들의 초기 내용을 설정한다.
-                initWidgetOfTrainingCount(attendanceDateList.size());
-
-                // =========================================== my training data ===========================================
-                myTrainingData = userTraining;
-
-                // =========================================== my attendance date list ===========================================
+                // attendanceDateList
                 myAttendanceDateList = attendanceDateList;
+
+                // 피트니스 센터가 등록되었을 때만
+                // - 등록일
+                // - 운동 횟수
+                if (userFitnessCenter != null) {
+
+                    // =========================================== register day count ===========================================
+                    // 등록일 -> userFitnessCenter 객체 : register day count 관련 widget 등의 초기 내용을 설정한다.
+                    initWidgetOfRegisterDayCount(
+                            calculateRegisterDayCount(userFitnessCenter.getContractDate())
+                    );
+
+                    // =========================================== training count ===========================================
+                    // 운동 횟수 -> attendanceDateList 객체 : training count 관련 widget 들의 초기 내용을 설정한다.
+                    initWidgetOfTrainingCount(attendanceDateList.size());
+
+                }
 
             }
 
@@ -133,29 +148,57 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         });
 
 
-        // [iv/C]LinearLayout : fitnessCenter click listener
+        // ================================================= fitness center =================================================
+        // click listener
         this.fitnessCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // fitnessCenterFragment 로 이동
+                // FitnessCenterFragment 로 이동
+                // 1. UserFitnessCenter  : 피트니스 센터를 등록해야지만 가져올 수 있음
+                // 2. ArrayList<Attendance> : 피트니스 센터를 등록하기만 하면 size 가 0 이상은 됨( 이유 : 출석체크를 하지 않으면 size 가 0 입니다.)
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance(myFitnessCenterData, myAttendanceDateList))
+                        .replace(R.id.nav_home_content_wrapper, FitnessCenterFragment.newInstance(myFitnessCenter, myAttendanceDateList))
                         .addToBackStack(MoreFragment.class.getSimpleName())
                         .commit();
 
             }
         });
 
-        // [iv/C]LinearLayout : target click listener
-        this.target.setOnClickListener(new View.OnClickListener() {
+
+        // ================================================= training =================================================
+        // click listener
+        this.training.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // UserTrainingInfoFragment 로 이동
+                // 1. UserTraining :
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(
+                                R.id.nav_home_content_wrapper,
+                                UserTrainingInfoFragment.newInstance(myTraining)
+                        )
+                        .addToBackStack(null)
+                        .commit();
+
+
+                // 그냥 로그 찍기 위해서
+                if (myTraining != null) {
+
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============================================");
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getSquat = " + myTraining.getSquat());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getDeadlift = " + myTraining.getDeadlift());
+                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getBenchPress = " + myTraining.getBenchPress());
+
+                }
 
             }
         });
 
-        // [iv/C]LinearLayout : setting click listener
+
+        // ================================================= setting =================================================
+        // click listener
         this.setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,41 +210,30 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             }
         });
 
-        this.myTrainingInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============================================");
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getSquat = " + myTrainingData.getSquat());
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getDeadlift = " + myTrainingData.getDeadlift());
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의트레이닝 > getBenchPress = " + myTrainingData.getBenchPress());
-
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(
-                                R.id.nav_home_content_wrapper,
-                                MyTrainingInfoFragment.newInstance(myTrainingData)
-                        )
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        // ================================================= target =================================================
+//        // click listener
+//        this.target.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
-        // [iv/C]MaterialButton : notice click listener
+        // ------------------------------------------------- notice -------------------------------------------------
+        // click listener
         this.notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_home_content_wrapper, FitnessCenterSearchFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-
 
             }
         });
 
-        // [iv/C]MaterialButton : serviceCenter click listener
+
+        // ------------------------------------------------- service center -------------------------------------------------
+        // click listener
         this.serviceCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +245,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
                 intent.setType("text/plain");
                 intent.setPackage("com.google.android.gm");
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"skyman1325@gmail.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, getFragment().getString(R.string.f_more_service_center_email_title));
+                intent.putExtra(Intent.EXTRA_SUBJECT, getFragment().getString(R.string.f_more_serviceCenter_emailTitle));
                 intent.setType("message/rfc822");
                 getFragment().getActivity().startActivity(intent);
 
@@ -235,6 +267,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.registerDayCountWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
             }
         });
@@ -261,12 +294,32 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     } // End of method [initWidgetOfTrainingCount]
 
 
+    /**
+     * 등록된 날에서 몇일이 지났는지 계산하여 반환한다.
+     *
+     * @param contractDate
+     * @return
+     */
     private int calculateRegisterDayCount(String contractDate) {
         final String METHOD_NAME = "[calculateRegisterDayCount] ";
 
+        // 현재 시간 가져오기
         LocalDate nowLocalDate = LocalDate.now();
         Calendar nowCalendar = Calendar.getInstance();
         nowCalendar.set(nowLocalDate.getYear(), nowLocalDate.getMonthValue() - 1, nowLocalDate.getDayOfMonth());
+
+        // 파라미터로 받은 날짜를 Calendar 객체로 변환
+        LocalDate contractLocalDate = LocalDate.parse(contractDate, DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        Calendar contractCalendar = Calendar.getInstance();
+        contractCalendar.set(contractLocalDate.getYear(), contractLocalDate.getMonthValue() - 1, contractLocalDate.getDayOfMonth());
+
+        // 시간을 하루(24*60*60*1000) 로 나눠서 일수로 변환  
+        long now = nowCalendar.getTimeInMillis() / (24 * 60 * 60 * 1000);
+        long contract = contractCalendar.getTimeInMillis() / (24 * 60 * 60 * 1000);
+
+        // 현재 일에서 등록일을 빼서 경과된 일수를 구하기 + 등록일도 포함하여 화면에 표시
+        long D_DAY = now - contract + 1;
+
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============================================================================================");
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 현재/LocalDate > YEAR = " + nowLocalDate.getYear());
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 현재/LocalDate > MONTH = " + nowLocalDate.getMonthValue());
@@ -276,9 +329,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 현재/Calendar > MONTH = " + nowCalendar.get(Calendar.MONTH));
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 현재/Calendar > calendar = " + nowCalendar.get(Calendar.DAY_OF_MONTH));
 
-        LocalDate contractLocalDate = LocalDate.parse(contractDate, DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
-        Calendar contractCalendar = Calendar.getInstance();
-        contractCalendar.set(contractLocalDate.getYear(), contractLocalDate.getMonthValue() - 1, contractLocalDate.getDayOfMonth());
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "============================================================================================");
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 등록일/LocalDate > YEAR = " + contractLocalDate.getYear());
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 등록일/LocalDate > MONTH = " + contractLocalDate.getMonthValue());
@@ -292,13 +342,8 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DATE > date = " + contractCalendar.getTime().toString());
 
-        long now = nowCalendar.getTimeInMillis() / (24 * 60 * 60 * 1000);
-        long contract = contractCalendar.getTimeInMillis() / (24 * 60 * 60 * 1000);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 시간 > now = " + now);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 시간 > contract = " + contract);
-
-
-        long D_DAY = now - contract;
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "경과 일수 = " + D_DAY);
 

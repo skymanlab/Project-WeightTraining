@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class LogManager {
 
     // constant
-    public static final Display ALL_LOG_DISPLAY_POWER = Display.ON;
+    public static final Display ALL_LOG_DISPLAY_POWER = Display.OFF;
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= default =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

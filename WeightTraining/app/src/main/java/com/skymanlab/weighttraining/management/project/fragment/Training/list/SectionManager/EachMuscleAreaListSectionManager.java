@@ -2,6 +2,7 @@ package com.skymanlab.weighttraining.management.project.fragment.Training.list.S
 
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ContentLoadingProgressBar;
@@ -21,6 +22,7 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.event.data.Event;
 import com.skymanlab.weighttraining.management.event.dialog.EventDialog;
+import com.skymanlab.weighttraining.management.project.ApiManager.NetworkStateChecker;
 import com.skymanlab.weighttraining.management.project.data.type.MuscleArea;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
@@ -41,6 +43,7 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
     private RecyclerView recyclerView;
     private ContentLoadingProgressBar progressBar;
     private ImageButton add;
+    private TextView indicator;
 
     // instance variable
     private EachMuscleAreaListRvAdapter adapter;
@@ -57,18 +60,32 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
     public void connectWidget() {
 
         // [iv/C]RecyclerView : recyclerView connect
-        this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_each_muscle_area_list_recycler_view);
+        this.recyclerView = (RecyclerView) getView().findViewById(R.id.f_eachMuscleAreaList_recycler_view);
 
         // [iv/C]ContentLoadingProgressBar : progressBar connect
-        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_each_muscle_area_list_progress_bar);
+        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_eachMuscleAreaList_progressBar);
 
         // [iv/C]ImageButton : add connect
-        this.add = (ImageButton) getView().findViewById(R.id.f_each_muscle_area_list_bt_add);
+        this.add = (ImageButton) getView().findViewById(R.id.f_eachMuscleAreaList_button_add);
+
+        // [ TextView | indicator ]
+        this.indicator = (TextView) getView().findViewById(R.id.f_eachMuscleAreaList_indicator);
 
     }
 
     @Override
     public void initWidget() {
+
+        if (!NetworkStateChecker.checkActiveNetwork(getFragment().getContext())) {
+
+            // indicator : VISIBLE
+            indicator.setVisibility(View.VISIBLE);
+
+            // progressBar : INVISIBLE
+            progressBar.setVisibility(View.INVISIBLE);
+
+            return;
+        }
 
         // [method] : adapter 생성 후 recyclerView 에 설정하기
         initWidgetOfRecyclerView();
@@ -154,6 +171,12 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
 
                 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 데이터를 가져오기 전 UI 설정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                 if (snapshot.getValue() == null) {
+
+                    // indicator
+                    indicator.setVisibility(View.VISIBLE);
+                    indicator.setText(R.string.f_eachMuscleAreaList_indicator_noData);
+
+                    //
                     progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }

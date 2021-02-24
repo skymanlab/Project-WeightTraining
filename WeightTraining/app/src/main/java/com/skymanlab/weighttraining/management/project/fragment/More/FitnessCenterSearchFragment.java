@@ -112,8 +112,8 @@ public class FitnessCenterSearchFragment extends Fragment {
         super.onPause();
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "========================= 구글 맵에 대한 '위치 업데이트'와 '마커 매니저' 에 대한 중지를 요청합니다. =========================");
-        sectionManager.getGoogleMapManager().stopLocationUpdate();
-        sectionManager.getGoogleMapManager().stopFitnessCenterMarkerManager();
+        sectionManager.getGoogleMapSettingManager().stopLocationUpdate();
+        sectionManager.getGoogleMapSettingManager().stopFitnessCenterMarkerManager();
     }
 
 }

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -27,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     // constant
     private static final String CLASS_NAME = "[Ac] SettingsActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private TextView title;
@@ -309,6 +310,8 @@ public class SettingsActivity extends AppCompatActivity {
                 this.isGrantedBackgroundLocationPermission.setEnabled(false);
 
             } else {
+                
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================> 거부 되었음");
 
                 // [check 3]  Background Location Permission : 사용자가 거부한 적이 있는지 확인
                 if (PermissionUtil.shouldShowRequestPermissionListRationale(getActivity(), PermissionManager.BACKGROUND_PERMISSION)) {
@@ -341,6 +344,7 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Preference > 클릭한 preference 는 ? = " + preference);
+                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Preference > =================>");
 
                             // requestCode : BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE
                             PermissionUtil.requestPermission(

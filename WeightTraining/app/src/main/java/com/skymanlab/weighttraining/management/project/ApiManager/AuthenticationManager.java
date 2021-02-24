@@ -197,11 +197,14 @@ public class AuthenticationManager {
     /**
      * [method] GoogleSignInClient 를 통해 인증화면으로 이동  -> 결과를 Intent 로 받아오기
      */
-    public void singIn() {
+    public void singIn(boolean isKeepLoggedIn) {
 
         // [lv/C]Intent : Google 인증을 위한 화면으로 이동
         Intent signInIntent = googleSignInClient.getSignInIntent();
         activity.startActivityForResult(signInIntent, RC_SIGN_IN);
+
+        // SharedPreference 에 해당 설정 저장하기
+        SettingsManager.setIsKeptLoggedIn(activity, isKeepLoggedIn );
 
     } // End of method [singIn]
 

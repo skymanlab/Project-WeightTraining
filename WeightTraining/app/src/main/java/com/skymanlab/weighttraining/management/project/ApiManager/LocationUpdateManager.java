@@ -41,10 +41,7 @@ public class LocationUpdateManager {
 
     // instance variable : location setting
     private LocationRequest locationRequest;
-    private LocationSettingsRequest.Builder settingsRequester;
-
-    // instance variable : init
-    private boolean isInitialized = false;
+    private LocationSettingsRequest.Builder locationSettingsRequestBuilder;
 
     // constructor
     private LocationUpdateManager(Builder builder) {
@@ -55,43 +52,33 @@ public class LocationUpdateManager {
         this.locationCallback = builder.locationCallback;
     }
 
-    // getter
-    public boolean isInitialized() {
-        return isInitialized;
-    }
-
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 위치 설정 변경 (사용자의 설정값으로) =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 위치 업데이트를 사용하기 위한 초기 설정 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // init
-    public void init() {
+    public void initSetup() {
 
         // 위치를 가져오기 위한 '통합 위치 제공자' 가져오기
-        createFusedLocationProviderClient(this.activity);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
-        // 위치에 대한 사용자의 설정을 적용하기 위한 LocationRequest 객체 생성
-        createLocationRequest(this.interval, this.fastestInterval, this.priority);
+        // 위치 서비스를 요청하기 위한 설정
+        locationRequest = createLocationRequest(this.interval, this.fastestInterval, this.priority);
 
-        // 위의 LocationResult 객체를 '통합 위치 제공자' 에게 설정값 적용하기 요청
-        setLocationRequest(this.locationRequest);
+        // 위에서 설정한 LocationResult(위치 요청하기 위한 설정값) 객체를 LocationSettingsRequest(설정값을 fusedLocationProviderClient 에 요청) 를 통해 요청을 추가한다.
+        locationSettingsRequestBuilder = addLocationRequest(this.locationRequest);
 
-        // 적용하기 요청한 결과를 감시하고 결과를 통해 다음 과정진행하기 / success or failure
-        checkSetting(this.activity, this.settingsRequester);
+        // LocationSettingsRequest 를 통해 추가한 LocationRequest 가 FusedLocationProviderClient 에 잘 적용되었는지 확인하기
+        checkSetting(activity, locationSettingsRequestBuilder);
 
-        if (this.fusedLocationClient != null) {
-            this.isInitialized = true;
-        }
     }
 
 
-    // fusedLocationProviderClient
-    public void createFusedLocationProviderClient(Activity activity) {
-        this.fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
-    }
+    // ================================================= LocationRequest =================================================
+    public LocationRequest createLocationRequest(int interval, int fastestInterval, int priority) {
 
+        // interval : 위치 업데이트 간견
+        // fastestInterval : 가장 빠른 위치 업데이트 간견
+        // priority : 우선 순위
 
-    // LocationRequest : location update 에 대한 사용자 설정값을 객체로 생성
-    public void createLocationRequest(int interval, int fastestInterval, int priority) {
-
-        this.locationRequest = LocationRequest
+        return LocationRequest
                 .create()
                 .setInterval(interval)
                 .setFastestInterval(fastestInterval)
@@ -99,9 +86,14 @@ public class LocationUpdateManager {
 
     }
 
-    public void createLocationRequest(int interval, int fastestInterval, int priority, int numUpdates) {
+    public LocationRequest createLocationRequest(int interval, int fastestInterval, int priority, int numUpdates) {
 
-        this.locationRequest = LocationRequest
+        // interval : 위치 업데이트 간견
+        // fastestInterval : 가장 빠른 위치 업데이트 간견
+        // priority : 우선 순위
+        // numNumber : 반복 회수
+
+        return LocationRequest
                 .create()
                 .setInterval(interval)
                 .setFastestInterval(fastestInterval)
@@ -109,9 +101,12 @@ public class LocationUpdateManager {
                 .setNumUpdates(numUpdates);
     }
 
-    // 사용자 설정값이 있는 LocationRequest 객체를 LocationSettingRequest 를 사용하여'통합 위치 제공자' 에 추가하기
-    public void setLocationRequest(LocationRequest locationRequest) {
-        this.settingsRequester = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+    // ================================================= LocationSettingsRequest =================================================
+    public LocationSettingsRequest.Builder addLocationRequest(LocationRequest locationRequest) {
+
+        // LocationRequest 를 추가하기
+        return new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+
     }
 
     // LocationSettingsRequest 를 통해 적용한 설정이 충족되었는지 SettingsClient 를 통해 이 LocationSettingsResponse 를 감시한다. 그리고 이 객체의 상태 코드로 결과를 확인한다.
@@ -150,44 +145,28 @@ public class LocationUpdateManager {
         });
     }
 
-    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= fusedLocationUpdateClient 사용 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    // 마지막 위치 가져오기
-    public void getLastLocation(Activity activity, OnSuccessListener<Location> onSuccessListener) {
 
-        // [check 1] 권한 승인 확인
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            // [check 2] fusedLocationClient 객세 생성 확인
-            if (fusedLocationClient != null) {
-
-                // 마지막 위치 가져오기 / 성공했을 시 OnSuccessListener 를 통해 다음 과정 수행하기
-                this.fusedLocationClient.getLastLocation()
-                        .addOnSuccessListener(activity, onSuccessListener);
-
-            } // [check 2]
-            
-        } // [check 1]
-    }
-
+    // ================================================= Location update start/stop =================================================
     // 위치 업데이트 start
     public void startLocationUpdate(Activity activity) {
 
-        // [check 1] 권한 승인 확인
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            // [check 2] fusedLocationClient 객세 생성 확인
             if (fusedLocationClient != null) {
 
-                // [check 3] locationCallback 객체 생성 확인
-                if (locationCallback != null) {
+                if (locationRequest != null) {
 
-                    this.fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-               
-                } else {
-                    throw new RuntimeException("MyLocationUpdateUtil 을 사용하기 위해서는 LocationCallback 객체를 Builder 를 통해 등록해주세요!");
-                } // [check 3]
+                    if (locationCallback != null) {
+
+                        this.fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+
+                    } else {
+                        throw new RuntimeException("MyLocationUpdateUtil 을 사용하기 위해서는 LocationCallback 객체를 Builder 를 통해 등록해주세요!");
+                    } // [check 3
+
+                }
 
             } // [check 2]
 
@@ -196,17 +175,14 @@ public class LocationUpdateManager {
 
     // 위치 업데이트 stop
     public void stopLocationUpdates(Activity activity) {
-        // [check 1] 권한 승인 확인
+
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            // [check 2] fusedLocationClient 객세 생성 확인
             if (fusedLocationClient != null) {
 
-                // [check 3] locationCallback 객체 생성 확인
                 if (locationCallback != null) {
 
-                    // update 된 위치에 대한 다음 과정을 진행하는 LocationCallback 객체가 있을 때만
                     this.fusedLocationClient.removeLocationUpdates(locationCallback);
 
                 } else {
@@ -219,6 +195,7 @@ public class LocationUpdateManager {
     }
 
 
+    // =========================================================== Builder ===========================================================
     public static class Builder {
 
         // instance variable : fused location provider client 를 가져오기 위한

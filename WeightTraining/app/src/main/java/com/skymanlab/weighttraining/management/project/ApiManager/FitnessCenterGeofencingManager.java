@@ -50,7 +50,7 @@ public class FitnessCenterGeofencingManager {
         // geofencingClient 가져오기
         this.geofencingClient = FitnessCenterGeofencingUtil.createGeofencingClient(activity);
 
-        // Geofence 생성
+        // 피트니스 센터의 위치로 Geofence 객체를 생성한다.
         Geofence geofence = FitnessCenterGeofencingUtil.createGeofence(
                 location,
                 FitnessCenterGeofencingUtil.GEOFENCE_RADIUS_IN_METERS,
@@ -59,10 +59,14 @@ public class FitnessCenterGeofencingManager {
                 FitnessCenterGeofencingUtil.GEOFENCE_LOITERING_DELAY
 
         );
+
         // PendingIntent : application context 에
+        // Geofence 가 트리거 되면 알려주기 위한 BroadcastReceiver 에 대한 PendingIntent 를 생성한다.
         this.pendingIntent = FitnessCenterGeofencingUtil.createPendingIntent(activity);
 
-        //
+        // 위에서 생성한 피트니스 센터의 지오팬스를 GeofencingClient 에 요청한다.
+        // 요청은 GeofencingRequest 를 사용한다.
+        // '최초 트리거 방법'과 피트니스 센터의 '지오팬스'를 geofencingRequest 를 통해 요청한다.
         this.geofencingRequest = FitnessCenterGeofencingUtil.createGeofencingRequest(
                 FitnessCenterGeofencingUtil.GEOFENCING_REQUEST_INITIAL_TRIGGER,
                 geofence
@@ -81,7 +85,7 @@ public class FitnessCenterGeofencingManager {
                         public void onSuccess(Void aVoid) {
                             Snackbar.make(
                                     activity.findViewById(R.id.nav_home_bottom_bar),
-                                    "모니터링 시작 성공!",
+                                    R.string.etc_fitnessCenterGeofencingManager_addGeofence_success,
                                     Snackbar.LENGTH_SHORT)
                                     .show();
 
@@ -93,7 +97,7 @@ public class FitnessCenterGeofencingManager {
                         public void onFailure(@NonNull Exception e) {
                             Snackbar.make(
                                     activity.findViewById(R.id.nav_home_bottom_bar),
-                                    "모니터링 시작 실패!",
+                                    R.string.etc_fitnessCenterGeofencingManager_addGeofence_fail,
                                     Snackbar.LENGTH_SHORT)
                                     .show();
                         }
@@ -111,7 +115,7 @@ public class FitnessCenterGeofencingManager {
                     public void onSuccess(Void aVoid) {
                         Snackbar.make(
                                 activity.findViewById(R.id.nav_home_bottom_bar),
-                                "모니터링 중지 성공!",
+                                R.string.etc_fitnessCenterGeofencingManager_removeGeofence_success,
                                 Snackbar.LENGTH_SHORT)
                                 .show();
                     }
@@ -121,7 +125,7 @@ public class FitnessCenterGeofencingManager {
                     public void onFailure(@NonNull Exception e) {
                         Snackbar.make(
                                 activity.findViewById(R.id.nav_home_bottom_bar),
-                                "모니터링 중지 실패!",
+                                R.string.etc_fitnessCenterGeofencingManager_removeGeofence_fail,
                                 Snackbar.LENGTH_SHORT)
                                 .show();
                     }

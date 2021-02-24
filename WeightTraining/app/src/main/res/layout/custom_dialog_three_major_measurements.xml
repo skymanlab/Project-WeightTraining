@@ -11,6 +11,7 @@
         android:padding="15dp">
 
         <ImageView
+            android:id="@+id/custom_dialog_threeMajorMeasurements_button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
@@ -21,16 +22,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/eland_choice_bold"
-            android:text="@string/custom_dialog_three_major_measurements_title"
+            android:text="@string/custom_dialog_threeMajorMeasurements_title"
             android:textAlignment="gravity"
             android:textColor="@color/colorTextBlack" />
 
         <TextView
-            android:id="@+id/custom_dialog_three_major_measurements_button_register"
+            android:id="@+id/custom_dialog_threeMajorMeasurements_button_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:text="@string/custom_dialog_three_major_measurements_button_register" />
+            android:text="@string/custom_dialog_threeMajorMeasurements_button_register" />
 
     </FrameLayout>
 
@@ -50,10 +51,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_medium"
-            android:text="@string/custom_dialog_three_major_measurements_squat" />
+            android:text="@string/custom_dialog_threeMajorMeasurements_squat" />
 
         <EditText
-            android:id="@+id/custom_dialog_three_major_measurements_squat"
+            android:id="@+id/custom_dialog_threeMajorMeasurements_squat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
@@ -77,10 +78,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_medium"
-            android:text="@string/custom_dialog_three_major_measurements_deadlift" />
+            android:text="@string/custom_dialog_threeMajorMeasurements_deadlift" />
 
         <EditText
-            android:id="@+id/custom_dialog_three_major_measurements_deadlift"
+            android:id="@+id/custom_dialog_threeMajorMeasurements_deadlift"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
@@ -104,10 +105,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eland_choice_medium"
-            android:text="@string/custom_dialog_three_major_measurements_bench_press" />
+            android:text="@string/custom_dialog_threeMajorMeasurements_benchPress" />
 
         <EditText
-            android:id="@+id/custom_dialog_three_major_measurements_bench_press"
+            android:id="@+id/custom_dialog_threeMajorMeasurements_bench_press"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />

@@ -1,5 +1,6 @@
 package com.skymanlab.weighttraining.management.project.fragment.Training.program.SectionManager;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -43,9 +44,6 @@ public class MyProgramDetailSectionManager extends FragmentSectionManager implem
     private TextView totalSetNumber;
     private LinearLayout detailProgramListWrapper;
 
-    // instance variable
-    private ArrayList<DetailProgram> detailProgramList;
-
     // constructor
     public MyProgramDetailSectionManager(Fragment fragment, View view) {
         super(fragment, view);
@@ -60,19 +58,19 @@ public class MyProgramDetailSectionManager extends FragmentSectionManager implem
     public void connectWidget() {
 
         // [ TextView | nickName ]
-        this.nickName = (TextView) getView().findViewById(R.id.f_my_program_detail_nick_name);
+        this.nickName = (TextView) getView().findViewById(R.id.f_myProgramDetail_nick_name);
 
         // [ TextView | muscleAreaList ]
-        this.muscleAreaList = (TextView) getView().findViewById(R.id.f_my_program_detail_muscle_area_list);
+        this.muscleAreaList = (TextView) getView().findViewById(R.id.f_myProgramDetail_muscle_area_list);
 
         // [ TextView | totalEventNumber ]
-        this.totalEventNumber = (TextView) getView().findViewById(R.id.f_my_program_detail_total_event_number);
+        this.totalEventNumber = (TextView) getView().findViewById(R.id.f_myProgramDetail_totalEventNumber);
 
         // [ TextView | totalSetNumber ]
-        this.totalSetNumber = (TextView) getView().findViewById(R.id.f_my_program_detail_total_set_number);
+        this.totalSetNumber = (TextView) getView().findViewById(R.id.f_myProgramDetail_totalSetNumber);
 
         // [ LinearLayout | detailProgramListWrapper ]
-        this.detailProgramListWrapper = (LinearLayout) getView().findViewById(R.id.f_my_program_detail_detail_program_list_wrapper);
+        this.detailProgramListWrapper = (LinearLayout) getView().findViewById(R.id.f_myProgramDetail_detailProgramList_wrapper);
 
     }
 
@@ -134,27 +132,27 @@ public class MyProgramDetailSectionManager extends FragmentSectionManager implem
         );
     }
 
-    private void initWidgetOfDetailProgramListWrapper() {
+    private void initWidgetOfDetailProgramListWrapper(ArrayList<DetailProgram> detailProgramList) {
 
-        LayoutInflater inflater = LayoutInflater.from(getFragment().getContext());
+        if (0 < detailProgramList.size()) {
 
-        for (int index = 0; index < detailProgramList.size(); index++) {
+            LayoutInflater inflater = (LayoutInflater) getFragment().getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            addViewOfDetailProgramListWrapper(
-                    newInstanceOfDetailProgramItem(
-                            inflater,
-                            detailProgramList.get(index)
-                    )
-            );
+            for (int index = 0; index < detailProgramList.size(); index++) {
+
+                addViewOfDetailProgramListWrapper(
+                        newInstanceOfDetailProgramItem(
+                                inflater,
+                                detailProgramList.get(index)
+                        )
+                );
+            }
         }
     }
 
 
     private void loadContent() {
         final String METHOD_NAME = "[loadContent] ";
-
-        // 데이터 담을 그릇
-        this.detailProgramList = new ArrayList<>();
 
         // database 에서 데이터 가져오기
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("program");
@@ -166,6 +164,12 @@ public class MyProgramDetailSectionManager extends FragmentSectionManager implem
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                // 해당 프로그램의 세부 내용을 가져오기 위해서
+                // program 객체의 내용으로
+                // 해당 프로그램의 DetailProgram 리스트를 가저온다.
+                // 데이터가 변경될 때마다 새로운 내용을 담아야 하므로 
+                ArrayList<DetailProgram> detailProgramList = new ArrayList<>();
+
                 for (DataSnapshot search : snapshot.getChildren()) {
 
                     DetailProgram detailProgram = search.getValue(DetailProgram.class);
@@ -173,7 +177,8 @@ public class MyProgramDetailSectionManager extends FragmentSectionManager implem
 
                 }
 
-                initWidgetOfDetailProgramListWrapper();
+                // 위에서 가져온 데이터를 바탕으로 화면 내용 구성
+                initWidgetOfDetailProgramListWrapper(detailProgramList);
             }
 
             @Override

@@ -23,7 +23,7 @@ public class Step7DetailProgramDialog extends DialogFragment {
 
     // constant
     private static final String CLASS_NAME = "[Ac] Step6PartialSettingDialog";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // constant
     public static final String REQUEST_KEY = "detailProgram";

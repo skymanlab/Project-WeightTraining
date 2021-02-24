@@ -157,8 +157,10 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             public void onClick(DialogInterface dialog, int which) {
 
                                 saveContent(
-                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+//                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
+//                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                                        "test2uid",
+                                        "테스트2",
                                         fitnessCenter.getName(),
                                         fitnessCenter.getFirstAddress(),
                                         fitnessCenter.getSecondAddress(),
@@ -264,6 +266,9 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
 
                         if (memberCounter == null) {
 
+                            // memberCounter 가 없으면 아직 등록된 피트니스 센터가 아니므로
+                            // 피트니스 센터를 처음 등록하는 방식으로 데이터를 저장한다.
+
                             memberCounter = 1;
 
                             // 경로 fitnessCenter/주소1/주소2/주소3/ 에 저장할 데이터
@@ -286,6 +291,10 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                                     .setValue(memberData);
 
                         } else {
+
+                            // memberCounter 가 있으면 이미 등록된 피트니스 센터이다.
+                            // 즉, 피트니스 센터의 정보는 저장하지 않고
+                            // memberList 에 회원을 추가하는 방식으로 데이터를 저장한다.
 
                             memberCounter += 1;
 
@@ -313,7 +322,6 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > committed = " + committed);
                         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< DataSnapshot > currentData = " + currentData);
 
-
                         if (error != null)
                             return;
 
@@ -323,6 +331,12 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Integer > userCounter = " + userCounter);
 
                             if (userCounter != null) {
+
+                                // 에러 없이 완료되고
+                                // 피트니스 센터에 내가 회원으로 등록 되었다는 것으로 간주하고
+                                // user/나의Uid/fitnessCenter 경로에 나의 피트니스 정보와 설정값들을 저장한다.
+                                // 개인 정보는 따로 여기에 보관한다.
+                                // 타인이 아닌 나만 접근하기 위한 보안장치이다.
 
                                 saveContentOfMyFitnessCenter(reference,
                                         userUid,

@@ -84,7 +84,7 @@ public class PermissionResultManager {
 
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterRegisterFragment : fragment - sectionManager - googleMapManager 의 init() 수행합니다.");
                 // FitnessCenterRegisterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
-                ((FitnessCenterSearchFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
+                ((FitnessCenterSearchFragment) targetFragment).getSectionManager().getGoogleMapSettingManager().init();
 
             } else if (targetFragment instanceof SettingsActivity.SettingsFragment) {
 
@@ -136,7 +136,7 @@ public class PermissionResultManager {
             if (targetFragment instanceof FitnessCenterSearchFragment) {
 
                 // FitnessCenterRegisterFragment : sectionManager 의 구글 맵을 초기화하는 method 를 호출한다.
-                ((FitnessCenterSearchFragment) targetFragment).getSectionManager().getGoogleMapManager().init();
+                ((FitnessCenterSearchFragment) targetFragment).getSectionManager().getGoogleMapSettingManager().init();
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetFragment > FitnessCenterFragment 에 대한 다음 과정을 진행합니다.");
 
             } // [check 2]

@@ -10,6 +10,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
@@ -27,7 +28,7 @@ public class AttendanceCalendarManager {
 
     // constant
     private static final String CLASS_NAME = AttendanceCalendarManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
     // instance variable
     private Context context;
@@ -55,7 +56,6 @@ public class AttendanceCalendarManager {
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > contractDate = " + contractDate);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > expiryDate = " + expiryDate);
-
 
         // today decorator
         TodayDecorator todayDecorator = new TodayDecorator();
@@ -207,7 +207,7 @@ public class AttendanceCalendarManager {
 
         @Override
         public void decorate(DayViewFacade view) {
-            view.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.attendance_calendar_date_checker));
+            view.addSpan(new DotSpan(10, ContextCompat.getColor(context, R.color.colorBackgroundGreen)));
         }
     }
 

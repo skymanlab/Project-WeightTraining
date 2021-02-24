@@ -32,11 +32,11 @@
             android:paddingBottom="@dimen/section_padding_bottom">
 
             <TextView
-                android:id="@+id/f_my_program_detail_nick_name"
+                android:id="@+id/f_myProgramDetail_nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/eland_choice_bold"
-                android:text="@string/f_my_program_detail_nick_name_default"
+                android:text="@string/f_myProgramDetail_nick_name_default"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/text_title_size" />
@@ -58,15 +58,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_my_program_detail_muscle_area_list" />
+                    android:text="@string/f_myProgramDetail_muscleAreaList" />
 
                 <TextView
-                    android:id="@+id/f_my_program_detail_muscle_area_list"
+                    android:id="@+id/f_myProgramDetail_muscle_area_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_my_program_detail_muscle_area_list_default"
+                    android:text="@string/f_myProgramDetail_muscleAreaList_default"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorTextBlack" />
             </LinearLayout><!-- End of muscle area list -->
@@ -83,15 +83,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_my_program_detail_total_event_number" />
+                    android:text="@string/f_myProgramDetail_totalEventNumber" />
 
                 <TextView
-                    android:id="@+id/f_my_program_detail_total_event_number"
+                    android:id="@+id/f_myProgramDetail_totalEventNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_my_program_detail_total_event_number_default"
+                    android:text="@string/f_myProgramDetail_totalEventNumber_default"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorTextBlack" />
             </LinearLayout><!-- End of total event number -->
@@ -108,30 +108,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_my_program_detail_total_set_number" />
+                    android:text="@string/f_myProgramDetail_totalSetNumber" />
 
                 <TextView
-                    android:id="@+id/f_my_program_detail_total_set_number"
+                    android:id="@+id/f_myProgramDetail_totalSetNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/eland_choice_medium"
-                    android:text="@string/f_my_program_detail_total_set_number_default"
+                    android:text="@string/f_myProgramDetail_totalSetNumber_default"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorTextBlack" />
             </LinearLayout><!-- End of total set number -->
 
             <include
-                layout="@layout/include_divider_default"
+                layout="@layout/include_divider_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:id="@+id/f_my_program_detail_detail_program_list_wrapper"
+                android:id="@+id/f_myProgramDetail_detailProgramList_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/f_myProgramDetail_detailProgramList_title"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/eland_choice_medium"/>
+
+                <include
+                    layout="@layout/include_dot_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

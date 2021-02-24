@@ -61,8 +61,6 @@ public class MoreFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String METHOD_NAME = "[onCreate] ";
-
     }
 
     @Override
@@ -75,9 +73,6 @@ public class MoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        final String METHOD_NAME = "[onViewCreated] ";
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<start> more fragment 의 Log manager 를 실행합니다!");
 
         // top bar
         this.topBarManager = new FragmentTopBarManager(this, view, getString(R.string.f_more_title));

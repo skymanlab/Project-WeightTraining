@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 public class ThreeMajorMeasurementsDialog extends DialogFragment implements FragmentSectionInitializable {
 
     // instance variable
+    private ImageView cancel;
     private TextView register;
     private EditText squat;
     private EditText deadlift;
@@ -69,21 +71,34 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
     @Override
     public void connectWidget() {
 
+        // [ ImageView | cancel ]
+        this.cancel = (ImageView) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_button_cancel);
+
         // [ TextView | register ]
-        this.register = (TextView) getView().findViewById(R.id.custom_dialog_three_major_measurements_button_register);
+        this.register = (TextView) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_button_register);
 
         // [ EditText | squat ]
-        this.squat = (EditText) getView().findViewById(R.id.custom_dialog_three_major_measurements_squat);
+        this.squat = (EditText) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_squat);
 
         // [ EditText | deadlift ]
-        this.deadlift = (EditText) getView().findViewById(R.id.custom_dialog_three_major_measurements_deadlift);
+        this.deadlift = (EditText) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_deadlift);
 
         // [ EditText | benchPress ]
-        this.benchPress = (EditText) getView().findViewById(R.id.custom_dialog_three_major_measurements_bench_press);
+        this.benchPress = (EditText) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_bench_press);
     }
 
     @Override
     public void initWidget() {
+
+        // click listener
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                }
+        );
 
         // click listener
         register.setOnClickListener(
@@ -132,7 +147,7 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
                                     );
 
                         } else {
-                            Snackbar.make(getView(), R.string.custom_dialog_three_major_measurements_snack_no_input, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(getView(), R.string.custom_dialog_threeMajorMeasurements_snack_no_input, Snackbar.LENGTH_SHORT).show();
                         }
 
                     }

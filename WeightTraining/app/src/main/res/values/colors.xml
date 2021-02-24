@@ -8,6 +8,7 @@
     <color name="colorBackgroundPrimary">#2196F3</color>
     <color name="colorBackgroundWhite">#FFFFFF</color>
     <color name="colorBackgroundGray">#e6e6e6</color>
+    <color name="colorBackgroundGreen">@android:color/holo_green_light</color>
 
     <color name="colorBackgroundFirst">#FF8A80</color>
     <color name="colorBackgroundSecond">#EA80FC</color>
