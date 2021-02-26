@@ -118,7 +118,7 @@ public class UserInfoSectionManager extends FragmentSectionManager implements Fr
                 @Override
                 public void onClick(View view) {
 
-                    AuthenticationManager.showDialogOfWithdraw(getFragment().getActivity());
+                    AuthenticationManager.showDialogOfWithdraw(getFragment().getActivity(), getFragment().getActivity().getSupportFragmentManager());
                 }
             });
         }

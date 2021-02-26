@@ -1,5 +1,6 @@
 package com.skymanlab.weighttraining;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.ApiManager.PermissionManager;
@@ -310,7 +313,7 @@ public class SettingsActivity extends AppCompatActivity {
                 this.isGrantedBackgroundLocationPermission.setEnabled(false);
 
             } else {
-                
+
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================> 거부 되었음");
 
                 // [check 3]  Background Location Permission : 사용자가 거부한 적이 있는지 확인
@@ -324,8 +327,23 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
 
-                            // requestCode : BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE / 직접 어플 설정화면으로 이동 -> 위치 -> 권한 -> 항상 허용으로 변경
-                            PermissionUtil.requestApplicationSetting(getActivity(), PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setTitle(R.string.preference_category_location_background_permission_alert_describe_to_user_title)
+                                    .setMessage(R.string.preference_category_location_background_permission_alert_describe_to_user_message)
+                                    .setPositiveButton(R.string.preference_category_location_background_permission_alert_describe_to_user_bt_positive, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // requestCode : BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE / 직접 어플 설정화면으로 이동 -> 위치 -> 권한 -> 항상 허용으로 변경
+                                            PermissionUtil.requestApplicationSetting(getActivity(), PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE);
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.preference_category_location_background_permission_alert_describe_to_user_bt_negative, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
 
                             return true;
                         }
@@ -346,12 +364,28 @@ public class SettingsActivity extends AppCompatActivity {
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Preference > 클릭한 preference 는 ? = " + preference);
                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Preference > =================>");
 
-                            // requestCode : BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE
-                            PermissionUtil.requestPermission(
-                                    getActivity(),
-                                    PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE,
-                                    PermissionManager.BACKGROUND_PERMISSION
-                            );
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setTitle(R.string.preference_category_location_background_permission_alert_describe_to_user_title)
+                                    .setMessage(R.string.preference_category_location_background_permission_alert_describe_to_user_message)
+                                    .setPositiveButton(R.string.preference_category_location_background_permission_alert_describe_to_user_bt_positive, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            // requestCode : BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE
+                                            PermissionUtil.requestPermission(
+                                                    getActivity(),
+                                                    PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE,
+                                                    PermissionManager.BACKGROUND_PERMISSION
+                                            );
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.preference_category_location_background_permission_alert_describe_to_user_bt_negative, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
 
                             return true;
                         }

@@ -14,6 +14,7 @@ import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.SettingsActivity;
 import com.skymanlab.weighttraining.management.notice.Notice;
 import com.skymanlab.weighttraining.management.project.ApiManager.NoticeManager;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSettingFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.NoticeFragment;
 import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
@@ -173,7 +174,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             public void onClick(View v) {
 
                 // UserTrainingInfoFragment 로 이동
-                // 1. UserTraining :
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(
                                 R.id.nav_home_content_wrapper,
@@ -227,6 +227,13 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View view) {
 
+//                // NoticeFragment 로 이동
+//                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.nav_home_content_wrapper, NoticeFragment.newInstance())
+//                        .addToBackStack(null)
+//                        .commit();
+
+                SettingsManager.displayAllSettingsValue(getFragment().getContext());
 
             }
         });
@@ -267,7 +274,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.registerDayCountWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
             }
         });

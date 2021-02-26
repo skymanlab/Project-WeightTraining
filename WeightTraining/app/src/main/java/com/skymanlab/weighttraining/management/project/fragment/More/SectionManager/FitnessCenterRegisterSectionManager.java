@@ -157,10 +157,8 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             public void onClick(DialogInterface dialog, int which) {
 
                                 saveContent(
-//                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
-//                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                                        "test2uid",
-                                        "테스트2",
+                                        FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
                                         fitnessCenter.getName(),
                                         fitnessCenter.getFirstAddress(),
                                         fitnessCenter.getSecondAddress(),

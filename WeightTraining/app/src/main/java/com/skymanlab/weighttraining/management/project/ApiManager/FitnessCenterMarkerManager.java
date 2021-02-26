@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
 import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.Member;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
@@ -97,6 +98,7 @@ public class FitnessCenterMarkerManager extends AsyncTask<LatLng, Void, Address>
                             fitnessCenter.setThirdAddress(search.getKey());                 // thirdAddress : key 가 주소3 이다.
 
                             if (fitnessCenter != null) {
+
 
                                 // 피트니스 센터에 등록된 회원의 수를 표시하기 위해서
                                 long counter = snapshot

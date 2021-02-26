@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     // constant
     private static final String CLASS_NAME = "[Ac] MainActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private ImageView log;
@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
         this.log.setVisibility(ImageView.VISIBLE);
         this.log.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein));
 
+        SettingsManager.displayAllSettingsValue(this);
+
         // [lv/C]MoveEnrollActivity : 6초 후 EnrollActivity 이동
         MoveActivity move = new MoveActivity(getApplicationContext());
         move.start();
 
-        // [lv/C]MobileAds :
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
 
     } // End of method [onCreate]
 
@@ -66,23 +66,25 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
 
             final String METHOD_NAME = "[run] ";
-//
-//            Class targetActivity = null;
-//
-//            if (SettingsManager.checkIsKeptLoggedIn(MainActivity.this)) {
-//                targetActivity = NavHomeActivity.class;
-//            } else {
-//                targetActivity = LoginActivity.class;
-//            }
-//            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< targetActivity > 목표 = " + targetActivity);
 
+            Class nextActivity = null;
+
+            if (SettingsManager.checkIsFinishedInitialization(context)) {
+                // 초기화 완료
+                nextActivity = LoginActivity.class;
+            } else {
+                // 초기화 아직 안함
+                nextActivity = InitialInstallActivity.class;
+            }
+
+            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 선택된 클래스 > 이름 = " + nextActivity.getSimpleName());
             try {
 
                 // [method] : 3초 지연
                 sleep(2000);
 
                 // [lv/C]Intent : targetActivity 이동하는 intent 생성 및 이동
-                Intent intent = new Intent(this.context, LoginActivity.class);
+                Intent intent = new Intent(this.context, nextActivity);
                 finish();
                 startActivity(intent);
 

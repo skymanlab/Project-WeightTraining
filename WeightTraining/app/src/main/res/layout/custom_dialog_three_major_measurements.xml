@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundWhite"
@@ -40,85 +41,244 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/section_padding_start"
-        android:paddingEnd="@dimen/section_padding_end">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="2dp">
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/eland_choice_medium"
-            android:text="@string/custom_dialog_threeMajorMeasurements_squat" />
-
-        <EditText
-            android:id="@+id/custom_dialog_threeMajorMeasurements_squat"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-    </LinearLayout>
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:orientation="vertical">
 
-    <include
-        layout="@layout/include_dot_divider"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/custom_dialog_threeMajorMeasurements_squat" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/colorDividerBlack" />
+
+                <EditText
+                    android:id="@+id/custom_dialog_threeMajorMeasurements_squat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <include
+                layout="@layout/include_dot_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/custom_dialog_threeMajorMeasurements_deadlift" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/colorDividerBlack" />
+
+                <EditText
+                    android:id="@+id/custom_dialog_threeMajorMeasurements_deadlift"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+
+            <include
+                layout="@layout/include_dot_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/eland_choice_medium"
+                    android:text="@string/custom_dialog_threeMajorMeasurements_benchPress" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/colorDividerBlack" />
+
+                <EditText
+                    android:id="@+id/custom_dialog_threeMajorMeasurements_bench_press"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
-    <LinearLayout
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/section_padding_start"
-        android:paddingEnd="@dimen/section_padding_end">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/eland_choice_medium"
-            android:text="@string/custom_dialog_threeMajorMeasurements_deadlift" />
-
-        <EditText
-            android:id="@+id/custom_dialog_threeMajorMeasurements_deadlift"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-    </LinearLayout>
-
-    <include
-        layout="@layout/include_dot_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/section_padding_start"
-        android:paddingEnd="@dimen/section_padding_end">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/eland_choice_medium"
-            android:text="@string/custom_dialog_threeMajorMeasurements_benchPress" />
-
-        <EditText
-            android:id="@+id/custom_dialog_threeMajorMeasurements_bench_press"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-    </LinearLayout>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
 
-    <include
-        layout="@layout/include_dot_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingStart="@dimen/section_padding_start"-->
+    <!--        android:paddingEnd="@dimen/section_padding_end">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="80dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:fontFamily="@font/eland_choice_medium"-->
+    <!--            android:text="@string/custom_dialog_threeMajorMeasurements_squat" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/custom_dialog_threeMajorMeasurements_squat"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:inputType="numberDecimal" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    <include-->
+    <!--        layout="@layout/include_dot_divider"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="20dp"-->
+    <!--        android:layout_marginEnd="20dp" />-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingStart="@dimen/section_padding_start"-->
+    <!--        android:paddingEnd="@dimen/section_padding_end">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="80dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:fontFamily="@font/eland_choice_medium"-->
+    <!--            android:text="@string/custom_dialog_threeMajorMeasurements_deadlift" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/custom_dialog_threeMajorMeasurements_deadlift"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:inputType="numberDecimal" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    <include-->
+    <!--        layout="@layout/include_dot_divider"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="20dp"-->
+    <!--        android:layout_marginEnd="20dp" />-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingStart="@dimen/section_padding_start"-->
+    <!--        android:paddingEnd="@dimen/section_padding_end">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="80dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:fontFamily="@font/eland_choice_medium"-->
+    <!--            android:text="@string/custom_dialog_threeMajorMeasurements_benchPress" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/custom_dialog_threeMajorMeasurements_bench_press"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:inputType="numberDecimal" />-->
+    <!--    </LinearLayout>-->
+
+
+<!--    <include-->
+<!--        layout="@layout/include_dot_divider"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp" />-->
 </LinearLayout>

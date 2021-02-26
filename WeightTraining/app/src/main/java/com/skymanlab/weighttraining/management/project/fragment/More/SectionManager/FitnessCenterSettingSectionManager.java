@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +46,7 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
 
     // instance variable
     private Switch isAllowedAccessNotification;
-    private TextView backgroundLocationPermissionGrantedGo;
+    private MaterialCardView backgroundLocationPermissionGrantedGo;
     private Switch isDisclosed;
 
     // constructor
@@ -64,8 +65,8 @@ public class FitnessCenterSettingSectionManager extends FragmentSectionManager i
         // [ Switch | isAllowedAccessNotification ]
         this.isAllowedAccessNotification = (Switch) getView().findViewById(R.id.f_fitnessCenterSetting_isAllowedAccessNotification);
 
-        // [ TextView | backgroundLocationPermissionGrantedGo ]
-        this.backgroundLocationPermissionGrantedGo = (TextView) getView().findViewById(R.id.f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo);
+        // [ MaterialCardView | backgroundLocationPermissionGrantedGo ]
+        this.backgroundLocationPermissionGrantedGo = (MaterialCardView) getView().findViewById(R.id.f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo);
 
         // [ Switch | isDisclosed ]
         this.isDisclosed = (Switch) getView().findViewById(R.id.f_fitnessCenterSetting_isDisclosed);

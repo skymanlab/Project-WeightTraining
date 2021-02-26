@@ -250,13 +250,15 @@ public class GoogleMapSettingManager {
 
                 if (fitnessCenter != null) {
 
+                    int numberOfMember = getNumberOfRegisteredMembers(marker.getTitle());
+
                     // alertDialog 의 message
                     StringBuilder message = new StringBuilder()
                             .append("센터명 : ")
                             .append(fitnessCenter.getName())
                             .append("\n")
                             .append("회원 수 : ")
-                            .append(fitnessCenter.getMemberCounter())
+                            .append(numberOfMember)
                             .append(" 명")
                             .append("\n")
                             .append("주소 : ")
@@ -371,6 +373,22 @@ public class GoogleMapSettingManager {
         }
 
         return null;
+    }
+
+    private int getNumberOfRegisteredMembers(String markerTitle) {
+        final String METHOD_NAME = "[getNumberOfRegisteredMembers] ";
+
+        int dashIndex = markerTitle.indexOf("/");
+        int tagIndex = markerTitle.indexOf("명");
+
+        String number = markerTitle.substring(dashIndex + 1, tagIndex);
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< / 위치 > index = " + dashIndex);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 명 위치 > index = " + tagIndex);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 구한 숫자 > string = " + number);
+
+        return Integer.parseInt(number);
+
     }
 
 

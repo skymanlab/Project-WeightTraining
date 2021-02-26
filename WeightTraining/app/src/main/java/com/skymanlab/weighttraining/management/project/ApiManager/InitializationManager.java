@@ -57,8 +57,8 @@ public class InitializationManager {
             return;
         }
 
-        if (SettingsManager.checkIsInitialInstallation(context)) {
-            // 최초 설치 아님 -> 설정 userNumber 와 isSavedBaseEvent 의 값에 따른 설정값 재등록
+        if (SettingsManager.checkIsFinishedInitialization(context)) {
+            // 초기화 완료 -> 설정 userNumber 와 isSavedBaseEvent 의 값에 따른 설정값 재등록
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 최초 설치 > 최초 설치가 아닙니다.");
 
             // userNumber
@@ -68,7 +68,7 @@ public class InitializationManager {
             checkSettingOfIsSavedBaseEvent(context, firebaseUser.getUid());
 
         } else {
-            // 최초 설치 완료 후 데이터 등록
+            // 최초 설치 완료 후 초기화 작업하기
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 최초 설치 > 최초 설치후 기본 데이터를 저장합니다.");
 
             // 경로(user/uid) 에 유저 정보 저장 -> userNumber 등록 -> 경로(event/uid) 에 기존 종목 데이터 저장 -> isSavedBaseEvent 를 true 로 변경 -> isInitialInstallation 을 true 로 변경
@@ -217,7 +217,7 @@ public class InitializationManager {
                                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< isSavedBaseEvent > 기본 종목 데이터가 저장되었고 그에 따라 설정에 isSavedBaseEvent 도 true 로 변경하였습니다.");
 
                                             // 설정의 isInitialInstallation 항목을 false 에서 true 로 변경
-                                            SettingsManager.setIsInitialInstallation(context, true);
+                                            SettingsManager.setIsFinishedInitialization(context, true);
                                             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< isInitialInstallation > 최초 설치에 따른 기본 데이터를 모두 저장하였습니다. 그에 따라 설정 isInitialInstallation 도 true 로 변경하였습니다.");
                                         }
                                     });
@@ -226,11 +226,17 @@ public class InitializationManager {
                             if (!SettingsManager.checkIsSavedBaseEvent(context)) {
                                 // isSavedBaseEvent = true
                                 SettingsManager.setIsSavedBaseEvent(context, true);
-                                // isInitialInstallation = true
-                                SettingsManager.setIsInitialInstallation(context, true);
+
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Boolean > Setting 에 isSavedBaseEvent, isInitialInstallation 을 true 로 변경");
                             }
+
+                            if (!SettingsManager.checkIsFinishedInitialization(context)) {
+                                // isInitialInstallation = true
+                                SettingsManager.setIsFinishedInitialization(context, true);
+                            }
                         }
+
+
                     }
                 }
             }

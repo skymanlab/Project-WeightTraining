@@ -2,29 +2,20 @@ package com.skymanlab.weighttraining.management.project.ApiManager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.auth.GoogleAuthException;
-import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.internal.ApiExceptionMapper;
-import com.google.android.gms.common.api.internal.GoogleApiManager;
-import com.google.android.gms.common.internal.ApiExceptionUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -34,20 +25,30 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.skymanlab.weighttraining.HomeActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.LoginActivity;
 import com.skymanlab.weighttraining.NavHomeActivity;
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.FitnessCenter.data.FitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
+import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
+import com.skymanlab.weighttraining.management.user.data.User;
+import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 
-import javax.net.ssl.SNIHostName;
+import java.util.HashMap;
+import java.util.Iterator;
+
 
 public class AuthenticationManager {
 
     // constant
     private static final String CLASS_NAME = AuthenticationManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
     // constant
     public static final int RC_SIGN_IN = 9000;
 
@@ -204,7 +205,7 @@ public class AuthenticationManager {
         activity.startActivityForResult(signInIntent, RC_SIGN_IN);
 
         // SharedPreference 에 해당 설정 저장하기
-        SettingsManager.setIsKeptLoggedIn(activity, isKeepLoggedIn );
+        SettingsManager.setIsKeptLoggedIn(activity, isKeepLoggedIn);
 
     } // End of method [singIn]
 
@@ -277,7 +278,8 @@ public class AuthenticationManager {
     /**
      * [method] App withdraw : Firebase 에 등록된 사용자를 삭제한다.
      */
-    public static void showDialogOfWithdraw(Activity activity) {
+    public static void showDialogOfWithdraw(Activity activity, FragmentManager fragmentManager) {
+        final String METHOD_NAME = "[showDialogOfWithdraw] ";
 
         // [lv/C]AlertDialog : Builder 객체 생성 / 초기 설정
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -287,27 +289,145 @@ public class AuthenticationManager {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        // [lv/C]FirebaseUser :
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+                        // Firebase Realtime Database 의 모든 데이터 삭제
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                        reference.child(FirebaseConstants.DATABASE_FIRST_NODE_USER)
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                // [check 1] : task 의 성공여부를 받는다.
-                                if (task.isSuccessful()) {
+                                        String myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                                    // [lv/C]Snackbar : 탈퇴 완료 메시지
-                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), "탈퇴가 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
+                                        HashMap<String, Object> deleteMyAllData = new HashMap<>();
 
-                                    // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
-                                    Intent intent = new Intent(activity, LoginActivity.class);
-                                    activity.finish();
-                                    activity.startActivity(intent);
+                                        UserFitnessCenter userFitnessCenter = snapshot.child(myUID)
+                                                .child(User.FITNESS_CENTER)
+                                                .getValue(UserFitnessCenter.class);
 
-                                    dialog.dismiss();
-                                } // [check 1]
-                            }
-                        });
+                                        if (userFitnessCenter != null) {
+
+                                            // ================================= 1. fitnessCenter : 내가 등록한 피트니스 센터에 회원 리스트에 있는 나의 정보 삭제 =================================
+                                            // 경로 : fitnessCenter/주소1/주소2/주소3/memberList/나의memberNumber
+                                            StringBuilder fitnessCenterPath = new StringBuilder()
+                                                    .append(FirebaseConstants.DATABASE_FIRST_NODE_FITNESS_CENTER)
+                                                    .append("/")
+                                                    .append(userFitnessCenter.getFirstAddress())
+                                                    .append("/")
+                                                    .append(userFitnessCenter.getSecondAddress())
+                                                    .append("/")
+                                                    .append(userFitnessCenter.getThirdAddress())
+                                                    .append("/")
+                                                    .append(FitnessCenter.MEMBER_LIST)
+                                                    .append("/")
+                                                    .append(userFitnessCenter.getMemberNumber());
+
+                                            // 삭제할 경로에 null
+                                            deleteMyAllData.put(fitnessCenterPath.toString(), null);
+
+                                        }
+
+                                        // ================================= 2. event : 나의 uid 로 저장된 event 를 삭제 =================================
+                                        // 경로 : event/나의Uid
+                                        StringBuilder eventPath = new StringBuilder()
+                                                .append(FirebaseConstants.DATABASE_FIRST_NODE_EVENT)
+                                                .append("/")
+                                                .append(myUID);
+
+                                        deleteMyAllData.put(eventPath.toString(), null);
+
+                                        // ================================= 3. program : 나의 uid 로 저장된 나의 프로그램을 삭제 =================================
+                                        // 경로 : program/나의Uid
+                                        StringBuilder programPath = new StringBuilder()
+                                                .append(FirebaseConstants.DATABASE_FIRST_NODE_PROGRAM)
+                                                .append("/")
+                                                .append(myUID);
+
+                                        deleteMyAllData.put(programPath.toString(), null);
+
+                                        // ================================= 4. user : 나의 uid 로 저장된 개인 정보 삭제 =================================
+                                        // 경로 : user/나의Uid
+                                        StringBuilder userPath = new StringBuilder()
+                                                .append(FirebaseConstants.DATABASE_FIRST_NODE_USER)
+                                                .append("/")
+                                                .append(myUID);
+
+                                        deleteMyAllData.put(userPath.toString(), null);
+
+
+                                        Iterator iterator = deleteMyAllData.keySet().iterator();
+
+                                        while (iterator.hasNext()) {
+                                            LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 경로 > = " + iterator.next());
+                                        }
+
+
+                                        // 데이터베이스에서 삭제
+                                        reference.updateChildren(
+                                                deleteMyAllData,
+                                                new DatabaseReference.CompletionListener() {
+                                                    @Override
+                                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 삭제 중 > 모든 데이터 삭제 완료");
+
+                                                        if (error != null) {
+
+                                                            return;
+                                                        }
+
+                                                        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 탈퇴과정 > 탈퇴준비중");
+                                                        // [lv/C]FirebaseUser : Firebase 에서 개인 정보 사게
+                                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 탈퇴과정 > isCanceled = " + task.isCanceled());
+                                                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 탈퇴과정 > isComplete = " + task.isComplete());
+                                                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 탈퇴과정 > isSuccessful = " + task.isSuccessful());
+                                                                // [check 1] : task 의 성공여부를 받는다.
+                                                                if (task.isSuccessful()) {
+
+                                                                    LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 탈퇴과정 > 탈퇴 성공");
+                                                                    
+                                                                    // 설정값 초기화
+                                                                    SettingsManager.initSetting(activity);
+
+                                                                    // 사용자에게 모든 데이터가 삭제 완료 되었다고 알리기
+                                                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.etc_authentication_alert_withdraw_snack_database_remove_completion, Snackbar.LENGTH_INDEFINITE)
+                                                                            .setAction(
+                                                                                    R.string.etc_authentication_alert_withdraw_snack_database_remove_completion_action_button,
+                                                                                    new View.OnClickListener() {
+                                                                                        @Override
+                                                                                        public void onClick(View v) {
+
+                                                                                            // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
+                                                                                            Intent intent = new Intent(activity, LoginActivity.class);
+                                                                                            activity.finish();
+                                                                                            activity.startActivity(intent);
+
+                                                                                            // 다이어로그 종료
+                                                                                            dialog.dismiss();
+
+                                                                                        }
+                                                                                    }
+                                                                            )
+                                                                            .show();
+                                                                } // [check 1]
+                                                            }
+                                                        });
+
+                                                    }
+                                                }
+                                        );
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
 
                     }
                 })

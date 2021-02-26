@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import com.skymanlab.weighttraining.management.developer.LogManager;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.dialog.ThreeMajorMeasurementsDialog;
+import com.skymanlab.weighttraining.management.project.fragment.More.dialog.TrainingLevelDialog;
 import com.skymanlab.weighttraining.management.user.data.User;
 import com.skymanlab.weighttraining.management.user.data.UserTraining;
 
@@ -28,6 +30,10 @@ public class UserTrainingInfoSectionManager extends FragmentSectionManager imple
 
     // instance variable
     private UserTraining myTraining;
+
+    // instance variable
+    private LinearLayout trainingLevelWrapper;
+    private TextView trainingLevel;
 
     // instance variable
     private LinearLayout threeMajorMeasurementsWrapper;
@@ -48,6 +54,14 @@ public class UserTrainingInfoSectionManager extends FragmentSectionManager imple
     @Override
     public void connectWidget() {
 
+
+        // [ LinearLayout | trainingLevelWrapper ]
+        this.trainingLevelWrapper = (LinearLayout) getView().findViewById(R.id.f_userTrainingInfo_trainingLevel_wrapper);
+
+        // [ TextView | trainingLevel ]
+        this.trainingLevel = (TextView) getView().findViewById(R.id.f_userTrainingInfo_trainingLevel);
+
+
         // [ LinearLayout | threeMajorMeasurementsWrapper ]
         this.threeMajorMeasurementsWrapper = (LinearLayout) getView().findViewById(R.id.f_userTrainingInfo_threeMajorMeasurements_wrapper);
 
@@ -67,6 +81,26 @@ public class UserTrainingInfoSectionManager extends FragmentSectionManager imple
         final String METHOD_NAME = "[initWidget] ";
 
         // wrapper click listener
+        trainingLevelWrapper.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TrainingLevelDialog dialog = new TrainingLevelDialog();
+
+                        dialog.setStyle(
+                                DialogFragment.STYLE_NO_TITLE,
+                                android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen
+                        );
+
+                        dialog.show(
+                                getFragment().getActivity().getSupportFragmentManager(),
+                                TrainingLevelDialog.class.getSimpleName()
+                        );
+                    }
+                }
+        );
+
+        // wrapper click listener
         threeMajorMeasurementsWrapper.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -74,20 +108,22 @@ public class UserTrainingInfoSectionManager extends FragmentSectionManager imple
 
                         ThreeMajorMeasurementsDialog dialog = new ThreeMajorMeasurementsDialog();
 
-                        getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                .add(
-                                        R.id.nav_home_content_wrapper,
-                                        dialog
-                                )
-                                .addToBackStack(null)
-                                .commit();
-
+                        dialog.setStyle(
+                                DialogFragment.STYLE_NO_TITLE,
+                                android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen
+                        );
+                        dialog.show(
+                                getFragment().getActivity().getSupportFragmentManager(),
+                                ThreeMajorMeasurementsDialog.class.getSimpleName()
+                        );
                     }
                 }
         );
 
         if (myTraining != null) {
+
+            // 트레이닝 레벨
+            trainingLevel.setText(myTraining.getLevel());
 
             // 스쿼트 측정 무게
             squat.setText(myTraining.getSquat() + " kg");
@@ -98,27 +134,42 @@ public class UserTrainingInfoSectionManager extends FragmentSectionManager imple
             // 벤치 프레스 측정 무게
             benchPress.setText(myTraining.getBenchPress() + " kg");
 
-            getFragment().getActivity().getSupportFragmentManager().setFragmentResultListener(
-                    User.TRAINING,
-                    getFragment(),
-                    new FragmentResultListener() {
-                        @Override
-                        public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-
-                            squat.setText(result.getInt(UserTraining.SQUAT) + " kg");
-
-                            deadLift.setText(result.getInt(UserTraining.DEADLIFT) + " kg");
-
-                            benchPress.setText(result.getInt(UserTraining.BENCH_PRESS) + " kg");
-
-                        }
-                    }
-            );
-
         } else {
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 나의 트레이닝 정보 > 아직 저장된 값이 없어요.");
         }
 
+
+        // TrainingLevelDialog 에서 보낸 데이터 확인
+        getFragment().getActivity().getSupportFragmentManager().setFragmentResultListener(
+                UserTraining.LEVEL,
+                getFragment(),
+                new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+
+                        trainingLevel.setText(result.getString(UserTraining.LEVEL));
+                    }
+                }
+        );
+
+
+        // ThreeMajorMeasurementsDialog 에서 보낸 데이터 확인
+        getFragment().getActivity().getSupportFragmentManager().setFragmentResultListener(
+                UserTraining.THREE_MAJOR_MEASUREMENTS,
+                getFragment(),
+                new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+
+                        squat.setText(result.getInt(UserTraining.SQUAT) + " kg");
+
+                        deadLift.setText(result.getInt(UserTraining.DEADLIFT) + " kg");
+
+                        benchPress.setText(result.getInt(UserTraining.BENCH_PRESS) + " kg");
+
+                    }
+                }
+        );
     }
 
 }

@@ -48,6 +48,11 @@
         <item>9</item>
         <item>10</item>
     </string-array>
-    
+
+    <string-array name="trainingLevel">
+        <item>초급자</item>
+        <item>중급자</item>
+        <item>상급자</item>
+    </string-array>
 
 </resources>

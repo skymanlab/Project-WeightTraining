@@ -16,29 +16,29 @@ public class SettingsManager {
 
     // constant
     private static final String CLASS_NAME = SettingsManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= is initial installation =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    public static boolean checkIsInitialInstallation(Context context) {
-        final String METHOD_NAME = "[checkIsInitialInstallation]";
+    public static boolean checkIsFinishedInitialization(Context context) {
+        final String METHOD_NAME = "[checkIsFinishedInitialization]";
 
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(
-                        context.getString(R.string.preference_key_is_initial_installation),
+                        context.getString(R.string.preference_key_isFinishedInitialization),
                         false
                 );
 
     }
 
-    public static void setIsInitialInstallation(Context context, boolean isInitialInstallation) {
-        final String METHOD_NAME = "[setIsInitialInstallation] ";
+    public static void setIsFinishedInitialization(Context context, boolean isFinishedInitialization) {
+        final String METHOD_NAME = "[setIsFinishedInitialization] ";
 
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(
-                        context.getString(R.string.preference_key_is_initial_installation),
-                        isInitialInstallation
+                        context.getString(R.string.preference_key_isFinishedInitialization),
+                        isFinishedInitialization
                 )
                 .commit();
     }
@@ -169,18 +169,18 @@ public class SettingsManager {
     public static void displayAllSettingsValue(Context context) {
         final String METHOD_NAME = "[displayAllSettingsValue] ";
 
-        // isInitialAuthentication : 최초 인증이냐? / true or false
+        // isFinishedInitialization : 초기화가 완료 되었냐? / true or false
         // userNumber : 유저 번호 / number
         // versionInfo : 버전 정보 /
         // isSavedBaseEvent : 기본 종목이 저장 되었냐? / true or false
         // isKeptLoggedIn : 로그인을 유지할 거냐? / true or false
         // isGrantedLocationPermission : 위치 권한을 승인 했냐? / true or false
         // isGrantedBackgroundLocationPermission : 백그라운드 위치 권한을 승인 했냐? / true or false
-        // isEnabledFitnessCenterGeofencing : 피트니스 센터 지오펜싱을 활성화 했냐? / true or fasle
-        // isDisclosedFitnessCenter : 피트니스 센터를 공개할 거냐? / true or false
+        // isAllowedAccessNotification : 피트니스 센터 지오펜싱을 활성화 했냐? / true or fasle
+        // isDisclosed : 피트니스 센터를 공개할 거냐? / true or false
 
-        boolean isInitialInstallation = PreferenceManager.getDefaultSharedPreferences(context).
-                getBoolean(context.getString(R.string.preference_key_is_initial_installation), false);
+        boolean isFinishedInitialization = PreferenceManager.getDefaultSharedPreferences(context).
+                getBoolean(context.getString(R.string.preference_key_isFinishedInitialization), false);
         int userNumber = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(context.getString(R.string.preference_key_user_number), 0);
         boolean isSavedBaseEvent = PreferenceManager.getDefaultSharedPreferences(context)
@@ -191,20 +191,22 @@ public class SettingsManager {
                 .getBoolean(context.getString(R.string.preference_key_is_granted_location_permission), false);
         boolean isGrantedBackgroundLocationPermission = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(context.getString(R.string.preference_key_is_granted_background_location_permission), false);
-        boolean isEnabledFitnessCenterGeofencing = PreferenceManager.getDefaultSharedPreferences(context)
+        boolean isAllowedAccessNotification = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(context.getString(R.string.preference_key_is_allowed_access_notification), false);
-        boolean isDisclosedFitnessCenter = PreferenceManager.getDefaultSharedPreferences(context)
+        boolean isDisclosed = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(context.getString(R.string.preference_key_is_disclosed), false);
 
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isInitialInstallation = " + isInitialInstallation);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isFinishedInitialization = " + isFinishedInitialization);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< int > userNumber = " + userNumber);
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isSavedBaseEvent = " + isSavedBaseEvent);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isKeptLoggedIn = " + isKeptLoggedIn);
+
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isGrantedLocationPermission = " + isGrantedLocationPermission);
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isGrantedBackgroundLocationPermission = " + isGrantedBackgroundLocationPermission);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isEnabledFitnessCenterGeofencing = " + isEnabledFitnessCenterGeofencing);
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isDisclosedFitnessCenter = " + isDisclosedFitnessCenter);
+
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isAllowedAccessNotification = " + isAllowedAccessNotification);
+        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< boolean > isDisclosed = " + isDisclosed);
 
     }
 
@@ -214,9 +216,9 @@ public class SettingsManager {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
                 .edit();
 
-        // is initial installation
+        // is finished initialization
         editor.putBoolean(
-                context.getString(R.string.preference_key_is_initial_installation),
+                context.getString(R.string.preference_key_isFinishedInitialization),
                 false
         );
 
@@ -250,13 +252,13 @@ public class SettingsManager {
                 false
         );
 
-        // is enabled fitness center geofencing
+        // is allowed access notification
         editor.putBoolean(
                 context.getString(R.string.preference_key_is_allowed_access_notification),
                 false
         );
 
-        // is disclosed fitness center
+        // is disclosed
         editor.putBoolean(
                 context.getString(R.string.preference_key_is_disclosed),
                 false

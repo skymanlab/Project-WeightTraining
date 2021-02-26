@@ -6,8 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,19 +28,17 @@ import com.skymanlab.weighttraining.management.user.data.UserTraining;
 
 import java.util.HashMap;
 
-public class ThreeMajorMeasurementsDialog extends DialogFragment implements FragmentSectionInitializable {
+public class TrainingLevelDialog extends DialogFragment implements FragmentSectionInitializable {
 
     // instance variable
     private ImageView cancel;
     private TextView register;
-    private EditText squat;
-    private EditText deadlift;
-    private EditText benchPress;
+    private Spinner trainingLevel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.custom_dialog_three_major_measurements, container, false);
+        return inflater.inflate(R.layout.custom_dialog_training_level, container, false);
     }
 
     @Override
@@ -49,7 +48,6 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
         connectWidget();
 
         initWidget();
-
     }
 
     @NonNull
@@ -57,36 +55,33 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        return dialog;
 
+        return dialog;
     }
 
     @Override
     public void connectWidget() {
 
         // [ ImageView | cancel ]
-        this.cancel = (ImageView) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_button_cancel);
+        this.cancel = (ImageView) getView().findViewById(R.id.custom_dialog_trainingLevel_button_cancel);
 
         // [ TextView | register ]
-        this.register = (TextView) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_button_register);
+        this.register = (TextView) getView().findViewById(R.id.custom_dialog_trainingLevel_button_register);
 
-        // [ EditText | squat ]
-        this.squat = (EditText) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_squat);
-
-        // [ EditText | deadlift ]
-        this.deadlift = (EditText) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_deadlift);
-
-        // [ EditText | benchPress ]
-        this.benchPress = (EditText) getView().findViewById(R.id.custom_dialog_threeMajorMeasurements_bench_press);
+        // [ Spinner | trainingLevel ]
+        this.trainingLevel = (Spinner) getView().findViewById(R.id.custom_dialog_trainingLevel_level);
     }
 
     @Override
     public void initWidget() {
 
+        // spinner
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.trainingLevel, android.R.layout.simple_spinner_dropdown_item);
+        trainingLevel.setAdapter(adapter);
+
         // click listener
-        cancel.setOnClickListener(
+        this.cancel.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -96,23 +91,17 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
         );
 
         // click listener
-        register.setOnClickListener(
+        this.register.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        if (!squat.getText().toString().equals("")
-                                && !deadlift.getText().toString().equals("")
-                                && !benchPress.getText().toString().equals("")) {
+                        if (!trainingLevel.getSelectedItem().toString().equals("")) {
 
-                            int squatValue = Integer.parseInt(squat.getText().toString());
-                            int deadliftValue = Integer.parseInt(deadlift.getText().toString());
-                            int benchPressValue = Integer.parseInt(benchPress.getText().toString());
+                            String level = trainingLevel.getSelectedItem().toString();
 
                             HashMap<String, Object> saveData = new HashMap<>();
-                            saveData.put(UserTraining.SQUAT, squatValue);
-                            saveData.put(UserTraining.DEADLIFT, deadliftValue);
-                            saveData.put(UserTraining.BENCH_PRESS, benchPressValue);
+                            saveData.put(UserTraining.LEVEL, level);
 
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                             reference.child(FirebaseConstants.DATABASE_FIRST_NODE_USER)
@@ -130,11 +119,9 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
                                                     }
 
                                                     Bundle args = new Bundle();
-                                                    args.putInt(UserTraining.SQUAT, squatValue);
-                                                    args.putInt(UserTraining.DEADLIFT, deadliftValue);
-                                                    args.putInt(UserTraining.BENCH_PRESS, benchPressValue);
+                                                    args.putString(UserTraining.LEVEL, level);
 
-                                                    getActivity().getSupportFragmentManager().setFragmentResult(UserTraining.THREE_MAJOR_MEASUREMENTS, args);
+                                                    getActivity().getSupportFragmentManager().setFragmentResult(UserTraining.LEVEL, args);
 
                                                     dismiss();
                                                 }
@@ -142,13 +129,13 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
                                     );
 
                         } else {
-                            Snackbar.make(getView(), R.string.custom_dialog_threeMajorMeasurements_snack_no_input, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(getView(), R.string.custom_dialog_trainingLevel_snack_noSelect, Snackbar.LENGTH_SHORT).show();
                         }
+
 
                     }
                 }
         );
 
     }
-
 }

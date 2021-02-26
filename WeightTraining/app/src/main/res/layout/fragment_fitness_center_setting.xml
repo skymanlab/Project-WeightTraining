@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,15 +27,25 @@
         android:text="@string/f_fitnessCenterSetting_isAllowedAccessNotification"
         android:textSize="@dimen/text_sub_title_size" />
 
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:visibility="gone"
-        android:fontFamily="@font/eland_choice_light"
-        android:text="@string/f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo" />
+        android:background="?attr/selectableItemBackground"
+        app:cardCornerRadius="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/right"
+            android:fontFamily="@font/eland_choice_light"
+            android:padding="7dp"
+            android:text="@string/f_fitnessCenterSetting_isAllowedAccessNotification_neededReasonOfBackground" />
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <include
         layout="@layout/include_dot_divider"
