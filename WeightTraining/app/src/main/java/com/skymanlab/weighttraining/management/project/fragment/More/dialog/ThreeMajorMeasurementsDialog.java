@@ -57,10 +57,9 @@ public class ThreeMajorMeasurementsDialog extends DialogFragment implements Frag
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        return dialog;
 
+        return dialog;
     }
 
     @Override

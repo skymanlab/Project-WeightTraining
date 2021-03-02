@@ -47,9 +47,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> <!-- Broadcast Receiver : fitness center geofence -->
+
         <receiver
             android:name=".management.project.ApiManager.FitnessCenterGeofencingBroadcastReceiver"
             android:exported="true" />
+
     </application>
 
 </manifest>

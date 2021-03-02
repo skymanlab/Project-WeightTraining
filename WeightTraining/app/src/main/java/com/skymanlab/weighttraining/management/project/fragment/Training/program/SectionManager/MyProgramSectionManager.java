@@ -76,7 +76,6 @@ public class MyProgramSectionManager extends FragmentSectionManager implements F
             // progressBar : INVISIBLE
             progressBar.setVisibility(View.INVISIBLE);
 
-            return;
         }
 
         // 데이터베이스에서 program 리스트 가져오기

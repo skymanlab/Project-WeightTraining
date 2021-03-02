@@ -103,29 +103,28 @@
     <string name="f_notice_"></string>
 
     <!-- Fragment : fitness center -->
-    <string name="f_fitness_center_title">피트니스 센터</string>
-    <string name="f_fitness_center_go_register"></string>
-    <string name="f_fitness_center_name">피트니스 센터를</string>
-    <string name="f_fitness_center_address">등록해주세요.</string>
-    <string name="f_fitness_center_member_number">회원 번호</string>
-    <string name="f_fitness_center_member_number_default">피트니스 센터 회원 번호입니다.</string>
-    <string name="f_fitness_center_info">등록 정보</string>
-    <string name="f_fitness_center_contract_date">등록일</string>
-    <string name="f_fitness_center_contract_date_default">피트니스 센터에 등록한 날짜입니다.</string>
-    <string name="f_fitness_center_expiry_date">만료일</string>
-    <string name="f_fitness_center_expiry_date_default">피트니스 센터 등록 마지막 날입니다.</string>
-    <string name="f_fitness_center_attendance_date_count">출석일수</string>
-    <string name="f_fitness_center_attendance_date_count_default">피트니스 센터에서 출석한 일 수입니다.</string>
-    <string name="f_fitness_center_setting_info_title">피트니스 센터 설정 정보</string>
-    <string name="f_fitness_center_setting_info_is_allowed_access_notification">접근 알림</string>
-    <string name="f_fitness_center_setting_info_is_allowed_access_notification_default">피트니스 센터에 접근여부를 알림으로 알려줄지에 대한 설정값입니다.</string>
-    <string name="f_fitness_center_setting_info_is_allowed_access_notification_true">실행 중</string>
-    <string name="f_fitness_center_setting_info_is_allowed_access_notification_false">중지</string>
-    <string name="f_fitness_center_setting_info_is_disclosed">공개 여부</string>
-    <string name="f_fitness_center_setting_info_is_disclosed_default">다른 사람에게 피트니스 센터 등록 공개 여부에 대한 설정입니다.</string>
-    <string name="f_fitness_center_setting_info_is_disclosed_true">공개</string>
-    <string name="f_fitness_center_setting_info_is_disclosed_false">비공개</string>
-    <string name="f_fitness_center_"></string>
+    <string name="f_fitnessCenter_title">피트니스 센터</string>
+    <string name="f_fitnessCenter_name">피트니스 센터를</string>
+    <string name="f_fitnessCenter_address">등록해주세요.</string>
+    <string name="f_fitnessCenter_registeredInfo_title">등록 정보</string>
+    <string name="f_fitnessCenter_registeredInfo_memberNumber">회원 번호</string>
+    <string name="f_fitnessCenter_registeredInfo_memberNumber_default">피트니스 센터 회원 번호입니다.</string>
+    <string name="f_fitnessCenter_registeredInfo_contractDate">등록일</string>
+    <string name="f_fitnessCenter_registeredInfo_contractDate_default">피트니스 센터에 등록한 날짜입니다.</string>
+    <string name="f_fitnessCenter_registeredInfo_expiryDate">만료일</string>
+    <string name="f_fitnessCenter_registeredInfo_expiryDate_default">피트니스 센터 등록 마지막 날입니다.</string>
+    <string name="f_fitnessCenter_registeredInfo_attendanceDateCount">출석일수</string>
+    <string name="f_fitnessCenter_registeredInfo_attendanceDateCount_default">피트니스 센터에서 출석한 일 수입니다.</string>
+    <string name="f_fitnessCenter_settingInfo_title">설정 정보</string>
+    <string name="f_fitnessCenter_settingInfo_isAllowedAccessNotification">접근 알림</string>
+    <string name="f_fitnessCenter_settingInfo_isAllowedAccessNotification_default">피트니스 센터에 접근여부를 알림으로 알려줄지에 대한 설정값입니다.</string>
+    <string name="f_fitnessCenter_settingInfo_isAllowedAccessNotification_true">실행 중</string>
+    <string name="f_fitnessCenter_settingInfo_isAllowedAccessNotification_false">중지</string>
+    <string name="f_fitnessCenter_settingInfo_isDisclosed">공개 여부</string>
+    <string name="f_fitnessCenter_settingInfo_isDisclosed_default">다른 사람에게 피트니스 센터 등록 공개 여부에 대한 설정입니다.</string>
+    <string name="f_fitnessCenter_settingInfo_isDisclosed_true">공개</string>
+    <string name="f_fitnessCenter_settingInfo_isDisclosed_false">비공개</string>
+    <string name="f_fitnessCenter_"></string>
 
     <!-- Fragment : fitness center search -->
     <string name="f_fitness_center_search_title">피트니스 센터 검색</string>
@@ -159,24 +158,28 @@
     <string name="f_fitness_center_register_snack_save_complete">데이터 저장이 완료되었습니다.</string>
     <string name="f_fitness_center_register_"></string>
 
-    <!-- Fragment : fitness center register info -->
-    <string name="f_fitness_center_register_info_title">등록 정보</string>
-    <string name="f_fitness_center_register_info_attendance_date">출석 날짜</string>
-    <string name="f_fitness_center_register_info_attendance_date_contract_date_describe">: 등록일</string>
-    <string name="f_fitness_center_register_info_attendance_date_expiry_date_describe">: 만료일</string>
-    <string name="f_fitness_center_register_info_attendance_date_date_checker_describe">: 출석일</string>
-    <string name="f_fitness_center_register_info_"></string>
+    <!-- Fragment : fitness center registered info -->
+    <string name="f_fitnessCenterRegisteredInfo_title">등록 정보</string>
+    <string name="f_fitnessCenterRegisteredInfo_contractDate">등록일</string>
+    <string name="f_fitnessCenterRegisteredInfo_expiryDate">만료일</string>
+    <string name="f_fitnessCenterRegisteredInfo_snack_noChangedData">변경된 데이터가 없습니다.</string>
+    <string name="f_fitnessCenterRegisteredInfo_snack_modificationComplete">날짜 수정이 완료되었습니다.</string>
+    <string name="f_fitnessCenterRegisteredInfo_registerCancel">등록취소</string>
+    <string name="f_fitnessCenterRegisteredInfo_alert_registerCancel_title">등록을 취소하시겠습니까?</string>
+    <string name="f_fitnessCenterRegisteredInfo_alert_registerCancel_message">내가 등록한 피트니스 센터에 대한 모든 정보를 삭제합니다.</string>
+    <string name="f_fitnessCenterRegisteredInfo_alert_registerCancel_button_positive">확인</string>
+    <string name="f_fitnessCenterRegisteredInfo_alert_registerCancel_button_negative">취소</string>
+    <string name="f_fitnessCenterRegisteredInfo_snack_registerCancelComplete">피트니스 센터 등록 취소를 완료하였습니다.</string>
+    <string name="f_fitnessCenterRegisteredInfo_snack_registerCancelComplete_databaseError">데이터베이스 에러로 등록 취소를 하지 못했습니다.</string>
+    <string name="f_fitnessCenterRegisteredInfo_"></string>
 
-    <!-- Fragment : fitness center setting -->
-    <string name="f_fitnessCenterSetting_title">피트니스 센터 설정</string>
-    <string name="f_fitnessCenterSetting_isAllowedAccessNotification">피트니스 센터 접근 알림</string>
-    <string name="f_fitnessCenterSetting_isAllowedAccessNotification_neededReasonOfBackground">피트니스 센터 접근 알림 서비스를 이용하기 위해서는 백그라운드 위치 권한이 필요합니다.</string>
-    <string name="f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo">백그라운 위치 권한 승인하기</string>
-    <string name="f_fitnessCenterSetting_isAllowedAccessNotification_grantedGo_describe_to_user"></string>
-    <string name="f_fitnessCenterSetting_isDisclosed">피트니스 센터 공개</string>
-    <string name="f_fitnessCenterSetting_alert_title"></string>
-    <string name="f_fitnessCenterSetting_alert_"></string>
-    <string name="f_fitnessCenterSetting_"></string>
+    <!-- Fragment : fitness center setting info -->
+    <string name="f_fitnessCenterSettingInfo_title">피트니스 센터 설정</string>
+    <string name="f_fitnessCenterSettingInfo_isAllowedAccessNotification">피트니스 센터 접근 알림</string>
+    <string name="f_fitnessCenterSettingInfo_isAllowedAccessNotification_neededReasonOfBackground">피트니스 센터 접근 알림 서비스를 이용하기 위해서는 백그라운드 위치 권한이 필요합니다.</string>
+    <string name="f_fitnessCenterSettingInfo_isAllowedAccessNotification_grantedGo">백그라운 위치 권한 승인하기</string>
+    <string name="f_fitnessCenterSettingInfo_isDisclosed">피트니스 센터 공개</string>
+    <string name="f_fitnessCenterSettingInfo_"></string>
 
     <!-- Fragment : setting -->
     <string name="f_setting_title">환경설정</string>
@@ -417,6 +420,13 @@
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ custom dialog +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
+    <!-- Custom dialog : attendance date -->
+    <string name="custom_dialog_attendance_title">출석부</string>
+    <string name="custom_dialog_attendance_attendanceDate">출석일</string>
+    <string name="custom_dialog_attendance_contractDate">등록일</string>
+    <string name="custom_dialog_attendance_expiryDate">만료일</string>
+    <string name="custom_dialog_attendance_"></string>
+
     <!-- Custom dialog : three major measurements -->
     <string name="custom_dialog_threeMajorMeasurements_title">3대 측정 입력</string>
     <string name="custom_dialog_threeMajorMeasurements_button_register">등록</string>
@@ -425,7 +435,6 @@
     <string name="custom_dialog_threeMajorMeasurements_benchPress">벤치 프레스</string>
     <string name="custom_dialog_threeMajorMeasurements_snack_no_input">모든 값을 입력해주세요.</string>
     <string name="custom_dialog_threeMajorMeasurements_"></string>
-
 
     <!-- Custom dialog : training level -->
     <string name="custom_dialog_trainingLevel_title">트레이닝 레벨</string>
@@ -544,14 +553,6 @@
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ preference +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-    <!-- Preference : title -->
-    <string name="title_activity_settings">SettingsActivity</string>
-
-    <!-- Preference : category title -->
-    <string name="preference_category_app">어플</string>
-    <string name="preference_category_location">위치</string>
-
     <!-- Preference : key -->
     <string name="preference_key_isFinishedInitialization">isFinishedInitialization</string>
     <string name="preference_key_user_number">userNumber</string>
@@ -564,9 +565,16 @@
     <string name="preference_key_is_disclosed">isDisclosed</string>
     <string name="preference_key_"></string>
 
+    <!-- Preference : title -->
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference : category title -->
+    <string name="preference_category_app">어플</string>
+    <string name="preference_category_location">위치</string>
+
     <!-- Preference : category item -->
     <string name="preference_category_app_version_info_title">버전 정보</string>
-    <string name="preference_category_app_version_info_summary">현재 최신 버전은 ⓥ 0.1 입니다.</string>
+    <string name="preference_category_app_version_info_summary">현재 최신 버전은 ⓥ 1.0 입니다.</string>
     <string name="preference_category_app_basic_event_data_title">기본 데이터 등록</string>
     <string name="preference_category_app_basic_event_data_summary_one">아직 기본 데이터가 등록되지 않았습니다.</string>
     <string name="preference_category_app_basic_event_data_summary_two">기본 데이터 등록이 완료되었습니다.</string>
@@ -592,14 +600,6 @@
     <string name="preference_category_notification_fitness_center_geofencing_summary_no_register">피트니스 센터가 등록되어 있지 않습니다.</string>
     <string name="preference_category_notification_fitness_center_geofencing_summary_on_register">피스트니 센터에 접근 알림을 알려주지 않습니다.</string>
     <string name="preference_category_notification_fitness_center_geofencing_summary_off_register">피스트니 센터에 접근하면 알림으로 알려줍니다.</string>
-
-    <string name="preference_category_"></string>
-
-    <!-- Preference, AlertDialog : base event data save -->
-    <string name="preference_alert_base_event_data_save_title">기본 데이터를 저장하겠습니까?</string>
-    <string name="preference_alert_base_event_data_save_message">데이터베이스에 기본 종목 데이터를 저장합니다.</string>
-    <string name="preference_alert_base_event_data_save_bt_positive">저장</string>
-    <string name="preference_alert_base_event_data_save_bt_negative">취소</string>
 
 
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++ etc +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -673,7 +673,7 @@
     <string name="etc_permissionManager_alert_neededReasonOfBackgroundPermission_buttonPositive"></string>
     <string name="etc_permissionManager_alert_neededReasonOfBackgroundPermission_buttonNegative"></string>
 
-    <!-- GoogleMapManager -->
+    <!-- GoogleMapSettingManager -->
     <string name="etc_google_map_manager_snack_notAccessNetwork">네트워크 연결이 되지 않았습니다.</string>
     <string name="etc_google_map_manager_alert_marker_title">피트니스 센터를 등록하시겠습니까?</string>
     <string name="etc_google_map_manager_alert_marker_message"></string>
@@ -696,12 +696,12 @@
     <!-- FitnessCenterMarkerManager -->
     <string name="etc_fitness_center_marker_manager_snack_fitnessCenterArrayList_not_zero_size">해당 지역의 피트니스 센터를 표시하였습니다.</string>
 
-    <!-- FitnessCenterGeofencingService -->
-    <string name="etc_fitness_center_geofencing_notification_title">피트니스 센터 알림</string>
-    <string name="etc_fitness_center_geofencing_transition_type_dwell">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
-    <string name="etc_fitness_center_geofencing_transition_type_enter">등록된 피트니스 센터에 오셨습니다. 운동하러 오셨나요?</string>
-    <string name="etc_fitness_center_geofencing_transition_type_exit">운동을 끝내고 가시나요?</string>
-    <string name="etc_fitness_center_geofencing_transition_type_default"></string>
+    <!-- FitnessCenterGeofencingBroadcastReceiver -->
+    <string name="etc_FitnessCenterGeofencingBroadcastReceiver_notification_title">피트니스 센터 알림</string>
+    <string name="etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_dwell">운동하러 오셨나요? 당신의 활동 상태를 다른 회원들에게 알려주세요.</string>
+    <string name="etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_enter">운동하러 오셨나요? 당신의 활동 상태를 다른 회원들에게 알려주세요.</string>
+    <string name="etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_exit">운동을 끝내고 가시나요? 퇴장 상태로 변경해주셨나요?</string>
+    <string name="etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_default"></string>
 
     <!-- FitnessCenterGeofencingManager -->
     <string name="etc_fitnessCenterGeofencingManager_addGeofence_success">피트니스 센터 접근 알림을 시작합니다.</string>

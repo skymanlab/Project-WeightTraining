@@ -5,17 +5,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.skymanlab.weighttraining.R;
-import com.skymanlab.weighttraining.SettingsActivity;
-import com.skymanlab.weighttraining.management.notice.Notice;
-import com.skymanlab.weighttraining.management.project.ApiManager.NoticeManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSettingFragment;
+import com.skymanlab.weighttraining.management.project.ApiManager.NetworkStateChecker;
 import com.skymanlab.weighttraining.management.project.fragment.More.NoticeFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.SettingsFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.dialog.AttendanceDialog;
 import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
@@ -25,7 +26,6 @@ import com.skymanlab.weighttraining.management.project.ApiManager.SettingsManage
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.MoreFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.UserTrainingInfoFragment;
 import com.skymanlab.weighttraining.management.user.data.UserTraining;
@@ -47,7 +47,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private LinearLayout trainingCountWrapper;
     private TextView trainingCount;
     private MaterialCardView fitnessCenter;
-    private MaterialCardView target;
     private MaterialCardView setting;
     private MaterialCardView training;
     private MaterialButton notice;
@@ -82,9 +81,6 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
         // [ MaterialCardView | fitnessCenter ]
         this.fitnessCenter = (MaterialCardView) getView().findViewById(R.id.f_more_fitnessCenter);
-
-        // [ MaterialCardView | target ]
-        this.target = (MaterialCardView) getView().findViewById(R.id.f_more_target);
 
         // [ MaterialCardView | setting ]
         this.setting = (MaterialCardView) getView().findViewById(R.id.f_more_setting);
@@ -135,7 +131,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
                     // =========================================== training count ===========================================
                     // 운동 횟수 -> attendanceDateList 객체 : training count 관련 widget 들의 초기 내용을 설정한다.
-                    initWidgetOfTrainingCount(attendanceDateList.size());
+                    initWidgetOfTrainingCount(userFitnessCenter, attendanceDateList);
 
                 }
 
@@ -202,23 +198,15 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // [iv/C]Intent : SettingsActivity 로 이동하는
-                Intent intent = new Intent(getFragment().getActivity(), SettingsActivity.class);
-                getFragment().getActivity().startActivity(intent);
+                
+                // 설정화면(SettingsFragment) 로 이동
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_home_content_wrapper, new SettingsFragment())
+                        .addToBackStack(null)
+                        .commit();
 
             }
         });
-
-
-        // ================================================= target =================================================
-//        // click listener
-//        this.target.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
 
         // ------------------------------------------------- notice -------------------------------------------------
@@ -227,13 +215,11 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void onClick(View view) {
 
-//                // NoticeFragment 로 이동
-//                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.nav_home_content_wrapper, NoticeFragment.newInstance())
-//                        .addToBackStack(null)
-//                        .commit();
-
-                SettingsManager.displayAllSettingsValue(getFragment().getContext());
+                // NoticeFragment 로 이동
+                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_home_content_wrapper, NoticeFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
 
             }
         });
@@ -284,15 +270,26 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     /**
      * training count 와 관련된 widwget 들의 초기 내용을 설정한다.
      */
-    private void initWidgetOfTrainingCount(int count) {
+    private void initWidgetOfTrainingCount(UserFitnessCenter userFitnessCenter, ArrayList<Attendance> attendanceDateList) {
 
         // text :  피트니스 센터에 운동하러 간 일수를 표시한다.
-        this.trainingCount.setText(count + " 회");
+        this.trainingCount.setText(attendanceDateList.size() + " 회");
 
         // click listener
         this.trainingCountWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                AttendanceDialog dialog = AttendanceDialog.newInstance(userFitnessCenter, attendanceDateList);
+                dialog.setStyle(
+                        DialogFragment.STYLE_NO_TITLE,
+                        android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen
+                );
+
+                dialog.show(
+                        getFragment().getActivity().getSupportFragmentManager(),
+                        AttendanceDialog.class.getSimpleName()
+                );
 
             }
         });

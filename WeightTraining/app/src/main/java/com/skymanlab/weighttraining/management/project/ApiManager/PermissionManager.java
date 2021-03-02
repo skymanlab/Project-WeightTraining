@@ -54,7 +54,7 @@ public class PermissionManager {
             return;
 
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==========================================================================");
-        LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==========================================================================");
+
         // [check 1] Location Permission : 권한이 승인되었는지 확인
         if (PermissionUtil.hasPermissionList(activity, LOCATION_PERMISSION_LIST)) {       // 승인된 경우
 

@@ -394,16 +394,14 @@ public class FitnessCenterRegisterSectionManager extends FragmentSectionManager 
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
 
                                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< 데이터베이스 레퍼런스 > ref = " + ref);
-
-                                if (error != null)
-                                    return;
-
+                                // 사용자에게 알리기 : 등록 완료
                                 Snackbar.make(
                                         getFragment().getActivity().findViewById(R.id.nav_home_bottom_bar),
                                         R.string.f_fitness_center_register_snack_save_complete,
                                         Snackbar.LENGTH_SHORT
                                 ).show();
 
+                                // MoreFragment 로 다시 돌아가기
                                 getFragment().getActivity()
                                         .getSupportFragmentManager()
                                         .popBackStack(

@@ -48,7 +48,7 @@ public class AuthenticationManager {
 
     // constant
     private static final String CLASS_NAME = AuthenticationManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
     // constant
     public static final int RC_SIGN_IN = 9000;
 
@@ -392,26 +392,26 @@ public class AuthenticationManager {
                                                                     // 설정값 초기화
                                                                     SettingsManager.initSetting(activity);
 
-                                                                    // 사용자에게 모든 데이터가 삭제 완료 되었다고 알리기
-                                                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.etc_authentication_alert_withdraw_snack_database_remove_completion, Snackbar.LENGTH_INDEFINITE)
-                                                                            .setAction(
-                                                                                    R.string.etc_authentication_alert_withdraw_snack_database_remove_completion_action_button,
-                                                                                    new View.OnClickListener() {
-                                                                                        @Override
-                                                                                        public void onClick(View v) {
+                                                                    // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
+                                                                    Intent intent = new Intent(activity, LoginActivity.class);
+                                                                    activity.finish();
+                                                                    activity.startActivity(intent);
 
-                                                                                            // [lv/C]Intent : LoginActivity 로 이동하는 객체 생성
-                                                                                            Intent intent = new Intent(activity, LoginActivity.class);
-                                                                                            activity.finish();
-                                                                                            activity.startActivity(intent);
+                                                                    // 다이어로그 종료
+                                                                    dialog.dismiss();
 
-                                                                                            // 다이어로그 종료
-                                                                                            dialog.dismiss();
-
-                                                                                        }
-                                                                                    }
-                                                                            )
-                                                                            .show();
+//                                                                    // 사용자에게 모든 데이터가 삭제 완료 되었다고 알리기
+//                                                                    Snackbar.make(activity.findViewById(R.id.nav_home_bottom_bar), R.string.etc_authentication_alert_withdraw_snack_database_remove_completion, Snackbar.LENGTH_INDEFINITE)
+//                                                                            .setAction(
+//                                                                                    R.string.etc_authentication_alert_withdraw_snack_database_remove_completion_action_button,
+//                                                                                    new View.OnClickListener() {
+//                                                                                        @Override
+//                                                                                        public void onClick(View v) {
+//
+//                                                                                        }
+//                                                                                    }
+//                                                                            )
+//                                                                            .show();
                                                                 } // [check 1]
                                                             }
                                                         });

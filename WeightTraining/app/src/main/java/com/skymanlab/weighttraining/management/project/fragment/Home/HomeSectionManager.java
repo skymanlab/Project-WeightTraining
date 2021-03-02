@@ -6,11 +6,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
@@ -64,6 +66,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     private TextView fitnessCenterMemberIndicator;
 
     // instance variable
+    private ContentLoadingProgressBar progressBar;
     private AdView adMob;
 
     // constructor
@@ -99,6 +102,10 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
         // [ TextView | fitnessCenterMemberIndicator ]
         this.fitnessCenterMemberIndicator = (TextView) getView().findViewById(R.id.f_home_fitnessCenterMemberList_indicator);
 
+
+        // [ ContentLoadingProgressBar | progressBar ]
+        this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_home_progressBar);
+
         // [ AdView | adMob ] widget connect
         this.adMob = (AdView) getView().findViewById(R.id.f_home_adMob);
 
@@ -108,6 +115,9 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
 
+        // ad mob adMob init
+        initWidgetOfAdMob();
+
         // 네트워크에 연결되지 않으면 사용자에게 알려주고
         if (!NetworkStateChecker.checkActiveNetwork(getFragment().getContext())) {
 
@@ -115,22 +125,10 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
             myStateNotificationIndicator.setVisibility(View.VISIBLE);
             myStateNotificationIndicator.setText(R.string.f_home_snack_notConnectedNetwork);
 
-//            Snackbar.make(getFragment().getActivity().findViewById(R.id.nav_home_content_wrapper), R.string.f_home_snack_notConnectedNetwork, Snackbar.LENGTH_INDEFINITE)
-//                    .setAction(
-//                            R.string.f_home_snack_notConnectedNetwork_actionButton,
-//                            new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//
-//                                }
-//                            }
-//                    )
-//                    .show();
-            return;
-        }
+            // progressBar : GONE
+            progressBar.setVisibility(View.GONE);
 
-        // ad mob adMob init
-        initWidgetOfAdMob();
+        }
 
         // 나의 fitness center 의 회원 목록을 가져와서
         // 각 상황에 맞게
@@ -154,6 +152,7 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
         AdRequest adRequest = new AdRequest.Builder().build();
 
+        adMob.setAdSize(AdSize.SMART_BANNER);
         adMob.loadAd(adRequest);
         adMob.setAdListener(new AdListener() {
             @Override
@@ -290,6 +289,9 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
                         // 내가 등록한 FitnessCenter 에 회원이 있을 경우에
                         if (!memberArrayList.isEmpty()) {
 
+                            // ============================================== progressBar ==============================================
+                            progressBar.setVisibility(View.GONE);
+
                             // ============================================== my state notification ==============================================
                             // content wrapper : VISIBLE
                             myStateNotificationContentWrapper.setVisibility(View.VISIBLE);
@@ -382,8 +384,11 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
             @Override
             public void isNotIsDisclosedState(String myUid, UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList) {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============================================> 피트니스 센터  , 비공개");
-
                 // 내가 등록한 피트니스 센터가 있지만, '비공개' 상태일 때
+
+                // ============================================== progressBar ==============================================
+                progressBar.setVisibility(View.GONE);
+
                 // ============================================== my state notification ==============================================
                 // content wrapper : VISIBLE
                 myStateNotificationContentWrapper.setVisibility(View.VISIBLE);
@@ -425,6 +430,9 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
             public void isNotRegisteredTheFitnessCenter() {
                 LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "==============================================> 피트니스 센터 아직 등록 안됨");
                 // 내가 등록한 피트니스 센터가 없을 때
+
+                // ============================================== progressBar ==============================================
+                progressBar.setVisibility(View.GONE);
 
                 // ============================================== my state notification ==============================================
                 // content wrapper : GONE

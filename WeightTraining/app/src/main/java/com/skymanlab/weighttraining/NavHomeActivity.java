@@ -54,7 +54,7 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
 
     // constant
     private static final String CLASS_NAME = "[Ac] NavHomeActivity";
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
 
     // instance variable
     private BottomNavigationView navBottomBar;
@@ -229,6 +229,15 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
                 );
 
                 break;
+            case PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE:
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "===============================================================================> ");
+                // Background Location Permission 요청에 대한 결과 치리
+                permissionResultManager.setNextProcedureForBackgroundLocationPermissionRequestResult(
+                        getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper)
+                );
+
+                break;
         }
 
     }
@@ -247,11 +256,20 @@ public class NavHomeActivity extends AppCompatActivity implements ActivityCompat
 
             case PermissionResultManager.LOCATION_SERVICE_REQUEST_CODE:
 
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< Location Service Request Code > 해당 요청 결과를 바탕으로 다음 과정을 진행하겠습니다.");
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< LOCATION_SERVICE_REQUEST_CODE > 위치 권한에 대한 결과를 반영합니다.");
                 permissionResultManager.setNextProcedureForLocationServiceRequestResult(
                         getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper)
                 );
 
+                break;
+
+            case PermissionResultManager.BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE:
+
+                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< BACKGROUND_LOCATION_PERMISSION_REQUEST_CODE > 백그라운드 위치 권한에 대한 결과를 반영합니다.");
+                // Background Location Permission 을 Application Detail Setting 에서 사용자가 설정한 결과에 대한 처리
+                permissionResultManager.setNextProcedureForBackgroundLocationPermissionRequestResult(
+                        getSupportFragmentManager().findFragmentById(R.id.nav_home_content_wrapper)
+                );
                 break;
 
         }

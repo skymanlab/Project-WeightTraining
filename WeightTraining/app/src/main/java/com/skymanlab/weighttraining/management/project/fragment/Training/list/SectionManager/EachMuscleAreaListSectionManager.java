@@ -84,7 +84,6 @@ public class EachMuscleAreaListSectionManager extends FragmentSectionManager imp
             // progressBar : INVISIBLE
             progressBar.setVisibility(View.INVISIBLE);
 
-            return;
         }
 
         // [method] : adapter 생성 후 recyclerView 에 설정하기

@@ -16,7 +16,7 @@ public class SettingsManager {
 
     // constant
     private static final String CLASS_NAME = SettingsManager.class.getSimpleName();
-    private static final Display CLASS_LOG_DISPLAY_POWER = Display.ON;
+    private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= is initial installation =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

@@ -53,7 +53,7 @@ public class FitnessCenterGeofencingBroadcastReceiver extends BroadcastReceiver 
             NotificationManager.sendFitnessCenterNotification(
                     context,
                     NotificationManager.NOTIFICATION_FITNESS_CENTER,
-                    context.getString(R.string.etc_fitness_center_geofencing_notification_title),
+                    context.getString(R.string.etc_FitnessCenterGeofencingBroadcastReceiver_notification_title),
                     getTransitionTypeMessage(context, geofenceTransitionType));
 
 
@@ -81,13 +81,13 @@ public class FitnessCenterGeofencingBroadcastReceiver extends BroadcastReceiver 
 
         switch (type) {
             case Geofence.GEOFENCE_TRANSITION_DWELL:
-                return context.getString(R.string.etc_fitness_center_geofencing_transition_type_dwell);
+                return context.getString(R.string.etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_dwell);
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                return context.getString(R.string.etc_fitness_center_geofencing_transition_type_enter);
+                return context.getString(R.string.etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_enter);
             case Geofence.GEOFENCE_TRANSITION_EXIT:
-                return context.getString(R.string.etc_fitness_center_geofencing_transition_type_exit);
+                return context.getString(R.string.etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_exit);
             default:
-                return context.getString(R.string.etc_fitness_center_geofencing_transition_type_default);
+                return context.getString(R.string.etc_FitnessCenterGeofencingBroadcastReceiver_transition_type_default);
         }
     }
 }

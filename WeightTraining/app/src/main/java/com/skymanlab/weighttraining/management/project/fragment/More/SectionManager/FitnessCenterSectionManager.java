@@ -3,30 +3,23 @@ package com.skymanlab.weighttraining.management.project.fragment.More.SectionMan
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.skymanlab.weighttraining.R;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
 import com.skymanlab.weighttraining.management.user.data.Attendance;
 import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
-import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisterInfoFragment;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterRegisteredInfoFragment;
 import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSearchFragment;
-import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSettingFragment;
-import com.skymanlab.weighttraining.management.user.data.User;
+import com.skymanlab.weighttraining.management.project.fragment.More.FitnessCenterSettingInfoFragment;
 
 import java.util.ArrayList;
 
@@ -41,25 +34,27 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
     private ArrayList<Attendance> myAttendanceDateList;
 
     // instance variable
-    private FrameLayout goRegister;
-    private ImageView goRegisterImage;
+    private FrameLayout fitnessCenterWrapper;
+    private ImageView fitnessCenterIndicatorImage;
     private TextView fitnessCenterName;
     private TextView fitnessCenterAddress;
 
     // instance variable
-    private TextView registerInfoTitle;
+    private LinearLayout registeredInfoWrapper;
+    private TextView registeredInfoTitle;
     private TextView memberNumber;
     private TextView contractDate;
     private TextView expiryDate;
     private TextView attendanceDateCounter;
 
     // instance variable
+    private LinearLayout settingInfoWrapper;
     private TextView settingInfoTitle;
     private TextView isAllowedAccessNotification;
     private TextView isDisclosed;
 
     // instance variable
-    private ArrayList<String> attendanceDateList;
+    private TextView registerCancel;
 
     // constructor
     public FitnessCenterSectionManager(Fragment fragment, View view) {
@@ -75,46 +70,60 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
         this.myAttendanceDateList = myAttendanceDateList;
     }
 
+
     @Override
     public void connectWidget() {
 
-        // [FrameLayout] [goRegister] widget connect
-        this.goRegister = (FrameLayout) getView().findViewById(R.id.f_fitness_center_go_register);
+        // ================================= section 1 =================================
+        // [ FrameLayout | fitnessCenterWrapper ]
+        this.fitnessCenterWrapper = (FrameLayout) getView().findViewById(R.id.f_fitnessCenter_wrapper);
 
-        // [ ImageView | goRegisterImage ]
-        this.goRegisterImage = (ImageView) getView().findViewById(R.id.f_fitness_center_go_register_image);
+        // [ ImageView | fitnessCenterIndicatorImage ]
+        this.fitnessCenterIndicatorImage = (ImageView) getView().findViewById(R.id.f_fitnessCenter_indicatorImage);
 
         // [TextView] [fitnessCenterName] widget connect
-        this.fitnessCenterName = (TextView) getView().findViewById(R.id.f_fitness_center_name);
+        this.fitnessCenterName = (TextView) getView().findViewById(R.id.f_fitnessCenter_name);
 
         // [TextView] [fitnessCenterAddress] widget connect
-        this.fitnessCenterAddress = (TextView) getView().findViewById(R.id.f_fitness_center_address);
+        this.fitnessCenterAddress = (TextView) getView().findViewById(R.id.f_fitnessCenter_address);
 
 
-        // [ TextView | registerInfoTitle ]
-        this.registerInfoTitle = (TextView) getView().findViewById(R.id.f_fitness_center_registerInfo_title);
+        // ================================= section 2 =================================
+        // [ LinearLayout | registeredInfoWrapper ]
+        this.registeredInfoWrapper = (LinearLayout) getView().findViewById(R.id.f_fitnessCenter_registeredInfo_wrapper);
+
+        // [ TextView | registeredInfoTitle ]
+        this.registeredInfoTitle = (TextView) getView().findViewById(R.id.f_fitnessCenter_registeredInfo_title);
 
         // [ TextView | memberNumber ]
-        this.memberNumber = (TextView) getView().findViewById(R.id.f_fitness_center_member_number);
+        this.memberNumber = (TextView) getView().findViewById(R.id.f_fitnessCenter_registeredInfo_memberNumber);
 
         // [ TextView | contractDate ]
-        this.contractDate = (TextView) getView().findViewById(R.id.f_fitness_center_contract_date);
+        this.contractDate = (TextView) getView().findViewById(R.id.f_fitnessCenter_registeredInfo_contractDate);
 
         // [ TextView | expiryDate ]
-        this.expiryDate = (TextView) getView().findViewById(R.id.f_fitness_center_expiry_date);
+        this.expiryDate = (TextView) getView().findViewById(R.id.f_fitnessCenter_registeredInfo_expiryDate);
 
         // [ TextView | attendanceDateCounter ]
-        this.attendanceDateCounter = (TextView) getView().findViewById(R.id.f_fitness_center_attendance_date_counter);
+        this.attendanceDateCounter = (TextView) getView().findViewById(R.id.f_fitnessCenter_registeredInfo_attendanceDateCount);
 
+
+        // ================================= section 3 =================================
+        // [ LinearLayout | settingInfoWrapper ]
+        this.settingInfoWrapper = (LinearLayout) getView().findViewById(R.id.f_fitnessCenter_settingInfo_wrapper);
 
         // [ TextView | settingInfoTitle ]
-        this.settingInfoTitle = (TextView) getView().findViewById(R.id.f_fitness_center_settingInfo_title);
+        this.settingInfoTitle = (TextView) getView().findViewById(R.id.f_fitnessCenter_settingInfo_title);
 
         // [ TextView | isAllowedAccessNotification ]
-        this.isAllowedAccessNotification = (TextView) getView().findViewById(R.id.f_fitness_center_setting_info_is_allowed_access_notification);
+        this.isAllowedAccessNotification = (TextView) getView().findViewById(R.id.f_fitnessCenter_settingInfo_isAllowedAccessNotification);
 
         // [ TextView | isDisclosed ]
-        this.isDisclosed = (TextView) getView().findViewById(R.id.f_fitness_center_setting_info_is_disclosed);
+        this.isDisclosed = (TextView) getView().findViewById(R.id.f_fitnessCenter_settingInfo_isDisclosed);
+
+
+        // [ TextView | registerCancel ]
+//        this.registerCancel = (TextView) getView().findViewById(R.id.f_fitnessCenter_registerCancel);
 
     }
 
@@ -127,15 +136,14 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > null 이 아닙니다.");
 
-
             // fitness center
             initWidgetOfFitnessCenterSection(
                     myFitnessCenter.getFitnessCenterName(),
                     myFitnessCenter.getThirdAddress()
             );
 
-            // register info
-            initWidgetOfRegisterInfoSection(
+            // registered info
+            initWidgetOfRegisteredInfoSection(
                     myFitnessCenter.getMemberNumber(),
                     myFitnessCenter.getContractDate(),
                     myFitnessCenter.getExpiryDate(),
@@ -153,14 +161,15 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
             LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< UserFitnessCenter > null 이예요.");
 
-            // goRegister click listener : FitnessCenterRegisterFragment 로 이동
-            goRegister.setOnClickListener(new View.OnClickListener() {
+            // fitnessCenterWrapper : FitnessCenterRegisterFragment 로 이동
+            fitnessCenterWrapper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    // 피트니스 센터 등록을 위해 '검색' 화면으로 이동
                     getFragment().getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.nav_home_content_wrapper, new FitnessCenterSearchFragment())
-                            .addToBackStack(null)
+                            .addToBackStack(FitnessCenterFragment.class.getSimpleName())
                             .commit();
                 }
             });
@@ -168,48 +177,63 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
     }
 
 
+    /**
+     * section : fitness center 의 widget init
+     *
+     * @param fitnessCenterName
+     * @param fitnessCenterAddress
+     */
     public void initWidgetOfFitnessCenterSection(String fitnessCenterName,
                                                  String fitnessCenterAddress) {
 
-        // text
+        // 등록한 피트니스 센터 이름과 주소를 표시
         this.fitnessCenterName.setText(fitnessCenterName);
         this.fitnessCenterAddress.setText(fitnessCenterAddress);
 
-        //
-        this.goRegister.setClickable(false);
-        this.goRegisterImage.setVisibility(View.GONE);
+        // 다시 등록하지 못하도록 클릭 금지 및 지시 이미지도 감추기기
+        this.fitnessCenterWrapper.setClickable(false);
+        this.fitnessCenterIndicatorImage.setVisibility(View.GONE);
 
     }
 
 
-    public void initWidgetOfRegisterInfoSection(long memberNumber,
-                                                String contractDate,
-                                                String expiryDate,
-                                                int attendanceDateCount,
-                                                ArrayList<Attendance> attendanceDateList) {
+    /**
+     * section : register info 의 widget init
+     *
+     * @param memberNumber
+     * @param contractDate
+     * @param expiryDate
+     * @param attendanceDateCount
+     * @param attendanceDateList
+     */
+    public void initWidgetOfRegisteredInfoSection(long memberNumber,
+                                                  String contractDate,
+                                                  String expiryDate,
+                                                  int attendanceDateCount,
+                                                  ArrayList<Attendance> attendanceDateList) {
 
-        final String METHOD_NAME = "[initWidgetOfRegisterInfoSection] ";
-
+        final String METHOD_NAME = "[initWidgetOfRegisteredInfoSection] ";
 
         // click listener
-        this.registerInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right, 0);
-        this.registerInfoTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ zmfflr");
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > contractDate = " + contractDate);
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "< String > expiryDate = " + expiryDate);
+        this.registeredInfoWrapper.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(
-                                R.id.nav_home_content_wrapper,
-                                FitnessCenterRegisterInfoFragment.newInstance(myFitnessCenter, myAttendanceDateList)
-                        )
-                        .addToBackStack(null)
-                        .commit();
+                        // 등록 정보를 수정하기 위해 'FitnessCenterRegisteredInfoFragment' 로 이동
+                        getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(
+                                        R.id.nav_home_content_wrapper,
+                                        FitnessCenterRegisteredInfoFragment.newInstance(myFitnessCenter, myAttendanceDateList)
+                                )
+                                .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+                                .commit();
+                    }
+                }
+        );
 
-            }
-        });
+        // title 의 drawableEnd 이미지
+        this.registeredInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right, 0);
 
         // text
         this.memberNumber.setText(memberNumber + "");
@@ -219,26 +243,36 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
     }
 
+
+    /**
+     * section : SettingInfo 의 widget init
+     *
+     * @param myFitnessCenter
+     * @param myAttendanceDateList
+     */
     public void initWidgetOfSettingInfoSection(UserFitnessCenter myFitnessCenter, ArrayList<Attendance> myAttendanceDateList) {
         final String METHOD_NAME = "[initWidgetOfSettingInfoSection] ";
 
-        // settingInfoTitle : click listener 및 drawableEnd
+        // click listener
+        this.settingInfoWrapper.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        // 설정 정보를 수정하기 위해 'FitnessCenterSettingInfoFragment' 로 이동
+                        getFragment().getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(
+                                        R.id.nav_home_content_wrapper,
+                                        FitnessCenterSettingInfoFragment.newInstance(myFitnessCenter)
+                                )
+                                .addToBackStack(FitnessCenterFragment.class.getSimpleName())
+                                .commit();
+                    }
+                }
+        );
+
+        // title 의 drawableEnd 이미지
         this.settingInfoTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right, 0);
-        this.settingInfoTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "================ 12312313");
-
-                getFragment().getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(
-                                R.id.nav_home_content_wrapper,
-                                FitnessCenterSettingFragment.newInstance(myFitnessCenter)
-                        )
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
 
         // ========================================================== is allowed access notification ==========================================================
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<=====================================> isAllowedAccessNotification widget 초기화 ");
@@ -246,35 +280,35 @@ public class FitnessCenterSectionManager extends FragmentSectionManager implemen
 
             isAllowedAccessNotification.setTextColor(ContextCompat.getColor(getFragment().getContext(), R.color.colorTextBlack));
             isAllowedAccessNotification.setText(
-                    getFragment().getString(R.string.f_fitness_center_setting_info_is_allowed_access_notification_true)
+                    getFragment().getString(R.string.f_fitnessCenter_settingInfo_isAllowedAccessNotification_true)
             );
 
         } else {
 
             isAllowedAccessNotification.setTextColor(ContextCompat.getColor(getFragment().getContext(), R.color.colorTextDefault));
             isAllowedAccessNotification.setText(
-                    getFragment().getString(R.string.f_fitness_center_setting_info_is_allowed_access_notification_false)
+                    getFragment().getString(R.string.f_fitnessCenter_settingInfo_isAllowedAccessNotification_false)
             );
 
         }
-
 
         // ========================================================== is disclosed ==========================================================
         LogManager.displayLog(CLASS_LOG_DISPLAY_POWER, CLASS_NAME, METHOD_NAME, "<=====================================> isDisclosed widget 초기화 ");
         if (myFitnessCenter.getIsDisclosed()) {
 
             isDisclosed.setText(
-                    getFragment().getString(R.string.f_fitness_center_setting_info_is_disclosed_true)
+                    getFragment().getString(R.string.f_fitnessCenter_settingInfo_isDisclosed_true)
             );
 
         } else {
 
             isDisclosed.setText(
-                    getFragment().getString(R.string.f_fitness_center_setting_info_is_disclosed_false)
+                    getFragment().getString(R.string.f_fitnessCenter_settingInfo_isDisclosed_false)
             );
 
         }
 
     }
+
 
 }
