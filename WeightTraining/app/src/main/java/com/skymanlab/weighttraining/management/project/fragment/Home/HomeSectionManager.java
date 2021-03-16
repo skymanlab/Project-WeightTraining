@@ -152,7 +152,6 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
         AdRequest adRequest = new AdRequest.Builder().build();
 
-        adMob.setAdSize(AdSize.SMART_BANNER);
         adMob.loadAd(adRequest);
         adMob.setAdListener(new AdListener() {
             @Override
