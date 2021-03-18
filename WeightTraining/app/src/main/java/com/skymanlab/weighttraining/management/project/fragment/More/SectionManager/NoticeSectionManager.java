@@ -21,9 +21,7 @@ import com.skymanlab.weighttraining.management.project.ApiManager.NoticeManager;
 import com.skymanlab.weighttraining.management.project.data.FirebaseConstants;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionInitializable;
 import com.skymanlab.weighttraining.management.project.fragment.FragmentSectionManager;
-import com.skymanlab.weighttraining.management.project.fragment.More.dialog.NoticeRvAdapter;
-
-import org.w3c.dom.Text;
+import com.skymanlab.weighttraining.management.project.fragment.More.adapter.NoticeRvAdapter;
 
 import java.util.ArrayList;
 
