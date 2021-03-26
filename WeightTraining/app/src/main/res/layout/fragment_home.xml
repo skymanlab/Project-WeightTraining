@@ -352,21 +352,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <FrameLayout
+                <include
+                    layout="@layout/include_divider_section_full"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/browser_actions_bg_grey">
+                    android:layout_height="match_parent" />
 
-                    <com.google.android.gms.ads.AdView
-                        android:id="@+id/f_home_adMob"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="bottom"
-                        app:adSize="SMART_BANNER"
-                        app:adUnitId="ca-app-pub-9668325238172702/1417429778" />
-                </FrameLayout>
             </LinearLayout>
 
             <androidx.core.widget.ContentLoadingProgressBar

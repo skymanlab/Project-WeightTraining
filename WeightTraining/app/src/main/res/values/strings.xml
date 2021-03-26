@@ -741,8 +741,8 @@
     <string name="home_event_program">운동 프로그램</string>
     <string name="home_"></string>
     <!-- AlertDialog : back -->
-    <string name="home_alert_back_title">종료하시겠습니?</string>
-    <string name="home_alert_back_message">확인버튼을 클릭하면 앱이 종료됩니다.</string>인터스텔라
+    <string name="home_alert_back_title">종료하시겠습니까?</string>
+    <string name="home_alert_back_message">확인버튼을 클릭하면 앱이 종료됩니다.</string>
     <string name="home_alert_back_bt_positive">종료</string>
     <string name="home_alert_back_bt_negative">취소</string>
 

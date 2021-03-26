@@ -67,7 +67,6 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
     // instance variable
     private ContentLoadingProgressBar progressBar;
-    private AdView adMob;
 
     // constructor
     public HomeSectionManager(Fragment fragment, View view) {
@@ -106,17 +105,11 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
         // [ ContentLoadingProgressBar | progressBar ]
         this.progressBar = (ContentLoadingProgressBar) getView().findViewById(R.id.f_home_progressBar);
 
-        // [ AdView | adMob ] widget connect
-        this.adMob = (AdView) getView().findViewById(R.id.f_home_adMob);
-
     }
 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
-
-        // ad mob adMob init
-        initWidgetOfAdMob();
 
         // 네트워크에 연결되지 않으면 사용자에게 알려주고
         if (!NetworkStateChecker.checkActiveNetwork(getFragment().getContext())) {
@@ -137,55 +130,6 @@ public class HomeSectionManager extends FragmentSectionManager implements Fragme
 
     }
 
-
-    /**
-     * Widget : adMob
-     */
-    private void initWidgetOfAdMob() {
-
-        MobileAds.initialize(getFragment().getActivity(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-
-            }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        adMob.loadAd(adRequest);
-        adMob.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
-
-            @Override
-            public void onAdClicked() {
-                super.onAdClicked();
-            }
-        });
-
-    }
 
 
     /**

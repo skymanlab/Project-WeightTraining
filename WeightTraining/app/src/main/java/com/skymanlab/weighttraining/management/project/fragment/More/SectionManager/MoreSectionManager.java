@@ -8,6 +8,13 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,6 +48,11 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private static final String CLASS_NAME = "[PFM] MoreSectionManager";
     private static final Display CLASS_LOG_DISPLAY_POWER = Display.OFF;
 
+    // instance variable :
+    private UserTraining myTraining = null;
+    private UserFitnessCenter myFitnessCenter = null;
+    private ArrayList<Attendance> myAttendanceDateList = null;
+
     // instance variable
     private LinearLayout registerDayCountWrapper;
     private TextView registerDayCount;
@@ -53,9 +65,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
     private MaterialButton serviceCenter;
 
     // instance variable :
-    private UserTraining myTraining = null;
-    private UserFitnessCenter myFitnessCenter = null;
-    private ArrayList<Attendance> myAttendanceDateList = null;
+    private AdView adMob;
 
     // constructor
     public MoreSectionManager(Fragment fragment, View view) {
@@ -94,11 +104,18 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
         // [iv/C]MaterialButton : connect
         this.serviceCenter = (MaterialButton) getView().findViewById(R.id.f_more_serviceCenter);
+
+        // [ AdView | adMob ] widget connect
+        this.adMob = (AdView) getView().findViewById(R.id.f_more_adMob);
+
     }
 
     @Override
     public void initWidget() {
         final String METHOD_NAME = "[initWidget] ";
+
+        // ad mob adMob init
+        initWidgetOfAdMob();
 
         // ============================================================= 
         MyUserDataManager myDataManager = new MyUserDataManager(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -198,7 +215,7 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         this.setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 // 설정화면(SettingsFragment) 로 이동
                 getFragment().getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.nav_home_content_wrapper, new SettingsFragment())
@@ -247,6 +264,55 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
 
     } // End of method [initWidget]
 
+
+    /**
+     * Widget : adMob
+     */
+    private void initWidgetOfAdMob() {
+
+        MobileAds.initialize(getFragment().getActivity(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        adMob.loadAd(adRequest);
+        adMob.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+            }
+        });
+
+    }
 
     /**
      * register day count 와 관련된 widget 들의 초기 내용을 설정한다.
