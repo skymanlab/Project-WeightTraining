@@ -25,6 +25,6 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:contentDescription="TODO"
-            android:src="@drawable/logo" />
+            android:src="@mipmap/icon" />
     </com.google.android.material.card.MaterialCardView><!-- End of main -->
 </androidx.constraintlayout.widget.ConstraintLayout>

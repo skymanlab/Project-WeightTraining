@@ -66,7 +66,7 @@ public class NotificationManager {
         PendingIntent homePendingIntent = PendingIntent.getActivity(context, 0, home, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_FITNESS_CENTER)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.mipmap.icon)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
@@ -82,7 +82,7 @@ public class NotificationManager {
     public void sendFitnessCenterNotification(int notificationId, String title, String message) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(activity.getApplicationContext(), CHANNEL_ID_FITNESS_CENTER)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.mipmap.icon)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
