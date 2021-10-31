@@ -330,6 +330,10 @@
                     app:adSize="SMART_BANNER"
                     app:adUnitId="ca-app-pub-9668325238172702/1417429778" />
             </FrameLayout>
+            <!--
+            테스트 adUnitId : ca-app-pub-3940256099942544/6300978111
+            실제 adUnitId : ca-app-pub-9668325238172702/1417429778
+            -->
 
         </LinearLayout>
     </ScrollView><!-- End of content container -->

@@ -5,14 +5,14 @@ plugins {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.skymanlab.weighttraining"
         minSdkVersion 28
         targetSdkVersion 29
-        versionCode 13
-        versionName "1.0.5"
+        versionCode 14
+        versionName "1.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,11 +49,12 @@ dependencies {
 
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-database'
-    implementation 'com.google.firebase:firebase-ads'
+//    implementation 'com.google.firebase:firebase-ads:20.4.0'
+    implementation 'com.google.android.gms:play-services-ads:20.4.0'
 
     // ImageView
     implementation 'com.squareup.picasso:picasso:2.71828'

@@ -280,37 +280,37 @@ public class MoreSectionManager extends FragmentSectionManager implements Fragme
         AdRequest adRequest = new AdRequest.Builder().build();
 
         adMob.loadAd(adRequest);
-        adMob.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
-
-            @Override
-            public void onAdClicked() {
-                super.onAdClicked();
-            }
-        });
+//        adMob.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdClosed() {
+//                super.onAdClosed();
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(LoadAdError loadAdError) {
+//                super.onAdFailedToLoad(loadAdError);
+//            }
+//
+////            @Override
+////            public void onAdLeftApplication() {
+////                super.onAdLeftApplication();
+////            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                super.onAdOpened();
+//            }
+//
+//            @Override
+//            public void onAdLoaded() {
+//                super.onAdLoaded();
+//            }
+//
+//            @Override
+//            public void onAdClicked() {
+//                super.onAdClicked();
+//            }
+//        });
 
     }
 
