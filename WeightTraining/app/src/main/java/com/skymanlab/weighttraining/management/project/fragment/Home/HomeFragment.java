@@ -25,6 +25,8 @@ import com.skymanlab.weighttraining.management.user.data.User;
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * 홈 화면
  */
 public class HomeFragment extends Fragment {
 

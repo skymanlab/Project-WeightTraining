@@ -15,6 +15,9 @@ import com.skymanlab.weighttraining.management.user.data.UserFitnessCenter;
 
 import java.util.ArrayList;
 
+/**
+ * 홈 화면에서 피트니스를 등록한 사람
+ */
 public class FitnessCenterMemberRvAdapter extends RecyclerView.Adapter<FitnessCenterMemberRvAdapter.ViewHolder> {
 
     // instance variable

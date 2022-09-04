@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.skymanlab.weighttraining"
         minSdkVersion 28
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode 14
         versionName "1.0.6"
 
@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
@@ -41,6 +41,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // android 12 update -> dependencies add
+    constraints{
+        implementation('androidx.work:work-runtime:2.7.1') {
+        }
+    }
 
     // Preference
     implementation 'androidx.preference:preference:1.1.1'

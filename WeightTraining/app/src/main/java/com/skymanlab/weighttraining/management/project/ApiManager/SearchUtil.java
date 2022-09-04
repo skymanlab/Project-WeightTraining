@@ -3,9 +3,6 @@ package com.skymanlab.weighttraining.management.project.ApiManager;
 import android.app.Activity;
 import android.location.Address;
 import android.location.Geocoder;
-import android.widget.TextView;
-
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -15,7 +12,6 @@ import com.skymanlab.weighttraining.management.developer.Display;
 import com.skymanlab.weighttraining.management.developer.LogManager;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
